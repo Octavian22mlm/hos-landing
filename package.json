@@ -1,0 +1,12 @@
+{
+  "name": "harvard-of-sales-landing",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Mini-site Harvard of Sales - landing cu generator MindStudio incastrat",
+  "scripts": {
+    "start": "serve -s . --no-clipboard -l tcp://0.0.0.0:${PORT:-3000}"
+  },
+  "dependencies": {
+    "serve": "^14.2.4"
+  }
+}
