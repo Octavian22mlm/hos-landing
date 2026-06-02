@@ -1,12 +1,16 @@
 {
   "name": "harvard-of-sales-landing",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "private": true,
-  "description": "Mini-site Harvard of Sales - landing cu generator MindStudio incastrat",
+  "description": "Harvard of Sales - Generator scripturi MLM cu membership",
   "scripts": {
-    "start": "serve -s . --no-clipboard -l tcp://0.0.0.0:${PORT:-3000}"
+    "start": "node server.js"
   },
   "dependencies": {
-    "serve": "^14.2.4"
+    "express": "^4.18.2",
+    "@supabase/supabase-js": "^2.39.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
   }
 }
