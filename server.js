@@ -1,3 +1,4 @@
+
 // ============================================
 // HARVARD OF SALES — Backend Server
 // ============================================
@@ -7,7 +8,7 @@ const path = require('path');
 
 const app = express();
 app.use(express.json());
-app.use(express.static(path.join(__dirname)));
+app.use(express.static(path.join(__dirname, 'public')));
 
 // ---- SUPABASE (service role = acces total, server-side only) ----
 const db = createClient(
@@ -197,14 +198,17 @@ app.post('/api/generate', auth, async (req, res) => {
   // 6. Apelam MindStudio API
   try {
     const msResponse = await fetch(
-      `https://api.mindstudio.ai/developer/v2/apps/${process.env.MINDSTUDIO_AGENT_ID}/run`,
+      'https://api.mindstudio.ai/developer/v2/apps/run',
       {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${process.env.MINDSTUDIO_API_KEY}`,
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ variables: allVariables })
+        body: JSON.stringify({
+          appId: process.env.MINDSTUDIO_AGENT_ID,
+          variables: allVariables
+        })
       }
     );
 
@@ -223,8 +227,17 @@ app.post('/api/generate', auth, async (req, res) => {
     // 8. Logam generarea
     await db.from('script_generations').insert({ user_id: req.user.id, mode });
 
-    // 9. Returnam scriptul
-    const scriptText = msData.result || msData.output || msData.text || JSON.stringify(msData);
+    // 9. Returnam scriptul — extragem din obiectul result
+    const result = msData.result;
+    let scriptText = '';
+    if (typeof result === 'string') {
+      scriptText = result;
+    } else if (typeof result === 'object' && result !== null) {
+      scriptText = result.output || result.result || result.text ||
+                   result.script || Object.values(result)[0] || JSON.stringify(result);
+    } else {
+      scriptText = msData.output || msData.text || JSON.stringify(msData);
+    }
     res.json({ script: scriptText, scripts_remaining: newRemaining });
 
   } catch (err) {
@@ -289,7 +302,7 @@ app.post('/api/admin/set-tier', admin, async (req, res) => {
 // FRONTEND — serveste index.html
 // ============================================
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'index.html'));
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
 // ============================================
