@@ -8,7 +8,7 @@ const path = require('path');
 
 const app = express();
 app.use(express.json());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname)));
 
 // ---- SUPABASE (service role = acces total, server-side only) ----
 const db = createClient(
@@ -302,7 +302,7 @@ app.post('/api/admin/set-tier', admin, async (req, res) => {
 // FRONTEND — serveste index.html
 // ============================================
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+  res.sendFile(path.join(__dirname, 'index.html'));
 });
 
 // ============================================
