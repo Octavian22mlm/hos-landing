@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ro">
 <head>
@@ -109,7 +110,11 @@ label{display:block;font-size:12.5px;font-weight:600;letter-spacing:.08em;text-t
   white-space:pre-wrap;line-height:1.75;font-size:15.5px;color:var(--ink);max-height:68vh;overflow-y:auto}
 .script-actions{display:flex;gap:12px;margin-top:18px;flex-wrap:wrap}
 
-/* ── LOADING ── */
+/* ── OBJECTION SECTION ── */
+.obj-card{background:var(--panel);border:1px solid var(--line);border-radius:13px;padding:26px 28px;margin-top:20px}
+.obj-q{font-family:"Playfair Display",serif;font-size:19px;color:var(--ink);margin-bottom:18px}
+.obj-btns{display:flex;gap:12px;flex-wrap:wrap}
+.obj-label{font-size:12.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin:24px 0 12px}
 .spinner{display:inline-block;width:20px;height:20px;border:2px solid rgba(216,169,74,.3);
   border-top-color:var(--gold);border-radius:50%;animation:spin .7s linear infinite;vertical-align:middle;margin-right:9px}
 @keyframes spin{to{transform:rotate(360deg)}}
@@ -422,6 +427,63 @@ label{display:block;font-size:12.5px;font-weight:600;letter-spacing:.08em;text-t
       <button class="btn" onclick="copyScript()" style="max-width:200px">Copiază scriptul</button>
       <button class="btn-ghost" onclick="showView('generator')">Generează alt script</button>
     </div>
+
+    <!-- OBIECȚII -->
+    <div id="obj-section" style="margin-top:36px">
+
+      <!-- Întrebare obiecție 1 -->
+      <div id="obj1-question" class="obj-card">
+        <p class="obj-q">Dorești să tratezi o obiecție din partea clientului?</p>
+        <div class="obj-btns">
+          <button class="btn" onclick="showObj(1)" style="max-width:160px">Da</button>
+          <button class="btn-ghost" onclick="hideObjSection()">Nu, mulțumesc</button>
+        </div>
+      </div>
+
+      <!-- Formular obiecție 1 -->
+      <div id="obj1-form" style="display:none" class="obj-card">
+        <label style="display:block;font-size:12.5px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:8px">Care este obiecția clientului?</label>
+        <textarea id="obj1-text" rows="3" placeholder="Ex: Nu am timp, Nu am bani, Trebuie să mă gândesc, Nu cunosc produsul..."></textarea>
+        <div id="obj1-err" class="err" style="margin-top:10px"></div>
+        <button class="btn" onclick="generateObjScript(1)" style="max-width:260px;margin-top:14px">Generează script obiecție →</button>
+      </div>
+
+      <!-- Scriptul obiecție 1 -->
+      <div id="obj1-result" style="display:none">
+        <div class="obj-label">Script tratare obiecție 1</div>
+        <div class="script-box" id="obj1-output"></div>
+        <div class="script-actions" style="margin-top:12px">
+          <button class="btn" onclick="copyObjScript(1)" style="max-width:200px">Copiază scriptul</button>
+        </div>
+
+        <!-- Întrebare obiecție 2 -->
+        <div id="obj2-question" class="obj-card" style="margin-top:28px">
+          <p class="obj-q">Mai dorești să tratezi încă o obiecție?</p>
+          <div class="obj-btns">
+            <button class="btn" onclick="showObj(2)" style="max-width:160px">Da</button>
+            <button class="btn-ghost" onclick="hideObjSection()">Nu, mulțumesc</button>
+          </div>
+        </div>
+
+        <!-- Formular obiecție 2 -->
+        <div id="obj2-form" style="display:none" class="obj-card">
+          <label style="display:block;font-size:12.5px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:8px">Care este a doua obiecție?</label>
+          <textarea id="obj2-text" rows="3" placeholder="Ex: Trebuie să vorbesc cu soțul/soția, Am mai încercat și nu a mers..."></textarea>
+          <div id="obj2-err" class="err" style="margin-top:10px"></div>
+          <button class="btn" onclick="generateObjScript(2)" style="max-width:260px;margin-top:14px">Generează script obiecție →</button>
+        </div>
+
+        <!-- Scriptul obiecție 2 -->
+        <div id="obj2-result" style="display:none">
+          <div class="obj-label">Script tratare obiecție 2</div>
+          <div class="script-box" id="obj2-output"></div>
+          <div class="script-actions" style="margin-top:12px">
+            <button class="btn" onclick="copyObjScript(2)" style="max-width:200px">Copiază scriptul</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
   </div>
 </div>
 
@@ -665,6 +727,18 @@ async function doGenerate() {
     'kb_opening':           document.getElementById('f_kb').value
   };
 
+  // Save for objection flow
+  lastVariables = variables;
+  lastMode = SELECTED_MODE;
+
+  // Reset objection section
+  document.getElementById('obj-section').style.display = 'block';
+  document.getElementById('obj1-question').style.display = 'block';
+  document.getElementById('obj1-form').style.display = 'none';
+  document.getElementById('obj1-result').style.display = 'none';
+  document.getElementById('obj2-form').style.display = 'none';
+  document.getElementById('obj2-result').style.display = 'none';
+
   showView('generating');
 
   try {
@@ -718,8 +792,75 @@ document.addEventListener('keydown', e => {
   else if (active.id === 'view-redeem') doRedeem();
 });
 
-// ============================================
-// COUNTER ANIMATION (78% ring)
+let lastVariables = null;
+let lastMode = 'clean';
+let lastObj1Text = '';
+
+function showObj(num) {
+  if (num === 1) {
+    document.getElementById('obj1-question').style.display = 'none';
+    document.getElementById('obj1-form').style.display = 'block';
+  } else {
+    document.getElementById('obj2-question').style.display = 'none';
+    document.getElementById('obj2-form').style.display = 'block';
+  }
+}
+
+function hideObjSection() {
+  document.getElementById('obj-section').style.display = 'none';
+}
+
+async function generateObjScript(num) {
+  const textEl = document.getElementById('obj' + num + '-text');
+  const errEl = document.getElementById('obj' + num + '-err');
+  errEl.style.display = 'none';
+
+  const objText = textEl.value.trim();
+  if (!objText) {
+    errEl.textContent = 'Introdu obiecția clientului.';
+    errEl.style.display = 'block';
+    return;
+  }
+
+  if (num === 1) lastObj1Text = objText;
+
+  const objVariables = {
+    ...lastVariables,
+    '14_obiectie_1': num === 1 ? objText : lastObj1Text,
+    '15_doreste_a_doua_obiectie': num === 2 ? 'Da' : 'Nu',
+    '16_obiectie_2': num === 2 ? objText : ''
+  };
+
+  const btn = document.querySelector('#obj' + num + '-form .btn');
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spinner"></span>Se generează...';
+
+  try {
+    const data = await api('/api/generate', {
+      method: 'POST',
+      body: JSON.stringify({
+        mode: lastMode,
+        variables: objVariables,
+        isObjection: true
+      })
+    });
+
+    document.getElementById('obj' + num + '-output').textContent = data.script;
+    document.getElementById('obj' + num + '-form').style.display = 'none';
+    document.getElementById('obj' + num + '-result').style.display = 'block';
+
+  } catch(e) {
+    errEl.textContent = e.message;
+    errEl.style.display = 'block';
+    btn.disabled = false;
+    btn.innerHTML = 'Generează script obiecție →';
+  }
+}
+
+function copyObjScript(num) {
+  const text = document.getElementById('obj' + num + '-output').textContent;
+  navigator.clipboard.writeText(text).then(() => toast('Script copiat! ✓'));
+}
 // ============================================
 function animateCounter() {
   const el = document.getElementById('counter-num');
