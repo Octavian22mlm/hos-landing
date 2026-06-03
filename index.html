@@ -153,6 +153,8 @@ label{display:block;font-size:12.5px;font-weight:600;letter-spacing:.08em;text-t
 .pstep.done .pstep-ico::after{content:"";position:absolute;left:5px;top:1px;width:4px;height:9px;
   border:solid #1a1206;border-width:0 2px 2px 0;transform:rotate(45deg)}
 .prog-cap{text-align:center;margin-top:22px;font-size:14.5px;color:var(--gold);min-height:20px;font-weight:600}
+.obj-prog-ctx{font-size:14px;color:var(--muted);margin-bottom:20px;padding-bottom:14px;border-bottom:1px solid var(--lsoft)}
+.obj-prog-ctx i{color:var(--goldl);font-style:italic}
 
 @media(max-width:600px){
   .auth-card{padding:28px 22px}
@@ -516,6 +518,17 @@ label{display:block;font-size:12.5px;font-weight:600;letter-spacing:.08em;text-t
         <button class="btn" onclick="generateObjScript(1)" style="max-width:260px;margin-top:14px">Generează script obiecție →</button>
       </div>
 
+      <!-- Progres obiecție 1 -->
+      <div id="obj1-progress" class="obj-card" style="display:none">
+        <div class="obj-prog-ctx" id="obj1-prog-ctx"></div>
+        <div class="prog-head">
+          <div class="progress-track"><div class="progress-fill" id="obj1-prog-fill"></div></div>
+          <div class="prog-pctnum"><span id="obj1-prog-num">0</span>%</div>
+        </div>
+        <div class="prog-list" id="obj1-prog-list"></div>
+        <div class="prog-cap" id="obj1-prog-cap"></div>
+      </div>
+
       <!-- Scriptul obiecție 1 -->
       <div id="obj1-result" style="display:none">
         <div class="obj-label">Script tratare obiecție 1</div>
@@ -540,6 +553,17 @@ label{display:block;font-size:12.5px;font-weight:600;letter-spacing:.08em;text-t
           <textarea id="obj2-text" rows="3" placeholder="Ex: Trebuie să vorbesc cu soțul/soția, Am mai încercat și nu a mers..."></textarea>
           <div id="obj2-err" class="err" style="margin-top:10px"></div>
           <button class="btn" onclick="generateObjScript(2)" style="max-width:260px;margin-top:14px">Generează script obiecție →</button>
+        </div>
+
+        <!-- Progres obiecție 2 -->
+        <div id="obj2-progress" class="obj-card" style="display:none">
+          <div class="obj-prog-ctx" id="obj2-prog-ctx"></div>
+          <div class="prog-head">
+            <div class="progress-track"><div class="progress-fill" id="obj2-prog-fill"></div></div>
+            <div class="prog-pctnum"><span id="obj2-prog-num">0</span>%</div>
+          </div>
+          <div class="prog-list" id="obj2-prog-list"></div>
+          <div class="prog-cap" id="obj2-prog-cap"></div>
         </div>
 
         <!-- Scriptul obiecție 2 -->
@@ -891,8 +915,10 @@ async function doGenerate() {
   document.getElementById('obj-section').style.display = 'block';
   document.getElementById('obj1-question').style.display = 'block';
   document.getElementById('obj1-form').style.display = 'none';
+  document.getElementById('obj1-progress').style.display = 'none';
   document.getElementById('obj1-result').style.display = 'none';
   document.getElementById('obj2-form').style.display = 'none';
+  document.getElementById('obj2-progress').style.display = 'none';
   document.getElementById('obj2-result').style.display = 'none';
 
   showView('generating');
@@ -1091,8 +1117,9 @@ function hideObjSection() {
 }
 
 async function generateObjScript(num) {
-  const textEl = document.getElementById('obj' + num + '-text');
-  const errEl = document.getElementById('obj' + num + '-err');
+  const prefix = 'obj' + num;
+  const textEl = document.getElementById(prefix + '-text');
+  const errEl = document.getElementById(prefix + '-err');
   errEl.style.display = 'none';
 
   const objText = textEl.value.trim();
@@ -1111,9 +1138,10 @@ async function generateObjScript(num) {
     '16_obiectie_2': num === 2 ? objText : ''
   };
 
-  const btn = document.querySelector('#obj' + num + '-form .btn');
-  btn.disabled = true;
-  btn.innerHTML = '<span class="spinner"></span>Se generează...';
+  // ascunde formularul, arata checklist-ul inline
+  document.getElementById(prefix + '-form').style.display = 'none';
+  document.getElementById(prefix + '-progress').style.display = 'block';
+  startObjProgress(prefix, objText);
 
   try {
     const data = await api('/api/generate', {
@@ -1126,16 +1154,123 @@ async function generateObjScript(num) {
       })
     });
 
-    document.getElementById('obj' + num + '-output').textContent = data.script;
-    document.getElementById('obj' + num + '-form').style.display = 'none';
-    document.getElementById('obj' + num + '-result').style.display = 'block';
+    finishObjProgress(prefix, () => {
+      document.getElementById(prefix + '-output').textContent = data.script;
+      document.getElementById(prefix + '-progress').style.display = 'none';
+      document.getElementById(prefix + '-result').style.display = 'block';
+    });
 
   } catch(e) {
+    stopObjProgress(prefix);
+    document.getElementById(prefix + '-progress').style.display = 'none';
+    document.getElementById(prefix + '-form').style.display = 'block';
     errEl.textContent = e.message;
     errEl.style.display = 'block';
-    btn.disabled = false;
-    btn.innerHTML = 'Generează script obiecție →';
   }
+}
+
+// ============================================
+// PROGRES OBIECTII — checklist inline (6-7 etape, ~3s)
+// ============================================
+const OBJ1_STAGES = [
+  'Analizăm obiecția clientului',
+  'Identificăm tipul: reală sau paravan',
+  'Detectăm emoția din spatele ei',
+  'Validăm fără să contrazicem',
+  'Selectăm tehnica de tratare',
+  'Construim puntea de revenire la prezentare',
+  'Eliminăm tonul defensiv'
+];
+const OBJ2_STAGES = [
+  'Recitim prima obiecție și contextul',
+  'Verificăm dacă e obiecție reală sau ezitare',
+  'Diferențiem față de prima replică',
+  'Evităm tonul repetat / rehearsed',
+  'Calibrăm un răspuns proaspăt',
+  'Construim revenirea naturală la prezentare',
+  'Eliminăm formulările de „vânzător"'
+];
+const OBJ_STAGE_MS = 3000;
+const OBJ_PROG_CEIL = 95;
+const _objProg = {
+  obj1: { raf:null, start:0, done:false, stages:OBJ1_STAGES },
+  obj2: { raf:null, start:0, done:false, stages:OBJ2_STAGES }
+};
+
+function buildObjChecklist(prefix) {
+  const list = document.getElementById(prefix + '-prog-list');
+  if (!list || list.childElementCount) return;
+  _objProg[prefix].stages.forEach((txt, i) => {
+    const row = document.createElement('div');
+    row.className = 'pstep pending';
+    row.id = prefix + '-pstep-' + i;
+    row.innerHTML = '<span class="pstep-ico"></span><span class="pstep-txt">' + txt + '</span>';
+    list.appendChild(row);
+  });
+}
+function renderObjStage(prefix, idx) {
+  _objProg[prefix].stages.forEach((_, i) => {
+    const row = document.getElementById(prefix + '-pstep-' + i);
+    if (!row) return;
+    row.classList.remove('done','active','pending');
+    if (i < idx) row.classList.add('done');
+    else if (i === idx) row.classList.add('active');
+    else row.classList.add('pending');
+  });
+}
+function setObjBar(prefix, pct) {
+  const fill = document.getElementById(prefix + '-prog-fill');
+  const num = document.getElementById(prefix + '-prog-num');
+  if (fill) fill.style.width = pct + '%';
+  if (num) num.textContent = Math.round(pct);
+}
+function objTick(prefix) {
+  const st = _objProg[prefix];
+  if (st.done) return;
+  const elapsed = performance.now() - st.start;
+  const total = st.stages.length * OBJ_STAGE_MS;
+  setObjBar(prefix, Math.min(OBJ_PROG_CEIL, (elapsed / total) * OBJ_PROG_CEIL));
+  const idx = Math.min(st.stages.length - 1, Math.floor(elapsed / OBJ_STAGE_MS));
+  renderObjStage(prefix, idx);
+  const cap = document.getElementById(prefix + '-prog-cap');
+  if (cap) cap.textContent = idx >= st.stages.length - 1 ? 'Suntem aproape gata...' : '';
+  st.raf = requestAnimationFrame(() => objTick(prefix));
+}
+function startObjProgress(prefix, objText) {
+  const st = _objProg[prefix];
+  cancelAnimationFrame(st.raf);
+  st.done = false;
+  st.start = performance.now();
+  const ctx = document.getElementById(prefix + '-prog-ctx');
+  if (ctx) {
+    let t = objText.length > 80 ? objText.slice(0, 80) + '…' : objText;
+    t = t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+    ctx.innerHTML = 'Tratăm obiecția: <i>«' + t + '»</i>';
+  }
+  buildObjChecklist(prefix);
+  renderObjStage(prefix, 0);
+  setObjBar(prefix, 0);
+  const cap = document.getElementById(prefix + '-prog-cap');
+  if (cap) cap.textContent = '';
+  st.raf = requestAnimationFrame(() => objTick(prefix));
+}
+function finishObjProgress(prefix, cb) {
+  const st = _objProg[prefix];
+  st.done = true;
+  cancelAnimationFrame(st.raf);
+  st.stages.forEach((_, i) => {
+    const row = document.getElementById(prefix + '-pstep-' + i);
+    if (row) { row.classList.remove('pending','active'); row.classList.add('done'); }
+  });
+  setObjBar(prefix, 100);
+  const cap = document.getElementById(prefix + '-prog-cap');
+  if (cap) cap.textContent = 'Gata!';
+  setTimeout(cb, 400);
+}
+function stopObjProgress(prefix) {
+  const st = _objProg[prefix];
+  st.done = true;
+  cancelAnimationFrame(st.raf);
 }
 
 function copyObjScript(num) {
