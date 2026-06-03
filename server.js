@@ -1,4 +1,3 @@
-
 // ============================================
 // HARVARD OF SALES — Backend Server
 // ============================================
@@ -172,7 +171,7 @@ app.post('/api/generate', auth, async (req, res) => {
   }
 
   // 4. Verificam modul permis pentru tier
-  const { mode, variables, isObjection } = req.body;
+  const { mode, variables, isObjection, objNum } = req.body;
   const tierModes = TIER_MODES[profile.tier] || {};
 
   if (mode === 'coach' && !tierModes.coach) {
@@ -198,6 +197,16 @@ app.post('/api/generate', auth, async (req, res) => {
   };
 
   // 6. Apelam MindStudio API
+  //    Scriptul principal -> workflow default (Main.flow)
+  //    Obiectia 1 -> workflow "Obiectie 1" ; Obiectia 2 -> workflow "Obiectie 2"
+  const msBody = {
+    appId: process.env.MINDSTUDIO_AGENT_ID,
+    variables: allVariables
+  };
+  if (isObjection) {
+    msBody.workflow = objNum === 2 ? 'Obiectie 2' : 'Obiectie 1';
+  }
+
   try {
     const msResponse = await fetch(
       'https://api.mindstudio.ai/developer/v2/apps/run',
@@ -207,10 +216,7 @@ app.post('/api/generate', auth, async (req, res) => {
           'Authorization': `Bearer ${process.env.MINDSTUDIO_API_KEY}`,
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({
-          appId: process.env.MINDSTUDIO_AGENT_ID,
-          variables: allVariables
-        })
+        body: JSON.stringify(msBody)
       }
     );
 
