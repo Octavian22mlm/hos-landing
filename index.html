@@ -933,6 +933,8 @@ async function doGenerate() {
     finishProgress(() => {
       // Show output
       document.getElementById('script-output').textContent = data.script;
+      lastScriptText = data.script;     // pentru anti-repetitie la obiectii
+      lastObj1Response = '';            // lant de obiectii proaspat
       document.getElementById('out-remaining').textContent = data.scripts_remaining;
       if (USER_PROFILE) USER_PROFILE.scripts_remaining = data.scripts_remaining;
       renderNudge();
@@ -1101,6 +1103,8 @@ document.addEventListener('keydown', e => {
 let lastVariables = null;
 let lastMode = 'clean';
 let lastObj1Text = '';
+let lastScriptText = '';      // textul scriptului principal generat
+let lastObj1Response = '';    // textul raspunsului generat la obiectia 1
 
 function showObj(num) {
   if (num === 1) {
@@ -1131,11 +1135,19 @@ async function generateObjScript(num) {
 
   if (num === 1) lastObj1Text = objText;
 
+  // Anti-repetitie: ce s-a generat deja in acest apel
+  const prior = num === 1
+    ? lastScriptText
+    : (lastScriptText + (lastObj1Response
+        ? '\n\n═══ RASPUNS OBIECTIE 1 ═══\n' + lastObj1Response
+        : ''));
+
   const objVariables = {
     ...lastVariables,
     '14_obiectie_1': num === 1 ? objText : lastObj1Text,
     '15_doreste_a_doua_obiectie': num === 2 ? 'Da' : 'Nu',
-    '16_obiectie_2': num === 2 ? objText : ''
+    '16_obiectie_2': num === 2 ? objText : '',
+    '22_continut_anterior': prior || ''
   };
 
   // ascunde formularul, arata checklist-ul inline
@@ -1156,6 +1168,7 @@ async function generateObjScript(num) {
 
     finishObjProgress(prefix, () => {
       document.getElementById(prefix + '-output').textContent = data.script;
+      if (num === 1) lastObj1Response = data.script;  // pentru anti-repetitie la obiectia 2
       document.getElementById(prefix + '-progress').style.display = 'none';
       document.getElementById(prefix + '-result').style.display = 'block';
     });
