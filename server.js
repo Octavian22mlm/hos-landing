@@ -172,7 +172,7 @@ app.post('/api/generate', auth, async (req, res) => {
   }
 
   // 4. Verificam modul permis pentru tier
-  const { mode, variables } = req.body;
+  const { mode, variables, isObjection } = req.body;
   const tierModes = TIER_MODES[profile.tier] || {};
 
   if (mode === 'coach' && !tierModes.coach) {
@@ -192,7 +192,9 @@ app.post('/api/generate', auth, async (req, res) => {
   const allVariables = {
     ...variables,
     '13_mod_output': modeLabel[mode] || modeLabel.clean,
-    '14_mod_debug':  'Nu'
+    '14_obiectie_1':               variables['14_obiectie_1'] || '',
+    '15_doreste_a_doua_obiectie':  variables['15_doreste_a_doua_obiectie'] || 'Nu',
+    '16_obiectie_2':               variables['16_obiectie_2'] || ''
   };
 
   // 6. Apelam MindStudio API
@@ -220,12 +222,13 @@ app.post('/api/generate', auth, async (req, res) => {
 
     const msData = await msResponse.json();
 
-    // 7. Decrementam contorul
-    const newRemaining = profile.scripts_remaining - 1;
-    await db.from('profiles').update({ scripts_remaining: newRemaining }).eq('id', req.user.id);
-
-    // 8. Logam generarea
-    await db.from('script_generations').insert({ user_id: req.user.id, mode });
+    // 7. Decrementam contorul (doar pentru scripturi principale, nu pentru obiectii)
+    let newRemaining = profile.scripts_remaining;
+    if (!isObjection) {
+      newRemaining = profile.scripts_remaining - 1;
+      await db.from('profiles').update({ scripts_remaining: newRemaining }).eq('id', req.user.id);
+      await db.from('script_generations').insert({ user_id: req.user.id, mode });
+    }
 
     // 9. Returnam scriptul — extragem din obiectul result
     const result = msData.result;
