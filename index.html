@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="ro">
 <head>
@@ -841,7 +840,8 @@ async function generateObjScript(num) {
       body: JSON.stringify({
         mode: lastMode,
         variables: objVariables,
-        isObjection: true
+        isObjection: true,
+        objNum: num
       })
     });
 
