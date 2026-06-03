@@ -80,10 +80,22 @@ label{display:block;font-size:12.5px;font-weight:600;letter-spacing:.08em;text-t
   padding:26px 28px;margin-bottom:22px}
 .section-card h3{font-family:"Playfair Display",serif;font-size:19px;color:var(--ink);margin-bottom:20px;
   padding-bottom:12px;border-bottom:1px solid var(--lsoft)}
+.section-card h3 .h3-link{font-family:"Hanken Grotesk",sans-serif;font-size:12px;font-weight:600;
+  color:var(--muted);cursor:pointer;text-transform:none;letter-spacing:0;float:right}
+.section-card h3 .h3-link:hover{color:var(--gold)}
 .field{margin-bottom:18px}
 .field:last-child{margin-bottom:0}
 .field-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
 .field-note{font-size:12px;color:var(--muted2);margin-top:6px;font-style:italic}
+
+/* ── UPGRADE NUDGE ── */
+.upgrade-nudge{display:none;margin-bottom:22px}
+.upgrade-nudge-inner{background:linear-gradient(180deg,rgba(216,169,74,.12),rgba(216,169,74,.04));
+  border:1px solid var(--line);border-radius:12px;padding:14px 20px;
+  display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.upgrade-nudge .un-text{flex:1;min-width:200px;font-size:14px;color:var(--ink);line-height:1.45}
+.upgrade-nudge .un-text b{color:var(--goldl)}
+.upgrade-nudge .un-cta{flex-shrink:0}
 
 /* ── MODE SELECTOR ── */
 .mode-options{display:flex;flex-direction:column;gap:11px}
@@ -119,6 +131,13 @@ label{display:block;font-size:12.5px;font-weight:600;letter-spacing:.08em;text-t
 @keyframes spin{to{transform:rotate(360deg)}}
 .generating{text-align:center;padding:60px 20px;color:var(--muted)}
 .generating p{margin-top:16px;font-size:15px}
+
+/* ── PROGRESS BAR (generare) ── */
+.progress-wrap{max-width:420px;margin:0 auto}
+.progress-pct{font-family:"Playfair Display",serif;font-size:48px;font-weight:900;color:var(--gold);line-height:1;margin-bottom:18px}
+.progress-track{height:10px;background:rgba(216,169,74,.12);border-radius:20px;overflow:hidden}
+.progress-fill{height:100%;width:0%;background:linear-gradient(90deg,var(--goldd),var(--goldl));
+  border-radius:20px;transition:width .35s ease;box-shadow:0 0 10px rgba(216,169,74,.5)}
 
 @media(max-width:600px){
   .auth-card{padding:28px 22px}
@@ -261,6 +280,14 @@ label{display:block;font-size:12.5px;font-weight:600;letter-spacing:.08em;text-t
 
   <div class="gen-wrap">
 
+    <!-- UPGRADE NUDGE (generator) -->
+    <div class="upgrade-nudge" id="nudge-gen">
+      <div class="upgrade-nudge-inner">
+        <div class="un-text"></div>
+        <div class="un-cta"><button class="btn-ghost" onclick="goUpgrade()">Fă upgrade</button></div>
+      </div>
+    </div>
+
     <!-- SECTIUNEA 1: Agent -->
     <div class="section-card">
       <h3>Datele tale de agent</h3>
@@ -273,7 +300,7 @@ label{display:block;font-size:12.5px;font-weight:600;letter-spacing:.08em;text-t
 
     <!-- SECTIUNEA 2: Client -->
     <div class="section-card">
-      <h3>Despre persoana invitată</h3>
+      <h3>Despre persoana invitată<a class="h3-link" onclick="clearClientData()">Golește pentru altă persoană</a></h3>
       <div class="field-row">
         <div class="field">
           <label>Tip relație</label>
@@ -371,6 +398,16 @@ label{display:block;font-size:12.5px;font-weight:600;letter-spacing:.08em;text-t
         </div>
       </div>
       <div class="field">
+        <label>Durata prezentării / întâlnirii</label>
+        <select id="f_durata">
+          <option value="10 minute">10 minute</option>
+          <option value="15 minute">15 minute</option>
+          <option value="20 minute" selected>20 minute</option>
+          <option value="30 minute">30 minute</option>
+          <option value="45 minute">45 minute</option>
+        </select>
+      </div>
+      <div class="field">
         <label>Ce știe ea despre motivul apelului tău, înainte să ridice telefonul?</label>
         <input type="text" id="f_12" placeholder="Ex: Nu știe nimic, ne-am vorbit ultima oară la telefon...">
       </div>
@@ -389,7 +426,7 @@ label{display:block;font-size:12.5px;font-weight:600;letter-spacing:.08em;text-t
       Generează scriptul →
     </button>
     <p style="text-align:center;font-size:13px;color:var(--muted2);margin-top:12px">
-      Va dura 15–30 de secunde
+      Scriptul tău psihologic, gata în câteva momente
     </p>
 
   </div>
@@ -399,8 +436,11 @@ label{display:block;font-size:12.5px;font-weight:600;letter-spacing:.08em;text-t
 <div id="view-generating" class="view z">
   <div class="auth-wrap">
     <div class="generating">
-      <div><span class="spinner"></span></div>
-      <p>Se generează scriptul tău psihologic...<br><span style="font-size:13px;color:var(--muted2)">Durează 15–30 secunde</span></p>
+      <div class="progress-wrap">
+        <div class="progress-pct"><span id="prog-num">0</span>%</div>
+        <div class="progress-track"><div class="progress-fill" id="prog-fill"></div></div>
+      </div>
+      <p id="prog-msg">Analizăm profilul clientului...</p>
     </div>
   </div>
 </div>
@@ -417,6 +457,15 @@ label{display:block;font-size:12.5px;font-weight:600;letter-spacing:.08em;text-t
     </div>
   </div>
   <div class="output-wrap">
+
+    <!-- UPGRADE NUDGE (output) -->
+    <div class="upgrade-nudge" id="nudge-out">
+      <div class="upgrade-nudge-inner">
+        <div class="un-text"></div>
+        <div class="un-cta"><button class="btn-ghost" onclick="goUpgrade()">Fă upgrade</button></div>
+      </div>
+    </div>
+
     <div class="output-header">
       <h2>Scriptul tău</h2>
       <button class="btn-ghost" onclick="showView('generator')">← Generează alt script</button>
@@ -424,6 +473,7 @@ label{display:block;font-size:12.5px;font-weight:600;letter-spacing:.08em;text-t
     <div class="script-box" id="script-output"></div>
     <div class="script-actions">
       <button class="btn" onclick="copyScript()" style="max-width:200px">Copiază scriptul</button>
+      <button class="btn-ghost" onclick="downloadScript()">Descarcă</button>
       <button class="btn-ghost" onclick="showView('generator')">Generează alt script</button>
     </div>
 
@@ -453,6 +503,7 @@ label{display:block;font-size:12.5px;font-weight:600;letter-spacing:.08em;text-t
         <div class="script-box" id="obj1-output"></div>
         <div class="script-actions" style="margin-top:12px">
           <button class="btn" onclick="copyObjScript(1)" style="max-width:200px">Copiază scriptul</button>
+          <button class="btn-ghost" onclick="downloadObjScript(1)">Descarcă</button>
         </div>
 
         <!-- Întrebare obiecție 2 -->
@@ -478,6 +529,7 @@ label{display:block;font-size:12.5px;font-weight:600;letter-spacing:.08em;text-t
           <div class="script-box" id="obj2-output"></div>
           <div class="script-actions" style="margin-top:12px">
             <button class="btn" onclick="copyObjScript(2)" style="max-width:200px">Copiază scriptul</button>
+            <button class="btn-ghost" onclick="downloadObjScript(2)">Descarcă</button>
           </div>
         </div>
       </div>
@@ -495,6 +547,14 @@ label{display:block;font-size:12.5px;font-weight:600;letter-spacing:.08em;text-t
 let TOKEN = sessionStorage.getItem('hos_token') || null;
 let USER_PROFILE = null;
 let SELECTED_MODE = 'clean';
+let _formLoaded = false;
+
+// Link-ul tau de upgrade (Payhip). Lasa gol pentru mesaj de contact.
+const UPGRADE_URL = '';
+
+// Campuri memorate: produs + client. (Agentul f_01 e salvat separat.)
+const SAVE_FIELDS = ['f_03','f_20','f_02','f_04','f_17','f_05','f_07','f_08','f_09','f_19','f_18'];
+const CLIENT_FIELDS = ['f_03','f_20','f_02','f_04','f_17','f_05'];
 
 // ============================================
 // INIT
@@ -611,6 +671,69 @@ function doLogout() {
 }
 
 // ============================================
+// FORM MEMORY (produs + client)
+// ============================================
+function saveFormData() {
+  const data = {};
+  SAVE_FIELDS.forEach(id => { const el = document.getElementById(id); if (el) data[id] = el.value; });
+  try { localStorage.setItem('hos_form', JSON.stringify(data)); } catch(e) {}
+}
+function loadFormData() {
+  try {
+    const raw = localStorage.getItem('hos_form');
+    if (!raw) return;
+    const data = JSON.parse(raw);
+    SAVE_FIELDS.forEach(id => {
+      const el = document.getElementById(id);
+      if (el && data[id] != null) el.value = data[id];
+    });
+    toggleExperienta();
+  } catch(e) {}
+}
+function clearClientData() {
+  CLIENT_FIELDS.forEach(id => { const el = document.getElementById(id); if (el) el.value = ''; });
+  saveFormData();
+  toast('Date client golite — completează pentru noua persoană');
+}
+
+// ============================================
+// UPGRADE NUDGE
+// ============================================
+const NEXT_TIER = {
+  unic:    { name: 'Recruit', perk: '3 scripturi/lună' },
+  recruit: { name: 'Builder', perk: '8 scripturi/lună + Coach Mode' },
+  builder: { name: 'Leader',  perk: '15 scripturi/lună + toate modurile' },
+  leader:  null
+};
+function goUpgrade() {
+  if (UPGRADE_URL) { window.open(UPGRADE_URL, '_blank'); }
+  else { toast('Pentru upgrade scrie-ne la contact@octavianalupoaie.biz', 5000); }
+}
+function renderNudge() {
+  if (!USER_PROFILE) return;
+  const remaining = USER_PROFILE.scripts_remaining;
+  const next = NEXT_TIER[USER_PROFILE.tier];
+  const show = next && remaining <= 3;
+  ['nudge-gen','nudge-out'].forEach(id => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    const txtEl = el.querySelector('.un-text');
+    if (show && txtEl) {
+      if (remaining <= 0) {
+        txtEl.innerHTML = 'Ai terminat scripturile pe luna asta. Treci pe <b>' + next.name + '</b> — ' + next.perk + '.';
+      } else {
+        const word = remaining === 1 ? 'script' : 'scripturi';
+        const verb = remaining === 1 ? 'a' : 'au';
+        txtEl.innerHTML = 'Ți-' + verb + ' mai rămas <b>' + remaining + ' ' + word + '</b>. Treci pe <b>' + next.name + '</b> — ' + next.perk + '.';
+      }
+      el.style.display = 'block';
+    } else {
+      el.style.display = 'none';
+    }
+  });
+}
+
+// ============================================
 // GENERATOR
 // ============================================
 function renderGenerator() {
@@ -667,14 +790,27 @@ function renderGenerator() {
     modeContainer.appendChild(div);
   });
 
-  // Agent data from localStorage
-  const saved = localStorage.getItem('hos_agent_data');
-  if (saved) document.getElementById('f_01').value = saved;
+  // ONE-TIME: incarca date salvate + ataseaza autosave (nu la fiecare re-render)
+  if (!_formLoaded) {
+    _formLoaded = true;
 
-  // Autosave agent field
-  document.getElementById('f_01').addEventListener('blur', () => {
-    localStorage.setItem('hos_agent_data', document.getElementById('f_01').value);
-  });
+    const savedAgent = localStorage.getItem('hos_agent_data');
+    if (savedAgent) document.getElementById('f_01').value = savedAgent;
+    loadFormData();
+
+    document.getElementById('f_01').addEventListener('blur', () => {
+      localStorage.setItem('hos_agent_data', document.getElementById('f_01').value);
+    });
+    SAVE_FIELDS.forEach(id => {
+      const el = document.getElementById(id);
+      if (el) {
+        el.addEventListener('blur', saveFormData);
+        el.addEventListener('change', saveFormData);
+      }
+    });
+  }
+
+  renderNudge();
 }
 
 function toggleExperienta() {
@@ -704,8 +840,9 @@ async function doGenerate() {
     }
   }
 
-  // Save agent data
+  // Save agent data + restul formularului (produs + client)
   localStorage.setItem('hos_agent_data', document.getElementById('f_01').value);
+  saveFormData();
 
   const variables = {
     '01_agent_gen':         document.getElementById('f_01').value,
@@ -718,6 +855,7 @@ async function doGenerate() {
     '09_experienta_produs': document.getElementById('f_09').value,
     '10_intentie':          'Invitatie la produs',
     '11_tip_prezentare':    document.getElementById('f_11').value,
+    '21_durata_prezentare': document.getElementById('f_durata').value,
     '12_context_intalnire': document.getElementById('f_12').value,
     '17_calitati_apreciate': document.getElementById('f_17').value,
     '18_testimoniale':      document.getElementById('f_18').value,
@@ -739,6 +877,7 @@ async function doGenerate() {
   document.getElementById('obj2-result').style.display = 'none';
 
   showView('generating');
+  startProgress();
 
   try {
     const data = await api('/api/generate', {
@@ -746,13 +885,16 @@ async function doGenerate() {
       body: JSON.stringify({ mode: SELECTED_MODE, variables })
     });
 
-    // Show output
-    document.getElementById('script-output').textContent = data.script;
-    document.getElementById('out-remaining').textContent = data.scripts_remaining;
-    if (USER_PROFILE) USER_PROFILE.scripts_remaining = data.scripts_remaining;
-
-    showView('output');
+    finishProgress(() => {
+      // Show output
+      document.getElementById('script-output').textContent = data.script;
+      document.getElementById('out-remaining').textContent = data.scripts_remaining;
+      if (USER_PROFILE) USER_PROFILE.scripts_remaining = data.scripts_remaining;
+      renderNudge();
+      showView('output');
+    });
   } catch(e) {
+    stopProgress();
     showView('generator');
     errEl.textContent = e.message;
     errEl.style.display = 'block';
@@ -767,6 +909,79 @@ function copyScript() {
   }).catch(() => {
     toast('Selectează textul manual și copiază cu Ctrl+C');
   });
+}
+
+// ============================================
+// PROGRESS BAR (generare)
+// ============================================
+let _progTimer = null;
+let _progVal = 0;
+const PROG_MSGS = [
+  [0,  'Analizăm profilul clientului...'],
+  [22, 'Construim deschiderea psihologică...'],
+  [45, 'Calibrăm tehnicile de persuasiune...'],
+  [68, 'Finisăm scriptul...'],
+  [85, 'Suntem foarte aproape...']
+];
+function setProg(v) {
+  _progVal = v;
+  const numEl = document.getElementById('prog-num');
+  const fillEl = document.getElementById('prog-fill');
+  const msgEl = document.getElementById('prog-msg');
+  if (numEl) numEl.textContent = Math.round(v);
+  if (fillEl) fillEl.style.width = v + '%';
+  if (msgEl) {
+    let msg = PROG_MSGS[0][1];
+    for (const pair of PROG_MSGS) { if (v >= pair[0]) msg = pair[1]; }
+    msgEl.textContent = msg;
+  }
+}
+function startProgress() {
+  clearInterval(_progTimer);
+  setProg(0);
+  _progTimer = setInterval(() => {
+    if (_progVal < 90) {
+      const step = Math.max(0.3, (90 - _progVal) * 0.04);
+      setProg(_progVal + step);
+    }
+  }, 300);
+}
+function finishProgress(cb) {
+  clearInterval(_progTimer);
+  setProg(100);
+  const msgEl = document.getElementById('prog-msg');
+  if (msgEl) msgEl.textContent = 'Gata!';
+  setTimeout(cb, 450);
+}
+function stopProgress() {
+  clearInterval(_progTimer);
+}
+
+// ============================================
+// DOWNLOAD SCRIPT
+// ============================================
+function downloadText(text, filename) {
+  const blob = new Blob([text], { type: 'text/plain;charset=utf-8' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+function downloadScript() {
+  const text = document.getElementById('script-output').textContent;
+  if (!text.trim()) { toast('Nu există încă un script de descărcat.'); return; }
+  downloadText(text, 'script-harvard-of-sales.txt');
+  toast('Script descărcat ✓');
+}
+function downloadObjScript(num) {
+  const text = document.getElementById('obj' + num + '-output').textContent;
+  if (!text.trim()) { toast('Nu există încă un script de descărcat.'); return; }
+  downloadText(text, 'script-obiectie-' + num + '.txt');
+  toast('Script descărcat ✓');
 }
 
 // ============================================
