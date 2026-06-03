@@ -132,12 +132,27 @@ label{display:block;font-size:12.5px;font-weight:600;letter-spacing:.08em;text-t
 .generating{text-align:center;padding:60px 20px;color:var(--muted)}
 .generating p{margin-top:16px;font-size:15px}
 
-/* ── PROGRESS BAR (generare) ── */
-.progress-wrap{max-width:420px;margin:0 auto}
-.progress-pct{font-family:"Playfair Display",serif;font-size:48px;font-weight:900;color:var(--gold);line-height:1;margin-bottom:18px}
-.progress-track{height:10px;background:rgba(216,169,74,.12);border-radius:20px;overflow:hidden}
+/* ── PROGRESS (checklist 12 etape) ── */
+.prog-card{width:100%;max-width:440px;margin:0 auto;text-align:left}
+.prog-title{font-family:"Playfair Display",serif;font-size:21px;color:var(--ink);text-align:center;margin-bottom:22px}
+.prog-head{display:flex;align-items:center;gap:14px;margin-bottom:24px}
+.progress-track{flex:1;height:9px;background:rgba(216,169,74,.12);border-radius:20px;overflow:hidden}
 .progress-fill{height:100%;width:0%;background:linear-gradient(90deg,var(--goldd),var(--goldl));
-  border-radius:20px;transition:width .35s ease;box-shadow:0 0 10px rgba(216,169,74,.5)}
+  border-radius:20px;box-shadow:0 0 10px rgba(216,169,74,.5)}
+.prog-pctnum{font-family:"Playfair Display",serif;font-weight:700;color:var(--gold);font-size:18px;min-width:44px;text-align:right}
+.prog-list{display:flex;flex-direction:column;gap:10px}
+.pstep{display:flex;align-items:center;gap:12px;font-size:13.5px;transition:color .3s,opacity .3s}
+.pstep-ico{width:18px;height:18px;border-radius:50%;flex:0 0 auto;position:relative;
+  border:2px solid var(--muted2);box-sizing:border-box;transition:border-color .3s,background .3s}
+.pstep-txt{line-height:1.35}
+.pstep.pending{color:var(--muted2);opacity:.55}
+.pstep.active{color:var(--ink)}
+.pstep.active .pstep-ico{border-color:var(--gold);border-top-color:transparent;animation:spin .7s linear infinite}
+.pstep.done{color:var(--muted)}
+.pstep.done .pstep-ico{border-color:var(--gold);background:var(--gold);animation:none}
+.pstep.done .pstep-ico::after{content:"";position:absolute;left:5px;top:1px;width:4px;height:9px;
+  border:solid #1a1206;border-width:0 2px 2px 0;transform:rotate(45deg)}
+.prog-cap{text-align:center;margin-top:22px;font-size:14.5px;color:var(--gold);min-height:20px;font-weight:600}
 
 @media(max-width:600px){
   .auth-card{padding:28px 22px}
@@ -436,11 +451,15 @@ label{display:block;font-size:12.5px;font-weight:600;letter-spacing:.08em;text-t
 <div id="view-generating" class="view z">
   <div class="auth-wrap">
     <div class="generating">
-      <div class="progress-wrap">
-        <div class="progress-pct"><span id="prog-num">0</span>%</div>
-        <div class="progress-track"><div class="progress-fill" id="prog-fill"></div></div>
+      <div class="prog-card">
+        <h3 class="prog-title">Construim scriptul tău psihologic</h3>
+        <div class="prog-head">
+          <div class="progress-track"><div class="progress-fill" id="prog-fill"></div></div>
+          <div class="prog-pctnum"><span id="prog-num">0</span>%</div>
+        </div>
+        <div class="prog-list" id="prog-list"></div>
+        <div class="prog-cap" id="prog-cap"></div>
       </div>
-      <p id="prog-msg">Analizăm profilul clientului...</p>
     </div>
   </div>
 </div>
@@ -912,49 +931,96 @@ function copyScript() {
 }
 
 // ============================================
-// PROGRESS BAR (generare)
+// PROGRESS — checklist 12 etape, viteza constanta
 // ============================================
-let _progTimer = null;
-let _progVal = 0;
-const PROG_MSGS = [
-  [0,  'Analizăm profilul clientului...'],
-  [22, 'Construim deschiderea psihologică...'],
-  [45, 'Calibrăm tehnicile de persuasiune...'],
-  [68, 'Finisăm scriptul...'],
-  [85, 'Suntem foarte aproape...']
+const PROG_STAGES = [
+  'Analizăm profilul psihologic al clientului',
+  'Evaluăm tipul relației și istoricul interacțiunii',
+  'Calibrăm tonul după vechimea contactului',
+  'Selectăm tehnica de deschidere neuro-psihologică',
+  'Construim cârligul de atenție (pattern interrupt)',
+  'Mapăm nevoile și problemele latente',
+  'Analizăm produsul și avantajele relevante',
+  'Integrăm testimonialele cu impact emoțional',
+  'Construim ancorele de credibilitate',
+  'Calibrăm întrebările de persuasiune (NU=DA)',
+  'Construim puntea către prezentare',
+  'Eliminăm formulările care „sună a vânzător"'
 ];
-function setProg(v) {
-  _progVal = v;
-  const numEl = document.getElementById('prog-num');
-  const fillEl = document.getElementById('prog-fill');
-  const msgEl = document.getElementById('prog-msg');
-  if (numEl) numEl.textContent = Math.round(v);
-  if (fillEl) fillEl.style.width = v + '%';
-  if (msgEl) {
-    let msg = PROG_MSGS[0][1];
-    for (const pair of PROG_MSGS) { if (v >= pair[0]) msg = pair[1]; }
-    msgEl.textContent = msg;
-  }
+const STAGE_MS = 5000;                                 // 5s per etapa
+const PROG_TOTAL_MS = PROG_STAGES.length * STAGE_MS;   // 60s
+const PROG_CEIL = 95;                                  // plafon cat timp asteptam API-ul
+
+let _progRAF = null;
+let _progStart = 0;
+let _progDone = false;
+
+function buildChecklist() {
+  const list = document.getElementById('prog-list');
+  if (!list || list.childElementCount) return; // construieste o singura data
+  PROG_STAGES.forEach((txt, i) => {
+    const row = document.createElement('div');
+    row.className = 'pstep pending';
+    row.id = 'pstep-' + i;
+    row.innerHTML = '<span class="pstep-ico"></span><span class="pstep-txt">' + txt + '</span>';
+    list.appendChild(row);
+  });
+}
+function renderStage(idx) {
+  PROG_STAGES.forEach((_, i) => {
+    const row = document.getElementById('pstep-' + i);
+    if (!row) return;
+    row.classList.remove('done','active','pending');
+    if (i < idx) row.classList.add('done');
+    else if (i === idx) row.classList.add('active');
+    else row.classList.add('pending');
+  });
+}
+function setBar(pct) {
+  const fill = document.getElementById('prog-fill');
+  const num = document.getElementById('prog-num');
+  if (fill) fill.style.width = pct + '%';
+  if (num) num.textContent = Math.round(pct);
+}
+function progTick() {
+  if (_progDone) return;
+  const elapsed = performance.now() - _progStart;
+  // bara liniara (viteza constanta) pana la plafon
+  setBar(Math.min(PROG_CEIL, (elapsed / PROG_TOTAL_MS) * PROG_CEIL));
+  // etapa curenta — se schimba la fiecare 5s
+  const idx = Math.min(PROG_STAGES.length - 1, Math.floor(elapsed / STAGE_MS));
+  renderStage(idx);
+  const cap = document.getElementById('prog-cap');
+  if (cap) cap.textContent = idx >= PROG_STAGES.length - 1 ? 'Suntem aproape gata...' : '';
+  _progRAF = requestAnimationFrame(progTick);
 }
 function startProgress() {
-  clearInterval(_progTimer);
-  setProg(0);
-  _progTimer = setInterval(() => {
-    if (_progVal < 90) {
-      const step = Math.max(0.3, (90 - _progVal) * 0.04);
-      setProg(_progVal + step);
-    }
-  }, 300);
+  cancelAnimationFrame(_progRAF);
+  _progDone = false;
+  _progStart = performance.now();
+  buildChecklist();
+  renderStage(0);
+  setBar(0);
+  const cap = document.getElementById('prog-cap');
+  if (cap) cap.textContent = '';
+  _progRAF = requestAnimationFrame(progTick);
 }
 function finishProgress(cb) {
-  clearInterval(_progTimer);
-  setProg(100);
-  const msgEl = document.getElementById('prog-msg');
-  if (msgEl) msgEl.textContent = 'Gata!';
-  setTimeout(cb, 450);
+  _progDone = true;
+  cancelAnimationFrame(_progRAF);
+  // bifeaza toate etapele + bara la 100%
+  PROG_STAGES.forEach((_, i) => {
+    const row = document.getElementById('pstep-' + i);
+    if (row) { row.classList.remove('pending','active'); row.classList.add('done'); }
+  });
+  setBar(100);
+  const cap = document.getElementById('prog-cap');
+  if (cap) cap.textContent = 'Gata!';
+  setTimeout(cb, 400);
 }
 function stopProgress() {
-  clearInterval(_progTimer);
+  _progDone = true;
+  cancelAnimationFrame(_progRAF);
 }
 
 // ============================================
