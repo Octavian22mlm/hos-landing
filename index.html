@@ -192,6 +192,7 @@ label{display:block;font-size:12.5px;font-weight:600;letter-spacing:.08em;text-t
   0%,100%{box-shadow:0 0 0 0 rgba(62,207,142,.5)}
   50%{box-shadow:0 0 0 7px rgba(62,207,142,0)}}
 </style>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
 
@@ -592,6 +593,11 @@ let USER_PROFILE = null;
 let SELECTED_MODE = 'clean';
 let _formLoaded = false;
 
+// Supabase client — pentru a recunoaște sesiunea venită din pagina de plată (preturi.html)
+const SUPABASE_URL = 'https://dbympznifmxalnxlemyk.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRieW1wem5pZm14YWxueGxlbXlrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODAzNjYxMjgsImV4cCI6MjA5NTk0MjEyOH0.EtUssJSyjVuttc89d6kuYuf49CNcSr-kqWlUXySbvCc';
+const supaApp = (window.supabase) ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY) : null;
+
 // Link-ul tau de upgrade (Payhip). Lasa gol pentru mesaj de contact.
 const UPGRADE_URL = '';
 
@@ -603,9 +609,28 @@ const CLIENT_FIELDS = ['f_03','f_20','f_02','f_04','f_17','f_05'];
 // INIT
 // ============================================
 async function init() {
+  // dacă nu avem token local, dar există sesiune Supabase (venită din pagina de plată) → o folosim
+  if (!TOKEN && supaApp) {
+    try {
+      const { data } = await supaApp.auth.getSession();
+      if (data && data.session) {
+        TOKEN = data.session.access_token;
+        sessionStorage.setItem('hos_token', TOKEN);
+      }
+    } catch(e) {}
+  }
   if (!TOKEN) { showView('login'); return; }
   try {
-    const profile = await api('/api/user');
+    let profile = await api('/api/user');
+    // dacă tocmai am plătit, planul s-ar putea activa cu 1-2s întârziere (webhook) → așteptăm puțin
+    const justPaid = new URLSearchParams(location.search).get('paid') === '1';
+    if (justPaid && (!profile.tier || profile.tier === 'none')) {
+      for (let i = 0; i < 6 && (!profile.tier || profile.tier === 'none'); i++) {
+        await new Promise(r => setTimeout(r, 1500));
+        profile = await api('/api/user');
+      }
+      history.replaceState({}, '', location.pathname);
+    }
     USER_PROFILE = profile;
     if (!profile.tier || profile.tier === 'none') {
       showView('redeem');
@@ -710,6 +735,7 @@ function doLogout() {
   sessionStorage.removeItem('hos_token');
   TOKEN = null;
   USER_PROFILE = null;
+  if (supaApp) { try { supaApp.auth.signOut(); } catch(e){} }
   showView('login');
 }
 
