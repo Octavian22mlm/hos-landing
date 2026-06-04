@@ -6,7 +6,11 @@ const { createClient } = require('@supabase/supabase-js');
 const path = require('path');
 
 const app = express();
-app.use(express.json());
+// express.json() parsează tot, DAR webhook-ul Stripe are nevoie de body RAW pentru semnătură:
+app.use((req, res, next) => {
+  if (req.originalUrl === '/api/webhook') return next();
+  express.json()(req, res, next);
+});
 app.use(express.static(path.join(__dirname)));
 
 // ---- SUPABASE (service role = acces total, server-side only) ----
@@ -31,6 +35,9 @@ const STRIPE_PLANS = {
   builder: { priceId: 'price_1Teblh2K2gEr8ziY4JzrVBzj', mode: 'subscription', tier: 'builder' },
   leader:  { priceId: 'price_1Teblu2K2gEr8ziYVpsv2Blz', mode: 'subscription', tier: 'leader'  },
 };
+
+// bonus de antrenament (o singură dată, la prima plată a abonamentului)
+const TRAINING_BONUS = { recruit: 1, builder: 3, leader: 5 };
 
 // ---- TIER CONFIG ----
 const TIER_MODES = {
@@ -99,8 +106,8 @@ app.get('/api/user', auth, async (req, res) => {
 
   if (error) return res.status(500).json({ error: 'Eroare la citirea profilului' });
 
-  // Reset lunar automat
-  if (profile.tier !== 'none' && profile.tiers) {
+  // Reset lunar automat (Script Unic = o singură dată, nu se resetează)
+  if (profile.tier !== 'none' && profile.tier !== 'unic' && profile.tiers) {
     const resetAt = new Date(profile.scripts_reset_at);
     const now = new Date();
     const newMonth = now.getMonth() !== resetAt.getMonth() || now.getFullYear() !== resetAt.getFullYear();
@@ -168,10 +175,11 @@ app.post('/api/generate', auth, async (req, res) => {
     return res.status(403).json({ error: 'Nu ai un plan activ. Activează un plan cu codul primit.' });
   }
 
-  // 2. Reset lunar
+  // 2. Reset lunar (Script Unic exclus — e o singură dată)
   const resetAt = new Date(profile.scripts_reset_at);
   const now = new Date();
-  if (now.getMonth() !== resetAt.getMonth() || now.getFullYear() !== resetAt.getFullYear()) {
+  if (profile.tier !== 'unic' &&
+      (now.getMonth() !== resetAt.getMonth() || now.getFullYear() !== resetAt.getFullYear())) {
     profile.scripts_remaining = profile.tiers.scripts_per_month;
     await db.from('profiles').update({
       scripts_remaining: profile.scripts_remaining,
@@ -179,8 +187,9 @@ app.post('/api/generate', auth, async (req, res) => {
     }).eq('id', req.user.id);
   }
 
-  // 3. Verificam scripturi disponibile
-  if (profile.scripts_remaining <= 0) {
+  // 3. Verificam scripturi disponibile (sau bonus de antrenament)
+  const trainingLeft = profile.training_left || 0;
+  if (profile.scripts_remaining <= 0 && trainingLeft <= 0) {
     return res.status(403).json({
       error: 'Ai atins limita lunară de scripturi. Fă upgrade pentru mai multe.'
     });
@@ -244,11 +253,17 @@ app.post('/api/generate', auth, async (req, res) => {
 
     const msData = await msResponse.json();
 
-    // 7. Decrementam contorul (doar pentru scripturi principale, nu pentru obiectii)
+    // 7. Decrementam (doar scripturi principale, nu obiectii) — întâi training_left, apoi scripts_remaining
     let newRemaining = profile.scripts_remaining;
+    let newTraining  = trainingLeft;
     if (!isObjection) {
-      newRemaining = profile.scripts_remaining - 1;
-      await db.from('profiles').update({ scripts_remaining: newRemaining }).eq('id', req.user.id);
+      if (newTraining > 0) {
+        newTraining = newTraining - 1;
+        await db.from('profiles').update({ training_left: newTraining }).eq('id', req.user.id);
+      } else {
+        newRemaining = profile.scripts_remaining - 1;
+        await db.from('profiles').update({ scripts_remaining: newRemaining }).eq('id', req.user.id);
+      }
       await db.from('script_generations').insert({ user_id: req.user.id, mode });
     }
 
@@ -263,7 +278,7 @@ app.post('/api/generate', auth, async (req, res) => {
     } else {
       scriptText = msData.output || msData.text || JSON.stringify(msData);
     }
-    res.json({ script: scriptText, scripts_remaining: newRemaining });
+    res.json({ script: scriptText, scripts_remaining: newRemaining, training_left: newTraining });
 
   } catch (err) {
     console.error('Generate error:', err);
@@ -351,6 +366,83 @@ app.post('/api/create-checkout-session', auth, async (req, res) => {
     console.error('Stripe checkout error:', err);
     res.status(500).json({ error: 'Nu am putut porni plata. Încearcă din nou.' });
   }
+});
+
+// ============================================
+// STRIPE WEBHOOK — activează planul automat după plată
+// (folosește body RAW — vezi skip-ul express.json de la început)
+// ============================================
+app.post('/api/webhook', express.raw({ type: 'application/json' }), async (req, res) => {
+  let event;
+  try {
+    event = stripe.webhooks.constructEvent(
+      req.body,
+      req.headers['stripe-signature'],
+      process.env.STRIPE_WEBHOOK_SECRET
+    );
+  } catch (err) {
+    console.error('Webhook signature error:', err.message);
+    return res.status(400).send(`Webhook Error: ${err.message}`);
+  }
+
+  try {
+    // 1) ACTIVARE INIȚIALĂ — plată unică SAU prima plată a abonamentului
+    if (event.type === 'checkout.session.completed') {
+      const s = event.data.object;
+      const userId = s.metadata && s.metadata.user_id;
+      const tier   = s.metadata && s.metadata.tier;
+      if (userId && tier) {
+        const { data: t } = await db.from('tiers').select('scripts_per_month').eq('id', tier).single();
+        const monthly = t ? t.scripts_per_month : 0;
+        await db.from('profiles').update({
+          tier,
+          scripts_remaining: monthly,
+          training_left: s.mode === 'subscription' ? (TRAINING_BONUS[tier] || 0) : 0,
+          scripts_reset_at: new Date().toISOString()
+        }).eq('id', userId);
+        console.log(`[webhook] activat ${tier} pentru ${userId} (${s.mode})`);
+      }
+    }
+
+    // 2) REÎNNOIRE LUNARĂ abonament (nu prima plată) — resetează scripturile, bonus 0
+    if (event.type === 'invoice.paid') {
+      const inv = event.data.object;
+      if (inv.billing_reason === 'subscription_cycle') {
+        const subId = inv.subscription || (inv.parent && inv.parent.subscription_details && inv.parent.subscription_details.subscription);
+        if (subId) {
+          const sub = await stripe.subscriptions.retrieve(subId);
+          const userId = sub.metadata && sub.metadata.user_id;
+          const tier   = sub.metadata && sub.metadata.tier;
+          if (userId && tier) {
+            const { data: t } = await db.from('tiers').select('scripts_per_month').eq('id', tier).single();
+            await db.from('profiles').update({
+              scripts_remaining: t ? t.scripts_per_month : 0,
+              training_left: 0,
+              scripts_reset_at: new Date().toISOString()
+            }).eq('id', userId);
+            console.log(`[webhook] reînnoit ${tier} pentru ${userId}`);
+          }
+        }
+      }
+    }
+
+    // 3) ANULARE / EXPIRARE abonament — revine la 'none'
+    if (event.type === 'customer.subscription.deleted') {
+      const sub = event.data.object;
+      const userId = sub.metadata && sub.metadata.user_id;
+      if (userId) {
+        await db.from('profiles').update({
+          tier: 'none', scripts_remaining: 0, training_left: 0
+        }).eq('id', userId);
+        console.log(`[webhook] anulat pentru ${userId}`);
+      }
+    }
+  } catch (err) {
+    console.error('Webhook handler error:', err);
+    // răspundem 200 ca Stripe să nu reîncerce la infinit pe o eroare de date
+  }
+
+  res.json({ received: true });
 });
 
 // ============================================
