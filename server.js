@@ -16,6 +16,18 @@ const db = createClient(
   { auth: { autoRefreshToken: false, persistSession: false } }
 );
 
+// ---- STRIPE (cheia secretă vine din variabila Railway STRIPE_SECRET_KEY) ----
+const Stripe = require('stripe');
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
+
+// maparea planurilor -> Price ID + tip facturare + tier
+const STRIPE_PLANS = {
+  unic:    { priceId: 'price_1Teazy2K2gEr8ziYVw7KVcPI', mode: 'payment',      tier: 'unic'    },
+  recruit: { priceId: 'price_1Teb0g2K2gEr8ziYzAWAiU3G', mode: 'subscription', tier: 'recruit' },
+  builder: { priceId: 'price_1Teb182K2gEr8ziYLioqV1kN', mode: 'subscription', tier: 'builder' },
+  leader:  { priceId: 'price_1Teb1l2K2gEr8ziYfofZ640S', mode: 'subscription', tier: 'leader'  },
+};
+
 // ---- TIER CONFIG ----
 const TIER_MODES = {
   unic:    { clean: true,  coach: false, both: false },
@@ -305,6 +317,36 @@ app.post('/api/admin/set-tier', admin, async (req, res) => {
   }).eq('id', user.id);
 
   res.json({ message: `Planul ${tierData.name} asignat lui ${email}` });
+});
+
+// ============================================
+// STRIPE — pornește Embedded Checkout (plata pe site)
+// Protejat cu auth: userId vine din token, nu din body (nu poți plăti în numele altcuiva)
+// ============================================
+app.post('/api/create-checkout-session', auth, async (req, res) => {
+  const { plan } = req.body;
+  const p = STRIPE_PLANS[plan];
+  if (!p) return res.status(400).json({ error: 'Plan invalid' });
+
+  try {
+    const base = `https://${req.get('host')}`;
+    const session = await stripe.checkout.sessions.create({
+      ui_mode: 'embedded',
+      mode: p.mode,
+      line_items: [{ price: p.priceId, quantity: 1 }],
+      customer_email: req.user.email,
+      client_reference_id: req.user.id,
+      metadata: { user_id: req.user.id, tier: p.tier },
+      subscription_data: p.mode === 'subscription'
+        ? { metadata: { user_id: req.user.id, tier: p.tier } } : undefined,
+      invoice_creation: p.mode === 'payment' ? { enabled: true } : undefined,
+      return_url: `${base}/preturi.html?paid=1&session_id={CHECKOUT_SESSION_ID}`,
+    });
+    res.json({ clientSecret: session.client_secret });
+  } catch (err) {
+    console.error('Stripe checkout error:', err);
+    res.status(500).json({ error: 'Nu am putut porni plata. Încearcă din nou.' });
+  }
 });
 
 // ============================================
