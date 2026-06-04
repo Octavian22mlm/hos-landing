@@ -359,7 +359,7 @@ app.post('/api/create-checkout-session', auth, async (req, res) => {
       subscription_data: p.mode === 'subscription'
         ? { metadata: { user_id: req.user.id, tier: p.tier } } : undefined,
       invoice_creation: p.mode === 'payment' ? { enabled: true } : undefined,
-      return_url: `${base}/preturi.html?paid=1&session_id={CHECKOUT_SESSION_ID}`,
+      return_url: `${base}/?paid=1&session_id={CHECKOUT_SESSION_ID}`,
     });
     res.json({ clientSecret: session.client_secret });
   } catch (err) {
