@@ -812,6 +812,16 @@ function showView(name) {
 // API HELPER
 // ============================================
 async function api(endpoint, options = {}) {
+  // Auto-refresh: ia token-ul proaspat din clientul Supabase (se reinnoieste singur, fara delogare la ~1h)
+  if (supaApp) {
+    try {
+      const { data: _sess } = await supaApp.auth.getSession();
+      if (_sess && _sess.session && _sess.session.access_token) {
+        TOKEN = _sess.session.access_token;
+        sessionStorage.setItem('hos_token', TOKEN);
+      }
+    } catch (e) {}
+  }
   const headers = { 'Content-Type': 'application/json' };
   if (TOKEN) headers['Authorization'] = 'Bearer ' + TOKEN;
   const res = await fetch(endpoint, { ...options, headers: { ...headers, ...options.headers } });
@@ -829,11 +839,15 @@ async function doLogin() {
   const errEl = document.getElementById('login-err');
   errEl.style.display = 'none';
   try {
-    const data = await api('/api/auth/login', {
-      method: 'POST',
-      body: JSON.stringify({ email, password: pass })
-    });
-    TOKEN = data.token;
+    if (supaApp) {
+      // Login prin clientul Supabase -> sesiunea e reinnoita automat (fara delogare la ~1h)
+      const { data: sd, error: se } = await supaApp.auth.signInWithPassword({ email, password: pass });
+      if (se) throw new Error(se.message === 'Invalid login credentials' ? 'Email sau parolă incorecte' : se.message);
+      TOKEN = sd.session.access_token;
+    } else {
+      const data = await api('/api/auth/login', { method: 'POST', body: JSON.stringify({ email, password: pass }) });
+      TOKEN = data.token;
+    }
     sessionStorage.setItem('hos_token', TOKEN);
     await init();
   } catch(e) {
@@ -1085,6 +1099,13 @@ function toggleExperienta() {
   document.getElementById('field-experienta').style.display = val === 'Da' ? 'block' : 'none';
 }
 
+// Randare sigura: escape HTML, apoi **text** -> ingrosat (pentru AGENT etc.)
+function renderScript(text) {
+  var esc = String(text == null ? '' : text)
+    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  return esc.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+}
+
 // Async: trimite jobul, apoi intreaba din 3 in 3 secunde pana e gata (fara timeout pe cerere lunga)
 async function generateAndWait(body) {
   const { jobId } = await api('/api/generate', { method: 'POST', body: JSON.stringify(body) });
@@ -1177,7 +1198,7 @@ async function doGenerate() {
 
     finishProgress(() => {
       // Show output
-      document.getElementById('script-output').textContent = data.script;
+      document.getElementById('script-output').innerHTML = renderScript(data.script);
       lastScriptText = data.script;     // pentru anti-repetitie la obiectii
       lastObj1Response = '';            // lant de obiectii proaspat
       document.getElementById('out-remaining').textContent = data.scripts_remaining;
@@ -1409,7 +1430,7 @@ async function generateObjScript(num) {
     });
 
     finishObjProgress(prefix, () => {
-      document.getElementById(prefix + '-output').textContent = data.script;
+      document.getElementById(prefix + '-output').innerHTML = renderScript(data.script);
       if (num === 1) lastObj1Response = data.script;  // pentru anti-repetitie la obiectia 2
       document.getElementById(prefix + '-progress').style.display = 'none';
       document.getElementById(prefix + '-result').style.display = 'block';
