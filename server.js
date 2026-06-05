@@ -4,12 +4,13 @@
 const express = require('express');
 const { createClient } = require('@supabase/supabase-js');
 const path = require('path');
+const crypto = require('crypto');
 
 const app = express();
 // express.json() parsează tot, DAR webhook-ul Stripe are nevoie de body RAW pentru semnătură:
 app.use((req, res, next) => {
   if (req.originalUrl === '/api/webhook') return next();
-  express.json()(req, res, next);
+  express.json({ limit: '2mb' })(req, res, next);
 });
 app.use(express.static(path.join(__dirname)));
 
@@ -161,8 +162,24 @@ app.post('/api/redeem', auth, async (req, res) => {
 });
 
 // ============================================
-// GENERARE SCRIPT
+// GENERARE SCRIPT — ASINCRON (anti-timeout)
+// Flux: /api/generate (porneste jobul, raspunde instant cu jobId)
+//   -> MindStudio ruleaza in fundal si trimite rezultatul la /api/ms-callback/:jobId
+//   -> front-end-ul intreaba /api/generate-status/:jobId pana e gata.
 // ============================================
+
+// Extrage textul scriptului din raspunsul/callback-ul MindStudio (robust la format)
+function extractScript(body) {
+  if (!body) return '';
+  const result = body.result;
+  if (typeof result === 'string') return result;
+  if (result && typeof result === 'object') {
+    return result.output || result.result || result.text || result.script ||
+           Object.values(result)[0] || JSON.stringify(result);
+  }
+  return body.output || body.text || (body.thread && body.thread.result) || '';
+}
+
 app.post('/api/generate', auth, async (req, res) => {
   // 1. Citim profilul cu detalii tier
   const { data: profile } = await db
@@ -172,7 +189,7 @@ app.post('/api/generate', auth, async (req, res) => {
     .single();
 
   if (!profile || profile.tier === 'none') {
-    return res.status(403).json({ error: 'Nu ai un plan activ. Activează un plan cu codul primit.' });
+    return res.status(403).json({ error: 'Nu ai un plan activ.' });
   }
 
   // 2. Reset lunar (Script Unic exclus — e o singură dată)
@@ -221,12 +238,29 @@ app.post('/api/generate', auth, async (req, res) => {
     '16_obiectie_2':               variables['16_obiectie_2'] || ''
   };
 
-  // 6. Apelam MindStudio API
-  //    Scriptul principal -> workflow default (Main.flow)
-  //    Obiectia 1 -> workflow "Obiectie 1" ; Obiectia 2 -> workflow "Obiectie 2"
+  // 6. Cream jobul in DB (status pending)
+  const jobId = crypto.randomUUID();
+  const { error: jobErr } = await db.from('generation_jobs').insert({
+    id: jobId,
+    user_id: req.user.id,
+    mode: mode || 'clean',
+    is_objection: !!isObjection,
+    status: 'pending'
+  });
+  if (jobErr) {
+    console.error('Job insert error:', jobErr);
+    return res.status(500).json({ error: 'Nu am putut porni generarea. Încearcă din nou.' });
+  }
+
+  // 7. Pornim MindStudio ASINCRON cu callbackUrl unic per job
+  const base = `https://${req.get('host')}`;
+  const secret = process.env.MS_CALLBACK_SECRET || '';
+  const callbackUrl = `${base}/api/ms-callback/${jobId}` + (secret ? `?s=${encodeURIComponent(secret)}` : '');
+
   const msBody = {
     appId: process.env.MINDSTUDIO_AGENT_ID,
-    variables: allVariables
+    variables: allVariables,
+    callbackUrl
   };
   if (isObjection) {
     msBody.workflow = objNum === 2 ? 'Obiectie 2' : 'Obiectie 1';
@@ -247,43 +281,98 @@ app.post('/api/generate', auth, async (req, res) => {
 
     if (!msResponse.ok) {
       const errText = await msResponse.text();
-      console.error('MindStudio error:', errText);
-      return res.status(500).json({ error: 'Eroare la generarea scriptului. Încearcă din nou.' });
+      console.error('MindStudio start error:', errText);
+      await db.from('generation_jobs').update({ status: 'error', error: 'start_failed' }).eq('id', jobId);
+      return res.status(500).json({ error: 'Eroare la pornirea generării. Încearcă din nou.' });
     }
 
-    const msData = await msResponse.json();
-
-    // 7. Decrementam (doar scripturi principale, nu obiectii) — întâi training_left, apoi scripts_remaining
-    let newRemaining = profile.scripts_remaining;
-    let newTraining  = trainingLeft;
-    if (!isObjection) {
-      if (newTraining > 0) {
-        newTraining = newTraining - 1;
-        await db.from('profiles').update({ training_left: newTraining }).eq('id', req.user.id);
-      } else {
-        newRemaining = profile.scripts_remaining - 1;
-        await db.from('profiles').update({ scripts_remaining: newRemaining }).eq('id', req.user.id);
-      }
-      await db.from('script_generations').insert({ user_id: req.user.id, mode });
-    }
-
-    // 9. Returnam scriptul — extragem din obiectul result
-    const result = msData.result;
-    let scriptText = '';
-    if (typeof result === 'string') {
-      scriptText = result;
-    } else if (typeof result === 'object' && result !== null) {
-      scriptText = result.output || result.result || result.text ||
-                   result.script || Object.values(result)[0] || JSON.stringify(result);
-    } else {
-      scriptText = msData.output || msData.text || JSON.stringify(msData);
-    }
-    res.json({ script: scriptText, scripts_remaining: newRemaining, training_left: newTraining });
+    // Raspuns instant — front-end-ul va face polling pe jobId
+    return res.json({ jobId });
 
   } catch (err) {
-    console.error('Generate error:', err);
-    res.status(500).json({ error: 'Eroare de conexiune. Încearcă din nou.' });
+    console.error('Generate start error:', err);
+    await db.from('generation_jobs').update({ status: 'error', error: 'connection' }).eq('id', jobId);
+    return res.status(500).json({ error: 'Eroare de conexiune. Încearcă din nou.' });
   }
+});
+
+// CALLBACK de la MindStudio — primeste rezultatul cand jobul e gata (public)
+app.post('/api/ms-callback/:jobId', async (req, res) => {
+  // verificare secret (optional, daca e setat MS_CALLBACK_SECRET)
+  const secret = process.env.MS_CALLBACK_SECRET || '';
+  if (secret && req.query.s !== secret) {
+    return res.status(401).json({ error: 'unauthorized' });
+  }
+
+  const { jobId } = req.params;
+  try {
+    const { data: job } = await db.from('generation_jobs').select('*').eq('id', jobId).single();
+    if (!job) return res.json({ received: true }); // job inexistent — ignoram politicos
+    if (job.status !== 'pending') return res.json({ received: true }); // deja procesat
+
+    // Detectam eroare in raspunsul MindStudio
+    const body = req.body || {};
+    const msError = body.success === false || (body.thread && body.thread.error);
+    const scriptText = extractScript(body);
+
+    if (msError || !scriptText) {
+      console.error('MS callback fara rezultat:', JSON.stringify(body).slice(0, 600));
+      await db.from('generation_jobs').update({ status: 'error', error: 'no_result' }).eq('id', jobId);
+      return res.json({ received: true });
+    }
+
+    // Decrementam scripturi DOAR la succes si DOAR pentru scripturi principale (nu obiectii)
+    let newRemaining = null, newTraining = null;
+    if (!job.is_objection) {
+      const { data: profile } = await db.from('profiles').select('*').eq('id', job.user_id).single();
+      if (profile) {
+        newRemaining = profile.scripts_remaining;
+        newTraining  = profile.training_left || 0;
+        if (newTraining > 0) {
+          newTraining = newTraining - 1;
+          await db.from('profiles').update({ training_left: newTraining }).eq('id', job.user_id);
+        } else {
+          newRemaining = profile.scripts_remaining - 1;
+          await db.from('profiles').update({ scripts_remaining: newRemaining }).eq('id', job.user_id);
+        }
+        await db.from('script_generations').insert({ user_id: job.user_id, mode: job.mode });
+      }
+    }
+
+    await db.from('generation_jobs').update({
+      status: 'done',
+      result: scriptText,
+      scripts_remaining: newRemaining,
+      training_left: newTraining
+    }).eq('id', jobId);
+
+    return res.json({ received: true });
+  } catch (err) {
+    console.error('MS callback handler error:', err);
+    await db.from('generation_jobs').update({ status: 'error', error: 'callback_exception' }).eq('id', jobId).then(()=>{}, ()=>{});
+    return res.json({ received: true });
+  }
+});
+
+// STATUS — front-end-ul face polling pana jobul e gata
+app.get('/api/generate-status/:jobId', auth, async (req, res) => {
+  const { jobId } = req.params;
+  const { data: job, error } = await db.from('generation_jobs').select('*').eq('id', jobId).single();
+  if (error || !job) return res.status(404).json({ error: 'Job inexistent' });
+  if (job.user_id !== req.user.id) return res.status(403).json({ error: 'Acces interzis' });
+
+  if (job.status === 'done') {
+    return res.json({
+      status: 'done',
+      script: job.result,
+      scripts_remaining: job.scripts_remaining,
+      training_left: job.training_left
+    });
+  }
+  if (job.status === 'error') {
+    return res.json({ status: 'error', error: 'Generarea a eșuat. Încearcă din nou.' });
+  }
+  return res.json({ status: 'pending' });
 });
 
 // ============================================
