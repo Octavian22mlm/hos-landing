@@ -1085,6 +1085,19 @@ function toggleExperienta() {
   document.getElementById('field-experienta').style.display = val === 'Da' ? 'block' : 'none';
 }
 
+// Async: trimite jobul, apoi intreaba din 3 in 3 secunde pana e gata (fara timeout pe cerere lunga)
+async function generateAndWait(body) {
+  const { jobId } = await api('/api/generate', { method: 'POST', body: JSON.stringify(body) });
+  const start = Date.now();
+  while (Date.now() - start < 5 * 60 * 1000) {           // siguranta: max 5 min
+    await new Promise(r => setTimeout(r, 3000));
+    const s = await api('/api/generate-status/' + jobId);
+    if (s.status === 'done')  return s;                   // { script, scripts_remaining, training_left }
+    if (s.status === 'error') throw new Error(s.error || 'Eroare la generare');
+  }
+  throw new Error('Generarea durează neobișnuit de mult. Reîncearcă.');
+}
+
 async function doGenerate() {
   const errEl = document.getElementById('gen-err');
   errEl.style.display = 'none';
@@ -1160,10 +1173,7 @@ async function doGenerate() {
   startProgress();
 
   try {
-    const data = await api('/api/generate', {
-      method: 'POST',
-      body: JSON.stringify({ mode: SELECTED_MODE, variables })
-    });
+    const data = await generateAndWait({ mode: SELECTED_MODE, variables });
 
     finishProgress(() => {
       // Show output
@@ -1391,14 +1401,11 @@ async function generateObjScript(num) {
   startObjProgress(prefix, objText);
 
   try {
-    const data = await api('/api/generate', {
-      method: 'POST',
-      body: JSON.stringify({
-        mode: lastMode,
-        variables: objVariables,
-        isObjection: true,
-        objNum: num
-      })
+    const data = await generateAndWait({
+      mode: lastMode,
+      variables: objVariables,
+      isObjection: true,
+      objNum: num
     });
 
     finishObjProgress(prefix, () => {
