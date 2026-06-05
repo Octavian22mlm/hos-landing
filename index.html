@@ -191,6 +191,76 @@ label{display:block;font-size:12.5px;font-weight:600;letter-spacing:.08em;text-t
 @keyframes pulse-dot{
   0%,100%{box-shadow:0 0 0 0 rgba(62,207,142,.5)}
   50%{box-shadow:0 0 0 7px rgba(62,207,142,0)}}
+
+/* ===== HEADER v2: brand + tagline + nav tabs + lang ===== */
+.gen-header{display:block;padding:0}
+.topbar{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;padding:13px 28px}
+.brandwrap{display:flex;flex-direction:column;gap:2px}
+.brandwrap .name{font-family:"Playfair Display",serif;font-weight:700;color:var(--gold);font-size:18px;letter-spacing:.04em}
+.brandwrap .tagline{font-size:10px;letter-spacing:.26em;text-transform:uppercase;color:var(--muted2)}
+.topright{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.langtog{display:flex;border:1px solid var(--line);border-radius:7px;overflow:hidden}
+.langtog .lang{background:transparent;color:var(--muted);border:none;padding:6px 11px;font-size:12px;font-weight:600;cursor:pointer;letter-spacing:.05em}
+.langtog .lang.active{background:var(--gold);color:#1a1206}
+.iesire{padding:7px 14px;font-size:12px;letter-spacing:.12em;text-transform:uppercase}
+.navtabs{display:flex;gap:2px;padding:0 16px;border-top:1px solid var(--lsoft);overflow-x:auto}
+.navtab{position:relative;background:transparent;border:none;color:var(--muted);font-family:"Hanken Grotesk",sans-serif;
+  font-size:13px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:13px 16px;cursor:pointer;white-space:nowrap;
+  border-bottom:2px solid transparent;transition:color .2s}
+.navtab:hover{color:var(--ink)}
+.navtab.active{color:var(--gold);border-bottom-color:var(--gold)}
+.navtab.soon{color:var(--muted2);cursor:default}
+.navtab.soon:hover{color:var(--muted)}
+.soon-badge{font-size:8.5px;letter-spacing:.08em;background:rgba(216,169,74,.13);color:var(--gold);
+  border:0.5px solid var(--line);border-radius:20px;padding:2px 6px;margin-left:7px;vertical-align:middle;text-transform:none}
+
+/* ===== GUIDE BUTTONS (deasupra formularului / scriptului) ===== */
+.guide-bar{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:20px}
+.guide-btn{background:var(--panel);border:1px solid var(--line);color:var(--goldl);
+  font-family:"Hanken Grotesk",sans-serif;font-size:13.5px;font-weight:600;padding:10px 16px;border-radius:9px;cursor:pointer;
+  transition:border-color .2s,background .2s}
+.guide-btn:hover{border-color:var(--gold);background:var(--panel2)}
+
+/* ===== MODAL ===== */
+.modal-overlay{position:fixed;inset:0;z-index:200;background:rgba(4,6,11,.78);backdrop-filter:blur(4px);
+  display:none;align-items:center;justify-content:center;padding:20px}
+.modal-overlay.show{display:flex}
+.modal-box{background:var(--bg2);border:1px solid var(--line);border-radius:16px;width:100%;max-width:640px;
+  max-height:88vh;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 24px 70px rgba(0,0,0,.55)}
+.modal-head{padding:22px 26px 16px;border-bottom:1px solid var(--lsoft)}
+.modal-title{font-family:"Playfair Display",serif;font-size:22px;color:var(--gold);font-weight:700}
+.modal-subtitle{font-size:13px;color:var(--muted);margin-top:5px}
+.modal-body{padding:20px 26px;overflow-y:auto}
+.modal-foot{padding:16px 26px;border-top:1px solid var(--lsoft);display:flex;justify-content:flex-end}
+.modal-gate{max-width:320px}
+.modal-gate.locked{position:relative}
+.modal-gate:disabled::after{content:" — derulează până jos";font-weight:500;text-transform:none;letter-spacing:0;font-size:12px}
+
+/* Reguli cards */
+.rule-card{display:flex;gap:14px;padding:14px 0;border-bottom:1px solid var(--lsoft)}
+.rule-card:last-child{border-bottom:none}
+.rule-num{flex:0 0 30px;height:30px;border-radius:50%;background:rgba(216,169,74,.13);border:1px solid var(--line);
+  color:var(--gold);font-weight:700;display:flex;align-items:center;justify-content:center;font-size:14px}
+.rule-txt .rt{font-weight:700;color:var(--ink);font-size:15px;margin-bottom:4px}
+.rule-txt .rd{font-size:13.5px;color:var(--muted);line-height:1.55}
+
+/* ASA DA / NU comparison */
+.cmp-intro{font-size:13.5px;color:var(--muted);margin-bottom:18px;line-height:1.5}
+.cmp-blk{margin-bottom:18px}
+.cmp-fname{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--goldl);margin-bottom:8px}
+.cmp{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.cmp .box{border-radius:10px;padding:12px 14px;border-left:3px solid}
+.cmp .nu{background:rgba(226,75,74,.08);border-left-color:#e24b4a}
+.cmp .da{background:rgba(29,158,117,.09);border-left-color:#1d9e75}
+.cmp .tag{font-size:11px;font-weight:700;letter-spacing:.05em;margin-bottom:6px}
+.cmp .tag-nu{color:#f09595}
+.cmp .tag-da{color:#5dcaa5}
+.cmp .ex{font-size:13px;color:#dfe5ee;line-height:1.45}
+.cmp-why{font-size:12px;color:var(--muted2);font-style:italic;margin-top:8px}
+.cmp-rule{margin-top:8px;background:rgba(216,169,74,.08);border:0.5px solid var(--line);border-radius:10px;
+  padding:13px 15px;font-size:13.5px;color:#e9d9b4;line-height:1.5}
+@media(max-width:560px){.cmp{grid-template-columns:1fr}}
+
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
@@ -231,12 +301,12 @@ label{display:block;font-size:12.5px;font-weight:600;letter-spacing:.08em;text-t
         <div class="sub">The Psychology of MLM Excellence</div>
       </div>
       <h2>Intră în platformă</h2>
-      <p>Generatorul tău de scripturi psihologice</p>
+      <p>Scriptul tău psihologic, la 2 minute distanță</p>
       <div class="err" id="login-err"></div>
       <div class="field"><label>Email</label><input type="email" id="login-email" placeholder="email@exemplu.com"></div>
       <div class="field"><label>Parolă</label><input type="password" id="login-pass" placeholder="••••••••"></div>
       <button class="btn" onclick="doLogin()">Intră în platformă</button>
-      <div class="auth-switch">Nu ai cont? <a onclick="showView('register')">Creează cont gratuit</a></div>
+      <div class="auth-switch">Nu ai cont? <a href="preturi.html">Creează-ți un cont</a></div>
     </div>
   </div>
 </div>
@@ -250,7 +320,7 @@ label{display:block;font-size:12.5px;font-weight:600;letter-spacing:.08em;text-t
         <div class="sub">The Psychology of MLM Excellence</div>
       </div>
       <h2>Creează cont</h2>
-      <p>Gratuit — activezi planul cu codul primit după plată</p>
+      <p>Creează-ți contul ca să intri în platformă.</p>
       <div class="err" id="reg-err"></div>
       <div class="suc" id="reg-suc"></div>
       <div class="field"><label>Email</label><input type="email" id="reg-email" placeholder="email@exemplu.com"></div>
@@ -282,21 +352,39 @@ label{display:block;font-size:12.5px;font-weight:600;letter-spacing:.08em;text-t
 
 <!-- ── VIEW: GENERATOR ── -->
 <div id="view-generator" class="view z">
-  <div class="gen-header">
-    <div class="brand">
-      <div class="name">HARVARD OF SALES</div>
-    </div>
-    <div class="counter-box">
-      <div class="counter">
-        <span class="num" id="scripts-remaining">—</span>
-        <span style="color:var(--muted);font-size:13px"> scripturi rămase</span>
-        <span class="tier-badge" id="tier-badge"></span>
+  <header class="gen-header">
+    <div class="topbar">
+      <div class="brandwrap">
+        <div class="name">HARVARD OF SALES</div>
+        <div class="tagline">The Psychology of MLM Excellence</div>
       </div>
-      <button class="btn-ghost" onclick="doLogout()">Ieși</button>
+      <div class="topright">
+        <div class="counter">
+          <span class="num" id="scripts-remaining">—</span>
+          <span style="color:var(--muted);font-size:13px"> scripturi</span>
+          <span class="tier-badge" id="tier-badge"></span>
+        </div>
+        <div class="langtog">
+          <button class="lang active" onclick="setLang('ro')">RO</button>
+          <button class="lang" onclick="setLang('en')">EN</button>
+        </div>
+        <button class="btn-ghost iesire" onclick="doLogout()">Ieșire</button>
+      </div>
     </div>
-  </div>
+    <nav class="navtabs">
+      <button class="navtab active" onclick="navTab('invitatie')">Invitație</button>
+      <button class="navtab soon" onclick="navTab('preconectare')">Pre-conectare<span class="soon-badge">în curând</span></button>
+      <button class="navtab soon" onclick="navTab('inchidere')">Închidere<span class="soon-badge">în curând</span></button>
+      <button class="navtab soon" onclick="navTab('followup')">Follow-up<span class="soon-badge">în curând</span></button>
+    </nav>
+  </header>
 
   <div class="gen-wrap">
+
+    <div class="guide-bar">
+      <button class="guide-btn" onclick="openModal('m-ghid','normal')">✅ Cum completezi corect</button>
+      <button class="guide-btn" onclick="openModal('m-reguli','normal')">📋 Reguli de Succes</button>
+    </div>
 
     <!-- UPGRADE NUDGE (generator) -->
     <div class="upgrade-nudge" id="nudge-gen">
@@ -309,17 +397,62 @@ label{display:block;font-size:12.5px;font-weight:600;letter-spacing:.08em;text-t
     <!-- SECTIUNEA 1: Agent -->
     <div class="section-card">
       <h3>Datele tale de agent</h3>
-      <div class="field">
-        <label>Cine ești tu? (experiență, stil, produs folosit)</label>
-        <textarea id="f_01" rows="4" placeholder="Ex: Mă numesc Andrei, am 2 ani în MLM cu ATOMY, am slăbit 8kg cu produsele lor, sunt sincer și direct în comunicare..."></textarea>
-        <div class="field-note">💾 Salvat automat — data viitoare găsești câmpul completat</div>
+      <div class="field-row">
+        <div class="field">
+          <label>Genul tău</label>
+          <select id="f_01">
+            <option value="">— Alege —</option>
+            <option>Masculin</option>
+            <option>Feminin</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Vârsta ta (opțional)</label>
+          <input type="text" id="f_29" placeholder="Ex: 42">
+        </div>
       </div>
+      <div class="field">
+        <label>Stil de abordare</label>
+        <input type="text" id="f_26" placeholder="Ex: relaxat și cu umor / cald-respectuos / direct / formal — dacă vorbești cu «frate», scrie aici">
+      </div>
+      <div class="field">
+        <label>Experiența ta în vânzări / MLM</label>
+        <input type="text" id="f_27" placeholder="Ex: 2 ani în MLM cu ATOMY / începător / 10 ani în vânzări...">
+      </div>
+      <div class="field">
+        <label>Clientul ar putea ști că dezvolți un MLM?</label>
+        <select id="f_28">
+          <option value="">— Alege —</option>
+          <option>Da</option>
+          <option>Nu</option>
+          <option>Nu sunt sigur</option>
+        </select>
+      </div>
+      <div class="field-note">💾 Salvat automat — data viitoare găsești câmpurile completate</div>
     </div>
 
     <!-- SECTIUNEA 2: Client -->
     <div class="section-card">
       <h3>Despre persoana invitată<a class="h3-link" onclick="clearClientData()">Golește pentru altă persoană</a></h3>
       <div class="field-row">
+        <div class="field">
+          <label>Numele clientului</label>
+          <input type="text" id="f_22" placeholder="Ex: Cristina">
+        </div>
+        <div class="field">
+          <label>Vârsta (opțional)</label>
+          <input type="text" id="f_23" placeholder="Ex: 34">
+        </div>
+      </div>
+      <div class="field-row">
+        <div class="field">
+          <label>Genul clientului</label>
+          <select id="f_02">
+            <option value="">— Alege —</option>
+            <option>Masculin</option>
+            <option>Feminin</option>
+          </select>
+        </div>
         <div class="field">
           <label>Tip relație</label>
           <select id="f_03">
@@ -332,23 +465,29 @@ label{display:block;font-size:12.5px;font-weight:600;letter-spacing:.08em;text-t
             <option>Persoană recent întâlnită</option>
           </select>
         </div>
+      </div>
+      <div class="field-row">
         <div class="field">
-          <label>Când ați vorbit ultima oară?</label>
-          <select id="f_20">
-            <option value="">— Alege —</option>
-            <option value="T1">Recent — în ultimele 3 luni</option>
-            <option value="T2">A trecut ceva timp — între 3 și 12 luni</option>
-            <option value="T3">Nu am mai vorbit de mult — peste 1 an</option>
-          </select>
+          <label>Statut profesional (loc de muncă / funcție)</label>
+          <input type="text" id="f_24" placeholder="Ex: asistentă medicală, antreprenor, contabilă...">
+        </div>
+        <div class="field">
+          <label>Statut familial (opțional)</label>
+          <input type="text" id="f_25" placeholder="Ex: căsătorită, 2 copii...">
         </div>
       </div>
       <div class="field">
-        <label>Date despre client (nume, vârstă, situație, probleme, interese)</label>
-        <textarea id="f_02" rows="3" placeholder="Ex: Cristina, 34 ani, mamă cu 2 copii, lucrează în vânzări, se plânge de oboseală cronică, activă pe Instagram..."></textarea>
+        <label>Când ați vorbit ultima oară?</label>
+        <select id="f_20">
+          <option value="">— Alege —</option>
+          <option>Recent — în ultimele 3 luni</option>
+          <option>A trecut ceva timp — între 3 și 12 luni</option>
+          <option>Nu am mai vorbit de mult — peste 1 an</option>
+        </select>
       </div>
       <div class="field">
-        <label>Detalii suplimentare (ce știi în plus)</label>
-        <textarea id="f_04" rows="2" placeholder="Ex: A menționat că vrea să slăbească, este sceptică față de MLM..."></textarea>
+        <label>Povestește despre clientul tău</label>
+        <textarea id="f_04" rows="3" placeholder="Situația ei acum, ce o preocupă, ce nevoi/interese are. Ex: vrea să slăbească, e sceptică față de MLM, mamă ocupată, activă pe Instagram..."></textarea>
       </div>
       <div class="field">
         <label>Calități apreciate la această persoană</label>
@@ -363,6 +502,17 @@ label{display:block;font-size:12.5px;font-weight:600;letter-spacing:.08em;text-t
     <!-- SECTIUNEA 3: Produs -->
     <div class="section-card">
       <h3>Produsul</h3>
+      <div class="field">
+        <label>Categoria produsului</label>
+        <select id="f_30">
+          <option value="">— Alege —</option>
+          <option>Suplimente</option>
+          <option>Vacanțe</option>
+          <option>Produse cosmetice</option>
+          <option>Produse de curățenie</option>
+          <option>Alt produs</option>
+        </select>
+      </div>
       <div class="field-row">
         <div class="field">
           <label>Produsul pe care îl prezinți</label>
@@ -490,7 +640,10 @@ label{display:block;font-size:12.5px;font-weight:600;letter-spacing:.08em;text-t
 
     <div class="output-header">
       <h2>Scriptul tău</h2>
-      <button class="btn-ghost" onclick="showView('generator')">← Generează alt script</button>
+      <div style="display:flex;gap:10px;flex-wrap:wrap">
+        <button class="btn-ghost" onclick="openModal('m-reguli','normal')">📋 Reguli de Succes</button>
+        <button class="btn-ghost" onclick="showView('generator')">← Generează alt script</button>
+      </div>
     </div>
     <div class="script-box" id="script-output"></div>
     <div class="script-actions">
@@ -601,9 +754,10 @@ const supaApp = (window.supabase) ? window.supabase.createClient(SUPABASE_URL, S
 // Link-ul tau de upgrade (Payhip). Lasa gol pentru mesaj de contact.
 const UPGRADE_URL = '';
 
-// Campuri memorate: produs + client. (Agentul f_01 e salvat separat.)
-const SAVE_FIELDS = ['f_03','f_20','f_02','f_04','f_17','f_05','f_07','f_08','f_09','f_19','f_18'];
-const CLIENT_FIELDS = ['f_03','f_20','f_02','f_04','f_17','f_05'];
+// Campuri memorate: produs + client. (Agentul = AGENT_FIELDS, salvat separat fill-once.)
+const AGENT_FIELDS = ['f_01','f_26','f_27','f_28','f_29'];
+const SAVE_FIELDS = ['f_22','f_23','f_02','f_03','f_24','f_25','f_20','f_04','f_17','f_05','f_30','f_07','f_08','f_09','f_19','f_18'];
+const CLIENT_FIELDS = ['f_22','f_23','f_02','f_03','f_24','f_25','f_20','f_04','f_17','f_05'];
 
 // ============================================
 // INIT
@@ -731,6 +885,38 @@ async function doRedeem() {
   }
 }
 
+
+// ===== GHIDURI / ONBOARDING / NAV =====
+function _isOnboarded(){ try{ return !!localStorage.getItem('hos_onboarded'); }catch(e){ return true; } }
+function closeModal(id){ var ov=document.getElementById(id); if(!ov) return; ov.classList.remove('show'); document.body.style.overflow=''; }
+function openModal(id, mode){
+  var ov=document.getElementById(id); if(!ov) return;
+  var body=ov.querySelector('.modal-body');
+  var btn=ov.querySelector('.modal-gate');
+  var onboarding = (mode!=='normal') && !_isOnboarded();
+  ov.classList.add('show'); document.body.style.overflow='hidden';
+  if(body) body.scrollTop=0;
+  if(btn){
+    if(onboarding){
+      if(id==='m-reguli'){ btn.textContent='Am înțeles → continui'; btn.onclick=function(){ closeModal('m-reguli'); openModal('m-ghid'); }; }
+      else { btn.textContent='Am înțeles → hai la primul script'; btn.onclick=function(){ finishOnboard(); }; }
+      btn.disabled=true; btn.classList.add('locked');
+      if(body){
+        var check=function(){ if(body.scrollTop+body.clientHeight >= body.scrollHeight-12){ btn.disabled=false; btn.classList.remove('locked'); body.removeEventListener('scroll',check); } };
+        body.addEventListener('scroll',check);
+        setTimeout(function(){ if(body.scrollHeight <= body.clientHeight+12){ btn.disabled=false; btn.classList.remove('locked'); } },150);
+      }
+    } else {
+      btn.textContent='Închide'; btn.disabled=false; btn.classList.remove('locked');
+      btn.onclick=function(){ closeModal(id); };
+    }
+  }
+}
+function finishOnboard(){ try{ localStorage.setItem('hos_onboarded','1'); }catch(e){} closeModal('m-ghid'); if(typeof toast==='function') toast('Gata! Completează cu detalii reale și specifice 💪', 4000); }
+function maybeOnboard(){ if(_isOnboarded()) return; openModal('m-reguli'); }
+function navTab(w){ if(w==='invitatie') return; var n={preconectare:'Pre-conectare',inchidere:'Închidere',followup:'Follow-up'}; if(typeof toast==='function') toast((n[w]||'Secțiunea')+' — în curând 🔒', 3000); }
+function setLang(l){ if(l==='en' && typeof toast==='function') toast('Versiunea EN — în curând', 3000); }
+
 function doLogout() {
   sessionStorage.removeItem('hos_token');
   TOKEN = null;
@@ -742,6 +928,11 @@ function doLogout() {
 // ============================================
 // FORM MEMORY (produs + client)
 // ============================================
+function saveAgentData() {
+  const data = {};
+  AGENT_FIELDS.forEach(id => { const el = document.getElementById(id); if (el) data[id] = el.value; });
+  try { localStorage.setItem('hos_agent_data', JSON.stringify(data)); } catch(e) {}
+}
 function saveFormData() {
   const data = {};
   SAVE_FIELDS.forEach(id => { const el = document.getElementById(id); if (el) data[id] = el.value; });
@@ -862,13 +1053,20 @@ function renderGenerator() {
   // ONE-TIME: incarca date salvate + ataseaza autosave (nu la fiecare re-render)
   if (!_formLoaded) {
     _formLoaded = true;
+    setTimeout(maybeOnboard, 500);
 
-    const savedAgent = localStorage.getItem('hos_agent_data');
-    if (savedAgent) document.getElementById('f_01').value = savedAgent;
+    try {
+      const savedAgent = localStorage.getItem('hos_agent_data');
+      if (savedAgent) {
+        const a = JSON.parse(savedAgent);
+        AGENT_FIELDS.forEach(id => { const el = document.getElementById(id); if (el && a[id] != null) el.value = a[id]; });
+      }
+    } catch(e) {}
     loadFormData();
 
-    document.getElementById('f_01').addEventListener('blur', () => {
-      localStorage.setItem('hos_agent_data', document.getElementById('f_01').value);
+    AGENT_FIELDS.forEach(id => {
+      const el = document.getElementById(id);
+      if (el) { el.addEventListener('blur', saveAgentData); el.addEventListener('change', saveAgentData); }
     });
     SAVE_FIELDS.forEach(id => {
       const el = document.getElementById(id);
@@ -893,9 +1091,11 @@ async function doGenerate() {
 
   // Validate required fields
   const required = [
-    ['f_01','Datele tale de agent'],
-    ['f_02','Date despre client'],
+    ['f_01','Genul tău'],
+    ['f_22','Numele clientului'],
+    ['f_02','Genul clientului'],
     ['f_03','Tip relație'],
+    ['f_30','Categoria produsului'],
     ['f_07','Produsul'],
     ['f_08','Ai folosit produsul?'],
     ['f_20','Vechimea contactului']
@@ -910,11 +1110,20 @@ async function doGenerate() {
   }
 
   // Save agent data + restul formularului (produs + client)
-  localStorage.setItem('hos_agent_data', document.getElementById('f_01').value);
+  saveAgentData();
   saveFormData();
 
   const variables = {
     '01_agent_gen':         document.getElementById('f_01').value,
+    '22_nume_client':        document.getElementById('f_22').value,
+    '23_varsta_client':      document.getElementById('f_23').value,
+    '24_statut_profesional': document.getElementById('f_24').value,
+    '25_statut_familial':    document.getElementById('f_25').value,
+    '26_stil_abordare':      document.getElementById('f_26').value,
+    '27_experienta_agent':   document.getElementById('f_27').value,
+    '28_stie_de_mlm':        document.getElementById('f_28').value,
+    '29_varsta_agent':       document.getElementById('f_29').value,
+    '30_categorie_produs':   document.getElementById('f_30').value,
     '02_client_gen':        document.getElementById('f_02').value,
     '03_tip_relatie':       document.getElementById('f_03').value,
     '04_detalii_client':    document.getElementById('f_04').value,
@@ -1410,5 +1619,87 @@ window.addEventListener('DOMContentLoaded', () => {
 // ============================================
 init();
 </script>
+
+<!-- ===== MODAL: REGULI DE SUCCES ===== -->
+<div class="modal-overlay" id="m-reguli" onclick="if(event.target===this && _isOnboarded()) closeModal('m-reguli')">
+  <div class="modal-box">
+    <div class="modal-head">
+      <div class="modal-title">Reguli de Succes</div>
+      <div class="modal-subtitle">80% din apel e starea ta. Citește o dată — apoi le ai.</div>
+    </div>
+    <div class="modal-body">
+      <div class="rule-card"><div class="rule-num">1</div><div class="rule-txt"><div class="rt">Starea ta face 80% din apel</div><div class="rd">30-60 secunde de mișcare reală înainte de apel — dans, sărituri, zâmbet larg în oglindă. Intri din abundență, nu din nevoia de a convinge. Vocea caldă vine din stare, nu se poate simula.</div></div></div>
+      <div class="rule-card"><div class="rule-num">2</div><div class="rule-txt"><div class="rt">Citește scriptul cu voce tare, minim de 3 ori</div><div class="rd">Prima dată îl citești, a doua te obișnuiești, a treia dispar ezitările. Corzile vocale memorează tiparul, nu doar mintea. Scriptul citit în gând = pitch detectabil în apel.</div></div></div>
+      <div class="rule-card"><div class="rule-num">3</div><div class="rule-txt"><div class="rt">Spune cuvintele EXACT cum sunt scrise</div><div class="rd">„Te macină", nu „te frământă". Fiecare cuvânt e ales ca să ocolească o rezistență. Naturalizează CUM spui (ritm, „uite", numele), dar păstrează CE spui (întrebările, oglindirile, frazele de sigilare).</div></div></div>
+      <div class="rule-card"><div class="rule-num">4</div><div class="rule-txt"><div class="rt">La întrebări incomode: zâmbet + amâni</div><div class="rd">„Îmi plac întrebările tale și nicio întrebare nu va rămâne fără răspuns 😊 — ajungem și acolo." Înainte de produs → amâni; după ce l-ai pomenit → „cu drag îți răspund când ne vedem". Nu prezenta produsul la telefon — întâlnirea e locul prezentării.</div></div></div>
+      <div class="rule-card"><div class="rule-num">5</div><div class="rule-txt"><div class="rt">Tăcerea după întrebare = puterea ta</div><div class="rd">Dacă devine inconfortabil, rezistă. El va vorbi primul. Nu umple tăcerea.</div></div></div>
+      <div class="rule-card"><div class="rule-num">6</div><div class="rule-txt"><div class="rt">Dacă te blochezi, ai o plasă de siguranță</div><div class="rd">„Lasă-mă să formulez mai bine ce voiam să întreb..." — și revii la script. Nimic nu e pierdut.</div></div></div>
+      <div class="rule-card"><div class="rule-num">7</div><div class="rule-txt"><div class="rt">Durata prezentării: spune-o exact, calm</div><div class="rd">Fără s-o minimizezi, fără s-o umfli. Exact valoarea pe care ai ales-o în formular.</div></div></div>
+    </div>
+    <div class="modal-foot"><button class="btn modal-gate">Închide</button></div>
+  </div>
+</div>
+
+<!-- ===== MODAL: GHID ASA DA / ASA NU ===== -->
+<div class="modal-overlay" id="m-ghid" onclick="if(event.target===this && _isOnboarded()) closeModal('m-ghid')">
+  <div class="modal-box">
+    <div class="modal-head">
+      <div class="modal-title">Cum completezi pentru un rezultat bun</div>
+      <div class="modal-subtitle">Calitatea răspunsurilor tale = calitatea scriptului.</div>
+    </div>
+    <div class="modal-body">
+      <div class="cmp-intro">Iată câmpurile care fac diferența. Compară greșit (stânga) cu corect (dreapta):</div>
+
+      <div class="cmp-blk">
+        <div class="cmp-fname">Povestește despre clientul tău</div>
+        <div class="cmp">
+          <div class="box nu"><div class="tag tag-nu">✕ ASA NU</div><div class="ex">„o știu de mult, e ok"</div></div>
+          <div class="box da"><div class="tag tag-da">✓ ASA DA</div><div class="ex">„E mereu epuizată după ture, doarme prost, n-are energie pentru nimic"</div></div>
+        </div>
+        <div class="cmp-why">De ce: situația concretă e ancora pe care se construiește puntea spre produs. Vag → script generic.</div>
+      </div>
+
+      <div class="cmp-blk">
+        <div class="cmp-fname">Calități apreciate la această persoană</div>
+        <div class="cmp">
+          <div class="box nu"><div class="tag tag-nu">✕ ASA NU</div><div class="ex">„bună, de treabă"</div></div>
+          <div class="box da"><div class="tag tag-da">✓ ASA DA</div><div class="ex">„Empatică, organizată, de încredere"</div></div>
+        </div>
+        <div class="cmp-why">De ce: specifice → compliment argumentat, nu laudă goală care sună fals.</div>
+      </div>
+
+      <div class="cmp-blk">
+        <div class="cmp-fname">Ultima interacțiune cu ea / el</div>
+        <div class="cmp">
+          <div class="box nu"><div class="tag tag-nu">✕ ASA NU</div><div class="ex">gol / „nu mai știu"</div></div>
+          <div class="box da"><div class="tag tag-da">✓ ASA DA</div><div class="ex">„săptămâna trecută, la o cafea — mi-a zis că e frântă de oboseală"</div></div>
+        </div>
+        <div class="cmp-why">De ce: hook real pentru deschidere + oglindire pe cuvintele ei exacte.</div>
+      </div>
+
+      <div class="cmp-blk">
+        <div class="cmp-fname">Statut profesional</div>
+        <div class="cmp">
+          <div class="box nu"><div class="tag tag-nu">✕ ASA NU</div><div class="ex">„muncește" / „are un job"</div></div>
+          <div class="box da"><div class="tag tag-da">✓ ASA DA</div><div class="ex">„Asistentă medicală, ture lungi de noapte"</div></div>
+        </div>
+        <div class="cmp-why">De ce: calibrează profilul (analitic? expert?) și dă argument concret pentru compliment.</div>
+      </div>
+
+      <div class="cmp-blk">
+        <div class="cmp-fname">Experiența ta concretă cu produsul</div>
+        <div class="cmp">
+          <div class="box nu"><div class="tag tag-nu">✕ ASA NU</div><div class="ex">„e foarte bun, mi-a plăcut mult"</div></div>
+          <div class="box da"><div class="tag tag-da">✓ ASA DA</div><div class="ex">„Eram epuizată după muncă; după ~3 săptămâni dorm mai bine și am energie toată ziua"</div></div>
+        </div>
+        <div class="cmp-why">De ce: experiența reală = puntea autentică. Vag → sună fix a reclamă.</div>
+      </div>
+
+      <div class="cmp-rule"><b style="font-weight:700">Regula de aur:</b> specific + real bate generic + vag. Iar dacă nu știi ceva — lasă gol. Gol-onest bate inventat.</div>
+    </div>
+    <div class="modal-foot"><button class="btn modal-gate">Închide</button></div>
+  </div>
+</div>
+
 </body>
 </html>
