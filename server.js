@@ -379,9 +379,13 @@ app.get('/api/generate-status/:jobId', auth, async (req, res) => {
 // STATS (public - fara autentificare)
 // ============================================
 app.get('/api/stats', async (req, res) => {
-  // Env Railway: STATS_BASE_COUNT=112 (distribuitori) · STATS_BASE_SCRIPTS=1122 (scripturi)
+  // Env Railway: STATS_BASE_COUNT=112 (agenti MLM) · STATS_BASE_SCRIPTS=1122 (scripturi)
   const baseD = parseInt(process.env.STATS_BASE_COUNT || '112');
   const baseS = parseInt(process.env.STATS_BASE_SCRIPTS || '1122');
+  // Ancora "azi": conturile/generarile existente la pornire sunt ignorate,
+  // ca sa pornim curat de la baza si sa numaram doar ce vine nou de acum incolo.
+  const ANCHOR_PROFILES = 394; // conturi existente azi (test) - ignorate
+  const ANCHOR_SCRIPTS  = 11;  // generari existente azi - ignorate
   try {
     const { count: profilesCount } = await db
       .from('profiles')
@@ -390,8 +394,8 @@ app.get('/api/stats', async (req, res) => {
       .from('script_generations')
       .select('*', { count: 'exact', head: true });
 
-    const distribuitori = baseD + (profilesCount || 0);
-    const scripturi     = baseS + (scriptsCount || 0);
+    const distribuitori = baseD + Math.max(0, (profilesCount || 0) - ANCHOR_PROFILES);
+    const scripturi     = baseS + Math.max(0, (scriptsCount  || 0) - ANCHOR_SCRIPTS);
 
     // 'agents' pastrat ca alias pentru compatibilitate
     res.json({ distribuitori, scripturi, agents: distribuitori });
