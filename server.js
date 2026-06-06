@@ -379,13 +379,25 @@ app.get('/api/generate-status/:jobId', auth, async (req, res) => {
 // STATS (public - fara autentificare)
 // ============================================
 app.get('/api/stats', async (req, res) => {
-  const { count, error } = await db
-    .from('profiles')
-    .select('*', { count: 'exact', head: true });
+  // Env Railway: STATS_BASE_COUNT=112 (distribuitori) · STATS_BASE_SCRIPTS=1122 (scripturi)
+  const baseD = parseInt(process.env.STATS_BASE_COUNT || '112');
+  const baseS = parseInt(process.env.STATS_BASE_SCRIPTS || '1122');
+  try {
+    const { count: profilesCount } = await db
+      .from('profiles')
+      .select('*', { count: 'exact', head: true });
+    const { count: scriptsCount } = await db
+      .from('script_generations')
+      .select('*', { count: 'exact', head: true });
 
-  const base = parseInt(process.env.STATS_BASE_COUNT || '0');
-  const total = base + (count || 0);
-  res.json({ agents: total });
+    const distribuitori = baseD + (profilesCount || 0);
+    const scripturi     = baseS + (scriptsCount || 0);
+
+    // 'agents' pastrat ca alias pentru compatibilitate
+    res.json({ distribuitori, scripturi, agents: distribuitori });
+  } catch (e) {
+    res.json({ distribuitori: baseD, scripturi: baseS, agents: baseD });
+  }
 });
 
 // ============================================
