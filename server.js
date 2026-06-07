@@ -32,7 +32,7 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 //   unic=price_1TebID2K2gEr8ziYQ4s9UhRp  recruit=price_1TeblV2K2gEr8ziYbTsthOp2
 //   builder=price_1Teblh2K2gEr8ziY4JzrVBzj  leader=price_1Teblu2K2gEr8ziYVpsv2Blz
 const STRIPE_PLANS = {
-  unic:    { priceId: 'price_1Teazy2K2gEr8ziYVw7KVcPI', mode: 'payment',      tier: 'unic'    },
+  unic:    { priceId: 'price_1Tfftr2K2gEr8ziYaiIjIq02', mode: 'payment',      tier: 'unic'    },
   recruit: { priceId: 'price_1Teb0g2K2gEr8ziYzAWAiU3G', mode: 'subscription', tier: 'recruit' },
   builder: { priceId: 'price_1Teb182K2gEr8ziYLioqV1kN', mode: 'subscription', tier: 'builder' },
   leader:  { priceId: 'price_1Teb1l2K2gEr8ziYfofZ640S', mode: 'subscription', tier: 'leader'  },
