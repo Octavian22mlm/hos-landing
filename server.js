@@ -1,6 +1,3 @@
-
-
-
 // ============================================
 // HARVARD OF SALES — Backend Server
 // ============================================
@@ -389,38 +386,27 @@ app.get('/api/stats', async (req, res) => {
   // existente inainte de aceasta data sunt ignorate definitiv.
   const LAUNCH = process.env.STATS_LAUNCH_DATE || '2026-06-07T00:00:00Z';
 
-  let newProfiles = null, totalProfiles = null, newScripts = null, errInfo = null;
+  let newProfiles = 0, newScripts = 0;
 
-  // conturi noi (de la lansare)
   try {
     const r = await db.from('profiles')
       .select('*', { count: 'exact', head: true })
       .gte('created_at', LAUNCH);
-    if (r.error) errInfo = 'profiles.created_at: ' + r.error.message;
-    else newProfiles = r.count;
-  } catch (e) { errInfo = 'profiles ex: ' + e.message; }
-
-  // total conturi (diagnostic — ca sa stim cifra reala)
-  try {
-    const r = await db.from('profiles').select('*', { count: 'exact', head: true });
-    totalProfiles = r.count;
+    if (!r.error && typeof r.count === 'number') newProfiles = r.count;
   } catch (e) {}
 
-  // scripturi noi (de la lansare)
   try {
     const r = await db.from('script_generations')
       .select('*', { count: 'exact', head: true })
       .gte('created_at', LAUNCH);
-    if (!r.error) newScripts = r.count;
+    if (!r.error && typeof r.count === 'number') newScripts = r.count;
   } catch (e) {}
 
-  const distribuitori = baseD + (newProfiles || 0);
-  const scripturi     = baseS + (newScripts || 0);
+  const distribuitori = baseD + newProfiles;
+  const scripturi     = baseS + newScripts;
 
-  res.json({
-    distribuitori, scripturi, agents: distribuitori,
-    _debug: { totalProfiles, newProfiles, newScripts, launch: LAUNCH, errInfo }
-  });
+  // 'agents' pastrat ca alias pentru compatibilitate
+  res.json({ distribuitori, scripturi, agents: distribuitori });
 });
 
 // ============================================
