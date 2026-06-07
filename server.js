@@ -12,7 +12,12 @@ app.use((req, res, next) => {
   if (req.originalUrl === '/api/webhook') return next();
   express.json({ limit: '2mb' })(req, res, next);
 });
-app.use(express.static(path.join(__dirname)));
+// index:false => "/" nu mai serveste automat index.html; il dam noi explicit mai jos
+app.use(express.static(path.join(__dirname), { index: false }));
+
+// "/" = pagina de vanzare (preturi.html) · aplicatia traieste la "/app"
+app.get('/', (req, res) => res.sendFile(path.join(__dirname, 'preturi.html')));
+app.get('/app', (req, res) => res.sendFile(path.join(__dirname, 'index.html')));
 
 // ---- SUPABASE (service role = acces total, server-side only) ----
 const db = createClient(
@@ -470,7 +475,7 @@ app.post('/api/create-checkout-session', auth, async (req, res) => {
       subscription_data: p.mode === 'subscription'
         ? { metadata: { user_id: req.user.id, tier: p.tier } } : undefined,
       invoice_creation: p.mode === 'payment' ? { enabled: true } : undefined,
-      return_url: `${base}/?paid=1&session_id={CHECKOUT_SESSION_ID}`,
+      return_url: `${base}/app?paid=1&session_id={CHECKOUT_SESSION_ID}`,
     });
     res.json({ clientSecret: session.client_secret });
   } catch (err) {
