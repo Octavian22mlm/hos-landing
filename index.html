@@ -220,6 +220,15 @@ label{display:block;font-size:12.5px;font-weight:600;letter-spacing:.08em;text-t
   font-family:"Hanken Grotesk",sans-serif;font-size:13.5px;font-weight:600;padding:10px 16px;border-radius:9px;cursor:pointer;
   transition:border-color .2s,background .2s}
 .guide-btn:hover{border-color:var(--gold);background:var(--panel2)}
+/* ── PAȘI NUMEROTAȚI (gate prima utilizare) ── */
+.step-btn{display:flex;align-items:center;gap:9px}
+.step-btn .step-no{display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;
+  background:rgba(216,169,74,.15);border:1px solid var(--line);color:var(--gold);font-size:12px;font-weight:700;flex:0 0 auto}
+.step-btn .step-check{color:var(--green);font-weight:700;opacity:0;transition:opacity .2s}
+.step-btn.step-ok{border-color:rgba(62,207,142,.4)}
+.step-btn.step-ok .step-no{background:var(--green);border-color:var(--green);color:#06231a}
+.step-btn.step-ok .step-check{opacity:1}
+.gate-hint{display:none;text-align:center;font-size:13px;color:var(--gold);margin-bottom:10px}
 
 /* ===== MODAL ===== */
 .modal-overlay{position:fixed;inset:0;z-index:200;background:rgba(4,6,11,.78);backdrop-filter:blur(4px);
@@ -381,9 +390,9 @@ label{display:block;font-size:12.5px;font-weight:600;letter-spacing:.08em;text-t
 
   <div class="gen-wrap">
 
-    <div class="guide-bar">
-      <button class="guide-btn" onclick="openModal('m-ghid','normal')">✅ Cum completezi corect</button>
-      <button class="guide-btn" onclick="openModal('m-reguli','normal')">📋 Reguli de Succes</button>
+    <div class="guide-bar" id="step-bar">
+      <button class="guide-btn step-btn" id="step-1" onclick="openModal('m-ghid')"><span class="step-no">1</span><span>Cum completezi corect</span><span class="step-check">✓</span></button>
+      <button class="guide-btn step-btn" id="step-2" onclick="openModal('m-reguli')"><span class="step-no">2</span><span>Reguli de succes</span><span class="step-check">✓</span></button>
     </div>
 
     <!-- UPGRADE NUDGE (generator) -->
@@ -589,8 +598,9 @@ label{display:block;font-size:12.5px;font-weight:600;letter-spacing:.08em;text-t
     </div>
 
     <div class="err" id="gen-err" style="margin-bottom:16px"></div>
+    <div class="gate-hint" id="gate-hint">🔒 Parcurge Pasul 1 și Pasul 2 de sus ca să deblochezi generarea</div>
     <button class="btn" id="gen-btn" onclick="doGenerate()" style="max-width:400px;margin:0 auto;display:block">
-      Generează scriptul →
+      Pasul 3 · Generează scriptul →
     </button>
     <p style="text-align:center;font-size:13px;color:var(--muted2);margin-top:12px">
       Scriptul tău psihologic, gata în câteva momente
@@ -902,17 +912,47 @@ async function doRedeem() {
 // ===== GHIDURI / ONBOARDING / NAV =====
 function _isOnboarded(){ try{ return !!localStorage.getItem('hos_onboarded'); }catch(e){ return true; } }
 function closeModal(id){ var ov=document.getElementById(id); if(!ov) return; ov.classList.remove('show'); document.body.style.overflow=''; }
+
+// ── GATE PAȘI: Pasul 1 (Cum completezi) + Pasul 2 (Reguli) -> deblocheaza generarea ──
+var _stepDone = { ghid:false, reguli:false };   // ghid = Pasul 1, reguli = Pasul 2
+function refreshStepUI(){
+  var onboarded = _isOnboarded();
+  var map = { ghid:'step-1', reguli:'step-2' };
+  ['ghid','reguli'].forEach(function(k){
+    var b=document.getElementById(map[k]); if(!b) return;
+    b.classList.toggle('step-ok', onboarded || _stepDone[k]);
+  });
+  var gb=document.getElementById('gen-btn');
+  if(gb) gb.disabled = !onboarded;
+  var hint=document.getElementById('gate-hint');
+  if(hint) hint.style.display = onboarded ? 'none' : 'block';
+}
+function markStep(k){
+  _stepDone[k]=true;
+  if(_stepDone.ghid && _stepDone.reguli){
+    try{ localStorage.setItem('hos_onboarded','1'); }catch(e){}
+    if(typeof toast==='function') toast('Gata! Acum poți genera scriptul 💪', 3500);
+  }
+  refreshStepUI();
+}
+
 function openModal(id, mode){
   var ov=document.getElementById(id); if(!ov) return;
   var body=ov.querySelector('.modal-body');
   var btn=ov.querySelector('.modal-gate');
-  var onboarding = (mode!=='normal') && !_isOnboarded();
+  var gate = (mode!=='normal') && !_isOnboarded();    // gate activ doar la prima utilizare
   ov.classList.add('show'); document.body.style.overflow='hidden';
   if(body) body.scrollTop=0;
   if(btn){
-    if(onboarding){
-      if(id==='m-reguli'){ btn.textContent='Am înțeles → continui'; btn.onclick=function(){ closeModal('m-reguli'); openModal('m-ghid'); }; }
-      else { btn.textContent='Am înțeles → hai la primul script'; btn.onclick=function(){ finishOnboard(); }; }
+    if(gate){
+      var stepKey = (id==='m-ghid') ? 'ghid' : 'reguli';
+      btn.textContent='Am înțeles ✓';
+      btn.onclick=function(){
+        markStep(stepKey);
+        closeModal(id);
+        // dupa Pasul 1 -> deschide automat Pasul 2 (doar daca nu e gata)
+        if(stepKey==='ghid' && !_stepDone.reguli && !_isOnboarded()){ setTimeout(function(){ openModal('m-reguli'); }, 250); }
+      };
       btn.disabled=true; btn.classList.add('locked');
       if(body){
         var check=function(){ if(body.scrollTop+body.clientHeight >= body.scrollHeight-12){ btn.disabled=false; btn.classList.remove('locked'); body.removeEventListener('scroll',check); } };
@@ -925,8 +965,8 @@ function openModal(id, mode){
     }
   }
 }
-function finishOnboard(){ try{ localStorage.setItem('hos_onboarded','1'); }catch(e){} closeModal('m-ghid'); if(typeof toast==='function') toast('Gata! Completează cu detalii reale și specifice 💪', 4000); }
-function maybeOnboard(){ if(_isOnboarded()) return; openModal('m-reguli'); }
+function finishOnboard(){ try{ localStorage.setItem('hos_onboarded','1'); }catch(e){} closeModal('m-ghid'); refreshStepUI(); if(typeof toast==='function') toast('Gata! Completează cu detalii reale și specifice 💪', 4000); }
+function maybeOnboard(){ if(_isOnboarded()){ refreshStepUI(); return; } openModal('m-ghid'); }   // Pasul 1 primul
 function navTab(w){ if(w==='invitatie') return; var n={preconectare:'Pre-conectare',inchidere:'Închidere',followup:'Follow-up'}; if(typeof toast==='function') toast((n[w]||'Secțiunea')+' — în curând 🔒', 3000); }
 function setLang(l){ if(l==='en' && typeof toast==='function') toast('Versiunea EN — în curând', 3000); }
 
@@ -1091,6 +1131,7 @@ function renderGenerator() {
   }
 
   renderNudge();
+  refreshStepUI();
 }
 
 function toggleExperienta() {
@@ -1121,6 +1162,14 @@ async function generateAndWait(body) {
 async function doGenerate() {
   const errEl = document.getElementById('gen-err');
   errEl.style.display = 'none';
+
+  // GATE: prima utilizare trebuie sa parcurga Pasul 1 + Pasul 2 (toate tier-urile)
+  if (!_isOnboarded()) {
+    refreshStepUI();
+    if (typeof toast === 'function') toast('Parcurge întâi Pasul 1 și Pasul 2 👆', 3500);
+    maybeOnboard();
+    return;
+  }
 
   // Validate required fields
   const required = [
