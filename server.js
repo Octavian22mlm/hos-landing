@@ -1,3 +1,6 @@
+
+
+
 // ============================================
 // HARVARD OF SALES — Backend Server
 // ============================================
@@ -382,26 +385,42 @@ app.get('/api/stats', async (req, res) => {
   // Env Railway: STATS_BASE_COUNT=112 (agenti MLM) · STATS_BASE_SCRIPTS=1122 (scripturi)
   const baseD = parseInt(process.env.STATS_BASE_COUNT || '112');
   const baseS = parseInt(process.env.STATS_BASE_SCRIPTS || '1122');
-  // Ancora "azi": conturile/generarile existente la pornire sunt ignorate,
-  // ca sa pornim curat de la baza si sa numaram doar ce vine nou de acum incolo.
-  const ANCHOR_PROFILES = 394; // conturi existente azi (test) - ignorate
-  const ANCHOR_SCRIPTS  = 11;  // generari existente azi - ignorate
+  // Numaram DOAR ce e creat de la lansare incoace. Conturile/generarile de test
+  // existente inainte de aceasta data sunt ignorate definitiv.
+  const LAUNCH = process.env.STATS_LAUNCH_DATE || '2026-06-07T00:00:00Z';
+
+  let newProfiles = null, totalProfiles = null, newScripts = null, errInfo = null;
+
+  // conturi noi (de la lansare)
   try {
-    const { count: profilesCount } = await db
-      .from('profiles')
-      .select('*', { count: 'exact', head: true });
-    const { count: scriptsCount } = await db
-      .from('script_generations')
-      .select('*', { count: 'exact', head: true });
+    const r = await db.from('profiles')
+      .select('*', { count: 'exact', head: true })
+      .gte('created_at', LAUNCH);
+    if (r.error) errInfo = 'profiles.created_at: ' + r.error.message;
+    else newProfiles = r.count;
+  } catch (e) { errInfo = 'profiles ex: ' + e.message; }
 
-    const distribuitori = baseD + Math.max(0, (profilesCount || 0) - ANCHOR_PROFILES);
-    const scripturi     = baseS + Math.max(0, (scriptsCount  || 0) - ANCHOR_SCRIPTS);
+  // total conturi (diagnostic — ca sa stim cifra reala)
+  try {
+    const r = await db.from('profiles').select('*', { count: 'exact', head: true });
+    totalProfiles = r.count;
+  } catch (e) {}
 
-    // 'agents' pastrat ca alias pentru compatibilitate
-    res.json({ distribuitori, scripturi, agents: distribuitori });
-  } catch (e) {
-    res.json({ distribuitori: baseD, scripturi: baseS, agents: baseD });
-  }
+  // scripturi noi (de la lansare)
+  try {
+    const r = await db.from('script_generations')
+      .select('*', { count: 'exact', head: true })
+      .gte('created_at', LAUNCH);
+    if (!r.error) newScripts = r.count;
+  } catch (e) {}
+
+  const distribuitori = baseD + (newProfiles || 0);
+  const scripturi     = baseS + (newScripts || 0);
+
+  res.json({
+    distribuitori, scripturi, agents: distribuitori,
+    _debug: { totalProfiles, newProfiles, newScripts, launch: LAUNCH, errInfo }
+  });
 });
 
 // ============================================
