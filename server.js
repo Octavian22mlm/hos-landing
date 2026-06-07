@@ -26,15 +26,16 @@ const Stripe = require('stripe');
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
 // maparea planurilor -> Price ID + tip facturare + tier
-// NOTA: acum sunt price-urile de TEST. La go-live se înlocuiesc cu cele LIVE de mai jos
-// (și se schimbă STRIPE_SECRET_KEY pe Railway + cheia publishable din preturi.html):
-//   unic=price_1Teazy2K2gEr8ziYVw7KVcPI  recruit=price_1Teb0g2K2gEr8ziYzAWAiU3G
-//   builder=price_1Teb182K2gEr8ziYLioqV1kN  leader=price_1Teb1l2K2gEr8ziYfofZ640S
+// ACUM PE LIVE. Cheia STRIPE_SECRET_KEY (sk_live) + STRIPE_WEBHOOK_SECRET sunt pe Railway,
+// cheia publishable (pk_live) e în preturi.html.
+// Price-urile de TEST (pentru rollback dacă e nevoie):
+//   unic=price_1TebID2K2gEr8ziYQ4s9UhRp  recruit=price_1TeblV2K2gEr8ziYbTsthOp2
+//   builder=price_1Teblh2K2gEr8ziY4JzrVBzj  leader=price_1Teblu2K2gEr8ziYVpsv2Blz
 const STRIPE_PLANS = {
-  unic:    { priceId: 'price_1TebID2K2gEr8ziYQ4s9UhRp', mode: 'payment',      tier: 'unic'    },
-  recruit: { priceId: 'price_1TeblV2K2gEr8ziYbTsthOp2', mode: 'subscription', tier: 'recruit' },
-  builder: { priceId: 'price_1Teblh2K2gEr8ziY4JzrVBzj', mode: 'subscription', tier: 'builder' },
-  leader:  { priceId: 'price_1Teblu2K2gEr8ziYVpsv2Blz', mode: 'subscription', tier: 'leader'  },
+  unic:    { priceId: 'price_1Teazy2K2gEr8ziYVw7KVcPI', mode: 'payment',      tier: 'unic'    },
+  recruit: { priceId: 'price_1Teb0g2K2gEr8ziYzAWAiU3G', mode: 'subscription', tier: 'recruit' },
+  builder: { priceId: 'price_1Teb182K2gEr8ziYLioqV1kN', mode: 'subscription', tier: 'builder' },
+  leader:  { priceId: 'price_1Teb1l2K2gEr8ziYfofZ640S', mode: 'subscription', tier: 'leader'  },
 };
 
 // bonus de antrenament (o singură dată, la prima plată a abonamentului)
