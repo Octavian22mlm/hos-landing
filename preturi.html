@@ -313,12 +313,13 @@
 
   /* ── MECHANISM (3 pași) ── */
   .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
-  .stepc{position:relative;background:var(--card);border:1px solid var(--line-soft);border-radius:18px;padding:30px 26px;transition:.3s}
+  .stepc{position:relative;background:var(--card);border:1px solid var(--line-soft);border-radius:18px;padding:30px 26px;transition:.55s ease}
   .stepc:hover{border-color:var(--line)}
   .stepc .k{font-family:'Playfair Display',serif;font-size:36px;font-weight:700;color:var(--gold);line-height:1}
-  .stepc h3{font-family:'Playfair Display',serif;font-size:20px;font-weight:600;margin:10px 0 8px}
+  .stepc h3{font-family:'Playfair Display',serif;font-size:20px;font-weight:600;margin:10px 0 8px;transition:color .55s ease}
   .stepc p{color:var(--muted);font-size:14.5px}
   .stepc.lit{border-color:var(--gold);box-shadow:0 0 0 1px rgba(201,162,75,.55),0 12px 34px -8px rgba(201,162,75,.42);transform:translateY(-2px)}
+  .stepc.lit h3{color:var(--gold-bright)}
   @media(prefers-reduced-motion:reduce){.stepc.lit{box-shadow:none;transform:none}}
 
   /* ── TEASER ── */
@@ -1244,17 +1245,25 @@
       if(e.isIntersecting){
         if(e.target.dataset.reveal!==undefined){ e.target.classList.add('in'); }
         if(e.target.id==='bigCount'){ countUp(e.target, (window.__hosScripts||1122), 1800); e.target.dataset.counted='1'; }
-        if(e.target.id==='ringSec'){ fillRing(); }
         io.unobserve(e.target);
       }
     });
   },{threshold:.2});
   document.querySelectorAll('[data-reveal]').forEach(function(el,i){ el.style.transitionDelay=(i%3*0.08)+'s'; io.observe(el); });
   io.observe(document.getElementById('bigCount'));
-  io.observe(document.getElementById('ringSec'));
 
-  /* fallback sigur: pornește inelul la încărcare, chiar dacă nu intră în câmpul vizual */
-  window.addEventListener('load', function(){ setTimeout(fillRing, 450); });
+  /* cadranul 78% se umple EXACT când agentul ajunge la el (nu la încărcarea paginii) */
+  (function(){
+    var ringWrap = document.querySelector('.ring-wrap');
+    if(!ringWrap){ return; }
+    if(!('IntersectionObserver' in window)){ fillRing(); return; }   // fallback browsere fără IO
+    var ringIO = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){ fillRing(); ringIO.unobserve(e.target); }
+      });
+    },{threshold:.6});
+    ringIO.observe(ringWrap);
+  })();
 
   /* aprindere secvențială a pașilor „Cum funcționează" — one-shot, respectă reduced-motion */
   (function stepGlow(){
@@ -1268,7 +1277,7 @@
         var idx = Array.prototype.indexOf.call(cards, e.target);
         setTimeout(function(){
           e.target.classList.add('lit');
-          setTimeout(function(){ e.target.classList.remove('lit'); }, 1000);
+          setTimeout(function(){ e.target.classList.remove('lit'); }, 2000);
         }, Math.max(0, idx) * 120);
         ob.unobserve(e.target);
       });
