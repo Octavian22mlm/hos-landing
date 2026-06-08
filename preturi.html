@@ -63,6 +63,7 @@
   .nav-actions{display:flex;align-items:center;gap:18px}
   .nav-login{font-size:14px;color:var(--muted);text-decoration:none;transition:.25s;white-space:nowrap}
   .nav-login:hover{color:var(--gold-bright)}
+  @media(max-width:560px){.nav-actions{flex-direction:column;align-items:flex-end;gap:8px}.nav-login{padding-right:19px}}
 
   /* ---------- HERO ---------- */
   header{text-align:center;padding:70px 0 30px}
@@ -75,6 +76,8 @@
   h1 em{font-style:italic;color:var(--gold-bright)}
   .sub{max-width:600px;margin:24px auto 0;color:var(--muted);font-size:clamp(16px,2vw,19px);
     opacity:0;animation:rise .9s .3s forwards}
+  .hero-claim{max-width:620px;margin:20px auto 0;color:var(--gold-bright);font-weight:600;
+    font-size:clamp(15px,2.3vw,19px);opacity:0;animation:rise .9s .22s forwards}
   .hero-cta{margin-top:38px;opacity:0;animation:rise .9s .45s forwards}
   .btn-primary{display:inline-block;background:linear-gradient(135deg,var(--gold-bright),var(--gold));
     color:#1a1205;font-weight:700;font-size:15.5px;padding:15px 34px;border-radius:46px;
@@ -315,6 +318,8 @@
   .stepc .k{font-family:'Playfair Display',serif;font-size:36px;font-weight:700;color:var(--gold);line-height:1}
   .stepc h3{font-family:'Playfair Display',serif;font-size:20px;font-weight:600;margin:10px 0 8px}
   .stepc p{color:var(--muted);font-size:14.5px}
+  .stepc.lit{border-color:var(--gold);box-shadow:0 0 0 1px rgba(201,162,75,.55),0 12px 34px -8px rgba(201,162,75,.42);transform:translateY(-2px)}
+  @media(prefers-reduced-motion:reduce){.stepc.lit{box-shadow:none;transform:none}}
 
   /* ── TEASER ── */
   .teaser-wrap{background:linear-gradient(180deg,rgba(201,162,75,.05),rgba(17,32,53,.35));border:1px solid var(--line);border-radius:24px;padding:38px;display:grid;grid-template-columns:1fr 300px;gap:42px;align-items:center}
@@ -431,7 +436,8 @@
   <header>
     <div class="eyebrow">Generator de scripturi MLM</div>
     <h1>Oamenii nu spun NU produsului.<br>Spun NU <em>felului în care suni.</em></h1>
-    <p class="sub">Scripturi de invitație personalizate, construite pe psihologia care îl face pe om să accepte întâlnirea — gata în 90 de secunde.</p>
+    <p class="hero-claim">Singurul generator de scripturi MLM construit pe psihologie comportamentală.</p>
+    <p class="sub">Scripturi de invitație personalizate, construite pe psihologia care îl face pe om să accepte întâlnirea — gata în 120 de secunde.</p>
     <div class="hero-cta"><a href="#planuri" class="btn-primary">Alege-ți planul</a></div>
     <p class="proof-line"><span class="pulse"></span><b id="liveCount">0</b> agenți MLM își scriu deja scripturile aici</p>
   </header>
@@ -476,7 +482,7 @@
           <li>Primești scriptul scris cuvânt cu cuvânt</li>
           <li>Îl citești la telefon — gata</li>
         </ul>
-        <div class="rf-res">Rezultat:<b>90 de secunde. Un script de citit.</b></div>
+        <div class="rf-res">Rezultat:<b>120 de secunde. Un script de citit.</b></div>
       </div>
     </div>
     <p class="rf-note pullquote">„Restul îți dau o bibliotecă. <em>Noi îți dăm fix replica de spus acum.</em>"</p>
@@ -787,7 +793,7 @@
   <!-- CLOSING -->
   <section class="closing">
     <h2>Următorul apel poate suna <em>complet diferit.</em></h2>
-    <p>Alege-ți planul acum și generează primul script în 90 de secunde.</p>
+    <p>Alege-ți planul acum și generează primul script în 120 de secunde.</p>
     <a href="#planuri" class="btn-primary">Alege-ți planul</a>
     <div class="secure">🔒 Plată securizată, direct pe site · Acces imediat după plată</div>
   </section>
@@ -1092,13 +1098,46 @@
   var prodCustom = document.getElementById('tProdCustom');
   if(prodCustom) prodCustom.addEventListener('input', function(){ teaserProd = (this.value || 'produsul tău').trim(); });
 
-  /* Fragment de impact — se taie la vârful curiozității. Forța vine din FRAMING,
-     nu din detalii despre client, ca să lovească indiferent de inputul de demo.
-     Doar numele e dinamic. */
-  var FRAG = {
-    prieten:  function(n){ return n+', bună! Stai puțin — înainte să povestim, am o mărturisire mică, și o să sune cam ciudat venind de la mine—'; },
-    cunoscut: function(n){ return n+', bună! Hai să-ți zic ceva ce o să sune cam ciudat venind de la mine — am stat zile bune gândindu-mă cum să încep apelul ăsta fără să—'; },
-    rece:     function(n){ return 'Bună ziua, '+n+'! O să încep cam ciudat, ai răbdare cu mine — sunt printre puținii care te sună fără să vrea de fapt să—'; }
+  /* Salut decuplat de gen: „Salut" merge la ambele genuri (cald);
+     „Bună ziua" e neutru-formal (rece). Corpul reacționează la ton + trăsătura din descriere. */
+  var SALUT = { prieten:'Salut, ', cunoscut:'Salut, ', rece:'Bună ziua, ' };
+  var INTRO = {
+    prieten: {
+      cald:    'Înainte să povestim de ale noastre, vreau să-ți spun ceva. ',
+      direct:  'Hai direct — înainte de orice, am ceva să-ți spun. ',
+      energic: 'Stai un pic — înainte să intrăm în ale noastre, am ceva să-ți zic! '
+    },
+    cunoscut: {
+      cald:    'O să-ți pară puțin neobișnuit cum încep, dar ai răbdare cu mine. ',
+      direct:  'O să fiu direct, chiar dacă sună neobișnuit venind de la mine. ',
+      energic: 'O să-ți pară neobișnuit cum încep — și exact asta vreau! '
+    },
+    rece: {
+      cald:    'Ai răbdare cu mine 30 de secunde, te rog. ',
+      direct:  'Îți cer 30 de secunde, apoi decizi tu. ',
+      energic: 'Dă-mi 30 de secunde — promit că merită! '
+    }
+  };
+  function traitSentence(){
+    var d = (document.getElementById('tDesc').value || '').toLowerCase();
+    if(/sceptic|schem|neincre|neîncre|nu crede/.test(d))                  return 'Și fiindcă te știu sceptic la «scheme», o spun fără ocolișuri. ';
+    if(/ocupat|timp|aglomerat|alergat|prins|grăbit|grabit/.test(d))       return 'Și știu cât de prins ești, așa că nu te rețin mult. ';
+    if(/copii|copil|familie|tată|tata|mamă|mama|părinte|parinte/.test(d)) return 'Și știu cât de plin ți-e programul cu ai tăi, așa că pe scurt. ';
+    if(/manager|antreprenor|afaceri|business|director|firm|șef|sef/.test(d)) return 'Și te știu om practic, așa că merg drept la subiect. ';
+    return '';
+  }
+  function traitLabel(){
+    var d = (document.getElementById('tDesc').value || '').toLowerCase();
+    if(/sceptic|schem|neincre|neîncre|nu crede/.test(d))                  return 'sceptic la «scheme» — abordare fără presiune';
+    if(/ocupat|timp|aglomerat|alergat|prins|grăbit|grabit/.test(d))       return 'om ocupat — mesaj scurt, la obiect';
+    if(/copii|copil|familie|tată|tata|mamă|mama|părinte|parinte/.test(d)) return 'are familie — miza pe timp și liniște';
+    if(/manager|antreprenor|afaceri|business|director|firm|șef|sef/.test(d)) return 'om practic — direct la subiect';
+    return 'detaliile din descrierea ta';
+  }
+  var CLIFF = {
+    prieten:  'O să ți se pară ciudat să auzi asta de la mine—',
+    cunoscut: 'Am stat zile întregi gândindu-mă cum să-ți spun asta fără să sune a—',
+    rece:     'Fiindcă tot ce urmează e exact pe dos față de ce te aștepți de la un apel ca—'
   };
   var RELLABEL = { prieten:'prieten apropiat', cunoscut:'cunoscut', rece:'contact rece' };
   var TONELABEL = { cald:'cald', direct:'direct', energic:'energic' };
@@ -1111,6 +1150,7 @@
   function buildCalib(name){
     var rows = [
       ['Cine suni',                 escHtml(name)+' · '+RELLABEL[teaserRel], false],
+      ['Ce am reținut din descriere', escHtml(traitLabel()), false],
       ['Produs',                    escHtml(teaserProd), false],
       ['Ce-l face să spună „da"',   'miza personală, nu produsul', true],
       ['Cum dezamorsezi „'+escHtml(firstObjection())+'"', 'fără să o contrazici frontal', true],
@@ -1128,7 +1168,8 @@
   function generateTeaser(){
     var desc = (document.getElementById('tDesc').value || 'Andrei').trim();
     var n = (desc.split(/[\s,]+/)[0] || 'Andrei'); // numele = primul cuvânt din descriere
-    var text = FRAG[teaserRel](n);
+    var _trait = (teaserRel === 'rece') ? '' : traitSentence();
+    var text = SALUT[teaserRel] + n + '! ' + INTRO[teaserRel][teaserTone] + _trait + CLIFF[teaserRel];
     document.getElementById('phPlaceholder').style.display = 'none';
     document.getElementById('phContent').style.display = 'block';
     var txt = document.getElementById('typedText');
@@ -1214,6 +1255,26 @@
 
   /* fallback sigur: pornește inelul la încărcare, chiar dacă nu intră în câmpul vizual */
   window.addEventListener('load', function(){ setTimeout(fillRing, 450); });
+
+  /* aprindere secvențială a pașilor „Cum funcționează" — one-shot, respectă reduced-motion */
+  (function stepGlow(){
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if(reduce) return;
+    var cards = document.querySelectorAll('.steps .stepc');
+    if(!cards.length || !('IntersectionObserver' in window)) return;
+    var ob = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(!e.isIntersecting) return;
+        var idx = Array.prototype.indexOf.call(cards, e.target);
+        setTimeout(function(){
+          e.target.classList.add('lit');
+          setTimeout(function(){ e.target.classList.remove('lit'); }, 1000);
+        }, Math.max(0, idx) * 120);
+        ob.unobserve(e.target);
+      });
+    }, { threshold: .45 });
+    cards.forEach(function(c){ ob.observe(c); });
+  })();
 </script>
 </body>
 </html>
