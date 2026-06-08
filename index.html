@@ -79,9 +79,10 @@ label{display:block;font-size:12.5px;font-weight:600;letter-spacing:.08em;text-t
 .section-card{background:var(--panel);border:1px solid var(--lsoft);border-radius:13px;
   padding:26px 28px;margin-bottom:22px}
 .section-card h3{font-family:"Playfair Display",serif;font-size:19px;color:var(--ink);margin-bottom:20px;
-  padding-bottom:12px;border-bottom:1px solid var(--lsoft)}
+  padding-bottom:12px;border-bottom:1px solid var(--lsoft);
+  display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 14px}
 .section-card h3 .h3-link{font-family:"Hanken Grotesk",sans-serif;font-size:12px;font-weight:600;
-  color:var(--muted);cursor:pointer;text-transform:none;letter-spacing:0;float:right}
+  color:var(--muted);cursor:pointer;text-transform:none;letter-spacing:0;margin-left:auto}
 .section-card h3 .h3-link:hover{color:var(--gold)}
 .field{margin-bottom:18px}
 .field:last-child{margin-bottom:0}
@@ -315,7 +316,7 @@ label{display:block;font-size:12.5px;font-weight:600;letter-spacing:.08em;text-t
       <div class="field"><label>Email</label><input type="email" id="login-email" placeholder="email@exemplu.com"></div>
       <div class="field"><label>Parolă</label><input type="password" id="login-pass" placeholder="••••••••"></div>
       <button class="btn" onclick="doLogin()">Intră în platformă</button>
-      <div class="auth-switch">Nu ai cont? <a href="/">Creează-ți un cont</a></div>
+      <div class="auth-switch">Nu ai cont? <a href="preturi.html">Creează-ți un cont</a></div>
     </div>
   </div>
 </div>
@@ -558,7 +559,9 @@ label{display:block;font-size:12.5px;font-weight:600;letter-spacing:.08em;text-t
           <label>Tip prezentare</label>
           <select id="f_11">
             <option value="">— Alege —</option>
-            <option>Online (Zoom/video)</option>
+            <option>Online — unu la unu</option>
+            <option>Online — prezentare de grup (prezint eu)</option>
+            <option>Online — prezentare de grup (prezintă un leader)</option>
             <option>Offline (față în față)</option>
           </select>
         </div>
@@ -974,9 +977,8 @@ function doLogout() {
   sessionStorage.removeItem('hos_token');
   TOKEN = null;
   USER_PROFILE = null;
-  var go = function(){ window.location.href = '/'; };   // inapoi pe pagina de vanzare
-  if (supaApp) { try { supaApp.auth.signOut().then(go, go); } catch(e){ go(); } }
-  else { go(); }
+  if (supaApp) { try { supaApp.auth.signOut(); } catch(e){} }
+  showView('login');
 }
 
 // ============================================
@@ -1702,7 +1704,36 @@ init();
       <div class="rule-card"><div class="rule-num">1</div><div class="rule-txt"><div class="rt">Starea ta face 80% din apel</div><div class="rd">30-60 secunde de mișcare reală înainte de apel — dans, sărituri, zâmbet larg în oglindă. Intri din abundență, nu din nevoia de a convinge. Vocea caldă vine din stare, nu se poate simula.</div></div></div>
       <div class="rule-card"><div class="rule-num">2</div><div class="rule-txt"><div class="rt">Citește scriptul cu voce tare, minim de 3 ori</div><div class="rd">Prima dată îl citești, a doua te obișnuiești, a treia dispar ezitările. Corzile vocale memorează tiparul, nu doar mintea. Scriptul citit în gând = pitch detectabil în apel.</div></div></div>
       <div class="rule-card"><div class="rule-num">3</div><div class="rule-txt"><div class="rt">Spune cuvintele EXACT cum sunt scrise</div><div class="rd">„Te macină", nu „te frământă". Fiecare cuvânt e ales ca să ocolească o rezistență. Naturalizează CUM spui (ritm, „uite", numele), dar păstrează CE spui (întrebările, oglindirile, frazele de sigilare).</div></div></div>
-      <div class="rule-card"><div class="rule-num">4</div><div class="rule-txt"><div class="rt">La întrebări incomode: zâmbet + amâni</div><div class="rd">„Îmi plac întrebările tale și nicio întrebare nu va rămâne fără răspuns 😊 — ajungem și acolo." Înainte de produs → amâni; după ce l-ai pomenit → „cu drag îți răspund când ne vedem". Nu prezenta produsul la telefon — întâlnirea e locul prezentării.</div></div></div>
+      <div class="rule-card"><div class="rule-num">4</div><div class="rule-txt"><div class="rt">Ce faci când clientul îți pune întrebări incomode în timpul scriptului</div><div class="rd"><div style="margin-bottom:4px">Sunt 2 astfel de situații diferite:</div>
+
+        <div style="margin:14px 0">
+          <div style="color:var(--gold);font-size:11.5px;letter-spacing:.03em;text-transform:uppercase;font-weight:700;margin-bottom:6px">Situația 1 — întrebare prematură</div>
+          <div style="color:var(--muted2);font-size:12px;margin-bottom:8px">(la începutul discuției, ÎNAINTE să prezinți produsul)</div>
+          <div style="margin-bottom:5px">Dacă clientul te întreabă:</div>
+          <div style="padding-left:6px;line-height:1.9;margin-bottom:10px">• „E cumva MLM?"<br>• „Despre ce e vorba?"<br>• „Ce vrei să-mi vinzi?"<br>• „Unde ai aflat de asta?"</div>
+          <div style="margin-bottom:5px">Replica ta (zâmbește obligatoriu 😊) — validezi întrebarea + promiți răspuns garantat + amâni CÂND răspunzi tu:</div>
+          <div style="border-left:2px solid var(--line);padding-left:11px;color:var(--ink);margin-bottom:10px">„Îmi plac întrebările tale și nicio întrebare nu va rămâne fără răspuns 😊 — ajungem și acolo."</div>
+          <div style="margin-bottom:8px">→ Apoi REVII la următoarea întrebare din script.</div>
+          <div>⚠️ Principiu: scriptul funcționează DOAR dacă urmezi structura. Ai încredere în sistem 😊</div>
+        </div>
+
+        <div style="height:1px;background:var(--lsoft);margin:14px 0"></div>
+
+        <div style="margin:14px 0">
+          <div style="color:var(--gold);font-size:11.5px;letter-spacing:.03em;text-transform:uppercase;font-weight:700;margin-bottom:6px">Situația 2 — întrebare după prezentarea scurtă</div>
+          <div style="color:var(--muted2);font-size:12px;margin-bottom:8px">(după ce ai pomenit produsul)</div>
+          <div style="margin-bottom:5px">Dacă clientul întreabă:</div>
+          <div style="padding-left:6px;line-height:1.9;margin-bottom:10px">• „Cum funcționează exact?"<br>• „Ce ingrediente conține?"<br>• „Cât costă?"<br>• „Cum se livrează?"<br>• „Care e diferența față de [competitor]?"</div>
+          <div style="color:#f0a0a0;margin-bottom:10px">⚠️ Pericolul: dacă răspunzi acum, faci prezentare prin telefon → pierzi motivația întâlnirii → clientul nu mai vine.</div>
+          <div style="margin-bottom:5px">Replica ta (zâmbește obligatoriu 😊) — validezi + amâni cu drag la întâlnire + redirect spre dată:</div>
+          <div style="border-left:2px solid var(--line);padding-left:11px;color:var(--ink);margin-bottom:10px">„Îmi place că ai întrebări bune care cresc valoarea discuției. Cu mare drag îți răspund când ne vedem — asta e și scopul [întâlnirii]. N-aș vrea să rămână nicio întrebare fără răspuns."</div>
+          <div>→ Apoi REDIRECT spre stabilirea datei.</div>
+        </div>
+
+        <div style="background:rgba(216,169,74,.07);border-radius:10px;padding:12px 14px;margin-top:14px">
+          <div style="color:var(--gold);font-size:11.5px;letter-spacing:.03em;text-transform:uppercase;font-weight:700;margin-bottom:8px">Regula meta pentru ambele situații</div>
+          <div style="line-height:1.95">• Niciodată „NU" direct<br>• Niciodată refuz brusc<br>• Întotdeauna cu zâmbet 😊<br>• Validezi întrebarea ÎNTÂI („Îmi plac/place...")<br>• Promiți răspuns garantat<br>• Tu decizi CÂND răspunzi</div>
+        </div></div></div></div>
       <div class="rule-card"><div class="rule-num">5</div><div class="rule-txt"><div class="rt">Tăcerea după întrebare = puterea ta</div><div class="rd">Dacă devine inconfortabil, rezistă. El va vorbi primul. Nu umple tăcerea.</div></div></div>
       <div class="rule-card"><div class="rule-num">6</div><div class="rule-txt"><div class="rt">Dacă te blochezi, ai o plasă de siguranță</div><div class="rd">„Lasă-mă să formulez mai bine ce voiam să întreb..." — și revii la script. Nimic nu e pierdut.</div></div></div>
       <div class="rule-card"><div class="rule-num">7</div><div class="rule-txt"><div class="rt">Durata prezentării: spune-o exact, calm</div><div class="rd">Fără s-o minimizezi, fără s-o umfli. Exact valoarea pe care ai ales-o în formular.</div></div></div>
