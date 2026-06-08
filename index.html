@@ -123,6 +123,11 @@ label{display:block;font-size:12.5px;font-weight:600;letter-spacing:.08em;text-t
   box-shadow:0 14px 36px rgba(0,0,0,.34)}
 .script-box strong{color:#7a5f10;font-weight:700}
 .script-actions{display:flex;gap:12px;margin-top:18px;flex-wrap:wrap}
+.script-box .script-rule{display:block;margin:16px 0 10px;padding-top:12px;border-top:1px solid rgba(0,0,0,.16);font-size:12px;letter-spacing:.05em;color:#7a5f10;font-weight:700;line-height:1.45}
+.script-box .script-rule.bare{padding-top:0;height:0;margin:14px 0;border-top:1px solid rgba(0,0,0,.12)}
+.prog-sub{text-align:center;color:var(--goldl);font-size:13px;letter-spacing:.04em;margin:-14px 0 22px}
+.prog-warn{text-align:center;color:var(--muted);font-size:12.5px;margin-top:14px;line-height:1.4}
+.prog-warn b{color:var(--goldl);font-weight:600}
 
 /* ── OBJECTION SECTION ── */
 .obj-card{background:var(--panel);border:1px solid var(--line);border-radius:13px;padding:26px 28px;margin-top:20px}
@@ -620,12 +625,14 @@ label{display:block;font-size:12.5px;font-weight:600;letter-spacing:.08em;text-t
     <div class="generating">
       <div class="prog-card">
         <h3 class="prog-title">Construim scriptul tău psihologic</h3>
+        <p class="prog-sub">durează 120 de secunde</p>
         <div class="prog-head">
           <div class="progress-track"><div class="progress-fill" id="prog-fill"></div></div>
           <div class="prog-pctnum"><span id="prog-num">0</span>%</div>
         </div>
         <div class="prog-list" id="prog-list"></div>
         <div class="prog-cap" id="prog-cap"></div>
+        <p class="prog-warn">Nu închide fereastra — <b>scriptul se generează</b>.</p>
       </div>
     </div>
   </div>
@@ -1148,6 +1155,14 @@ function toggleExperienta() {
 function renderScript(text) {
   var esc = String(text == null ? '' : text)
     .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  var lines = esc.split('\n');
+  for (var i = 0; i < lines.length; i++) {
+    var t = lines[i].trim();
+    if (/^[—–\-═]{3,}$/.test(t)) { lines[i] = '<span class="script-rule bare"></span>'; continue; }
+    var core = t.replace(/^[—–\-═\s]+/, '').replace(/[—–\-═\s]+$/, '');
+    if (/^ETAPA\b/i.test(core)) { lines[i] = '<span class="script-rule">' + core + '</span>'; }
+  }
+  esc = lines.join('\n');
   return esc.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
 }
 
