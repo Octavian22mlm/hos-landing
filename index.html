@@ -89,6 +89,12 @@ label{display:block;font-size:12.5px;font-weight:600;letter-spacing:.08em;text-t
 .field-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:18px}
 .field-row:last-child{margin-bottom:0}
 .field-note{font-size:12px;color:var(--muted2);margin-top:6px;font-style:italic}
+.stil-chips{display:flex;flex-wrap:wrap;gap:9px}
+.stil-chip{background:var(--panel2);border:1.5px solid var(--lsoft);color:var(--muted);
+  font-family:"Hanken Grotesk",sans-serif;font-size:14px;font-weight:600;
+  padding:10px 16px;border-radius:9px;cursor:pointer;transition:border-color .2s,color .2s,background .2s}
+.stil-chip:hover{border-color:rgba(216,169,74,.4);color:var(--ink)}
+.stil-chip.selected{border-color:var(--gold);background:rgba(216,169,74,.08);color:var(--goldl)}
 
 /* ── UPGRADE NUDGE ── */
 .upgrade-nudge{display:none;margin-bottom:22px}
@@ -440,7 +446,15 @@ label{display:block;font-size:12.5px;font-weight:600;letter-spacing:.08em;text-t
       </div>
       <div class="field">
         <label>Stil de abordare</label>
-        <input type="text" id="f_26" placeholder="Ex: relaxat și cu umor / cald-respectuos / direct / formal — dacă vorbești cu «frate», scrie aici">
+        <div class="stil-chips" id="stil-chips">
+          <button type="button" class="stil-chip" data-stil="Relaxat și cu umor" onclick="selectStil(this)">Relaxat și cu umor</button>
+          <button type="button" class="stil-chip" data-stil="Cald-respectuos" onclick="selectStil(this)">Cald-respectuos</button>
+          <button type="button" class="stil-chip" data-stil="Direct" onclick="selectStil(this)">Direct</button>
+          <button type="button" class="stil-chip" data-stil="__altul__" onclick="selectStil(this)">Altul</button>
+        </div>
+        <input type="text" id="f_26_alt" oninput="onStilAltInput()" placeholder="Scrie tu stilul — ex: cald, dar la obiect / vorbim cu «frate»" style="display:none;margin-top:10px">
+        <input type="hidden" id="f_26">
+        <div class="field-note" id="stil-note" style="display:none">La „Altul" descrii tu tonul — modelul îl interpretează (poți scrie și apelative ca «frate»).</div>
       </div>
       <div class="field">
         <label>Experiența ta în vânzări / MLM</label>
@@ -1138,6 +1152,7 @@ function renderGenerator() {
       }
     } catch(e) {}
     loadFormData();
+    reflectStilFromValue();
 
     AGENT_FIELDS.forEach(id => {
       const el = document.getElementById(id);
@@ -1156,6 +1171,48 @@ function renderGenerator() {
   refreshStepUI();
 }
 
+function selectStil(btn) {
+  document.querySelectorAll('#stil-chips .stil-chip').forEach(c => c.classList.remove('selected'));
+  btn.classList.add('selected');
+  const val = btn.getAttribute('data-stil');
+  const alt = document.getElementById('f_26_alt');
+  const note = document.getElementById('stil-note');
+  if (val === '__altul__') {
+    alt.style.display = 'block';
+    if (note) note.style.display = 'block';
+    document.getElementById('f_26').value = alt.value.trim();
+    alt.focus();
+  } else {
+    alt.style.display = 'none';
+    if (note) note.style.display = 'none';
+    document.getElementById('f_26').value = val;
+  }
+  saveAgentData();
+}
+function onStilAltInput() {
+  document.getElementById('f_26').value = document.getElementById('f_26_alt').value;
+  saveAgentData();
+}
+function reflectStilFromValue() {
+  const val = (document.getElementById('f_26').value || '').trim();
+  const alt = document.getElementById('f_26_alt');
+  const note = document.getElementById('stil-note');
+  let matched = false;
+  document.querySelectorAll('#stil-chips .stil-chip').forEach(c => {
+    const isMatch = c.getAttribute('data-stil') === val && val !== '';
+    c.classList.toggle('selected', isMatch);
+    if (isMatch) matched = true;
+  });
+  if (val && !matched) {
+    const altChip = document.querySelector('#stil-chips .stil-chip[data-stil="__altul__"]');
+    if (altChip) altChip.classList.add('selected');
+    if (alt) { alt.style.display = 'block'; alt.value = val; }
+    if (note) note.style.display = 'block';
+  } else {
+    if (alt) alt.style.display = 'none';
+    if (note) note.style.display = 'none';
+  }
+}
 function toggleExperienta() {
   const val = document.getElementById('f_08').value;
   document.getElementById('field-experienta').style.display = val === 'Da' ? 'block' : 'none';
