@@ -1,1342 +1,1859 @@
 <!DOCTYPE html>
 <html lang="ro">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Planuri — Harvard of Sales</title>
-<!-- Preview la share (WhatsApp, Facebook, etc.) -->
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://www.mlmpsychology.com/">
-<meta property="og:title" content="Oamenii nu spun NU produsului — spun NU felului în care suni.">
-<meta property="og:description" content="Singurul generator de scripturi MLM construit pe psihologie. Scripturi de invitație personalizate, gata în 120 de secunde.">
-<meta property="og:image" content="https://www.mlmpsychology.com/preview.jpg">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-<meta property="og:locale" content="ro_RO">
-<meta property="og:site_name" content="Harvard of Sales">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Oamenii nu spun NU produsului — spun NU felului în care suni.">
-<meta name="twitter:description" content="Generator de scripturi MLM pe bază de psihologie. Gata în 120 de secunde.">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Harvard of Sales — Generator scripturi</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700;800&family=Hanken+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="https://js.stripe.com/v3/"></script>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,500&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-  :root{
-    --navy:#0A1322;
-    --navy-2:#0E1B2E;
-    --card:#11203580;
-    --card-solid:#122138;
-    --gold:#C9A24B;
-    --gold-bright:#E4C36A;
-    --gold-deep:#A8842F;
-    --ink:#EAEFF6;
-    --muted:#90A0B6;
-    --muted-2:#5E708A;
-    --line:rgba(201,162,75,.22);
-    --line-soft:rgba(255,255,255,.07);
-    --ok:#7FC8A0;
-  }
-  *{box-sizing:border-box;margin:0;padding:0}
-  html{scroll-behavior:smooth}
-  body{
-    background:var(--navy);
-    color:var(--ink);
-    font-family:'Hanken Grotesk',sans-serif;
-    font-weight:400;
-    line-height:1.6;
-    -webkit-font-smoothing:antialiased;
-    overflow-x:hidden;
-    position:relative;
-  }
-  /* atmospheric background */
-  body::before{
-    content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
-    background:
-      radial-gradient(900px 600px at 75% -5%, rgba(201,162,75,.10), transparent 60%),
-      radial-gradient(700px 500px at 10% 20%, rgba(201,162,75,.05), transparent 55%),
-      linear-gradient(180deg,#0A1322 0%, #0B1525 55%, #0A1322 100%);
-  }
-  body::after{ /* subtle grain */
-    content:"";position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.035;
-    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  }
-  .wrap{position:relative;z-index:1;max-width:1180px;margin:0 auto;padding:0 24px}
-  h1,h2,h3,.serif{font-family:'Playfair Display',serif}
+:root{
+  --bg:#080b12;--bg2:#0d1322;--panel:#121a2b;--panel2:#161f33;
+  --ink:#eef1f7;--muted:#9aa3b8;--muted2:#5a6378;
+  --gold:#d8a94a;--goldl:#ecca7e;--goldd:#c2933a;
+  --line:rgba(216,169,74,.18);--lsoft:rgba(255,255,255,.07);
+  --green:#3ecf8e;--red:#e05252;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:"Hanken Grotesk",sans-serif;background:var(--bg);color:var(--ink);min-height:100vh;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:radial-gradient(60% 45% at 50% -5%,rgba(216,169,74,.09),transparent 55%),linear-gradient(180deg,#0a0f1b,var(--bg) 50%)}
+.z{position:relative;z-index:1}
+input,textarea,select{width:100%;padding:12px 14px;background:var(--panel2);border:1px solid var(--lsoft);border-radius:8px;
+  color:var(--ink);font-family:"Hanken Grotesk",sans-serif;font-size:15px;outline:none;resize:vertical;transition:border-color .2s}
+input:focus,textarea:focus,select:focus{border-color:var(--gold)}
+select option{background:var(--panel2)}
+label{display:block;font-size:12.5px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:7px}
+.btn{width:100%;padding:14px;background:linear-gradient(180deg,var(--goldl),var(--goldd));color:#1a1206;
+  font-family:"Hanken Grotesk",sans-serif;font-size:15px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;
+  border:none;border-radius:9px;cursor:pointer;transition:filter .2s,transform .15s}
+.btn:hover{filter:brightness(1.07);transform:translateY(-1px)}
+.btn:disabled{opacity:.45;cursor:not-allowed;transform:none;filter:none}
+.btn-ghost{background:transparent;color:var(--gold);border:1px solid var(--line);
+  font-family:"Hanken Grotesk",sans-serif;font-size:14px;font-weight:600;padding:11px 20px;
+  border-radius:8px;cursor:pointer;transition:border-color .2s;width:auto}
+.btn-ghost:hover{border-color:var(--gold)}
+.err{background:rgba(224,82,82,.12);border:1px solid rgba(224,82,82,.3);border-radius:8px;
+  padding:11px 14px;font-size:14px;color:#f08080;display:none;margin-bottom:14px}
+.suc{background:rgba(62,207,142,.1);border:1px solid rgba(62,207,142,.3);border-radius:8px;
+  padding:11px 14px;font-size:14px;color:var(--green);display:none;margin-bottom:14px}
 
-  /* ---------- NAV ---------- */
-  nav{position:relative;z-index:2;display:flex;align-items:center;justify-content:space-between;
-    max-width:1180px;margin:0 auto;padding:26px 24px}
-  .brand{font-family:'Playfair Display',serif;font-weight:700;letter-spacing:.5px;font-size:19px}
-  .brand span{color:var(--gold)}
-  .nav-cta{font-size:14px;color:var(--muted);text-decoration:none;border:1px solid var(--line);
-    padding:9px 18px;border-radius:40px;transition:.25s}
-  .nav-cta:hover{color:var(--ink);border-color:var(--gold);}
-  .nav-actions{display:flex;align-items:center;gap:18px}
-  .nav-login{font-size:14px;color:var(--muted);text-decoration:none;transition:.25s;white-space:nowrap}
-  .nav-login:hover{color:var(--gold-bright)}
-  @media(max-width:560px){.nav-actions{flex-direction:column;align-items:flex-end;gap:8px}.nav-login{padding-right:19px}}
+/* ── TOAST ── */
+#toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(100px);
+  background:var(--panel2);border:1px solid var(--line);border-radius:10px;
+  padding:13px 22px;font-size:14px;color:var(--ink);z-index:999;transition:transform .3s;white-space:nowrap}
+#toast.show{transform:translateX(-50%) translateY(0)}
 
-  /* ---------- HERO ---------- */
-  header{text-align:center;padding:70px 0 30px}
-  .eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:12.5px;letter-spacing:3px;
-    text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:26px;
-    opacity:0;animation:rise .8s .05s forwards}
-  .eyebrow::before,.eyebrow::after{content:"";width:26px;height:1px;background:var(--gold-deep);opacity:.6}
-  h1{font-size:clamp(34px,5.4vw,62px);font-weight:700;line-height:1.08;letter-spacing:-.5px;
-    max-width:880px;margin:0 auto;opacity:0;animation:rise .9s .15s forwards}
-  h1 em{font-style:italic;color:var(--gold-bright)}
-  .sub{max-width:600px;margin:24px auto 0;color:var(--muted);font-size:clamp(16px,2vw,19px);
-    opacity:0;animation:rise .9s .3s forwards}
-  .hero-claim{max-width:620px;margin:20px auto 0;color:var(--gold-bright);font-weight:600;
-    font-size:clamp(15px,2.3vw,19px);opacity:0;animation:rise .9s .22s forwards}
-  .hero-cta{margin-top:38px;opacity:0;animation:rise .9s .45s forwards}
-  .btn-primary{display:inline-block;background:linear-gradient(135deg,var(--gold-bright),var(--gold));
-    color:#1a1205;font-weight:700;font-size:15.5px;padding:15px 34px;border-radius:46px;
-    text-decoration:none;border:none;cursor:pointer;letter-spacing:.3px;
-    box-shadow:0 10px 30px -8px rgba(201,162,75,.5);transition:.25s}
-  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 16px 38px -8px rgba(201,162,75,.6)}
-  .proof-line{margin-top:34px;font-size:14.5px;color:var(--muted-2);
-    opacity:0;animation:rise .9s .6s forwards}
-  .proof-line b{color:var(--gold-bright);font-weight:700}
-  .pulse{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--ok);
-    margin-right:8px;box-shadow:0 0 0 0 rgba(127,200,160,.6);animation:pulse 2s infinite}
+/* ── VIEWS ── */
+.view{display:none;min-height:100vh}
+.view.active{display:block}
 
-  /* ---------- PRICE CARDS ---------- */
-  .plans{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:64px;align-items:stretch}
-  .card{position:relative;background:var(--card);backdrop-filter:blur(6px);
-    border:1px solid var(--line-soft);border-radius:20px;padding:34px 28px;display:flex;flex-direction:column;
-    transition:.3s;opacity:0;transform:translateY(20px)}
-  .card.in{opacity:1;transform:none}
-  .card:hover{border-color:var(--line);transform:translateY(-4px)}
-  .card.featured{border:1.5px solid var(--gold);background:linear-gradient(180deg,rgba(201,162,75,.10),rgba(17,32,53,.5));
-    box-shadow:0 20px 60px -20px rgba(201,162,75,.35);transform:scale(1.045)}
-  .card.featured:hover{transform:scale(1.045) translateY(-4px)}
-  @media(max-width:860px){.card.featured{transform:none}.card.featured:hover{transform:translateY(-4px)}}
-  .ribbon{position:absolute;top:-13px;left:50%;transform:translateX(-50%);
-    background:linear-gradient(135deg,var(--gold-bright),var(--gold-deep));color:#1a1205;
-    font-size:11.5px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;
-    padding:6px 18px;border-radius:30px;white-space:nowrap;box-shadow:0 6px 18px -6px rgba(201,162,75,.7)}
-  .step{font-size:12px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);font-weight:600}
-  .pname{font-family:'Playfair Display',serif;font-size:27px;font-weight:600;margin:6px 0 2px}
-  .ptag{color:var(--muted);font-size:14px;min-height:38px}
-  .price{display:flex;align-items:baseline;gap:6px;margin:18px 0 2px}
-  .price .amt{font-family:'Playfair Display',serif;font-size:46px;font-weight:700;letter-spacing:-1px}
-  .price .per{color:var(--muted);font-size:15px}
-  .perscript{font-size:13px;color:var(--gold-bright);font-weight:500;margin-bottom:2px}
-  .commit{font-size:12px;color:var(--muted-2);letter-spacing:.3px;margin-bottom:20px}
-  .qty{font-size:15px;font-weight:600;color:var(--ink);padding:14px 0;border-top:1px solid var(--line-soft);
-    border-bottom:1px solid var(--line-soft);margin-bottom:18px}
-  .qty b{color:var(--gold-bright);font-size:17px}
-  .bonus{font-size:13px;color:var(--gold-bright);background:rgba(201,162,75,.08);border:1px dashed var(--line);border-radius:10px;padding:10px 12px;margin-bottom:18px;line-height:1.35}
-  .bonus .b1{font-weight:600}
-  .bonus .b2{display:block;color:var(--muted-2);font-size:11.5px;font-weight:400;margin-top:2px}
-  .feats{list-style:none;flex:1;margin-bottom:26px}
-  .feats li{display:flex;align-items:flex-start;gap:11px;font-size:14.5px;padding:7px 0;color:var(--ink)}
-  .feats li .ic{flex:0 0 18px;margin-top:3px}
-  .feats li.locked{color:var(--muted-2);cursor:pointer}
-  .feats li .check{color:var(--ok)}
-  .feats li .lock{filter:grayscale(.3);opacity:.7}
-  .feats li small{display:block;color:var(--muted-2);font-size:12.5px;font-weight:400}
-  .btn-card{width:100%;padding:14px;border-radius:44px;font-weight:700;font-size:15px;cursor:pointer;
-    border:1px solid var(--gold);background:transparent;color:var(--gold-bright);transition:.25s;font-family:inherit}
-  .btn-card:hover{background:rgba(201,162,75,.12)}
-  .card.featured .btn-card{background:linear-gradient(135deg,var(--gold-bright),var(--gold));color:#1a1205;border:none;
-    box-shadow:0 10px 26px -8px rgba(201,162,75,.5)}
-  .card.featured .btn-card:hover{transform:translateY(-1px)}
+/* ── AUTH CARDS ── */
+.auth-wrap{display:flex;align-items:center;justify-content:center;min-height:100vh;padding:20px}
+.auth-card{background:rgba(18,26,43,.7);border:1px solid var(--line);border-radius:18px;
+  padding:44px 48px;width:100%;max-width:460px;backdrop-filter:blur(8px);margin-left:auto;margin-right:auto}
+.auth-brand{text-align:center;margin-bottom:30px}
+.auth-brand .name{font-family:"Playfair Display",serif;font-weight:700;font-size:22px;color:var(--gold);letter-spacing:.06em}
+.auth-brand .sub{font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--muted2);margin-top:5px}
+.auth-card h2{font-family:"Playfair Display",serif;font-size:26px;color:var(--ink);margin-bottom:8px}
+.auth-card p{font-size:14px;color:var(--muted);margin-bottom:26px}
+.auth-card .field{margin-bottom:18px}
+.auth-switch{text-align:center;margin-top:18px;font-size:13.5px;color:var(--muted)}
+.auth-switch a{color:var(--gold);cursor:pointer;text-decoration:underline}
 
-  /* ---------- SCRIPT UNIC (distinct) ---------- */
-  .unic{margin-top:26px;border:1px dashed var(--line);border-radius:18px;
-    padding:24px 28px;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;
-    background:rgba(255,255,255,.015)}
-  .unic .l h3{font-family:'Playfair Display',serif;font-size:20px;font-weight:600}
-  .unic .l p{color:var(--muted);font-size:14px;max-width:520px;margin-top:4px}
-  .unic-feats{list-style:none;margin:14px 0 14px}
-  .unic-feats li{display:flex;align-items:flex-start;gap:10px;font-size:15px;color:var(--ink);padding:5px 0;font-weight:500}
-  .unic-feats li .uc{color:var(--ok);flex:0 0 auto;margin-top:1px}
-  .unic-note strong{color:var(--ink)}
-  .unic .r{display:flex;align-items:center;gap:20px}
-  .unic .uprice{font-family:'Playfair Display',serif;font-size:30px;font-weight:700}
-  .unic .uprice small{display:block;font-family:'Hanken Grotesk';font-size:11.5px;color:var(--muted-2);
-    font-weight:400;letter-spacing:.3px;text-transform:uppercase}
-  .btn-ghost{padding:12px 26px;border-radius:44px;border:1px solid var(--line);background:transparent;
-    color:var(--ink);font-weight:600;font-size:14px;cursor:pointer;transition:.25s;font-family:inherit;white-space:nowrap}
-  .btn-ghost:hover{border-color:var(--gold);color:var(--gold-bright)}
+/* ── GENERATOR ── */
+#view-generator{padding-bottom:60px}
+.gen-header{background:rgba(8,11,18,.8);border-bottom:1px solid var(--lsoft);
+  backdrop-filter:blur(10px);padding:14px 28px;display:flex;align-items:center;
+  justify-content:space-between;gap:16px;flex-wrap:wrap;position:sticky;top:0;z-index:10}
+.gen-header .brand{display:flex;align-items:center;gap:12px}
+.gen-header .name{font-family:"Playfair Display",serif;font-weight:700;color:var(--gold);font-size:17px}
+.counter-box{display:flex;align-items:center;gap:14px}
+.counter{background:var(--panel);border:1px solid var(--line);border-radius:30px;
+  padding:8px 18px;font-size:13.5px;font-weight:600}
+.counter .num{color:var(--gold);font-size:17px;font-weight:700}
+.counter .tier-badge{font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--muted);margin-left:6px}
+.gen-wrap{max-width:800px;margin:0 auto;padding:32px 24px 0}
+.section-card{background:var(--panel);border:1px solid var(--lsoft);border-radius:13px;
+  padding:26px 28px;margin-bottom:22px}
+.section-card h3{font-family:"Playfair Display",serif;font-size:19px;color:var(--gold);margin-bottom:20px;
+  padding-bottom:12px;border-bottom:1px solid var(--lsoft);
+  display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 14px}
+.section-card h3 .h3-link{font-family:"Hanken Grotesk",sans-serif;font-size:12px;font-weight:600;
+  color:var(--muted);cursor:pointer;text-transform:none;letter-spacing:0;margin-left:auto}
+.section-card h3 .h3-link:hover{color:var(--gold)}
+.field{margin-bottom:18px}
+.field:last-child{margin-bottom:0}
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:18px}
+.field-row:last-child{margin-bottom:0}
+.field-note{font-size:12px;color:var(--muted2);margin-top:6px;font-style:italic}
 
-  /* ---------- SECTION TITLES ---------- */
-  .sec{padding:90px 0 0}
-  .sec-head{text-align:center;max-width:640px;margin:0 auto 50px}
-  .sec-head .eyebrow{animation:none;opacity:1}
-  .sec-head h2{font-size:clamp(28px,4vw,40px);font-weight:600;line-height:1.15}
-  .sec-head p{color:var(--muted);margin-top:14px;font-size:16px}
-  .sec-head p.pain-quote{font-family:'Playfair Display',serif;font-style:italic;font-weight:600;color:var(--ink);font-size:clamp(20px,3vw,27px);line-height:1.32;max-width:560px;margin:22px auto 0;position:relative;padding-top:24px}
-  .sec-head p.pain-quote::before{content:"";position:absolute;top:0;left:50%;transform:translateX(-50%);width:58px;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+/* ── UPGRADE NUDGE ── */
+.upgrade-nudge{display:none;margin-bottom:22px}
+.upgrade-nudge-inner{background:linear-gradient(180deg,rgba(216,169,74,.12),rgba(216,169,74,.04));
+  border:1px solid var(--line);border-radius:12px;padding:14px 20px;
+  display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.upgrade-nudge .un-text{flex:1;min-width:200px;font-size:14px;color:var(--ink);line-height:1.45}
+.upgrade-nudge .un-text b{color:var(--goldl)}
+.upgrade-nudge .un-cta{flex-shrink:0}
 
-  /* ---------- MODES ---------- */
-  .modes{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
-  .mode{background:var(--card);border:1px solid var(--line-soft);border-radius:18px;padding:30px 26px;transition:.3s}
-  .mode:hover{border-color:var(--line)}
-  .mode .mi{font-size:13px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);font-weight:700}
-  .mode h3{font-family:'Playfair Display',serif;font-size:23px;font-weight:600;margin:8px 0 12px}
-  .mode p{color:var(--muted);font-size:14.5px}
-  .mode .badge{display:inline-block;margin-top:16px;font-size:12px;color:var(--gold-bright);
-    border:1px solid var(--line);padding:4px 12px;border-radius:30px}
+/* ── MODE SELECTOR ── */
+.mode-options{display:flex;flex-direction:column;gap:11px}
+.mode-option{display:flex;align-items:center;gap:14px;padding:14px 18px;
+  background:var(--panel2);border:1.5px solid var(--lsoft);border-radius:10px;cursor:pointer;transition:border-color .2s}
+.mode-option:hover:not(.locked){border-color:rgba(216,169,74,.4)}
+.mode-option.selected{border-color:var(--gold);background:rgba(216,169,74,.07)}
+.mode-option.locked{opacity:.45;cursor:not-allowed}
+.mode-radio{width:18px;height:18px;border-radius:50%;border:2px solid var(--muted);flex:0 0 auto;transition:all .2s}
+.mode-option.selected .mode-radio{border-color:var(--gold);background:var(--gold)}
+.mode-option.locked .mode-radio{border-color:var(--muted2)}
+.mode-text .mode-title{font-size:15px;font-weight:600;color:var(--ink)}
+.mode-text .mode-desc{font-size:13px;color:var(--muted);margin-top:2px}
+.lock-badge{margin-left:auto;background:rgba(216,169,74,.12);border:1px solid var(--line);
+  border-radius:20px;padding:4px 12px;font-size:11.5px;font-weight:600;
+  letter-spacing:.05em;color:var(--gold);white-space:nowrap;flex-shrink:0}
 
-  /* ---------- SOCIAL PROOF BAND ---------- */
-  .band{margin-top:90px;border-top:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft);
-    padding:54px 0;text-align:center}
-  .counter{font-family:'Playfair Display',serif;font-size:clamp(44px,7vw,72px);font-weight:700;
-    color:var(--gold-bright);line-height:1;letter-spacing:-1px}
-  .band p{color:var(--muted);margin-top:10px;font-size:16px}
-  .band .small{color:var(--muted-2);font-size:13.5px;margin-top:18px;max-width:560px;margin-left:auto;margin-right:auto}
+/* ── OUTPUT ── */
+.output-wrap{max-width:800px;margin:0 auto;padding:32px 24px}
+.output-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:22px;flex-wrap:wrap;gap:12px}
+.output-header h2{font-family:"Playfair Display",serif;font-size:26px;color:var(--ink)}
+.script-box{background:#faf7f0;border:1px solid rgba(0,0,0,.08);border-radius:13px;padding:32px 34px;
+  white-space:pre-wrap;line-height:1.8;font-size:15.5px;color:#23262e;max-height:68vh;overflow-y:auto;
+  box-shadow:0 14px 36px rgba(0,0,0,.34)}
+.script-box strong{color:#7a5f10;font-weight:700}
+.script-actions{display:flex;gap:12px;margin-top:18px;flex-wrap:wrap}
+.script-box .script-rule{display:block;margin:16px 0 10px;padding-top:12px;border-top:1px solid rgba(0,0,0,.16);font-size:12px;letter-spacing:.05em;color:#7a5f10;font-weight:700;line-height:1.45}
+.script-box .script-rule.bare{padding-top:0;height:0;margin:14px 0;border-top:1px solid rgba(0,0,0,.12)}
+.script-box .script-zone{display:block;margin:22px 0 18px;background:rgba(122,95,16,.10);border-left:3px solid #b8903a;padding:11px 14px;font-size:13.5px;letter-spacing:.02em;color:#5a4a14;font-weight:700;line-height:1.4}
+.script-box .script-pause{display:inline-block;background:rgba(0,0,0,.05);border-radius:6px;padding:3px 10px;font-size:12.5px;color:#555;font-weight:600}
+.prog-sub{text-align:center;color:var(--goldl);font-size:13px;letter-spacing:.04em;margin:-14px 0 22px}
+.prog-warn{text-align:center;color:var(--muted);font-size:12.5px;margin-top:14px;line-height:1.4}
+.prog-warn b{color:var(--goldl);font-weight:600}
 
-  /* ---------- FAQ ---------- */
-  .faq{max-width:760px;margin:0 auto}
-  .q{border-bottom:1px solid var(--line-soft)}
-  .q button{width:100%;text-align:left;background:none;border:none;color:var(--ink);
-    font-family:'Playfair Display',serif;font-size:18.5px;font-weight:500;padding:22px 40px 22px 0;
-    cursor:pointer;position:relative}
-  .q button::after{content:"+";position:absolute;right:6px;top:50%;transform:translateY(-50%);
-    color:var(--gold);font-size:24px;font-family:'Hanken Grotesk';transition:.3s}
-  .q.open button::after{transform:translateY(-50%) rotate(45deg)}
-  .q .a{max-height:0;overflow:hidden;transition:max-height .35s ease}
-  .q .a p{color:var(--muted);font-size:15px;padding:0 0 22px}
+/* ── OBJECTION SECTION ── */
+.obj-card{background:var(--panel);border:1px solid var(--line);border-radius:13px;padding:26px 28px;margin-top:20px}
+.obj-q{font-family:"Playfair Display",serif;font-size:19px;color:var(--ink);margin-bottom:18px}
+.obj-btns{display:flex;gap:12px;flex-wrap:wrap}
+.obj-label{font-size:12.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin:24px 0 12px}
+.spinner{display:inline-block;width:20px;height:20px;border:2px solid rgba(216,169,74,.3);
+  border-top-color:var(--gold);border-radius:50%;animation:spin .7s linear infinite;vertical-align:middle;margin-right:9px}
+@keyframes spin{to{transform:rotate(360deg)}}
+.generating{text-align:center;padding:60px 20px;color:var(--muted)}
+.generating p{margin-top:16px;font-size:15px}
 
-  /* ---------- CLOSING ---------- */
-  .closing{text-align:center;padding:96px 0 40px}
-  .closing h2{font-size:clamp(28px,4.4vw,46px);font-weight:600;max-width:680px;margin:0 auto 10px}
-  .closing h2 em{font-style:italic;color:var(--gold-bright)}
-  .closing p{color:var(--muted);margin:0 auto 30px;max-width:480px}
-  .secure{display:flex;align-items:center;justify-content:center;gap:8px;color:var(--muted-2);font-size:13px;margin-top:22px}
+/* ── PROGRESS (checklist 12 etape) ── */
+.prog-card{width:100%;max-width:440px;margin:0 auto;text-align:left}
+.prog-title{font-family:"Playfair Display",serif;font-size:21px;color:var(--ink);text-align:center;margin-bottom:22px}
+.prog-head{display:flex;align-items:center;gap:14px;margin-bottom:24px}
+.progress-track{flex:1;height:9px;background:rgba(216,169,74,.12);border-radius:20px;overflow:hidden}
+.progress-fill{height:100%;width:0%;background:linear-gradient(90deg,var(--goldd),var(--goldl));
+  border-radius:20px;box-shadow:0 0 10px rgba(216,169,74,.5)}
+.prog-pctnum{font-family:"Playfair Display",serif;font-weight:700;color:var(--gold);font-size:18px;min-width:44px;text-align:right}
+.prog-list{display:flex;flex-direction:column;gap:10px}
+.pstep{display:flex;align-items:center;gap:12px;font-size:13.5px;transition:color .3s,opacity .3s}
+.pstep-ico{width:18px;height:18px;border-radius:50%;flex:0 0 auto;position:relative;
+  border:2px solid var(--muted2);box-sizing:border-box;transition:border-color .3s,background .3s}
+.pstep-txt{line-height:1.35}
+.pstep.pending{color:var(--muted2);opacity:.55}
+.pstep.active{color:var(--ink)}
+.pstep.active .pstep-ico{border-color:var(--gold);border-top-color:transparent;animation:spin .7s linear infinite}
+.pstep.done{color:var(--muted)}
+.pstep.done .pstep-ico{border-color:var(--gold);background:var(--gold);animation:none}
+.pstep.done .pstep-ico::after{content:"";position:absolute;left:5px;top:1px;width:4px;height:9px;
+  border:solid #1a1206;border-width:0 2px 2px 0;transform:rotate(45deg)}
+.prog-cap{text-align:center;margin-top:22px;font-size:14.5px;color:var(--gold);min-height:20px;font-weight:600}
+.obj-prog-ctx{font-size:14px;color:var(--muted);margin-bottom:20px;padding-bottom:14px;border-bottom:1px solid var(--lsoft)}
+.obj-prog-ctx i{color:var(--goldl);font-style:italic}
 
-  footer{border-top:1px solid var(--line-soft);padding:34px 0;text-align:center;color:var(--muted-2);font-size:13px}
-  footer a{color:var(--muted);text-decoration:none}
+@media(max-width:600px){
+  .auth-card{padding:28px 22px}
+  .gen-wrap,.output-wrap{padding:20px 14px 0}
+  .section-card{padding:20px 16px}
+  .field-row{grid-template-columns:1fr}
+}
 
-  /* ---------- MODAL ---------- */
-  .overlay{position:fixed;inset:0;background:rgba(5,9,16,.75);backdrop-filter:blur(5px);z-index:50;
-    display:none;align-items:center;justify-content:center;padding:20px}
-  .overlay.show{display:flex}
-  .modal{background:var(--card-solid);border:1px solid var(--line);border-radius:22px;max-width:440px;width:100%;
-    padding:36px 32px;text-align:center;position:relative;animation:rise .4s forwards}
-  .modal .close{position:absolute;top:16px;right:18px;background:none;border:none;color:var(--muted);
-    font-size:24px;cursor:pointer}
-  .modal .step{margin-bottom:8px}
-  .modal h3{font-family:'Playfair Display',serif;font-size:24px;font-weight:600;margin-bottom:6px}
-  .modal .mprice{font-family:'Playfair Display',serif;font-size:38px;font-weight:700;color:var(--gold-bright);margin:8px 0 4px}
-  .modal .mprice small{font-size:14px;color:var(--muted);font-family:'Hanken Grotesk';font-weight:400}
-  .modal p{color:var(--muted);font-size:14.5px;margin:10px 0 22px}
-  .modal .btn-primary{width:100%}
-  .modal .note{font-size:12px;color:var(--muted-2);margin-top:16px;line-height:1.5}
+/* ── PROOF / COUNTER SECTION ── */
+.proof-section{text-align:center;padding:56px 20px 36px;max-width:580px;margin:0 auto}
+.proof-eyebrow{text-transform:uppercase;letter-spacing:.3em;font-size:11px;font-weight:700;color:var(--gold);margin-bottom:24px}
+.stat-ring-wrap{position:relative;width:190px;height:190px;margin:0 auto 20px}
+.stat-ring-wrap svg{position:absolute;inset:0;transform:rotate(-90deg)}
+.ring-track{fill:none;stroke:rgba(216,169,74,.12);stroke-width:11}
+.ring-fill{fill:none;stroke:var(--gold);stroke-width:11;stroke-linecap:round;
+  stroke-dasharray:534;stroke-dashoffset:534;transition:stroke-dashoffset 2.4s cubic-bezier(.15,.85,.2,1);
+  filter:drop-shadow(0 0 8px rgba(216,169,74,.45))}
+.ring-inner{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px}
+.big-num{font-family:"Playfair Display",serif;font-size:58px;font-weight:900;color:var(--gold);line-height:1;letter-spacing:-.02em}
+.big-pct{font-size:28px;font-weight:700;vertical-align:super;color:var(--goldl)}
+.ring-sub{font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted2)}
+.stat-headline{font-family:"Playfair Display",serif;font-size:22px;color:var(--ink);margin-bottom:10px}
+.stat-headline em{font-style:italic;color:var(--gold)}
+.stat-compare{font-size:14px;color:var(--muted);line-height:1.6}
+.stat-compare strong{color:var(--goldl);font-weight:700}
+.stat-divider{width:56px;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);margin:20px auto}
+.stat-proof{font-size:13.5px;color:var(--muted2);font-style:italic;margin-bottom:32px}
+.live-badge{display:inline-flex;align-items:center;gap:10px;
+  background:rgba(62,207,142,.07);border:1px solid rgba(62,207,142,.2);
+  border-radius:30px;padding:10px 20px;margin-bottom:22px;font-size:15px;color:var(--ink)}
+.live-badge strong{font-size:20px;font-weight:700;color:var(--green);font-family:"Playfair Display",serif}
+.live-dot{width:9px;height:9px;background:var(--green);border-radius:50%;flex-shrink:0;
+  animation:pulse-dot 1.8s ease-in-out infinite}
+@keyframes pulse-dot{
+  0%,100%{box-shadow:0 0 0 0 rgba(62,207,142,.5)}
+  50%{box-shadow:0 0 0 7px rgba(62,207,142,0)}}
 
-  /* toast */
-  .toast{position:fixed;bottom:26px;left:50%;transform:translateX(-50%) translateY(120px);
-    background:var(--card-solid);border:1px solid var(--gold);color:var(--ink);padding:14px 22px;border-radius:14px;
-    font-size:14px;z-index:60;transition:.4s;box-shadow:0 16px 40px -12px rgba(0,0,0,.6);max-width:90vw}
-  .toast.show{transform:translateX(-50%) translateY(0)}
-  .toast b{color:var(--gold-bright)}
+/* ===== HEADER v2: brand + tagline + nav tabs + lang ===== */
+.gen-header{display:block;padding:0}
+.topbar{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;padding:13px 28px}
+.brandwrap{display:flex;flex-direction:column;gap:2px}
+.brandwrap .name{font-family:"Playfair Display",serif;font-weight:700;color:var(--gold);font-size:18px;letter-spacing:.04em}
+.brandwrap .tagline{font-size:10px;letter-spacing:.26em;text-transform:uppercase;color:var(--muted2)}
+.topright{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.langtog{display:flex;border:1px solid var(--line);border-radius:7px;overflow:hidden}
+.langtog .lang{background:transparent;color:var(--muted);border:none;padding:6px 11px;font-size:12px;font-weight:600;cursor:pointer;letter-spacing:.05em}
+.langtog .lang.active{background:var(--gold);color:#1a1206}
+.iesire{padding:7px 14px;font-size:12px;letter-spacing:.12em;text-transform:uppercase}
+.navtabs{display:flex;gap:2px;padding:0 16px;border-top:1px solid var(--lsoft);overflow-x:auto}
+.navtab{position:relative;background:transparent;border:none;color:var(--muted);font-family:"Hanken Grotesk",sans-serif;
+  font-size:13px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:13px 16px;cursor:pointer;white-space:nowrap;
+  border-bottom:2px solid transparent;transition:color .2s}
+.navtab:hover{color:var(--ink)}
+.navtab.active{color:var(--gold);border-bottom-color:var(--gold)}
+.navtab.soon{color:var(--muted2);cursor:default}
+.navtab.soon:hover{color:var(--muted)}
+.soon-badge{font-size:8.5px;letter-spacing:.08em;background:rgba(216,169,74,.13);color:var(--gold);
+  border:0.5px solid var(--line);border-radius:20px;padding:2px 6px;margin-left:7px;vertical-align:middle;text-transform:none}
 
-  /* ---------- AUTH MODAL ---------- */
-  .modal.auth{text-align:left;max-width:420px}
-  .modal.auth h3{text-align:center;margin-bottom:4px}
-  .modal.auth .sub{text-align:center;color:var(--muted);font-size:14px;margin-bottom:22px}
-  .atabs{display:flex;gap:6px;background:rgba(0,0,0,.22);border:1px solid var(--line-soft);
-    border-radius:14px;padding:5px;margin-bottom:22px}
-  .atab{flex:1;text-align:center;padding:10px;border-radius:10px;cursor:pointer;font-size:14px;
-    font-weight:600;color:var(--muted);transition:.2s;border:none;background:none;font-family:inherit}
-  .atab.active{background:linear-gradient(135deg,var(--gold-bright),var(--gold));color:#1a1407}
-  .afield{margin-bottom:14px}
-  .afield label{display:block;font-size:12.5px;color:var(--muted);margin-bottom:6px;letter-spacing:.2px}
-  .modal.auth .btn-primary{width:100%;margin-top:6px}
-  .aerr{color:#E89090;font-size:13px;min-height:18px;margin:6px 2px 4px;line-height:1.4}
-  .aok{color:var(--ok);font-size:13px;min-height:18px;margin:6px 2px 4px;line-height:1.4}
-  .anote{font-size:12px;color:var(--muted-2);text-align:center;margin-top:16px;line-height:1.5}
-  /* pilula de status (colț dreapta-sus) */
-  .apill{position:fixed;top:16px;right:18px;z-index:40;display:none;align-items:center;gap:10px;
-    background:var(--card-solid);border:1px solid var(--line);border-radius:44px;padding:7px 8px 7px 16px;
-    font-size:13px;color:var(--muted);box-shadow:0 10px 30px -14px rgba(0,0,0,.6)}
-  .apill.show{display:flex}
-  .apill .em{color:var(--ink);max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-  .apill button{background:rgba(255,255,255,.05);border:1px solid var(--line-soft);color:var(--muted);
-    border-radius:30px;padding:6px 12px;font-size:12px;cursor:pointer;font-family:inherit;transition:.2s}
-  .apill button:hover{border-color:var(--gold);color:var(--gold-bright)}
+/* ===== GUIDE BUTTONS (deasupra formularului / scriptului) ===== */
+.guide-bar{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:20px}
+.guide-btn{background:var(--panel);border:1px solid var(--line);color:var(--goldl);
+  font-family:"Hanken Grotesk",sans-serif;font-size:13.5px;font-weight:600;padding:10px 16px;border-radius:9px;cursor:pointer;
+  transition:border-color .2s,background .2s}
+.guide-btn:hover{border-color:var(--gold);background:var(--panel2)}
+/* ── PAȘI NUMEROTAȚI (gate prima utilizare) ── */
+.step-btn{display:flex;align-items:center;gap:9px}
+.step-btn .step-no{display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;
+  background:rgba(216,169,74,.15);border:1px solid var(--line);color:var(--gold);font-size:12px;font-weight:700;flex:0 0 auto}
+.step-btn .step-check{color:var(--green);font-weight:700;opacity:0;transition:opacity .2s}
+.step-btn.step-ok{border-color:rgba(62,207,142,.4)}
+.step-btn.step-ok .step-no{background:var(--green);border-color:var(--green);color:#06231a}
+.step-btn.step-ok .step-check{opacity:1}
+.gate-hint{display:none;text-align:center;font-size:13px;color:var(--gold);margin-bottom:10px}
 
-  /* ---------- CHECKOUT EMBEDDED ---------- */
-  #checkoutModal{max-height:92vh;overflow-y:auto}
-  #checkoutBox{min-height:120px}
-  #stripe-checkout{margin-top:4px}
-  .cloading{color:var(--muted);font-size:14px;text-align:center;padding:34px 0}
-  .cloading .dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--gold);
-    margin:0 3px;animation:cbounce 1s infinite ease-in-out}
-  .cloading .dot:nth-child(2){animation-delay:.15s}
-  .cloading .dot:nth-child(3){animation-delay:.3s}
-  @keyframes cbounce{0%,80%,100%{transform:scale(.6);opacity:.5}40%{transform:scale(1);opacity:1}}
-  .cerr{color:#E89090;font-size:14px;text-align:center;padding:22px 6px;line-height:1.5}
-  .cback{margin-top:14px;background:none;border:1px solid var(--line-soft);color:var(--muted);
-    border-radius:30px;padding:8px 16px;font-size:13px;cursor:pointer;font-family:inherit}
-  .cback:hover{border-color:var(--gold);color:var(--gold-bright)}
+/* ===== MODAL ===== */
+.modal-overlay{position:fixed;inset:0;z-index:200;background:rgba(4,6,11,.78);backdrop-filter:blur(4px);
+  display:none;align-items:center;justify-content:center;padding:20px}
+.modal-overlay.show{display:flex}
+.modal-box{background:var(--bg2);border:1px solid var(--line);border-radius:16px;width:100%;max-width:640px;
+  max-height:88vh;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 24px 70px rgba(0,0,0,.55)}
+.modal-head{padding:22px 26px 16px;border-bottom:1px solid var(--lsoft)}
+.modal-title{font-family:"Playfair Display",serif;font-size:22px;color:var(--gold);font-weight:700}
+.modal-subtitle{font-size:13px;color:var(--muted);margin-top:5px}
+.modal-body{padding:20px 26px;overflow-y:auto}
+.modal-foot{padding:16px 26px;border-top:1px solid var(--lsoft);display:flex;justify-content:flex-end}
+.modal-gate{max-width:320px}
+.modal-gate.locked{position:relative}
+.modal-gate:disabled::after{content:" — derulează până jos";font-weight:500;text-transform:none;letter-spacing:0;font-size:12px}
 
-  /* ── PROOF RING (78% rată de apariție) ── */
-  .proof-ring{text-align:center;padding:58px 0 4px;max-width:600px;margin:0 auto}
-  .ring-wrap{position:relative;width:200px;height:200px;margin:0 auto 24px}
-  .ring-wrap svg{position:absolute;inset:0;transform:rotate(-90deg)}
-  .ring-track{fill:none;stroke:rgba(201,162,75,.12);stroke-width:11}
-  .ring-fill{fill:none;stroke:var(--gold);stroke-width:11;stroke-linecap:round;
-    stroke-dasharray:534;stroke-dashoffset:534;transition:stroke-dashoffset 2.4s cubic-bezier(.15,.85,.2,1);
-    filter:drop-shadow(0 0 9px rgba(201,162,75,.5))}
-  .ring-inner{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
-  .ring-inner .num{font-family:'Playfair Display',serif;font-size:60px;font-weight:700;color:var(--gold-bright);line-height:1;letter-spacing:-1px}
-  .ring-inner .num small{font-size:26px;vertical-align:super;font-weight:600}
-  .ring-inner .lab{font-size:11px;letter-spacing:2.5px;text-transform:uppercase;color:var(--muted-2);margin-top:5px}
-  .proof-ring h2{font-size:clamp(23px,3.5vw,33px);font-weight:600;line-height:1.18;margin-bottom:10px}
-  .proof-ring h2 em{font-style:italic;color:var(--gold-bright)}
-  .proof-ring .contrast{color:var(--muted);font-size:15.5px}
-  .proof-ring .contrast b{color:var(--ink);font-weight:600}
+/* Reguli cards */
+.rule-card{display:flex;gap:14px;padding:14px 0;border-bottom:1px solid var(--lsoft)}
+.rule-card:last-child{border-bottom:none}
+.rule-num{flex:0 0 30px;height:30px;border-radius:50%;background:rgba(216,169,74,.13);border:1px solid var(--line);
+  color:var(--gold);font-weight:700;display:flex;align-items:center;justify-content:center;font-size:14px}
+.rule-txt .rt{font-weight:700;color:var(--ink);font-size:15px;margin-bottom:4px}
+.rule-txt .rd{font-size:13.5px;color:var(--muted);line-height:1.55}
 
-  /* ── PAIN STATS ── */
-  .stat-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-  .stat{background:var(--card);border:1px solid var(--line-soft);border-radius:16px;padding:32px 22px;text-align:center;transition:.3s}
-  .stat:hover{border-color:var(--line)}
-  .stat.hl{border:1.5px solid var(--gold);background:linear-gradient(180deg,rgba(201,162,75,.1),rgba(17,32,53,.45));box-shadow:0 18px 48px -24px rgba(201,162,75,.55)}
-  .stat .n{font-family:'Playfair Display',serif;font-size:clamp(38px,5vw,50px);font-weight:700;color:var(--gold-bright);line-height:1;letter-spacing:-1px}
-  .stat .t{color:var(--muted);font-size:14px;margin-top:10px;line-height:1.45}
-  .stat.hl .t{color:var(--ink)}
-  .stat-src{text-align:center;color:var(--muted-2);font-size:12px;margin-top:18px}
+/* ASA DA / NU comparison */
+.cmp-intro{font-size:13.5px;color:var(--muted);margin-bottom:18px;line-height:1.5}
+.cmp-blk{margin-bottom:18px}
+.cmp-fname{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--goldl);margin-bottom:8px}
+.cmp{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.cmp .box{border-radius:10px;padding:12px 14px;border-left:3px solid}
+.cmp .nu{background:rgba(226,75,74,.08);border-left-color:#e24b4a}
+.cmp .da{background:rgba(29,158,117,.09);border-left-color:#1d9e75}
+.cmp .tag{font-size:11px;font-weight:700;letter-spacing:.05em;margin-bottom:6px}
+.cmp .tag-nu{color:#f09595}
+.cmp .tag-da{color:#5dcaa5}
+.cmp .ex{font-size:13px;color:#dfe5ee;line-height:1.45}
+.cmp-why{font-size:12px;color:var(--muted2);font-style:italic;margin-top:8px}
+.cmp-rule{margin-top:8px;background:rgba(216,169,74,.08);border:0.5px solid var(--line);border-radius:10px;
+  padding:13px 15px;font-size:13.5px;color:#e9d9b4;line-height:1.5}
+@media(max-width:560px){.cmp{grid-template-columns:1fr}}
 
-  /* ── REFRAME / ANTI-CURS ── */
-  .reframe{display:grid;grid-template-columns:1fr 56px 1fr;align-items:stretch}
-  .rf-card{border:1px solid var(--line-soft);border-radius:18px;padding:30px 28px}
-  .rf-card.old{background:rgba(255,255,255,.015);opacity:.9}
-  .rf-card.new{border:1.5px solid var(--gold);background:linear-gradient(180deg,rgba(201,162,75,.09),rgba(17,32,53,.4))}
-  .rf-card h3{font-family:'Playfair Display',serif;font-size:20px;font-weight:600;margin-bottom:14px}
-  .rf-card .lst{list-style:none}
-  .rf-card .lst li{font-size:14.5px;color:var(--muted);padding:6px 0;display:flex;gap:9px}
-  .rf-card.new .lst li{color:var(--ink)}
-  .rf-card .lst li::before{content:"·";color:var(--gold);font-weight:700}
-  .rf-res{margin-top:16px;padding-top:14px;border-top:1px solid var(--line-soft);font-size:14px;color:var(--muted)}
-  .rf-res b{font-family:'Playfair Display',serif;font-size:16.5px;display:block;margin-top:3px}
-  .rf-card.old .rf-res b{color:var(--muted)}
-  .rf-card.new .rf-res b{color:var(--gold-bright)}
-  .rf-arrow{display:flex;align-items:center;justify-content:center;color:var(--gold);font-size:26px}
-  .rf-note{text-align:center;max-width:640px;margin:34px auto 0;color:var(--muted);font-size:15.5px}
-  .rf-note em{font-style:italic;color:var(--gold-bright)}
-  .rf-note.pullquote{font-family:'Playfair Display',serif;font-size:clamp(22px,3.6vw,34px);font-weight:600;color:var(--ink);line-height:1.32;max-width:780px;margin-top:42px;position:relative;padding-top:30px}
-  .rf-note.pullquote::before{content:"";position:absolute;top:0;left:50%;transform:translateX(-50%);width:58px;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
-  .rf-sub{text-align:center;max-width:560px;margin:16px auto 0;color:var(--muted-2);font-size:14px}
-  .rf-sub em{font-style:italic;color:var(--muted)}
-  .turn-lead{text-align:center;color:var(--muted);font-size:15px;max-width:520px;margin:0 auto 4px}
-
-  /* ── MECHANISM (3 pași) ── */
-  .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
-  .stepc{position:relative;background:var(--card);border:1px solid var(--line-soft);border-radius:18px;padding:30px 26px;transition:.55s ease}
-  .stepc:hover{border-color:var(--line)}
-  .stepc .k{font-family:'Playfair Display',serif;font-size:36px;font-weight:700;color:var(--gold);line-height:1}
-  .stepc h3{font-family:'Playfair Display',serif;font-size:20px;font-weight:600;margin:10px 0 8px;transition:color .55s ease}
-  .stepc p{color:var(--muted);font-size:14.5px}
-  .stepc.lit{border-color:var(--gold);box-shadow:0 0 0 1px rgba(201,162,75,.55),0 12px 34px -8px rgba(201,162,75,.42);transform:translateY(-2px)}
-  .stepc.lit h3{color:var(--gold-bright)}
-  @media(prefers-reduced-motion:reduce){.stepc.lit{box-shadow:none;transform:none}}
-
-  /* ── TEASER ── */
-  .teaser-wrap{background:linear-gradient(180deg,rgba(201,162,75,.05),rgba(17,32,53,.35));border:1px solid var(--line);border-radius:24px;padding:38px;display:grid;grid-template-columns:1fr 300px;gap:42px;align-items:center}
-  .tlabel{font-size:12px;letter-spacing:1.5px;color:var(--gold);font-weight:700;margin:20px 0 10px;text-transform:uppercase}
-  .tlabel:first-child{margin-top:0}
-  .chips{display:flex;gap:10px;flex-wrap:wrap}
-  .chip{padding:9px 16px;border-radius:30px;border:1px solid var(--line-soft);background:transparent;color:var(--muted);font-size:14px;cursor:pointer;font-family:inherit;transition:.2s}
-  .chip:hover{border-color:var(--line);color:var(--ink)}
-  .chip.active{background:rgba(201,162,75,.15);border-color:var(--gold);color:var(--gold-bright)}
-  .tinput{width:100%;padding:12px 16px;border-radius:12px;border:1px solid var(--line-soft);background:rgba(0,0,0,.22);color:var(--ink);font-family:inherit;font-size:15px;outline:none;transition:.2s}
-  .tinput:focus{border-color:var(--gold)}
-  .tinput::placeholder{color:var(--muted-2)}
-  .tgen{margin-top:26px;width:100%;padding:15px;border-radius:44px;border:none;background:linear-gradient(135deg,var(--gold-bright),var(--gold));color:#1a1205;font-weight:700;font-size:15.5px;cursor:pointer;font-family:inherit;box-shadow:0 10px 26px -8px rgba(201,162,75,.5);transition:.25s}
-  .tgen:hover{transform:translateY(-2px)}
-  .tintro{font-size:13px;color:var(--muted);margin-bottom:20px;line-height:1.5}
-  .tgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-  .phone{width:300px;max-width:100%;margin:0 auto;background:#070d18;border:1px solid var(--line);border-radius:34px;padding:14px;box-shadow:0 30px 70px -30px rgba(0,0,0,.85)}
-  .notch{width:88px;height:5px;border-radius:5px;background:rgba(255,255,255,.12);margin:2px auto 12px}
-  .screen{background:linear-gradient(180deg,#0c1424,#0a1018);border-radius:22px;min-height:420px;padding:18px 16px;font-size:14px;line-height:1.55;
-    -webkit-user-select:none;user-select:none;position:relative;overflow:hidden}
-  .ph-placeholder{color:var(--muted-2);text-align:center;margin-top:160px;font-size:14px}
-  .callbar{display:flex;align-items:center;gap:8px;color:var(--muted-2);font-size:11.5px;border-bottom:1px solid var(--line-soft);padding-bottom:10px;margin-bottom:14px}
-  .callbar .dot{width:7px;height:7px;border-radius:50%;background:var(--ok)}
-  .typed{color:var(--ink);min-height:70px}
-  .dline{margin:0 0 13px}
-  .dline:last-child{margin-bottom:0}
-  .dline .dwho{display:block;font-size:9.5px;letter-spacing:1.6px;text-transform:uppercase;font-weight:700;margin-bottom:3px}
-  .dline.agent .dwho{color:var(--gold)}
-  .dline.client .dwho{color:var(--muted-2)}
-  .dline .dtext{font-size:13.5px;line-height:1.5}
-  .dline.agent .dtext{color:var(--ink)}
-  .dline.client .dtext{color:var(--muted)}
-  .dlock{font-size:14px}
-  .cursor{display:inline-block;width:2px;height:1em;background:var(--gold);vertical-align:text-bottom;animation:blink 1s steps(1) infinite}
-  @keyframes blink{50%{opacity:0}}
-  .structure{margin-top:18px;display:none}
-  .structure.show{display:block;animation:rise .5s forwards}
-  .st-item{display:flex;align-items:center;gap:10px;padding:9px 0}
-  .st-num{flex:0 0 22px;height:22px;border-radius:50%;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--gold);font-weight:700}
-  .st-label{font-size:12.5px;color:var(--muted)}
-  .st-item.done .st-label{color:var(--ink)}
-  .st-item.done .st-num{border-color:var(--ok);color:var(--ok)}
-  .fog{flex:1;height:9px;border-radius:6px;background:linear-gradient(90deg,rgba(201,162,75,.28),rgba(255,255,255,.06));filter:blur(2.5px);opacity:.65}
-  .lockrow{margin-top:16px;text-align:center}
-  .lockrow .lk{font-size:18px}
-  .lockrow p{font-size:12px;color:var(--muted-2);margin:6px 0 12px}
-  .tcta{display:block;width:100%;padding:13px;border-radius:44px;border:none;background:linear-gradient(135deg,var(--gold-bright),var(--gold));color:#1a1205;font-weight:700;font-size:14px;cursor:pointer;font-family:inherit;text-decoration:none;text-align:center}
-  .calib{margin-top:16px;background:rgba(201,162,75,.06);border:1px solid var(--line-soft);border-radius:14px;padding:13px 14px}
-  .calib .ch{font-size:10.5px;letter-spacing:1.2px;text-transform:uppercase;color:var(--gold);font-weight:700;display:flex;align-items:center;gap:6px;margin-bottom:10px}
-  .calib .crow{display:flex;justify-content:space-between;gap:12px;font-size:11.5px;padding:4.5px 0;border-top:1px solid rgba(255,255,255,.04)}
-  .calib .crow:first-of-type{border-top:none}
-  .calib .cf{color:var(--muted-2);white-space:nowrap;flex:0 0 auto}
-  .calib .cv{color:var(--ink);text-align:right}
-  .calib .cv.lock{filter:blur(3.8px);-webkit-filter:blur(3.8px);user-select:none;color:var(--gold-bright);opacity:.75}
-  .calib .cnote{font-size:10.5px;color:var(--muted-2);margin-top:11px;line-height:1.45;border-top:1px solid rgba(255,255,255,.04);padding-top:9px}
-  @media(max-width:860px){ .teaser-wrap{grid-template-columns:1fr;padding:26px 20px} }
-
-  @media(max-width:860px){
-    .stat-strip{grid-template-columns:1fr}
-    .reframe{grid-template-columns:1fr}
-    .rf-arrow{transform:rotate(90deg);padding:12px 0}
-    .steps{grid-template-columns:1fr}
-    .tgrid{grid-template-columns:1fr}
-  }
-  @media(min-width:861px) and (max-width:1040px){
-    .steps{grid-template-columns:repeat(2,1fr)}
-  }
-
-  /* ── CREDIBILITY ── */
-  .founder{display:grid;grid-template-columns:280px 1fr;gap:40px;align-items:center;margin-bottom:50px}
-  .founder-photo img{width:100%;border-radius:18px;border:1px solid var(--line);display:block}
-  .founder-bio h3{font-family:'Playfair Display',serif;font-size:30px;font-weight:600}
-  .founder-bio .role{color:var(--gold-bright);font-size:14px;letter-spacing:.4px;margin:5px 0 16px}
-  .founder-bio p{color:var(--muted);font-size:15.5px;line-height:1.7}
-  .verified{display:inline-flex;align-items:center;gap:8px;margin-top:20px;font-size:13px;color:var(--gold-bright);border:1px solid var(--line);border-radius:30px;padding:9px 16px;text-decoration:none;transition:.2s}
-  .verified:hover{background:rgba(201,162,75,.1)}
-  .cred-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-bottom:48px}
-  .cred-stats > div{text-align:center;background:var(--card);border:1px solid var(--line-soft);border-radius:16px;padding:28px 16px}
-  .cred-stats .n{font-family:'Playfair Display',serif;font-size:clamp(28px,3.4vw,40px);font-weight:700;color:var(--gold-bright);line-height:1;letter-spacing:-1px}
-  .cred-stats .t{color:var(--muted);font-size:13px;margin-top:9px;line-height:1.4}
-  .timeline{position:relative;margin:0 auto 54px;max-width:760px;padding-left:8px;border-left:1px solid var(--line)}
-  .tl-item{position:relative;padding:0 0 26px 24px}
-  .tl-item:last-child{padding-bottom:0}
-  .tl-item::before{content:"";position:absolute;left:-6px;top:4px;width:11px;height:11px;border-radius:50%;background:var(--gold);box-shadow:0 0 0 4px var(--navy)}
-  .tl-item .yr{font-size:12.5px;letter-spacing:1.5px;color:var(--gold);font-weight:700;text-transform:uppercase}
-  .tl-item h4{font-family:'Playfair Display',serif;font-size:18px;font-weight:600;margin:3px 0 5px}
-  .tl-item p{color:var(--muted);font-size:14px}
-  .proof-h{text-align:center;font-family:'Playfair Display',serif;font-size:24px;font-weight:600;margin-bottom:28px}
-  .cred-gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-  .cred-gallery figure{margin:0;background:var(--card);border:1px solid var(--line-soft);border-radius:14px;overflow:hidden;transition:.3s}
-  .cred-gallery figure:hover{border-color:var(--line);transform:translateY(-3px)}
-  .cred-gallery img{width:100%;display:block;background:#fff}
-  .cred-gallery figcaption{font-size:12.5px;color:var(--muted);padding:12px 14px;line-height:1.45}
-  @media(max-width:860px){
-    .founder{grid-template-columns:1fr;gap:22px}
-    .founder-photo{max-width:260px}
-    .cred-stats{grid-template-columns:1fr 1fr}
-    .cred-gallery{grid-template-columns:1fr}
-  }
-
-  @keyframes rise{to{opacity:1;transform:none}}
-  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(127,200,160,.6)}70%{box-shadow:0 0 0 9px rgba(127,200,160,0)}100%{box-shadow:0 0 0 0 rgba(127,200,160,0)}}
-
-  @media(max-width:860px){
-    .plans{grid-template-columns:1fr;gap:18px}
-    .modes{grid-template-columns:1fr}
-    .unic{flex-direction:column;align-items:flex-start}
-    .unic .r{width:100%;justify-content:space-between}
-  }
 </style>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
 
-<nav>
-  <div class="brand">Harvard of <span>Sales</span></div>
-  <div class="nav-actions">
-    <a href="/app" class="nav-login">Conectează-te</a>
-    <a href="#planuri" class="nav-cta">Vezi planurile</a>
-  </div>
-</nav>
+<!-- ── VIEW: LOGIN ── -->
+<div id="view-login" class="view active z">
 
-<div class="wrap">
-  <header>
-    <div class="eyebrow">Generator de scripturi MLM</div>
-    <h1>Oamenii nu spun NU produsului.<br>Spun NU <em>felului în care suni.</em></h1>
-    <p class="hero-claim">Singurul generator de scripturi MLM construit pe psihologie comportamentală.</p>
-    <p class="sub">Scripturi de invitație personalizate, construite pe psihologia care îl face pe om să accepte întâlnirea. Gata în 120 de secunde.</p>
-    <div class="hero-cta"><a href="#planuri" class="btn-primary">Alege-ți planul</a></div>
-    <p class="proof-line"><span class="pulse"></span><b id="liveCount">0</b> agenți MLM își scriu deja scripturile aici</p>
-    <p class="proof-line" style="margin-top:10px"><b id="bigCount">0</b> scripturi generate până acum</p>
-  </header>
+  <!-- PROOF / COUNTER -->
+  <div class="proof-section">
+    <div class="proof-eyebrow">Validat în teren · rezultate reale</div>
 
-  <!-- PAIN -->
-  <section class="sec" style="padding-top:66px">
-    <div class="sec-head">
-      <div class="eyebrow" style="opacity:1;animation:none">Adevărul incomod</div>
-      <h2>Nu produsul îi oprește. Invitația.</h2>
-      <p>Oamenii nu se lasă de MLM pentru că nu cred în ce vând.</p>
-      <p class="pain-quote">Se lasă pentru că nu știu ce să spună când trebuie să sune.</p>
-    </div>
-    <div class="stat-strip">
-      <div class="stat" data-reveal><div class="n">50%</div><div class="t">abandonează în primul an</div></div>
-      <div class="stat hl" data-reveal><div class="n">39%</div><div class="t">se opresc fiindcă li se pare incomod și greu să invite oameni</div></div>
-      <div class="stat" data-reveal><div class="n">2&nbsp;din&nbsp;3</div><div class="t">spun că nu ar mai începe a doua oară</div></div>
-    </div>
-    <p class="stat-src">Studii internaționale AARP &amp; FTC asupra distribuitorilor din rețelele de vânzare.</p>
-  </section>
-
-  <!-- REFRAME / ANTI-CURS -->
-  <section class="sec" style="padding-top:84px">
-    <div class="sec-head">
-      <div class="eyebrow" style="opacity:1;animation:none">De ce încă un curs nu te ajută</div>
-      <h2>Ai învățat destul. Tot îngheți la primul apel.</h2>
-      <p>Problema nu e că nu știi. În fața telefonului, „a ști" nu te ajută cu nimic. Lipsește exact replica de spus acum.</p>
-    </div>
-    <div class="reframe">
-      <div class="rf-card old" data-reveal>
-        <h3>Ce ai cumpărat până acum</h3>
-        <ul class="lst">
-          <li>Cursuri și module pe care nu le termini</li>
-          <li>Webinarii din care ieși inspirat și tot blocat</li>
-          <li>Abonamente lunare la încă un „program"</li>
-        </ul>
-        <div class="rf-res">Rezultat:<b>100 de ore de teorie. Zero invitații trimise.</b></div>
-      </div>
-      <div class="rf-arrow">→</div>
-      <div class="rf-card new" data-reveal>
-        <h3>Ce îți trebuia de fapt</h3>
-        <ul class="lst">
-          <li>Spui cui suni și ce produs ai</li>
-          <li>Primești scriptul scris cuvânt cu cuvânt</li>
-          <li>Îl citești la telefon — gata</li>
-        </ul>
-        <div class="rf-res">Rezultat:<b>120 de secunde. Un script de citit.</b></div>
-      </div>
-    </div>
-    <p class="rf-note pullquote">„Restul îți dau o bibliotecă. <em>Noi îți dăm fix replica de spus acum.</em>"</p>
-    <p class="rf-sub">E ceea ce se numește <em>knowing-doing gap</em> — distanța dintre a ști și a face. Noi o ștergem.</p>
-  </section>
-
-  <!-- PROOF RING (antidotul) -->
-  <section class="proof-ring" id="ringSec">
-    <p class="turn-lead">Și iată ce se schimbă când ai cuvintele potrivite în mână:</p>
-    <div class="eyebrow" style="opacity:1;animation:none">Rezultatul care contează</div>
-    <div class="ring-wrap">
-      <svg viewBox="0 0 200 200">
-        <circle class="ring-track" cx="100" cy="100" r="85"></circle>
-        <circle class="ring-fill" id="ringFill" cx="100" cy="100" r="85"></circle>
+    <div class="stat-ring-wrap" id="stat-ring-wrap">
+      <svg viewBox="0 0 190 190" width="190" height="190" aria-hidden="true">
+        <circle class="ring-track" cx="95" cy="95" r="85"/>
+        <circle class="ring-fill" id="ring-fill" cx="95" cy="95" r="85"/>
       </svg>
       <div class="ring-inner">
-        <div class="num"><span id="ringNum">0</span><small>%</small></div>
-        <div class="lab">rată de apariție</div>
+        <div class="big-num"><span id="counter-num">0</span><span class="big-pct">%</span></div>
+        <div class="ring-sub">rată apariție</div>
       </div>
     </div>
-    <h2>Până la <em>78% dintre cei pe care îi suni</em> apar la întâlnire.</h2>
-    <p class="contrast">Adică aproape <b>7 din 10</b> — față de cei <b>12–20%</b> obținuți de obicei cu scripturile standard.</p>
-  </section>
 
-  <!-- MECHANISM -->
-  <section class="sec" style="padding-top:88px">
-    <div class="sec-head">
-      <div class="eyebrow" style="opacity:1;animation:none">Cum funcționează</div>
-      <h2>Patru pași. Nu douăsprezece module.</h2>
-      <p>Cât i-ar lua altcuiva să termine lecția 1 dintr-un curs, tu ai și sunat.</p>
+    <h2 class="stat-headline"><em>7 din 10</em> persoane invitate apar la întâlnire</h2>
+    <div class="stat-compare">
+      față de <strong>12–20%</strong> cu scripturile standard MLM
     </div>
-    <div class="steps">
-      <div class="stepc" data-reveal><div class="k">1</div><h3>Spui cui suni</h3><p>Situația, produsul, tipul de prezentare care urmează. Câteva câmpuri, atât.</p></div>
-      <div class="stepc" data-reveal><div class="k">2</div><h3>Primești scriptul</h3><p>Dialogul complet, personalizat, scris cuvânt cu cuvânt — pe psihologia care convinge.</p></div>
-      <div class="stepc" data-reveal><div class="k">3</div><h3>Suni</h3><p>Deschizi, citești, inviți. Fără improvizație, fără îngheț la primul „alo".</p></div>
-      <div class="stepc" data-reveal><div class="k">4</div><h3>Răspunzi la orice obiecție</h3><p>„Nu am timp", „E MLM?", „Mă mai gândesc" — ai pe loc replica care întoarce discuția. Fiecare script îți dă și răspuns pentru 2 obiecții — fără să-ți consume din limită.</p></div>
+    <div class="stat-divider"></div>
+    <div class="stat-proof">Bazat pe scripturi psihologice testate · neuroștiință aplicată</div>
+
+    <div class="live-badge">
+      <span class="live-dot"></span>
+      <span><strong id="counter-agents">0</strong> agenți MLM generează scripturi zilnic</span>
     </div>
-  </section>
-
-  <!-- TEASER -->
-  <section class="sec" style="padding-top:88px">
-    <div class="sec-head">
-      <div class="eyebrow" style="opacity:1;animation:none">Nu-ți promitem. Îți arătăm.</div>
-      <h2>Configurează un script.<br>Vezi cum apare.</h2>
-      <p>Vezi exact ce ia în calcul aplicația ca să-ți scrie un script doar al tău — nu un șablon.</p>
+    <br>
+    <div class="live-badge">
+      <span class="live-dot"></span>
+      <span><strong id="counter-scripts">0</strong> scripturi generate până acum</span>
     </div>
-    <div class="teaser-wrap">
-      <div class="teaser-controls">
-        <p class="tintro">Le-am completat cu un exemplu. Schimbă ce vrei și apasă „Generează" — vezi cum se calibrează scriptul pentru persoana ta.</p>
-
-        <div class="tlabel">Pe cine suni?</div>
-        <div class="chips" id="relChips">
-          <button class="chip active" data-rel="prieten">Prieten apropiat</button>
-          <button class="chip" data-rel="cunoscut">Cunoscut</button>
-          <button class="chip" data-rel="rece">Contact rece</button>
-        </div>
-
-        <div class="tlabel">Descrie persoana pe care o suni</div>
-        <input class="tinput" id="tDesc" value="Andrei, prieten din liceu, manager la multinațională, sceptic la «scheme», tată a doi copii" maxlength="110" />
-
-        <div class="tlabel">Produsul pe care îl vinzi în MLM</div>
-        <div class="chips" id="prodChips">
-          <button class="chip active" data-prod="niște produse de sănătate" data-adv="energie mai bună în 2-3 săptămâni, somn mai odihnitor, –20% ca membru și venit recurent din echipă">Produse de sănătate</button>
-          <button class="chip" data-prod="niște oferte de vacanță" data-adv="30–50% reducere la hoteluri în peste 100 de țări, fără taxe ascunse, comision la fiecare rezervare a invitaților">Vacanțe</button>
-          <button class="chip" data-prod="niște produse cosmetice" data-adv="ingrediente clean, ten vizibil mai bun în 28 de zile, –25% preț de membru, bonus la primele 3 recomandări">Cosmetice</button>
-          <button class="chip" data-prod="__custom__" data-adv="">Alt produs</button>
-        </div>
-        <input class="tinput" id="tProdCustom" placeholder="scrie produsul tău — ex: cafea funcțională, asigurări, suplimente…" maxlength="45" style="display:none;margin-top:10px" />
-
-        <div class="tlabel">Descrie clar avantajele produsului tău</div>
-        <input class="tinput" id="tAdv" value="energie mai bună în 2-3 săptămâni, somn mai odihnitor, –20% ca membru și venit recurent din echipă" maxlength="130" />
-
-        <div class="tlabel">La ce-l inviți?</div>
-        <div class="chips" id="inviteChips">
-          <button class="chip active" data-inv="cafea">O cafea, 1-la-1</button>
-          <button class="chip" data-inv="online">O prezentare online</button>
-          <button class="chip" data-inv="eveniment">Un eveniment</button>
-        </div>
-
-        <div class="tlabel">Obiecțiile pe care le anticipezi</div>
-        <input class="tinput" id="tObj" value="„nu am timp”, „nu am bani”, „nu e cumva schemă piramidală?”" maxlength="120" />
-
-        <div class="tlabel">Tonul</div>
-        <div class="chips" id="toneChips">
-          <button class="chip active" data-tone="cald">Cald</button>
-          <button class="chip" data-tone="direct">Direct</button>
-          <button class="chip" data-tone="energic">Energic</button>
-        </div>
-
-        <button class="tgen" onclick="generateTeaser()">Generează scriptul ✨</button>
+    <div class="auth-card">
+      <div class="auth-brand">
+        <div class="name">HARVARD OF SALES</div>
+        <div class="sub">The Psychology of MLM Excellence</div>
       </div>
-      <div class="phone">
-        <div class="notch"></div>
-        <div class="screen" id="screen" oncontextmenu="return false">
-          <div class="ph-placeholder" id="phPlaceholder">Completează în stânga<br>și apasă „Generează"</div>
-          <div id="phContent" style="display:none">
-            <div class="callbar"><span class="dot"></span> Scriptul tău · personalizat</div>
-            <div class="typed"><div id="typedText"></div><span class="cursor" id="typedCursor"></span></div>
-            <div class="calib" id="calib" style="display:none"></div>
-            <div class="structure" id="structure">
-              <div class="st-item done"><div class="st-num">1</div><div class="st-label">Deschiderea — ai văzut începutul</div></div>
-              <div class="st-item"><div class="st-num">2</div><div class="st-label">Cârligul care stârnește interesul</div><div class="fog"></div></div>
-              <div class="st-item"><div class="st-num">3</div><div class="st-label">Întrebarea care dezarmează</div><div class="fog"></div></div>
-              <div class="st-item"><div class="st-num">4</div><div class="st-label">Invitația greu de refuzat</div><div class="fog"></div></div>
-              <div class="st-item"><div class="st-num">5</div><div class="st-label">Cum tratezi „mă mai gândesc"</div><div class="fog"></div></div>
-              <div class="lockrow">
-                <div class="lk">🔒</div>
-                <p>Scriptul complet: 6 etape · ~14 replici scrise cuvânt cu cuvânt · marcaje de pauză și ton · + tratarea a 2 obiecții.</p>
-                <a href="#planuri" class="tcta">Deblochează scriptul complet</a>
-              </div>
-            </div>
+      <h2>Intră în platformă</h2>
+      <p>Scriptul tău psihologic, la 2 minute distanță</p>
+      <div class="err" id="login-err"></div>
+      <div class="field"><label>Email</label><input type="email" id="login-email" placeholder="email@exemplu.com"></div>
+      <div class="field"><label>Parolă</label><input type="password" id="login-pass" placeholder="••••••••"></div>
+      <button class="btn" onclick="doLogin()">Intră în platformă</button>
+      <div class="auth-switch">Nu ai cont? <a href="preturi.html">Creează-ți un cont</a></div>
+    </div>
+  </div>
+</div>
+
+<!-- ── VIEW: REGISTER ── -->
+<div id="view-register" class="view z">
+  <div class="auth-wrap">
+    <div class="auth-card">
+      <div class="auth-brand">
+        <div class="name">HARVARD OF SALES</div>
+        <div class="sub">The Psychology of MLM Excellence</div>
+      </div>
+      <h2>Creează cont</h2>
+      <p>Creează-ți contul ca să intri în platformă.</p>
+      <div class="err" id="reg-err"></div>
+      <div class="suc" id="reg-suc"></div>
+      <div class="field"><label>Email</label><input type="email" id="reg-email" placeholder="email@exemplu.com"></div>
+      <div class="field"><label>Parolă</label><input type="password" id="reg-pass" placeholder="Minim 6 caractere"></div>
+      <button class="btn" onclick="doRegister()">Creează cont</button>
+      <div class="auth-switch">Ai deja cont? <a onclick="showView('login')">Loghează-te</a></div>
+    </div>
+  </div>
+</div>
+
+<!-- ── VIEW: REDEEM ── -->
+<div id="view-redeem" class="view z">
+  <div class="auth-wrap">
+    <div class="auth-card">
+      <div class="auth-brand">
+        <div class="name">HARVARD OF SALES</div>
+        <div class="sub">The Psychology of MLM Excellence</div>
+      </div>
+      <h2>Activează planul</h2>
+      <p>Introdu codul primit în emailul de confirmare după plată</p>
+      <div class="err" id="redeem-err"></div>
+      <div class="suc" id="redeem-suc"></div>
+      <div class="field"><label>Codul de activare</label><input type="text" id="redeem-code" placeholder="XXXX-XXXX-XXXX" style="letter-spacing:.1em;text-transform:uppercase"></div>
+      <button class="btn" onclick="doRedeem()">Activează planul</button>
+      <div class="auth-switch" style="margin-top:14px"><a onclick="doLogout()" style="color:var(--muted)">Ieși din cont</a></div>
+    </div>
+  </div>
+</div>
+
+<!-- ── VIEW: GENERATOR ── -->
+<div id="view-generator" class="view z">
+  <header class="gen-header">
+    <div class="topbar">
+      <div class="brandwrap">
+        <div class="name">HARVARD OF SALES</div>
+        <div class="tagline">The Psychology of MLM Excellence</div>
+      </div>
+      <div class="topright">
+        <div class="counter">
+          <span class="num" id="scripts-remaining">—</span>
+          <span style="color:var(--muted);font-size:13px"> scripturi</span>
+          <span class="tier-badge" id="tier-badge"></span>
+        </div>
+        <div class="langtog">
+          <button class="lang active" onclick="setLang('ro')">RO</button>
+          <button class="lang" onclick="setLang('en')">EN</button>
+        </div>
+        <button class="btn-ghost iesire" onclick="doLogout()">Ieșire</button>
+      </div>
+    </div>
+    <nav class="navtabs">
+      <button class="navtab active" onclick="navTab('invitatie')">Invitație</button>
+      <button class="navtab soon" onclick="navTab('conectare')">Conectare<span class="soon-badge">în curând</span></button>
+      <button class="navtab soon" onclick="navTab('prezentare')">Prezentare<span class="soon-badge">în curând</span></button>
+      <button class="navtab soon" onclick="navTab('inchidere')">Închidere<span class="soon-badge">în curând</span></button>
+      <button class="navtab soon" onclick="navTab('followup')">Follow-up<span class="soon-badge">în curând</span></button>
+      <button class="navtab soon" onclick="navTab('recomandari')">Cerere de recomandări<span class="soon-badge">în curând</span></button>
+    </nav>
+  </header>
+
+  <div class="gen-wrap">
+
+    <div class="guide-bar" id="step-bar">
+      <button class="guide-btn step-btn" id="step-1" onclick="openModal('m-ghid')"><span class="step-no">1</span><span>Cum completezi corect</span><span class="step-check">✓</span></button>
+      <button class="guide-btn step-btn" id="step-2" onclick="openModal('m-reguli')"><span class="step-no">2</span><span>Reguli de succes</span><span class="step-check">✓</span></button>
+    </div>
+
+    <!-- UPGRADE NUDGE (generator) -->
+    <div class="upgrade-nudge" id="nudge-gen">
+      <div class="upgrade-nudge-inner">
+        <div class="un-text"></div>
+        <div class="un-cta"><button class="btn-ghost" onclick="goUpgrade()">Fă upgrade</button></div>
+      </div>
+    </div>
+
+    <!-- SECTIUNEA 1: Agent -->
+    <div class="section-card">
+      <h3>Datele tale de agent</h3>
+      <div class="field-row">
+        <div class="field">
+          <label>Genul tău</label>
+          <select id="f_01">
+            <option value="">— Alege —</option>
+            <option>Masculin</option>
+            <option>Feminin</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Vârsta ta (aproximativ)</label>
+          <input type="text" id="f_29" placeholder="Ex: 42">
+        </div>
+      </div>
+      <div class="field">
+        <label>Stil de abordare</label>
+        <input type="text" id="f_26" placeholder="Ex: relaxat și cu umor / cald-respectuos / direct / formal — dacă vorbești cu «frate», scrie aici">
+      </div>
+      <div class="field">
+        <label>Experiența ta în vânzări / MLM</label>
+        <input type="text" id="f_27" placeholder="Ex: 2 ani în MLM cu ATOMY / începător / 10 ani în vânzări...">
+      </div>
+      <div class="field">
+        <label>Clientul ar putea ști că dezvolți un MLM?</label>
+        <select id="f_28">
+          <option value="">— Alege —</option>
+          <option>Da</option>
+          <option>Nu</option>
+          <option>Nu sunt sigur</option>
+        </select>
+      </div>
+      <div class="field-note">💾 Salvat automat — data viitoare găsești câmpurile completate</div>
+    </div>
+
+    <!-- SECTIUNEA 2: Client -->
+    <div class="section-card">
+      <h3>Despre persoana invitată<a class="h3-link" onclick="clearClientData()">Golește pentru altă persoană</a></h3>
+      <div class="field-row">
+        <div class="field">
+          <label>Numele clientului</label>
+          <input type="text" id="f_22" placeholder="Ex: Cristina">
+        </div>
+        <div class="field">
+          <label>Vârsta (aproximativ)</label>
+          <input type="text" id="f_23" placeholder="Ex: 34">
+        </div>
+      </div>
+      <div class="field-row">
+        <div class="field">
+          <label>Genul clientului</label>
+          <select id="f_02">
+            <option value="">— Alege —</option>
+            <option>Masculin</option>
+            <option>Feminin</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Tip relație</label>
+          <select id="f_03">
+            <option value="">— Alege —</option>
+            <option>Prieten apropiat</option>
+            <option>Cunoștință</option>
+            <option>Coleg de serviciu</option>
+            <option>Rudă</option>
+            <option>Client existent</option>
+            <option>Persoană recent întâlnită</option>
+          </select>
+        </div>
+      </div>
+      <div class="field-row">
+        <div class="field">
+          <label>Statut profesional (loc de muncă / funcție)</label>
+          <input type="text" id="f_24" placeholder="Ex: asistentă medicală, antreprenor, contabilă...">
+        </div>
+        <div class="field">
+          <label>Statut familial (opțional)</label>
+          <input type="text" id="f_25" placeholder="Ex: căsătorită, 2 copii...">
+        </div>
+      </div>
+      <div class="field">
+        <label>Când ați vorbit ultima oară?</label>
+        <select id="f_20">
+          <option value="">— Alege —</option>
+          <option>Recent — în ultimele 3 luni</option>
+          <option>A trecut ceva timp — între 3 și 12 luni</option>
+          <option>Nu am mai vorbit de mult — peste 1 an</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>Povestește despre clientul tău</label>
+        <textarea id="f_04" rows="3" placeholder="Situația ei acum, ce o preocupă, ce nevoi/interese are. Ex: vrea să slăbească, e sceptică față de MLM, mamă ocupată, activă pe Instagram..."></textarea>
+      </div>
+      <div class="field">
+        <label>Calități apreciate la această persoană</label>
+        <input type="text" id="f_17" placeholder="Ex: Seriozitate, empatie, energie pozitivă...">
+      </div>
+      <div class="field">
+        <label>Ultima interacțiune cu ea</label>
+        <input type="text" id="f_05" placeholder="Ex: Ne-am văzut la cafea acum 2 săptămâni, am vorbit despre copii...">
+      </div>
+    </div>
+
+    <!-- SECTIUNEA 3: Produs -->
+    <div class="section-card">
+      <h3>Produsul</h3>
+      <div class="field">
+        <label>Categoria produsului</label>
+        <select id="f_30">
+          <option value="">— Alege —</option>
+          <option>Suplimente</option>
+          <option>Vacanțe</option>
+          <option>Produse cosmetice</option>
+          <option>Produse de curățenie</option>
+          <option>Alt produs</option>
+        </select>
+      </div>
+      <div class="field-row">
+        <div class="field">
+          <label>Produsul pe care îl prezinți</label>
+          <input type="text" id="f_07" placeholder="Ex: Supliment energizant ATOMY Hemohim">
+        </div>
+        <div class="field">
+          <label>Ai folosit produsul?</label>
+          <select id="f_08" onchange="toggleExperienta()">
+            <option value="">— Alege —</option>
+            <option value="Da">Da</option>
+            <option value="Nu">Nu</option>
+          </select>
+        </div>
+      </div>
+      <div class="field" id="field-experienta" style="display:none">
+        <label>Experiența ta cu produsul</label>
+        <textarea id="f_09" rows="3" placeholder="Ex: Am folosit 3 luni, energia mea a crescut vizibil, am reușit să slăbesc 5kg, somnul s-a îmbunătățit..."></textarea>
+      </div>
+      <div class="field">
+        <label>Avantajele concrete ale produsului</label>
+        <textarea id="f_19" rows="2" placeholder="Ex: natural · fără efecte secundare · rezultate vizibile în 30 de zile · certificat..."></textarea>
+        <div class="field-note">Enumeră minim 3 avantaje concrete. Cu cât mai specific, cu atât scriptul e mai puternic — vag → sună a reclamă.</div>
+      </div>
+      <div class="field">
+        <label>Testimoniale cunoscute</label>
+        <textarea id="f_18" rows="2" placeholder="Ex: Colega mea Maria a scăpat de dureri de spate după 6 săptămâni, un prieten și-a redus tensiunea..."></textarea>
+      </div>
+    </div>
+
+    <!-- SECTIUNEA 4: Context apel -->
+    <div class="section-card">
+      <h3>Contextul apelului</h3>
+      <div class="field-row">
+        <div class="field">
+          <label>Tip prezentare</label>
+          <select id="f_11">
+            <option value="">— Alege —</option>
+            <option>Online — unu la unu</option>
+            <option>Online — prezentare de grup (prezint eu)</option>
+            <option>Online — prezentare de grup (prezintă un leader)</option>
+            <option>Offline (față în față)</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Tehnica de deschidere</label>
+          <select id="f_kb">
+            <option value="">Alege automat (recomandat)</option>
+            <option value="1 — Pattern interrupt cu umor (oxitocina)">1 — Pattern interrupt cu umor</option>
+            <option value="2 — Mirroring (neuroni-oglinda)">2 — Mirroring (oglindă)</option>
+            <option value="3 — Compliment argumentat cu intrebare deschisa (serotonina)">3 — Compliment argumentat</option>
+            <option value="4 — Bad news + good news (bucla deschisa, dopamina)">4 — Bad news + good news</option>
+          </select>
+        </div>
+      </div>
+      <div class="field">
+        <label>Durata prezentării / întâlnirii</label>
+        <select id="f_durata">
+          <option value="10 minute">10 minute</option>
+          <option value="15 minute">15 minute</option>
+          <option value="20 minute" selected>20 minute</option>
+          <option value="30 minute">30 minute</option>
+          <option value="45 minute">45 minute</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>Ce știe ea despre motivul apelului tău, înainte să ridice telefonul?</label>
+        <input type="text" id="f_12" placeholder="Ex: Nu știe nimic, ne-am vorbit ultima oară la telefon...">
+      </div>
+    </div>
+
+    <!-- SECTIUNEA 5: Mod output (tier-controlled) -->
+    <div class="section-card">
+      <h3>Modul de output</h3>
+      <div class="mode-options" id="mode-options">
+        <!-- Populated by JS based on tier -->
+      </div>
+    </div>
+
+    <div class="err" id="gen-err" style="margin-bottom:16px"></div>
+    <div class="gate-hint" id="gate-hint">🔒 Parcurge Pasul 1 și Pasul 2 de sus ca să deblochezi generarea</div>
+    <button class="btn" id="gen-btn" onclick="doGenerate()" style="max-width:400px;margin:0 auto;display:block">
+      Pasul 3 · Generează scriptul →
+    </button>
+    <p style="text-align:center;font-size:13px;color:var(--muted2);margin-top:12px">
+      Scriptul tău psihologic, gata în câteva momente
+    </p>
+
+  </div>
+</div>
+
+<!-- ── VIEW: GENERATING ── -->
+<div id="view-generating" class="view z">
+  <div class="auth-wrap">
+    <div class="generating">
+      <div class="prog-card">
+        <h3 class="prog-title">Construim scriptul tău psihologic</h3>
+        <p class="prog-sub">durează 120 de secunde</p>
+        <div class="prog-head">
+          <div class="progress-track"><div class="progress-fill" id="prog-fill"></div></div>
+          <div class="prog-pctnum"><span id="prog-num">0</span>%</div>
+        </div>
+        <div class="prog-list" id="prog-list"></div>
+        <div class="prog-cap" id="prog-cap"></div>
+        <p class="prog-warn">Nu închide fereastra — <b>scriptul se generează</b>.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── VIEW: OUTPUT ── -->
+<div id="view-output" class="view z">
+  <div class="gen-header">
+    <div class="brand"><div class="name">HARVARD OF SALES</div></div>
+    <div class="counter-box">
+      <div class="counter">
+        <span class="num" id="out-remaining">—</span>
+        <span style="color:var(--muted);font-size:13px"> scripturi rămase</span>
+      </div>
+    </div>
+  </div>
+  <div class="output-wrap">
+
+    <!-- UPGRADE NUDGE (output) -->
+    <div class="upgrade-nudge" id="nudge-out">
+      <div class="upgrade-nudge-inner">
+        <div class="un-text"></div>
+        <div class="un-cta"><button class="btn-ghost" onclick="goUpgrade()">Fă upgrade</button></div>
+      </div>
+    </div>
+
+    <div class="output-header">
+      <h2>Scriptul tău</h2>
+      <div style="display:flex;gap:10px;flex-wrap:wrap">
+        <button class="btn-ghost" onclick="openModal('m-reguli','normal')">📋 Reguli de Succes</button>
+        <button class="btn-ghost" onclick="showView('generator')">← Generează alt script</button>
+      </div>
+    </div>
+    <div class="script-box" id="script-output"></div>
+    <div class="script-actions">
+      <button class="btn" onclick="copyScript()" style="max-width:200px">Copiază scriptul</button>
+      <button class="btn-ghost" onclick="downloadScript()">Descarcă</button>
+      <button class="btn-ghost" onclick="showView('generator')">Generează alt script</button>
+    </div>
+
+    <!-- OBIECȚII -->
+    <div id="obj-section" style="margin-top:36px">
+
+      <!-- Întrebare obiecție 1 -->
+      <div id="obj1-question" class="obj-card">
+        <p class="obj-q">Dorești să tratezi o obiecție din partea clientului?</p>
+        <div class="obj-btns">
+          <button class="btn" onclick="showObj(1)" style="max-width:160px">Da</button>
+          <button class="btn-ghost" onclick="hideObjSection()">Nu, mulțumesc</button>
+        </div>
+      </div>
+
+      <!-- Formular obiecție 1 -->
+      <div id="obj1-form" style="display:none" class="obj-card">
+        <label style="display:block;font-size:12.5px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:8px">Care este obiecția clientului?</label>
+        <textarea id="obj1-text" rows="3" placeholder="Ex: Nu am timp, Nu am bani, Trebuie să mă gândesc, Nu cunosc produsul..."></textarea>
+        <div id="obj1-err" class="err" style="margin-top:10px"></div>
+        <button class="btn" onclick="generateObjScript(1)" style="max-width:260px;margin-top:14px">Generează script obiecție →</button>
+      </div>
+
+      <!-- Progres obiecție 1 -->
+      <div id="obj1-progress" class="obj-card" style="display:none">
+        <div class="obj-prog-ctx" id="obj1-prog-ctx"></div>
+        <div class="prog-head">
+          <div class="progress-track"><div class="progress-fill" id="obj1-prog-fill"></div></div>
+          <div class="prog-pctnum"><span id="obj1-prog-num">0</span>%</div>
+        </div>
+        <div class="prog-list" id="obj1-prog-list"></div>
+        <div class="prog-cap" id="obj1-prog-cap"></div>
+      </div>
+
+      <!-- Scriptul obiecție 1 -->
+      <div id="obj1-result" style="display:none">
+        <div class="obj-label">Script tratare obiecție 1</div>
+        <div class="script-box" id="obj1-output"></div>
+        <div class="script-actions" style="margin-top:12px">
+          <button class="btn" onclick="copyObjScript(1)" style="max-width:200px">Copiază scriptul</button>
+          <button class="btn-ghost" onclick="downloadObjScript(1)">Descarcă</button>
+        </div>
+
+        <!-- Întrebare obiecție 2 -->
+        <div id="obj2-question" class="obj-card" style="margin-top:28px">
+          <p class="obj-q">Mai dorești să tratezi încă o obiecție?</p>
+          <div class="obj-btns">
+            <button class="btn" onclick="showObj(2)" style="max-width:160px">Da</button>
+            <button class="btn-ghost" onclick="hideObjSection()">Nu, mulțumesc</button>
+          </div>
+        </div>
+
+        <!-- Formular obiecție 2 -->
+        <div id="obj2-form" style="display:none" class="obj-card">
+          <label style="display:block;font-size:12.5px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:8px">Care este a doua obiecție?</label>
+          <textarea id="obj2-text" rows="3" placeholder="Ex: Trebuie să vorbesc cu soțul/soția, Am mai încercat și nu a mers..."></textarea>
+          <div id="obj2-err" class="err" style="margin-top:10px"></div>
+          <button class="btn" onclick="generateObjScript(2)" style="max-width:260px;margin-top:14px">Generează script obiecție →</button>
+        </div>
+
+        <!-- Progres obiecție 2 -->
+        <div id="obj2-progress" class="obj-card" style="display:none">
+          <div class="obj-prog-ctx" id="obj2-prog-ctx"></div>
+          <div class="prog-head">
+            <div class="progress-track"><div class="progress-fill" id="obj2-prog-fill"></div></div>
+            <div class="prog-pctnum"><span id="obj2-prog-num">0</span>%</div>
+          </div>
+          <div class="prog-list" id="obj2-prog-list"></div>
+          <div class="prog-cap" id="obj2-prog-cap"></div>
+        </div>
+
+        <!-- Scriptul obiecție 2 -->
+        <div id="obj2-result" style="display:none">
+          <div class="obj-label">Script tratare obiecție 2</div>
+          <div class="script-box" id="obj2-output"></div>
+          <div class="script-actions" style="margin-top:12px">
+            <button class="btn" onclick="copyObjScript(2)" style="max-width:200px">Copiază scriptul</button>
+            <button class="btn-ghost" onclick="downloadObjScript(2)">Descarcă</button>
           </div>
         </div>
       </div>
+
     </div>
-  </section>
-
-  <!-- PLANS -->
-  <section id="planuri">
-    <div class="sec-head" style="margin-bottom:46px">
-      <div class="eyebrow" style="opacity:1;animation:none">Planuri</div>
-      <h2>Alege treapta pe care urci.</h2>
-      <p>De la primul script de test până la conducerea unei echipe — plătești pentru cât de departe vrei să mergi.</p>
-    </div>
-    <div class="plans">
-
-      <!-- RECRUIT -->
-      <div class="card" data-reveal>
-        <div class="step">Începi</div>
-        <div class="pname">Recruit</div>
-        <div class="ptag">Primul pas dincolo de improvizație.</div>
-        <div class="price"><span class="amt">9€</span><span class="per">/ lună</span></div>
-        <div class="perscript">3€ per script</div>
-        <div class="commit">Abonament lunar · anulezi oricând</div>
-        <div class="qty"><b>3</b> scripturi / lună</div>
-        <div class="bonus"><span class="b1">+1 script de antrenament</span><span class="b2">o singură dată, la înscriere — exersezi fără grija că „irosești"</span></div>
-        <ul class="feats">
-          <li><span class="ic check">✓</span> Mod <b>Clean</b> — dialogul gata de citit la telefon</li>
-          <li><span class="ic check">✓</span> Răspuns pentru 2 obiecții la fiecare script <small>(nu se scad din limită)</small></li>
-          <li class="locked" onclick="lockToast('Coach')"><span class="ic lock">🔒</span> Mod Coach <small>din planul Builder</small></li>
-          <li class="locked" onclick="lockToast('Ambele')"><span class="ic lock">🔒</span> Mod Ambele <small>din planul Leader</small></li>
-        </ul>
-        <button class="btn-card" onclick="selectPlan('recruit')">Încep cu Recruit</button>
-      </div>
-
-      <!-- BUILDER (featured) -->
-      <div class="card featured" data-reveal>
-        <div class="ribbon">Cel mai ales</div>
-        <div class="step">Construiești</div>
-        <div class="pname">Builder</div>
-        <div class="ptag">Volumul + înțelegerea. De aici începe diferența reală.</div>
-        <div class="price"><span class="amt">19€</span><span class="per">/ lună</span></div>
-        <div class="perscript">2,38€ per script</div>
-        <div class="commit">Abonament lunar · anulezi oricând</div>
-        <div class="qty"><b>8</b> scripturi / lună</div>
-        <div class="bonus"><span class="b1">+3 scripturi de antrenament</span><span class="b2">o singură dată, la înscriere — exersezi fără grija că „irosești"</span></div>
-        <ul class="feats">
-          <li><span class="ic check">✓</span> Mod <b>Clean</b> — execuție pură</li>
-          <li><span class="ic check">✓</span> Mod <b>Coach</b> — îți explică <em>de ce</em> funcționează fiecare replică</li>
-          <li><span class="ic check">✓</span> Răspuns pentru 2 obiecții la fiecare script <small>(nu se scad din limită)</small></li>
-          <li class="locked" onclick="lockToast('Ambele')"><span class="ic lock">🔒</span> Mod Ambele <small>din planul Leader</small></li>
-        </ul>
-        <button class="btn-card" onclick="selectPlan('builder')">Aleg Builder</button>
-      </div>
-
-      <!-- LEADER -->
-      <div class="card" data-reveal>
-        <div class="step">Conduci</div>
-        <div class="pname">Leader</div>
-        <div class="ptag">Pentru cei care construiesc echipe, nu doar contacte.</div>
-        <div class="price"><span class="amt">29€</span><span class="per">/ lună</span></div>
-        <div class="perscript">1,93€ per script</div>
-        <div class="commit">Abonament lunar · anulezi oricând</div>
-        <div class="qty"><b>15</b> scripturi / lună</div>
-        <div class="bonus"><span class="b1">+5 scripturi de antrenament</span><span class="b2">o singură dată, la înscriere — exersezi fără grija că „irosești"</span></div>
-        <ul class="feats">
-          <li><span class="ic check">✓</span> Mod <b>Clean</b></li>
-          <li><span class="ic check">✓</span> Mod <b>Coach</b></li>
-          <li><span class="ic check">✓</span> Mod <b>Ambele</b> — execuție + explicații, flexibilitate totală</li>
-          <li><span class="ic check">✓</span> Răspuns pentru 2 obiecții la fiecare script <small>(nu se scad din limită)</small></li>
-        </ul>
-        <button class="btn-card" onclick="selectPlan('leader')">Trec la Leader</button>
-      </div>
-    </div>
-
-    <!-- SCRIPT UNIC -->
-    <div class="unic" data-reveal>
-      <div class="l">
-        <h3>Vrei doar să încerci un singur script?</h3>
-        <ul class="unic-feats">
-          <li><span class="uc">✓</span> Un script complet, gata de citit la telefon</li>
-          <li><span class="uc">✓</span> Răspuns pregătit pentru 2 obiecții</li>
-        </ul>
-        <p class="unic-note">O singură plată, fără abonament. <strong>9€ pentru 1 script</strong> — același preț cu care la Recruit ai 3.</p>
-      </div>
-      <div class="r">
-        <div class="uprice">9€<small>o singură dată</small></div>
-        <button class="btn-ghost" onclick="selectPlan('unic')">Iau un script</button>
-      </div>
-    </div>
-  </section>
-
-  <!-- MODES -->
-  <section class="sec">
-    <div class="sec-head">
-      <div class="eyebrow">Ce primești de fapt</div>
-      <h2>Trei moduri. De la execuție la măiestrie.</h2>
-      <p>Nu plătești doar pentru mai multe scripturi — plătești pentru cât de mult înțelegi din ce spui.</p>
-    </div>
-    <div class="modes">
-      <div class="mode" data-reveal>
-        <div class="mi">Clean</div>
-        <h3>Execuți</h3>
-        <p>Doar scriptul, gata de citit la telefon. Deschizi, citești, suni. Zero teorie, zero distragere.</p>
-        <span class="badge">Inclus în toate planurile</span>
-      </div>
-      <div class="mode" data-reveal>
-        <div class="mi">Coach</div>
-        <h3>Înțelegi</h3>
-        <p>Fiecare replică vine cu explicația <em>de ce</em> funcționează, în limbaj simplu. Înveți psihologia, nu doar o execuți — și data viitoare improvizezi corect.</p>
-        <span class="badge">Builder & Leader</span>
-      </div>
-      <div class="mode" data-reveal>
-        <div class="mi">Ambele</div>
-        <h3>Stăpânești</h3>
-        <p>Și varianta de citit, și explicațiile, una lângă alta. Pentru cei care antrenează oameni și au nevoie de tot.</p>
-        <span class="badge">Leader</span>
-      </div>
-    </div>
-  </section>
-
-  <!-- CREDIBILITY -->
-  <section class="sec" id="fondator" style="padding-top:92px">
-    <div class="sec-head">
-      <div class="eyebrow" style="opacity:1;animation:none">Cine e în spatele metodei</div>
-      <h2>Nu teorie de pe internet. Peste un deceniu în vârful vânzărilor directe.</h2>
-      <p>Psihologia din spatele fiecărui script vine din experiență reală în MLM, la cel mai înalt nivel mondial.</p>
-    </div>
-
-    <div class="founder">
-      <div class="founder-photo"><img src="/foto-1.jpg" alt="Octavian Alupoaie" /></div>
-      <div class="founder-bio">
-        <h3>Octavian Alupoaie</h3>
-        <p class="role">Fondator · Harvard of Sales — Academia de Vânzări Psihologice</p>
-        <p>A construit o rețea de 71.000 de distribuitori, a generat 500 de milioane de dolari cifră de afaceri și a urcat în Top 10 Income Earners la nivel mondial. A atins cele mai înalte ranguri din MLM — International &amp; National Marketing Director la WorldVentures, Diamond la Seacret Direct — și a antrenat oameni de pe scene internaționale, în fața a mii de participanți. Astăzi transformă toată experiența asta în Harvard of Sales: vânzarea construită pe psihologie, nu pe noroc.</p>
-        <a class="verified" href="https://www.businessforhome.org/2021/03/octavian-alupoaie-from-romania-achieves-diamond-rank-at-seacret-direct/" target="_blank" rel="noopener">✔ Diamond la Seacret Direct — verificat de Business For Home</a>
-      </div>
-    </div>
-
-    <div class="cred-stats">
-      <div><div class="n">71.000</div><div class="t">distribuitori în rețea, la nivel mondial</div></div>
-      <div><div class="n">$500M</div><div class="t">cifră de afaceri generată</div></div>
-      <div><div class="n">Top 10</div><div class="t">Income Earner mondial, 2020</div></div>
-      <div><div class="n">4.000</div><div class="t">de oameni în sală la un singur discurs</div></div>
-    </div>
-
-    <div class="timeline">
-      <div class="tl-item"><div class="yr">2011 – 2014</div><h4>OrgaLeader · LR Health &amp; Beauty (Germania)</h4><p>LR Health &amp; Beauty — companie germană de MLM (sănătate &amp; beauty). Primii ani la nivel de lider.</p></div>
-      <div class="tl-item"><div class="yr">2014 – 2020</div><h4>Dublă recunoaștere mondială · WorldVentures (SUA)</h4><p>WorldVentures — companie de MLM din SUA (travel). International &amp; National Marketing Director (cele mai înalte două niveluri) și Trainer International. 71.000 de distribuitori, 500M$ cifră de afaceri, Top 10 Income Earner în 2020.</p></div>
-      <div class="tl-item"><div class="yr">2020 – 2023</div><h4>Diamond · Seacret Direct (SUA)</h4><p>Seacret Direct — companie de MLM din SUA (skincare cu minerale de la Marea Moartă). Rang Diamond, recunoscut public de Business For Home.</p></div>
-      <div class="tl-item"><div class="yr">2023 – 2026</div><h4>Fondator · Harvard of Sales</h4><p>Academia de Vânzări Psihologice — experiența de teren, transformată în metodă.</p></div>
-    </div>
-
-    <h3 class="proof-h">Dovezi, nu doar cuvinte</h3>
-    <div class="cred-gallery">
-      <figure><img src="/foto-2.jpg" alt="Business For Home feature Diamond rank" /><figcaption>Featuring în Business For Home pentru rangul Diamond, distribuit de lideri din industrie — 156 de reacții, 41 de comentarii (2021).</figcaption></figure>
-      <figure><img src="/foto-3.jpg" alt="Top 10 Income Earners pe scenă" /><figcaption>Top 10 Income Earners — pe scenă, 2020.</figcaption></figure>
-      <figure><img src="/foto-4.jpg" alt="Discurs The View Nisa" /><figcaption>Discurs pe scena „The View”, Nisa — în fața a 4.000 de oameni (2019).</figcaption></figure>
-      <figure><img src="/foto-5.jpg" alt="Testimonial Ioana Wasile" /><figcaption>NMD + 72 de cicluri în 7 zile, peste 10.000$/lună dintr-un singur bonus — Ioana Wasile, 2020.</figcaption></figure>
-      <figure><img src="/foto-6.jpg" alt="Testimonial Razvan Dinca 2020" /><figcaption>National Marketing Director pe al doilea cont, 72 de cicluri — Răzvan Dincă, 2020.</figcaption></figure>
-      <figure><img src="/foto-7.jpg" alt="Testimonial Razvan Dinca 2018" /><figcaption>RMD pe al doilea spot — „a true master of this business”, Răzvan Dincă, 2018.</figcaption></figure>
-    </div>
-  </section>
-</div>
-
-<div class="wrap">
-  <!-- FAQ -->
-  <section class="sec">
-    <div class="sec-head">
-      <div class="eyebrow">Înainte să alegi</div>
-      <h2>Întrebări firești</h2>
-    </div>
-    <div class="faq" id="faq">
-      <div class="q"><button>Ce înseamnă, mai exact, „un script"?</button>
-        <div class="a"><p>Un dialog complet de invitație, personalizat pe situația ta — cui suni, ce produs ai, ce tip de prezentare urmează. Îl primești scris cuvânt cu cuvânt, gata de folosit la telefon.</p></div></div>
-      <div class="q"><button>Obiecțiile consumă din scripturile mele lunare?</button>
-        <div class="a"><p>Nu. Fiecare script generat vine cu răspuns pentru 2 obiecții la alegere, fără să-ți scadă din limita lunară. Limita se aplică doar scripturilor de invitație generate de la zero.</p></div></div>
-      <div class="q"><button>Ce sunt „scripturile de antrenament"?</button>
-        <div class="a"><p>Un plus pe care îl primești o singură dată, la înscriere, pe lângă scripturile lunare. Sunt acolo ca să exersezi cât înveți să completezi câmpurile — poți încerca, ajusta, greși, fără teama că-ți „consumi" scripturile plătite. După ce te-ai obișnuit, rămâi cu alocarea lunară a planului.</p></div></div>
-      <div class="q"><button>Care e diferența dintre Clean, Coach și Ambele?</button>
-        <div class="a"><p>Clean îți dă doar textul de citit. Coach adaugă, lângă fiecare replică, explicația de ce funcționează — ca să înveți, nu doar să execuți. Ambele le combină pe amândouă.</p></div></div>
-      <div class="q"><button>Pot face upgrade mai târziu?</button>
-        <div class="a"><p>Da, oricând. Treci de la Recruit la Builder sau Leader într-un click, iar noile moduri se deblochează imediat.</p></div></div>
-      <div class="q"><button>Script Unic și Recruit costă amândouă 9€. Care e diferența?</button>
-        <div class="a"><p>Script Unic e o singură plată pentru un singur script — perfect ca să testezi. Recruit e abonament lunar și îți dă 3 scripturi în fiecare lună, plus răspuns pentru 2 obiecții la fiecare script. Pentru cei care chiar sună, Recruit e de trei ori mai mult la același preț.</p></div></div>
-    </div>
-  </section>
-
-  <!-- CLOSING -->
-  <section class="closing">
-    <h2>Următorul apel poate suna <em>complet diferit.</em></h2>
-    <p>Alege-ți planul acum și generează primul script în 120 de secunde.</p>
-    <a href="#planuri" class="btn-primary">Alege-ți planul</a>
-    <div class="secure">🔒 Plată securizată, direct pe site · Acces imediat după plată</div>
-  </section>
-</div>
-
-<footer>
-  <div class="wrap">Harvard of Sales · <a href="mailto:contact@octavianalupoaie.biz">contact@octavianalupoaie.biz</a> · 0733.614.511</div>
-</footer>
-
-<!-- AUTH STATUS PILL -->
-<div class="apill" id="apill">
-  <span class="em" id="apillEmail"></span>
-  <button onclick="signOut()">Ieși</button>
-</div>
-
-<!-- AUTH MODAL -->
-<div class="overlay" id="authOverlay" onclick="if(event.target===this)closeAuth()">
-  <div class="modal auth">
-    <button class="close" onclick="closeAuth()">×</button>
-    <h3 id="authTitle">Îți activezi accesul</h3>
-    <div class="sub" id="authSub">Doar email și parolă.<br>20 de secunde și generezi primul script.</div>
-
-    <div class="atabs">
-      <button class="atab active" id="tabRegister" onclick="setAuthMode('register')">Sunt nou aici</button>
-      <button class="atab" id="tabLogin" onclick="setAuthMode('login')">Am deja cont</button>
-    </div>
-
-    <div class="afield">
-      <label for="authEmail">Email</label>
-      <input class="tinput" id="authEmail" type="email" autocomplete="email" placeholder="nume@email.com" />
-    </div>
-    <div class="afield">
-      <label for="authPass">Parolă</label>
-      <input class="tinput" id="authPass" type="password" autocomplete="current-password" placeholder="minim 8 caractere" />
-    </div>
-
-    <div class="aerr" id="authErr"></div>
-    <button class="btn-primary" id="authSubmit" onclick="submitAuth()">Continuă</button>
-    <div class="anote">Folosim emailul tău doar pentru cont, factură și activarea planului.</div>
   </div>
 </div>
 
-<!-- CHECKOUT MODAL -->
-<div class="overlay" id="overlay" onclick="if(event.target===this)closeModal()">
-  <div class="modal" id="checkoutModal">
-    <button class="close" onclick="closeModal()">×</button>
-    <div id="checkoutSummary">
-      <div class="step" id="mStep"></div>
-      <h3 id="mName"></h3>
-      <div class="mprice" id="mPrice"></div>
-      <p id="mDesc"></p>
-      <button class="btn-primary" onclick="goCheckout()">Continuă spre plată</button>
-      <div class="note">Plata se face pe site, fără redirect. După confirmare, planul se activează automat și poți genera primul script imediat.</div>
-    </div>
-    <div id="checkoutBox" style="display:none"></div>
-  </div>
-</div>
-
-<div class="toast" id="toast"></div>
+<div id="toast"></div>
 
 <script>
-  /* ===================== CONFIG SUPABASE =====================
-     Completează cu valorile din Supabase → Project Settings → API.
-     Cheia ANON este publică (safe în frontend). NU pune service_role aici. */
-  var SUPABASE_URL      = 'https://dbympznifmxalnxlemyk.supabase.co';
-  var SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRieW1wem5pZm14YWxueGxlbXlrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODAzNjYxMjgsImV4cCI6MjA5NTk0MjEyOH0.EtUssJSyjVuttc89d6kuYuf49CNcSr-kqWlUXySbvCc';
-  var DOMAIN            = window.location.origin; // pentru return_url la checkout (pas următor)
+// ============================================
+// STATE
+// ============================================
+let TOKEN = sessionStorage.getItem('hos_token') || null;
+let USER_PROFILE = null;
+let SELECTED_MODE = 'clean';
+let _formLoaded = false;
 
-  /* ===================== CONFIG STRIPE ===================== */
-  var STRIPE_PUBLISHABLE_KEY = 'pk_live_51RNRrB2K2gEr8ziYZqT21LqCqZdOqHwUrVjm0RVapomxD97AeLpIn3BYMLTKU1bXP6CFQX3cR85SKSpukPKKwPa500373ntLK6';
-  var stripeJs = window.Stripe ? window.Stripe(STRIPE_PUBLISHABLE_KEY) : null;
-  var embeddedCheckout = null;
+// Supabase client — pentru a recunoaște sesiunea venită din pagina de plată (preturi.html)
+const SUPABASE_URL = 'https://dbympznifmxalnxlemyk.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRieW1wem5pZm14YWxueGxlbXlrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODAzNjYxMjgsImV4cCI6MjA5NTk0MjEyOH0.EtUssJSyjVuttc89d6kuYuf49CNcSr-kqWlUXySbvCc';
+const supaApp = (window.supabase) ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY) : null;
 
-  var supa = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+// Link-ul tau de upgrade (Payhip). Lasa gol pentru mesaj de contact.
+const UPGRADE_URL = '';
 
-  /* ---- stare auth ---- */
-  var currentUser = null;
-  var pendingPlan = null;
-  var authMode    = 'register';
+// Campuri memorate: produs + client. (Agentul = AGENT_FIELDS, salvat separat fill-once.)
+const AGENT_FIELDS = ['f_01','f_26','f_27','f_28','f_29'];
+const SAVE_FIELDS = ['f_22','f_23','f_02','f_03','f_24','f_25','f_20','f_04','f_17','f_05','f_30','f_07','f_08','f_09','f_19','f_18'];
+const CLIENT_FIELDS = ['f_22','f_23','f_02','f_03','f_24','f_25','f_20','f_04','f_17','f_05'];
 
-  /* la încărcare: verifică sesiunea + ascultă schimbările */
-  (async function initAuth(){
-    var { data } = await supa.auth.getSession();
-    setUser(data && data.session ? data.session.user : null);
-    supa.auth.onAuthStateChange(function(_e, session){
-      setUser(session ? session.user : null);
-    });
-  })();
-
-  /* Enter în câmpurile de auth → submit */
-  ['authEmail','authPass'].forEach(function(id){
-    document.getElementById(id).addEventListener('keydown', function(e){
-      if (e.key === 'Enter'){ e.preventDefault(); submitAuth(); }
-    });
-  });
-
-  /* revenire după plata Stripe (return_url cu ?paid=1) */
-  (function checkPaid(){
-    var params = new URLSearchParams(window.location.search);
-    if (params.get('paid') === '1'){
-      setTimeout(function(){
-        showToast('✓ Plata a fost înregistrată. Planul se activează imediat.');
-      }, 600);
-      // curăță parametrii din URL ca să nu reapară la refresh
-      history.replaceState({}, '', window.location.pathname);
-    }
-  })();
-
-  function setUser(user){
-    currentUser = user;
-    var pill = document.getElementById('apill');
-    if (user){
-      document.getElementById('apillEmail').textContent = user.email || 'cont activ';
-      pill.classList.add('show');
-    } else {
-      pill.classList.remove('show');
-    }
-  }
-
-  /* deschide modalul de auth, ținând minte planul ales */
-  function openAuth(plan){
-    pendingPlan = plan || null;
-    document.getElementById('authEmail').value = '';
-    document.getElementById('authPass').value  = '';
-    document.getElementById('authErr').textContent = '';
-    setAuthMode('register');
-    document.getElementById('authOverlay').classList.add('show');
-    setTimeout(function(){ document.getElementById('authEmail').focus(); }, 60);
-  }
-  function closeAuth(){ document.getElementById('authOverlay').classList.remove('show'); }
-
-  function setAuthMode(mode){
-    authMode = mode;
-    var reg = mode === 'register';
-    document.getElementById('tabRegister').classList.toggle('active', reg);
-    document.getElementById('tabLogin').classList.toggle('active', !reg);
-    document.getElementById('authTitle').textContent = reg ? 'Îți activezi accesul' : 'Bine ai revenit';
-    document.getElementById('authSub').innerHTML   = reg
-      ? 'Doar email și parolă.<br>20 de secunde și generezi primul script.'
-      : 'Intră în cont ca să continui spre plată.';
-    document.getElementById('authSubmit').textContent = reg ? 'Îmi activez accesul' : 'Intră în cont';
-    document.getElementById('authPass').setAttribute('autocomplete', reg ? 'new-password' : 'current-password');
-    document.getElementById('authErr').textContent = '';
-  }
-
-  async function submitAuth(){
-    var email = document.getElementById('authEmail').value.trim();
-    var pass  = document.getElementById('authPass').value;
-    var err   = document.getElementById('authErr');
-    var btn   = document.getElementById('authSubmit');
-    err.className = 'aerr'; err.textContent = '';
-
-    if (!email || email.indexOf('@') < 1){ err.textContent = 'Introdu un email valid.'; return; }
-    if (!pass || pass.length < 8){ err.textContent = 'Parola trebuie să aibă minim 8 caractere.'; return; }
-
-    var label = btn.textContent; btn.disabled = true; btn.textContent = 'Un moment…';
+// ============================================
+// INIT
+// ============================================
+async function init() {
+  // dacă nu avem token local, dar există sesiune Supabase (venită din pagina de plată) → o folosim
+  if (!TOKEN && supaApp) {
     try {
-      var res;
-      if (authMode === 'register'){
-        res = await supa.auth.signUp({ email: email, password: pass });
+      const { data } = await supaApp.auth.getSession();
+      if (data && data.session) {
+        TOKEN = data.session.access_token;
+        sessionStorage.setItem('hos_token', TOKEN);
+      }
+    } catch(e) {}
+  }
+  if (!TOKEN) { showView('login'); return; }
+  try {
+    let profile = await api('/api/user');
+    // dacă tocmai am plătit, planul s-ar putea activa cu 1-2s întârziere (webhook) → așteptăm puțin
+    const justPaid = new URLSearchParams(location.search).get('paid') === '1';
+    if (justPaid && (!profile.tier || profile.tier === 'none')) {
+      for (let i = 0; i < 6 && (!profile.tier || profile.tier === 'none'); i++) {
+        await new Promise(r => setTimeout(r, 1500));
+        profile = await api('/api/user');
+      }
+      history.replaceState({}, '', location.pathname);
+    }
+    USER_PROFILE = profile;
+    if (!profile.tier || profile.tier === 'none') {
+      showView('redeem');
+    } else {
+      renderGenerator();
+      showView('generator');
+    }
+  } catch(e) {
+    sessionStorage.removeItem('hos_token');
+    TOKEN = null;
+    showView('login');
+  }
+}
+
+// ============================================
+// VIEW MANAGEMENT
+// ============================================
+function showView(name) {
+  document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+  document.getElementById('view-' + name).classList.add('active');
+  window.scrollTo(0, 0);
+}
+
+// ============================================
+// API HELPER
+// ============================================
+async function api(endpoint, options = {}) {
+  // Auto-refresh: ia token-ul proaspat din clientul Supabase (se reinnoieste singur, fara delogare la ~1h)
+  if (supaApp) {
+    try {
+      const { data: _sess } = await supaApp.auth.getSession();
+      if (_sess && _sess.session && _sess.session.access_token) {
+        TOKEN = _sess.session.access_token;
+        sessionStorage.setItem('hos_token', TOKEN);
+      }
+    } catch (e) {}
+  }
+  const headers = { 'Content-Type': 'application/json' };
+  if (TOKEN) headers['Authorization'] = 'Bearer ' + TOKEN;
+  const res = await fetch(endpoint, { ...options, headers: { ...headers, ...options.headers } });
+  const data = await res.json();
+  if (!res.ok) throw new Error(data.error || 'Eroare necunoscută');
+  return data;
+}
+
+// ============================================
+// AUTH
+// ============================================
+async function doLogin() {
+  const email = document.getElementById('login-email').value.trim();
+  const pass = document.getElementById('login-pass').value;
+  const errEl = document.getElementById('login-err');
+  errEl.style.display = 'none';
+  try {
+    if (supaApp) {
+      // Login prin clientul Supabase -> sesiunea e reinnoita automat (fara delogare la ~1h)
+      const { data: sd, error: se } = await supaApp.auth.signInWithPassword({ email, password: pass });
+      if (se) throw new Error(se.message === 'Invalid login credentials' ? 'Email sau parolă incorecte' : se.message);
+      TOKEN = sd.session.access_token;
+    } else {
+      const data = await api('/api/auth/login', { method: 'POST', body: JSON.stringify({ email, password: pass }) });
+      TOKEN = data.token;
+    }
+    sessionStorage.setItem('hos_token', TOKEN);
+    await init();
+  } catch(e) {
+    errEl.textContent = e.message;
+    errEl.style.display = 'block';
+  }
+}
+
+async function doRegister() {
+  const email = document.getElementById('reg-email').value.trim();
+  const pass = document.getElementById('reg-pass').value;
+  const errEl = document.getElementById('reg-err');
+  const sucEl = document.getElementById('reg-suc');
+  errEl.style.display = 'none'; sucEl.style.display = 'none';
+  try {
+    await api('/api/auth/register', {
+      method: 'POST',
+      body: JSON.stringify({ email, password: pass })
+    });
+    sucEl.textContent = 'Cont creat! Verifică emailul și confirmă, apoi loghează-te.';
+    sucEl.style.display = 'block';
+  } catch(e) {
+    errEl.textContent = e.message;
+    errEl.style.display = 'block';
+  }
+}
+
+async function doRedeem() {
+  const code = document.getElementById('redeem-code').value.trim().toUpperCase();
+  const errEl = document.getElementById('redeem-err');
+  const sucEl = document.getElementById('redeem-suc');
+  errEl.style.display = 'none'; sucEl.style.display = 'none';
+  try {
+    const data = await api('/api/redeem', {
+      method: 'POST',
+      body: JSON.stringify({ code })
+    });
+    sucEl.textContent = data.message;
+    sucEl.style.display = 'block';
+    setTimeout(async () => {
+      const profile = await api('/api/user');
+      USER_PROFILE = profile;
+      renderGenerator();
+      showView('generator');
+    }, 1500);
+  } catch(e) {
+    errEl.textContent = e.message;
+    errEl.style.display = 'block';
+  }
+}
+
+
+// ===== GHIDURI / ONBOARDING / NAV =====
+function _isOnboarded(){ try{ return !!localStorage.getItem('hos_onboarded'); }catch(e){ return true; } }
+function closeModal(id){ var ov=document.getElementById(id); if(!ov) return; ov.classList.remove('show'); document.body.style.overflow=''; }
+
+// ── GATE PAȘI: Pasul 1 (Cum completezi) + Pasul 2 (Reguli) -> deblocheaza generarea ──
+var _stepDone = { ghid:false, reguli:false };   // ghid = Pasul 1, reguli = Pasul 2
+function refreshStepUI(){
+  var onboarded = _isOnboarded();
+  var map = { ghid:'step-1', reguli:'step-2' };
+  ['ghid','reguli'].forEach(function(k){
+    var b=document.getElementById(map[k]); if(!b) return;
+    b.classList.toggle('step-ok', onboarded || _stepDone[k]);
+  });
+  var gb=document.getElementById('gen-btn');
+  if(gb) gb.disabled = !onboarded;
+  var hint=document.getElementById('gate-hint');
+  if(hint) hint.style.display = onboarded ? 'none' : 'block';
+}
+function markStep(k){
+  _stepDone[k]=true;
+  if(_stepDone.ghid && _stepDone.reguli){
+    try{ localStorage.setItem('hos_onboarded','1'); }catch(e){}
+    if(typeof toast==='function') toast('Gata! Acum poți genera scriptul 💪', 3500);
+  }
+  refreshStepUI();
+}
+
+function openModal(id, mode){
+  var ov=document.getElementById(id); if(!ov) return;
+  var body=ov.querySelector('.modal-body');
+  var btn=ov.querySelector('.modal-gate');
+  var gate = (mode!=='normal') && !_isOnboarded();    // gate activ doar la prima utilizare
+  ov.classList.add('show'); document.body.style.overflow='hidden';
+  if(body) body.scrollTop=0;
+  if(btn){
+    if(gate){
+      var stepKey = (id==='m-ghid') ? 'ghid' : 'reguli';
+      btn.textContent='Am înțeles ✓';
+      btn.onclick=function(){
+        markStep(stepKey);
+        closeModal(id);
+        // dupa Pasul 1 -> deschide automat Pasul 2 (doar daca nu e gata)
+        if(stepKey==='ghid' && !_stepDone.reguli && !_isOnboarded()){ setTimeout(function(){ openModal('m-reguli'); }, 250); }
+      };
+      btn.disabled=true; btn.classList.add('locked');
+      if(body){
+        var check=function(){ if(body.scrollTop+body.clientHeight >= body.scrollHeight-12){ btn.disabled=false; btn.classList.remove('locked'); body.removeEventListener('scroll',check); } };
+        body.addEventListener('scroll',check);
+        setTimeout(function(){ if(body.scrollHeight <= body.clientHeight+12){ btn.disabled=false; btn.classList.remove('locked'); } },150);
+      }
+    } else {
+      btn.textContent='Închide'; btn.disabled=false; btn.classList.remove('locked');
+      btn.onclick=function(){ closeModal(id); };
+    }
+  }
+}
+function finishOnboard(){ try{ localStorage.setItem('hos_onboarded','1'); }catch(e){} closeModal('m-ghid'); refreshStepUI(); if(typeof toast==='function') toast('Gata! Completează cu detalii reale și specifice 💪', 4000); }
+function maybeOnboard(){ if(_isOnboarded()){ refreshStepUI(); return; } openModal('m-ghid'); }   // Pasul 1 primul
+function navTab(w){ if(w==='invitatie') return; var n={conectare:'Conectare',prezentare:'Prezentare',inchidere:'Închidere',followup:'Follow-up',recomandari:'Cerere de recomandări'}; if(typeof toast==='function') toast((n[w]||'Secțiunea')+' — în curând 🔒', 3000); }
+function setLang(l){ if(l==='en' && typeof toast==='function') toast('Versiunea EN — în curând', 3000); }
+
+function doLogout() {
+  sessionStorage.removeItem('hos_token');
+  TOKEN = null;
+  USER_PROFILE = null;
+  if (supaApp) { try { supaApp.auth.signOut(); } catch(e){} }
+  showView('login');
+}
+
+// ============================================
+// FORM MEMORY (produs + client)
+// ============================================
+function saveAgentData() {
+  const data = {};
+  AGENT_FIELDS.forEach(id => { const el = document.getElementById(id); if (el) data[id] = el.value; });
+  try { localStorage.setItem('hos_agent_data', JSON.stringify(data)); } catch(e) {}
+}
+function saveFormData() {
+  const data = {};
+  SAVE_FIELDS.forEach(id => { const el = document.getElementById(id); if (el) data[id] = el.value; });
+  try { localStorage.setItem('hos_form', JSON.stringify(data)); } catch(e) {}
+}
+function loadFormData() {
+  try {
+    const raw = localStorage.getItem('hos_form');
+    if (!raw) return;
+    const data = JSON.parse(raw);
+    SAVE_FIELDS.forEach(id => {
+      const el = document.getElementById(id);
+      if (el && data[id] != null) el.value = data[id];
+    });
+    toggleExperienta();
+  } catch(e) {}
+}
+function clearClientData() {
+  CLIENT_FIELDS.forEach(id => { const el = document.getElementById(id); if (el) el.value = ''; });
+  saveFormData();
+  toast('Date client golite — completează pentru noua persoană');
+}
+
+// ============================================
+// UPGRADE NUDGE
+// ============================================
+const NEXT_TIER = {
+  unic:    { name: 'Recruit', perk: '3 scripturi/lună' },
+  recruit: { name: 'Builder', perk: '8 scripturi/lună + Coach Mode' },
+  builder: { name: 'Leader',  perk: '15 scripturi/lună + toate modurile' },
+  leader:  null
+};
+function goUpgrade() {
+  if (UPGRADE_URL) { window.open(UPGRADE_URL, '_blank'); }
+  else { toast('Pentru upgrade scrie-ne la contact@octavianalupoaie.biz', 5000); }
+}
+function renderNudge() {
+  if (!USER_PROFILE) return;
+  const remaining = USER_PROFILE.scripts_remaining;
+  const next = NEXT_TIER[USER_PROFILE.tier];
+  const show = next && remaining <= 3;
+  ['nudge-gen','nudge-out'].forEach(id => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    const txtEl = el.querySelector('.un-text');
+    if (show && txtEl) {
+      if (remaining <= 0) {
+        txtEl.innerHTML = 'Ai terminat scripturile pe luna asta. Treci pe <b>' + next.name + '</b> — ' + next.perk + '.';
       } else {
-        res = await supa.auth.signInWithPassword({ email: email, password: pass });
+        const word = remaining === 1 ? 'script' : 'scripturi';
+        const verb = remaining === 1 ? 'a' : 'au';
+        txtEl.innerHTML = 'Ți-' + verb + ' mai rămas <b>' + remaining + ' ' + word + '</b>. Treci pe <b>' + next.name + '</b> — ' + next.perk + '.';
       }
-      if (res.error){ console.error('Auth error:', res.error); err.textContent = translateAuthError(res.error.message); return; }
-
-      /* dacă avem sesiune → logat instant; continuăm spre checkout */
-      if (res.data && res.data.session){
-        setUser(res.data.session.user);
-        closeAuth();
-        if (pendingPlan){ var pl = pendingPlan; pendingPlan = null; selectPlan(pl); }
-        return;
-      }
-      /* fără sesiune = confirmarea pe email e PORNITĂ în Supabase.
-         Pentru flux instant, oprește „Confirm email" (vezi SETUP_auth.md). */
-      err.className = 'aok';
-      err.textContent = 'Cont creat. Confirmă emailul, apoi revino și apasă „Am deja cont".';
-    } catch(e){
-      err.textContent = 'A apărut o eroare. Mai încearcă o dată.';
-    } finally {
-      btn.disabled = false; btn.textContent = label;
-    }
-  }
-
-  function translateAuthError(m){
-    var raw = m || '';
-    m = raw.toLowerCase();
-    if (m.indexOf('already registered') > -1 || m.indexOf('already exists') > -1)
-      return 'Există deja un cont cu acest email. Alege „Am deja cont".';
-    if (m.indexOf('invalid login') > -1)        return 'Email sau parolă greșite.';
-    if (m.indexOf('email not confirmed') > -1)  return 'Confirmă întâi emailul, apoi intră în cont.';
-    if (m.indexOf('database error') > -1)       return 'Eroare la salvarea contului (trigger DB). Mesaj: ' + raw;
-    if (m.indexOf('password') > -1)             return 'Parola e prea slabă (minim 8 caractere).';
-    return 'Nu am putut continua. Mesaj de la server: ' + raw;
-  }
-
-  async function signOut(){ await supa.auth.signOut(); setUser(null); }
-
-  /* ---- date plan ---- */
-  var PLANS = {
-    unic:   {step:'Încerci',     name:'Script Unic', price:'9€', per:'o singură dată', desc:'Un singur script + răspuns pentru 2 obiecții, mod Clean. Fără abonament.'},
-    recruit:{step:'Începi',      name:'Recruit',     price:'9€', per:'/ lună', desc:'3 scripturi/lună + 1 de antrenament la start. Mod Clean, cu răspuns pentru 2 obiecții/script.'},
-    builder:{step:'Construiești',name:'Builder',     price:'19€',per:'/ lună', desc:'8 scripturi/lună + 3 de antrenament la start. Plus modul Coach, care îți explică de ce funcționează.'},
-    leader: {step:'Conduci',     name:'Leader',      price:'29€',per:'/ lună', desc:'15 scripturi/lună + 5 de antrenament la start. Toate modurile, inclusiv Ambele.'}
-  };
-  var current = null;
-
-  function selectPlan(key){
-    current = key;
-    if (!currentUser){ openAuth(key); return; }   // fără cont → întâi auth, apoi revine aici
-    var p = PLANS[key];
-    document.getElementById('checkoutSummary').style.display = 'block';
-    var box = document.getElementById('checkoutBox');
-    box.style.display = 'none'; box.innerHTML = '';
-    if (embeddedCheckout){ try{ embeddedCheckout.destroy(); }catch(e){} embeddedCheckout = null; }
-    document.getElementById('mStep').textContent = p.step;
-    document.getElementById('mName').textContent = p.name;
-    document.getElementById('mPrice').innerHTML = p.price + ' <small>' + p.per + '</small>';
-    document.getElementById('mDesc').textContent = p.desc;
-    document.getElementById('overlay').classList.add('show');
-  }
-  function closeModal(){
-    document.getElementById('overlay').classList.remove('show');
-    if (embeddedCheckout){ try{ embeddedCheckout.destroy(); }catch(e){} embeddedCheckout = null; }
-    var box = document.getElementById('checkoutBox');
-    box.style.display = 'none'; box.innerHTML = '';
-    document.getElementById('checkoutSummary').style.display = 'block';
-  }
-
-  async function goCheckout(){
-    if (!currentUser){ closeModal(); openAuth(current); return; }
-
-    var summary = document.getElementById('checkoutSummary');
-    var box     = document.getElementById('checkoutBox');
-
-    // token-ul sesiunii pentru a autentifica apelul la backend
-    var sess = (await supa.auth.getSession()).data.session;
-    if (!sess){ closeModal(); openAuth(current); return; }
-
-    summary.style.display = 'none';
-    box.style.display = 'block';
-    box.innerHTML = '<div class="cloading">Se încarcă plata securizată<br><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>';
-
-    try {
-      var r = await fetch('/api/create-checkout-session', {
-        method: 'POST',
-        headers: { 'Content-Type':'application/json', 'Authorization':'Bearer ' + sess.access_token },
-        body: JSON.stringify({ plan: current })
-      });
-      var d = await r.json();
-      if (!r.ok || !d.clientSecret){ throw new Error(d.error || 'Răspuns invalid de la server'); }
-      if (!stripeJs){ throw new Error('Stripe.js nu s-a încărcat'); }
-
-      box.innerHTML = '<div id="stripe-checkout"></div>';
-      if (embeddedCheckout){ try{ embeddedCheckout.destroy(); }catch(e){} }
-      embeddedCheckout = await stripeJs.initEmbeddedCheckout({ clientSecret: d.clientSecret });
-      embeddedCheckout.mount('#stripe-checkout');
-    } catch(e){
-      box.innerHTML = '<div class="cerr">Nu am putut porni plata: ' + (e.message || e) +
-        '</div><div style="text-align:center"><button class="cback" onclick="selectPlan(current)">Înapoi</button></div>';
-    }
-  }
-
-  function lockToast(mod){ showToast('Modul <b>'+mod+'</b> se deblochează la un plan superior.'); }
-
-  var toastTimer;
-  function showToast(html){
-    var t = document.getElementById('toast');
-    t.innerHTML = html; t.classList.add('show');
-    clearTimeout(toastTimer);
-    toastTimer = setTimeout(function(){ t.classList.remove('show'); }, 3200);
-  }
-
-  /* ---- TEASER ---- */
-  var teaserRel='prieten', teaserInv='cafea', teaserTone='cald', teaserProd='niște produse de sănătate';
-  function wireChips(id, cb){
-    var el = document.getElementById(id); if(!el) return;
-    el.addEventListener('click', function(e){
-      var b = e.target.closest('.chip'); if(!b) return;
-      this.querySelectorAll('.chip').forEach(function(c){c.classList.remove('active');});
-      b.classList.add('active'); cb(b);
-    });
-  }
-  wireChips('relChips',    function(b){ teaserRel  = b.getAttribute('data-rel');  });
-  wireChips('inviteChips', function(b){ teaserInv  = b.getAttribute('data-inv');  });
-  wireChips('toneChips',   function(b){ teaserTone = b.getAttribute('data-tone'); });
-  wireChips('prodChips',   function(b){
-    var prod = b.getAttribute('data-prod');
-    var custom = document.getElementById('tProdCustom');
-    var adv = document.getElementById('tAdv');
-    if(prod === '__custom__'){
-      custom.style.display = 'block';
-      custom.focus();
-      teaserProd = (custom.value || 'produsul tău').trim();
-      adv.value = '';
-      adv.placeholder = 'scrie 2-3 beneficii ale produsului tău';
+      el.style.display = 'block';
     } else {
-      custom.style.display = 'none';
-      teaserProd = prod;
-      var a = b.getAttribute('data-adv'); if(a) adv.value = a;
+      el.style.display = 'none';
     }
   });
-  var prodCustom = document.getElementById('tProdCustom');
-  if(prodCustom) prodCustom.addEventListener('input', function(){ teaserProd = (this.value || 'produsul tău').trim(); });
+}
 
-  /* TEASER: dialog pe 3 ture (Agent → Client → Agent, tăiat la lacăt).
-     Salut după relație: „Te salut" la prieten/cunoscut, „Bună ziua" la contact rece. */
-  var GREET = { prieten:'Te salut, ', cunoscut:'Te salut, ', rece:'Bună ziua, ' };
+// ============================================
+// GENERATOR
+// ============================================
+function renderGenerator() {
+  if (!USER_PROFILE) return;
+  const tier = USER_PROFILE.tier;
+  const remaining = USER_PROFILE.scripts_remaining;
 
-  /* Două intro-uri. Fiecare = replica Agentului (tur 1) + reacția clientului (tur 2). */
-  var INTROS = [
-    {
-      id:'sincer',
-      agent: function(n){ return GREET[teaserRel] + n + '! O să fiu sincer: nu te sun întâmplător, și nu-ți cer decât 60 de secunde. Ai avea răbdare cu mine sau nu?'; },
-      client: 'Dacă sunt doar 60 de secunde... te ascult :)',
-      conts: ['surpriza','confesiune','negare','relatie','intrebare']
-    },
-    {
-      id:'iubire',
-      agent: function(n){ return GREET[teaserRel] + n + '! Îți spun doar atât: la finalul acestui apel, fie o să mă iubești, fie o să mă urăști :))))'; },
-      client: 'Hai că m-ai făcut curios...',
-      conts: ['motiv','negare']
-    }
+  // Counter
+  const badges = { recruit:'Recruit', builder:'Builder', leader:'Leader', unic:'Script Unic' };
+  document.getElementById('scripts-remaining').textContent = remaining;
+  document.getElementById('tier-badge').textContent = '· ' + (badges[tier] || tier);
+
+  // Mode options
+  const modes = [
+    { id:'clean', title:'Clean Mode', desc:'Script gata de executat la telefon, fără adnotări', tier:null },
+    { id:'coach', title:'Coach Mode', desc:'Script + explicații psihologice pentru fiecare linie', tier:'builder' },
+    { id:'both',  title:'Ambele moduri', desc:'Coach Mode + Clean Mode, unul sub altul', tier:'leader' }
   ];
 
-  /* Continuări (tur 3 al Agentului) — se taie la lacăt. */
-  var CONTS = {
-    surpriza:   function(n){ return n + '... ceea ce urmează să-ți spun, posibil să te—'; },
-    confesiune: function(n){ return n + ', am stat zile întregi gândindu-mă cum să încep apelul ăsta fără să sune a—'; },
-    negare:     function(n){ return n + ', sigur nu te-ai gândit niciodată că te-aș suna tocmai pentru—'; },
-    relatie:    function(n){ return n + ', fix pentru că te știu de-atâția ani nu pot să spun asta ca oricui—'; },
-    intrebare:  function(n){ return n + ', pot să te întreb ceva ce probabil nu te-a întrebat nimeni până acum—'; },
-    motiv:      function(n){ return n + '... și motivul pentru care zic asta e—'; }
-  };
+  const tierOrder = ['unic','recruit','builder','leader'];
+  const tierIdx = tierOrder.indexOf(tier);
+  const tierNames = { builder:'Builder', leader:'Leader' };
 
-  var teaserSpin = 0; // rotație deterministică între generări
-  function pickDialog(n){
-    var intro = INTROS[teaserSpin % INTROS.length];
-    var pool = intro.conts.filter(function(c){ return c !== 'relatie' || teaserRel === 'prieten'; });
-    var contId = pool[Math.floor(teaserSpin / INTROS.length) % pool.length];
-    teaserSpin++;
-    return [
-      { who:'Agent',  text: intro.agent(n),   cut:false },
-      { who:'Client', text: intro.client,     cut:false },
-      { who:'Agent',  text: CONTS[contId](n), cut:true  }
-    ];
-  }
-  function traitLabel(){
-    var d = (document.getElementById('tDesc').value || '').toLowerCase();
-    if(/ocupat|timp|aglomerat|alergat|prins|grăbit|grabit/.test(d))       return 'om ocupat — mesaj scurt, la obiect';
-    if(/copii|copil|familie|tată|tata|mamă|mama|părinte|parinte/.test(d)) return 'are familie — miza pe timp și liniște';
-    if(/manager|antreprenor|afaceri|business|director|firm|șef|sef/.test(d)) return 'om practic — direct la subiect';
-    return 'detaliile din descrierea ta';
-  }
-  var RELLABEL = { prieten:'prieten apropiat', cunoscut:'cunoscut', rece:'contact rece' };
-  var TONELABEL = { cald:'cald', direct:'direct', energic:'energic' };
-  function firstObjection(){
-    var raw = (document.getElementById('tObj')||{}).value || '';
-    var m = raw.match(/[„"]([^”"]+)[”"]/);
-    return m ? m[1] : 'obiecțiile tale';
-  }
-  function escHtml(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
-  function buildCalib(name){
-    var rows = [
-      ['Cine suni',                 escHtml(name)+' · '+RELLABEL[teaserRel], false],
-      ['Ce am reținut din descriere', escHtml(traitLabel()), false],
-      ['Produs',                    escHtml(teaserProd), false],
-      ['Ce-l face să spună „da"',   'miza personală, nu produsul', true],
-      ['Cum dezamorsezi „'+escHtml(firstObjection())+'"', 'fără să o contrazici frontal', true],
-      ['Tonul exact al deschiderii','cald, egal, fără ton de vânzător ('+TONELABEL[teaserTone]+')', true]
-    ];
-    var html = '<div class="ch">🧠 Cum a calibrat aplicația apelul tău</div>';
-    rows.forEach(function(r){
-      html += '<div class="crow"><span class="cf">'+r[0]+'</span><span class="cv'+(r[2]?' lock':'')+'">'+r[1]+'</span></div>';
-    });
-    html += '<div class="cnote">Aplicația cântărește astea înainte să scrie un cuvânt — de-aia scriptul e doar al tău, nu un șablon.</div>';
-    return html;
-  }
+  const modeContainer = document.getElementById('mode-options');
+  modeContainer.innerHTML = '';
 
-  var typeTimer;
-  function generateTeaser(){
-    var desc = (document.getElementById('tDesc').value || 'Andrei').trim();
-    var n = (desc.split(/[\s,]+/)[0] || 'Andrei'); // numele = primul cuvânt din descriere
-    var turns = pickDialog(n);
+  modes.forEach(m => {
+    const requiredIdx = m.tier ? tierOrder.indexOf(m.tier) : 0;
+    const isLocked = tierIdx < requiredIdx;
+    const isSelected = SELECTED_MODE === m.id && !isLocked;
 
-    document.getElementById('phPlaceholder').style.display = 'none';
-    document.getElementById('phContent').style.display = 'block';
-    var txt = document.getElementById('typedText');
-    var cur = document.getElementById('typedCursor');
-    var calib = document.getElementById('calib');
-    var struct = document.getElementById('structure');
-    struct.classList.remove('show');
-    calib.style.display = 'none';
-    calib.innerHTML = buildCalib(n);
-    clearTimeout(typeTimer);
+    const div = document.createElement('div');
+    div.className = 'mode-option' + (isSelected ? ' selected' : '') + (isLocked ? ' locked' : '');
+    div.innerHTML = `
+      <div class="mode-radio"></div>
+      <div class="mode-text">
+        <div class="mode-title">${m.title}</div>
+        <div class="mode-desc">${m.desc}</div>
+      </div>
+      ${isLocked ? `<div class="lock-badge">🔒 din planul ${tierNames[m.tier]}</div>` : ''}
+    `;
 
-    // construiește liniile de dialog goale (nume escapat prin textContent la tastare)
-    txt.innerHTML = '';
-    var lines = turns.map(function(t){
-      var line = document.createElement('div');
-      line.className = 'dline ' + (t.who === 'Agent' ? 'agent' : 'client');
-      line.style.display = 'none';
-      var who = document.createElement('span'); who.className = 'dwho';
-      who.textContent = (t.who === 'Agent' ? 'Tu' : 'El/Ea');
-      var body = document.createElement('span'); body.className = 'dtext';
-      line.appendChild(who); line.appendChild(body);
-      txt.appendChild(line);
-      return { body: body, line: line, text: t.text, cut: t.cut };
-    });
+    if (!isLocked) {
+      div.addEventListener('click', () => {
+        SELECTED_MODE = m.id;
+        renderGenerator();
+      });
+    } else {
+      div.addEventListener('click', () => {
+        toast(`Coach Mode și Ambele sunt disponibile din planul ${tierNames[m.tier]}. Fă upgrade pentru acces.`);
+      });
+    }
 
-    cur.style.display = 'inline-block';
-    var li = 0;
-    (function typeLine(){
-      if(li >= lines.length){
-        cur.style.display = 'none';
-        calib.style.display = 'block';
-        struct.classList.add('show');
-        return;
-      }
-      var L = lines[li];
-      L.line.style.display = 'block';
-      var i = 0;
-      (function typeChar(){
-        if(i <= L.text.length){
-          L.body.textContent = L.text.slice(0, i);
-          L.body.appendChild(cur);
-          if(L.cut && i === L.text.length){
-            var lk = document.createElement('span'); lk.className = 'dlock'; lk.textContent = ' 🔒';
-            L.body.appendChild(lk);
-          }
-          i++; typeTimer = setTimeout(typeChar, 22);
-        } else {
-          li++; typeTimer = setTimeout(typeLine, 360); // pauză între ture
-        }
-      })();
-    })();
-  }
-
-  /* ---- FAQ accordion ---- */
-  document.querySelectorAll('#faq .q button').forEach(function(b){
-    b.addEventListener('click', function(){
-      var q = b.parentElement;
-      var a = q.querySelector('.a');
-      var open = q.classList.contains('open');
-      document.querySelectorAll('#faq .q').forEach(function(x){x.classList.remove('open');x.querySelector('.a').style.maxHeight=null;});
-      if(!open){ q.classList.add('open'); a.style.maxHeight = a.scrollHeight + 'px'; }
-    });
+    modeContainer.appendChild(div);
   });
 
-  /* ---- count-up ---- */
-  function countUp(el, target, dur){
-    var start=0, t0=null;
-    function step(ts){ if(!t0)t0=ts; var p=Math.min((ts-t0)/dur,1);
-      var ease=1-Math.pow(1-p,3);
-      el.textContent = Math.floor(ease*target).toLocaleString('ro-RO');
-      if(p<1) requestAnimationFrame(step); }
-    requestAnimationFrame(step);
-  }
-  /* Contoare reale, sincronizate cu pagina de logare prin /api/stats.
-     distribuitori -> #liveCount · scripturi -> #bigCount · fallback 112 / 1122 */
-  window.__hosScripts = 1122;
-  (function loadStats(){
-    fetch('/api/stats').then(function(r){ return r.json(); }).then(function(d){
-      var dist = (typeof d.distribuitori === 'number') ? d.distribuitori
-               : (typeof d.agents === 'number') ? d.agents : 112;
-      var scr  = (typeof d.scripturi === 'number') ? d.scripturi : 1122;
-      window.__hosScripts = scr;
-      countUp(document.getElementById('liveCount'), dist, 1600);
-      var bc = document.getElementById('bigCount');
-      if(bc && bc.dataset.counted === '1'){ countUp(bc, scr, 1200); } // re-animeaza daca s-a afisat deja fallback-ul
-    }).catch(function(){
-      countUp(document.getElementById('liveCount'), 112, 1600);
-    });
-  })();
+  // ONE-TIME: incarca date salvate + ataseaza autosave (nu la fiecare re-render)
+  if (!_formLoaded) {
+    _formLoaded = true;
+    setTimeout(maybeOnboard, 500);
 
-  /* ---- scroll reveal + band counter + ring ---- */
-  var ringDone = false;
-  function fillRing(){
-    if(ringDone) return; ringDone = true;
-    document.getElementById('ringFill').style.strokeDashoffset = 534 * (1 - 0.78); // 78%
-    countUp(document.getElementById('ringNum'), 78, 2300);
-  }
-  var io = new IntersectionObserver(function(entries){
-    entries.forEach(function(e){
-      if(e.isIntersecting){
-        if(e.target.dataset.reveal!==undefined){ e.target.classList.add('in'); }
-        if(e.target.id==='bigCount'){ countUp(e.target, (window.__hosScripts||1122), 1800); e.target.dataset.counted='1'; }
-        io.unobserve(e.target);
+    try {
+      const savedAgent = localStorage.getItem('hos_agent_data');
+      if (savedAgent) {
+        const a = JSON.parse(savedAgent);
+        AGENT_FIELDS.forEach(id => { const el = document.getElementById(id); if (el && a[id] != null) el.value = a[id]; });
+      }
+    } catch(e) {}
+    loadFormData();
+
+    AGENT_FIELDS.forEach(id => {
+      const el = document.getElementById(id);
+      if (el) { el.addEventListener('blur', saveAgentData); el.addEventListener('change', saveAgentData); }
+    });
+    SAVE_FIELDS.forEach(id => {
+      const el = document.getElementById(id);
+      if (el) {
+        el.addEventListener('blur', saveFormData);
+        el.addEventListener('change', saveFormData);
       }
     });
-  },{threshold:.2});
-  document.querySelectorAll('[data-reveal]').forEach(function(el,i){ el.style.transitionDelay=(i%3*0.08)+'s'; io.observe(el); });
-  io.observe(document.getElementById('bigCount'));
+  }
 
-  /* cadranul 78% se umple EXACT când agentul ajunge la el (nu la încărcarea paginii) */
-  (function(){
-    var ringWrap = document.querySelector('.ring-wrap');
-    if(!ringWrap){ return; }
-    if(!('IntersectionObserver' in window)){ fillRing(); return; }   // fallback browsere fără IO
-    var ringIO = new IntersectionObserver(function(entries){
-      entries.forEach(function(e){
-        if(e.isIntersecting){ fillRing(); ringIO.unobserve(e.target); }
-      });
-    },{threshold:.6});
-    ringIO.observe(ringWrap);
-  })();
+  renderNudge();
+  refreshStepUI();
+}
 
-  /* aprindere secvențială a pașilor „Cum funcționează" — one-shot, respectă reduced-motion */
-  (function stepGlow(){
-    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if(reduce) return;
-    var cards = document.querySelectorAll('.steps .stepc');
-    if(!cards.length || !('IntersectionObserver' in window)) return;
-    var ob = new IntersectionObserver(function(entries){
-      entries.forEach(function(e){
-        if(!e.isIntersecting) return;
-        var idx = Array.prototype.indexOf.call(cards, e.target);
-        setTimeout(function(){
-          e.target.classList.add('lit');
-          setTimeout(function(){ e.target.classList.remove('lit'); }, 2000);
-        }, Math.max(0, idx) * 120);
-        ob.unobserve(e.target);
-      });
-    }, { threshold: .45 });
-    cards.forEach(function(c){ ob.observe(c); });
-  })();
+function toggleExperienta() {
+  const val = document.getElementById('f_08').value;
+  document.getElementById('field-experienta').style.display = val === 'Da' ? 'block' : 'none';
+}
+
+// Randare sigura: escape HTML, apoi **text** -> ingrosat (pentru AGENT etc.)
+function renderScript(text) {
+  var esc = String(text == null ? '' : text)
+    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  var lines = esc.split('\n');
+  for (var i = 0; i < lines.length; i++) {
+    var t = lines[i].trim();
+    // bare grele de zona (blocuri pline █ sau linie dubla ═) -> scoase (le inlocuieste bannerul)
+    if (/^[█═]{3,}$/.test(t)) { lines[i] = ''; continue; }
+    // separatoare usoare (— – - ─) -> linie fina
+    if (/^[—–\-─]{3,}$/.test(t)) { lines[i] = '<span class="script-rule bare"></span>'; continue; }
+    // pauza [ PAUZA ... ] -> chip discret
+    if (/^\[\s*PAUZ/i.test(t) && /\]$/.test(t)) {
+      var pcore = t.replace(/^\[\s*/, '').replace(/\s*\]$/, '');
+      lines[i] = '<span class="script-pause">' + pcore + '</span>'; continue;
+    }
+    // curata separatoarele din capete (inclusiv ─ si █) ca sa detectam continutul
+    var core = t.replace(/^[—–\-═─█\s]+/, '').replace(/[—–\-═─█\s]+$/, '');
+    if (/^ETAPA\b/i.test(core)) { lines[i] = '<span class="script-rule">' + core + '</span>'; continue; }
+    // antet de zona (incepe cu emoji-ul zonei) -> banda
+    if (/^(📋|🎬|✅)/.test(core)) { lines[i] = '<span class="script-zone">' + core + '</span>'; continue; }
+  }
+  esc = lines.join('\n');
+  return esc.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+}
+
+// Async: trimite jobul, apoi intreaba din 3 in 3 secunde pana e gata (fara timeout pe cerere lunga)
+async function generateAndWait(body) {
+  const { jobId } = await api('/api/generate', { method: 'POST', body: JSON.stringify(body) });
+  const start = Date.now();
+  while (Date.now() - start < 5 * 60 * 1000) {           // siguranta: max 5 min
+    await new Promise(r => setTimeout(r, 3000));
+    const s = await api('/api/generate-status/' + jobId);
+    if (s.status === 'done')  return s;                   // { script, scripts_remaining, training_left }
+    if (s.status === 'error') throw new Error(s.error || 'Eroare la generare');
+  }
+  throw new Error('Generarea durează neobișnuit de mult. Reîncearcă.');
+}
+
+async function doGenerate() {
+  const errEl = document.getElementById('gen-err');
+  errEl.style.display = 'none';
+
+  // GATE: prima utilizare trebuie sa parcurga Pasul 1 + Pasul 2 (toate tier-urile)
+  if (!_isOnboarded()) {
+    refreshStepUI();
+    if (typeof toast === 'function') toast('Parcurge întâi Pasul 1 și Pasul 2 👆', 3500);
+    maybeOnboard();
+    return;
+  }
+
+  // Validate required fields
+  const required = [
+    ['f_01','Genul tău'],
+    ['f_29','Vârsta ta'],
+    ['f_26','Stil de abordare'],
+    ['f_22','Numele clientului'],
+    ['f_23','Vârsta clientului'],
+    ['f_02','Genul clientului'],
+    ['f_03','Tip relație'],
+    ['f_20','Când ați vorbit ultima oară'],
+    ['f_17','Calități apreciate la această persoană'],
+    ['f_30','Categoria produsului'],
+    ['f_07','Produsul'],
+    ['f_08','Ai folosit produsul?'],
+    ['f_19','Avantajele produsului'],
+    ['f_11','Tip prezentare']
+  ];
+  for (const [id, name] of required) {
+    if (!document.getElementById(id).value.trim()) {
+      errEl.textContent = `Câmpul "${name}" este obligatoriu.`;
+      errEl.style.display = 'block';
+      document.getElementById(id).focus();
+      return;
+    }
+  }
+
+  // Save agent data + restul formularului (produs + client)
+  saveAgentData();
+  saveFormData();
+
+  const variables = {
+    '01_agent_gen':         document.getElementById('f_01').value,
+    '22_nume_client':        document.getElementById('f_22').value,
+    '23_varsta_client':      document.getElementById('f_23').value,
+    '24_statut_profesional': document.getElementById('f_24').value,
+    '25_statut_familial':    document.getElementById('f_25').value,
+    '26_stil_abordare':      document.getElementById('f_26').value,
+    '27_experienta_agent':   document.getElementById('f_27').value,
+    '28_stie_de_mlm':        document.getElementById('f_28').value,
+    '29_varsta_agent':       document.getElementById('f_29').value,
+    '30_categorie_produs':   document.getElementById('f_30').value,
+    '02_client_gen':        document.getElementById('f_02').value,
+    '03_tip_relatie':       document.getElementById('f_03').value,
+    '04_detalii_client':    document.getElementById('f_04').value,
+    '05_interactiune_client': document.getElementById('f_05').value,
+    '07_produs':            document.getElementById('f_07').value,
+    '08_folosit_produs':    document.getElementById('f_08').value,
+    '09_experienta_produs': document.getElementById('f_09').value,
+    '10_intentie':          'Invitatie la produs',
+    '11_tip_prezentare':    document.getElementById('f_11').value,
+    '21_durata_prezentare': document.getElementById('f_durata').value,
+    '12_context_intalnire': document.getElementById('f_12').value,
+    '17_calitati_apreciate': document.getElementById('f_17').value,
+    '18_testimoniale':      document.getElementById('f_18').value,
+    '19_avantaje_produs':   document.getElementById('f_19').value,
+    '20_vechime_contact':   document.getElementById('f_20').value,
+    'kb_opening':           document.getElementById('f_kb').value
+  };
+
+  // Save for objection flow
+  lastVariables = variables;
+  lastMode = SELECTED_MODE;
+
+  // Reset objection section
+  document.getElementById('obj-section').style.display = 'block';
+  document.getElementById('obj1-question').style.display = 'block';
+  document.getElementById('obj1-form').style.display = 'none';
+  document.getElementById('obj1-progress').style.display = 'none';
+  document.getElementById('obj1-result').style.display = 'none';
+  document.getElementById('obj2-form').style.display = 'none';
+  document.getElementById('obj2-progress').style.display = 'none';
+  document.getElementById('obj2-result').style.display = 'none';
+
+  showView('generating');
+  startProgress();
+
+  try {
+    const data = await generateAndWait({ mode: SELECTED_MODE, variables });
+
+    finishProgress(() => {
+      // Show output
+      document.getElementById('script-output').innerHTML = renderScript(data.script);
+      lastScriptText = data.script;     // pentru anti-repetitie la obiectii
+      lastObj1Response = '';            // lant de obiectii proaspat
+      document.getElementById('out-remaining').textContent = data.scripts_remaining;
+      if (USER_PROFILE) USER_PROFILE.scripts_remaining = data.scripts_remaining;
+      renderNudge();
+      showView('output');
+    });
+  } catch(e) {
+    stopProgress();
+    showView('generator');
+    errEl.textContent = e.message;
+    errEl.style.display = 'block';
+    window.scrollTo(0, document.body.scrollHeight - 200);
+  }
+}
+
+function copyScript() {
+  const text = document.getElementById('script-output').textContent;
+  navigator.clipboard.writeText(text).then(() => {
+    toast('Script copiat în clipboard! ✓');
+  }).catch(() => {
+    toast('Selectează textul manual și copiază cu Ctrl+C');
+  });
+}
+
+// ============================================
+// PROGRESS — checklist 12 etape, viteza constanta
+// ============================================
+const PROG_STAGES = [
+  'Analizăm profilul psihologic al clientului',
+  'Evaluăm tipul relației și istoricul interacțiunii',
+  'Calibrăm tonul după vechimea contactului',
+  'Selectăm tehnica de deschidere neuro-psihologică',
+  'Construim cârligul de atenție (pattern interrupt)',
+  'Mapăm nevoile și problemele latente',
+  'Analizăm produsul și avantajele relevante',
+  'Integrăm testimonialele cu impact emoțional',
+  'Construim ancorele de credibilitate',
+  'Calibrăm întrebările de persuasiune (NU=DA)',
+  'Construim puntea către prezentare',
+  'Eliminăm formulările care „sună a vânzător"'
+];
+const STAGE_MS = 5000;                                 // 5s per etapa
+const PROG_TOTAL_MS = PROG_STAGES.length * STAGE_MS;   // 60s
+const PROG_CEIL = 95;                                  // plafon cat timp asteptam API-ul
+
+let _progRAF = null;
+let _progStart = 0;
+let _progDone = false;
+
+function buildChecklist() {
+  const list = document.getElementById('prog-list');
+  if (!list || list.childElementCount) return; // construieste o singura data
+  PROG_STAGES.forEach((txt, i) => {
+    const row = document.createElement('div');
+    row.className = 'pstep pending';
+    row.id = 'pstep-' + i;
+    row.innerHTML = '<span class="pstep-ico"></span><span class="pstep-txt">' + txt + '</span>';
+    list.appendChild(row);
+  });
+}
+function renderStage(idx) {
+  PROG_STAGES.forEach((_, i) => {
+    const row = document.getElementById('pstep-' + i);
+    if (!row) return;
+    row.classList.remove('done','active','pending');
+    if (i < idx) row.classList.add('done');
+    else if (i === idx) row.classList.add('active');
+    else row.classList.add('pending');
+  });
+}
+function setBar(pct) {
+  const fill = document.getElementById('prog-fill');
+  const num = document.getElementById('prog-num');
+  if (fill) fill.style.width = pct + '%';
+  if (num) num.textContent = Math.round(pct);
+}
+function progTick() {
+  if (_progDone) return;
+  const elapsed = performance.now() - _progStart;
+  // bara liniara (viteza constanta) pana la plafon
+  setBar(Math.min(PROG_CEIL, (elapsed / PROG_TOTAL_MS) * PROG_CEIL));
+  // etapa curenta — se schimba la fiecare 5s
+  const idx = Math.min(PROG_STAGES.length - 1, Math.floor(elapsed / STAGE_MS));
+  renderStage(idx);
+  const cap = document.getElementById('prog-cap');
+  if (cap) cap.textContent = idx >= PROG_STAGES.length - 1 ? 'Suntem aproape gata...' : '';
+  _progRAF = requestAnimationFrame(progTick);
+}
+function startProgress() {
+  cancelAnimationFrame(_progRAF);
+  _progDone = false;
+  _progStart = performance.now();
+  buildChecklist();
+  renderStage(0);
+  setBar(0);
+  const cap = document.getElementById('prog-cap');
+  if (cap) cap.textContent = '';
+  _progRAF = requestAnimationFrame(progTick);
+}
+function finishProgress(cb) {
+  _progDone = true;
+  cancelAnimationFrame(_progRAF);
+  // bifeaza toate etapele + bara la 100%
+  PROG_STAGES.forEach((_, i) => {
+    const row = document.getElementById('pstep-' + i);
+    if (row) { row.classList.remove('pending','active'); row.classList.add('done'); }
+  });
+  setBar(100);
+  const cap = document.getElementById('prog-cap');
+  if (cap) cap.textContent = 'Gata!';
+  setTimeout(cb, 400);
+}
+function stopProgress() {
+  _progDone = true;
+  cancelAnimationFrame(_progRAF);
+}
+
+// ============================================
+// DOWNLOAD SCRIPT
+// ============================================
+function downloadText(text, filename) {
+  const blob = new Blob([text], { type: 'text/plain;charset=utf-8' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+function downloadScript() {
+  const text = document.getElementById('script-output').textContent;
+  if (!text.trim()) { toast('Nu există încă un script de descărcat.'); return; }
+  downloadText(text, 'script-harvard-of-sales.txt');
+  toast('Script descărcat ✓');
+}
+function downloadObjScript(num) {
+  const text = document.getElementById('obj' + num + '-output').textContent;
+  if (!text.trim()) { toast('Nu există încă un script de descărcat.'); return; }
+  downloadText(text, 'script-obiectie-' + num + '.txt');
+  toast('Script descărcat ✓');
+}
+
+// ============================================
+// TOAST
+// ============================================
+function toast(msg, duration = 3500) {
+  const el = document.getElementById('toast');
+  el.textContent = msg;
+  el.classList.add('show');
+  setTimeout(() => el.classList.remove('show'), duration);
+}
+
+// ============================================
+// ENTER KEY ON AUTH FORMS
+// ============================================
+document.addEventListener('keydown', e => {
+  if (e.key !== 'Enter') return;
+  const active = document.querySelector('.view.active');
+  if (!active) return;
+  if (active.id === 'view-login') doLogin();
+  else if (active.id === 'view-register') doRegister();
+  else if (active.id === 'view-redeem') doRedeem();
+});
+
+let lastVariables = null;
+let lastMode = 'clean';
+let lastObj1Text = '';
+let lastScriptText = '';      // textul scriptului principal generat
+let lastObj1Response = '';    // textul raspunsului generat la obiectia 1
+
+function showObj(num) {
+  if (num === 1) {
+    document.getElementById('obj1-question').style.display = 'none';
+    document.getElementById('obj1-form').style.display = 'block';
+  } else {
+    document.getElementById('obj2-question').style.display = 'none';
+    document.getElementById('obj2-form').style.display = 'block';
+  }
+}
+
+function hideObjSection() {
+  document.getElementById('obj-section').style.display = 'none';
+}
+
+async function generateObjScript(num) {
+  const prefix = 'obj' + num;
+  const textEl = document.getElementById(prefix + '-text');
+  const errEl = document.getElementById(prefix + '-err');
+  errEl.style.display = 'none';
+
+  const objText = textEl.value.trim();
+  if (!objText) {
+    errEl.textContent = 'Introdu obiecția clientului.';
+    errEl.style.display = 'block';
+    return;
+  }
+
+  if (num === 1) lastObj1Text = objText;
+
+  // Anti-repetitie: ce s-a generat deja in acest apel
+  const prior = num === 1
+    ? lastScriptText
+    : (lastScriptText + (lastObj1Response
+        ? '\n\n═══ RASPUNS OBIECTIE 1 ═══\n' + lastObj1Response
+        : ''));
+
+  const objVariables = {
+    ...lastVariables,
+    '14_obiectie_1': num === 1 ? objText : lastObj1Text,
+    '15_doreste_a_doua_obiectie': num === 2 ? 'Da' : 'Nu',
+    '16_obiectie_2': num === 2 ? objText : '',
+    '22_continut_anterior': prior || ''
+  };
+
+  // ascunde formularul, arata checklist-ul inline
+  document.getElementById(prefix + '-form').style.display = 'none';
+  document.getElementById(prefix + '-progress').style.display = 'block';
+  startObjProgress(prefix, objText);
+
+  try {
+    const data = await generateAndWait({
+      mode: lastMode,
+      variables: objVariables,
+      isObjection: true,
+      objNum: num
+    });
+
+    finishObjProgress(prefix, () => {
+      document.getElementById(prefix + '-output').innerHTML = renderScript(data.script);
+      if (num === 1) lastObj1Response = data.script;  // pentru anti-repetitie la obiectia 2
+      document.getElementById(prefix + '-progress').style.display = 'none';
+      document.getElementById(prefix + '-result').style.display = 'block';
+    });
+
+  } catch(e) {
+    stopObjProgress(prefix);
+    document.getElementById(prefix + '-progress').style.display = 'none';
+    document.getElementById(prefix + '-form').style.display = 'block';
+    errEl.textContent = e.message;
+    errEl.style.display = 'block';
+  }
+}
+
+// ============================================
+// PROGRES OBIECTII — checklist inline (6-7 etape, ~3s)
+// ============================================
+const OBJ1_STAGES = [
+  'Analizăm obiecția clientului',
+  'Identificăm tipul: reală sau paravan',
+  'Detectăm emoția din spatele ei',
+  'Validăm fără să contrazicem',
+  'Selectăm tehnica de tratare',
+  'Construim puntea de revenire la prezentare',
+  'Eliminăm tonul defensiv'
+];
+const OBJ2_STAGES = [
+  'Recitim prima obiecție și contextul',
+  'Verificăm dacă e obiecție reală sau ezitare',
+  'Diferențiem față de prima replică',
+  'Evităm tonul repetat / rehearsed',
+  'Calibrăm un răspuns proaspăt',
+  'Construim revenirea naturală la prezentare',
+  'Eliminăm formulările de „vânzător"'
+];
+const OBJ_STAGE_MS = 3000;
+const OBJ_PROG_CEIL = 95;
+const _objProg = {
+  obj1: { raf:null, start:0, done:false, stages:OBJ1_STAGES },
+  obj2: { raf:null, start:0, done:false, stages:OBJ2_STAGES }
+};
+
+function buildObjChecklist(prefix) {
+  const list = document.getElementById(prefix + '-prog-list');
+  if (!list || list.childElementCount) return;
+  _objProg[prefix].stages.forEach((txt, i) => {
+    const row = document.createElement('div');
+    row.className = 'pstep pending';
+    row.id = prefix + '-pstep-' + i;
+    row.innerHTML = '<span class="pstep-ico"></span><span class="pstep-txt">' + txt + '</span>';
+    list.appendChild(row);
+  });
+}
+function renderObjStage(prefix, idx) {
+  _objProg[prefix].stages.forEach((_, i) => {
+    const row = document.getElementById(prefix + '-pstep-' + i);
+    if (!row) return;
+    row.classList.remove('done','active','pending');
+    if (i < idx) row.classList.add('done');
+    else if (i === idx) row.classList.add('active');
+    else row.classList.add('pending');
+  });
+}
+function setObjBar(prefix, pct) {
+  const fill = document.getElementById(prefix + '-prog-fill');
+  const num = document.getElementById(prefix + '-prog-num');
+  if (fill) fill.style.width = pct + '%';
+  if (num) num.textContent = Math.round(pct);
+}
+function objTick(prefix) {
+  const st = _objProg[prefix];
+  if (st.done) return;
+  const elapsed = performance.now() - st.start;
+  const total = st.stages.length * OBJ_STAGE_MS;
+  setObjBar(prefix, Math.min(OBJ_PROG_CEIL, (elapsed / total) * OBJ_PROG_CEIL));
+  const idx = Math.min(st.stages.length - 1, Math.floor(elapsed / OBJ_STAGE_MS));
+  renderObjStage(prefix, idx);
+  const cap = document.getElementById(prefix + '-prog-cap');
+  if (cap) cap.textContent = idx >= st.stages.length - 1 ? 'Suntem aproape gata...' : '';
+  st.raf = requestAnimationFrame(() => objTick(prefix));
+}
+function startObjProgress(prefix, objText) {
+  const st = _objProg[prefix];
+  cancelAnimationFrame(st.raf);
+  st.done = false;
+  st.start = performance.now();
+  const ctx = document.getElementById(prefix + '-prog-ctx');
+  if (ctx) {
+    let t = objText.length > 80 ? objText.slice(0, 80) + '…' : objText;
+    t = t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+    ctx.innerHTML = 'Tratăm obiecția: <i>«' + t + '»</i>';
+  }
+  buildObjChecklist(prefix);
+  renderObjStage(prefix, 0);
+  setObjBar(prefix, 0);
+  const cap = document.getElementById(prefix + '-prog-cap');
+  if (cap) cap.textContent = '';
+  st.raf = requestAnimationFrame(() => objTick(prefix));
+}
+function finishObjProgress(prefix, cb) {
+  const st = _objProg[prefix];
+  st.done = true;
+  cancelAnimationFrame(st.raf);
+  st.stages.forEach((_, i) => {
+    const row = document.getElementById(prefix + '-pstep-' + i);
+    if (row) { row.classList.remove('pending','active'); row.classList.add('done'); }
+  });
+  setObjBar(prefix, 100);
+  const cap = document.getElementById(prefix + '-prog-cap');
+  if (cap) cap.textContent = 'Gata!';
+  setTimeout(cb, 400);
+}
+function stopObjProgress(prefix) {
+  const st = _objProg[prefix];
+  st.done = true;
+  cancelAnimationFrame(st.raf);
+}
+
+function copyObjScript(num) {
+  const text = document.getElementById('obj' + num + '-output').textContent;
+  navigator.clipboard.writeText(text).then(() => toast('Script copiat! ✓'));
+}
+// ============================================
+function animateCounter() {
+  const el = document.getElementById('counter-num');
+  const ring = document.getElementById('ring-fill');
+  const agentsEl = document.getElementById('counter-agents');
+  const scriptsEl = document.getElementById('counter-scripts');
+  if (!el) return;
+
+  // Animam 78% ring
+  const target = 78;
+  const circumference = 534;
+  const duration = 2400;
+  const startTime = performance.now();
+  function ease(t){ return 1 - Math.pow(1 - t, 3); }
+  function frame(now){
+    const progress = Math.min((now - startTime) / duration, 1);
+    const eased = ease(progress);
+    el.textContent = Math.round(target * eased);
+    if (ring) ring.style.strokeDashoffset = circumference - circumference * (target / 100) * eased;
+    if (progress < 1) requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+
+  // Animam contoarele reale (agenti + scripturi): preia numerele din backend
+  if (agentsEl || scriptsEl) {
+    const fmtRo = (n) => Number(n).toLocaleString('ro-RO');
+    // count-up de la 0 la target peste `dur` ms (ca pe preturi.html), indiferent de marimea numarului
+    const countFromZero = (elx, target, dur) => {
+      if (!elx) return;
+      let t0 = null;
+      const stepFrame = (ts) => {
+        if (!t0) t0 = ts;
+        const p = Math.min((ts - t0) / dur, 1);
+        const eased = 1 - Math.pow(1 - p, 3);
+        elx.textContent = fmtRo(Math.floor(eased * target));
+        if (p < 1) requestAnimationFrame(stepFrame);
+        else elx.textContent = fmtRo(target);
+      };
+      requestAnimationFrame(stepFrame);
+    };
+    // polling (60s): bump silentios doar daca a crescut (delta mica)
+    const bumpTo = (elx, target) => {
+      if (!elx) return;
+      const prev = parseInt(String(elx.textContent).replace(/\D/g, '')) || 0;
+      if (target > prev) {
+        let current = prev;
+        const bump = () => {
+          if (current < target) { current++; elx.textContent = fmtRo(current); setTimeout(bump, 80); }
+        };
+        bump();
+      }
+    };
+    const updateStats = async (animate = false) => {
+      try {
+        const res = await fetch('/api/stats');
+        const data = await res.json();
+        const realAgents = (typeof data.distribuitori === 'number') ? data.distribuitori
+                         : (typeof data.agents === 'number') ? data.agents : 112;
+        const realScripts = (typeof data.scripturi === 'number') ? data.scripturi : 1122;
+        if (animate) {
+          countFromZero(agentsEl,  realAgents,  1600);
+          countFromZero(scriptsEl, realScripts, 1800);
+        } else {
+          bumpTo(agentsEl,  realAgents);
+          bumpTo(scriptsEl, realScripts);
+        }
+      } catch(e) {
+        // Fallback la valori statice daca API-ul nu raspunde
+        if (animate) {
+          if (agentsEl)  agentsEl.textContent  = '112';
+          if (scriptsEl) scriptsEl.textContent = '1.122';
+        }
+      }
+    };
+
+    // Prima incarcare cu animatie
+    updateStats(true);
+
+    // Polling la fiecare 60 secunde pentru update in timp real
+    setInterval(() => updateStats(false), 60000);
+  }
+}
+const _counterObs = new IntersectionObserver((entries, obs) => {
+  if (entries[0].isIntersecting){ animateCounter(); obs.disconnect(); }
+}, { threshold: 0.4 });
+window.addEventListener('DOMContentLoaded', () => {
+  const t = document.getElementById('counter-num');
+  if (t) _counterObs.observe(t);
+});
+
+// ============================================
+// START
+// ============================================
+init();
 </script>
+
+<!-- ===== MODAL: REGULI DE SUCCES ===== -->
+<div class="modal-overlay" id="m-reguli" onclick="if(event.target===this && _isOnboarded()) closeModal('m-reguli')">
+  <div class="modal-box">
+    <div class="modal-head">
+      <div class="modal-title">Reguli de Succes</div>
+      <div class="modal-subtitle">80% din apel e starea ta. Citește o dată — apoi le ai.</div>
+    </div>
+    <div class="modal-body">
+      <div class="rule-card"><div class="rule-num">1</div><div class="rule-txt"><div class="rt">Starea ta face 80% din apel</div><div class="rd">30-60 secunde de mișcare reală înainte de apel — dans, sărituri, zâmbet larg în oglindă. Intri din abundență, nu din nevoia de a convinge. Vocea caldă vine din stare, nu se poate simula.</div></div></div>
+      <div class="rule-card"><div class="rule-num">2</div><div class="rule-txt"><div class="rt">Citește scriptul cu voce tare, minim de 3 ori</div><div class="rd">Prima dată îl citești, a doua te obișnuiești, a treia dispar ezitările. Corzile vocale memorează tiparul, nu doar mintea. Scriptul citit în gând = pitch detectabil în apel.</div></div></div>
+      <div class="rule-card"><div class="rule-num">3</div><div class="rule-txt"><div class="rt">Spune cuvintele EXACT cum sunt scrise</div><div class="rd">„Te macină", nu „te frământă". Fiecare cuvânt e ales ca să ocolească o rezistență. Naturalizează CUM spui (ritm, „uite", numele), dar păstrează CE spui (întrebările, oglindirile, frazele de sigilare).</div></div></div>
+      <div class="rule-card"><div class="rule-num">4</div><div class="rule-txt"><div class="rt">Ce faci când clientul îți pune întrebări incomode în timpul scriptului</div><div class="rd"><div style="margin-bottom:4px">Sunt 2 astfel de situații diferite:</div>
+
+        <div style="margin:14px 0">
+          <div style="color:var(--gold);font-size:11.5px;letter-spacing:.03em;text-transform:uppercase;font-weight:700;margin-bottom:6px">Situația 1 — întrebare prematură</div>
+          <div style="color:var(--muted2);font-size:12px;margin-bottom:8px">(la începutul discuției, ÎNAINTE să prezinți produsul)</div>
+          <div style="margin-bottom:5px">Dacă clientul te întreabă:</div>
+          <div style="padding-left:6px;line-height:1.9;margin-bottom:10px">• „E cumva MLM?"<br>• „Despre ce e vorba?"<br>• „Ce vrei să-mi vinzi?"<br>• „Unde ai aflat de asta?"</div>
+          <div style="margin-bottom:5px">Replica ta (zâmbește obligatoriu 😊) — validezi întrebarea + promiți răspuns garantat + amâni CÂND răspunzi tu:</div>
+          <div style="border-left:2px solid var(--line);padding-left:11px;color:var(--ink);margin-bottom:10px">„Îmi plac întrebările tale și nicio întrebare nu va rămâne fără răspuns 😊 — ajungem și acolo."</div>
+          <div style="margin-bottom:8px">→ Apoi REVII la următoarea întrebare din script.</div>
+          <div>⚠️ Principiu: scriptul funcționează DOAR dacă urmezi structura. Ai încredere în sistem 😊</div>
+        </div>
+
+        <div style="height:1px;background:var(--lsoft);margin:14px 0"></div>
+
+        <div style="margin:14px 0">
+          <div style="color:var(--gold);font-size:11.5px;letter-spacing:.03em;text-transform:uppercase;font-weight:700;margin-bottom:6px">Situația 2 — întrebare după prezentarea scurtă</div>
+          <div style="color:var(--muted2);font-size:12px;margin-bottom:8px">(după ce ai pomenit produsul)</div>
+          <div style="margin-bottom:5px">Dacă clientul întreabă:</div>
+          <div style="padding-left:6px;line-height:1.9;margin-bottom:10px">• „Cum funcționează exact?"<br>• „Ce ingrediente conține?"<br>• „Cât costă?"<br>• „Cum se livrează?"<br>• „Care e diferența față de [competitor]?"</div>
+          <div style="color:#f0a0a0;margin-bottom:10px">⚠️ Pericolul: dacă răspunzi acum, faci prezentare prin telefon → pierzi motivația întâlnirii → clientul nu mai vine.</div>
+          <div style="margin-bottom:5px">Replica ta (zâmbește obligatoriu 😊) — validezi + amâni cu drag la întâlnire + redirect spre dată:</div>
+          <div style="border-left:2px solid var(--line);padding-left:11px;color:var(--ink);margin-bottom:10px">„Îmi place că ai întrebări bune care cresc valoarea discuției. Cu mare drag îți răspund când ne vedem — asta e și scopul [întâlnirii]. N-aș vrea să rămână nicio întrebare fără răspuns."</div>
+          <div>→ Apoi REDIRECT spre stabilirea datei.</div>
+        </div>
+
+        <div style="background:rgba(216,169,74,.07);border-radius:10px;padding:12px 14px;margin-top:14px">
+          <div style="color:var(--gold);font-size:11.5px;letter-spacing:.03em;text-transform:uppercase;font-weight:700;margin-bottom:8px">Regula meta pentru ambele situații</div>
+          <div style="line-height:1.95">• Niciodată „NU" direct<br>• Niciodată refuz brusc<br>• Întotdeauna cu zâmbet 😊<br>• Validezi întrebarea ÎNTÂI („Îmi plac/place...")<br>• Promiți răspuns garantat<br>• Tu decizi CÂND răspunzi</div>
+        </div></div></div></div>
+      <div class="rule-card"><div class="rule-num">5</div><div class="rule-txt"><div class="rt">Tăcerea după întrebare = puterea ta</div><div class="rd">Dacă devine inconfortabil, rezistă. El va vorbi primul. Nu umple tăcerea.</div></div></div>
+      <div class="rule-card"><div class="rule-num">6</div><div class="rule-txt"><div class="rt">Dacă te blochezi, ai o plasă de siguranță</div><div class="rd">„Lasă-mă să formulez mai bine ce voiam să întreb..." — și revii la script. Nimic nu e pierdut.</div></div></div>
+      <div class="rule-card"><div class="rule-num">7</div><div class="rule-txt"><div class="rt">Durata prezentării: spune-o exact, calm</div><div class="rd">Fără s-o minimizezi, fără s-o umfli. Exact valoarea pe care ai ales-o în formular.</div></div></div>
+    </div>
+    <div class="modal-foot"><button class="btn modal-gate">Închide</button></div>
+  </div>
+</div>
+
+<!-- ===== MODAL: GHID ASA DA / ASA NU ===== -->
+<div class="modal-overlay" id="m-ghid" onclick="if(event.target===this && _isOnboarded()) closeModal('m-ghid')">
+  <div class="modal-box">
+    <div class="modal-head">
+      <div class="modal-title">Cum completezi pentru un rezultat bun</div>
+      <div class="modal-subtitle">Calitatea răspunsurilor tale = calitatea scriptului.</div>
+    </div>
+    <div class="modal-body">
+      <div class="cmp-intro">Iată câmpurile care fac diferența. Compară greșit (stânga) cu corect (dreapta):</div>
+
+      <div class="cmp-blk">
+        <div class="cmp-fname">Povestește despre clientul tău</div>
+        <div class="cmp">
+          <div class="box nu"><div class="tag tag-nu">✕ ASA NU</div><div class="ex">„o știu de mult, e ok"</div></div>
+          <div class="box da"><div class="tag tag-da">✓ ASA DA</div><div class="ex">„E mereu epuizată după ture, doarme prost, n-are energie pentru nimic"</div></div>
+        </div>
+        <div class="cmp-why">De ce: situația concretă e ancora pe care se construiește puntea spre produs. Vag → script generic.</div>
+      </div>
+
+      <div class="cmp-blk">
+        <div class="cmp-fname">Calități apreciate la această persoană</div>
+        <div class="cmp">
+          <div class="box nu"><div class="tag tag-nu">✕ ASA NU</div><div class="ex">„bună, de treabă"</div></div>
+          <div class="box da"><div class="tag tag-da">✓ ASA DA</div><div class="ex">„Empatică, organizată, de încredere"</div></div>
+        </div>
+        <div class="cmp-why">De ce: specifice → compliment argumentat, nu laudă goală care sună fals.</div>
+      </div>
+
+      <div class="cmp-blk">
+        <div class="cmp-fname">Ultima interacțiune cu ea / el</div>
+        <div class="cmp">
+          <div class="box nu"><div class="tag tag-nu">✕ ASA NU</div><div class="ex">gol / „nu mai știu"</div></div>
+          <div class="box da"><div class="tag tag-da">✓ ASA DA</div><div class="ex">„săptămâna trecută, la o cafea — mi-a zis că e frântă de oboseală"</div></div>
+        </div>
+        <div class="cmp-why">De ce: hook real pentru deschidere + oglindire pe cuvintele ei exacte.</div>
+      </div>
+
+      <div class="cmp-blk">
+        <div class="cmp-fname">Statut profesional</div>
+        <div class="cmp">
+          <div class="box nu"><div class="tag tag-nu">✕ ASA NU</div><div class="ex">„muncește" / „are un job"</div></div>
+          <div class="box da"><div class="tag tag-da">✓ ASA DA</div><div class="ex">„Asistentă medicală, ture lungi de noapte"</div></div>
+        </div>
+        <div class="cmp-why">De ce: calibrează profilul (analitic? expert?) și dă argument concret pentru compliment.</div>
+      </div>
+
+      <div class="cmp-blk">
+        <div class="cmp-fname">Experiența ta concretă cu produsul</div>
+        <div class="cmp">
+          <div class="box nu"><div class="tag tag-nu">✕ ASA NU</div><div class="ex">„e foarte bun, mi-a plăcut mult"</div></div>
+          <div class="box da"><div class="tag tag-da">✓ ASA DA</div><div class="ex">„Eram epuizată după muncă; după ~3 săptămâni dorm mai bine și am energie toată ziua"</div></div>
+        </div>
+        <div class="cmp-why">De ce: experiența reală = puntea autentică. Vag → sună fix a reclamă.</div>
+      </div>
+
+      <div class="cmp-rule"><b style="font-weight:700">Regula de aur:</b> specific + real bate generic + vag. Iar dacă nu știi ceva — lasă gol. Gol-onest bate inventat.</div>
+    </div>
+    <div class="modal-foot"><button class="btn modal-gate">Închide</button></div>
+  </div>
+</div>
+
 </body>
 </html>
