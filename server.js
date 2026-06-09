@@ -485,6 +485,110 @@ app.post('/api/create-checkout-session', auth, async (req, res) => {
 });
 
 // ============================================
+// GESTIONARE ABONAMENT — info / anulare / reactivare
+// ============================================
+
+// Gaseste abonamentul Stripe al userului. Ordine: sub_id salvat -> customer_id salvat
+// -> cautare dupa email (pentru abonatii vechi, fara ID-uri in DB). Backfill cand gaseste.
+async function findUserSubscription(userId, email) {
+  const { data: profile } = await db
+    .from('profiles')
+    .select('stripe_subscription_id, stripe_customer_id, tier')
+    .eq('id', userId).single();
+
+  const isActive = s => ['active', 'trialing', 'past_due'].includes(s.status);
+
+  // 1) avem subscription id salvat
+  if (profile && profile.stripe_subscription_id) {
+    try {
+      const sub = await stripe.subscriptions.retrieve(profile.stripe_subscription_id);
+      if (sub && sub.status !== 'canceled') return { sub };
+    } catch (e) { /* sub invalid -> fallback */ }
+  }
+
+  // 2) avem customer id -> listam abonamentele lui
+  if (profile && profile.stripe_customer_id) {
+    const subs = await stripe.subscriptions.list({ customer: profile.stripe_customer_id, status: 'all', limit: 10 });
+    const sub = subs.data.find(isActive);
+    if (sub) {
+      await db.from('profiles').update({ stripe_subscription_id: sub.id }).eq('id', userId);
+      return { sub };
+    }
+  }
+
+  // 3) fallback abonati vechi: cautare dupa email
+  if (email) {
+    const customers = await stripe.customers.list({ email, limit: 10 });
+    for (const c of customers.data) {
+      const subs = await stripe.subscriptions.list({ customer: c.id, status: 'all', limit: 10 });
+      const sub = subs.data.find(isActive);
+      if (sub) {
+        await db.from('profiles').update({ stripe_customer_id: c.id, stripe_subscription_id: sub.id }).eq('id', userId);
+        return { sub };
+      }
+    }
+  }
+
+  return null;
+}
+
+// citeste data de final perioada (compatibil cu API-ul nou: poate fi pe item)
+function subPeriodEnd(sub) {
+  const item = sub.items && sub.items.data && sub.items.data[0];
+  const sec = sub.current_period_end || (item && item.current_period_end) || null;
+  return sec ? sec * 1000 : null;
+}
+
+// GET — info abonament curent
+app.get('/api/subscription', auth, async (req, res) => {
+  try {
+    const found = await findUserSubscription(req.user.id, req.user.email);
+    if (!found) return res.json({ has_subscription: false });
+    res.json({
+      has_subscription: true,
+      status: found.sub.status,
+      cancel_at_period_end: found.sub.cancel_at_period_end,
+      current_period_end: subPeriodEnd(found.sub)
+    });
+  } catch (err) {
+    console.error('subscription info error:', err);
+    res.status(500).json({ error: 'Nu am putut citi abonamentul.' });
+  }
+});
+
+// POST — anuleaza la finalul perioadei (ramane activ pana atunci, fara refund, se poate reactiva)
+app.post('/api/subscription/cancel', auth, async (req, res) => {
+  try {
+    const found = await findUserSubscription(req.user.id, req.user.email);
+    if (!found) return res.status(404).json({ error: 'Nu ai un abonament activ de anulat.' });
+    const reason = ((req.body && req.body.reason) || '').toString().slice(0, 120);
+    const updated = await stripe.subscriptions.update(found.sub.id, {
+      cancel_at_period_end: true,
+      metadata: { ...(found.sub.metadata || {}), cancel_reason: reason }
+    });
+    console.log(`[cancel] ${req.user.id} sub=${updated.id} motiv="${reason}"`);
+    res.json({ ok: true, cancel_at_period_end: true, current_period_end: subPeriodEnd(updated) });
+  } catch (err) {
+    console.error('cancel error:', err);
+    res.status(500).json({ error: 'Nu am putut anula abonamentul. Incearca din nou.' });
+  }
+});
+
+// POST — reactiveaza (anuleaza anularea programata)
+app.post('/api/subscription/resume', auth, async (req, res) => {
+  try {
+    const found = await findUserSubscription(req.user.id, req.user.email);
+    if (!found) return res.status(404).json({ error: 'Nu ai un abonament de reactivat.' });
+    const updated = await stripe.subscriptions.update(found.sub.id, { cancel_at_period_end: false });
+    console.log(`[resume] ${req.user.id} sub=${updated.id}`);
+    res.json({ ok: true, cancel_at_period_end: false, current_period_end: subPeriodEnd(updated) });
+  } catch (err) {
+    console.error('resume error:', err);
+    res.status(500).json({ error: 'Nu am putut reactiva abonamentul.' });
+  }
+});
+
+// ============================================
 // STRIPE WEBHOOK — activează planul automat după plată
 // (folosește body RAW — vezi skip-ul express.json de la început)
 // ============================================
