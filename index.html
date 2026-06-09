@@ -428,7 +428,7 @@ label{display:block;font-size:12.5px;font-weight:600;letter-spacing:.08em;text-t
           </select>
         </div>
         <div class="field">
-          <label>Vârsta ta (opțional)</label>
+          <label>Vârsta ta (aproximativ)</label>
           <input type="text" id="f_29" placeholder="Ex: 42">
         </div>
       </div>
@@ -461,7 +461,7 @@ label{display:block;font-size:12.5px;font-weight:600;letter-spacing:.08em;text-t
           <input type="text" id="f_22" placeholder="Ex: Cristina">
         </div>
         <div class="field">
-          <label>Vârsta (opțional)</label>
+          <label>Vârsta (aproximativ)</label>
           <input type="text" id="f_23" placeholder="Ex: 34">
         </div>
       </div>
@@ -553,8 +553,9 @@ label{display:block;font-size:12.5px;font-weight:600;letter-spacing:.08em;text-t
         <textarea id="f_09" rows="3" placeholder="Ex: Am folosit 3 luni, energia mea a crescut vizibil, am reușit să slăbesc 5kg, somnul s-a îmbunătățit..."></textarea>
       </div>
       <div class="field">
-        <label>Avantajele principale ale produsului</label>
-        <textarea id="f_19" rows="2" placeholder="Ex: Natural, fără efecte secundare, certificat internațional, rezultate în 30 de zile..."></textarea>
+        <label>Avantajele concrete ale produsului</label>
+        <textarea id="f_19" rows="2" placeholder="Ex: natural · fără efecte secundare · rezultate vizibile în 30 de zile · certificat..."></textarea>
+        <div class="field-note">Enumeră minim 3 avantaje concrete. Cu cât mai specific, cu atât scriptul e mai puternic — vag → sună a reclamă.</div>
       </div>
       <div class="field">
         <label>Testimoniale cunoscute</label>
@@ -1209,13 +1210,19 @@ async function doGenerate() {
   // Validate required fields
   const required = [
     ['f_01','Genul tău'],
+    ['f_29','Vârsta ta'],
+    ['f_26','Stil de abordare'],
     ['f_22','Numele clientului'],
+    ['f_23','Vârsta clientului'],
     ['f_02','Genul clientului'],
     ['f_03','Tip relație'],
+    ['f_20','Când ați vorbit ultima oară'],
+    ['f_17','Calități apreciate la această persoană'],
     ['f_30','Categoria produsului'],
     ['f_07','Produsul'],
     ['f_08','Ai folosit produsul?'],
-    ['f_20','Vechimea contactului']
+    ['f_19','Avantajele produsului'],
+    ['f_11','Tip prezentare']
   ];
   for (const [id, name] of required) {
     if (!document.getElementById(id).value.trim()) {
