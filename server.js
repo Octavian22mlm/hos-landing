@@ -514,9 +514,11 @@ app.post('/api/webhook', express.raw({ type: 'application/json' }), async (req, 
           tier,
           scripts_remaining: monthly,
           training_left: s.mode === 'subscription' ? (TRAINING_BONUS[tier] || 0) : 0,
-          scripts_reset_at: new Date().toISOString()
+          scripts_reset_at: new Date().toISOString(),
+          stripe_customer_id: s.customer || null,
+          stripe_subscription_id: s.subscription || null
         }).eq('id', userId);
-        console.log(`[webhook] activat ${tier} pentru ${userId} (${s.mode})`);
+        console.log(`[webhook] activat ${tier} pentru ${userId} (${s.mode}) cust=${s.customer || '-'} sub=${s.subscription || '-'}`);
       }
     }
 
