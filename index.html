@@ -125,6 +125,8 @@ label{display:block;font-size:12.5px;font-weight:600;letter-spacing:.08em;text-t
 .script-actions{display:flex;gap:12px;margin-top:18px;flex-wrap:wrap}
 .script-box .script-rule{display:block;margin:16px 0 10px;padding-top:12px;border-top:1px solid rgba(0,0,0,.16);font-size:12px;letter-spacing:.05em;color:#7a5f10;font-weight:700;line-height:1.45}
 .script-box .script-rule.bare{padding-top:0;height:0;margin:14px 0;border-top:1px solid rgba(0,0,0,.12)}
+.script-box .script-zone{display:block;margin:22px 0 18px;background:rgba(122,95,16,.10);border-left:3px solid #b8903a;padding:11px 14px;font-size:13.5px;letter-spacing:.02em;color:#5a4a14;font-weight:700;line-height:1.4}
+.script-box .script-pause{display:inline-block;background:rgba(0,0,0,.05);border-radius:6px;padding:3px 10px;font-size:12.5px;color:#555;font-weight:600}
 .prog-sub{text-align:center;color:var(--goldl);font-size:13px;letter-spacing:.04em;margin:-14px 0 22px}
 .prog-warn{text-align:center;color:var(--muted);font-size:12.5px;margin-top:14px;line-height:1.4}
 .prog-warn b{color:var(--goldl);font-weight:600}
@@ -1160,9 +1162,20 @@ function renderScript(text) {
   var lines = esc.split('\n');
   for (var i = 0; i < lines.length; i++) {
     var t = lines[i].trim();
-    if (/^[—–\-═]{3,}$/.test(t)) { lines[i] = '<span class="script-rule bare"></span>'; continue; }
-    var core = t.replace(/^[—–\-═\s]+/, '').replace(/[—–\-═\s]+$/, '');
-    if (/^ETAPA\b/i.test(core)) { lines[i] = '<span class="script-rule">' + core + '</span>'; }
+    // bare grele de zona (blocuri pline █ sau linie dubla ═) -> scoase (le inlocuieste bannerul)
+    if (/^[█═]{3,}$/.test(t)) { lines[i] = ''; continue; }
+    // separatoare usoare (— – - ─) -> linie fina
+    if (/^[—–\-─]{3,}$/.test(t)) { lines[i] = '<span class="script-rule bare"></span>'; continue; }
+    // pauza [ PAUZA ... ] -> chip discret
+    if (/^\[\s*PAUZ/i.test(t) && /\]$/.test(t)) {
+      var pcore = t.replace(/^\[\s*/, '').replace(/\s*\]$/, '');
+      lines[i] = '<span class="script-pause">' + pcore + '</span>'; continue;
+    }
+    // curata separatoarele din capete (inclusiv ─ si █) ca sa detectam continutul
+    var core = t.replace(/^[—–\-═─█\s]+/, '').replace(/[—–\-═─█\s]+$/, '');
+    if (/^ETAPA\b/i.test(core)) { lines[i] = '<span class="script-rule">' + core + '</span>'; continue; }
+    // antet de zona (incepe cu emoji-ul zonei) -> banda
+    if (/^(📋|🎬|✅)/.test(core)) { lines[i] = '<span class="script-zone">' + core + '</span>'; continue; }
   }
   esc = lines.join('\n');
   return esc.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
