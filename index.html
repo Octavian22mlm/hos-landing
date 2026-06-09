@@ -314,6 +314,11 @@ label{display:block;font-size:12.5px;font-weight:600;letter-spacing:.08em;text-t
       <span class="live-dot"></span>
       <span><strong id="counter-agents">112</strong> agenți MLM generează scripturi zilnic</span>
     </div>
+    <br>
+    <div class="live-badge">
+      <span class="live-dot"></span>
+      <span><strong id="counter-scripts">1.122</strong> scripturi generate până acum</span>
+    </div>
     <div class="auth-card">
       <div class="auth-brand">
         <div class="name">HARVARD OF SALES</div>
@@ -1648,6 +1653,7 @@ function animateCounter() {
   const el = document.getElementById('counter-num');
   const ring = document.getElementById('ring-fill');
   const agentsEl = document.getElementById('counter-agents');
+  const scriptsEl = document.getElementById('counter-scripts');
   if (!el) return;
 
   // Animam 78% ring
@@ -1665,57 +1671,54 @@ function animateCounter() {
   }
   requestAnimationFrame(frame);
 
-  // Animam contorul agentilor: preia numarul real din backend
-  if (agentsEl) {
-    const updateAgents = async (animate = false) => {
+  // Animam contoarele reale (agenti + scripturi): preia numerele din backend
+  if (agentsEl || scriptsEl) {
+    const fmtRo = (n) => Number(n).toLocaleString('ro-RO');
+    // animate=true -> count-up de la (target-lead) la target; animate=false -> bump silentios doar daca a crescut
+    const animateTo = (elx, target, animate, lead, speed) => {
+      if (!elx) return;
+      if (animate) {
+        let current = Math.max(0, target - lead);
+        elx.textContent = fmtRo(current);
+        const step = () => {
+          if (current < target) { current++; elx.textContent = fmtRo(current); setTimeout(step, speed); }
+          // dupa atingerea tintei, creste doar real din polling-ul de la 60s
+        };
+        setTimeout(step, 600);
+      } else {
+        const prev = parseInt(String(elx.textContent).replace(/\D/g, '')) || 0;
+        if (target > prev) {
+          let current = prev;
+          const bump = () => {
+            if (current < target) { current++; elx.textContent = fmtRo(current); setTimeout(bump, 80); }
+          };
+          bump();
+        }
+      }
+    };
+    const updateStats = async (animate = false) => {
       try {
         const res = await fetch('/api/stats');
         const data = await res.json();
-        const realCount = (typeof data.distribuitori === 'number') ? data.distribuitori
+        const realAgents = (typeof data.distribuitori === 'number') ? data.distribuitori
                          : (typeof data.agents === 'number') ? data.agents : 112;
-
-        if (animate) {
-          // Prima data: animeaza de la (count - 20) la count
-          const startFrom = Math.max(0, realCount - 20);
-          let current = startFrom;
-          agentsEl.textContent = current;
-          const step = () => {
-            if (current < realCount) {
-              current++;
-              agentsEl.textContent = current;
-              setTimeout(step, 55);
-            } else {
-              // Numerele cresc doar real, din polling-ul de la 60s. Fara incremente false.
-            }
-          };
-          setTimeout(step, 600);
-        } else {
-          // Update silentios (polling)
-          const prev = parseInt(agentsEl.textContent);
-          if (realCount > prev) {
-            // Animeaza diferenta
-            let current = prev;
-            const bump = () => {
-              if (current < realCount) {
-                current++;
-                agentsEl.textContent = current;
-                setTimeout(bump, 80);
-              }
-            };
-            bump();
-          }
-        }
+        const realScripts = (typeof data.scripturi === 'number') ? data.scripturi : 1122;
+        animateTo(agentsEl,  realAgents,  animate, 20, 55);
+        animateTo(scriptsEl, realScripts, animate, 30, 45);
       } catch(e) {
-        // Fallback la valoarea statica daca API-ul nu raspunde
-        if (animate) agentsEl.textContent = '112';
+        // Fallback la valori statice daca API-ul nu raspunde
+        if (animate) {
+          if (agentsEl)  agentsEl.textContent  = '112';
+          if (scriptsEl) scriptsEl.textContent = '1.122';
+        }
       }
     };
 
     // Prima incarcare cu animatie
-    updateAgents(true);
+    updateStats(true);
 
     // Polling la fiecare 60 secunde pentru update in timp real
-    setInterval(() => updateAgents(false), 60000);
+    setInterval(() => updateStats(false), 60000);
   }
 }
 const _counterObs = new IntersectionObserver((entries, obs) => {
