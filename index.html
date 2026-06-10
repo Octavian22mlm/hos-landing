@@ -21,28 +21,28 @@ body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
   background:radial-gradient(60% 45% at 50% -5%,rgba(216,169,74,.09),transparent 55%),linear-gradient(180deg,#0a0f1b,var(--bg) 50%)}
 .z{position:relative;z-index:1}
 input,textarea,select{width:100%;padding:12px 14px;background:var(--panel2);border:1px solid var(--lsoft);border-radius:8px;
-  color:var(--ink);font-family:"Hanken Grotesk",sans-serif;font-size:15px;outline:none;resize:vertical;transition:border-color .2s}
+  color:var(--ink);font-family:"Hanken Grotesk",sans-serif;font-size:16px;outline:none;resize:vertical;transition:border-color .2s}
 input:focus,textarea:focus,select:focus{border-color:var(--gold)}
 select option{background:var(--panel2)}
-label{display:block;font-size:12.5px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:7px}
+label{display:block;font-size:13.5px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:7px}
 .btn{width:100%;padding:14px;background:linear-gradient(180deg,var(--goldl),var(--goldd));color:#1a1206;
-  font-family:"Hanken Grotesk",sans-serif;font-size:15px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;
+  font-family:"Hanken Grotesk",sans-serif;font-size:16px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;
   border:none;border-radius:9px;cursor:pointer;transition:filter .2s,transform .15s}
 .btn:hover{filter:brightness(1.07);transform:translateY(-1px)}
 .btn:disabled{opacity:.45;cursor:not-allowed;transform:none;filter:none}
 .btn-ghost{background:transparent;color:var(--gold);border:1px solid var(--line);
-  font-family:"Hanken Grotesk",sans-serif;font-size:14px;font-weight:600;padding:11px 20px;
+  font-family:"Hanken Grotesk",sans-serif;font-size:15px;font-weight:600;padding:11px 20px;
   border-radius:8px;cursor:pointer;transition:border-color .2s;width:auto}
 .btn-ghost:hover{border-color:var(--gold)}
 .err{background:rgba(224,82,82,.12);border:1px solid rgba(224,82,82,.3);border-radius:8px;
-  padding:11px 14px;font-size:14px;color:#f08080;display:none;margin-bottom:14px}
+  padding:11px 14px;font-size:15px;color:#f08080;display:none;margin-bottom:14px}
 .suc{background:rgba(62,207,142,.1);border:1px solid rgba(62,207,142,.3);border-radius:8px;
-  padding:11px 14px;font-size:14px;color:var(--green);display:none;margin-bottom:14px}
+  padding:11px 14px;font-size:15px;color:var(--green);display:none;margin-bottom:14px}
 
 /* ── TOAST ── */
 #toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(100px);
   background:var(--panel2);border:1px solid var(--line);border-radius:10px;
-  padding:13px 22px;font-size:14px;color:var(--ink);z-index:999;transition:transform .3s;white-space:nowrap}
+  padding:13px 22px;font-size:15px;color:var(--ink);z-index:999;transition:transform .3s;white-space:nowrap}
 #toast.show{transform:translateX(-50%) translateY(0)}
 
 /* ── VIEWS ── */
@@ -54,12 +54,12 @@ label{display:block;font-size:12.5px;font-weight:600;letter-spacing:.08em;text-t
 .auth-card{background:rgba(18,26,43,.7);border:1px solid var(--line);border-radius:18px;
   padding:44px 48px;width:100%;max-width:460px;backdrop-filter:blur(8px);margin-left:auto;margin-right:auto}
 .auth-brand{text-align:center;margin-bottom:30px}
-.auth-brand .name{font-family:"Playfair Display",serif;font-weight:700;font-size:22px;color:var(--gold);letter-spacing:.06em}
-.auth-brand .sub{font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--muted2);margin-top:5px}
-.auth-card h2{font-family:"Playfair Display",serif;font-size:26px;color:var(--ink);margin-bottom:8px}
-.auth-card p{font-size:14px;color:var(--muted);margin-bottom:26px}
+.auth-brand .name{font-family:"Playfair Display",serif;font-weight:700;font-size:23px;color:var(--gold);letter-spacing:.06em}
+.auth-brand .sub{font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:var(--muted2);margin-top:5px}
+.auth-card h2{font-family:"Playfair Display",serif;font-size:28px;color:var(--ink);margin-bottom:8px}
+.auth-card p{font-size:15px;color:var(--muted);margin-bottom:26px}
 .auth-card .field{margin-bottom:18px}
-.auth-switch{text-align:center;margin-top:18px;font-size:13.5px;color:var(--muted)}
+.auth-switch{text-align:center;margin-top:18px;font-size:14.5px;color:var(--muted)}
 .auth-switch a{color:var(--gold);cursor:pointer;text-decoration:underline}
 
 /* ── GENERATOR ── */
@@ -68,40 +68,41 @@ label{display:block;font-size:12.5px;font-weight:600;letter-spacing:.08em;text-t
   backdrop-filter:blur(10px);padding:14px 28px;display:flex;align-items:center;
   justify-content:space-between;gap:16px;flex-wrap:wrap;position:sticky;top:0;z-index:10}
 .gen-header .brand{display:flex;align-items:center;gap:12px}
-.gen-header .name{font-family:"Playfair Display",serif;font-weight:700;color:var(--gold);font-size:17px}
+.gen-header .name{font-family:"Playfair Display",serif;font-weight:700;color:var(--gold);font-size:18px}
 .counter-box{display:flex;align-items:center;gap:14px}
 .counter{background:var(--panel);border:1px solid var(--line);border-radius:30px;
-  padding:8px 18px;font-size:13.5px;font-weight:600}
-.counter .num{color:var(--gold);font-size:17px;font-weight:700}
-.counter .tier-badge{font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+  padding:8px 18px;font-size:14.5px;font-weight:600}
+.counter .num{color:var(--gold);font-size:18px;font-weight:700}
+.counter .tier-badge{font-size:12px;letter-spacing:.1em;text-transform:uppercase;
   color:var(--muted);margin-left:6px}
 .gen-wrap{max-width:800px;margin:0 auto;padding:32px 24px 0}
 .section-card{background:var(--panel);border:1px solid var(--lsoft);border-radius:13px;
   padding:26px 28px;margin-bottom:22px}
-.section-card h3{font-family:"Playfair Display",serif;font-size:19px;color:var(--gold);margin-bottom:20px;
+.section-card h3{font-family:"Playfair Display",serif;font-size:20px;color:var(--gold);margin-bottom:20px;
   padding-bottom:12px;border-bottom:1px solid var(--lsoft);
   display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 14px}
-.section-card h3 .h3-link{font-family:"Hanken Grotesk",sans-serif;font-size:12px;font-weight:600;
+.section-card h3 .h3-link{font-family:"Hanken Grotesk",sans-serif;font-size:13px;font-weight:600;
   color:var(--muted);cursor:pointer;text-transform:none;letter-spacing:0;margin-left:auto}
 .section-card h3 .h3-link:hover{color:var(--gold)}
 .field{margin-bottom:18px}
 .field:last-child{margin-bottom:0}
 .field-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:18px}
 .field-row:last-child{margin-bottom:0}
-.field-note{font-size:12px;color:var(--muted2);margin-top:6px;font-style:italic}
+.field-note{font-size:13px;color:var(--muted2);margin-top:6px;font-style:italic}
 .stil-chips{display:flex;flex-wrap:wrap;gap:9px}
 .stil-chip{background:var(--panel2);border:1.5px solid var(--lsoft);color:var(--muted);
-  font-family:"Hanken Grotesk",sans-serif;font-size:14px;font-weight:600;
+  font-family:"Hanken Grotesk",sans-serif;font-size:15px;font-weight:600;
   padding:10px 16px;border-radius:9px;cursor:pointer;transition:border-color .2s,color .2s,background .2s}
 .stil-chip:hover{border-color:rgba(216,169,74,.4);color:var(--ink)}
 .stil-chip.selected{border-color:var(--gold);background:rgba(216,169,74,.08);color:var(--goldl)}
+.stil-help{font-size:14.5px;color:var(--goldl);margin:0 0 11px;line-height:1.45;font-weight:500}
 
 /* ── UPGRADE NUDGE ── */
 .upgrade-nudge{display:none;margin-bottom:22px}
 .upgrade-nudge-inner{background:linear-gradient(180deg,rgba(216,169,74,.12),rgba(216,169,74,.04));
   border:1px solid var(--line);border-radius:12px;padding:14px 20px;
   display:flex;align-items:center;gap:14px;flex-wrap:wrap}
-.upgrade-nudge .un-text{flex:1;min-width:200px;font-size:14px;color:var(--ink);line-height:1.45}
+.upgrade-nudge .un-text{flex:1;min-width:200px;font-size:15px;color:var(--ink);line-height:1.45}
 .upgrade-nudge .un-text b{color:var(--goldl)}
 .upgrade-nudge .un-cta{flex-shrink:0}
 
@@ -115,50 +116,50 @@ label{display:block;font-size:12.5px;font-weight:600;letter-spacing:.08em;text-t
 .mode-radio{width:18px;height:18px;border-radius:50%;border:2px solid var(--muted);flex:0 0 auto;transition:all .2s}
 .mode-option.selected .mode-radio{border-color:var(--gold);background:var(--gold)}
 .mode-option.locked .mode-radio{border-color:var(--muted2)}
-.mode-text .mode-title{font-size:15px;font-weight:600;color:var(--ink)}
-.mode-text .mode-desc{font-size:13px;color:var(--muted);margin-top:2px}
+.mode-text .mode-title{font-size:16px;font-weight:600;color:var(--ink)}
+.mode-text .mode-desc{font-size:14px;color:var(--muted);margin-top:2px}
 .lock-badge{margin-left:auto;background:rgba(216,169,74,.12);border:1px solid var(--line);
-  border-radius:20px;padding:4px 12px;font-size:11.5px;font-weight:600;
+  border-radius:20px;padding:4px 12px;font-size:12.5px;font-weight:600;
   letter-spacing:.05em;color:var(--gold);white-space:nowrap;flex-shrink:0}
 
 /* ── OUTPUT ── */
 .output-wrap{max-width:800px;margin:0 auto;padding:32px 24px}
 .output-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:22px;flex-wrap:wrap;gap:12px}
-.output-header h2{font-family:"Playfair Display",serif;font-size:26px;color:var(--ink)}
+.output-header h2{font-family:"Playfair Display",serif;font-size:28px;color:var(--ink)}
 .script-box{background:#faf7f0;border:1px solid rgba(0,0,0,.08);border-radius:13px;padding:32px 34px;
-  white-space:pre-wrap;line-height:1.8;font-size:15.5px;color:#23262e;max-height:68vh;overflow-y:auto;
+  white-space:pre-wrap;line-height:1.8;font-size:16.5px;color:#23262e;max-height:68vh;overflow-y:auto;
   box-shadow:0 14px 36px rgba(0,0,0,.34)}
 .script-box strong{color:#7a5f10;font-weight:700}
 .script-actions{display:flex;gap:12px;margin-top:18px;flex-wrap:wrap}
-.script-box .script-rule{display:block;margin:16px 0 10px;padding-top:12px;border-top:1px solid rgba(0,0,0,.16);font-size:12px;letter-spacing:.05em;color:#7a5f10;font-weight:700;line-height:1.45}
+.script-box .script-rule{display:block;margin:16px 0 10px;padding-top:12px;border-top:1px solid rgba(0,0,0,.16);font-size:13px;letter-spacing:.05em;color:#7a5f10;font-weight:700;line-height:1.45}
 .script-box .script-rule.bare{padding-top:0;height:0;margin:14px 0;border-top:1px solid rgba(0,0,0,.12)}
-.script-box .script-zone{display:block;margin:22px 0 18px;background:rgba(122,95,16,.10);border-left:3px solid #b8903a;padding:11px 14px;font-size:13.5px;letter-spacing:.02em;color:#5a4a14;font-weight:700;line-height:1.4}
-.script-box .script-pause{display:inline-block;background:rgba(0,0,0,.05);border-radius:6px;padding:3px 10px;font-size:12.5px;color:#555;font-weight:600}
-.prog-sub{text-align:center;color:var(--goldl);font-size:13px;letter-spacing:.04em;margin:-14px 0 22px}
-.prog-warn{text-align:center;color:var(--muted);font-size:12.5px;margin-top:14px;line-height:1.4}
+.script-box .script-zone{display:block;margin:22px 0 18px;background:rgba(122,95,16,.10);border-left:3px solid #b8903a;padding:11px 14px;font-size:14.5px;letter-spacing:.02em;color:#5a4a14;font-weight:700;line-height:1.4}
+.script-box .script-pause{display:inline-block;background:rgba(0,0,0,.05);border-radius:6px;padding:3px 10px;font-size:13.5px;color:#555;font-weight:600}
+.prog-sub{text-align:center;color:var(--goldl);font-size:14px;letter-spacing:.04em;margin:-14px 0 22px}
+.prog-warn{text-align:center;color:var(--muted);font-size:13.5px;margin-top:14px;line-height:1.4}
 .prog-warn b{color:var(--goldl);font-weight:600}
 
 /* ── OBJECTION SECTION ── */
 .obj-card{background:var(--panel);border:1px solid var(--line);border-radius:13px;padding:26px 28px;margin-top:20px}
-.obj-q{font-family:"Playfair Display",serif;font-size:19px;color:var(--ink);margin-bottom:18px}
+.obj-q{font-family:"Playfair Display",serif;font-size:20px;color:var(--ink);margin-bottom:18px}
 .obj-btns{display:flex;gap:12px;flex-wrap:wrap}
-.obj-label{font-size:12.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin:24px 0 12px}
+.obj-label{font-size:13.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin:24px 0 12px}
 .spinner{display:inline-block;width:20px;height:20px;border:2px solid rgba(216,169,74,.3);
   border-top-color:var(--gold);border-radius:50%;animation:spin .7s linear infinite;vertical-align:middle;margin-right:9px}
 @keyframes spin{to{transform:rotate(360deg)}}
 .generating{text-align:center;padding:60px 20px;color:var(--muted)}
-.generating p{margin-top:16px;font-size:15px}
+.generating p{margin-top:16px;font-size:16px}
 
 /* ── PROGRESS (checklist 12 etape) ── */
 .prog-card{width:100%;max-width:440px;margin:0 auto;text-align:left}
-.prog-title{font-family:"Playfair Display",serif;font-size:21px;color:var(--ink);text-align:center;margin-bottom:22px}
+.prog-title{font-family:"Playfair Display",serif;font-size:22px;color:var(--ink);text-align:center;margin-bottom:22px}
 .prog-head{display:flex;align-items:center;gap:14px;margin-bottom:24px}
 .progress-track{flex:1;height:9px;background:rgba(216,169,74,.12);border-radius:20px;overflow:hidden}
 .progress-fill{height:100%;width:0%;background:linear-gradient(90deg,var(--goldd),var(--goldl));
   border-radius:20px;box-shadow:0 0 10px rgba(216,169,74,.5)}
-.prog-pctnum{font-family:"Playfair Display",serif;font-weight:700;color:var(--gold);font-size:18px;min-width:44px;text-align:right}
+.prog-pctnum{font-family:"Playfair Display",serif;font-weight:700;color:var(--gold);font-size:19px;min-width:44px;text-align:right}
 .prog-list{display:flex;flex-direction:column;gap:10px}
-.pstep{display:flex;align-items:center;gap:12px;font-size:13.5px;transition:color .3s,opacity .3s}
+.pstep{display:flex;align-items:center;gap:12px;font-size:14.5px;transition:color .3s,opacity .3s}
 .pstep-ico{width:18px;height:18px;border-radius:50%;flex:0 0 auto;position:relative;
   border:2px solid var(--muted2);box-sizing:border-box;transition:border-color .3s,background .3s}
 .pstep-txt{line-height:1.35}
@@ -169,8 +170,8 @@ label{display:block;font-size:12.5px;font-weight:600;letter-spacing:.08em;text-t
 .pstep.done .pstep-ico{border-color:var(--gold);background:var(--gold);animation:none}
 .pstep.done .pstep-ico::after{content:"";position:absolute;left:5px;top:1px;width:4px;height:9px;
   border:solid #1a1206;border-width:0 2px 2px 0;transform:rotate(45deg)}
-.prog-cap{text-align:center;margin-top:22px;font-size:14.5px;color:var(--gold);min-height:20px;font-weight:600}
-.obj-prog-ctx{font-size:14px;color:var(--muted);margin-bottom:20px;padding-bottom:14px;border-bottom:1px solid var(--lsoft)}
+.prog-cap{text-align:center;margin-top:22px;font-size:15.5px;color:var(--gold);min-height:20px;font-weight:600}
+.obj-prog-ctx{font-size:15px;color:var(--muted);margin-bottom:20px;padding-bottom:14px;border-bottom:1px solid var(--lsoft)}
 .obj-prog-ctx i{color:var(--goldl);font-style:italic}
 
 @media(max-width:600px){
@@ -182,7 +183,7 @@ label{display:block;font-size:12.5px;font-weight:600;letter-spacing:.08em;text-t
 
 /* ── PROOF / COUNTER SECTION ── */
 .proof-section{text-align:center;padding:56px 20px 36px;max-width:580px;margin:0 auto}
-.proof-eyebrow{text-transform:uppercase;letter-spacing:.3em;font-size:11px;font-weight:700;color:var(--gold);margin-bottom:24px}
+.proof-eyebrow{text-transform:uppercase;letter-spacing:.3em;font-size:12px;font-weight:700;color:var(--gold);margin-bottom:24px}
 .stat-ring-wrap{position:relative;width:190px;height:190px;margin:0 auto 20px}
 .stat-ring-wrap svg{position:absolute;inset:0;transform:rotate(-90deg)}
 .ring-track{fill:none;stroke:rgba(216,169,74,.12);stroke-width:11}
@@ -190,19 +191,19 @@ label{display:block;font-size:12.5px;font-weight:600;letter-spacing:.08em;text-t
   stroke-dasharray:534;stroke-dashoffset:534;transition:stroke-dashoffset 2.4s cubic-bezier(.15,.85,.2,1);
   filter:drop-shadow(0 0 8px rgba(216,169,74,.45))}
 .ring-inner{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px}
-.big-num{font-family:"Playfair Display",serif;font-size:58px;font-weight:900;color:var(--gold);line-height:1;letter-spacing:-.02em}
-.big-pct{font-size:28px;font-weight:700;vertical-align:super;color:var(--goldl)}
-.ring-sub{font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted2)}
-.stat-headline{font-family:"Playfair Display",serif;font-size:22px;color:var(--ink);margin-bottom:10px}
+.big-num{font-family:"Playfair Display",serif;font-size:62px;font-weight:900;color:var(--gold);line-height:1;letter-spacing:-.02em}
+.big-pct{font-size:30px;font-weight:700;vertical-align:super;color:var(--goldl)}
+.ring-sub{font-size:12.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted2)}
+.stat-headline{font-family:"Playfair Display",serif;font-size:23px;color:var(--ink);margin-bottom:10px}
 .stat-headline em{font-style:italic;color:var(--gold)}
-.stat-compare{font-size:14px;color:var(--muted);line-height:1.6}
+.stat-compare{font-size:15px;color:var(--muted);line-height:1.6}
 .stat-compare strong{color:var(--goldl);font-weight:700}
 .stat-divider{width:56px;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);margin:20px auto}
-.stat-proof{font-size:13.5px;color:var(--muted2);font-style:italic;margin-bottom:32px}
+.stat-proof{font-size:14.5px;color:var(--muted2);font-style:italic;margin-bottom:32px}
 .live-badge{display:inline-flex;align-items:center;gap:10px;
   background:rgba(62,207,142,.07);border:1px solid rgba(62,207,142,.2);
-  border-radius:30px;padding:10px 20px;margin-bottom:22px;font-size:15px;color:var(--ink)}
-.live-badge strong{font-size:20px;font-weight:700;color:var(--green);font-family:"Playfair Display",serif}
+  border-radius:30px;padding:10px 20px;margin-bottom:22px;font-size:16px;color:var(--ink)}
+.live-badge strong{font-size:21px;font-weight:700;color:var(--green);font-family:"Playfair Display",serif}
 .live-dot{width:9px;height:9px;background:var(--green);border-radius:50%;flex-shrink:0;
   animation:pulse-dot 1.8s ease-in-out infinite}
 @keyframes pulse-dot{
@@ -213,39 +214,39 @@ label{display:block;font-size:12.5px;font-weight:600;letter-spacing:.08em;text-t
 .gen-header{display:block;padding:0}
 .topbar{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;padding:13px 28px}
 .brandwrap{display:flex;flex-direction:column;gap:2px}
-.brandwrap .name{font-family:"Playfair Display",serif;font-weight:700;color:var(--gold);font-size:18px;letter-spacing:.04em}
-.brandwrap .tagline{font-size:10px;letter-spacing:.26em;text-transform:uppercase;color:var(--muted2)}
+.brandwrap .name{font-family:"Playfair Display",serif;font-weight:700;color:var(--gold);font-size:19px;letter-spacing:.04em}
+.brandwrap .tagline{font-size:12px;letter-spacing:.26em;text-transform:uppercase;color:var(--muted2)}
 .topright{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
 .langtog{display:flex;border:1px solid var(--line);border-radius:7px;overflow:hidden}
-.langtog .lang{background:transparent;color:var(--muted);border:none;padding:6px 11px;font-size:12px;font-weight:600;cursor:pointer;letter-spacing:.05em}
+.langtog .lang{background:transparent;color:var(--muted);border:none;padding:6px 11px;font-size:13px;font-weight:600;cursor:pointer;letter-spacing:.05em}
 .langtog .lang.active{background:var(--gold);color:#1a1206}
-.iesire{padding:7px 14px;font-size:12px;letter-spacing:.12em;text-transform:uppercase}
+.iesire{padding:7px 14px;font-size:13px;letter-spacing:.12em;text-transform:uppercase}
 .navtabs{display:flex;gap:2px;padding:0 16px;border-top:1px solid var(--lsoft);overflow-x:auto}
 .navtab{position:relative;background:transparent;border:none;color:var(--muted);font-family:"Hanken Grotesk",sans-serif;
-  font-size:13px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:13px 16px;cursor:pointer;white-space:nowrap;
+  font-size:14px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:13px 16px;cursor:pointer;white-space:nowrap;
   border-bottom:2px solid transparent;transition:color .2s}
 .navtab:hover{color:var(--ink)}
 .navtab.active{color:var(--gold);border-bottom-color:var(--gold)}
 .navtab.soon{color:var(--muted2);cursor:default}
 .navtab.soon:hover{color:var(--muted)}
-.soon-badge{font-size:8.5px;letter-spacing:.08em;background:rgba(216,169,74,.13);color:var(--gold);
+.soon-badge{font-size:11.5px;letter-spacing:.08em;background:rgba(216,169,74,.13);color:var(--gold);
   border:0.5px solid var(--line);border-radius:20px;padding:2px 6px;margin-left:7px;vertical-align:middle;text-transform:none}
 
 /* ===== GUIDE BUTTONS (deasupra formularului / scriptului) ===== */
 .guide-bar{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:20px}
 .guide-btn{background:var(--panel);border:1px solid var(--line);color:var(--goldl);
-  font-family:"Hanken Grotesk",sans-serif;font-size:13.5px;font-weight:600;padding:10px 16px;border-radius:9px;cursor:pointer;
+  font-family:"Hanken Grotesk",sans-serif;font-size:14.5px;font-weight:600;padding:10px 16px;border-radius:9px;cursor:pointer;
   transition:border-color .2s,background .2s}
 .guide-btn:hover{border-color:var(--gold);background:var(--panel2)}
 /* ── PAȘI NUMEROTAȚI (gate prima utilizare) ── */
 .step-btn{display:flex;align-items:center;gap:9px}
 .step-btn .step-no{display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;
-  background:rgba(216,169,74,.15);border:1px solid var(--line);color:var(--gold);font-size:12px;font-weight:700;flex:0 0 auto}
+  background:rgba(216,169,74,.15);border:1px solid var(--line);color:var(--gold);font-size:13px;font-weight:700;flex:0 0 auto}
 .step-btn .step-check{color:var(--green);font-weight:700;opacity:0;transition:opacity .2s}
 .step-btn.step-ok{border-color:rgba(62,207,142,.4)}
 .step-btn.step-ok .step-no{background:var(--green);border-color:var(--green);color:#06231a}
 .step-btn.step-ok .step-check{opacity:1}
-.gate-hint{display:none;text-align:center;font-size:13px;color:var(--gold);margin-bottom:10px}
+.gate-hint{display:none;text-align:center;font-size:14px;color:var(--gold);margin-bottom:10px}
 
 /* ===== MODAL ===== */
 .modal-overlay{position:fixed;inset:0;z-index:200;background:rgba(4,6,11,.78);backdrop-filter:blur(4px);
@@ -254,37 +255,37 @@ label{display:block;font-size:12.5px;font-weight:600;letter-spacing:.08em;text-t
 .modal-box{background:var(--bg2);border:1px solid var(--line);border-radius:16px;width:100%;max-width:640px;
   max-height:88vh;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 24px 70px rgba(0,0,0,.55)}
 .modal-head{padding:22px 26px 16px;border-bottom:1px solid var(--lsoft)}
-.modal-title{font-family:"Playfair Display",serif;font-size:22px;color:var(--gold);font-weight:700}
-.modal-subtitle{font-size:13px;color:var(--muted);margin-top:5px}
+.modal-title{font-family:"Playfair Display",serif;font-size:23px;color:var(--gold);font-weight:700}
+.modal-subtitle{font-size:14px;color:var(--muted);margin-top:5px}
 .modal-body{padding:20px 26px;overflow-y:auto}
 .modal-foot{padding:16px 26px;border-top:1px solid var(--lsoft);display:flex;justify-content:flex-end}
 .modal-gate{max-width:320px}
 .modal-gate.locked{position:relative}
-.modal-gate:disabled::after{content:" — derulează până jos";font-weight:500;text-transform:none;letter-spacing:0;font-size:12px}
+.modal-gate:disabled::after{content:" — derulează până jos";font-weight:500;text-transform:none;letter-spacing:0;font-size:13px}
 
 /* Reguli cards */
 .rule-card{display:flex;gap:14px;padding:14px 0;border-bottom:1px solid var(--lsoft)}
 .rule-card:last-child{border-bottom:none}
 .rule-num{flex:0 0 30px;height:30px;border-radius:50%;background:rgba(216,169,74,.13);border:1px solid var(--line);
-  color:var(--gold);font-weight:700;display:flex;align-items:center;justify-content:center;font-size:14px}
-.rule-txt .rt{font-weight:700;color:var(--ink);font-size:15px;margin-bottom:4px}
-.rule-txt .rd{font-size:13.5px;color:var(--muted);line-height:1.55}
+  color:var(--gold);font-weight:700;display:flex;align-items:center;justify-content:center;font-size:15px}
+.rule-txt .rt{font-weight:700;color:var(--ink);font-size:16px;margin-bottom:4px}
+.rule-txt .rd{font-size:14.5px;color:var(--muted);line-height:1.55}
 
 /* ASA DA / NU comparison */
-.cmp-intro{font-size:13.5px;color:var(--muted);margin-bottom:18px;line-height:1.5}
+.cmp-intro{font-size:14.5px;color:var(--muted);margin-bottom:18px;line-height:1.5}
 .cmp-blk{margin-bottom:18px}
-.cmp-fname{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--goldl);margin-bottom:8px}
+.cmp-fname{font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--goldl);margin-bottom:8px}
 .cmp{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .cmp .box{border-radius:10px;padding:12px 14px;border-left:3px solid}
 .cmp .nu{background:rgba(226,75,74,.08);border-left-color:#e24b4a}
 .cmp .da{background:rgba(29,158,117,.09);border-left-color:#1d9e75}
-.cmp .tag{font-size:11px;font-weight:700;letter-spacing:.05em;margin-bottom:6px}
+.cmp .tag{font-size:12px;font-weight:700;letter-spacing:.05em;margin-bottom:6px}
 .cmp .tag-nu{color:#f09595}
 .cmp .tag-da{color:#5dcaa5}
-.cmp .ex{font-size:13px;color:#dfe5ee;line-height:1.45}
-.cmp-why{font-size:12px;color:var(--muted2);font-style:italic;margin-top:8px}
+.cmp .ex{font-size:14px;color:#dfe5ee;line-height:1.45}
+.cmp-why{font-size:13px;color:var(--muted2);font-style:italic;margin-top:8px}
 .cmp-rule{margin-top:8px;background:rgba(216,169,74,.08);border:0.5px solid var(--line);border-radius:10px;
-  padding:13px 15px;font-size:13.5px;color:#e9d9b4;line-height:1.5}
+  padding:13px 15px;font-size:14.5px;color:#e9d9b4;line-height:1.5}
 @media(max-width:560px){.cmp{grid-template-columns:1fr}}
 
 </style>
@@ -392,7 +393,7 @@ label{display:block;font-size:12.5px;font-weight:600;letter-spacing:.08em;text-t
       <div class="topright">
         <div class="counter">
           <span class="num" id="scripts-remaining">—</span>
-          <span style="color:var(--muted);font-size:13px"> scripturi</span>
+          <span style="color:var(--muted);font-size:14px"> scripturi</span>
           <span class="tier-badge" id="tier-badge"></span>
         </div>
         <div class="langtog">
@@ -446,6 +447,7 @@ label{display:block;font-size:12.5px;font-weight:600;letter-spacing:.08em;text-t
       </div>
       <div class="field">
         <label>Stil de abordare</label>
+        <div class="stil-help">Felul tău firesc de a vorbi — scriptul se mulează pe el.</div>
         <div class="stil-chips" id="stil-chips">
           <button type="button" class="stil-chip" data-stil="Relaxat și cu umor" onclick="selectStil(this)">Relaxat și cu umor</button>
           <button type="button" class="stil-chip" data-stil="Cald-respectuos" onclick="selectStil(this)">Cald-respectuos</button>
@@ -636,7 +638,7 @@ label{display:block;font-size:12.5px;font-weight:600;letter-spacing:.08em;text-t
     <button class="btn" id="gen-btn" onclick="doGenerate()" style="max-width:400px;margin:0 auto;display:block">
       Pasul 3 · Generează scriptul →
     </button>
-    <p style="text-align:center;font-size:13px;color:var(--muted2);margin-top:12px">
+    <p style="text-align:center;font-size:14px;color:var(--muted2);margin-top:12px">
       Scriptul tău psihologic, gata în câteva momente
     </p>
 
@@ -669,7 +671,7 @@ label{display:block;font-size:12.5px;font-weight:600;letter-spacing:.08em;text-t
     <div class="counter-box">
       <div class="counter">
         <span class="num" id="out-remaining">—</span>
-        <span style="color:var(--muted);font-size:13px"> scripturi rămase</span>
+        <span style="color:var(--muted);font-size:14px"> scripturi rămase</span>
       </div>
     </div>
   </div>
@@ -711,7 +713,7 @@ label{display:block;font-size:12.5px;font-weight:600;letter-spacing:.08em;text-t
 
       <!-- Formular obiecție 1 -->
       <div id="obj1-form" style="display:none" class="obj-card">
-        <label style="display:block;font-size:12.5px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:8px">Care este obiecția clientului?</label>
+        <label style="display:block;font-size:13.5px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:8px">Care este obiecția clientului?</label>
         <textarea id="obj1-text" rows="3" placeholder="Ex: Nu am timp, Nu am bani, Trebuie să mă gândesc, Nu cunosc produsul..."></textarea>
         <div id="obj1-err" class="err" style="margin-top:10px"></div>
         <button class="btn" onclick="generateObjScript(1)" style="max-width:260px;margin-top:14px">Generează script obiecție →</button>
@@ -748,7 +750,7 @@ label{display:block;font-size:12.5px;font-weight:600;letter-spacing:.08em;text-t
 
         <!-- Formular obiecție 2 -->
         <div id="obj2-form" style="display:none" class="obj-card">
-          <label style="display:block;font-size:12.5px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:8px">Care este a doua obiecție?</label>
+          <label style="display:block;font-size:13.5px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:8px">Care este a doua obiecție?</label>
           <textarea id="obj2-text" rows="3" placeholder="Ex: Trebuie să vorbesc cu soțul/soția, Am mai încercat și nu a mers..."></textarea>
           <div id="obj2-err" class="err" style="margin-top:10px"></div>
           <button class="btn" onclick="generateObjScript(2)" style="max-width:260px;margin-top:14px">Generează script obiecție →</button>
@@ -1831,8 +1833,8 @@ init();
       <div class="rule-card"><div class="rule-num">4</div><div class="rule-txt"><div class="rt">Ce faci când clientul îți pune întrebări incomode în timpul scriptului</div><div class="rd"><div style="margin-bottom:4px">Sunt 2 astfel de situații diferite:</div>
 
         <div style="margin:14px 0">
-          <div style="color:var(--gold);font-size:11.5px;letter-spacing:.03em;text-transform:uppercase;font-weight:700;margin-bottom:6px">Situația 1 — întrebare prematură</div>
-          <div style="color:var(--muted2);font-size:12px;margin-bottom:8px">(la începutul discuției, ÎNAINTE să prezinți produsul)</div>
+          <div style="color:var(--gold);font-size:12.5px;letter-spacing:.03em;text-transform:uppercase;font-weight:700;margin-bottom:6px">Situația 1 — întrebare prematură</div>
+          <div style="color:var(--muted2);font-size:13px;margin-bottom:8px">(la începutul discuției, ÎNAINTE să prezinți produsul)</div>
           <div style="margin-bottom:5px">Dacă clientul te întreabă:</div>
           <div style="padding-left:6px;line-height:1.9;margin-bottom:10px">• „E cumva MLM?"<br>• „Despre ce e vorba?"<br>• „Ce vrei să-mi vinzi?"<br>• „Unde ai aflat de asta?"</div>
           <div style="margin-bottom:5px">Replica ta (zâmbește obligatoriu 😊) — validezi întrebarea + promiți răspuns garantat + amâni CÂND răspunzi tu:</div>
@@ -1844,8 +1846,8 @@ init();
         <div style="height:1px;background:var(--lsoft);margin:14px 0"></div>
 
         <div style="margin:14px 0">
-          <div style="color:var(--gold);font-size:11.5px;letter-spacing:.03em;text-transform:uppercase;font-weight:700;margin-bottom:6px">Situația 2 — întrebare după prezentarea scurtă</div>
-          <div style="color:var(--muted2);font-size:12px;margin-bottom:8px">(după ce ai pomenit produsul)</div>
+          <div style="color:var(--gold);font-size:12.5px;letter-spacing:.03em;text-transform:uppercase;font-weight:700;margin-bottom:6px">Situația 2 — întrebare după prezentarea scurtă</div>
+          <div style="color:var(--muted2);font-size:13px;margin-bottom:8px">(după ce ai pomenit produsul)</div>
           <div style="margin-bottom:5px">Dacă clientul întreabă:</div>
           <div style="padding-left:6px;line-height:1.9;margin-bottom:10px">• „Cum funcționează exact?"<br>• „Ce ingrediente conține?"<br>• „Cât costă?"<br>• „Cum se livrează?"<br>• „Care e diferența față de [competitor]?"</div>
           <div style="color:#f0a0a0;margin-bottom:10px">⚠️ Pericolul: dacă răspunzi acum, faci prezentare prin telefon → pierzi motivația întâlnirii → clientul nu mai vine.</div>
@@ -1855,7 +1857,7 @@ init();
         </div>
 
         <div style="background:rgba(216,169,74,.07);border-radius:10px;padding:12px 14px;margin-top:14px">
-          <div style="color:var(--gold);font-size:11.5px;letter-spacing:.03em;text-transform:uppercase;font-weight:700;margin-bottom:8px">Regula meta pentru ambele situații</div>
+          <div style="color:var(--gold);font-size:12.5px;letter-spacing:.03em;text-transform:uppercase;font-weight:700;margin-bottom:8px">Regula meta pentru ambele situații</div>
           <div style="line-height:1.95">• Niciodată „NU" direct<br>• Niciodată refuz brusc<br>• Întotdeauna cu zâmbet 😊<br>• Validezi întrebarea ÎNTÂI („Îmi plac/place...")<br>• Promiți răspuns garantat<br>• Tu decizi CÂND răspunzi</div>
         </div></div></div></div>
       <div class="rule-card"><div class="rule-num">5</div><div class="rule-txt"><div class="rt">Tăcerea după întrebare = puterea ta</div><div class="rd">Dacă devine inconfortabil, rezistă. El va vorbi primul. Nu umple tăcerea.</div></div></div>
