@@ -1223,6 +1223,8 @@ function renderScript(text) {
   var esc = String(text == null ? '' : text)
     .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
   var lines = esc.split('\n');
+  // ascunde linia tehnica de ancorare a modului ([DEBUG] ...) injectata in prompt
+  lines = lines.filter(function(l){ return l.indexOf('[DEBUG]') === -1; });
   for (var i = 0; i < lines.length; i++) {
     var t = lines[i].trim();
     // bare grele de zona (blocuri pline █ sau linie dubla ═) -> scoase (le inlocuieste bannerul)
@@ -1332,6 +1334,13 @@ async function doGenerate() {
   lastVariables = variables;
   lastMode = SELECTED_MODE;
 
+  // #5 — anti-repetitie pe scripturi: la INPUT IDENTIC trimitem scripturile deja generate
+  // ca {{31_scripturi_anterioare}}, ca modelul sa varieze. Input nou (alt client) -> start curat.
+  const inputSig = JSON.stringify(variables);
+  if (inputSig !== lastInputSig) scriptVariantHistory = [];
+  const priorScripts = scriptVariantHistory.join('\n\n═══ VARIANTA ANTERIOARA (NU O REPETA) ═══\n\n');
+  lastInputSig = inputSig;
+
   // Reset objection section
   document.getElementById('obj-section').style.display = 'block';
   document.getElementById('obj1-question').style.display = 'block';
@@ -1346,12 +1355,17 @@ async function doGenerate() {
   startProgress();
 
   try {
-    const data = await generateAndWait({ mode: SELECTED_MODE, variables });
+    const data = await generateAndWait({
+      mode: SELECTED_MODE,
+      variables: { ...variables, '31_scripturi_anterioare': priorScripts }
+    });
 
     finishProgress(() => {
       // Show output
       document.getElementById('script-output').innerHTML = renderScript(data.script);
       lastScriptText = data.script;     // pentru anti-repetitie la obiectii
+      scriptVariantHistory.push(data.script);                          // #5 — retine pt varianta urmatoare
+      if (scriptVariantHistory.length > 2) scriptVariantHistory.shift(); // pastreaza ultimele 2
       lastObj1Response = '';            // lant de obiectii proaspat
       document.getElementById('out-remaining').textContent = data.scripts_remaining;
       if (USER_PROFILE) USER_PROFILE.scripts_remaining = data.scripts_remaining;
@@ -1523,6 +1537,8 @@ let lastMode = 'clean';
 let lastObj1Text = '';
 let lastScriptText = '';      // textul scriptului principal generat
 let lastObj1Response = '';    // textul raspunsului generat la obiectia 1
+let scriptVariantHistory = [];// #5 — scripturi generate pt ACELASI input (anti-repetitie)
+let lastInputSig = null;      // #5 — semnatura inputului (detecteaza regenerare pe acelasi client)
 
 function showObj(num) {
   if (num === 1) {
