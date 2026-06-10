@@ -1090,12 +1090,6 @@ function renderGenerator() {
   const tier = USER_PROFILE.tier;
   const remaining = USER_PROFILE.scripts_remaining;
 
-  // #6 — restaureaza modul ales anterior (sticky intre sesiuni), o singura data
-  if (!_modeRestored) {
-    _modeRestored = true;
-    try { const _sm = localStorage.getItem('hos_mode'); if (_sm) SELECTED_MODE = _sm; } catch(e){}
-  }
-
   // Counter
   const badges = { recruit:'Recruit', builder:'Builder', leader:'Leader', unic:'Script Unic' };
   document.getElementById('scripts-remaining').textContent = remaining;
@@ -1111,13 +1105,6 @@ function renderGenerator() {
   const tierOrder = ['unic','recruit','builder','leader'];
   const tierIdx = tierOrder.indexOf(tier);
   const tierNames = { builder:'Builder', leader:'Leader' };
-
-  // #6 — daca modul (restaurat) nu e permis de tier -> cazi pe clean
-  if (SELECTED_MODE !== 'clean') {
-    const _selM = modes.find(x => x.id === SELECTED_MODE);
-    const _reqIdx = _selM && _selM.tier ? tierOrder.indexOf(_selM.tier) : 0;
-    if (tierIdx < _reqIdx) SELECTED_MODE = 'clean';
-  }
 
   const modeContainer = document.getElementById('mode-options');
   modeContainer.innerHTML = '';
@@ -1141,7 +1128,6 @@ function renderGenerator() {
     if (!isLocked) {
       div.addEventListener('click', () => {
         SELECTED_MODE = m.id;
-        try { localStorage.setItem('hos_mode', SELECTED_MODE); } catch(e){}   // #6 — sticky
         renderGenerator();
       });
     } else {
@@ -1551,7 +1537,6 @@ let lastScriptText = '';      // textul scriptului principal generat
 let lastObj1Response = '';    // textul raspunsului generat la obiectia 1
 let scriptVariantHistory = [];// #5 — scripturi generate pt ACELASI input (anti-repetitie)
 let lastInputSig = null;      // #5 — semnatura inputului (detecteaza regenerare pe acelasi client)
-let _modeRestored = false;    // #6 — am restaurat o data modul salvat
 
 function showObj(num) {
   if (num === 1) {
