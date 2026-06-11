@@ -645,12 +645,12 @@ label{display:block;font-size:13.5px;font-weight:600;letter-spacing:.08em;text-t
           <button type="button" class="stil-chip" data-semnal="Negativ" onclick="toggleSemnal(this)">Ceva negativ</button>
           <button type="button" class="stil-chip" data-semnal="Dorinta" onclick="toggleSemnal(this)">O dorință știută</button>
         </div>
-        <input type="hidden" id="f_06">
+        <input type="hidden" id="f_32">
         <div id="semnal-detail-wrap" style="display:none">
           <input type="text" id="f_05" placeholder="Detaliu — ce e pozitiv sau ce negativ. Ex: deschisă la nou / a fost arsă de un MLM">
         </div>
         <div id="dorinta-wrap" style="display:none;margin-top:9px">
-          <input type="text" id="f_13" placeholder="Ce-și dorește? Ex: să slăbească / venit în plus / timp cu copiii">
+          <input type="text" id="f_33" placeholder="Ce-și dorește? Ex: să slăbească / venit în plus / timp cu copiii">
           <div class="stil-help" style="margin-top:5px">O păstrăm pentru prima obiecție — nu apare în primul script.</div>
         </div>
       </div>
@@ -1081,8 +1081,8 @@ const UPGRADE_URL = '';
 
 // Campuri memorate: produs + client. (Agentul = AGENT_FIELDS, salvat separat fill-once.)
 const AGENT_FIELDS = ['f_01','f_26','f_27','f_28','f_29'];
-const SAVE_FIELDS = ['f_22','f_23','f_02','f_03','f_24','f_25','f_20','f_04','f_17','f_05','f_06','f_13','f_30','f_07','f_08','f_09','f_19','f_18'];
-const CLIENT_FIELDS = ['f_22','f_23','f_02','f_03','f_24','f_25','f_20','f_04','f_17','f_05','f_06','f_13'];
+const SAVE_FIELDS = ['f_22','f_23','f_02','f_03','f_24','f_25','f_20','f_04','f_17','f_05','f_32','f_33','f_30','f_07','f_08','f_09','f_19','f_18'];
+const CLIENT_FIELDS = ['f_22','f_23','f_02','f_03','f_24','f_25','f_20','f_04','f_17','f_05','f_32','f_33'];
 
 // ============================================
 // INIT
@@ -1454,7 +1454,7 @@ function renderGenerator() {
 
 function updateSemnalState() {
   const sel = Array.from(document.querySelectorAll('#semnal-chips .stil-chip.selected')).map(c => c.getAttribute('data-semnal'));
-  document.getElementById('f_06').value = sel.join(', ');
+  document.getElementById('f_32').value = sel.join(', ');
   const dw = document.getElementById('semnal-detail-wrap');
   const ow = document.getElementById('dorinta-wrap');
   if (dw) dw.style.display = (sel.indexOf('Pozitiv') !== -1 || sel.indexOf('Negativ') !== -1) ? 'block' : 'none';
@@ -1466,7 +1466,7 @@ function toggleSemnal(btn) {
   saveAgentData();
 }
 function reflectSemnalFromValue() {
-  const val = (document.getElementById('f_06').value || '').trim();
+  const val = (document.getElementById('f_32').value || '').trim();
   const set = val ? val.split(',').map(s => s.trim()) : [];
   document.querySelectorAll('#semnal-chips .stil-chip').forEach(c => {
     c.classList.toggle('selected', set.indexOf(c.getAttribute('data-semnal')) !== -1);
@@ -1618,8 +1618,8 @@ async function doGenerate() {
     '03_tip_relatie':       document.getElementById('f_03').value,
     '04_detalii_client':    document.getElementById('f_04').value,
     '05_interactiune_client': document.getElementById('f_05').value,
-    '06_semnal_tip':        document.getElementById('f_06').value,
-    '13_dorinta':           document.getElementById('f_13').value,
+    '32_semnal_tip':        document.getElementById('f_32').value,
+    '33_dorinta':           document.getElementById('f_33').value,
     '07_produs':            document.getElementById('f_07').value,
     '08_folosit_produs':    document.getElementById('f_08').value,
     '09_experienta_produs': document.getElementById('f_09').value,
