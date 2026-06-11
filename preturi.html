@@ -66,17 +66,35 @@
   h1,h2,h3,.serif{font-family:'Playfair Display',serif}
 
   /* ---------- NAV ---------- */
-  nav{position:relative;z-index:2;display:flex;align-items:center;justify-content:space-between;
-    max-width:1180px;margin:0 auto;padding:26px 24px}
-  .brand{font-family:'Playfair Display',serif;font-weight:700;letter-spacing:.5px;font-size:20px}
+  nav{position:relative;z-index:2;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;
+    max-width:1180px;margin:0 auto;padding:30px 24px 46px;gap:16px}
+  .brand{font-family:'Playfair Display',serif;font-weight:700;letter-spacing:.6px;font-size:27px;justify-self:center;text-align:center;white-space:nowrap}
   .brand span{color:var(--gold)}
+  .nav-left{display:flex;flex-direction:column;align-items:flex-start;gap:11px;justify-self:start}
+  .nav-right{justify-self:end}
+  .lang-dd{position:relative}
+  .lang-trigger{display:inline-flex;align-items:center;gap:7px;background:transparent;border:1px solid var(--line);border-radius:40px;color:var(--muted);font-size:15px;font-family:inherit;padding:8px 14px;cursor:pointer;transition:.25s;line-height:1;white-space:nowrap}
+  .lang-trigger:hover{color:var(--gold-bright);border-color:var(--gold)}
+  .lang-trigger .flag{font-size:15px;line-height:1}
+  .lang-caret{width:11px;height:7px;transition:transform .25s}
+  .lang-dd.open .lang-caret{transform:rotate(180deg)}
+  .lang-menu{position:absolute;top:calc(100% + 8px);left:0;background:var(--card-solid);border:1px solid var(--line);border-radius:12px;padding:6px;min-width:132px;display:flex;flex-direction:column;gap:2px;opacity:0;visibility:hidden;transform:translateY(-6px);transition:.2s;box-shadow:0 18px 44px rgba(0,0,0,.5);z-index:30}
+  .lang-dd.open .lang-menu{opacity:1;visibility:visible;transform:translateY(0)}
+  .lang-opt{display:flex;align-items:center;gap:10px;background:transparent;border:none;border-radius:8px;color:var(--ink);font-size:14px;font-weight:600;font-family:inherit;padding:9px 12px;cursor:pointer;text-align:left;transition:.15s;width:100%}
+  .lang-opt:hover{background:rgba(255,255,255,.06)}
+  .lang-opt.active{color:var(--gold)}
+  .lang-opt .flag{font-size:15px;line-height:1}
   .nav-cta{font-size:15px;color:var(--muted);text-decoration:none;border:1px solid var(--line);
     padding:9px 18px;border-radius:40px;transition:.25s}
   .nav-cta:hover{color:var(--ink);border-color:var(--gold);}
   .nav-actions{display:flex;align-items:center;gap:18px}
   .nav-login{font-size:15px;color:var(--muted);text-decoration:none;transition:.25s;white-space:nowrap}
   .nav-login:hover{color:var(--gold-bright)}
-  @media(max-width:560px){.nav-actions{flex-direction:column;align-items:flex-end;gap:8px}.nav-login{padding-right:19px}}
+  @media(max-width:640px){
+    nav{display:flex;flex-direction:column;align-items:center;gap:16px;padding:22px 18px 30px}
+    .brand{order:-1;font-size:24px}
+    .nav-left{align-items:center}
+  }
 
   /* ---------- HERO ---------- */
   header{text-align:center;padding:70px 0 30px}
@@ -450,11 +468,22 @@
 <body>
 
 <nav>
-  <div class="brand">Harvard of <span>Sales</span></div>
-  <div class="nav-actions">
+  <div class="nav-left">
     <a href="/app" class="nav-login">Conectează-te</a>
-    <a href="#planuri" class="nav-cta">Vezi planurile</a>
+    <div class="lang-dd" id="langDd">
+      <button class="lang-trigger" onclick="toggleLang(event)" aria-label="Alege limba">
+        <span class="flag">🇷🇴</span>Limbă
+        <svg class="lang-caret" viewBox="0 0 12 8" aria-hidden="true"><path d="M1 1.5 L6 6.5 L11 1.5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <div class="lang-menu">
+        <button class="lang-opt active" onclick="setLang('ro')"><span class="flag">🇷🇴</span>RO</button>
+        <button class="lang-opt" onclick="setLang('en')"><span class="flag">🇬🇧</span>EN</button>
+        <button class="lang-opt" onclick="setLang('it')"><span class="flag">🇮🇹</span>IT</button>
+        <button class="lang-opt" onclick="setLang('es')"><span class="flag">🇪🇸</span>ES</button>
+      </div>
+    </div>
   </div>
+  <div class="brand">Harvard of <span>Sales</span></div>
 </nav>
 
 <div class="wrap">
@@ -1084,6 +1113,9 @@
     clearTimeout(toastTimer);
     toastTimer = setTimeout(function(){ t.classList.remove('show'); }, 3200);
   }
+  function toggleLang(e){ e.stopPropagation(); var d=document.getElementById('langDd'); if(d) d.classList.toggle('open'); }
+  document.addEventListener('click', function(){ var d=document.getElementById('langDd'); if(d) d.classList.remove('open'); });
+  function setLang(l){ var d=document.getElementById('langDd'); if(d) d.classList.remove('open'); if(l!=='ro'){ var m={en:'EN',it:'IT',es:'ES'}; showToast('Versiunea '+(m[l]||l.toUpperCase())+' — în curând'); } }
 
   /* ---- TEASER ---- */
   var teaserRel='prieten', teaserInv='cafea', teaserTone='cald', teaserProd='niște produse de sănătate';
