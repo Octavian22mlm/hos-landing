@@ -1754,9 +1754,9 @@ function _typewriter(titleEl, bodyEl, title, body){
         bi++;
         if(bi <= body.length){ bodyEl.innerHTML = body.slice(0,bi)+CARET; }
         else{ bodyEl.textContent = body; _clearTw(); }
-      }, 22);
+      }, 40);
     }
-  }, 42);
+  }, 55);
 }
 function _omShow(c, i) {
   _clearTw();
@@ -1839,7 +1839,7 @@ function progTick() {
 function startProgress() {
   cancelAnimationFrame(_progRAF); _progDone = false; _progStart = performance.now();
   const L = document.getElementById('gen-loader'), R = document.getElementById('gen-ready');
-  if (L) L.style.display = 'block'; if (R) R.style.display = 'none';
+  if (L) L.style.display = 'flex'; if (R) R.style.display = 'none';
   setBar(0);
   omStart({ omuId:'omu-main', phaseId:'gen-phase', lessonBoxId:'lesson-box', lessonTitleId:'lesson-title', lessonBodyId:'lesson-body', omRowId:'om-row', stepnoId:'om-stepno', tipId:'om-tip', items:MAIN_ITEMS, headLesson:LESSONS_HEAD, headStep:STEPS_HEAD });
   _progRAF = requestAnimationFrame(progTick);
@@ -1968,7 +1968,13 @@ async function generateObjScript(num) {
 
     finishObjProgress(prefix, () => {
       document.getElementById(prefix + '-output').innerHTML = renderScript(data.script);
-      if (num === 1) lastObj1Response = data.script;  // pentru anti-repetitie la obiectia 2
+      if (num === 1) {
+        lastObj1Response = data.script;  // pentru anti-repetitie la obiectia 2
+        document.getElementById('obj2-question').style.display = 'block';
+        document.getElementById('obj2-form').style.display = 'none';
+        document.getElementById('obj2-progress').style.display = 'none';
+        document.getElementById('obj2-result').style.display = 'none';
+      }
       document.getElementById(prefix + '-progress').style.display = 'none';
       document.getElementById(prefix + '-result').style.display = 'block';
     });
