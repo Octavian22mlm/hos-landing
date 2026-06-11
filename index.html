@@ -76,7 +76,7 @@ label{display:block;font-size:13.5px;font-weight:600;letter-spacing:.08em;text-t
 .counter .num{color:var(--gold);font-size:18px;font-weight:700}
 .counter .tier-badge{font-size:12px;letter-spacing:.1em;text-transform:uppercase;
   color:var(--muted);margin-left:6px}
-.gen-wrap{max-width:800px;margin:0 auto;padding:32px 24px 0}
+.gen-wrap{max-width:800px;margin:0 auto;padding:46px 24px 0}
 .section-card{background:var(--panel);border:1px solid var(--lsoft);border-radius:13px;
   padding:26px 28px;margin-bottom:22px}
 .section-card h3{font-family:"Playfair Display",serif;font-size:20px;color:var(--gold);margin-bottom:20px;
@@ -246,6 +246,12 @@ label{display:block;font-size:13.5px;font-weight:600;letter-spacing:.08em;text-t
 .om-dots{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;max-width:200px;margin:0 auto 18px}
 .om-dots i{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.16);transition:.3s}
 .om-dots i.on{background:var(--gold);width:18px;border-radius:6px}
+.gen-phase{text-align:center;margin:2px 0 16px;transition:opacity .3s}
+.gen-phase.lesson{font-size:12.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.gen-phase.step{font-size:17px;font-weight:600;color:var(--goldl);line-height:1.4;max-width:330px;margin-left:auto;margin-right:auto}
+.lesson-box{max-width:330px;margin:0 auto 4px;transition:opacity .3s}
+.lesson-title{text-align:center;color:var(--gold);font-weight:700;font-size:18px;line-height:1.3;margin-bottom:10px}
+.lesson-body{text-align:left;font-size:16px;line-height:1.55;color:var(--ink)}
 
 /* ===== OMULET FINAL (stare gata) ===== */
 .gen-ready{text-align:center;display:none}
@@ -268,7 +274,7 @@ label{display:block;font-size:13.5px;font-weight:600;letter-spacing:.08em;text-t
 
 @media(max-width:600px){
   .auth-card{padding:28px 22px}
-  .gen-wrap,.output-wrap{padding:20px 14px 0}
+  .gen-wrap,.output-wrap{padding:34px 14px 0}
   .section-card{padding:20px 16px}
   .field-row{grid-template-columns:1fr}
 }
@@ -625,15 +631,28 @@ label{display:block;font-size:13.5px;font-weight:600;letter-spacing:.08em;text-t
       </div>
       <div class="field">
         <label>Povestește despre clientul tău</label>
-        <textarea id="f_04" rows="3" placeholder="Situația ei acum, ce o preocupă, ce nevoi/interese are. Ex: vrea să slăbească, e sceptică față de MLM, mamă ocupată, activă pe Instagram..."></textarea>
+        <textarea id="f_04" rows="3" placeholder="Situația ei acum, ce o preocupă, cine e. Ex: mamă ocupată, lucrează în vânzări, activă pe Instagram..."></textarea>
       </div>
       <div class="field">
         <label>Calități apreciate la această persoană</label>
         <input type="text" id="f_17" placeholder="Ex: Seriozitate, empatie, energie pozitivă...">
       </div>
       <div class="field">
-        <label>Ultima interacțiune cu ea</label>
-        <input type="text" id="f_05" placeholder="Ex: Ne-am văzut la cafea acum 2 săptămâni, am vorbit despre copii...">
+        <label>Ce mai știi despre persoană?</label>
+        <div class="stil-help">Ceva pozitiv, negativ sau o dorință de-a ei — poți alege mai multe.</div>
+        <div class="stil-chips" id="semnal-chips" style="margin-bottom:10px">
+          <button type="button" class="stil-chip" data-semnal="Pozitiv" onclick="toggleSemnal(this)">Ceva pozitiv</button>
+          <button type="button" class="stil-chip" data-semnal="Negativ" onclick="toggleSemnal(this)">Ceva negativ</button>
+          <button type="button" class="stil-chip" data-semnal="Dorinta" onclick="toggleSemnal(this)">O dorință știută</button>
+        </div>
+        <input type="hidden" id="f_06">
+        <div id="semnal-detail-wrap" style="display:none">
+          <input type="text" id="f_05" placeholder="Detaliu — ce e pozitiv sau ce negativ. Ex: deschisă la nou / a fost arsă de un MLM">
+        </div>
+        <div id="dorinta-wrap" style="display:none;margin-top:9px">
+          <input type="text" id="f_13" placeholder="Ce-și dorește? Ex: să slăbească / venit în plus / timp cu copiii">
+          <div class="stil-help" style="margin-top:5px">O păstrăm pentru prima obiecție — nu apare în primul script.</div>
+        </div>
       </div>
     </div>
 
@@ -751,7 +770,8 @@ label{display:block;font-size:13.5px;font-weight:600;letter-spacing:.08em;text-t
         <div id="gen-loader">
           <h3 class="prog-title">Construim scriptul tău psihologic</h3>
           <p class="prog-sub">durează sub 2 minute</p>
-          <div class="omu" id="omu-main">
+          <div class="gen-phase lesson" id="gen-phase"></div>
+          <div class="omu" id="omu-main" style="display:none">
             <svg viewBox="0 0 200 206" aria-hidden="true">
               <g class="rings" data-p="breathe">
                 <circle cx="100" cy="120" r="16" fill="none" stroke="var(--goldl)" stroke-width="2"/>
@@ -839,7 +859,11 @@ label{display:block;font-size:13.5px;font-weight:600;letter-spacing:.08em;text-t
               </g>
             </svg>
           </div>
-          <div class="om-row"><span class="om-stepno hide" id="om-stepno">1</span><div class="om-tip" id="om-tip"></div></div>
+          <div class="lesson-box" id="lesson-box">
+            <div class="lesson-title" id="lesson-title"></div>
+            <div class="lesson-body" id="lesson-body"></div>
+          </div>
+          <div class="om-row" id="om-row"><span class="om-stepno hide" id="om-stepno">1</span><div class="om-tip" id="om-tip"></div></div>
           <div class="prog-head">
             <div class="progress-track"><div class="progress-fill" id="prog-fill"></div></div>
             <div class="prog-pctnum"><span id="prog-num">0</span>%</div>
@@ -955,8 +979,10 @@ label{display:block;font-size:13.5px;font-weight:600;letter-spacing:.08em;text-t
       <div id="obj1-progress" class="obj-card" style="display:none">
         <div id="obj1-loader">
           <div class="obj-prog-ctx" id="obj1-prog-ctx"></div>
-          <div class="omu" id="obj1-omu"></div>
-          <div class="om-row"><div class="om-tip" id="obj1-tip"></div></div>
+          <div class="lesson-box" id="obj1-lbox">
+            <div class="lesson-title" id="obj1-ltitle"></div>
+            <div class="lesson-body" id="obj1-lbody"></div>
+          </div>
           <div class="om-dots" id="obj1-dots"></div>
           <div class="prog-head">
             <div class="progress-track"><div class="progress-fill" id="obj1-prog-fill"></div></div>
@@ -1001,8 +1027,10 @@ label{display:block;font-size:13.5px;font-weight:600;letter-spacing:.08em;text-t
         <div id="obj2-progress" class="obj-card" style="display:none">
           <div id="obj2-loader">
             <div class="obj-prog-ctx" id="obj2-prog-ctx"></div>
-            <div class="omu" id="obj2-omu"></div>
-            <div class="om-row"><div class="om-tip" id="obj2-tip"></div></div>
+            <div class="lesson-box" id="obj2-lbox">
+              <div class="lesson-title" id="obj2-ltitle"></div>
+              <div class="lesson-body" id="obj2-lbody"></div>
+            </div>
             <div class="om-dots" id="obj2-dots"></div>
             <div class="prog-head">
               <div class="progress-track"><div class="progress-fill" id="obj2-prog-fill"></div></div>
@@ -1053,8 +1081,8 @@ const UPGRADE_URL = '';
 
 // Campuri memorate: produs + client. (Agentul = AGENT_FIELDS, salvat separat fill-once.)
 const AGENT_FIELDS = ['f_01','f_26','f_27','f_28','f_29'];
-const SAVE_FIELDS = ['f_22','f_23','f_02','f_03','f_24','f_25','f_20','f_04','f_17','f_05','f_30','f_07','f_08','f_09','f_19','f_18'];
-const CLIENT_FIELDS = ['f_22','f_23','f_02','f_03','f_24','f_25','f_20','f_04','f_17','f_05'];
+const SAVE_FIELDS = ['f_22','f_23','f_02','f_03','f_24','f_25','f_20','f_04','f_17','f_05','f_06','f_13','f_30','f_07','f_08','f_09','f_19','f_18'];
+const CLIENT_FIELDS = ['f_22','f_23','f_02','f_03','f_24','f_25','f_20','f_04','f_17','f_05','f_06','f_13'];
 
 // ============================================
 // INIT
@@ -1405,6 +1433,7 @@ function renderGenerator() {
     } catch(e) {}
     loadFormData();
     reflectStilFromValue();
+    reflectSemnalFromValue();
 
     AGENT_FIELDS.forEach(id => {
       const el = document.getElementById(id);
@@ -1423,6 +1452,27 @@ function renderGenerator() {
   refreshStepUI();
 }
 
+function updateSemnalState() {
+  const sel = Array.from(document.querySelectorAll('#semnal-chips .stil-chip.selected')).map(c => c.getAttribute('data-semnal'));
+  document.getElementById('f_06').value = sel.join(', ');
+  const dw = document.getElementById('semnal-detail-wrap');
+  const ow = document.getElementById('dorinta-wrap');
+  if (dw) dw.style.display = (sel.indexOf('Pozitiv') !== -1 || sel.indexOf('Negativ') !== -1) ? 'block' : 'none';
+  if (ow) ow.style.display = (sel.indexOf('Dorinta') !== -1) ? 'block' : 'none';
+}
+function toggleSemnal(btn) {
+  btn.classList.toggle('selected');
+  updateSemnalState();
+  saveAgentData();
+}
+function reflectSemnalFromValue() {
+  const val = (document.getElementById('f_06').value || '').trim();
+  const set = val ? val.split(',').map(s => s.trim()) : [];
+  document.querySelectorAll('#semnal-chips .stil-chip').forEach(c => {
+    c.classList.toggle('selected', set.indexOf(c.getAttribute('data-semnal')) !== -1);
+  });
+  updateSemnalState();
+}
 function selectStil(btn) {
   document.querySelectorAll('#stil-chips .stil-chip').forEach(c => c.classList.remove('selected'));
   btn.classList.add('selected');
@@ -1568,6 +1618,8 @@ async function doGenerate() {
     '03_tip_relatie':       document.getElementById('f_03').value,
     '04_detalii_client':    document.getElementById('f_04').value,
     '05_interactiune_client': document.getElementById('f_05').value,
+    '06_semnal_tip':        document.getElementById('f_06').value,
+    '13_dorinta':           document.getElementById('f_13').value,
     '07_produs':            document.getElementById('f_07').value,
     '08_folosit_produs':    document.getElementById('f_08').value,
     '09_experienta_produs': document.getElementById('f_09').value,
@@ -1645,52 +1697,67 @@ function copyScript() {
 // ============================================
 // PROGRESS — checklist 12 etape, viteza constanta
 // ============================================
+const LESSONS_HEAD = 'Secrete din psihologie care vând';
+const STEPS_HEAD = 'E timpul să te pui în stare optimă de performanță!';
 const MAIN_ITEMS = [
-  { s:'teach', dur:8500, html:'<b>Reciprocitate.</b> Un gest mic și sincer la început creează o datorie subtilă de atenție — oamenii întorc ce primesc.' },
-  { s:'teach', dur:8500, html:'<b>„NU" e mai ușor decât „DA".</b> Întrebările în care un „nu" e de fapt acordul tău dezarmează: creierul vede „nu" ca pe o ieșire sigură.' },
-  { s:'teach', dur:8500, html:'<b>Bucla deschisă.</b> O frază lăsată neterminată ține atenția captivă — mintea nu suportă o poveste pe jumătate.' },
-  { s:'teach', dur:8500, html:'<b>Numele lui.</b> Numele interlocutorului, rostit măsurat, e cel mai dulce cuvânt pentru oricine.' },
-  { s:'teach', dur:8500, html:'<b>Vulnerabilitatea coboară garda.</b> Când recunoști tu primul o nesiguranță, celălalt nu mai simte nevoia să se apere.' },
-  { s:'teach', dur:8500, html:'<b>Frica de pierdere.</b> Oamenii se tem mai tare să piardă decât se bucură să câștige — „ce ratezi" mișcă mai mult ca „ce primești".' },
-  { s:'teach', dur:8500, html:'<b>Pauza.</b> Tăcerea după o întrebare e cel mai subestimat instrument — nu o umple tu, lasă-l pe el să răspundă.' },
-  { s:'teach', dur:8500, html:'<b>„Pentru că".</b> Orice cerere însoțită de un motiv — chiar simplu — crește dramatic șansa de „da".' },
-  { s:'read',    dur:6000, n:1, html:'<b>Citește scriptul cu voce tare</b>, în picioare, de 3 ori — ține-l în față.' },
-  { s:'jump',    dur:6000, n:2, html:'<b>Pune-te în stare optimă</b>: sari, dansează, mișcă-te.' },
-  { s:'breathe', dur:6000, n:3, html:'<b>Zâmbește larg și respiră adânc</b> de 3 ori. Inspiră și expiră fericire!' },
-  { s:'notes',   dur:6000, n:4, html:'Ai un <b>pix și o foaie</b> la îndemână pentru ce notezi în apel.' },
-  { s:'smile',   dur:6000, n:5, html:'<b>Zâmbește</b> când suni — se aude în voce.' },
-  { s:'silent',  dur:6000, n:6, html:'Pune notificările pe <b>silent</b> — fără întreruperi.' },
-  { s:'think',   dur:6000, n:7, html:'<b>Gândește-te la persoană</b>, nu la vânzare. Relația vinde, nu scriptul.' }
+  { type:'lesson', dur:8500, title:'Reciprocitate', body:'Un gest mic și sincer la început creează o datorie subtilă de atenție — oamenii întorc ce primesc.' },
+  { type:'lesson', dur:8500, title:'„NU" e mai ușor decât „DA"', body:'Întrebările în care un „nu" e de fapt acordul tău dezarmează: creierul vede „nu" ca pe o ieșire sigură.' },
+  { type:'lesson', dur:8500, title:'Bucla deschisă', body:'O frază lăsată neterminată ține atenția captivă — mintea nu suportă o poveste pe jumătate.' },
+  { type:'lesson', dur:8500, title:'Numele lui', body:'Numele interlocutorului, rostit măsurat, e cel mai dulce cuvânt pentru oricine.' },
+  { type:'lesson', dur:8500, title:'Vulnerabilitatea coboară garda', body:'Când recunoști tu primul o nesiguranță, celălalt nu mai simte nevoia să se apere.' },
+  { type:'lesson', dur:8500, title:'Frica de pierdere', body:'Oamenii se tem mai tare să piardă decât se bucură să câștige — „ce ratezi" mișcă mai mult ca „ce primești".' },
+  { type:'lesson', dur:8500, title:'Pauza', body:'Tăcerea după o întrebare e cel mai subestimat instrument — nu o umple tu, lasă-l pe el să răspundă.' },
+  { type:'lesson', dur:8500, title:'„Pentru că"', body:'Orice cerere însoțită de un motiv — chiar simplu — crește dramatic șansa de „da".' },
+  { type:'step', s:'read',    dur:6000, n:1, html:'<b>Citește scriptul cu voce tare</b>, în picioare, de 3 ori — ține-l în față.' },
+  { type:'step', s:'jump',    dur:6000, n:2, html:'<b>Pune-te în stare optimă</b>: sari, dansează, mișcă-te.' },
+  { type:'step', s:'breathe', dur:6000, n:3, html:'<b>Zâmbește larg și respiră adânc</b> de 3 ori. Inspiră și expiră fericire!' },
+  { type:'step', s:'notes',   dur:6000, n:4, html:'Ai un <b>pix și o foaie</b> la îndemână pentru ce notezi în apel.' },
+  { type:'step', s:'smile',   dur:6000, n:5, html:'<b>Zâmbește</b> când suni — se aude în voce.' },
+  { type:'step', s:'silent',  dur:6000, n:6, html:'Pune notificările pe <b>silent</b> — fără întreruperi.' },
+  { type:'step', s:'think',   dur:6000, n:7, html:'<b>Gândește-te la persoană</b>, nu la vânzare. Relația vinde, nu scriptul.' }
 ];
 
 // ===== MOTOR OMULET (reutilizabil: principal + obiectii) =====
 let _omCtx = null;
 function _omShow(c, i) {
   const it = c.items[i];
-  c.stage.className = 'omu s-' + it.s;
-  const gw = c.stage.querySelector('.guywrap');
-  if (gw) { gw.classList.remove('pop'); void gw.offsetWidth; gw.classList.add('pop'); }
-  if (c.stepno) {
-    if (it.n) { c.stepno.textContent = it.n; c.stepno.classList.remove('hide'); }
-    else c.stepno.classList.add('hide');
+  const isStep = it.type === 'step';
+  if (c.phase) { c.phase.className = 'gen-phase ' + (isStep ? 'step' : 'lesson'); c.phase.textContent = isStep ? c.headStep : c.headLesson; }
+  if (c.omu) c.omu.style.display = isStep ? '' : 'none';
+  if (isStep) {
+    if (c.omu) {
+      c.omu.className = 'omu s-' + it.s;
+      const gw = c.omu.querySelector('.guywrap');
+      if (gw) { gw.classList.remove('pop'); void gw.offsetWidth; gw.classList.add('pop'); }
+    }
+    if (c.lessonBox) c.lessonBox.style.display = 'none';
+    if (c.omRow) c.omRow.style.display = '';
+    if (c.stepno) { if (it.n) { c.stepno.textContent = it.n; c.stepno.classList.remove('hide'); } else c.stepno.classList.add('hide'); }
+    if (c.tip) { c.tip.style.opacity = 0; setTimeout(function () { c.tip.innerHTML = it.html; c.tip.style.opacity = 1; }, 200); }
+  } else {
+    if (c.omRow) c.omRow.style.display = 'none';
+    if (c.lessonBox) {
+      c.lessonBox.style.display = '';
+      c.lessonBox.style.opacity = 0;
+      setTimeout(function () { c.lessonTitle.textContent = it.title; c.lessonBody.innerHTML = it.body; c.lessonBox.style.opacity = 1; }, 200);
+    }
   }
   if (c.dots) c.dots.forEach((d, k) => d.classList.toggle('on', k === i));
-  c.tip.style.opacity = 0;
-  setTimeout(function () { c.tip.innerHTML = it.html; c.tip.style.opacity = 1; }, 200);
   c.timer = setTimeout(function () { c.i = (c.i + 1) % c.items.length; _omShow(c, c.i); }, it.dur);
 }
-function omStart(stageId, stepnoId, tipId, items, dotsWrapId) {
+function omStart(o) {
   omStop();
-  const stage = document.getElementById(stageId);
-  const tip = document.getElementById(tipId);
-  if (!stage || !tip) return;
-  let dots = null;
-  if (dotsWrapId) {
-    const dw = document.getElementById(dotsWrapId);
-    if (dw) { dw.innerHTML = ''; items.forEach(() => dw.appendChild(document.createElement('i'))); dots = Array.from(dw.children); }
-  }
-  _omCtx = { stage: stage, stepno: stepnoId ? document.getElementById(stepnoId) : null, tip: tip, items: items, i: 0, timer: null, dots: dots };
-  _omShow(_omCtx, 0);
+  const g = function (id) { return id ? document.getElementById(id) : null; };
+  const c = {
+    phase: g(o.phaseId), omu: g(o.omuId),
+    lessonBox: g(o.lessonBoxId), lessonTitle: g(o.lessonTitleId), lessonBody: g(o.lessonBodyId),
+    omRow: g(o.omRowId), stepno: g(o.stepnoId), tip: g(o.tipId),
+    headLesson: o.headLesson || '', headStep: o.headStep || '',
+    items: o.items, i: 0, timer: null, dots: null
+  };
+  if (o.dotsId) { const dw = g(o.dotsId); if (dw) { dw.innerHTML = ''; o.items.forEach(function () { dw.appendChild(document.createElement('i')); }); c.dots = Array.from(dw.children); } }
+  _omCtx = c;
+  _omShow(c, 0);
 }
 function omStop() { if (_omCtx && _omCtx.timer) clearTimeout(_omCtx.timer); _omCtx = null; }
 
@@ -1714,7 +1781,7 @@ function startProgress() {
   const L = document.getElementById('gen-loader'), R = document.getElementById('gen-ready');
   if (L) L.style.display = 'block'; if (R) R.style.display = 'none';
   setBar(0);
-  omStart('omu-main', 'om-stepno', 'om-tip', MAIN_ITEMS);
+  omStart({ omuId:'omu-main', phaseId:'gen-phase', lessonBoxId:'lesson-box', lessonTitleId:'lesson-title', lessonBodyId:'lesson-body', omRowId:'om-row', stepnoId:'om-stepno', tipId:'om-tip', items:MAIN_ITEMS, headLesson:LESSONS_HEAD, headStep:STEPS_HEAD });
   _progRAF = requestAnimationFrame(progTick);
 }
 function finishProgress(cb) {
@@ -1859,11 +1926,11 @@ async function generateObjScript(num) {
 // PROGRES OBIECTII — checklist inline (6-7 etape, ~3s)
 // ============================================
 const OBJ_ITEMS = [
-  { s:'calm', dur:6000, html:'O obiecție nu e un „nu" — e o întrebare care încă n-a primit răspuns.' },
-  { s:'calm', dur:6000, html:'Întâi validează, apoi răspunde. „Te înțeleg" dezarmează mai mult ca orice argument.' },
-  { s:'calm', dur:6000, html:'După ce răspunzi, <b>taci</b>. Lasă liniștea să lucreze pentru tine.' },
-  { s:'calm', dur:6000, html:'Nu te aperi — ești de partea lui. Nu e el contra ta, e o nelămurire de lămurit.' },
-  { s:'calm', dur:6000, html:'Majoritatea „nu"-urilor sunt de fapt „nu încă" sau „n-am înțeles".' }
+  { dur:6000, title:'Obiecția nu e „nu"', body:'E o întrebare care încă n-a primit răspuns.' },
+  { dur:6000, title:'Validează, apoi răspunde', body:'„Te înțeleg" dezarmează mai mult ca orice argument.' },
+  { dur:6000, title:'După ce răspunzi, taci', body:'Lasă liniștea să lucreze pentru tine.' },
+  { dur:6000, title:'Ești de partea lui', body:'Nu e el contra ta, e o nelămurire de lămurit.' },
+  { dur:6000, title:'„Nu" înseamnă „nu încă"', body:'Majoritatea „nu"-urilor sunt de fapt „nu încă" sau „n-am înțeles".' }
 ];
 const OBJ_PROG_CEIL = 95;
 const OBJ_TOTAL_MS = 30000;
@@ -1890,9 +1957,8 @@ function startObjProgress(prefix, objText) {
   if (ctx) { let t = objText.length > 80 ? objText.slice(0, 80) + '…' : objText; t = t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); ctx.innerHTML = 'Tratăm obiecția: <i>«' + t + '»</i>'; }
   document.getElementById(prefix + '-loader').style.display = 'block';
   document.getElementById(prefix + '-ready').style.display = 'none';
-  _ensureClone('omu-main', prefix + '-omu');
   setObjBar(prefix, 0);
-  omStart(prefix + '-omu', null, prefix + '-tip', OBJ_ITEMS, prefix + '-dots');
+  omStart({ lessonBoxId: prefix + '-lbox', lessonTitleId: prefix + '-ltitle', lessonBodyId: prefix + '-lbody', dotsId: prefix + '-dots', items: OBJ_ITEMS });
   st.raf = requestAnimationFrame(() => objTick(prefix));
 }
 function finishObjProgress(prefix, cb) {
