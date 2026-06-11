@@ -258,9 +258,11 @@ label{display:block;font-size:13.5px;font-weight:600;letter-spacing:.08em;text-t
 .gen-mid{flex:1 1 auto;display:flex;flex-direction:column;justify-content:center;align-items:center;width:100%}
 .gen-bot{flex:0 0 auto}
 #lesson-box{max-width:344px;padding:24px 24px 26px;border-radius:20px;background:linear-gradient(180deg,rgba(216,169,74,.08),rgba(216,169,74,.02));border:1px solid rgba(216,169,74,.24);box-shadow:0 10px 34px rgba(0,0,0,.28),inset 0 1px 0 rgba(216,169,74,.10)}
-#obj1-lbox,#obj2-lbox{max-width:none;padding:20px 22px 22px;border-radius:16px;background:linear-gradient(180deg,rgba(216,169,74,.07),rgba(216,169,74,.02));border:1px solid rgba(216,169,74,.22);box-shadow:0 6px 22px rgba(0,0,0,.22),inset 0 1px 0 rgba(216,169,74,.08);margin:6px auto 20px}
+#obj1-lbox,#obj2-lbox{max-width:none;padding:22px 24px 24px;border-radius:16px;background:linear-gradient(180deg,rgba(216,169,74,.07),rgba(216,169,74,.02));border:1px solid rgba(216,169,74,.22);box-shadow:0 6px 22px rgba(0,0,0,.22),inset 0 1px 0 rgba(216,169,74,.08);margin:18px auto 22px}
 .tw-caret{display:inline-block;color:var(--goldl);animation:twBlink .7s steps(1) infinite;margin-left:1px;font-weight:400}
 @keyframes twBlink{50%{opacity:0}}
+.lesson-box.reveal{animation:pageOpen .55s cubic-bezier(.22,1,.36,1) both}
+@keyframes pageOpen{from{opacity:0;transform:translateY(14px) scale(.985)}to{opacity:1;transform:none}}
 .lesson-title{text-align:center;color:var(--gold);font-weight:700;font-size:18px;line-height:1.3;margin-bottom:10px}
 .lesson-body{text-align:left;font-size:16px;line-height:1.55;color:var(--ink)}
 
@@ -973,7 +975,7 @@ label{display:block;font-size:13.5px;font-weight:600;letter-spacing:.08em;text-t
     </div>
 
     <!-- OBIECȚII -->
-    <div id="obj-section" style="margin-top:36px">
+    <div id="obj-section" style="margin-top:48px">
 
       <!-- Întrebare obiecție 1 -->
       <div id="obj1-question" class="obj-card">
@@ -1718,14 +1720,12 @@ function copyScript() {
 const LESSONS_HEAD = 'Secrete din psihologie care vând';
 const STEPS_HEAD = 'E timpul să te pui în stare optimă de performanță!';
 const MAIN_ITEMS = [
-  { type:'lesson', dur:8500, title:'Reciprocitate', body:'Un gest mic și sincer la început creează o datorie subtilă de atenție — oamenii întorc ce primesc.' },
-  { type:'lesson', dur:8500, title:'„NU" e mai ușor decât „DA"', body:'Întrebările în care un „nu" e de fapt acordul tău dezarmează: creierul vede „nu" ca pe o ieșire sigură.' },
-  { type:'lesson', dur:8500, title:'Bucla deschisă', body:'O frază lăsată neterminată ține atenția captivă — mintea nu suportă o poveste pe jumătate.' },
-  { type:'lesson', dur:8500, title:'Numele lui', body:'Numele interlocutorului, rostit măsurat, e cel mai dulce cuvânt pentru oricine.' },
-  { type:'lesson', dur:8500, title:'Vulnerabilitatea coboară garda', body:'Când recunoști tu primul o nesiguranță, celălalt nu mai simte nevoia să se apere.' },
-  { type:'lesson', dur:8500, title:'Frica de pierdere', body:'Oamenii se tem mai tare să piardă decât se bucură să câștige — „ce ratezi" mișcă mai mult ca „ce primești".' },
-  { type:'lesson', dur:8500, title:'Pauza', body:'Tăcerea după o întrebare e cel mai subestimat instrument — nu o umple tu, lasă-l pe el să răspundă.' },
-  { type:'lesson', dur:8500, title:'„Pentru că"', body:'Orice cerere însoțită de un motiv — chiar simplu — crește dramatic șansa de „da".' },
+  { type:'lesson', dur:6000, title:'Reciprocitate', body:'Un gest mic și sincer la început creează o datorie subtilă de atenție — oamenii întorc ce primesc.' },
+  { type:'lesson', dur:6000, title:'„NU" e mai ușor decât „DA"', body:'Întrebările în care un „nu" e de fapt acordul tău dezarmează: creierul vede „nu" ca pe o ieșire sigură.' },
+  { type:'lesson', dur:6000, title:'Bucla deschisă', body:'O frază lăsată neterminată ține atenția captivă — mintea nu suportă o poveste pe jumătate.' },
+  { type:'lesson', dur:6000, title:'Frica de pierdere', body:'Oamenii se tem mai tare să piardă decât se bucură să câștige — „ce ratezi" mișcă mai mult ca „ce primești".' },
+  { type:'lesson', dur:6000, title:'Pauza', body:'Tăcerea după o întrebare e cel mai subestimat instrument — nu o umple tu, lasă-l pe el să răspundă.' },
+  { type:'lesson', dur:6000, title:'„Pentru că"', body:'Orice cerere însoțită de un motiv — chiar simplu — crește dramatic șansa de „da".' },
   { type:'transition', dur:2800, text:STEPS_HEAD },
   { type:'step', s:'read',    dur:6000, n:1, html:'<b>Citește scriptul cu voce tare</b>, în picioare, de 3 ori — ține-l în față.' },
   { type:'step', s:'jump',    dur:6000, n:2, html:'<b>Pune-te în stare optimă</b>: sari, dansează, mișcă-te.' },
@@ -1798,8 +1798,12 @@ function _omShow(c, i) {
     if (c.omRow) c.omRow.style.display = 'none';
     if (c.lessonBox) {
       c.lessonBox.style.display = '';
-      c.lessonBox.style.opacity = 0;
-      setTimeout(function () { c.lessonBox.style.opacity = 1; _typewriter(c.lessonTitle, c.lessonBody, it.title, it.body); }, 200);
+      c.lessonBox.style.opacity = '';
+      c.lessonTitle.textContent = it.title;
+      c.lessonBody.textContent = it.body;
+      c.lessonBox.classList.remove('reveal');
+      void c.lessonBox.offsetWidth;
+      c.lessonBox.classList.add('reveal');
     }
   }
   if (c.dots) c.dots.forEach((d, k) => d.classList.toggle('on', k === i));
