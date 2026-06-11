@@ -148,13 +148,13 @@ label{display:block;font-size:13.5px;font-weight:600;letter-spacing:.08em;text-t
 .spinner{display:inline-block;width:20px;height:20px;border:2px solid rgba(216,169,74,.3);
   border-top-color:var(--gold);border-radius:50%;animation:spin .7s linear infinite;vertical-align:middle;margin-right:9px}
 @keyframes spin{to{transform:rotate(360deg)}}
-.generating{text-align:center;padding:60px 20px;color:var(--muted)}
+.generating{text-align:center;padding:24px 20px;color:var(--muted)}
 .generating p{margin-top:16px;font-size:16px}
 
 /* ── PROGRESS (checklist 12 etape) ── */
 .prog-card{width:100%;max-width:440px;margin:0 auto;text-align:left}
 .prog-title{font-family:"Playfair Display",serif;font-size:22px;color:var(--ink);text-align:center;margin-bottom:22px}
-.prog-head{display:flex;align-items:center;gap:14px;margin-bottom:24px}
+.prog-head{display:flex;align-items:center;gap:14px;margin-bottom:12px}
 .progress-track{flex:1;height:9px;background:rgba(216,169,74,.12);border-radius:20px;overflow:hidden}
 .progress-fill{height:100%;width:0%;background:linear-gradient(90deg,var(--goldd),var(--goldl));
   border-radius:20px;box-shadow:0 0 10px rgba(216,169,74,.5)}
@@ -177,6 +177,7 @@ label{display:block;font-size:13.5px;font-weight:600;letter-spacing:.08em;text-t
 
 /* ===== OMULET LOADER (stari de incarcare) ===== */
 .omu{position:relative;width:188px;height:194px;margin:0 auto 4px}
+#omu-main{background:radial-gradient(circle at 50% 46%,rgba(216,169,74,.13),rgba(216,169,74,0) 60%)}
 .omu svg{width:100%;height:100%;display:block;overflow:visible}
 .omu .guy{transform-box:fill-box;transform-origin:50% 100%;animation:omBob 3.6s cubic-bezier(.45,0,.55,1) infinite}
 @keyframes omBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
@@ -249,7 +250,17 @@ label{display:block;font-size:13.5px;font-weight:600;letter-spacing:.08em;text-t
 .gen-phase{text-align:center;margin:2px 0 16px;transition:opacity .3s}
 .gen-phase.lesson{font-size:12.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);font-weight:600}
 .gen-phase.step{font-size:17px;font-weight:600;color:var(--goldl);line-height:1.4;max-width:330px;margin-left:auto;margin-right:auto}
+.gen-phase.trans{font-family:"Playfair Display",serif;font-size:23px;font-weight:700;color:var(--goldl);line-height:1.35;max-width:330px;margin:0 auto;text-transform:none;letter-spacing:0;animation:signalIn .55s cubic-bezier(.22,1,.36,1) both}
+@keyframes signalIn{from{opacity:0;transform:translateY(12px) scale(.95)}to{opacity:1;transform:none}}
 .lesson-box{max-width:330px;margin:0 auto 4px;transition:opacity .3s}
+#gen-loader{display:flex;flex-direction:column;min-height:74vh}
+.gen-top{flex:0 0 auto}
+.gen-mid{flex:1 1 auto;display:flex;flex-direction:column;justify-content:center;align-items:center;width:100%}
+.gen-bot{flex:0 0 auto}
+#lesson-box{max-width:344px;padding:24px 24px 26px;border-radius:20px;background:linear-gradient(180deg,rgba(216,169,74,.08),rgba(216,169,74,.02));border:1px solid rgba(216,169,74,.24);box-shadow:0 10px 34px rgba(0,0,0,.28),inset 0 1px 0 rgba(216,169,74,.10)}
+#obj1-lbox,#obj2-lbox{max-width:none;padding:20px 22px 22px;border-radius:16px;background:linear-gradient(180deg,rgba(216,169,74,.07),rgba(216,169,74,.02));border:1px solid rgba(216,169,74,.22);box-shadow:0 6px 22px rgba(0,0,0,.22),inset 0 1px 0 rgba(216,169,74,.08);margin:6px auto 20px}
+.tw-caret{display:inline-block;color:var(--goldl);animation:twBlink .7s steps(1) infinite;margin-left:1px;font-weight:400}
+@keyframes twBlink{50%{opacity:0}}
 .lesson-title{text-align:center;color:var(--gold);font-weight:700;font-size:18px;line-height:1.3;margin-bottom:10px}
 .lesson-body{text-align:left;font-size:16px;line-height:1.55;color:var(--ink)}
 
@@ -333,7 +344,7 @@ label{display:block;font-size:13.5px;font-weight:600;letter-spacing:.08em;text-t
   border:0.5px solid var(--line);border-radius:20px;padding:2px 6px;margin-left:7px;vertical-align:middle;text-transform:none}
 
 /* ===== GUIDE BUTTONS (deasupra formularului / scriptului) ===== */
-.guide-bar{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:20px}
+.guide-bar{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:40px}
 .guide-btn{background:var(--panel);border:1px solid var(--line);color:var(--goldl);
   font-family:"Hanken Grotesk",sans-serif;font-size:14.5px;font-weight:600;padding:10px 16px;border-radius:9px;cursor:pointer;
   transition:border-color .2s,background .2s}
@@ -768,8 +779,11 @@ label{display:block;font-size:13.5px;font-weight:600;letter-spacing:.08em;text-t
 
         <!-- STARE: SE GENEREAZA -->
         <div id="gen-loader">
+          <div class="gen-top">
           <h3 class="prog-title">Construim scriptul tău psihologic</h3>
           <p class="prog-sub">durează sub 2 minute</p>
+          </div>
+          <div class="gen-mid">
           <div class="gen-phase lesson" id="gen-phase"></div>
           <div class="omu" id="omu-main" style="display:none">
             <svg viewBox="0 0 200 206" aria-hidden="true">
@@ -864,11 +878,14 @@ label{display:block;font-size:13.5px;font-weight:600;letter-spacing:.08em;text-t
             <div class="lesson-body" id="lesson-body"></div>
           </div>
           <div class="om-row" id="om-row"><span class="om-stepno hide" id="om-stepno">1</span><div class="om-tip" id="om-tip"></div></div>
+          </div>
+          <div class="gen-bot">
           <div class="prog-head">
             <div class="progress-track"><div class="progress-fill" id="prog-fill"></div></div>
             <div class="prog-pctnum"><span id="prog-num">0</span>%</div>
           </div>
           <p class="prog-warn">Nu închide fereastra — <b>scriptul se generează</b>.</p>
+          </div>
         </div>
 
         <!-- STARE: GATA -->
@@ -1651,6 +1668,7 @@ async function doGenerate() {
   document.getElementById('obj1-form').style.display = 'none';
   document.getElementById('obj1-progress').style.display = 'none';
   document.getElementById('obj1-result').style.display = 'none';
+  document.getElementById('obj2-question').style.display = 'block';
   document.getElementById('obj2-form').style.display = 'none';
   document.getElementById('obj2-progress').style.display = 'none';
   document.getElementById('obj2-result').style.display = 'none';
@@ -1708,6 +1726,7 @@ const MAIN_ITEMS = [
   { type:'lesson', dur:8500, title:'Frica de pierdere', body:'Oamenii se tem mai tare să piardă decât se bucură să câștige — „ce ratezi" mișcă mai mult ca „ce primești".' },
   { type:'lesson', dur:8500, title:'Pauza', body:'Tăcerea după o întrebare e cel mai subestimat instrument — nu o umple tu, lasă-l pe el să răspundă.' },
   { type:'lesson', dur:8500, title:'„Pentru că"', body:'Orice cerere însoțită de un motiv — chiar simplu — crește dramatic șansa de „da".' },
+  { type:'transition', dur:2800, text:STEPS_HEAD },
   { type:'step', s:'read',    dur:6000, n:1, html:'<b>Citește scriptul cu voce tare</b>, în picioare, de 3 ori — ține-l în față.' },
   { type:'step', s:'jump',    dur:6000, n:2, html:'<b>Pune-te în stare optimă</b>: sari, dansează, mișcă-te.' },
   { type:'step', s:'breathe', dur:6000, n:3, html:'<b>Zâmbește larg și respiră adânc</b> de 3 ori. Inspiră și expiră fericire!' },
@@ -1719,12 +1738,53 @@ const MAIN_ITEMS = [
 
 // ===== MOTOR OMULET (reutilizabil: principal + obiectii) =====
 let _omCtx = null;
+let _twTimer = null;
+function _clearTw(){ if(_twTimer){ clearInterval(_twTimer); _twTimer=null; } }
+function _typewriter(titleEl, bodyEl, title, body){
+  _clearTw();
+  const CARET = '<span class="tw-caret">▌</span>';
+  titleEl.innerHTML=''; bodyEl.innerHTML='';
+  let ti=0, bi=0;
+  _twTimer = setInterval(function(){
+    ti++;
+    if(ti <= title.length){ titleEl.innerHTML = title.slice(0,ti)+CARET; }
+    else{
+      titleEl.textContent = title; _clearTw();
+      _twTimer = setInterval(function(){
+        bi++;
+        if(bi <= body.length){ bodyEl.innerHTML = body.slice(0,bi)+CARET; }
+        else{ bodyEl.textContent = body; _clearTw(); }
+      }, 22);
+    }
+  }, 42);
+}
 function _omShow(c, i) {
+  _clearTw();
   const it = c.items[i];
   const isStep = it.type === 'step';
-  if (c.phase) { c.phase.className = 'gen-phase ' + (isStep ? 'step' : 'lesson'); c.phase.textContent = isStep ? c.headStep : c.headLesson; }
+  const isTrans = it.type === 'transition';
+  if (c.phase) {
+    if (isTrans) {
+      c.phase.className = 'gen-phase trans';
+      c.phase.style.display = '';
+      c.phase.style.opacity = '';
+      c.phase.textContent = it.text;
+    } else if (isStep) {
+      c.phase.className = 'gen-phase step';
+      c.phase.style.display = 'none';
+      c.phase.textContent = '';
+    } else {
+      c.phase.className = 'gen-phase lesson';
+      c.phase.style.display = '';
+      c.phase.style.opacity = '';
+      c.phase.textContent = c.headLesson;
+    }
+  }
   if (c.omu) c.omu.style.display = isStep ? '' : 'none';
-  if (isStep) {
+  if (isTrans) {
+    if (c.lessonBox) c.lessonBox.style.display = 'none';
+    if (c.omRow) c.omRow.style.display = 'none';
+  } else if (isStep) {
     if (c.omu) {
       c.omu.className = 'omu s-' + it.s;
       const gw = c.omu.querySelector('.guywrap');
@@ -1739,7 +1799,7 @@ function _omShow(c, i) {
     if (c.lessonBox) {
       c.lessonBox.style.display = '';
       c.lessonBox.style.opacity = 0;
-      setTimeout(function () { c.lessonTitle.textContent = it.title; c.lessonBody.innerHTML = it.body; c.lessonBox.style.opacity = 1; }, 200);
+      setTimeout(function () { c.lessonBox.style.opacity = 1; _typewriter(c.lessonTitle, c.lessonBody, it.title, it.body); }, 200);
     }
   }
   if (c.dots) c.dots.forEach((d, k) => d.classList.toggle('on', k === i));
@@ -1759,7 +1819,7 @@ function omStart(o) {
   _omCtx = c;
   _omShow(c, 0);
 }
-function omStop() { if (_omCtx && _omCtx.timer) clearTimeout(_omCtx.timer); _omCtx = null; }
+function omStop() { _clearTw(); if (_omCtx && _omCtx.timer) clearTimeout(_omCtx.timer); _omCtx = null; }
 
 // ===== BARA (plafon 95% pana vine rezultatul real) =====
 const PROG_CEIL = 95;
@@ -1928,7 +1988,7 @@ async function generateObjScript(num) {
 const OBJ_ITEMS = [
   { dur:6000, title:'Obiecția nu e „nu"', body:'E o întrebare care încă n-a primit răspuns.' },
   { dur:6000, title:'Validează, apoi răspunde', body:'„Te înțeleg" dezarmează mai mult ca orice argument.' },
-  { dur:6000, title:'După ce răspunzi, taci', body:'Lasă liniștea să lucreze pentru tine.' },
+  { dur:6000, title:'După ce adresezi o întrebare, taci', body:'Lasă liniștea să lucreze pentru tine.' },
   { dur:6000, title:'Ești de partea lui', body:'Nu e el contra ta, e o nelămurire de lămurit.' },
   { dur:6000, title:'„Nu" înseamnă „nu încă"', body:'Majoritatea „nu"-urilor sunt de fapt „nu încă" sau „n-am înțeles".' }
 ];
