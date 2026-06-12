@@ -142,6 +142,10 @@ NU REPETA din continutul anterior:
   "album de calatorii") SAU vizuala ("casa" / "meci-radio" / "film" / "apus").
   Daca una apare deja in {{22_continut_anterior}}, tu iei ALTA.
 ✗ Aceleasi formulari de "out real" / permisiune ("ramane intre noi", "zero suparare"...).
+✗ Aceeasi INTREBARE DE COLECTARE A DECIZIEI / supapa de dorinta. In special structura
+  "singurul moment / singura pauza din saptamana in care nu trebuie sa (faci / rezolvi) nimic"
+  si polul negativ "idee gresita" — daca apar in continutul anterior, iei ALT pol si ALTA
+  imagine. Sigilarea difera SI de scriptul principal, nu doar de obiectia anterioara.
 
 PERMIS (NU e repetitie):
 ✅ Aceeasi TEHNICA cu formulare noua (intrebarea-NU, mirroring, reframe — refolosite, dar
@@ -662,6 +666,13 @@ STRUCTURA (invariantul):
 structura asta, adaptata la client:
 - daca e suprasolicitat → polul pozitiv = "respiro / pauza pentru tine"
 - daca viseaza o destinatie → leag polul pozitiv de ea
+
+⚠️ CROSS-CHECK OBLIGATORIU INAINTE DE A ALEGE EXEMPLUL: scaneaza {{22_continut_anterior}}.
+Daca polul NEGATIV ("idee gresita" / "timp pierdut" / "nepotrivit"...) SAU structura polului
+POZITIV — mai ales "singurul moment / singura pauza din saptamana in care nu trebuie sa
+(faci / rezolvi) nimic" — apare DEJA acolo (in scriptul principal SAU in raspunsul la obiectia
+anterioara), NU o refolosi. Iei alt pol negativ SI alta imagine pozitiva. Intrebarea de
+sigilare de acum TREBUIE sa difere SI de scriptul principal, nu doar de obiectia anterioara.
 
 EXEMPLE INTREBARE (variaza, nu reproduce verbatim):
 1. „Ti se pare ceva care te-ar obosi in plus... sau ar putea fi chiar putina
