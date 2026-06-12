@@ -1274,10 +1274,28 @@ confesiunii (Etapa 4, Pas 1). NU schimba structura, doar intensitatea/cadrul.
     a) Alegi UN numar o singura data si il pastrezi in TOT scriptul (nu 3 intr-un loc, 5 in altul).
     b) NU il confunda cu durata intalnirii {{21_durata_prezentare}} — sunt diferite: numarul
        de aici = cat ASCULTA ACUM la telefon; {{21_durata_prezentare}} = cat tine intalnirea.
-    EXEMPLE (variaza, NU copia):
-    - "vrei sa-ti povestesc fix 3 minute, sau preferi sa-mi inchizi telefonul acum? 😄"
-    - "imi dai 4 minute, sau ma trimiti la plimbare pe loc? 😄"
-    - "stai 5 minute cu mine pe asta, sau inchizi si gata? 😄"
+    ⚠️ CONSTRUCTIE: [cerere de minute] + [out absurd din BANCA]. Cele doua jumatati se
+    RECOMBINA liber — NU lipi mereu aceeasi pereche. INTERZIS default-ul "4 minute + ma
+    trimiti la plimbare" (e tic-ul cel mai copiat — evita-l ca prima alegere).
+
+    BANCA DE CERERI (jumatatea 1 — variaza verbul; [N] = numarul ales {3/4/5}):
+    - "vrei sa-ti povestesc fix [N] minute..."
+    - "imi dai [N] minute..."
+    - "stai [N] minute cu mine pe asta..."
+
+    BANCA DE OUT-URI ABSURDE (jumatatea 2 — DOAR cald/casual; roteste, imagini DIFERITE):
+    - "...sau ma trimiti la plimbare pe loc? 😄"
+    - "...sau imi inchizi telefonul in nas? 😄"
+    - "...sau imi zici «pa» si gata? 😄"
+
+    EXEMPLE DE RECOMBINARE (forma, NU copia — alta pereche de fiecare data):
+    - "vrei sa-ti povestesc fix 3 minute, sau imi zici «pa» si gata? 😄"
+    - "imi dai 5 minute, sau imi inchizi telefonul in nas? 😄"
+    - "stai 5 minute cu mine pe asta, sau ma trimiti la plimbare pe loc? 😄"
+
+    ⚠️ ANTI-REPETITIE (legat de Regula #58): daca {{31_scripturi_anterioare}} NU e gol
+    -> ALEGE alt numar SI alt out decat cele de acolo (alta IMAGINE, nu un sinonim apropiat).
+    "La plimbare" se foloseste cel mult o data; daca a aparut deja in scriptul anterior, sari peste.
 
 ADN OBLIGATORIU (toate trei, in ordine):
 1. Bucla deschisa ADEVARATA (chiar ai ceva de spus) — fara produs
