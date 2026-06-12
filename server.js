@@ -232,6 +232,14 @@ async function runObjectionDirect(jobId, objNum, allVariables) {
       await db.from('generation_jobs').update({ status: 'error', error: 'anthropic_error' }).eq('id', jobId);
       return;
     }
+    // cost real per obiectie (apare in Railway logs) — Sonnet 4.6: $3/M in, $15/M out
+    try {
+      const u = data.usage || {};
+      const inTok = u.input_tokens || 0;
+      const outTok = u.output_tokens || 0;
+      const cost = (inTok * 3 + outTok * 15) / 1e6;
+      console.log(`[OBIECTIE COST] obj${objNum || 1} in=${inTok} out=${outTok} cost=$${cost.toFixed(4)}`);
+    } catch (_) {}
     const text = (data.content || []).map(b => b.text || '').join('\n').trim();
     if (!text) {
       await db.from('generation_jobs').update({ status: 'error', error: 'empty_result' }).eq('id', jobId);
