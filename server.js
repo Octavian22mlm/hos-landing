@@ -807,6 +807,94 @@ app.post('/api/subscription/resume', auth, async (req, res) => {
   }
 });
 
+// POST — schimba planul. Upgrade = plata integrala imediat (ciclu repornit) + scripturi cumulate.
+// Downgrade = imediat, fara plata acum, pastreaza scripturile, pierde doar feature-urile superioare.
+const TIER_RANK = { recruit: 1, builder: 2, leader: 3 };
+app.post('/api/subscription/change', auth, async (req, res) => {
+  try {
+    const target = ((req.body && req.body.tier) || '').toString();
+    if (!TIER_RANK[target] || !STRIPE_PLANS[target]) return res.status(400).json({ error: 'Plan invalid.' });
+
+    const found = await findUserSubscription(req.user.id, req.user.email);
+    if (!found) return res.status(404).json({ error: 'Nu ai un abonament activ de schimbat.' });
+    const sub = found.sub;
+
+    const { data: prof } = await db.from('profiles').select('tier, scripts_remaining').eq('id', req.user.id).single();
+    const current = (prof && prof.tier) || (sub.metadata && sub.metadata.tier);
+    if (!TIER_RANK[current]) return res.status(400).json({ error: 'Planul curent nu poate fi schimbat de aici.' });
+    if (current === target) return res.status(400).json({ error: 'Esti deja pe acest plan.' });
+
+    const itemId    = sub.items.data[0].id;
+    const newPrice  = STRIPE_PLANS[target].priceId;
+    const isUpgrade = TIER_RANK[target] > TIER_RANK[current];
+
+    const params = {
+      items: [{ id: itemId, price: newPrice }],
+      proration_behavior: 'none',
+      metadata: { ...(sub.metadata || {}), tier: target }
+    };
+    if (isUpgrade) params.billing_cycle_anchor = 'now'; // plata integrala imediat + ciclu repornit azi
+
+    await stripe.subscriptions.update(sub.id, params);
+
+    const dbUpdate = { tier: target, stripe_subscription_id: sub.id };
+    if (isUpgrade) {
+      // scripturile noului tier se ADAUGA peste cele existente
+      const { data: t } = await db.from('tiers').select('scripts_per_month').eq('id', target).single();
+      const add = t ? t.scripts_per_month : 0;
+      const cur = (prof && prof.scripts_remaining) || 0;
+      dbUpdate.scripts_remaining = cur + add;
+      dbUpdate.scripts_reset_at  = new Date().toISOString();
+    }
+    // downgrade: NU atingem scripts_remaining (pastreaza ce are); doar tier-ul scade -> feature-urile superioare se blocheaza
+
+    await db.from('profiles').update(dbUpdate).eq('id', req.user.id);
+    console.log(`[change] ${req.user.id} ${current} -> ${target} (${isUpgrade ? 'upgrade+plata' : 'downgrade'})`);
+    res.json({ ok: true, tier: target, upgrade: isUpgrade });
+  } catch (err) {
+    console.error('change error:', err);
+    res.status(500).json({ error: 'Nu am putut schimba planul. Incearca din nou.' });
+  }
+});
+
+// POST — cumpara inca o data acelasi plan: REPORNESTE ciclul (plata integrala azi pe cardul salvat),
+// ramane pe acelasi plan, +X scripturi cumulativ, urmatoarea factura la 30 de zile din acest moment.
+app.post('/api/subscription/repurchase', auth, async (req, res) => {
+  try {
+    const found = await findUserSubscription(req.user.id, req.user.email);
+    if (!found) return res.status(404).json({ error: 'Nu ai un abonament activ.' });
+    const sub = found.sub;
+
+    const { data: prof } = await db.from('profiles').select('tier, scripts_remaining').eq('id', req.user.id).single();
+    const tier = (prof && prof.tier) || (sub.metadata && sub.metadata.tier);
+    if (!TIER_RANK[tier]) return res.status(400).json({ error: 'Plan invalid pentru aceasta optiune.' });
+
+    // repornire ciclu pe ACELASI plan: plata integrala imediat pe cardul salvat (off-session),
+    // factura generata are billing_reason 'subscription_update' -> NU declanseaza resetul din invoice.paid
+    const updated = await stripe.subscriptions.update(sub.id, {
+      billing_cycle_anchor: 'now',
+      proration_behavior: 'none',
+      metadata: { ...(sub.metadata || {}), tier }
+    });
+
+    // +X scripturi cumulativ (peste cele existente)
+    const { data: t } = await db.from('tiers').select('scripts_per_month').eq('id', tier).single();
+    const add = t ? t.scripts_per_month : 0;
+    const cur = (prof && prof.scripts_remaining) || 0;
+    await db.from('profiles').update({
+      scripts_remaining: cur + add,
+      scripts_reset_at: new Date().toISOString(),
+      stripe_subscription_id: sub.id
+    }).eq('id', req.user.id);
+
+    console.log(`[repurchase] ${req.user.id} ${tier} +${add} scripturi (total ${cur + add}), ciclu repornit`);
+    res.json({ ok: true, tier, scripts_added: add, scripts_total: cur + add, current_period_end: subPeriodEnd(updated) });
+  } catch (err) {
+    console.error('repurchase error:', err);
+    res.status(500).json({ error: 'Nu am putut procesa plata. Verifica cardul salvat sau incearca din nou.' });
+  }
+});
+
 // POST — mesaj de ajutor (din fluxul de retentie). Stocheaza in Supabase + email prin Resend daca exista cheia.
 app.post('/api/support', auth, async (req, res) => {
   try {
