@@ -206,11 +206,32 @@ async function runObjectionDirect(jobId, objNum, allVariables) {
       return;
     }
     let prompt = fs.readFileSync(promptPath, 'utf8');
-    for (const [k, v] of Object.entries(allVariables)) {
+
+    // EVITA MULTIPLICAREA: {{22_continut_anterior}} apare de 11x in prompt -> injectat la fiecare = explozie de cost.
+    // Inlocuim referintele cu eticheta + adaugam continutul O SINGURA DATA la final.
+    const priorContent = allVariables['22_continut_anterior'] || '';
+    prompt = prompt.split('{{22_continut_anterior}}').join('scriptul anterior (vezi SCRIPT ANTERIOR la finalul promptului)');
+
+    // restul variabilelor (fara cea mare, deja tratata)
+    const vars = { ...allVariables };
+    delete vars['22_continut_anterior'];
+    for (const [k, v] of Object.entries(vars)) {
       prompt = prompt.split('{{' + k + '}}').join(v == null ? '' : String(v));
     }
-    // variabilele necompletate -> gol (ca in MindStudio)
-    prompt = prompt.replace(/\{\{[^}]+\}\}/g, '');
+    prompt = prompt.replace(/\{\{[^}]+\}\}/g, ''); // variabilele necompletate -> gol (ca in MindStudio)
+
+    // injecteaza BIBLIOTECA DE TEHNICI DE OBIECTIE (ADN) + scriptul anterior, O SINGURA DATA, la final
+    const kbObCands = [
+      path.join(__dirname, 'prompts', 'kb_obiectii.md'),
+      path.join(process.cwd(), 'prompts', 'kb_obiectii.md'),
+      path.join(__dirname, 'kb_obiectii.md')
+    ];
+    const kbObPath = kbObCands.find(p => { try { return fs.existsSync(p); } catch (e) { return false; } });
+    const kbObiectii = kbObPath ? fs.readFileSync(kbObPath, 'utf8') : '';
+    if (kbObiectii) prompt += '\n\n' + kbObiectii;
+    if (priorContent.trim()) {
+      prompt += '\n\n═══════════ SCRIPT ANTERIOR (contextul conversatiei de pana acum) ═══════════\n' + priorContent;
+    }
 
     const r = await fetch('https://api.anthropic.com/v1/messages', {
       method: 'POST',
