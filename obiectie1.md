@@ -498,39 +498,62 @@ uita, nu intelege, nu decide. Decizia se ia in PREZENTA ta, live.
 OBIECTIV: micro-angajament la o prezentare/intalnire scurta (in formatul din {{11_tip_prezentare}}), NU un material de citit.
 
 ─────────────────────────────────────────
-🎁 «CADRUL SURPRIZEI» — pentru obiectia "trimite-mi pe WhatsApp / mail"
+🎁 «CADRU FIX» — pentru obiectia "trimite-mi pe WhatsApp / mail" (2 tehnici verificate)
 ─────────────────────────────────────────
 CAND: clientul cere sa-i trimiti informatia inainte (WhatsApp / SMS / mail / mesaj).
 CONDITIE: DOAR daca {{03_tip_relatie}} = "Prieten apropiat" SAU "Ruda" SI tonul e jucaus/umor
 (din {{26_stil_abordare}} = "Relaxat si cu umor", sau registrul jucaus din {{22_continut_anterior}}).
-Profilul (expert sau nu) NU mai conteaza — daca relatia e apropiata si tonul e jucaus, gluma merge.
-ALTFEL (ton ne-jucaus: cald-respectuos / direct, SAU relatie ne-apropiata) -> NU forta gluma;
+ALTFEL (ton ne-jucaus: cald-respectuos / direct, SAU relatie ne-apropiata) -> NU forta;
 foloseste REFRAME VIZUAL "vino sa vezi" de mai sus (mai robust logic).
 ⚠️ NU se foloseste daca REGULA #0 (hardship) s-a declansat.
 
-MECANISM: muti clientul din rolul "cer informatii" in rolul "gazda care isi protejeaza
-surpriza" — ajunge sa argumenteze SINGUR pentru pastrarea surprizei, apoi transferi.
-E o Alegere Dirijata: pol pozitiv (placerea) vs pol negativ absurd; absurdul + zambetul
-dezamorseaza. Inchei cu TACERE.
+CUM ALEGI: ai EXACT 2 tehnici verificate mai jos. Folosesti UNA din ele, integral.
+🚫 NU inventa alte analogii, intrebari sau argumente. Orice analogie libera (mobila, mancarea,
+"live te verific mai bine", intrebari deschise care o pun pe EA sa raspunda) se INTOARCE impotriva ta:
+clientul sceptic foloseste aceeasi logica sa-ti ceara tocmai WhatsApp-ul. Aceste 2 sunt SINGURELE permise.
 
-MODEL (NU copia verbatim — variaza formularea, pastreaza arcul si tonul cald):
+ANTI-REPETITIE (#0.5): daca una din cele 2 (sau metafora ei) apare deja in {{22_continut_anterior}},
+folosesti CEALALTA. Daca niciuna nu apare, alegi pe oricare se potriveste mai bine tonului.
+ROTATIE: daca la finalul promptului apare o linie ">>> ROTATIE WHATSAPP: foloseste [tehnica]",
+foloseste ACEA tehnica. EXCEPTIE: daca ea apare deja in {{22_continut_anterior}}, foloseste cealalta
+(anti-repetitia bate rotatia).
+
+ARC COMUN (ambele il pastreaza): 1) VALIDARE calda ("te aud") 2) mutarea cadrului
+3) binar soft + [ TACERE COMPLETA 🤐 ]. Ton jucaus + cald.
+
+═══ TEHNICA 1 — «PRINCIPIUL PERSONAL» (valoarea ta; cea mai etansa) ═══
+MECANISM: enunti un PRINCIPIU al tau — respectul fata de oamenii la care tii. NU afirmi ce-i
+"mai bine" pentru ea (aia se poate flipa), ci standardul TAU (greu de contrazis).
+MODEL (NU copia verbatim — variaza formularea, pastreaza arcul):
+AGENT: ( ZAMBET CALDUROS 😊 ) "[NUME], te aud — si inteleg, pe WhatsApp ai totul la indemana, cand vrei tu."
+[ PAUZA 2s ⏸️ ]
+AGENT: ( VOCE JOASA 🎙️ ) "Dar am un principiu de la care nu ma abat: pe oamenii la care tin cu adevarat
+nu-i tratez ca pe un contact caruia ii arunc niste randuri si «descurca-te». Pe astia ii privesc in ochi,
+le dau toata atentia, fata in fata."
+[ PAUZA 2s ⏸️ ]
+AGENT: ( ZAMBET CALDUROS 😊 ) "Oare chiar mi-ai refuza placerea de a te trata asa?"
+[ TACERE COMPLETA 🤐 ]
+
+═══ TEHNICA 2 — «CADRUL SURPRIZEI» (norma sociala + bind jucaus) ═══
+MECANISM: muti clientul din "cer informatii" in "gazda care isi protejeaza surpriza". Forta vine din
+BIND-ul jucaus ("vrei sa ma pedepsesti?"), greu de refuzat social — NU din logica analogiei.
+MODEL (NU copia verbatim — variaza formularea, pastreaza arcul):
 AGENT: ( ZAMBESTE OBLIGATORIU 😊 ) "[NUME], vrei sa-mi strici toata surpriza?"
 [ PAUZA 2s ⏸️ ]
 CLIENT (exemplu): "Nu... dar vreau sa stiu inainte sa vin."
-AGENT: ( ZAMBET CALDUROS 😊 ) "Te aud... inteleg ce zici. Dar e ca si cum tu m-ai chema
-la o petrecere surpriza, iar eu te-as intreba dinainte care-i surpriza. Mi-ai spune...
-sau ai vrea s-o pastrezi, ca de-aia e surpriza? 😊"
+AGENT: ( ZAMBET CALDUROS 😊 ) "Te aud... inteleg ce zici. Dar e ca si cum tu m-ai chema la o petrecere
+surpriza, iar eu te-as intreba dinainte care-i surpriza. Mi-ai spune... sau ai vrea s-o pastrezi, ca de-aia
+e surpriza? 😊"
 [ PAUZA 2s ⏸️ ]
 CLIENT (exemplu): "As pastra surpriza."
-AGENT: ( ZAMBESTE OBLIGATORIU 😊 ) "Si-atunci... [ALEGE UN POL dupa caldura relatiei]:
-   - cald / sigur (default): «imi faci placerea sa ramana surpriza, sau chiar vrei sa-mi strici bucuria?»
-   - prieten apropiat, jucaus: «...sau chiar vrei sa ma pedepsesti?»"
+AGENT: ( ZAMBESTE OBLIGATORIU 😊 ) "Si-atunci... imi faci placerea sa ramana surpriza, sau chiar vrei sa
+ma pedepsesti? 😊"
 [ TACERE COMPLETA 🤐 ]
 
 ⚠️ Dupa intrebarea finala = TACERE. Prima persoana care vorbeste pierde.
 ⚠️ NU folosi "te inteleg perfect" (e pe BLACKLIST). Foloseste "te aud" / "inteleg ce zici".
-⚠️ ANTI-REPETITIE (Regula #0.5): daca metafora-surpriza apare deja in {{22_continut_anterior}},
-sari pe alta cale (reframe vizual / album de calatorii).
+⚠️ RESCUE (DOAR daca ezita prea mult, DUPA tacere): voce joasa, o singura linie —
+"[NUME]... de la prieten la prieten. Atat." -> apoi din nou [ TACERE COMPLETA 🤐 ].
 
 ─────────────────────────────────────────
 ⚠️ DURATA — ANTI-HALUCINATIE
