@@ -233,8 +233,11 @@ async function runObjectionDirect(jobId, objNum, allVariables) {
       prompt += '\n\n═══════════ SCRIPT ANTERIOR (contextul conversatiei de pana acum) ═══════════\n' + priorContent;
     }
 
-    // ROTATIE WHATSAPP: alege aleator una din cele 2 tehnici verificate, ca pe input identic sa varieze intre generari
-    const waTech = Math.random() < 0.5 ? 'Principiul Personal' : 'Cadrul Surprizei';
+    // ROTATIE WHATSAPP: alege aleator una din tehnicile verificate. A 3-a (Reactia pe viu) intra in pool DOAR la produse turistice.
+    const waPool = ['Principiul Personal', 'Cadrul Surprizei'];
+    const produsObj = (allVariables['07_produs'] || '').toLowerCase();
+    if (/vacant|croazier|calatori|turistic|excursi/.test(produsObj)) waPool.push('Reactia pe viu');
+    const waTech = waPool[Math.floor(Math.random() * waPool.length)];
     prompt += '\n\n>>> ROTATIE WHATSAPP: foloseste ' + waTech + ' (se aplica DOAR daca obiectia e de tip "trimite pe WhatsApp / mail" si conditia CADRU FIX e indeplinita; pentru orice alta obiectie, ignora complet aceasta linie).';
 
     const r = await fetch('https://api.anthropic.com/v1/messages', {
