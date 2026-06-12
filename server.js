@@ -834,7 +834,7 @@ app.post('/api/support', auth, async (req, res) => {
           method: 'POST',
           headers: { 'Authorization': `Bearer ${process.env.RESEND_API_KEY}`, 'Content-Type': 'application/json' },
           body: JSON.stringify({
-            from: process.env.SUPPORT_FROM || 'Harvard of Sales <noreply@octavianalupoaie.biz>',
+            from: process.env.SUPPORT_FROM || 'Harvard of Sales <onboarding@resend.dev>',
             to: ['contact@octavianalupoaie.biz'],
             reply_to: req.user.email,
             subject: `[Ajutor] ${reason || 'Mesaj'} - ${req.user.email}`,
