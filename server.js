@@ -672,9 +672,27 @@ app.post('/api/webhook', express.raw({ type: 'application/json' }), async (req, 
 // ============================================
 app.get('/api/test-anthropic', async (req, res) => {
   if (req.query.s !== process.env.ADMIN_SECRET) return res.status(401).send('unauthorized');
+  const fs = require('fs');
+  const candidates = [
+    path.join(__dirname, 'prompts', 'obiectie1.md'),
+    path.join(process.cwd(), 'prompts', 'obiectie1.md'),
+    path.join(__dirname, 'obiectie1.md')
+  ];
+  const promptPath = candidates.find(p => { try { return fs.existsSync(p); } catch (e) { return false; } });
+  if (!promptPath) {
+    let diag = 'NU am gasit obiectie1.md. Diagnostic:\n';
+    diag += '__dirname = ' + __dirname + '\n';
+    diag += 'cwd = ' + process.cwd() + '\n\n';
+    try { diag += 'Fisiere in __dirname:\n  ' + fs.readdirSync(__dirname).join('\n  ') + '\n\n'; } catch (e) { diag += 'eroare __dirname: ' + e.message + '\n\n'; }
+    const pd = path.join(__dirname, 'prompts');
+    try {
+      if (fs.existsSync(pd)) diag += 'Fisiere in prompts/:\n  ' + fs.readdirSync(pd).join('\n  ');
+      else diag += 'Folderul prompts/ NU exista.';
+    } catch (e) { diag += 'eroare prompts/: ' + e.message; }
+    return res.status(500).type('text/plain').send(diag);
+  }
   try {
-    const fs = require('fs');
-    let prompt = fs.readFileSync(path.join(__dirname, 'prompts/obiectie1.md'), 'utf8');
+    let prompt = fs.readFileSync(promptPath, 'utf8');
     const sample = {
       '01_agent_gen': 'Feminin', '02_client_gen': 'Feminin', '03_tip_relatie': 'Prieten apropiat',
       '04_detalii_client': 'Prietena din liceu, doi copii, lucreaza in contabilitate, mereu ocupata',
