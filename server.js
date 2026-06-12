@@ -233,6 +233,10 @@ async function runObjectionDirect(jobId, objNum, allVariables) {
       prompt += '\n\n═══════════ SCRIPT ANTERIOR (contextul conversatiei de pana acum) ═══════════\n' + priorContent;
     }
 
+    // ROTATIE WHATSAPP: alege aleator una din cele 2 tehnici verificate, ca pe input identic sa varieze intre generari
+    const waTech = Math.random() < 0.5 ? 'Principiul Personal' : 'Cadrul Surprizei';
+    prompt += '\n\n>>> ROTATIE WHATSAPP: foloseste ' + waTech + ' (se aplica DOAR daca obiectia e de tip "trimite pe WhatsApp / mail" si conditia CADRU FIX e indeplinita; pentru orice alta obiectie, ignora complet aceasta linie).';
+
     const r = await fetch('https://api.anthropic.com/v1/messages', {
       method: 'POST',
       headers: {
