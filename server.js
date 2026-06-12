@@ -252,6 +252,102 @@ async function runObjectionDirect(jobId, objNum, allVariables) {
   }
 }
 
+// ============================================
+// FLUX DIRECT ANTHROPIC pentru INVITATIE (sub flag USE_DIRECT_INVITATION)
+// Injecteaza cele 6 openinguri in {{kb_opening}}, curata randul [DEBUG] din primer,
+// si DECREMENTEAZA CREDITE identic cu callback-ul MindStudio (invitatia scade credite).
+// ============================================
+async function runInvitationDirect(jobId, jobMode, userId, allVariables) {
+  const fs = require('fs');
+  const findFile = (name) => {
+    const cands = [
+      path.join(__dirname, 'prompts', name),
+      path.join(process.cwd(), 'prompts', name),
+      path.join(__dirname, name)
+    ];
+    return cands.find(p => { try { return fs.existsSync(p); } catch (e) { return false; } });
+  };
+  try {
+    const promptPath = findFile('invitatie.md');
+    const kbPath = findFile('kb_openings.md');
+    if (!promptPath) {
+      await db.from('generation_jobs').update({ status: 'error', error: 'prompt_missing' }).eq('id', jobId);
+      return;
+    }
+    let prompt = fs.readFileSync(promptPath, 'utf8');
+    const kbOpenings = kbPath ? fs.readFileSync(kbPath, 'utf8') : '';
+
+    // injecteaza openingurile in {{kb_opening}} + restul variabilelor
+    const vars = { ...allVariables, kb_opening: kbOpenings };
+    for (const [k, v] of Object.entries(vars)) {
+      prompt = prompt.split('{{' + k + '}}').join(v == null ? '' : String(v));
+    }
+    prompt = prompt.replace(/\{\{[^}]+\}\}/g, ''); // variabile necompletate -> gol
+
+    const r = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: {
+        'x-api-key': process.env.ANTHROPIC_API_KEY,
+        'anthropic-version': '2023-06-01',
+        'content-type': 'application/json'
+      },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-6',
+        max_tokens: 16000,
+        temperature: 0.6,
+        messages: [{ role: 'user', content: prompt }]
+      })
+    });
+    const data = await r.json();
+    if (!r.ok) {
+      console.error('Anthropic invitatie error:', JSON.stringify(data).slice(0, 500));
+      await db.from('generation_jobs').update({ status: 'error', error: 'anthropic_error' }).eq('id', jobId);
+      return;
+    }
+    // cost real per invitatie (Railway logs) — Sonnet 4.6: $3/M in, $15/M out
+    try {
+      const u = data.usage || {};
+      const inTok = u.input_tokens || 0, outTok = u.output_tokens || 0;
+      const cost = (inTok * 3 + outTok * 15) / 1e6;
+      console.log(`[INVITATIE COST] mode=${jobMode} in=${inTok} out=${outTok} cost=$${cost.toFixed(4)}`);
+    } catch (_) {}
+
+    let text = (data.content || []).map(b => b.text || '').join('\n').trim();
+    if (!text) {
+      await db.from('generation_jobs').update({ status: 'error', error: 'empty_result' }).eq('id', jobId);
+      return;
+    }
+    // curata randul [DEBUG] din primer (mode-lock) ca sa nu apara la utilizator
+    text = text.replace(/^\[DEBUG\][^\n]*\r?\n\r?\n?/, '').trim();
+
+    // DECREMENTARE CREDITE — IDENTIC cu callback-ul MindStudio (training_left intai, apoi scripts_remaining)
+    let newRemaining = null, newTraining = null;
+    const { data: profile } = await db.from('profiles').select('*').eq('id', userId).single();
+    if (profile) {
+      newRemaining = profile.scripts_remaining;
+      newTraining  = profile.training_left || 0;
+      if (newTraining > 0) {
+        newTraining = newTraining - 1;
+        await db.from('profiles').update({ training_left: newTraining }).eq('id', userId);
+      } else {
+        newRemaining = profile.scripts_remaining - 1;
+        await db.from('profiles').update({ scripts_remaining: newRemaining }).eq('id', userId);
+      }
+      await db.from('script_generations').insert({ user_id: userId, mode: jobMode });
+    }
+
+    await db.from('generation_jobs').update({
+      status: 'done',
+      result: text,
+      scripts_remaining: newRemaining,
+      training_left: newTraining
+    }).eq('id', jobId);
+  } catch (e) {
+    console.error('runInvitationDirect exception:', e.message);
+    try { await db.from('generation_jobs').update({ status: 'error', error: 'direct_exception' }).eq('id', jobId); } catch (_) {}
+  }
+}
+
 app.post('/api/generate', auth, async (req, res) => {
   // 1. Citim profilul cu detalii tier
   const { data: profile } = await db
@@ -327,6 +423,12 @@ app.post('/api/generate', auth, async (req, res) => {
   // 6.5 — FLUX DIRECT ANTHROPIC pentru OBIECTII (sub flag, in paralel cu MindStudio)
   if (isObjection && process.env.USE_DIRECT_OBJECTIONS === '1') {
     runObjectionDirect(jobId, objNum, allVariables); // fundal — NU asteptam
+    return res.json({ jobId });
+  }
+
+  // 6.6 — FLUX DIRECT ANTHROPIC pentru INVITATIE (sub flag, in paralel cu MindStudio)
+  if (!isObjection && process.env.USE_DIRECT_INVITATION === '1') {
+    runInvitationDirect(jobId, mode || 'clean', req.user.id, allVariables); // fundal — NU asteptam
     return res.json({ jobId });
   }
 
