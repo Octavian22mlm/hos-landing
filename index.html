@@ -376,6 +376,34 @@ label{display:block;font-size:13.5px;font-weight:600;letter-spacing:.08em;text-t
 .modal-gate.locked{position:relative}
 .modal-gate:disabled::after{content:" — derulează până jos";font-weight:500;text-transform:none;letter-spacing:0;font-size:13px}
 
+/* Cont / abonament / retentie */
+.acc-loading{padding:26px;text-align:center;color:var(--muted);font-size:14px}
+.acc-grid{display:flex;flex-direction:column;gap:9px;margin-bottom:16px}
+.acc-row{display:flex;justify-content:space-between;align-items:center;gap:14px;padding:11px 14px;background:var(--bg);border:1px solid var(--lsoft);border-radius:10px}
+.acc-k{font-size:11.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}
+.acc-v{font-size:14px;color:var(--ink);font-weight:600;text-align:right;word-break:break-word}
+.acc-status{padding:13px 15px;border-radius:10px;background:var(--bg);border:1px solid var(--lsoft);font-size:14px;color:var(--ink);margin-bottom:16px;line-height:1.55}
+.acc-status.warn{border-color:var(--line);background:rgba(216,169,74,.06)}
+.acc-status b{color:var(--goldl)}
+.acc-note{font-size:13px;color:var(--muted);line-height:1.5}
+.acc-actions{display:flex;gap:10px;flex-wrap:wrap}
+.retain-lead{font-size:14px;color:var(--muted);line-height:1.55;margin-bottom:16px}
+.reason-chips{display:flex;flex-direction:column;gap:9px;margin-bottom:4px}
+.reason-chip{text-align:left;padding:13px 16px;border-radius:10px;background:var(--bg);border:1px solid var(--line);color:var(--ink);font-size:14px;cursor:pointer;transition:.15s;font-family:inherit}
+.reason-chip:hover{border-color:var(--gold);color:var(--goldl)}
+.retain-msg{padding:16px 18px;border-radius:12px;background:var(--bg);border:1px solid var(--lsoft);font-size:14px;line-height:1.62;color:var(--ink);margin-bottom:16px}
+.retain-msg.ok{border-color:var(--line);background:rgba(216,169,74,.06)}
+.retain-msg b{color:var(--goldl)}
+.help-area{width:100%;min-height:120px;resize:vertical;padding:12px 14px;border-radius:10px;background:var(--bg);border:1px solid var(--line);color:var(--ink);font-family:inherit;font-size:14px;margin-bottom:14px}
+.help-area:focus{outline:none;border-color:var(--gold)}
+.btn-row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.btn-stay{background:var(--gold);color:#1a1206;border:none;padding:11px 20px;border-radius:9px;font-weight:700;cursor:pointer;font-size:14px;font-family:inherit}
+.btn-stay:hover{background:var(--goldl)}
+.btn-cancel{background:transparent;color:#d98a8a;border:1px solid rgba(217,138,138,.4);padding:11px 20px;border-radius:9px;cursor:pointer;font-size:14px;font-weight:600;font-family:inherit}
+.btn-cancel:hover{border-color:#d98a8a}
+.btn-cancel-soft{background:transparent;color:var(--muted);border:1px solid var(--line);padding:11px 20px;border-radius:9px;cursor:pointer;font-size:14px;font-family:inherit}
+.btn-cancel-soft:hover{color:#d98a8a;border-color:rgba(217,138,138,.4)}
+
 /* Reguli cards */
 .rule-card{display:flex;gap:14px;padding:14px 0;border-bottom:1px solid var(--lsoft)}
 .rule-card:last-child{border-bottom:none}
@@ -515,6 +543,7 @@ label{display:block;font-size:13.5px;font-weight:600;letter-spacing:.08em;text-t
           <button class="lang" onclick="setLang('it')"><span class="flag">🇮🇹</span>IT</button>
           <button class="lang" onclick="setLang('es')"><span class="flag">🇪🇸</span>ES</button>
         </div>
+        <button class="btn-ghost" onclick="openAccount()">Cont</button>
         <button class="btn-ghost iesire" onclick="doLogout()">Ieșire</button>
       </div>
     </div>
@@ -1304,6 +1333,162 @@ function finishOnboard(){ try{ localStorage.setItem('hos_onboarded','1'); }catch
 function maybeOnboard(){ if(_isOnboarded()){ refreshStepUI(); return; } openModal('m-ghid'); }   // Pasul 1 primul
 function navTab(w){ if(w==='invitatie') return; var n={conectare:'Conectare',prezentare:'Prezentare',inchidere:'Închidere',followup:'Follow-up',recomandari:'Cerere de recomandări'}; if(typeof toast==='function') toast((n[w]||'Secțiunea')+' — în curând 🔒', 3000); }
 function setLang(l){ if(l!=='ro' && typeof toast==='function'){ var m={en:'EN',it:'IT',es:'ES'}; toast('Versiunea '+(m[l]||l.toUpperCase())+' — în curând', 3000); } }
+
+// ============================================
+// CONT / ABONAMENT + RETENTIE
+// ============================================
+const ACC_TIER_LABELS = { unic:'Script Unic', recruit:'Recruit', builder:'Builder', leader:'Leader', none:'Fără plan' };
+const ACC_SUB_TIERS = ['recruit','builder','leader'];
+const RETAIN = {
+  timp: {
+    label:'Nu am timp să sun',
+    msg:'Normal, viața intervine. Dar abonamentul nu „arde" dacă nu suni o săptămână — scripturile te așteaptă când revii. Dacă anulezi acum, data viitoare începi de la zero. Vrei mai degrabă o pauză, nu să închizi tot?',
+    primary:'stay'
+  },
+  rezultate: {
+    label:'Nu am obținut rezultate',
+    msg:'Asta vreau să rezolvăm, nu să te pierd ca abonat. De cele mai multe ori nu scriptul e problema, ci pe cine suni și în ce moment. Scrie-ne cu 2-3 exemple de apeluri și ne uităm împreună unde se rupe — e inclus, fără cost.',
+    primary:'help'
+  },
+  gata_mlm: {
+    label:'Nu mai fac MLM',
+    msg:'Atunci ai dreptate, un generator de scripturi chiar nu-ți mai folosește. Nu te ținem cu forța. Îți confirmăm anularea acum. Mulțumim că ai fost cu noi.',
+    primary:'cancel'
+  },
+  alt: {
+    label:'Alt motiv',
+    msg:'Înțelegem. Dacă vrei, lasă-ne un rând — ne ajută să ne îmbunătățim. Nu e obligatoriu.',
+    primary:'stay', note:true
+  }
+};
+
+function _accBody(){ return document.getElementById('acc-body'); }
+function _accSub(t){ var e=document.getElementById('acc-sub'); if(e) e.textContent=t; }
+function _esc(s){ return String(s==null?'':s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];}); }
+function _fmtDate(ms){ if(!ms) return '—'; try{ return new Date(ms).toLocaleDateString('ro-RO',{day:'numeric',month:'long',year:'numeric'}); }catch(e){ return '—'; } }
+
+async function openAccount(){
+  const ov=document.getElementById('m-account'); if(!ov) return;
+  ov.classList.add('show'); document.body.style.overflow='hidden';
+  _accSub('Gestionează planul și abonamentul');
+  _accBody().innerHTML = '<div class="acc-loading">Se încarcă…</div>';
+  try{
+    const sub = await api('/api/subscription');
+    accRenderHome(sub);
+  }catch(e){
+    _accBody().innerHTML = '<div class="retain-msg">Nu am putut încărca abonamentul. Încearcă din nou.</div><div class="btn-row"><button class="btn-ghost" onclick="openAccount()">Reîncearcă</button></div>';
+  }
+}
+
+function accRenderHome(sub){
+  const p = (typeof USER_PROFILE!=='undefined' && USER_PROFILE) ? USER_PROFILE : {};
+  const tier = p.tier || 'none';
+  const tierLabel = ACC_TIER_LABELS[tier] || tier;
+  let statusHtml='', actionHtml='';
+  if(tier === 'unic'){
+    statusHtml = '<div class="acc-status">Plată unică — acces permanent, fără abonament recurent.</div>';
+    actionHtml = '<div class="acc-note">Nu ai un abonament de gestionat.</div>';
+  } else if(!sub.has_subscription || !ACC_SUB_TIERS.includes(tier)){
+    statusHtml = '<div class="acc-status">Nu ai un abonament activ acum.</div>';
+  } else if(sub.cancel_at_period_end){
+    statusHtml = '<div class="acc-status warn">Anulat — rămâne activ până pe <b>'+_fmtDate(sub.current_period_end)+'</b>. Nu vei mai fi taxat.</div>';
+    actionHtml = '<button class="btn-stay" onclick="doResume()">Reactivează abonamentul</button>';
+  } else {
+    statusHtml = '<div class="acc-status">Se reînnoiește pe <b>'+_fmtDate(sub.current_period_end)+'</b>.</div>';
+    actionHtml = '<button class="btn-cancel" onclick="accShowReasons()">Anulează abonamentul</button>';
+  }
+  _accBody().innerHTML =
+    '<div class="acc-grid">'+
+      '<div class="acc-row"><span class="acc-k">Email</span><span class="acc-v">'+_esc(p.email||'')+'</span></div>'+
+      '<div class="acc-row"><span class="acc-k">Plan</span><span class="acc-v">'+_esc(tierLabel)+'</span></div>'+
+    '</div>'+ statusHtml +
+    '<div class="acc-actions">'+actionHtml+'</div>';
+}
+
+function accShowReasons(){
+  _accSub('Înainte să pleci…');
+  const chips = Object.keys(RETAIN).map(function(k){
+    return '<button class="reason-chip" onclick="accPickReason(\''+k+'\')">'+RETAIN[k].label+'</button>';
+  }).join('');
+  _accBody().innerHTML =
+    '<p class="retain-lead">Spune-ne pe scurt ce te-a făcut să te răzgândești — poate găsim o soluție mai bună.</p>'+
+    '<div class="reason-chips">'+chips+'</div>'+
+    '<div class="acc-actions" style="margin-top:14px"><button class="btn-ghost" onclick="openAccount()">← Înapoi</button></div>';
+}
+
+function accPickReason(k){
+  const r = RETAIN[k]; if(!r) return;
+  let buttons='';
+  if(r.primary==='cancel'){
+    buttons = '<button class="btn-cancel" onclick="doCancel(\''+k+'\')">Continuă anularea</button>'+
+              '<button class="btn-ghost" onclick="openAccount()">M-am răzgândit</button>';
+  } else if(r.primary==='help'){
+    buttons = '<button class="btn-stay" onclick="accHelp(\''+k+'\')">Vreau ajutor</button>'+
+              '<button class="btn-cancel-soft" onclick="doCancel(\''+k+'\')">Continuă anularea</button>';
+  } else {
+    buttons = '<button class="btn-stay" onclick="openAccount()">Rămân abonat</button>'+
+              '<button class="btn-cancel-soft" onclick="doCancel(\''+k+'\')">Continuă anularea</button>';
+  }
+  const noteField = r.note ? '<textarea id="acc-note-in" class="help-area" style="min-height:70px" placeholder="Motivul tău (opțional)…" maxlength="500"></textarea>' : '';
+  _accBody().innerHTML = '<div class="retain-msg">'+r.msg+'</div>'+ noteField +'<div class="btn-row">'+buttons+'</div>';
+}
+
+async function doCancel(k){
+  const r = RETAIN[k] || {};
+  let reason = r.label || k;
+  const noteEl = document.getElementById('acc-note-in');
+  if(noteEl && noteEl.value.trim()) reason = 'Alt motiv: '+noteEl.value.trim().slice(0,100);
+  _accBody().innerHTML = '<div class="acc-loading">Se procesează…</div>';
+  try{
+    const res = await api('/api/subscription/cancel', { method:'POST', body: JSON.stringify({ reason }) });
+    _accSub('Abonament anulat');
+    _accBody().innerHTML =
+      '<div class="retain-msg ok">Gata. Abonamentul rămâne activ până pe <b>'+_fmtDate(res.current_period_end)+'</b> — până atunci ai acces complet și nu mai ești taxat. Te-ai răzgândit? Îl reactivezi oricând până atunci.</div>'+
+      '<div class="btn-row"><button class="btn-stay" onclick="doResume()">Reactivează abonamentul</button><button class="btn-ghost" onclick="closeModal(\'m-account\')">Închide</button></div>';
+  }catch(e){
+    _accBody().innerHTML = '<div class="retain-msg">'+_esc(e.message||'Nu am putut anula. Încearcă din nou.')+'</div><div class="btn-row"><button class="btn-ghost" onclick="openAccount()">← Înapoi</button></div>';
+  }
+}
+
+async function doResume(){
+  _accBody().innerHTML = '<div class="acc-loading">Se reactivează…</div>';
+  try{
+    await api('/api/subscription/resume', { method:'POST' });
+    if(typeof toast==='function') toast('Abonament reactivat ✓', 3000);
+    openAccount();
+  }catch(e){
+    _accBody().innerHTML = '<div class="retain-msg">'+_esc(e.message||'Nu am putut reactiva.')+'</div><div class="btn-row"><button class="btn-ghost" onclick="openAccount()">← Înapoi</button></div>';
+  }
+}
+
+function accHelp(k){
+  _accSub('Scrie-ne ce s-a întâmplat');
+  _accBody().innerHTML =
+    '<p class="retain-lead">Dă-ne câteva detalii (pe cine ai sunat, ce ai zis, ce răspuns ai primit) și ne uităm împreună unde se rupe.</p>'+
+    '<textarea id="help-msg" class="help-area" placeholder="Scrie aici…" maxlength="4000"></textarea>'+
+    '<div class="btn-row">'+
+      '<button class="btn-stay" onclick="submitSupport(\''+k+'\')">Trimite</button>'+
+      '<button class="btn-ghost" onclick="accShowReasons()">← Înapoi</button>'+
+    '</div>';
+  setTimeout(function(){ var t=document.getElementById('help-msg'); if(t) t.focus(); }, 80);
+}
+
+async function submitSupport(k){
+  const msgEl = document.getElementById('help-msg');
+  const message = msgEl ? msgEl.value.trim() : '';
+  if(!message){ if(typeof toast==='function') toast('Scrie un mesaj înainte de a trimite.', 3000); return; }
+  const reason = (RETAIN[k] && RETAIN[k].label) || 'Ajutor';
+  _accBody().innerHTML = '<div class="acc-loading">Se trimite…</div>';
+  try{
+    await api('/api/support', { method:'POST', body: JSON.stringify({ reason, message }) });
+    _accSub('Mesaj trimis');
+    _accBody().innerHTML =
+      '<div class="retain-msg ok">Am primit mesajul tău. Îți răspundem cât putem de repede. Între timp, abonamentul rămâne activ.</div>'+
+      '<div class="btn-row"><button class="btn-ghost" onclick="closeModal(\'m-account\')">Închide</button></div>';
+  }catch(e){
+    _accBody().innerHTML = '<div class="retain-msg">'+_esc(e.message||'Nu am putut trimite. Încearcă din nou.')+'</div><div class="btn-row"><button class="btn-stay" onclick="accHelp(\''+k+'\')">← Reîncearcă</button></div>';
+  }
+}
 
 function doLogout() {
   sessionStorage.removeItem('hos_token');
@@ -2188,6 +2373,17 @@ init();
       <div class="rule-card"><div class="rule-num">7</div><div class="rule-txt"><div class="rt">Durata prezentării: spune-o exact, calm</div><div class="rd">Fără s-o minimizezi, fără s-o umfli. Exact valoarea pe care ai ales-o în formular.</div></div></div>
     </div>
     <div class="modal-foot"><button class="btn modal-gate">Închide</button></div>
+  </div>
+</div>
+
+<!-- ===== MODAL: CONT / ABONAMENT ===== -->
+<div class="modal-overlay" id="m-account" onclick="if(event.target===this) closeModal('m-account')">
+  <div class="modal-box" style="max-width:520px">
+    <div class="modal-head">
+      <div class="modal-title">Contul tău</div>
+      <div class="modal-subtitle" id="acc-sub">Gestionează planul și abonamentul</div>
+    </div>
+    <div class="modal-body" id="acc-body"></div>
   </div>
 </div>
 
