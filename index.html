@@ -378,7 +378,7 @@ label{display:block;font-size:13.5px;font-weight:600;letter-spacing:.08em;text-t
 
 /* Cont / abonament / retentie */
 .acc-loading{padding:26px;text-align:center;color:var(--muted);font-size:14px}
-.acc-grid{display:flex;flex-direction:column;gap:9px;margin-bottom:16px}
+.acc-grid{display:flex;flex-direction:column;gap:9px;margin-bottom:24px}
 .acc-row{display:flex;justify-content:space-between;align-items:center;gap:14px;padding:11px 14px;background:var(--bg);border:1px solid var(--lsoft);border-radius:10px}
 .acc-k{font-size:11.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}
 .acc-v{font-size:14px;color:var(--ink);font-weight:600;text-align:right;word-break:break-word}
@@ -403,6 +403,19 @@ label{display:block;font-size:13.5px;font-weight:600;letter-spacing:.08em;text-t
 .btn-cancel:hover{border-color:#d98a8a}
 .btn-cancel-soft{background:transparent;color:var(--muted);border:1px solid var(--line);padding:11px 20px;border-radius:9px;cursor:pointer;font-size:14px;font-family:inherit}
 .btn-cancel-soft:hover{color:#d98a8a;border-color:rgba(217,138,138,.4)}
+.plan-card{background:var(--bg);border:1px solid var(--line);border-radius:11px;padding:13px 15px;margin-bottom:10px}
+.plan-card.current{border-color:var(--gold);background:rgba(216,169,74,.06)}
+.plan-top{display:flex;justify-content:space-between;align-items:baseline}
+.plan-name{font-size:15px;font-weight:700;color:var(--ink)}
+.plan-price{font-size:14px;color:var(--goldl);font-weight:600}
+.plan-feat{font-size:12.5px;color:var(--muted);margin:4px 0 10px}
+.plan-scripts{font-size:13px;color:var(--goldl);font-weight:600;margin:0 0 2px}
+.plan-per{font-size:12px;color:var(--muted);margin:0 0 12px}
+.plan-cur{font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--gold);font-weight:600}
+.plan-pick{width:100%;background:transparent;color:var(--gold);border:1px solid var(--line);padding:9px;border-radius:8px;cursor:pointer;font-size:13.5px;font-family:inherit}
+.plan-pick:hover{border-color:var(--gold);background:rgba(216,169,74,.06)}
+.plan-topup{width:100%;margin-top:9px;background:var(--gold);color:#1a1206;border:none;padding:9px;border-radius:8px;cursor:pointer;font-size:13px;font-weight:700;font-family:inherit}
+.plan-topup:hover{background:var(--goldl)}
 
 /* Reguli cards */
 .rule-card{display:flex;gap:14px;padding:14px 0;border-bottom:1px solid var(--lsoft)}
@@ -1339,6 +1352,13 @@ function setLang(l){ if(l!=='ro' && typeof toast==='function'){ var m={en:'EN',i
 // ============================================
 const ACC_TIER_LABELS = { unic:'Script Unic', recruit:'Recruit', builder:'Builder', leader:'Leader', none:'Fără plan' };
 const ACC_SUB_TIERS = ['recruit','builder','leader'];
+const ACC_RANK = { recruit:1, builder:2, leader:3 };
+const ACC_PLANS = [
+  { id:'recruit', name:'Recruit', price:'9€/lună',  feat:'Mod Clean',                scripts:3,  one:'9€',  per:'3€'    },
+  { id:'builder', name:'Builder', price:'19€/lună', feat:'Clean + Coach',            scripts:8,  one:'19€', per:'2,38€' },
+  { id:'leader',  name:'Leader',  price:'29€/lună', feat:'Clean + Coach + Ambele',   scripts:15, one:'29€', per:'1,93€' }
+];
+var ACC_SUB = null;
 const RETAIN = {
   timp: {
     label:'Nu am timp să sun',
@@ -1370,7 +1390,7 @@ function _fmtDate(ms){ if(!ms) return '—'; try{ return new Date(ms).toLocaleDa
 async function openAccount(){
   const ov=document.getElementById('m-account'); if(!ov) return;
   ov.classList.add('show'); document.body.style.overflow='hidden';
-  _accSub('Gestionează planul și abonamentul');
+  _accSub('Datele contului tău');
   _accBody().innerHTML = '<div class="acc-loading">Se încarcă…</div>';
   try{
     const sub = await api('/api/subscription');
@@ -1381,6 +1401,7 @@ async function openAccount(){
 }
 
 function accRenderHome(sub){
+  ACC_SUB = sub;
   const p = (typeof USER_PROFILE!=='undefined' && USER_PROFILE) ? USER_PROFILE : {};
   const tier = p.tier || 'none';
   const tierLabel = ACC_TIER_LABELS[tier] || tier;
@@ -1394,8 +1415,7 @@ function accRenderHome(sub){
     statusHtml = '<div class="acc-status warn">Anulat — rămâne activ până pe <b>'+_fmtDate(sub.current_period_end)+'</b>. Nu vei mai fi taxat.</div>';
     actionHtml = '<button class="btn-stay" onclick="doResume()">Reactivează abonamentul</button>';
   } else {
-    statusHtml = '<div class="acc-status">Se reînnoiește pe <b>'+_fmtDate(sub.current_period_end)+'</b>.</div>';
-    actionHtml = '<button class="btn-cancel" onclick="accShowReasons()">Anulează abonamentul</button>';
+    actionHtml = '<button class="btn-stay" onclick="accManage()">Gestionează planul și abonamentul</button>';
   }
   _accBody().innerHTML =
     '<div class="acc-grid">'+
@@ -1403,6 +1423,77 @@ function accRenderHome(sub){
       '<div class="acc-row"><span class="acc-k">Plan</span><span class="acc-v">'+_esc(tierLabel)+'</span></div>'+
     '</div>'+ statusHtml +
     '<div class="acc-actions">'+actionHtml+'</div>';
+}
+
+function accManage(){
+  _accSub('Planul tău și abonamentul');
+  const p = (typeof USER_PROFILE!=='undefined' && USER_PROFILE) ? USER_PROFILE : {};
+  const cur = p.tier || 'none';
+  var cards = ACC_PLANS.map(function(pl){
+    var isCur = pl.id===cur;
+    var scriptsLine = isCur
+      ? '<div class="plan-scripts">'+pl.scripts+' scripturi / lună</div>'
+      : '<div class="plan-scripts">Acces instant la +'+pl.scripts+' scripturi</div>';
+    var perLine = '<div class="plan-per">'+pl.per+' per script</div>';
+    return '<div class="plan-card'+(isCur?' current':'')+'">'+
+      '<div class="plan-top"><span class="plan-name">'+pl.name+'</span><span class="plan-price">'+pl.price+'</span></div>'+
+      '<div class="plan-feat">'+pl.feat+'</div>'+
+      scriptsLine + perLine +
+      (isCur ? '<div class="plan-cur">Planul tău</div>'
+              +'<button class="plan-topup" onclick="doTopup()">Mai cumpără +'+pl.scripts+' scripturi · '+pl.one+'</button>'
+             : '<button class="plan-pick" onclick="doChange(\''+pl.id+'\')">Treci la acest plan</button>')+
+    '</div>';
+  }).join('');
+  _accBody().innerHTML = cards +
+    '<div class="brow" style="margin-top:4px"><button class="btn-cancel" onclick="accShowReasons()">Anulează abonamentul</button>'+
+    '<button class="btn-ghost" onclick="openAccount()">‹ Înapoi</button></div>';
+}
+
+function doChange(target){
+  const p = (typeof USER_PROFILE!=='undefined' && USER_PROFILE) ? USER_PROFILE : {};
+  const cur = p.tier || 'none';
+  if(target===cur) return;
+  var up = ACC_RANK[target] > ACC_RANK[cur];
+  var name = (ACC_PLANS.filter(function(x){return x.id===target;})[0]||{}).name || target;
+  var msg = up
+    ? 'Treci pe <b>'+name+'</b>. Se incaseaza acum pretul intreg al planului nou, ciclul de facturare reporneste azi, iar scripturile noi se adauga la cele pe care le ai. Continui?'
+    : 'Treci pe <b>'+name+'</b> acum. Nu se incaseaza nimic acum — platesti noul pret de la urmatoarea reinnoire. Iti pastrezi scripturile actuale, dar pierzi facilitatile planului superior. Continui?';
+  _accBody().innerHTML = '<div class="retain-msg">'+msg+'</div>'+
+    '<div class="brow"><button class="btn-stay" onclick="confirmChange(\''+target+'\')">Confirma</button>'+
+    '<button class="btn-ghost" onclick="accManage()">‹ Inapoi</button></div>';
+}
+
+async function confirmChange(target){
+  _accBody().innerHTML = '<div class="acc-loading">Se proceseaza…</div>';
+  try{
+    var res = await api('/api/subscription/change', { method:'POST', body: JSON.stringify({ tier: target }) });
+    try{ USER_PROFILE = await api('/api/user'); if(typeof renderGenerator==='function') renderGenerator(); }catch(e){}
+    _accSub('Plan schimbat');
+    _accBody().innerHTML =
+      '<div class="retain-msg ok">Gata. Esti acum pe planul <b>'+(ACC_TIER_LABELS[target]||target)+'</b>.'+(res.upgrade?' Scripturile noi au fost adaugate la cele existente.':'')+'</div>'+
+      '<div class="brow"><button class="btn-ghost" onclick="openAccount()">Inapoi la cont</button></div>';
+  }catch(e){
+    _accBody().innerHTML = '<div class="retain-msg">'+_esc(e.message||'Nu am putut schimba planul.')+'</div>'+
+      '<div class="brow"><button class="btn-ghost" onclick="accManage()">‹ Inapoi</button></div>';
+  }
+}
+
+async function doTopup(){
+  _accBody().innerHTML = '<div class="acc-loading">Se procesează plata…</div>';
+  try{
+    var res = await api('/api/subscription/repurchase', { method:'POST', body: JSON.stringify({}) });
+    if(!res || !res.ok) throw new Error((res && res.error) || 'Nu am putut procesa plata.');
+    // reincarca profilul ca sa se vada scripturile noi
+    try{ var u = await api('/api/user'); if(u){ USER_PROFILE = u; if(typeof renderGenerator==='function') renderGenerator(); } }catch(_){}
+    var when = res.current_period_end ? new Date(res.current_period_end*1000).toLocaleDateString('ro-RO',{day:'numeric',month:'long',year:'numeric'}) : null;
+    _accBody().innerHTML =
+      '<div class="retain-msg">Gata! S-au adăugat <b>+'+(res.scripts_added||0)+' scripturi</b> (ai acum <b>'+(res.scripts_total||0)+'</b>).'+
+      (when ? ' Următoarea factură: <b>'+when+'</b>, pe același plan.' : '')+'</div>'+
+      '<div class="brow"><button class="btn-stay" onclick="accManage()">‹ Înapoi la cont</button></div>';
+  }catch(e){
+    _accBody().innerHTML = '<div class="retain-msg">'+_esc(e.message||'Nu am putut procesa plata.')+'</div>'+
+      '<div class="brow"><button class="btn-ghost" onclick="accManage()">‹ Înapoi</button></div>';
+  }
 }
 
 function accShowReasons(){
@@ -2381,7 +2472,7 @@ init();
   <div class="modal-box" style="max-width:520px">
     <div class="modal-head">
       <div class="modal-title">Contul tău</div>
-      <div class="modal-subtitle" id="acc-sub">Gestionează planul și abonamentul</div>
+      <div class="modal-subtitle" id="acc-sub">Datele contului tău</div>
     </div>
     <div class="modal-body" id="acc-body"></div>
   </div>
