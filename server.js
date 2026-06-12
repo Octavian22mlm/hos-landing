@@ -830,7 +830,7 @@ app.post('/api/support', auth, async (req, res) => {
     // 2) email prin Resend (doar daca exista cheia)
     if (process.env.RESEND_API_KEY) {
       try {
-        await fetch('https://api.resend.com/emails', {
+        const rr = await fetch('https://api.resend.com/emails', {
           method: 'POST',
           headers: { 'Authorization': `Bearer ${process.env.RESEND_API_KEY}`, 'Content-Type': 'application/json' },
           body: JSON.stringify({
@@ -841,7 +841,12 @@ app.post('/api/support', auth, async (req, res) => {
             text: `Cont: ${req.user.email}\nPlan: ${tier || '-'}\nMotiv: ${reason || '-'}\n\n${message}`
           })
         });
-      } catch (e) { console.error('resend error:', e.message); }
+        const rbody = await rr.text();
+        if (!rr.ok) console.error('[resend] FAIL status=' + rr.status + ' body=' + rbody);
+        else console.log('[resend] OK ' + rbody);
+      } catch (e) { console.error('[resend] error:', e.message); }
+    } else {
+      console.log('[resend] SKIP: lipseste RESEND_API_KEY in env');
     }
 
     console.log(`[support] ${req.user.id} motiv="${reason}"`);
