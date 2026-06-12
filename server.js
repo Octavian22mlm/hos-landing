@@ -668,6 +668,41 @@ app.post('/api/webhook', express.raw({ type: 'application/json' }), async (req, 
 });
 
 // ============================================
+// TEMPORAR — TEST ANTHROPIC DIRECT (de scos dupa validare)
+// ============================================
+app.get('/api/test-anthropic', async (req, res) => {
+  if (req.query.s !== process.env.ADMIN_SECRET) return res.status(401).send('unauthorized');
+  try {
+    const fs = require('fs');
+    let prompt = fs.readFileSync(path.join(__dirname, 'prompts/obiectie1.md'), 'utf8');
+    const sample = {
+      '01_agent_gen': 'Feminin', '02_client_gen': 'Feminin', '03_tip_relatie': 'Prieten apropiat',
+      '04_detalii_client': 'Prietena din liceu, doi copii, lucreaza in contabilitate, mereu ocupata',
+      '05_interactiune_client': 'mi-a scris ca e epuizata si abia mai are timp de ea',
+      '07_produs': 'suplimente de energie', '08_folosit_produs': 'Da',
+      '09_experienta_produs': 'in 2 saptamani am simtit mai multa energie dimineata',
+      '10_intentie': 'Vanzare produs', '11_tip_prezentare': 'Offline (fata in fata)',
+      '12_context_intalnire': 'la o cafea', '13_mod_output': 'Clean Mode pentru executie',
+      '14_obiectie_1': 'Nu am timp acum, sunt super ocupata',
+      '17_calitati_apreciate': 'organizata, tine la oamenii ei',
+      '21_durata_prezentare': '20 de minute', '22_continut_anterior': '',
+      '26_stil_abordare': 'Cald-respectuos', '32_semnal_tip': '', '33_dorinta': ''
+    };
+    for (const [k, v] of Object.entries(sample)) prompt = prompt.split('{{' + k + '}}').join(v);
+    const r = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: { 'x-api-key': process.env.ANTHROPIC_API_KEY, 'anthropic-version': '2023-06-01', 'content-type': 'application/json' },
+      body: JSON.stringify({ model: 'claude-sonnet-4-6', max_tokens: 8000, temperature: 0.6, messages: [{ role: 'user', content: prompt }] })
+    });
+    const data = await r.json();
+    if (!r.ok) return res.status(500).type('text/plain').send('EROARE API:\n' + JSON.stringify(data, null, 2));
+    const text = (data.content || []).map(b => b.text || '').join('\n');
+    res.type('text/plain').send(text || JSON.stringify(data, null, 2));
+  } catch (e) { res.status(500).type('text/plain').send('EXCEPTIE: ' + e.message); }
+});
+// ====== SFARSIT TEST TEMPORAR ======
+
+// ============================================
 // FRONTEND — serveste index.html
 // ============================================
 app.get('*', (req, res) => {
