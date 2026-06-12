@@ -1029,6 +1029,15 @@ CE FACI — 3-5 MINUTE DE CONVERSATIE REALA (OBLIGATORIU):
 - Asculti 80% / vorbesti 20%. Intrebari deschise din ce tocmai a spus, nu memorate.
 - ZERO produs, ZERO pivot. Doar conversatie.
 
+📤 IN OUTPUT — incadreaza zona asta DISTINCT (NU ca o replica AGENT de citit).
+Foloseste EXACT marcajul de mai jos, ca agentul sa vada instant ca e bloc liber:
+
+🗣️ **CONVERSATIE LIBERA (reconectare) · 3-5 min** — *nu citesti, construiesti din ce spune [Nume]*
+> Asculti 80% / vorbesti 20%. Intrebari deschise din ce tocmai a spus.
+> Zero produs, zero pivot. Doar conversatie.
+
+(NU pune marcaj "AGENT ( ... )" pe zona asta — nu e o replica de rostit, e un bloc liber.)
+
 DE CE: dupa o pauza, un compliment aruncat in secunda 30 suna tranzactional si ii
 aprinde radarul (mai ales unui client sceptic la MLM). Dupa 3-5 min de conversatie,
 complimentul aterizeaza autentic — SI il construiesti din ce ti-a spus ea ACUM
@@ -1167,6 +1176,15 @@ CE FACI DUPA CE [Nume] RASPUNDE:
 🟢 Asculti 80% / vorbesti 20%.
 🟢 Pui 2-3 intrebari legate de CE TOCMAI A SPUS [Nume] — nu intrebari memorate.
    Incurajeaza-l pe [Nume] sa vorbeasca.
+
+📤 IN OUTPUT — incadreaza zona asta DISTINCT (NU ca o replica AGENT de citit).
+Foloseste EXACT marcajul de mai jos, ca agentul sa vada instant ca e bloc liber:
+
+🗣️ **CONVERSATIE LIBERA · 3-5 min** — *nu citesti, construiesti din ce spune [Nume]*
+> Asculti 80% / vorbesti 20%. Intrebari deschise din ULTIMUL lucru spus.
+> Zero produs, zero pivot. Doar conversatie.
+
+(NU pune marcaj "AGENT ( ... )" pe zona asta — nu e o replica de rostit, e un bloc liber.)
 
 ⚠️ AICI NU EXISTA REPLICI FIXE — construiesti din ce spune [Nume]. Intrebarile
 pleaca din ULTIMUL lucru spus, sunt deschise (nu Da/Nu), curiozitate reala fara
