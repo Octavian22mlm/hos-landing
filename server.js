@@ -277,12 +277,29 @@ async function runInvitationDirect(jobId, jobMode, userId, allVariables) {
     let prompt = fs.readFileSync(promptPath, 'utf8');
     const kbOpenings = kbPath ? fs.readFileSync(kbPath, 'utf8') : '';
 
-    // injecteaza openingurile in {{kb_opening}} + restul variabilelor
-    const vars = { ...allVariables, kb_opening: kbOpenings };
+    // EVITA MULTIPLICAREA variabilelor mari: {{kb_opening}} apare de 8x si
+    // {{31_scripturi_anterioare}} de 6x in prompt. Injectate la fiecare referinta = explozie de cost.
+    // Solutie: inlocuim referintele cu o eticheta scurta + adaugam continutul O SINGURA DATA la final.
+    let priorScripts = allVariables['31_scripturi_anterioare'] || '';
+    if (priorScripts.length > 24000) priorScripts = priorScripts.slice(-24000); // plafon cost (pastram recentele)
+
+    prompt = prompt.split('{{kb_opening}}').join('openingul ales din BIBLIOTECA OPENINGURI (lista la finalul promptului)');
+    prompt = prompt.split('{{31_scripturi_anterioare}}').join('scripturile generate anterior (lista la finalul promptului)');
+
+    // restul variabilelor (fara cele doua mari, deja tratate)
+    const vars = { ...allVariables };
+    delete vars['31_scripturi_anterioare'];
+    delete vars['kb_opening'];
     for (const [k, v] of Object.entries(vars)) {
       prompt = prompt.split('{{' + k + '}}').join(v == null ? '' : String(v));
     }
     prompt = prompt.replace(/\{\{[^}]+\}\}/g, ''); // variabile necompletate -> gol
+
+    // continutul mare, O SINGURA DATA, la final
+    prompt += '\n\n═══════════ BIBLIOTECA OPENINGURI ═══════════\n' + kbOpenings;
+    if (priorScripts.trim()) {
+      prompt += '\n\n═══════════ SCRIPTURI GENERATE ANTERIOR (doar pentru variatie — NU repeta openingurile/structurile) ═══════════\n' + priorScripts;
+    }
 
     const r = await fetch('https://api.anthropic.com/v1/messages', {
       method: 'POST',
