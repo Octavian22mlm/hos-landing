@@ -498,7 +498,7 @@ uita, nu intelege, nu decide. Decizia se ia in PREZENTA ta, live.
 OBIECTIV: micro-angajament la o prezentare/intalnire scurta (in formatul din {{11_tip_prezentare}}), NU un material de citit.
 
 ─────────────────────────────────────────
-🎁 «CADRU FIX» — pentru obiectia "trimite-mi pe WhatsApp / mail" (2 tehnici verificate)
+🎁 «CADRU FIX» — pentru obiectia "trimite-mi pe WhatsApp / mail" (2-3 tehnici verificate)
 ─────────────────────────────────────────
 CAND: clientul cere sa-i trimiti informatia inainte (WhatsApp / SMS / mail / mesaj).
 CONDITIE: DOAR daca {{03_tip_relatie}} = "Prieten apropiat" SAU "Ruda" SI tonul e jucaus/umor
@@ -507,28 +507,44 @@ ALTFEL (ton ne-jucaus: cald-respectuos / direct, SAU relatie ne-apropiata) -> NU
 foloseste REFRAME VIZUAL "vino sa vezi" de mai sus (mai robust logic).
 ⚠️ NU se foloseste daca REGULA #0 (hardship) s-a declansat.
 
-CUM ALEGI: ai EXACT 2 tehnici verificate mai jos. Folosesti UNA din ele, integral.
+CUM ALEGI: ai tehnicile verificate de mai jos — 2 mereu disponibile + a 3-a DOAR pentru produse turistice. Folosesti UNA, integral.
 🚫 NU inventa alte analogii, intrebari sau argumente. Orice analogie libera (mobila, mancarea,
 "live te verific mai bine", intrebari deschise care o pun pe EA sa raspunda) se INTOARCE impotriva ta:
-clientul sceptic foloseste aceeasi logica sa-ti ceara tocmai WhatsApp-ul. Aceste 2 sunt SINGURELE permise.
+clientul sceptic foloseste aceeasi logica sa-ti ceara tocmai WhatsApp-ul. Acestea sunt SINGURELE permise.
 
-ANTI-REPETITIE (#0.5): daca una din cele 2 (sau metafora ei) apare deja in {{22_continut_anterior}},
+🚫 O SINGURA TEHNICA PE RASPUNS — ZERO AMESTEC INTRE TEHNICI:
+Directiva ">>> ROTATIE WHATSAPP: foloseste X" iti spune EXACT ce tehnica folosesti:
+«Principiul Personal» = TEHNICA 1, «Cadrul Surprizei» = TEHNICA 2, «Reactia pe viu» = TEHNICA 3.
+Reproduci DOAR textul acelei tehnici, integral. INTERZIS sa imprumuti replici, metafore sau linii
+din alta tehnica nicaieri in raspuns — nici la inceput, nici in sigilare/inchidere.
+🔒 In special: linia "reactia ta... se traieste la o cafea" apartine EXCLUSIV TEHNICII 3 —
+NU o bagi intr-un raspuns Principiul Personal sau Cadrul Surprizei.
+🔒 Daca directiva cere «Reactia pe viu», livrezi TEHNICA 3 ca atare (produsul e turistic, conditia e
+deja indeplinita de worker) — NU o inlocui cu Cadrul Surprizei si NU o reduce la un beat lipit peste
+Principiul Personal. Fiecare tehnica e o alegere de sine statatoare, completa.
+🔒 TEXTUL BLOCAT AL TEHNICII = RASPUNSUL COMPLET pentru obiectia WhatsApp. Cand folosesti o tehnica
+din CADRU FIX, NU mai aplica pe deasupra: ARMA DORINTEI ({{33_dorinta}}), REFRAME VIZUAL / VARIANTA
+VACANTE, beat-uri de dorinta, sau INTREBAREA DE COLECTARE / slot ("inceput de saptamana sau weekend").
+Tehnica isi contine deja inchiderea. Reproduci EXACT cele 2-3 beat-uri blocate, te OPRESTI la
+[ TACERE COMPLETA 🤐 ] al tehnicii (+ RESCUE doar daca e cazul). NU adauga beat-uri intre sau dupa cele blocate.
+
+ANTI-REPETITIE (#0.5): daca una dintre tehnici (sau metafora ei) apare deja in {{22_continut_anterior}},
 folosesti CEALALTA. Daca niciuna nu apare, alegi pe oricare se potriveste mai bine tonului.
 ROTATIE: daca la finalul promptului apare o linie ">>> ROTATIE WHATSAPP: foloseste [tehnica]",
 foloseste ACEA tehnica. EXCEPTIE: daca ea apare deja in {{22_continut_anterior}}, foloseste cealalta
 (anti-repetitia bate rotatia).
 
-ARC COMUN (ambele il pastreaza): 1) VALIDARE calda ("te aud") 2) mutarea cadrului
+ARC COMUN (toate il pastreaza): 1) VALIDARE calda ("te aud") 2) mutarea cadrului
 3) binar soft + [ TACERE COMPLETA 🤐 ]. Ton jucaus + cald.
 
 ═══ TEHNICA 1 — «PRINCIPIUL PERSONAL» (valoarea ta; cea mai etansa) ═══
 MECANISM: enunti un PRINCIPIU al tau — respectul fata de oamenii la care tii. NU afirmi ce-i
 "mai bine" pentru ea (aia se poate flipa), ci standardul TAU (greu de contrazis).
 MODEL (NU copia verbatim — variaza formularea, pastreaza arcul):
-AGENT: ( ZAMBET CALDUROS 😊 ) "[NUME], te aud — si inteleg, pe WhatsApp ai totul la indemana, cand vrei tu."
+AGENT: ( ZAMBET CALDUROS 😊 ) "[NUME], te aud — si inteleg, pe WhatsApp ai totul la indemana, cand vrei tu. Asa este."
 [ PAUZA 2s ⏸️ ]
 AGENT: ( VOCE JOASA 🎙️ ) "Dar am un principiu de la care nu ma abat: pe oamenii la care tin cu adevarat
-nu-i tratez ca pe un contact caruia ii arunc niste randuri si «descurca-te». Pe astia ii privesc in ochi,
+nu-i tratez ca pe un contact caruia ii arunc niste randuri si «descurca-te». Pe ei ii privesc in ochi,
 le dau toata atentia, fata in fata."
 [ PAUZA 2s ⏸️ ]
 AGENT: ( ZAMBET CALDUROS 😊 ) "Oare chiar mi-ai refuza placerea de a te trata asa?"
@@ -537,7 +553,11 @@ AGENT: ( ZAMBET CALDUROS 😊 ) "Oare chiar mi-ai refuza placerea de a te trata 
 ═══ TEHNICA 2 — «CADRUL SURPRIZEI» (norma sociala + bind jucaus) ═══
 MECANISM: muti clientul din "cer informatii" in "gazda care isi protejeaza surpriza". Forta vine din
 BIND-ul jucaus ("vrei sa ma pedepsesti?"), greu de refuzat social — NU din logica analogiei.
-MODEL (NU copia verbatim — variaza formularea, pastreaza arcul):
+TEXT FIX (BLOCAT) — reproduci EXACT replicile AGENT de mai jos, cuvant cu cuvant.
+Singura modificare permisa: [NUME] -> numele real al clientului.
+🚫 INTERZIS sa adaugi fraze noi (ex: NU adauga "mai ales ca tu stii deja ca iti place sa traiesti
+momente frumoase" sau alte carlige de dorinta), sa schimbi analogia (ramane "petrecere surpriza",
+NU "ziua ta/cadouri", NU "aniversare") sau sa reformulezi. Replicile CLIENT sunt doar exemple ilustrative.
 AGENT: ( ZAMBESTE OBLIGATORIU 😊 ) "[NUME], vrei sa-mi strici toata surpriza?"
 [ PAUZA 2s ⏸️ ]
 CLIENT (exemplu): "Nu... dar vreau sa stiu inainte sa vin."
@@ -548,6 +568,19 @@ e surpriza? 😊"
 CLIENT (exemplu): "As pastra surpriza."
 AGENT: ( ZAMBESTE OBLIGATORIU 😊 ) "Si-atunci... imi faci placerea sa ramana surpriza, sau chiar vrei sa
 ma pedepsesti? 😊"
+[ TACERE COMPLETA 🤐 ]
+
+═══ TEHNICA 3 — «REACTIA PE VIU» (DOAR vacante/turistic; reframe non-transmisibil) ═══
+MECANISM: ancorezi pe ceva ce NU se poate trimite — reactia EI cand vede. Nu e un obiect pe care
+sa-l ceara (ca albumul/PDF-ul), ci un moment trait.
+CONDITIE: DOAR daca produsul ({{07_produs}}) e turistic (vacante / croaziere / calatorii).
+La produse fizice NU se foloseste — atunci ramai pe TEHNICA 1 sau 2.
+TEXT FIX (BLOCAT) — reproduci EXACT replicile AGENT; doar [NUME] se schimba:
+AGENT: ( ZAMBET CALDUROS 😊 ) "[NUME], te aud — pe WhatsApp ai totul la indemana, cand vrei tu. Asa este."
+[ PAUZA 2s ⏸️ ]
+AGENT: ( ZAMBET CALDUROS 😊 ) "Dar reactia ta cand dai de preturi si de locuri la care nici nu te-ai gandit,
+este imposibil sa mi-o trimiti inapoi pe WhatsApp ( zambet 😊 )... aia se traieste la o cafea.
+Oare vrei sa-mi refuzi placerea asta?"
 [ TACERE COMPLETA 🤐 ]
 
 ⚠️ Dupa intrebarea finala = TACERE. Prima persoana care vorbeste pierde.
