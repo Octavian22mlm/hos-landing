@@ -186,6 +186,64 @@ function extractScript(body) {
   return body.output || body.text || (body.thread && body.thread.result) || '';
 }
 
+// ============================================
+// FLUX DIRECT ANTHROPIC pentru OBIECTII (sub flag USE_DIRECT_OBJECTIONS)
+// Ruleaza in fundal: completeaza promptul, suna Anthropic, actualizeaza jobul.
+// Obiectiile NU scad credite (la fel ca fluxul MindStudio).
+// ============================================
+async function runObjectionDirect(jobId, objNum, allVariables) {
+  const fs = require('fs');
+  try {
+    const file = objNum === 2 ? 'obiectie2.md' : 'obiectie1.md';
+    const candidates = [
+      path.join(__dirname, 'prompts', file),
+      path.join(process.cwd(), 'prompts', file),
+      path.join(__dirname, file)
+    ];
+    const promptPath = candidates.find(p => { try { return fs.existsSync(p); } catch (e) { return false; } });
+    if (!promptPath) {
+      await db.from('generation_jobs').update({ status: 'error', error: 'prompt_missing' }).eq('id', jobId);
+      return;
+    }
+    let prompt = fs.readFileSync(promptPath, 'utf8');
+    for (const [k, v] of Object.entries(allVariables)) {
+      prompt = prompt.split('{{' + k + '}}').join(v == null ? '' : String(v));
+    }
+    // variabilele necompletate -> gol (ca in MindStudio)
+    prompt = prompt.replace(/\{\{[^}]+\}\}/g, '');
+
+    const r = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: {
+        'x-api-key': process.env.ANTHROPIC_API_KEY,
+        'anthropic-version': '2023-06-01',
+        'content-type': 'application/json'
+      },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-6',
+        max_tokens: 8000,
+        temperature: 0.6,
+        messages: [{ role: 'user', content: prompt }]
+      })
+    });
+    const data = await r.json();
+    if (!r.ok) {
+      console.error('Anthropic obiectie error:', JSON.stringify(data).slice(0, 500));
+      await db.from('generation_jobs').update({ status: 'error', error: 'anthropic_error' }).eq('id', jobId);
+      return;
+    }
+    const text = (data.content || []).map(b => b.text || '').join('\n').trim();
+    if (!text) {
+      await db.from('generation_jobs').update({ status: 'error', error: 'empty_result' }).eq('id', jobId);
+      return;
+    }
+    await db.from('generation_jobs').update({ status: 'done', result: text }).eq('id', jobId);
+  } catch (e) {
+    console.error('runObjectionDirect exception:', e.message);
+    try { await db.from('generation_jobs').update({ status: 'error', error: 'direct_exception' }).eq('id', jobId); } catch (_) {}
+  }
+}
+
 app.post('/api/generate', auth, async (req, res) => {
   // 1. Citim profilul cu detalii tier
   const { data: profile } = await db
@@ -256,6 +314,12 @@ app.post('/api/generate', auth, async (req, res) => {
   if (jobErr) {
     console.error('Job insert error:', jobErr);
     return res.status(500).json({ error: 'Nu am putut porni generarea. Încearcă din nou.' });
+  }
+
+  // 6.5 — FLUX DIRECT ANTHROPIC pentru OBIECTII (sub flag, in paralel cu MindStudio)
+  if (isObjection && process.env.USE_DIRECT_OBJECTIONS === '1') {
+    runObjectionDirect(jobId, objNum, allVariables); // fundal — NU asteptam
+    return res.json({ jobId });
   }
 
   // 7. Pornim MindStudio ASINCRON cu callbackUrl unic per job
