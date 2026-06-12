@@ -1,4 +1,8 @@
-[Mai jos sunt TOATE openingurile din Knowledge Base. Alege-l pe CEL MAI potrivit pentru ACEST client — dupa relatie, tip prezentare si produs — apoi extrage-i MECANISMUL si adapteaza-l. Alege UNUL singur, nu le combina pe toate.]
+[Mai jos sunt openingurile din Knowledge Base. Foloseste-le DOAR ca sursa de HOOK pentru ETAPA 1 (mecanismul de deschidere care coboara garda: vulnerabilitate / umor / curiosity gap / pattern interrupt).
+
+⚠️ REGULA CRITICA: NU prelua din ele partea de "te invit la o cafea / la online" + inchiderea. In acest script, invitatia se face O SINGURA DATA, la FINAL (Etapa 5-6), DUPA rapport si dupa teaser-ul de produs. Openingul iti da DOAR carligul de deschidere — NU inchide invitatia in Etapa 1.
+
+Alege UN SINGUR opening dupa profilul COMPLET al clientului (relatie, tip prezentare, produs, DAR SI psihologia: analitic / jucaus / obosit / iubitor de mister, varsta, statut). Extrage-i hook-ul si adapteaza-l la datele CONCRETE ale clientului. NU combina mai multe openinguri.]
 
 ═══════════════════════════════════════════════════════════════
 # OPENING #1 — Invitație Fizică la Cafea (Prieten Apropiat)
