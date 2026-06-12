@@ -807,6 +807,51 @@ app.post('/api/subscription/resume', auth, async (req, res) => {
   }
 });
 
+// POST — mesaj de ajutor (din fluxul de retentie). Stocheaza in Supabase + email prin Resend daca exista cheia.
+app.post('/api/support', auth, async (req, res) => {
+  try {
+    const reason  = ((req.body && req.body.reason)  || '').toString().slice(0, 60);
+    const message = ((req.body && req.body.message) || '').toString().slice(0, 4000);
+    if (!message.trim()) return res.status(400).json({ error: 'Scrie un mesaj inainte de a trimite.' });
+
+    let tier = null;
+    try {
+      const { data: prof } = await db.from('profiles').select('tier').eq('id', req.user.id).single();
+      tier = prof ? prof.tier : null;
+    } catch (e) { /* irelevant */ }
+
+    // 1) stocare in Supabase (best-effort)
+    try {
+      await db.from('support_messages').insert({
+        user_id: req.user.id, email: req.user.email, tier, reason, message
+      });
+    } catch (e) { console.error('support store error:', e.message); }
+
+    // 2) email prin Resend (doar daca exista cheia)
+    if (process.env.RESEND_API_KEY) {
+      try {
+        await fetch('https://api.resend.com/emails', {
+          method: 'POST',
+          headers: { 'Authorization': `Bearer ${process.env.RESEND_API_KEY}`, 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            from: process.env.SUPPORT_FROM || 'Harvard of Sales <noreply@octavianalupoaie.biz>',
+            to: ['contact@octavianalupoaie.biz'],
+            reply_to: req.user.email,
+            subject: `[Ajutor] ${reason || 'Mesaj'} - ${req.user.email}`,
+            text: `Cont: ${req.user.email}\nPlan: ${tier || '-'}\nMotiv: ${reason || '-'}\n\n${message}`
+          })
+        });
+      } catch (e) { console.error('resend error:', e.message); }
+    }
+
+    console.log(`[support] ${req.user.id} motiv="${reason}"`);
+    res.json({ ok: true });
+  } catch (err) {
+    console.error('support error:', err);
+    res.status(500).json({ error: 'Nu am putut trimite mesajul. Incearca din nou.' });
+  }
+});
+
 // ============================================
 // STRIPE WEBHOOK — activează planul automat după plată
 // (folosește body RAW — vezi skip-ul express.json de la început)
