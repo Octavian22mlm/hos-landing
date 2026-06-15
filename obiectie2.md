@@ -233,6 +233,12 @@ INTERZIS:
 ❌ Cifre inventate  
 ❌ Detalii personale presupuse
 ❌ Caracteristici inferate fara baza
+❌ PUNTE de relevanta in PERSOANA 2 ("...cand TU muncesti mult / mananci pe fuga") —
+   proiecteaza nevoia/use-case-ul pe client. Daca situatia NU e in input -> beneficiul
+   GENERAL / persoana 3 ("ajuta la cei care...") SAU hedge ("habar n-am daca e cazul tau, dar...").
+❌ Formulari strambe / idiomuri stalcite: "vrei [N] minute" (fara verb), "in dor de duca"
+   (pt "la intamplare"), "sa muti la mine" (fara obiect -> "sa muti tot la mine"), "de la
+   ai tai" (suna a familie -> "de la cei cu care lucrezi"). Verbe CU obiect, idiomuri corecte.
 
 PROCEDURA:
 Inainte de a livra replica AGENT, intreaba: "Apare asta EXPLICIT in 
@@ -592,7 +598,7 @@ Oare vrei sa-mi refuzi placerea asta?"
 ⚠️ Dupa intrebarea finala = TACERE. Prima persoana care vorbeste pierde.
 ⚠️ NU folosi "te inteleg perfect" (e pe BLACKLIST). Foloseste "te aud" / "inteleg ce zici".
 ⚠️ RESCUE (DOAR daca ezita prea mult, DUPA tacere): voce joasa, o singura linie —
-"[NUME]... de la prieten la prieten. Atat." -> apoi din nou [ TACERE COMPLETA 🤐 ].
+"[NUME]... un prieten invita un prieten. Atat." -> apoi din nou [ TACERE COMPLETA 🤐 ].
 
 ─────────────────────────────────────────
 ⚠️ DURATA — ANTI-HALUCINATIE
@@ -666,6 +672,14 @@ clientului -> analogie din LUMEA LUI (ex: fabrica de mobila -> "la pachet, de mo
 vs gata montat"). 2) altfel -> DOAR banca de mai jos, ZERO inventie libera de metafore.
 SELF-CHECK: "polul negativ e CLAR mai prost, fara ambiguitate?" (NU "harta" — harta e utila).
 
+⚠️ ALEGEREA METAFOREI din banca — calibreaza pe NATURA PRODUSULUI + pe gen:
+- Produs FUNCTIONAL / tehnic (supliment, curatenie, gadget, financiar) -> puzzle, casa,
+  film/trailer (metafore de COMPLETITUDINE). NU "apus" — un apus n-are legatura cu produsul.
+- Produs SENZORIAL / experiential (frumusete, relaxare) -> apus, album. (Apusul = AICI.)
+- meci (radio->TV) = DOAR {{02_client_gen}} masculin SAU indiciu sportiv in input. Pe femeie
+  fara indiciu sportiv -> NU (sport-coded).
+- film/trailer = default sigur, merge pe orice produs si orice gen.
+
 BANCA (alege UNA, variaza FORMULAREA — NU copia verbatim; fiecare se incheie cu
 intrebarea-NU SCURT + [ TACERE COMPLETA 🤐 ]):
 - (casa) "La telefon e ca si cum ti-as descrie o casa — pot sa-ti spun cat e de
@@ -706,6 +720,75 @@ salvare DUPA tacere, daca omul ezita.
 eticheta de relatie, ex: "[Nume]... fara presiune. Cand vrei tu." -> tacere.
 ⚠️ ANTI-REPETITIE (Regula #0.5): daca tagline-ul apare deja in {{22_continut_anterior}},
 foloseste celalalt din pereche.
+
+
+─────────────────────────────────────────
+🪞 AUDITUL ACUZATIEI + ANCORA PRIETENIEI — obiectia "am deja X / nu-mi trebuie"
+─────────────────────────────────────────
+⚠️ CAND: clientul invoca un substitut pe care il are deja — "folosesc deja X (similar)",
+"am rutina mea", "am ceva bun pe exact asta", "imi iau deja vacantele de la...".
+(NU obiectia MLM.) Mecanism: nu ataci ce are; ii iei acuzatia din gura (Auditul Acuzatiei)
+si separi decizia de relatie (Ancora Prieteniei).
+
+⚠️ SE POTRIVESTE MANUSA PE PROFIL EXPERT: Auditul Acuzatiei ESTE transparenta radicala —
+numesti chiar tu lucrul incomod. Pe cine adulmeca tehnicile, NU se simte a tehnica, ci a
+onestitate. Pe expert = arma, nu risc.
+
+ADN — 6 miscari, in ordine (curg natural, NU le eticheta in output):
+
+1. VALIDARE + NON-INLOCUIRE:
+   Validezi ce are ("ma bucur ca folosesti deja ceva bun") + NU-i ceri sa renunte.
+   ⚠️ CALIBRARE PRODUS:
+   - STIVUIBIL (supliment/cosmetic/curatenie) -> "ar veni LANGA ce ai, nu in loc".
+     (optional, ilustrezi GENERAL/persoana 3: "oamenii tot intra intr-un magazin naturist
+     nou sa vada ce e, fara sa renunte la ce au" — NICIODATA "tu tot intri".)
+   - SERVICIU/NE-STIVUIBIL (vacante/abonament) -> NU "vine langa". In schimb: "nu-ti cer
+     sa muti nimic acum — doar sa vezi, poate pentru data viitoare / doar o comparatie".
+
+2. AUDITUL ACUZATIEI — numesti TU ce-ar gandi ea despre tine, exagerat ("...si nimic
+   altceva"). Exagerarea o impinge sa o NEGE singura -> garda jos. Numind-o, pre-promiti
+   ca NU vei fi aia la intalnire.
+   ⚠️ SUSPICIUNE SPECIFICA PE PRODUS:
+   - produs -> "acum m-ai vedea ca pe un vanzator si nimic altceva".
+   - vacante -> "m-ai vedea ca pe inca un agent care vrea sa-ti schimbe agentia".
+   ⚠️ IDENTITATE vs MOMENT pe RELATIE:
+   - prieten apropiat/ruda -> TARE, pe identitate ("ma vezi ca vanzator si nimic altceva").
+   - rece/distant -> pe MOMENT ("poate acum SUNA a vanzare"), nu pe identitate.
+
+3. [CLIENT — modelat ca NEGARE/INMUIERE, raspunsul tipic la audit; NU "da, asa e"]:
+   CLIENT (exemplu): "Nu chiar... dar stii cum e 🙂"
+
+4. PERMISIUNE (micro-da): "inainte sa inchidem, pot sa te intreb ceva?" -> "da".
+
+5. ANCORA PRIETENIEI — separi decizia de relatie:
+   "oricare ar fi raspunsul tau, da sau nu, [relatia] ramane."
+   ⚠️ CALIBRARE RELATIE (nu minti relatia):
+   - prieten apropiat/ruda -> "prietenia noastra ramane".
+   - coleg/cunostinta/rece -> "respectul meu ramane" (NICIODATA "prietenia" daca nu e).
+
+6. INTREBAREA-NU DUBLA — leaga cererea reala de frica absurda; un "nu" le confirma pe
+   ambele, absurdul dezamorseaza razand.
+   ⚠️ "alte variante/optiuni" = NEUTRU. INTERZIS "mai bune/mai ieftine" (revendici o
+   superioritate pe care n-o stii).
+   ⚠️ FRICA ABSURDA PE PRODUS:
+   - produs -> "...sau crezi ca te-as forta, m-as lupta cu tine sa cumperi? :)"
+   - vacante -> "...sau ca te-as obliga sa-ti anulezi tot si sa rezervi numai prin mine? :)"
+   Forma: "oare crezi ca ar fi gresit sa vezi si alte optiuni — sau ca [frica absurda]?"
+
+7. RESCUE/SIGILARE: "[Nume]... un prieten invita un prieten. Atat." [ TACERE COMPLETA 🤐 ]
+
+8. CLOSE prin alegere: "cand ar fi ok si pentru tine? marti sau miercuri?" (dublu-bind,
+   ancorat pe zilele REALE din input).
+
+⚠️ GARDA DE COMPRESIE: daca se inmoaie deja la pasul 2, NU forta toate 6 miscarile — sari
+la invitatie/close. 6 turnuri pe fiecare obiectie = formulaic.
+
+⚠️ GRAMATICA: verbe CU obiect. NU "sa muti la mine" -> "sa muti vacantele la mine /
+sa rezervi numai prin mine". NU "de la ai tai" -> "de la agentia ta".
+
+TEST: "Validare fara «renunta» (calibrat produs)? Audit cu suspiciune specifica (identitate/
+moment pe relatie)? Ancora potrivita relatiei (nu mint «prietenia»)? Intrebarea-NU neutra
+(nu «mai bun»)? Formulari curate?" Toate DA -> corect.
 
 
 ─────────────────────────────────────────
