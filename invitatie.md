@@ -402,6 +402,11 @@ EXCLUSIV viata AGENTULUI. NU se atribuie NICIODATA clientului:
 ❌ nici direct ("si tu cazi la ora 3")
 ❌ nici ipotetic ("probabil treci si tu prin asta", "stiu ca te macina si pe tine")
 ❌ nici prin articol hotarat ("caderea AIA de energie" — presupune ca o stie / o are)
+❌ nici prin PUNTE de relevanta in PERSOANA 2: "si stii cat de mult conteaza asta cand TU
+   muncesti mult / mananci pe fuga / esti obosita" — proiecteaza use-case-ul produsului pe
+   client ca si cum aia e situatia ei. Daca situatia NU e in {{04_detalii_client}}: livreaza
+   beneficiul GENERAL / persoana 3 ("ajuta la cei care mananca pe fuga", "conteaza cand
+   muncesti mult, in general") SAU cu hedge ("habar n-am daca e cazul tau, dar...").
 
 ANCORA CENTRALA a apelului (din NOTA DE CALIBRARE, sectiunea A — si in CAZ 1, si in CAZ 2)
 se construieste EXCLUSIV din:
@@ -1012,7 +1017,7 @@ VARIATII (genereaza propriu, NU copia, variaza de fiecare data):
 
 AGENT ( instructiune vocala, persoana 2-a — continui DIN reactia ei ):
 "[a doua parte a deschiderii: marturisirea, REPRODUCAND mecanismele KB, FARA cifre de produs]"
-[ PAUZA Xs ⏸️ ] [ TACERE COMPLETA 🤐 ]
+[ PAUZA Xs ⏸️ · TACERE COMPLETA 🤐 ]
 CLIENT (exemplu): "[raspuns model]"
 
 [ZONA DE CONVERSATIE REALA — STOP INAINTE DE ETAPA 2] ◆ START
@@ -1164,7 +1169,7 @@ TEST: "Deschizatorul comunica curiozitate de elev (nu evaluare)? L-am variat fat
 tiparul implicit? Tinta (A/B/C) se potriveste calitatii?" Toate DA -> corect.
 
 DUPA INTREBARE — OBLIGATORIU:
-[ PAUZA 3s ⏸️ ] [ TACERE COMPLETA 🤐 ]
+[ PAUZA 3s ⏸️ · TACERE COMPLETA 🤐 ]
 NU VORBI. NU UMPLE. EL RASPUNDE PRIMUL.
 [TEHNICA #46 — INTREBAREA DE CURIOZITATE — PASUL 3] ◆ END
 [COMPLIMENT IN 3 PASI — OBLIGATORIU] ◆ END
@@ -1279,9 +1284,11 @@ confesiunii (Etapa 4, Pas 1). NU schimba structura, doar intensitatea/cadrul.
     trimiti la plimbare" (e tic-ul cel mai copiat — evita-l ca prima alegere).
 
     BANCA DE CERERI (jumatatea 1 — variaza verbul; [N] = numarul ales {3/4/5}):
-    - "vrei sa-ti povestesc fix [N] minute..."
+    - "ai [N] minute pentru mine..."
     - "imi dai [N] minute..."
     - "stai [N] minute cu mine pe asta..."
+    ⚠️ GRAMATICA: cererea trebuie sa ramana corecta chiar daca e scurtata. NU "vrei [N] minute"
+    (agramat — "vrei" cere un verb dupa el, ex "vrei sa-ti povestesc"). Foloseste formele de mai sus.
 
     BANCA DE OUT-URI ABSURDE (jumatatea 2 — DOAR cald/casual; roteste, imagini DIFERITE):
     - "...sau ma trimiti la plimbare pe loc? 😄"
@@ -1289,7 +1296,7 @@ confesiunii (Etapa 4, Pas 1). NU schimba structura, doar intensitatea/cadrul.
     - "...sau imi zici «pa» si gata? 😄"
 
     EXEMPLE DE RECOMBINARE (forma, NU copia — alta pereche de fiecare data):
-    - "vrei sa-ti povestesc fix 3 minute, sau imi zici «pa» si gata? 😄"
+    - "ai 3 minute pentru mine, sau imi zici «pa» si gata? 😄"
     - "imi dai 5 minute, sau imi inchizi telefonul in nas? 😄"
     - "stai 5 minute cu mine pe asta, sau ma trimiti la plimbare pe loc? 😄"
 
@@ -1646,7 +1653,7 @@ Agentul chiar a folosit produsul (08=Da)?" Toate DA -> corect.
 [ETAPA 4 / PAS 3 — AFIRMATIE DE INTARIRE A PRODUSULUI — ADN + VARIATII] ◆ END
 
 PAS 4 — VERIFICARE INTERES (escaladare respectuoasa, cu out real)
-[ PAUZA 4s ⏸️⏸️ ] [ TACERE COMPLETA 🤐 ]
+[ PAUZA 4s ⏸️⏸️ · TACERE COMPLETA 🤐 ]
 DACA clientul intreaba singur "Despre ce produs e vorba?" / "Si ce e?" -> interes
 confirmat, treci la ETAPA 5-6.
 
@@ -1745,7 +1752,7 @@ profil, ca pana acum (Inversia ramane valabil pe EXPERT).
    fara pauza — voce calma, fara presiune 🎤 ). Vine RAPID, ca sa raspunda la intrebare, nu sa
    analizeze textul de dinainte. O pauza inainte = timp sa se intoarca la afirmatie si sa
    pregateasca contraargumente.
-4. [ PAUZA 5s ⏸️⏸️⏸️ ] [ TACERE COMPLETA 🤐 ] — clientul raspunde primul (pauza DOAR aici, dupa intrebare)
+4. [ PAUZA 5s ⏸️⏸️⏸️ · TACERE COMPLETA 🤐 ] — clientul raspunde primul (pauza DOAR aici, dupa intrebare)
 ⚠️ NU lungi pasul 2. Text lung inainte de intrebare = timp pentru rezistenta. Inversia OFF.
 
 SIGILARI ANCORATE (G1 + G2 — roteste; INTERZIS vagi de tip "ti se pare prea mult?"):
@@ -1843,6 +1850,18 @@ SIGILARI ANCORATE (G1 + G2 — roteste; INTERZIS vagi de tip "ti se pare prea mu
     de montat singur vs gata montat"). 2) altfel -> DOAR banca de mai jos, ZERO inventie
     libera de metafore. SELF-CHECK: "polul negativ e CLAR mai prost, fara ambiguitate?"
     (NU "harta" — harta e utila) — daca nu trece, foloseste banca.
+    ⚠️ ALEGEREA METAFOREI din banca — calibreaza pe NATURA PRODUSULUI + pe gen:
+    AXA 1 — NATURA PRODUSULUI:
+    - SENZORIAL / experiential (vacante, spa, relaxare, frumusete) -> metafore senzoriale:
+      apus de soare, album de calatorii, fereastra spre locuri. (Apusul = AICI, nu pe tehnic.)
+    - FUNCTIONAL / tehnic (supliment, curatenie, gadget, financiar) -> metafore de
+      COMPLETITUDINE: puzzle (piese vs poza intreaga), casa (descriere vs intrat),
+      film/trailer (parte vs intreg). NU apus — n-are legatura cu produsul.
+    AXA 2 — GEN / LUMEA CLIENTULUI:
+    - meci (radio->TV) = DOAR {{02_client_gen}} masculin SAU indiciu sportiv in input
+      (sport-coded). Pe femeie fara indiciu sportiv -> NU.
+    - film/trailer = default sigur, merge pe orice produs si orice gen.
+    PRIORITATE: arborele de mai sus (lumea clientului) bate banca; banca = doar fara indiciu personal.
     VARIATII (inspiratie, variaza FORMULAREA — NU inventa familii noi de metafore):
     1. (casa) "La telefon e ca si cum ti-as descrie o casa — pot sa-ti spun cat e de
        frumoasa, dar n-o vezi cu adevarat pana nu intri in ea. De-aia te invit la o cafea."
@@ -1895,7 +1914,7 @@ variat expresia? Am sigilat cu intrebarea-NU? Am ancorat pe {{12_context_intalni
 Am pus tag-ul «prieten» doar pe relatie apropiata?" Toate DA -> corect.
 [ADN + VARIATII — PROPUNEREA] ◆ END
 
-[ PAUZA 5s ⏸️⏸️⏸️ ] [ TACERE COMPLETA 🤐 ]
+[ PAUZA 5s ⏸️⏸️⏸️ · TACERE COMPLETA 🤐 ]
 NU ADAUGA NIMIC. CLIENTUL VORBESTE PRIMUL.
 
 CLIENT (exemplu): "Merge. Cat dureaza?"
