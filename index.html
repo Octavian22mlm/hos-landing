@@ -264,7 +264,7 @@ label{display:block;font-size:13.5px;font-weight:600;letter-spacing:.08em;text-t
 .lesson-box.reveal{animation:pageOpen .55s cubic-bezier(.22,1,.36,1) both}
 @keyframes pageOpen{from{opacity:0;transform:translateY(14px) scale(.985)}to{opacity:1;transform:none}}
 .lesson-title{text-align:center;color:var(--gold);font-weight:700;font-size:18px;line-height:1.3;margin-bottom:10px}
-.lesson-body{text-align:left;font-size:16px;line-height:1.55;color:var(--ink)}
+.lesson-body{text-align:center;font-size:16px;line-height:1.55;color:var(--ink)}
 
 /* ===== OMULET FINAL (stare gata) ===== */
 .gen-ready{text-align:center;display:none}
@@ -830,8 +830,8 @@ label{display:block;font-size:13.5px;font-weight:600;letter-spacing:.08em;text-t
         <select id="f_durata">
           <option value="10 minute">10 minute</option>
           <option value="15 minute">15 minute</option>
-          <option value="20 minute" selected>20 minute</option>
-          <option value="30 minute">30 minute</option>
+          <option value="20 minute">20 minute</option>
+          <option value="30 minute" selected>30 minute</option>
           <option value="45 minute">45 minute</option>
         </select>
       </div>
@@ -1067,7 +1067,7 @@ label{display:block;font-size:13.5px;font-weight:600;letter-spacing:.08em;text-t
     </div>
 
     <!-- OBIECȚII -->
-    <div id="obj-section" style="margin-top:48px">
+    <div id="obj-section" style="margin-top:72px">
 
       <!-- Întrebare obiecție 1 -->
       <div id="obj1-question" class="obj-card">
@@ -2047,12 +2047,12 @@ function copyScript() {
 const LESSONS_HEAD = 'Secrete din psihologie care vând';
 const STEPS_HEAD = 'E timpul să te pui în stare optimă de performanță!';
 const MAIN_ITEMS = [
-  { type:'lesson', dur:6000, title:'Reciprocitate', body:'Un gest mic și sincer la început creează o datorie subtilă de atenție — oamenii întorc ce primesc.' },
-  { type:'lesson', dur:6000, title:'„NU" e mai ușor decât „DA"', body:'Întrebările în care un „nu" e de fapt acordul tău dezarmează: creierul vede „nu" ca pe o ieșire sigură.' },
-  { type:'lesson', dur:6000, title:'Bucla deschisă', body:'O frază lăsată neterminată ține atenția captivă — mintea nu suportă o poveste pe jumătate.' },
-  { type:'lesson', dur:6000, title:'Frica de pierdere', body:'Oamenii se tem mai tare să piardă decât se bucură să câștige — „ce ratezi" mișcă mai mult ca „ce primești".' },
+  { type:'lesson', dur:6000, title:'Inviți, nu vinzi', body:'Nu convingi pe nimeni la telefon — îl faci doar curios cât să vrea să vadă cu ochii lui. Telefonul deschide ușa, întâlnirea vinde.' },
+  { type:'lesson', dur:6000, title:'Numele', body:'Numele cuiva e cel mai dulce sunet pentru el. Folosește-l la momentele-cheie — coboară garda pe loc.' },
+  { type:'lesson', dur:6000, title:'Sinceritatea dezarmează', body:'Un strop de sinceritate neașteptată coboară garda mai mult ca orice argument lustruit.' },
+  { type:'lesson', dur:6000, title:'Dovada socială', body:'„Și alții care nu credeau în chestii de-astea au venit și s-au lămurit" convinge mai mult ca orice laudă. Oamenii urmează oamenii.' },
+  { type:'lesson', dur:6000, title:'Pasul mic', body:'Un „da" mic deschide drum spre unul mare. Cere întâi 2-3 minute de ascultare, nu întâlnirea direct.' },
   { type:'lesson', dur:6000, title:'Pauza', body:'Tăcerea după o întrebare e cel mai subestimat instrument — nu o umple tu, lasă-l pe el să răspundă.' },
-  { type:'lesson', dur:6000, title:'„Pentru că"', body:'Orice cerere însoțită de un motiv — chiar simplu — crește dramatic șansa de „da".' },
   { type:'transition', dur:2800, text:STEPS_HEAD },
   { type:'step', s:'read',    dur:6000, n:1, html:'<b>Citește scriptul cu voce tare</b>, în picioare, de 3 ori — ține-l în față.' },
   { type:'step', s:'jump',    dur:6000, n:2, html:'<b>Pune-te în stare optimă</b>: sari, dansează, mișcă-te.' },
@@ -2322,12 +2322,19 @@ async function generateObjScript(num) {
 // ============================================
 // PROGRES OBIECTII — checklist inline (6-7 etape, ~3s)
 // ============================================
-const OBJ_ITEMS = [
+const OBJ1_ITEMS = [
   { dur:6000, title:'Obiecția nu e „nu"', body:'E o întrebare care încă n-a primit răspuns.' },
   { dur:6000, title:'Validează, apoi răspunde', body:'„Te înțeleg" dezarmează mai mult ca orice argument.' },
   { dur:6000, title:'După ce adresezi o întrebare, taci', body:'Lasă liniștea să lucreze pentru tine.' },
   { dur:6000, title:'Ești de partea lui', body:'Nu e el contra ta, e o nelămurire de lămurit.' },
   { dur:6000, title:'„Nu" înseamnă „nu încă"', body:'Majoritatea „nu"-urilor sunt de fapt „nu încă" sau „n-am înțeles".' }
+];
+const OBJ2_ITEMS = [
+  { dur:6000, title:'A doua obiecție e semnal bun', body:'Dacă încă vorbește, nu pleacă — a doua obiecție înseamnă că e interesat, nu că te refuză.' },
+  { dur:6000, title:'Emoția din spatele obiecției', body:'O obiecție pare logică, dar dedesubt e mereu o emoție — de obicei frica de a greși. Vorbește cu frica, nu cu argumentul.' },
+  { dur:6000, title:'Nu te apăra', body:'În clipa în care te justifici, ai pierdut. Calmul și curiozitatea dezarmează mai mult ca orice contra-argument.' },
+  { dur:6000, title:'Lasă-i controlul', body:'Omul se opune când simte că i se ia libertatea. Cu cât simte mai mult că el decide, cu atât rezistă mai puțin.' },
+  { dur:6000, title:'Calmul tău dă tonul', body:'Dacă tu te grăbești, el simte presiune. Vorbește rar — starea ta calmă trece prin telefon și devine a lui.' }
 ];
 const OBJ_PROG_CEIL = 95;
 const OBJ_TOTAL_MS = 30000;
@@ -2355,7 +2362,7 @@ function startObjProgress(prefix, objText) {
   document.getElementById(prefix + '-loader').style.display = 'block';
   document.getElementById(prefix + '-ready').style.display = 'none';
   setObjBar(prefix, 0);
-  omStart({ lessonBoxId: prefix + '-lbox', lessonTitleId: prefix + '-ltitle', lessonBodyId: prefix + '-lbody', dotsId: prefix + '-dots', items: OBJ_ITEMS });
+  omStart({ lessonBoxId: prefix + '-lbox', lessonTitleId: prefix + '-ltitle', lessonBodyId: prefix + '-lbody', dotsId: prefix + '-dots', items: (prefix === 'obj2' ? OBJ2_ITEMS : OBJ1_ITEMS) });
   st.raf = requestAnimationFrame(() => objTick(prefix));
 }
 function finishObjProgress(prefix, cb) {
