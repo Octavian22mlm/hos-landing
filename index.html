@@ -480,6 +480,39 @@ label{display:block;font-size:13.5px;font-weight:600;letter-spacing:.08em;text-t
 .fc-locked{display:flex;flex-direction:column;align-items:center;text-align:center;gap:13px;padding:10px 0 4px}
 .fc-locked .lk-ic{font-size:22px}
 .fc-locked .lk-tx{font-size:14px;color:var(--muted);line-height:1.55;max-width:360px}
+/* ===== FULGER — BANNER 9/10 (execuție corectă) ===== */
+.ful9{position:relative;overflow:hidden;border:1.5px solid var(--gold);border-radius:14px;
+  background:linear-gradient(180deg,rgba(216,169,74,.14),rgba(18,26,43,.6));
+  box-shadow:0 20px 54px -28px rgba(216,169,74,.5);padding:26px 26px 22px;margin-bottom:22px}
+.ful9::before{content:"";position:absolute;top:-45%;right:-8%;width:300px;height:300px;
+  background:radial-gradient(circle,rgba(216,169,74,.16),transparent 65%);pointer-events:none}
+.ful9-top{display:flex;align-items:center;gap:22px;flex-wrap:wrap;position:relative}
+.ful9-badge{flex:0 0 auto;width:108px;height:108px;border-radius:50%;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;border:2px solid var(--gold);background:rgba(8,11,18,.5);
+  box-shadow:0 0 0 6px rgba(216,169,74,.09),inset 0 0 24px rgba(216,169,74,.14)}
+.ful9-badge .n{font-family:"Playfair Display",serif;font-size:40px;font-weight:900;color:var(--goldl);line-height:.9}
+.ful9-badge .n small{font-size:18px;font-weight:700;color:var(--muted)}
+.ful9-badge .lab{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted2);margin-top:5px}
+.ful9-txt{flex:1;min-width:250px}
+.ful9-kicker{display:inline-flex;align-items:center;gap:7px;font-size:11.5px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:9px}
+.ful9-txt h3{font-family:"Playfair Display",serif;font-size:22px;font-weight:700;line-height:1.2;color:var(--ink);margin:0}
+.ful9-txt h3 em{font-style:italic;color:var(--goldl)}
+.ful9-lead{color:var(--muted);font-size:14.5px;line-height:1.6;margin-top:9px;max-width:520px}
+.ful9-rules{margin-top:22px;border-top:1px solid var(--lsoft);padding-top:18px}
+.ful9-rh{display:flex;align-items:center;gap:9px;font-size:12px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--gold);font-weight:700;margin-bottom:13px}
+.ful9-rule{display:flex;gap:13px;padding:11px 0;border-bottom:1px solid rgba(255,255,255,.05)}
+.ful9-rule:last-child{border-bottom:none}
+.ful9-rn{flex:0 0 28px;height:28px;border-radius:50%;background:rgba(216,169,74,.14);border:1px solid var(--line);
+  color:var(--goldl);font-weight:700;display:flex;align-items:center;justify-content:center;font-size:14px}
+.ful9-rt{font-weight:700;color:var(--ink);font-size:15.5px;margin-bottom:3px}
+.ful9-rd{font-size:14px;color:var(--muted);line-height:1.55}
+.ful9-rule.forbid .ful9-rn{background:rgba(224,82,82,.13);border-color:rgba(224,82,82,.4);color:#ef9a9a}
+.ful9-rule.forbid .ful9-rt{color:#f2b3b3}
+.ful9-foot{margin-top:18px;font-size:13px;color:var(--muted);line-height:1.55;
+  background:rgba(0,0,0,.2);border:1px solid var(--lsoft);border-radius:10px;padding:12px 15px}
+.ful9-foot b{color:var(--goldl)}
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
@@ -2473,6 +2506,24 @@ window.addEventListener('DOMContentLoaded', () => {
 // ============================================
 // INVITAȚIA-FULGER (conținut static + render gated)
 // ============================================
+const FULGER_EXEC = {
+  cifra: "9", din: "/10", eticheta: "rată de reușită",
+  kicker: "Citește înainte să suni",
+  titlu_a: "Executată corect, această invitație reușește la ",
+  titlu_em: "9 din 10 apeluri.",
+  lead: "Nu e magie — e o replică calibrată la milimetru. Puterea ei stă în execuție, nu în cuvinte. Respectă cele 4 reguli de mai jos și rezultatul vine aproape de la sine.",
+  reguli: [
+    { t: "Intră în stare optimă de performanță",
+      d: "Înainte să formezi numărul: respiră adânc, coboară ritmul, pune-ți zâmbetul pe față. Vocea calmă și prezentă face jumătate din treabă. Grăbit sau tensionat, strici tot." },
+    { t: "Nu schimba invitația",
+      d: "Fiecare cuvânt, fiecare pauză și fiecare tăcere au un rol testat. „Îmbunătățirile” de moment o dezechilibrează. Ai încredere în structură — e gândită să funcționeze exact așa." },
+    { t: "Spune exact ce scrie",
+      d: "Citește replica întocmai — nu improviza, nu adăuga argumente, nu explica pe lângă. Rostește-o firesc, ca și cum ți-ar veni natural, dar fără să te abați de la text." },
+    { t: "Oprește-te când se termină scriptul", forbid: true,
+      d: "După ultima replică — taci. E interzis să continui discuția. Ai obținut „da”-ul la cafea; orice cuvânt în plus deschide o ușă pe care nu vrei s-o deschizi și îți poate pierde întâlnirea." }
+  ],
+  foot: "Ține minte: invitația-fulger îți aduce doar acceptul la întâlnire. Nu prezenta produsul și nu explica business-ul la telefon. Restul se întâmplă față în față."
+};
 const FULGER_INTRO = {
   titlu: "Invitația-fulger — citește asta întâi",
   avertisment:
@@ -2626,6 +2677,21 @@ function renderFulger(){
   var order=['unic','recruit','builder','leader'];
   var unlocked=(order.indexOf(tier) >= order.indexOf('builder'));
   var html='';
+
+  var _e=FULGER_EXEC;
+  html+='<div class="ful9"><div class="ful9-top">';
+  html+='<div class="ful9-badge"><div class="n">'+_fEsc(_e.cifra)+'<small>'+_fEsc(_e.din)+'</small></div><div class="lab">'+_fEsc(_e.eticheta)+'</div></div>';
+  html+='<div class="ful9-txt"><div class="ful9-kicker">◆ '+_fEsc(_e.kicker)+'</div><h3>'+_fEsc(_e.titlu_a)+'<em>'+_fEsc(_e.titlu_em)+'</em></h3><div class="ful9-lead">'+_fEsc(_e.lead)+'</div></div>';
+  html+='</div>';
+  html+='<div class="ful9-rules"><div class="ful9-rh">✓ Ce înseamnă „executată corect”</div>';
+  _e.reguli.forEach(function(r,ix){
+    var cls='ful9-rule'+(r.forbid?' forbid':'');
+    var num=r.forbid?'✕':(ix+1);
+    html+='<div class="'+cls+'"><div class="ful9-rn">'+num+'</div><div><div class="ful9-rt">'+_fEsc(r.t)+'</div><div class="ful9-rd">'+_fEsc(r.d)+'</div></div></div>';
+  });
+  html+='</div>';
+  html+='<div class="ful9-foot">'+_fEsc(_e.foot)+'</div>';
+  html+='</div>';
 
   html+='<div class="ful-intro">';
   html+='<div class="ful-warn"><span class="wi">⚠️</span><span class="wt">'+_fEsc(FULGER_INTRO.avertisment)+'</span></div>';
