@@ -5,6 +5,8 @@ const express = require('express');
 const { createClient } = require('@supabase/supabase-js');
 const path = require('path');
 const crypto = require('crypto');
+// Conținut premium (Conectare + Invitația-fulger) — servit doar prin /api/module/:name
+const PREMIUM = require('./private/modules');
 
 const app = express();
 // express.json() parsează tot, DAR webhook-ul Stripe are nevoie de body RAW pentru semnătură:
@@ -13,6 +15,8 @@ app.use((req, res, next) => {
   express.json({ limit: '2mb' })(req, res, next);
 });
 // index:false => "/" nu mai serveste automat index.html; il dam noi explicit mai jos
+// BLOCARE HTTP: continutul premium din /private NU se serveste static (doar prin /api/module/:name, cu verificare de plan)
+app.use('/private', (req, res) => res.status(404).end());
 app.use(express.static(path.join(__dirname), { index: false }));
 
 // "/" = pagina de vanzare (preturi.html) · aplicatia traieste la "/app"
@@ -1076,6 +1080,26 @@ app.get('/api/test-anthropic', async (req, res) => {
   } catch (e) { res.status(500).type('text/plain').send('EXCEPTIE: ' + e.message); }
 });
 // ====== SFARSIT TEST TEMPORAR ======
+
+// ============================================
+// CONȚINUT PREMIUM GATED — Conectare + Invitația-fulger (doar Builder/Leader)
+// Blocare REALĂ: conținutul nu ajunge la client dacă planul e sub Builder.
+// ============================================
+const MODULE_MIN_TIER = { conectare: 'builder', fulger: 'builder' };
+const TIER_ORDER_MOD = ['none', 'unic', 'recruit', 'builder', 'leader'];
+app.get('/api/module/:name', auth, async (req, res) => {
+  const name = req.params.name;
+  if (!Object.prototype.hasOwnProperty.call(PREMIUM, name)) {
+    return res.status(404).json({ error: 'Modul inexistent' });
+  }
+  const { data: profile } = await db.from('profiles').select('tier').eq('id', req.user.id).single();
+  const tier = (profile && profile.tier) || 'none';
+  const min = MODULE_MIN_TIER[name] || 'builder';
+  if (TIER_ORDER_MOD.indexOf(tier) < TIER_ORDER_MOD.indexOf(min)) {
+    return res.status(403).json({ error: 'locked', min_tier: min });
+  }
+  return res.json({ name, content: PREMIUM[name] });
+});
 
 // ============================================
 // FRONTEND — serveste index.html
