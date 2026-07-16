@@ -254,4 +254,133 @@ const fulger = [
   }
 ];
 
-module.exports = { conectare, fulger };
+// ---- MODUL: PREZENTARE (1 la 1) — HTML injectat în #prezentare-content · gated LEADER ----
+const prezentare = `
+  <div class="cn-title-block">
+    <h1 class="cn-h1">Prezentarea 1 la 1</h1>
+    <div class="cn-subtitle">dialog, nu monolog</div>
+  </div>
+  <p class="cn-lead">Prezentarea 1 la 1 trebuie să fie un <b>dialog</b>, nu un monolog. Doar așa ai atenția clientului 100%.</p>
+  <p class="cn-lead">Greșeala pe care mulți o fac: prezintă fără să adreseze întrebări de calitate — întrebări care îl ajută pe client să <b>conștientizeze</b> valoarea produsului.</p>
+
+  <div class="cn-precond"><b>⚠️ De ce contează:</b> clientul cumpără doar beneficiile pe care și le amintește. Dacă tu prezinți și el ascultă pasiv, mintea lui nu reține nimic — la final <b>nu are cum</b> să justifice cumpărarea și primești „mai mă gândesc", „nu am timp", „trebuie să vorbesc cu partenerul". Un DA smuls e un DA fals.</div>
+
+  <div class="cn-sec">Cum fixezi beneficiile în mintea lui</div>
+
+  <div class="cn-rule">
+    <div class="cn-rule-num">1</div>
+    <div class="cn-rule-txt">
+      <div class="cn-rt">Prin întrebări deschise, nu doar prin prezentare</div>
+      <div class="cn-rd">
+        <p>Fixezi avantajele nu turnând informație, ci punând întrebări la care <b>el</b> trebuie să gândească răspunsul. Mintea reține ce produce singură, nu ce aude.</p>
+        <p>În plus, întrebările deschise îți arată <b>cum gândește</b> clientul — deci știi pe ce construiești închiderea.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="cn-rule">
+    <div class="cn-rule-num">2</div>
+    <div class="cn-rule-txt">
+      <div class="cn-rt">Folosește întrebări deschise: Cum / Ce / Care / Cine</div>
+      <div class="cn-rd">
+        <p>Întrebările deschise generează un răspuns detaliat, care îți arată cum gândește clientul.</p>
+        <p><b>Evită „De ce…?"</b> — sună a interogatoriu și îl pune în defensivă.</p>
+        <p><b>Evită „Oare…?"</b> — sună retoric și vag.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="cn-rule">
+    <div class="cn-rule-num">3</div>
+    <div class="cn-rule-txt">
+      <div class="cn-rt">Interzise: întrebările închise și cele-capcană</div>
+      <div class="cn-rd">
+        <p><b>Închisă</b> = răspuns da/nu (ex: „Ți-ar plăcea să economisești la vacanțe?"). Nu-ți spune nimic despre cum gândește.</p>
+        <p><b>Capcană (leading)</b> = închisă + îi bagi tu răspunsul în gură (ex: „Nu-i așa că prietenii tăi ar vrea asta?"). Se simte manipulat și se închide.</p>
+        <div class="cn-ban">
+          <div class="cn-ban-label">De ce sunt periculoase</div>
+          <ul>
+            <li>Oamenii urăsc să spună DA forțat</li>
+            <li>Clientul se simte manipulat și se închide</li>
+            <li>Tu crezi că ai obținut un DA — dar e fals, l-ai obligat</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cn-rule">
+    <div class="cn-rule-num">4</div>
+    <div class="cn-rule-txt">
+      <div class="cn-rt">Tonalitatea face diferența</div>
+      <div class="cn-rd">
+        <p>Aceeași întrebare sună a interogatoriu sau a curiozitate caldă doar din ton.</p>
+        <p>Ton <b>descendent</b> la final (ancheta urcă), ritm lent, zâmbet în glas 😊 — apoi <b>taci</b>. El vorbește primul.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="cn-rule">
+    <div class="cn-rule-num">5</div>
+    <div class="cn-rule-txt">
+      <div class="cn-rt">Cadență: fără interogatoriu</div>
+      <div class="cn-rd">
+        <p>Alege <b>3–4 întrebări la partea de produs</b> și <b>3–4 la partea de afacere</b>.</p>
+        <p>Distribuie-le pe parcurs — una după fiecare beneficiu, cu tăcere după — <b>niciodată în rafală</b>. Altfel clientul se simte la interogatoriu.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="cn-rule">
+    <div class="cn-rule-num">6</div>
+    <div class="cn-rule-txt">
+      <div class="cn-rt">Notează-i răspunsurile</div>
+      <div class="cn-rd">
+        <p>Mental sau în scris. Cuvintele pe care ți le dă acum sunt muniția ta — le folosești la <b>închidere</b> (modul separat).</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="cn-sec">Banca de întrebări</div>
+  <p class="cn-lead">Alege 3–4 din fiecare zonă. E un meniu, nu o listă de bifat.</p>
+
+  <div class="cn-box">
+
+    <span class="cn-zone">🛍️ Partea de produs</span>
+
+    <p class="cn-line"><span class="cn-role">Pentru el:</span></p>
+    <p class="cn-line cn-gap">„Care ar fi beneficiile pe care tu personal le-ai avea folosind X?"</p>
+    <p class="cn-line cn-gap">„Cum te-ar putea ajuta acest produs în viața ta?"</p>
+    <p class="cn-line cn-gap">„Ce anume te-ar face să spui că un produs chiar și-a meritat banii?"</p>
+    <p class="cn-line cn-gap">„Cum ar arăta o zi de-a ta în care <span class="cn-fill">[problema pe care o rezolvă produsul]</span> n-ar mai fi o grijă?"</p>
+    <p class="cn-line cn-gap">„Care ar fi primul lucru pe care l-ai simți diferit după câteva săptămâni în care îl folosești?"</p>
+    <p class="cn-line cn-gap">„Ce ar însemna pentru tine să rezolvi asta și să nu te mai gândești la ea?"</p>
+
+    <p class="cn-line"><span class="cn-role">Dincolo de el:</span></p>
+    <p class="cn-line cn-gap">„În afară de tine, cine s-ar mai bucura de calitatea acestui produs / serviciu?"</p>
+    <p class="cn-line cn-gap">„În afară de tine, cine s-ar mai putea bucura de avantajele X, Y, Z?"</p>
+    <p class="cn-line cn-gap">„Cine din jurul tău ar observa primul schimbarea la tine?"</p>
+    <p class="cn-line cn-gap">„Cum ți s-ar părea să oferi mai departe ceva care pe tine te-a ajutat?"</p>
+
+    <span class="cn-zone">💼 Partea de afacere</span>
+
+    <p class="cn-line"><span class="cn-role">Pentru el:</span></p>
+    <p class="cn-line cn-gap">„Cum te-ar putea ajuta un venit extra de 500–1.000 Eur lunar, dezvoltând part-time acest proiect?"</p>
+    <p class="cn-line cn-gap">„Care sunt lucrurile pe care le-ai face cu un venit extra de 500–1.000 Eur lunar?"</p>
+    <p class="cn-line cn-gap">„Ce ar schimba concret în viața ta un venit extra de 500–1.000 Eur lunar, part-time?"</p>
+    <p class="cn-line cn-gap">„Ce ți-ar plăcea să faci mai mult, dacă timpul și banii n-ar mai fi problema?"</p>
+
+    <p class="cn-line"><span class="cn-role">Dincolo de el:</span></p>
+    <p class="cn-line cn-gap">„Cine s-ar mai bucura de un venit lunar de 500–1.000 Eur extra pe care tu l-ai produce în familia ta?"</p>
+    <p class="cn-line cn-gap">„Cine din familia ta ar simți cel mai mult diferența acestui venit?"</p>
+    <p class="cn-line cn-gap">„În afară de tine, cine ar mai avea de câștigat dacă ai construi proiectul ăsta?"</p>
+    <p class="cn-line cn-gap">„Cum ar fi să construiești ceva al tău, în ritmul tău, fără să renunți la ce ai acum?"</p>
+
+  </div>
+
+  <div class="cn-precond" style="margin-top:18px"><b>📍 Doar pentru prezentarea 1 la 1.</b> Prezentarea de grup funcționează diferit și e tratată separat.</div>
+
+  <div class="cn-foot">Harvard of Sales · Modul Prezentare (1 la 1)</div>
+`;
+
+module.exports = { conectare, fulger, prezentare };
