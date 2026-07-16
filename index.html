@@ -697,7 +697,7 @@ label{display:block;font-size:13.5px;font-weight:600;letter-spacing:.08em;text-t
     <nav class="navtabs">
       <button class="navtab active" id="tab-invitatie" onclick="navTab('invitatie')">Invitație</button>
       <button class="navtab" id="tab-conectare" onclick="navTab('conectare')">Conectare</button>
-      <button class="navtab soon" onclick="navTab('prezentare')">Prezentare<span class="soon-badge">în curând</span></button>
+      <button class="navtab" id="tab-prezentare" onclick="navTab('prezentare')">Prezentare</button>
       <button class="navtab soon" onclick="navTab('inchidere')">Închidere<span class="soon-badge">în curând</span></button>
       <button class="navtab soon" onclick="navTab('followup')">Follow-up<span class="soon-badge">în curând</span></button>
       <button class="navtab soon" onclick="navTab('recomandari')">Cerere de recomandări<span class="soon-badge">în curând</span></button>
@@ -963,6 +963,11 @@ label{display:block;font-size:13.5px;font-weight:600;letter-spacing:.08em;text-t
   <!-- ── MODUL CONECTARE (gated Builder/Leader) ── -->
   <div class="gen-wrap" id="wrap-conectare" style="display:none">
     <div id="conectare-content"></div>
+  </div>
+
+  <!-- ── MODUL PREZENTARE (gated Leader) ── -->
+  <div class="gen-wrap" id="wrap-prezentare" style="display:none">
+    <div id="prezentare-content"></div>
   </div>
 </div>
 
@@ -1500,21 +1505,21 @@ function openModal(id, mode){
 function finishOnboard(){ try{ localStorage.setItem('hos_onboarded','1'); }catch(e){} closeModal('m-ghid'); refreshStepUI(); if(typeof toast==='function') toast('Gata! Completează cu detalii reale și specifice 💪', 4000); }
 function maybeOnboard(){ if(_isOnboarded()){ refreshStepUI(); return; } openModal('m-ghid'); }   // Pasul 1 primul
 function navTab(w){
-  if(w!=='invitatie' && w!=='conectare'){
-    var n={prezentare:'Prezentare',inchidere:'Închidere',followup:'Follow-up',recomandari:'Cerere de recomandări'};
+  var real=['invitatie','conectare','prezentare'];
+  if(real.indexOf(w)<0){
+    var n={inchidere:'Închidere',followup:'Follow-up',recomandari:'Cerere de recomandări'};
     if(typeof toast==='function') toast((n[w]||'Secțiunea')+' — în curând 🔒', 3000);
     return;
   }
-  var ti=document.getElementById('tab-invitatie'), tc=document.getElementById('tab-conectare');
-  var wi=document.getElementById('wrap-invitatie'), wc=document.getElementById('wrap-conectare');
-  if(w==='conectare'){
-    if(ti)ti.classList.remove('active'); if(tc)tc.classList.add('active');
-    if(wi)wi.style.display='none'; if(wc)wc.style.display='block';
-    if(typeof renderConectare==='function') renderConectare();
-  } else {
-    if(tc)tc.classList.remove('active'); if(ti)ti.classList.add('active');
-    if(wc)wc.style.display='none'; if(wi)wi.style.display='block';
-  }
+  var tabs={invitatie:'tab-invitatie',conectare:'tab-conectare',prezentare:'tab-prezentare'};
+  var wraps={invitatie:'wrap-invitatie',conectare:'wrap-conectare',prezentare:'wrap-prezentare'};
+  real.forEach(function(k){
+    var t=document.getElementById(tabs[k]); var wr=document.getElementById(wraps[k]);
+    if(t) t.classList.toggle('active', k===w);
+    if(wr) wr.style.display=(k===w)?'block':'none';
+  });
+  if(w==='conectare' && typeof renderConectare==='function') renderConectare();
+  if(w==='prezentare' && typeof renderPrezentare==='function') renderPrezentare();
 }
 
 // ===== MODUL CONECTARE — incarcare gated de pe server (Builder/Leader) =====
@@ -1539,6 +1544,31 @@ async function renderConectare(){
     _conectareLoaded=true;
   }catch(e){
     if(/locked/i.test(e.message||'')){ host.innerHTML=_cnLockHtml(); }
+    else { host.innerHTML='<div class="cn-load">Nu am putut încărca modulul. Reîncearcă.</div>'; }
+  }
+}
+// ===== MODUL PREZENTARE — incarcare gated de pe server (doar Leader) =====
+var _prezentareLoaded=false;
+function _pzLockHtml(){
+  return '<div class="cn-lock"><div class="cn-lock-ic">🔒</div>'+
+    '<div class="cn-lock-tx">Modulul <b>Prezentare 1 la 1</b> — banca de întrebări, cadența și tonalitatea care țin atenția clientului 100% — se deblochează din planul <b>Leader</b>.</div>'+
+    '<button class="btn-ghost" style="max-width:240px" onclick="goUpgrade()">Deblochează la Leader</button></div>';
+}
+async function renderPrezentare(){
+  var host=document.getElementById('prezentare-content');
+  if(!host) return;
+  var tier=(typeof USER_PROFILE!=='undefined' && USER_PROFILE && USER_PROFILE.tier) ? USER_PROFILE.tier : 'none';
+  var order=['none','unic','recruit','builder','leader'];
+  var unlocked=(order.indexOf(tier) >= order.indexOf('leader'));
+  if(!unlocked){ host.innerHTML=_pzLockHtml(); _prezentareLoaded=false; return; }
+  if(_prezentareLoaded) return;
+  host.innerHTML='<div class="cn-load">Se încarcă modulul…</div>';
+  try{
+    var data=await api('/api/module/prezentare');
+    host.innerHTML=data.content;
+    _prezentareLoaded=true;
+  }catch(e){
+    if(/locked/i.test(e.message||'')){ host.innerHTML=_pzLockHtml(); }
     else { host.innerHTML='<div class="cn-load">Nu am putut încărca modulul. Reîncearcă.</div>'; }
   }
 }
