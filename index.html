@@ -576,6 +576,35 @@ label{display:block;font-size:13.5px;font-weight:600;letter-spacing:.08em;text-t
 .cn-lock-tx{font-size:15px;color:var(--muted);line-height:1.6;max-width:420px}
 .cn-lock-tx b{color:var(--goldl)}
 .cn-load{text-align:center;color:var(--muted);padding:50px 20px;font-size:15px}
+/* ===== MODUL ÎNCHIDERE — formula "Oferta Irezistibilă" (nativ, vertical, nu se sparge) ===== */
+.if-wrap{max-width:540px;margin:16px auto 6px}
+.if-gl{font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;margin:0 0 11px;text-align:center}
+.if-max{color:var(--goldl)}
+.if-min{color:var(--muted)}
+.if-row{display:flex;align-items:stretch;gap:10px;justify-content:center}
+.if-card{flex:1 1 0;min-width:0;background:linear-gradient(180deg,var(--panel),var(--panel2));
+  border:1px solid var(--line);border-radius:12px;padding:13px 15px;text-align:center}
+.if-card .lab{font-size:10px;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);line-height:1.32;margin-bottom:7px}
+.if-card .val{font-family:"Playfair Display",serif;font-size:16px;font-weight:700;color:var(--goldl);line-height:1.12}
+.if-x{display:flex;align-items:center;justify-content:center;color:var(--muted2);font-size:15px;font-weight:700;flex:0 0 auto}
+.if-bar{height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent);margin:15px 0;border-radius:2px}
+.if-op{text-align:center;color:var(--gold);font-size:22px;font-weight:800;font-family:"Playfair Display",serif;margin:13px 0}
+.if-risk-wrap{text-align:center}
+.if-risk{display:inline-block;background:linear-gradient(180deg,#e5484d,#c0303a);color:#fff;
+  font-family:"Playfair Display",serif;font-weight:800;font-size:19px;line-height:1.05;text-align:center;
+  padding:15px 30px;border-radius:14px;box-shadow:0 0 26px rgba(224,82,82,.45);text-transform:uppercase;letter-spacing:.04em}
+.if-result{max-width:300px;margin:0 auto;border:2px solid var(--gold);border-radius:14px;background:rgba(216,169,74,.06);
+  padding:15px 26px;text-align:center;box-shadow:0 0 0 5px rgba(216,169,74,.05)}
+.if-result .rl{font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:6px}
+.if-result .rv{font-family:"Playfair Display",serif;font-weight:800;font-size:23px;color:var(--ink);line-height:1.05;text-transform:uppercase}
+@media(max-width:500px){.if-row{flex-direction:column}}
+/* blocaje (rosu) — de ce nu poti inchide */
+.cn-block{margin:14px 0 4px;background:rgba(224,82,82,.06);border:1px solid rgba(224,82,82,.22);border-radius:12px;padding:16px 18px}
+.cn-block-h{color:#f0a0a0;font-size:12px;letter-spacing:.05em;text-transform:uppercase;font-weight:700;margin-bottom:12px}
+.cn-block ul{list-style:none;display:flex;flex-direction:column;gap:9px;margin:0;padding:0}
+.cn-block li{font-size:14.5px;color:#ecc4c4;line-height:1.5;padding-left:24px;position:relative}
+.cn-block li::before{content:"✕";position:absolute;left:0;top:0;color:#e05252;font-weight:700}
+
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
@@ -698,7 +727,7 @@ label{display:block;font-size:13.5px;font-weight:600;letter-spacing:.08em;text-t
       <button class="navtab active" id="tab-invitatie" onclick="navTab('invitatie')">Invitație</button>
       <button class="navtab" id="tab-conectare" onclick="navTab('conectare')">Conectare</button>
       <button class="navtab" id="tab-prezentare" onclick="navTab('prezentare')">Prezentare</button>
-      <button class="navtab soon" onclick="navTab('inchidere')">Închidere<span class="soon-badge">în curând</span></button>
+      <button class="navtab" id="tab-inchidere" onclick="navTab('inchidere')">Închidere</button>
       <button class="navtab soon" onclick="navTab('followup')">Follow-up<span class="soon-badge">în curând</span></button>
       <button class="navtab soon" onclick="navTab('recomandari')">Cerere de recomandări<span class="soon-badge">în curând</span></button>
     </nav>
@@ -968,6 +997,11 @@ label{display:block;font-size:13.5px;font-weight:600;letter-spacing:.08em;text-t
   <!-- ── MODUL PREZENTARE (gated Leader) ── -->
   <div class="gen-wrap" id="wrap-prezentare" style="display:none">
     <div id="prezentare-content"></div>
+  </div>
+
+  <!-- ── MODUL ÎNCHIDERE (gated Leader) ── -->
+  <div class="gen-wrap" id="wrap-inchidere" style="display:none">
+    <div id="inchidere-content"></div>
   </div>
 </div>
 
@@ -1505,14 +1539,14 @@ function openModal(id, mode){
 function finishOnboard(){ try{ localStorage.setItem('hos_onboarded','1'); }catch(e){} closeModal('m-ghid'); refreshStepUI(); if(typeof toast==='function') toast('Gata! Completează cu detalii reale și specifice 💪', 4000); }
 function maybeOnboard(){ if(_isOnboarded()){ refreshStepUI(); return; } openModal('m-ghid'); }   // Pasul 1 primul
 function navTab(w){
-  var real=['invitatie','conectare','prezentare'];
+  var real=['invitatie','conectare','prezentare','inchidere'];
   if(real.indexOf(w)<0){
-    var n={inchidere:'Închidere',followup:'Follow-up',recomandari:'Cerere de recomandări'};
+    var n={followup:'Follow-up',recomandari:'Cerere de recomandări'};
     if(typeof toast==='function') toast((n[w]||'Secțiunea')+' — în curând 🔒', 3000);
     return;
   }
-  var tabs={invitatie:'tab-invitatie',conectare:'tab-conectare',prezentare:'tab-prezentare'};
-  var wraps={invitatie:'wrap-invitatie',conectare:'wrap-conectare',prezentare:'wrap-prezentare'};
+  var tabs={invitatie:'tab-invitatie',conectare:'tab-conectare',prezentare:'tab-prezentare',inchidere:'tab-inchidere'};
+  var wraps={invitatie:'wrap-invitatie',conectare:'wrap-conectare',prezentare:'wrap-prezentare',inchidere:'wrap-inchidere'};
   real.forEach(function(k){
     var t=document.getElementById(tabs[k]); var wr=document.getElementById(wraps[k]);
     if(t) t.classList.toggle('active', k===w);
@@ -1520,6 +1554,7 @@ function navTab(w){
   });
   if(w==='conectare' && typeof renderConectare==='function') renderConectare();
   if(w==='prezentare' && typeof renderPrezentare==='function') renderPrezentare();
+  if(w==='inchidere' && typeof renderInchidere==='function') renderInchidere();
 }
 
 // ===== MODUL CONECTARE — incarcare gated de pe server (Builder/Leader) =====
@@ -1569,6 +1604,31 @@ async function renderPrezentare(){
     _prezentareLoaded=true;
   }catch(e){
     if(/locked/i.test(e.message||'')){ host.innerHTML=_pzLockHtml(); }
+    else { host.innerHTML='<div class="cn-load">Nu am putut încărca modulul. Reîncearcă.</div>'; }
+  }
+}
+// ===== MODUL ÎNCHIDERE — incarcare gated de pe server (doar Leader) =====
+var _inchidereLoaded=false;
+function _inLockHtml(){
+  return '<div class="cn-lock"><div class="cn-lock-ic">🔒</div>'+
+    '<div class="cn-lock-tx">Modulul <b>Închidere</b> — formula, cele 3 etape și regulile de aur de execuție — se deblochează din planul <b>Leader</b>.</div>'+
+    '<button class="btn-ghost" style="max-width:240px" onclick="goUpgrade()">Deblochează la Leader</button></div>';
+}
+async function renderInchidere(){
+  var host=document.getElementById('inchidere-content');
+  if(!host) return;
+  var tier=(typeof USER_PROFILE!=='undefined' && USER_PROFILE && USER_PROFILE.tier) ? USER_PROFILE.tier : 'none';
+  var order=['none','unic','recruit','builder','leader'];
+  var unlocked=(order.indexOf(tier) >= order.indexOf('leader'));
+  if(!unlocked){ host.innerHTML=_inLockHtml(); _inchidereLoaded=false; return; }
+  if(_inchidereLoaded) return;
+  host.innerHTML='<div class="cn-load">Se încarcă modulul…</div>';
+  try{
+    var data=await api('/api/module/inchidere');
+    host.innerHTML=data.content;
+    _inchidereLoaded=true;
+  }catch(e){
+    if(/locked/i.test(e.message||'')){ host.innerHTML=_inLockHtml(); }
     else { host.innerHTML='<div class="cn-load">Nu am putut încărca modulul. Reîncearcă.</div>'; }
   }
 }
