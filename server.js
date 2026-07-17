@@ -1085,7 +1085,7 @@ app.get('/api/test-anthropic', async (req, res) => {
 // CONȚINUT PREMIUM GATED — Conectare + Invitația-fulger (doar Builder/Leader)
 // Blocare REALĂ: conținutul nu ajunge la client dacă planul e sub Builder.
 // ============================================
-const MODULE_MIN_TIER = { conectare: 'builder', fulger: 'builder', prezentare: 'leader' };
+const MODULE_MIN_TIER = { conectare: 'builder', fulger: 'builder', prezentare: 'leader', inchidere: 'leader' };
 const TIER_ORDER_MOD = ['none', 'unic', 'recruit', 'builder', 'leader'];
 app.get('/api/module/:name', auth, async (req, res) => {
   const name = req.params.name;
