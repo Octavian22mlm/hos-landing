@@ -655,6 +655,7 @@ label{display:block;font-size:13.5px;font-weight:600;letter-spacing:.08em;text-t
       <div class="field"><label>Email</label><input type="email" id="login-email" placeholder="email@exemplu.com"></div>
       <div class="field"><label>Parolă</label><input type="password" id="login-pass" placeholder="••••••••"></div>
       <button class="btn" onclick="doLogin()">Intră în platformă</button>
+      <div class="auth-switch" style="margin-top:14px"><a onclick="showView('forgot')">Ai uitat parola?</a></div>
       <div class="auth-switch">Nu ai cont? <a href="preturi.html">Creează-ți un cont</a></div>
     </div>
     <div style="text-align:center;margin-top:22px;font-size:12.5px;line-height:1.9">
@@ -700,6 +701,44 @@ label{display:block;font-size:13.5px;font-weight:600;letter-spacing:.08em;text-t
       <div class="field"><label>Codul de activare</label><input type="text" id="redeem-code" placeholder="XXXX-XXXX-XXXX" style="letter-spacing:.1em;text-transform:uppercase"></div>
       <button class="btn" onclick="doRedeem()">Activează planul</button>
       <div class="auth-switch" style="margin-top:14px"><a onclick="doLogout()" style="color:var(--muted)">Ieși din cont</a></div>
+    </div>
+  </div>
+</div>
+
+<!-- ── VIEW: FORGOT PASSWORD ── -->
+<div id="view-forgot" class="view z">
+  <div class="auth-wrap">
+    <div class="auth-card">
+      <div class="auth-brand">
+        <div class="name">HARVARD OF SALES</div>
+        <div class="sub">The Psychology of MLM Excellence</div>
+      </div>
+      <h2>Ai uitat parola?</h2>
+      <p>Scrie adresa de email a contului. Îți trimitem un link de resetare.</p>
+      <div class="err" id="forgot-err"></div>
+      <div class="suc" id="forgot-suc"></div>
+      <div class="field"><label>Email</label><input type="email" id="forgot-email" placeholder="email@exemplu.com"></div>
+      <button class="btn" onclick="doForgotPassword()">Trimite link de resetare</button>
+      <div class="auth-switch" style="margin-top:16px"><a onclick="showView('login')">← Înapoi la login</a></div>
+    </div>
+  </div>
+</div>
+
+<!-- ── VIEW: RESET PASSWORD (după clic pe linkul din email) ── -->
+<div id="view-reset" class="view z">
+  <div class="auth-wrap">
+    <div class="auth-card">
+      <div class="auth-brand">
+        <div class="name">HARVARD OF SALES</div>
+        <div class="sub">The Psychology of MLM Excellence</div>
+      </div>
+      <h2>Setează o parolă nouă</h2>
+      <p>Introdu noua parolă pentru contul tău.</p>
+      <div class="err" id="reset-err"></div>
+      <div class="suc" id="reset-suc"></div>
+      <div class="field"><label>Parolă nouă</label><input type="password" id="reset-pass" placeholder="Minim 6 caractere"></div>
+      <div class="field"><label>Confirmă parola</label><input type="password" id="reset-pass2" placeholder="Repetă parola"></div>
+      <button class="btn" onclick="doResetPassword()">Salvează parola nouă</button>
     </div>
   </div>
 </div>
@@ -1332,6 +1371,14 @@ const SUPABASE_URL = 'https://dbympznifmxalnxlemyk.supabase.co';
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRieW1wem5pZm14YWxueGxlbXlrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODAzNjYxMjgsImV4cCI6MjA5NTk0MjEyOH0.EtUssJSyjVuttc89d6kuYuf49CNcSr-kqWlUXySbvCc';
 const supaApp = (window.supabase) ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY) : null;
 
+// RESET PAROLA: detectam intrarea prin linkul de resetare din email (hash contine type=recovery)
+const IS_RECOVERY = (typeof location !== 'undefined' && location.hash && location.hash.indexOf('type=recovery') !== -1);
+if (supaApp) {
+  supaApp.auth.onAuthStateChange(function(event){
+    if (event === 'PASSWORD_RECOVERY') { showView('reset'); }
+  });
+}
+
 // Link-ul tau de upgrade (Payhip). Lasa gol pentru mesaj de contact.
 const UPGRADE_URL = '';
 
@@ -1344,6 +1391,8 @@ const CLIENT_FIELDS = ['f_22','f_23','f_02','f_03','f_24','f_25','f_20','f_04','
 // INIT
 // ============================================
 async function init() {
+  // RESET PAROLA: daca am intrat prin linkul de resetare, mergem direct la ecranul de parola noua
+  if (IS_RECOVERY) { showView('reset'); return; }
   // dacă nu avem token local, dar există sesiune Supabase (venită din pagina de plată) → o folosim
   if (!TOKEN && supaApp) {
     try {
@@ -1418,6 +1467,52 @@ async function api(endpoint, options = {}) {
 // ============================================
 // AUTH
 // ============================================
+
+// RESET PAROLA — pas 1: trimite email cu link de resetare
+async function doForgotPassword() {
+  const email = document.getElementById('forgot-email').value.trim();
+  const errEl = document.getElementById('forgot-err');
+  const sucEl = document.getElementById('forgot-suc');
+  errEl.style.display = 'none'; sucEl.style.display = 'none';
+  if (!email) { errEl.textContent = 'Introdu adresa de email.'; errEl.style.display = 'block'; return; }
+  if (!supaApp) { errEl.textContent = 'Serviciul de resetare nu este disponibil momentan.'; errEl.style.display = 'block'; return; }
+  try {
+    const redirectTo = window.location.origin + '/app';
+    const { error } = await supaApp.auth.resetPasswordForEmail(email, { redirectTo: redirectTo });
+    if (error) throw new Error(error.message);
+    sucEl.textContent = 'Dacă există un cont cu acest email, vei primi un link de resetare. Verifică inbox-ul (și folderul Spam).';
+    sucEl.style.display = 'block';
+  } catch(e) {
+    errEl.textContent = 'Nu am putut trimite emailul. Încearcă din nou în câteva momente.';
+    errEl.style.display = 'block';
+  }
+}
+
+// RESET PAROLA — pas 2: seteaza parola noua (dupa clic pe linkul din email)
+async function doResetPassword() {
+  const p1 = document.getElementById('reset-pass').value;
+  const p2 = document.getElementById('reset-pass2').value;
+  const errEl = document.getElementById('reset-err');
+  const sucEl = document.getElementById('reset-suc');
+  errEl.style.display = 'none'; sucEl.style.display = 'none';
+  if (!p1 || p1.length < 6) { errEl.textContent = 'Parola trebuie să aibă minim 6 caractere.'; errEl.style.display = 'block'; return; }
+  if (p1 !== p2) { errEl.textContent = 'Parolele nu coincid.'; errEl.style.display = 'block'; return; }
+  if (!supaApp) { errEl.textContent = 'Serviciul de resetare nu este disponibil momentan.'; errEl.style.display = 'block'; return; }
+  try {
+    const { error } = await supaApp.auth.updateUser({ password: p1 });
+    if (error) throw new Error(error.message);
+    sucEl.textContent = 'Parola a fost schimbată cu succes. Te ducem în platformă...';
+    sucEl.style.display = 'block';
+    setTimeout(function(){
+      try { history.replaceState({}, '', location.pathname); } catch(e){}
+      window.location.href = window.location.origin + '/app';
+    }, 1600);
+  } catch(e) {
+    errEl.textContent = 'Linkul de resetare a expirat sau nu mai e valid. Cere un link nou de resetare.';
+    errEl.style.display = 'block';
+  }
+}
+
 async function doLogin() {
   const email = document.getElementById('login-email').value.trim();
   const pass = document.getElementById('login-pass').value;
@@ -2471,6 +2566,8 @@ document.addEventListener('keydown', e => {
   if (active.id === 'view-login') doLogin();
   else if (active.id === 'view-register') doRegister();
   else if (active.id === 'view-redeem') doRedeem();
+  else if (active.id === 'view-forgot') doForgotPassword();
+  else if (active.id === 'view-reset') doResetPassword();
 });
 
 let lastVariables = null;
