@@ -253,6 +253,10 @@ const IT_DIRECTIVE = '\n\n═══════════ LINGUA OUTPUT — PR
   'Mantieni identica la struttura e la metodologia. Per le etichette di sezione usa "FASE" al posto di "ETAPA" ' +
   'e "[PAUSA ...]" al posto di "[PAUZĂ ...]"; conserva gli emoji 📋 🎬 ✅. ' +
   'I nomi propri e il nome del prodotto restano invariati. ' +
+  'Le etichette dei parlanti devono essere sempre "AGENTE" e "CLIENTE" (MAI "CLIENT", MAI "AGENT"). ' +
+  'Traduci in italiano ANCHE tutte le didascalie e le indicazioni di regia tra parentesi: ' +
+  'nessuna parola rumena come "zâmbet"/"zambet" (usa "sorriso"), "pauză" (usa "pausa"), "voce" resta "voce". ' +
+  'Rileggi l\'output prima di consegnarlo: se trovi anche una sola parola in rumeno, correggila. ' +
   'Nell\'output finale non deve comparire NESSUNA parola in rumeno.';
 
 async function runObjectionDirect(jobId, objNum, allVariables, lang) {
