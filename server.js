@@ -245,7 +245,17 @@ function extractScript(body) {
 // Ruleaza in fundal: completeaza promptul, suna Anthropic, actualizeaza jobul.
 // Obiectiile NU scad credite (la fel ca fluxul MindStudio).
 // ============================================
-async function runObjectionDirect(jobId, objNum, allVariables) {
+// Directiva de limba: fortam output 100% italian nativ cand userul e pe /app-it.
+// Se adauga ULTIMA in prompt (ultima instructiune are prioritate pentru model).
+const IT_DIRECTIVE = '\n\n═══════════ LINGUA OUTPUT — PRIORITÀ ASSOLUTA ═══════════\n' +
+  'Scrivi TUTTO l\'output esclusivamente in ITALIANO madrelingua, fluente e naturale. ' +
+  'NON tradurre parola per parola: adatta idiomi, tono e ritmo come un vero venditore italiano. ' +
+  'Mantieni identica la struttura e la metodologia. Per le etichette di sezione usa "FASE" al posto di "ETAPA" ' +
+  'e "[PAUSA ...]" al posto di "[PAUZĂ ...]"; conserva gli emoji 📋 🎬 ✅. ' +
+  'I nomi propri e il nome del prodotto restano invariati. ' +
+  'Nell\'output finale non deve comparire NESSUNA parola in rumeno.';
+
+async function runObjectionDirect(jobId, objNum, allVariables, lang) {
   const fs = require('fs');
   try {
     const file = objNum === 2 ? 'obiectie2.md' : 'obiectie1.md';
@@ -294,6 +304,8 @@ async function runObjectionDirect(jobId, objNum, allVariables) {
     const waTech = waPool[Math.floor(Math.random() * waPool.length)];
     prompt += '\n\n>>> ROTATIE WHATSAPP: foloseste ' + waTech + ' (se aplica DOAR daca obiectia e de tip "trimite pe WhatsApp / mail" si conditia CADRU FIX e indeplinita; pentru orice alta obiectie, ignora complet aceasta linie).';
 
+    if (lang === 'it') prompt += IT_DIRECTIVE;
+
     const r = await fetch('https://api.anthropic.com/v1/messages', {
       method: 'POST',
       headers: {
@@ -339,7 +351,7 @@ async function runObjectionDirect(jobId, objNum, allVariables) {
 // Injecteaza cele 6 openinguri in {{kb_opening}}, curata randul [DEBUG] din primer,
 // si DECREMENTEAZA CREDITE identic cu callback-ul MindStudio (invitatia scade credite).
 // ============================================
-async function runInvitationDirect(jobId, jobMode, userId, allVariables) {
+async function runInvitationDirect(jobId, jobMode, userId, allVariables, lang) {
   const fs = require('fs');
   const findFile = (name) => {
     const cands = [
@@ -382,6 +394,8 @@ async function runInvitationDirect(jobId, jobMode, userId, allVariables) {
     if (priorScripts.trim()) {
       prompt += '\n\n═══════════ SCRIPTURI GENERATE ANTERIOR (doar pentru variatie — NU repeta openingurile/structurile) ═══════════\n' + priorScripts;
     }
+
+    if (lang === 'it') prompt += IT_DIRECTIVE;
 
     const r = await fetch('https://api.anthropic.com/v1/messages', {
       method: 'POST',
@@ -471,7 +485,7 @@ app.post('/api/generate', auth, async (req, res) => {
   }
 
   // 4. Verificam modul permis pentru tier
-  const { mode, variables, isObjection, objNum } = req.body;
+  const { mode, variables, isObjection, objNum, lang } = req.body;
   const tierModes = TIER_MODES[profile.tier] || {};
 
   if (mode === 'coach' && !tierModes.coach) {
@@ -512,13 +526,13 @@ app.post('/api/generate', auth, async (req, res) => {
 
   // 6.5 — FLUX DIRECT ANTHROPIC pentru OBIECTII (sub flag, in paralel cu MindStudio)
   if (isObjection && process.env.USE_DIRECT_OBJECTIONS === '1') {
-    runObjectionDirect(jobId, objNum, allVariables); // fundal — NU asteptam
+    runObjectionDirect(jobId, objNum, allVariables, lang); // fundal — NU asteptam
     return res.json({ jobId });
   }
 
   // 6.6 — FLUX DIRECT ANTHROPIC pentru INVITATIE (sub flag, in paralel cu MindStudio)
   if (!isObjection && process.env.USE_DIRECT_INVITATION === '1') {
-    runInvitationDirect(jobId, mode || 'clean', req.user.id, allVariables); // fundal — NU asteptam
+    runInvitationDirect(jobId, mode || 'clean', req.user.id, allVariables, lang); // fundal — NU asteptam
     return res.json({ jobId });
   }
 
