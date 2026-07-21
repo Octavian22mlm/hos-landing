@@ -1063,7 +1063,7 @@
   }
   function toggleLang(e){ e.stopPropagation(); var d=document.getElementById('langDd'); if(d) d.classList.toggle('open'); }
   document.addEventListener('click', function(){ var d=document.getElementById('langDd'); if(d) d.classList.remove('open'); });
-  function setLang(l){ var d=document.getElementById('langDd'); if(d) d.classList.remove('open'); if(l!=='ro'){ var m={en:'EN',it:'IT',es:'ES'}; showToast('Versiunea '+(m[l]||l.toUpperCase())+' — în curând'); } }
+  function setLang(l){ var d=document.getElementById('langDd'); if(d) d.classList.remove('open'); if(l==='ro'){ return; } if(l==='it'){ window.location.href='/it'; return; } var m={en:'EN',es:'ES'}; showToast('Versiunea '+(m[l]||l.toUpperCase())+' — în curând'); }
   /* ---- TEASER ---- */
   var teaserRel='prieten', teaserInv='cafea', teaserTone='cald', teaserProd='niște produse de sănătate';
   function wireChips(id, cb){
