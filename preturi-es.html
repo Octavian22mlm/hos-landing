@@ -1,0 +1,1310 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Planes — Harvard of Sales</title>
+<!-- Preview la share (WhatsApp, Facebook, etc.) -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.mlmpsychology.com/es">
+<meta property="og:title" content="Las personas no le dicen NO al producto — le dicen NO a cómo llamas.">
+<meta property="og:description" content="El único generador de guiones MLM construido sobre la psicología. Guiones de invitación personalizados, listos en 120 segundos.">
+<meta property="og:image" content="https://www.mlmpsychology.com/preview.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="es_ES">
+<meta property="og:site_name" content="Harvard of Sales">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Las personas no le dicen NO al producto — le dicen NO a cómo llamas.">
+<meta name="twitter:description" content="Generador de guiones MLM basado en la psicología. Listos en 120 segundos.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700;800&family=Hanken+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://js.stripe.com/v3/"></script>
+<style>
+  :root{
+    --navy:#0A1322;
+    --navy-2:#0E1B2E;
+    --card:#11203580;
+    --card-solid:#122138;
+    --gold:#C9A24B;
+    --gold-bright:#E4C36A;
+    --gold-deep:#A8842F;
+    --ink:#EAEFF6;
+    --muted:#90A0B6;
+    --muted-2:#5E708A;
+    --line:rgba(201,162,75,.22);
+    --line-soft:rgba(255,255,255,.07);
+    --ok:#7FC8A0;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--navy);
+    color:var(--ink);
+    font-family:'Hanken Grotesk',sans-serif;
+    font-weight:400;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+    position:relative;
+  }
+  /* atmospheric background */
+  body::before{
+    content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
+    background:
+      radial-gradient(900px 600px at 75% -5%, rgba(201,162,75,.10), transparent 60%),
+      radial-gradient(700px 500px at 10% 20%, rgba(201,162,75,.05), transparent 55%),
+      linear-gradient(180deg,#0A1322 0%, #0B1525 55%, #0A1322 100%);
+  }
+  body::after{ /* subtle grain */
+    content:"";position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.035;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  .wrap{position:relative;z-index:1;max-width:1180px;margin:0 auto;padding:0 24px}
+  h1,h2,h3,.serif{font-family:'Playfair Display',serif}
+  /* ---------- NAV ---------- */
+  nav{position:relative;z-index:2;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;
+    max-width:1180px;margin:0 auto;padding:30px 24px 46px;gap:16px}
+  .brand{font-family:'Playfair Display',serif;font-weight:700;letter-spacing:.6px;font-size:27px;justify-self:center;text-align:center;white-space:nowrap}
+  .brand span{color:var(--gold)}
+  .nav-left{display:flex;flex-direction:column;align-items:flex-start;gap:11px;justify-self:start}
+  .nav-right{justify-self:end}
+  .lang-dd{position:relative}
+  .lang-trigger{display:inline-flex;align-items:center;gap:7px;background:transparent;border:1px solid var(--line);border-radius:40px;color:var(--muted);font-size:15px;font-family:inherit;padding:8px 14px;cursor:pointer;transition:.25s;line-height:1;white-space:nowrap}
+  .lang-trigger:hover{color:var(--gold-bright);border-color:var(--gold)}
+  .lang-trigger .flag{font-size:15px;line-height:1}
+  .lang-caret{width:11px;height:7px;transition:transform .25s}
+  .lang-dd.open .lang-caret{transform:rotate(180deg)}
+  .lang-menu{position:absolute;top:calc(100% + 8px);left:0;background:var(--card-solid);border:1px solid var(--line);border-radius:12px;padding:6px;min-width:132px;display:flex;flex-direction:column;gap:2px;opacity:0;visibility:hidden;transform:translateY(-6px);transition:.2s;box-shadow:0 18px 44px rgba(0,0,0,.5);z-index:30}
+  .lang-dd.open .lang-menu{opacity:1;visibility:visible;transform:translateY(0)}
+  .lang-opt{display:flex;align-items:center;gap:10px;background:transparent;border:none;border-radius:8px;color:var(--ink);font-size:14px;font-weight:600;font-family:inherit;padding:9px 12px;cursor:pointer;text-align:left;transition:.15s;width:100%}
+  .lang-opt:hover{background:rgba(255,255,255,.06)}
+  .lang-opt.active{color:var(--gold)}
+  .lang-opt .flag{font-size:15px;line-height:1}
+  .nav-cta{font-size:15px;color:var(--muted);text-decoration:none;border:1px solid var(--line);
+    padding:9px 18px;border-radius:40px;transition:.25s}
+  .nav-cta:hover{color:var(--ink);border-color:var(--gold);}
+  .nav-actions{display:flex;align-items:center;gap:18px}
+  .nav-login{font-size:15px;color:var(--muted);text-decoration:none;transition:.25s;white-space:nowrap}
+  .nav-login:hover{color:var(--gold-bright)}
+  @media(max-width:640px){
+    nav{display:flex;flex-direction:column;align-items:center;gap:16px;padding:22px 18px 30px}
+    .brand{order:-1;font-size:24px}
+    .nav-left{align-items:center}
+  }
+  /* ---------- HERO ---------- */
+  header{text-align:center;padding:70px 0 30px}
+  .eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:13.5px;letter-spacing:3px;
+    text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:26px;
+    opacity:0;animation:rise .8s .05s forwards}
+  .eyebrow::before,.eyebrow::after{content:"";width:26px;height:1px;background:var(--gold-deep);opacity:.6}
+  h1{font-size:clamp(34px,5.4vw,62px);font-weight:700;line-height:1.08;letter-spacing:-.5px;
+    max-width:880px;margin:0 auto;opacity:0;animation:rise .9s .15s forwards}
+  h1 em{font-style:italic;color:var(--gold-bright)}
+  .sub{max-width:600px;margin:24px auto 0;color:var(--muted);font-size:clamp(16px,2vw,19px);
+    opacity:0;animation:rise .9s .3s forwards}
+  .hero-claim{max-width:620px;margin:20px auto 0;color:var(--gold-bright);font-weight:600;
+    font-size:clamp(15px,2.3vw,19px);opacity:0;animation:rise .9s .22s forwards}
+  .hero-cta{margin-top:38px;opacity:0;animation:rise .9s .45s forwards}
+  .btn-primary{display:inline-block;background:linear-gradient(135deg,var(--gold-bright),var(--gold));
+    color:#1a1205;font-weight:700;font-size:16.5px;padding:15px 34px;border-radius:46px;
+    text-decoration:none;border:none;cursor:pointer;letter-spacing:.3px;
+    box-shadow:0 10px 30px -8px rgba(201,162,75,.5);transition:.25s}
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 16px 38px -8px rgba(201,162,75,.6)}
+  .proof-line{margin-top:34px;font-size:15.5px;color:var(--muted-2);
+    opacity:0;animation:rise .9s .6s forwards}
+  .proof-line b{color:var(--gold-bright);font-weight:700}
+  .pulse{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--ok);
+    margin-right:8px;box-shadow:0 0 0 0 rgba(127,200,160,.6);animation:pulse 2s infinite}
+  /* ---------- PRICE CARDS ---------- */
+  .plans{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:64px;align-items:stretch}
+  .card{position:relative;background:var(--card);backdrop-filter:blur(6px);
+    border:1px solid var(--line-soft);border-radius:20px;padding:34px 28px;display:flex;flex-direction:column;
+    transition:.3s;opacity:0;transform:translateY(20px)}
+  .card.in{opacity:1;transform:none}
+  .card:hover{border-color:var(--line);transform:translateY(-4px)}
+  .card.featured{border:1.5px solid var(--gold);background:linear-gradient(180deg,rgba(201,162,75,.10),rgba(17,32,53,.5));
+    box-shadow:0 20px 60px -20px rgba(201,162,75,.35);transform:scale(1.045)}
+  .card.featured:hover{transform:scale(1.045) translateY(-4px)}
+  @media(max-width:860px){.card.featured{transform:none}.card.featured:hover{transform:translateY(-4px)}}
+  .ribbon{position:absolute;top:-13px;left:50%;transform:translateX(-50%);
+    background:linear-gradient(135deg,var(--gold-bright),var(--gold-deep));color:#1a1205;
+    font-size:12.5px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;
+    padding:6px 18px;border-radius:30px;white-space:nowrap;box-shadow:0 6px 18px -6px rgba(201,162,75,.7)}
+  .step{font-size:13px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);font-weight:600}
+  .pname{font-family:'Playfair Display',serif;font-size:29px;font-weight:600;margin:6px 0 2px}
+  .ptag{color:var(--muted);font-size:15px;min-height:38px}
+  .price{display:flex;align-items:baseline;gap:6px;margin:18px 0 2px}
+  .price .amt{font-family:'Playfair Display',serif;font-size:49px;font-weight:700;letter-spacing:-1px}
+  .price .per{color:var(--muted);font-size:16px}
+  .perscript{font-size:14px;color:var(--gold-bright);font-weight:500;margin-bottom:2px}
+  .commit{font-size:13px;color:var(--muted-2);letter-spacing:.3px;margin-bottom:20px}
+  .qty{font-size:16px;font-weight:600;color:var(--ink);padding:14px 0;border-top:1px solid var(--line-soft);
+    border-bottom:1px solid var(--line-soft);margin-bottom:18px}
+  .qty b{color:var(--gold-bright);font-size:18px}
+  .bonus{font-size:14px;color:var(--gold-bright);background:rgba(201,162,75,.08);border:1px dashed var(--line);border-radius:10px;padding:10px 12px;margin-bottom:18px;line-height:1.35}
+  .bonus .b1{font-weight:600}
+  .bonus .b2{display:block;color:var(--muted-2);font-size:12.5px;font-weight:400;margin-top:2px}
+  .feats{list-style:none;flex:1;margin-bottom:26px}
+  .feats li{display:flex;align-items:flex-start;gap:11px;font-size:15px;padding:10px 0;color:var(--ink);
+    line-height:1.45;border-bottom:1px solid rgba(255,255,255,.045)}
+  .feats li:last-child{border-bottom:none}
+  .feats li .ic{flex:0 0 18px;margin-top:1px;text-align:center}
+  .feats li .ft{flex:1;min-width:0}
+  .feats li .ft small{display:block;color:var(--muted-2);font-size:12.5px;font-weight:400;font-style:italic;margin-top:3px}
+  .feats li .ft .desc{display:block;color:var(--muted-2);font-size:13.5px;font-weight:400;margin-top:3px;line-height:1.42}
+  .feats li .ft b{font-weight:700}
+  .feats li.locked{color:var(--muted-2);cursor:pointer}
+  .feats li .check{color:var(--ok)}
+  .feats li .lock{filter:grayscale(.3);opacity:.7}
+  .feats li .tier{flex:0 0 auto;align-self:center;font-size:10.5px;font-weight:700;letter-spacing:.5px;
+    text-transform:uppercase;color:var(--muted-2);background:rgba(255,255,255,.05);
+    border:1px solid var(--line-soft);border-radius:30px;padding:3px 10px;white-space:nowrap}
+  .feats li .tier.gold{color:var(--gold-bright);background:rgba(201,162,75,.12);border-color:var(--line)}
+  .btn-card{width:100%;padding:14px;border-radius:44px;font-weight:700;font-size:16px;cursor:pointer;
+    border:1px solid var(--gold);background:transparent;color:var(--gold-bright);transition:.25s;font-family:inherit}
+  .btn-card:hover{background:rgba(201,162,75,.12)}
+  .card.featured .btn-card{background:linear-gradient(135deg,var(--gold-bright),var(--gold));color:#1a1205;border:none;
+    box-shadow:0 10px 26px -8px rgba(201,162,75,.5)}
+  .card.featured .btn-card:hover{transform:translateY(-1px)}
+  .upsell{display:block;width:100%;margin-top:11px;background:none;border:none;font-family:inherit;
+    font-size:13.5px;color:var(--muted);cursor:pointer;transition:.2s;text-align:center;line-height:1.4}
+  .upsell b{color:var(--gold-bright);font-weight:700}
+  .upsell:hover{color:var(--ink)}
+  /* ---------- SCRIPT UNIC (distinct) ---------- */
+  .unic{margin-top:26px;border:1px dashed var(--line);border-radius:18px;
+    padding:24px 28px;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;
+    background:rgba(255,255,255,.015)}
+  .unic .l h3{font-family:'Playfair Display',serif;font-size:21px;font-weight:600}
+  .unic .l p{color:var(--muted);font-size:15px;max-width:520px;margin-top:4px}
+  .unic-feats{list-style:none;margin:14px 0 14px}
+  .unic-feats li{display:flex;align-items:flex-start;gap:10px;font-size:16px;color:var(--ink);padding:5px 0;font-weight:500}
+  .unic-feats li .uc{color:var(--ok);flex:0 0 auto;margin-top:1px}
+  .unic-note strong{color:var(--ink)}
+  .unic .r{display:flex;align-items:center;gap:20px}
+  .unic .uprice{font-family:'Playfair Display',serif;font-size:32px;font-weight:700}
+  .unic .uprice small{display:block;font-family:'Hanken Grotesk';font-size:12.5px;color:var(--muted-2);
+    font-weight:400;letter-spacing:.3px;text-transform:uppercase}
+  .btn-ghost{padding:12px 26px;border-radius:44px;border:1px solid var(--line);background:transparent;
+    color:var(--ink);font-weight:600;font-size:15px;cursor:pointer;transition:.25s;font-family:inherit;white-space:nowrap}
+  .btn-ghost:hover{border-color:var(--gold);color:var(--gold-bright)}
+  /* ---------- SECTION TITLES ---------- */
+  .sec{padding:90px 0 0}
+  .sec-head{text-align:center;max-width:640px;margin:0 auto 50px}
+  .sec-head .eyebrow{animation:none;opacity:1}
+  .sec-head h2{font-size:clamp(28px,4vw,40px);font-weight:600;line-height:1.15}
+  .sec-head p{color:var(--muted);margin-top:14px;font-size:17px}
+  .sec-head p.pain-quote{font-family:'Playfair Display',serif;font-style:italic;font-weight:600;color:var(--ink);font-size:clamp(20px,3vw,27px);line-height:1.32;max-width:560px;margin:22px auto 0;position:relative;padding-top:24px}
+  .sec-head p.pain-quote::before{content:"";position:absolute;top:0;left:50%;transform:translateX(-50%);width:58px;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+  /* ---------- MODES ---------- */
+  .modes{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+  .mode{background:var(--card);border:1px solid var(--line-soft);border-radius:18px;padding:30px 26px;transition:.3s}
+  .mode:hover{border-color:var(--line)}
+  .mode .mi{font-size:14px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);font-weight:700}
+  .mode h3{font-family:'Playfair Display',serif;font-size:24px;font-weight:600;margin:8px 0 12px}
+  .mode p{color:var(--muted);font-size:15.5px}
+  .mode .badge{display:inline-block;margin-top:16px;font-size:13px;color:var(--gold-bright);
+    border:1px solid var(--line);padding:4px 12px;border-radius:30px}
+  /* ---------- SOCIAL PROOF BAND ---------- */
+  .band{margin-top:90px;border-top:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft);
+    padding:54px 0;text-align:center}
+  .counter{font-family:'Playfair Display',serif;font-size:clamp(44px,7vw,72px);font-weight:700;
+    color:var(--gold-bright);line-height:1;letter-spacing:-1px}
+  .band p{color:var(--muted);margin-top:10px;font-size:17px}
+  .band .small{color:var(--muted-2);font-size:14.5px;margin-top:18px;max-width:560px;margin-left:auto;margin-right:auto}
+  /* ---------- FAQ ---------- */
+  .faq{max-width:760px;margin:0 auto}
+  .q{border-bottom:1px solid var(--line-soft)}
+  .q button{width:100%;text-align:left;background:none;border:none;color:var(--ink);
+    font-family:'Playfair Display',serif;font-size:19.5px;font-weight:500;padding:22px 40px 22px 0;
+    cursor:pointer;position:relative}
+  .q button::after{content:"+";position:absolute;right:6px;top:50%;transform:translateY(-50%);
+    color:var(--gold);font-size:25px;font-family:'Hanken Grotesk';transition:.3s}
+  .q.open button::after{transform:translateY(-50%) rotate(45deg)}
+  .q .a{max-height:0;overflow:hidden;transition:max-height .35s ease}
+  .q .a p{color:var(--muted);font-size:16px;padding:0 0 22px}
+  /* ---------- CLOSING ---------- */
+  .closing{text-align:center;padding:96px 0 40px}
+  .closing h2{font-size:clamp(28px,4.4vw,46px);font-weight:600;max-width:680px;margin:0 auto 10px}
+  .closing h2 em{font-style:italic;color:var(--gold-bright)}
+  .closing p{color:var(--muted);margin:0 auto 30px;max-width:480px}
+  .secure{display:flex;align-items:center;justify-content:center;gap:8px;color:var(--muted-2);font-size:14px;margin-top:22px}
+  footer{border-top:1px solid var(--line-soft);padding:34px 0;text-align:center;color:var(--muted-2);font-size:14px}
+  footer a{color:var(--muted);text-decoration:none}
+  /* ---------- MODAL ---------- */
+  .overlay{position:fixed;inset:0;background:rgba(5,9,16,.75);backdrop-filter:blur(5px);z-index:50;
+    display:none;align-items:center;justify-content:center;padding:20px}
+  .overlay.show{display:flex}
+  .modal{background:var(--card-solid);border:1px solid var(--line);border-radius:22px;max-width:440px;width:100%;
+    padding:36px 32px;text-align:center;position:relative;animation:rise .4s forwards}
+  .modal .close{position:absolute;top:16px;right:18px;background:none;border:none;color:var(--muted);
+    font-size:25px;cursor:pointer}
+  .modal .step{margin-bottom:8px}
+  .modal h3{font-family:'Playfair Display',serif;font-size:25px;font-weight:600;margin-bottom:6px}
+  .modal .mprice{font-family:'Playfair Display',serif;font-size:40px;font-weight:700;color:var(--gold-bright);margin:8px 0 4px}
+  .modal .mprice small{font-size:15px;color:var(--muted);font-family:'Hanken Grotesk';font-weight:400}
+  .modal p{color:var(--muted);font-size:15.5px;margin:10px 0 22px}
+  .modal .btn-primary{width:100%}
+  .modal .note{font-size:13px;color:var(--muted-2);margin-top:16px;line-height:1.5}
+  /* toast */
+  .toast{position:fixed;bottom:26px;left:50%;transform:translateX(-50%) translateY(120px);
+    background:var(--card-solid);border:1px solid var(--gold);color:var(--ink);padding:14px 22px;border-radius:14px;
+    font-size:15px;z-index:60;transition:.4s;box-shadow:0 16px 40px -12px rgba(0,0,0,.6);max-width:90vw}
+  .toast.show{transform:translateX(-50%) translateY(0)}
+  .toast b{color:var(--gold-bright)}
+  /* ---------- AUTH MODAL ---------- */
+  .modal.auth{text-align:left;max-width:420px}
+  .modal.auth h3{text-align:center;margin-bottom:4px}
+  .modal.auth .sub{text-align:center;color:var(--muted);font-size:15px;margin-bottom:22px}
+  .atabs{display:flex;gap:6px;background:rgba(0,0,0,.22);border:1px solid var(--line-soft);
+    border-radius:14px;padding:5px;margin-bottom:22px}
+  .atab{flex:1;text-align:center;padding:10px;border-radius:10px;cursor:pointer;font-size:15px;
+    font-weight:600;color:var(--muted);transition:.2s;border:none;background:none;font-family:inherit}
+  .atab.active{background:linear-gradient(135deg,var(--gold-bright),var(--gold));color:#1a1407}
+  .afield{margin-bottom:14px}
+  .afield label{display:block;font-size:13.5px;color:var(--muted);margin-bottom:6px;letter-spacing:.2px}
+  .modal.auth .btn-primary{width:100%;margin-top:6px}
+  .aerr{color:#E89090;font-size:14px;min-height:18px;margin:6px 2px 4px;line-height:1.4}
+  .aok{color:var(--ok);font-size:14px;min-height:18px;margin:6px 2px 4px;line-height:1.4}
+  .anote{font-size:13px;color:var(--muted-2);text-align:center;margin-top:16px;line-height:1.5}
+  /* pilula de status (colț dreapta-sus) */
+  .apill{position:fixed;top:16px;right:18px;z-index:40;display:none;align-items:center;gap:10px;
+    background:var(--card-solid);border:1px solid var(--line);border-radius:44px;padding:7px 8px 7px 16px;
+    font-size:14px;color:var(--muted);box-shadow:0 10px 30px -14px rgba(0,0,0,.6)}
+  .apill.show{display:flex}
+  .apill .em{color:var(--ink);max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .apill button{background:rgba(255,255,255,.05);border:1px solid var(--line-soft);color:var(--muted);
+    border-radius:30px;padding:6px 12px;font-size:13px;cursor:pointer;font-family:inherit;transition:.2s}
+  .apill button:hover{border-color:var(--gold);color:var(--gold-bright)}
+  /* ---------- CHECKOUT EMBEDDED ---------- */
+  #checkoutModal{max-height:92vh;overflow-y:auto}
+  #checkoutBox{min-height:120px}
+  #stripe-checkout{margin-top:4px}
+  .cloading{color:var(--muted);font-size:15px;text-align:center;padding:34px 0}
+  .cloading .dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--gold);
+    margin:0 3px;animation:cbounce 1s infinite ease-in-out}
+  .cloading .dot:nth-child(2){animation-delay:.15s}
+  .cloading .dot:nth-child(3){animation-delay:.3s}
+  @keyframes cbounce{0%,80%,100%{transform:scale(.6);opacity:.5}40%{transform:scale(1);opacity:1}}
+  .cerr{color:#E89090;font-size:15px;text-align:center;padding:22px 6px;line-height:1.5}
+  .cback{margin-top:14px;background:none;border:1px solid var(--line-soft);color:var(--muted);
+    border-radius:30px;padding:8px 16px;font-size:14px;cursor:pointer;font-family:inherit}
+  .cback:hover{border-color:var(--gold);color:var(--gold-bright)}
+  /* ── PROOF RING (78% rată de apariție) ── */
+  .proof-ring{text-align:center;padding:58px 0 4px;max-width:600px;margin:0 auto}
+  .ring-wrap{position:relative;width:200px;height:200px;margin:0 auto 24px}
+  .ring-wrap svg{position:absolute;inset:0;transform:rotate(-90deg)}
+  .ring-track{fill:none;stroke:rgba(201,162,75,.12);stroke-width:11}
+  .ring-fill{fill:none;stroke:var(--gold);stroke-width:11;stroke-linecap:round;
+    stroke-dasharray:534;stroke-dashoffset:534;transition:stroke-dashoffset 2.4s cubic-bezier(.15,.85,.2,1);
+    filter:drop-shadow(0 0 9px rgba(201,162,75,.5))}
+  .ring-inner{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+  .ring-inner .num{font-family:'Playfair Display',serif;font-size:64px;font-weight:700;color:var(--gold-bright);line-height:1;letter-spacing:-1px}
+  .ring-inner .num small{font-size:28px;vertical-align:super;font-weight:600}
+  .ring-inner .lab{font-size:12.5px;letter-spacing:2.5px;text-transform:uppercase;color:var(--muted-2);margin-top:5px}
+  .proof-ring h2{font-size:clamp(23px,3.5vw,33px);font-weight:600;line-height:1.18;margin-bottom:10px}
+  .proof-ring h2 em{font-style:italic;color:var(--gold-bright)}
+  .proof-ring .contrast{color:var(--muted);font-size:16.5px}
+  .proof-ring .contrast b{color:var(--ink);font-weight:600}
+  /* ── PAIN STATS ── */
+  .stat-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .stat{background:var(--card);border:1px solid var(--line-soft);border-radius:16px;padding:32px 22px;text-align:center;transition:.3s}
+  .stat:hover{border-color:var(--line)}
+  .stat.hl{border:1.5px solid var(--gold);background:linear-gradient(180deg,rgba(201,162,75,.1),rgba(17,32,53,.45));box-shadow:0 18px 48px -24px rgba(201,162,75,.55)}
+  .stat .n{font-family:'Playfair Display',serif;font-size:clamp(38px,5vw,50px);font-weight:700;color:var(--gold-bright);line-height:1;letter-spacing:-1px}
+  .stat .t{color:var(--muted);font-size:15px;margin-top:10px;line-height:1.45}
+  .stat.hl .t{color:var(--ink)}
+  .stat-src{text-align:center;color:var(--muted-2);font-size:13px;margin-top:18px}
+  /* ── REFRAME / ANTI-CURS ── */
+  .reframe{display:grid;grid-template-columns:1fr 56px 1fr;align-items:stretch}
+  .rf-card{border:1px solid var(--line-soft);border-radius:18px;padding:30px 28px}
+  .rf-card.old{background:rgba(255,255,255,.015);opacity:.9}
+  .rf-card.new{border:1.5px solid var(--gold);background:linear-gradient(180deg,rgba(201,162,75,.09),rgba(17,32,53,.4))}
+  .rf-card h3{font-family:'Playfair Display',serif;font-size:21px;font-weight:600;margin-bottom:14px}
+  .rf-card .lst{list-style:none}
+  .rf-card .lst li{font-size:15.5px;color:var(--muted);padding:6px 0;display:flex;gap:9px}
+  .rf-card.new .lst li{color:var(--ink)}
+  .rf-card .lst li::before{content:"·";color:var(--gold);font-weight:700}
+  .rf-res{margin-top:16px;padding-top:14px;border-top:1px solid var(--line-soft);font-size:15px;color:var(--muted)}
+  .rf-res b{font-family:'Playfair Display',serif;font-size:17.5px;display:block;margin-top:3px}
+  .rf-card.old .rf-res b{color:var(--muted)}
+  .rf-card.new .rf-res b{color:var(--gold-bright)}
+  .rf-arrow{display:flex;align-items:center;justify-content:center;color:var(--gold);font-size:28px}
+  .rf-note{text-align:center;max-width:640px;margin:34px auto 0;color:var(--muted);font-size:16.5px}
+  .rf-note em{font-style:italic;color:var(--gold-bright)}
+  .rf-note.pullquote{font-family:'Playfair Display',serif;font-size:clamp(22px,3.6vw,34px);font-weight:600;color:var(--ink);line-height:1.32;max-width:780px;margin-top:42px;position:relative;padding-top:30px}
+  .rf-note.pullquote::before{content:"";position:absolute;top:0;left:50%;transform:translateX(-50%);width:58px;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+  .rf-sub{text-align:center;max-width:560px;margin:16px auto 0;color:var(--muted-2);font-size:15px}
+  .rf-sub em{font-style:italic;color:var(--muted)}
+  .turn-lead{text-align:center;color:var(--muted);font-size:16px;max-width:520px;margin:0 auto 4px}
+  /* ── MECHANISM (3 pași) ── */
+  .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+  .stepc{position:relative;background:var(--card);border:1px solid var(--line-soft);border-radius:18px;padding:30px 26px;transition:.55s ease}
+  .stepc:hover{border-color:var(--line)}
+  .stepc .k{font-family:'Playfair Display',serif;font-size:38px;font-weight:700;color:var(--gold);line-height:1}
+  .stepc h3{font-family:'Playfair Display',serif;font-size:21px;font-weight:600;margin:10px 0 8px;transition:color .55s ease}
+  .stepc p{color:var(--muted);font-size:15.5px}
+  .stepc.lit{border-color:var(--gold);box-shadow:0 0 0 1px rgba(201,162,75,.55),0 12px 34px -8px rgba(201,162,75,.42);transform:translateY(-2px)}
+  .stepc.lit h3{color:var(--gold-bright)}
+  @media(prefers-reduced-motion:reduce){.stepc.lit{box-shadow:none;transform:none}}
+  /* ── TEASER ── */
+  .teaser-wrap{background:linear-gradient(180deg,rgba(201,162,75,.05),rgba(17,32,53,.35));border:1px solid var(--line);border-radius:24px;padding:38px;display:grid;grid-template-columns:1fr 300px;gap:42px;align-items:center}
+  .tlabel{font-size:13px;letter-spacing:1.5px;color:var(--gold);font-weight:700;margin:20px 0 10px;text-transform:uppercase}
+  .tlabel:first-child{margin-top:0}
+  .chips{display:flex;gap:10px;flex-wrap:wrap}
+  .chip{padding:9px 16px;border-radius:30px;border:1px solid var(--line-soft);background:transparent;color:var(--muted);font-size:15px;cursor:pointer;font-family:inherit;transition:.2s}
+  .chip:hover{border-color:var(--line);color:var(--ink)}
+  .chip.active{background:rgba(201,162,75,.15);border-color:var(--gold);color:var(--gold-bright)}
+  .tinput{width:100%;padding:12px 16px;border-radius:12px;border:1px solid var(--line-soft);background:rgba(0,0,0,.22);color:var(--ink);font-family:inherit;font-size:16px;outline:none;transition:.2s}
+  .tinput:focus{border-color:var(--gold)}
+  .tinput::placeholder{color:var(--muted-2)}
+  .tgen{margin-top:26px;width:100%;padding:15px;border-radius:44px;border:none;background:linear-gradient(135deg,var(--gold-bright),var(--gold));color:#1a1205;font-weight:700;font-size:16.5px;cursor:pointer;font-family:inherit;box-shadow:0 10px 26px -8px rgba(201,162,75,.5);transition:.25s}
+  .tgen:hover{transform:translateY(-2px)}
+  .tintro{font-size:14px;color:var(--muted);margin-bottom:20px;line-height:1.5}
+  .tgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .phone{width:300px;max-width:100%;margin:0 auto;background:#070d18;border:1px solid var(--line);border-radius:34px;padding:14px;box-shadow:0 30px 70px -30px rgba(0,0,0,.85)}
+  .notch{width:88px;height:5px;border-radius:5px;background:rgba(255,255,255,.12);margin:2px auto 12px}
+  .screen{background:linear-gradient(180deg,#0c1424,#0a1018);border-radius:22px;min-height:420px;padding:18px 16px;font-size:15px;line-height:1.55;
+    -webkit-user-select:none;user-select:none;position:relative;overflow:hidden}
+  .ph-placeholder{color:var(--muted-2);text-align:center;margin-top:160px;font-size:15px}
+  .callbar{display:flex;align-items:center;gap:8px;color:var(--muted-2);font-size:12.5px;border-bottom:1px solid var(--line-soft);padding-bottom:10px;margin-bottom:14px}
+  .callbar .dot{width:7px;height:7px;border-radius:50%;background:var(--ok)}
+  .typed{color:var(--ink);min-height:70px}
+  .dline{margin:0 0 13px}
+  .dline:last-child{margin-bottom:0}
+  .dline .dwho{display:block;font-size:12px;letter-spacing:1.6px;text-transform:uppercase;font-weight:700;margin-bottom:3px}
+  .dline.agent .dwho{color:var(--gold)}
+  .dline.client .dwho{color:var(--muted-2)}
+  .dline .dtext{font-size:14.5px;line-height:1.5}
+  .dline.agent .dtext{color:var(--ink)}
+  .dline.client .dtext{color:var(--muted)}
+  .dlock{font-size:15px}
+  .cursor{display:inline-block;width:2px;height:1em;background:var(--gold);vertical-align:text-bottom;animation:blink 1s steps(1) infinite}
+  @keyframes blink{50%{opacity:0}}
+  .structure{margin-top:18px;display:none}
+  .structure.show{display:block;animation:rise .5s forwards}
+  .st-item{display:flex;align-items:center;gap:10px;padding:9px 0}
+  .st-num{flex:0 0 22px;height:22px;border-radius:50%;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:12.5px;color:var(--gold);font-weight:700}
+  .st-label{font-size:13.5px;color:var(--muted)}
+  .st-item.done .st-label{color:var(--ink)}
+  .st-item.done .st-num{border-color:var(--ok);color:var(--ok)}
+  .fog{flex:1;height:9px;border-radius:6px;background:linear-gradient(90deg,rgba(201,162,75,.28),rgba(255,255,255,.06));filter:blur(2.5px);opacity:.65}
+  .lockrow{margin-top:16px;text-align:center}
+  .lockrow .lk{font-size:19px}
+  .lockrow p{font-size:13px;color:var(--muted-2);margin:6px 0 12px}
+  .tcta{display:block;width:100%;padding:13px;border-radius:44px;border:none;background:linear-gradient(135deg,var(--gold-bright),var(--gold));color:#1a1205;font-weight:700;font-size:15px;cursor:pointer;font-family:inherit;text-decoration:none;text-align:center}
+  .calib{margin-top:16px;background:rgba(201,162,75,.06);border:1px solid var(--line-soft);border-radius:14px;padding:13px 14px}
+  .calib .ch{font-size:12.5px;letter-spacing:1.2px;text-transform:uppercase;color:var(--gold);font-weight:700;display:flex;align-items:center;gap:6px;margin-bottom:10px}
+  .calib .crow{display:flex;justify-content:space-between;gap:12px;font-size:12.5px;padding:4.5px 0;border-top:1px solid rgba(255,255,255,.04)}
+  .calib .crow:first-of-type{border-top:none}
+  .calib .cf{color:var(--muted-2);white-space:nowrap;flex:0 0 auto}
+  .calib .cv{color:var(--ink);text-align:right}
+  .calib .cv.lock{filter:blur(3.8px);-webkit-filter:blur(3.8px);user-select:none;color:var(--gold-bright);opacity:.75}
+  .calib .cnote{font-size:12.5px;color:var(--muted-2);margin-top:11px;line-height:1.45;border-top:1px solid rgba(255,255,255,.04);padding-top:9px}
+  @media(max-width:860px){ .teaser-wrap{grid-template-columns:1fr;padding:26px 20px} }
+  @media(max-width:860px){
+    .stat-strip{grid-template-columns:1fr}
+    .reframe{grid-template-columns:1fr}
+    .rf-arrow{transform:rotate(90deg);padding:12px 0}
+    .steps{grid-template-columns:1fr}
+    .tgrid{grid-template-columns:1fr}
+  }
+  @media(min-width:861px) and (max-width:1040px){
+    .steps{grid-template-columns:repeat(2,1fr)}
+  }
+  /* ── CREDIBILITY ── */
+  .founder{display:grid;grid-template-columns:280px 1fr;gap:40px;align-items:center;margin-bottom:50px}
+  .founder-photo img{width:100%;border-radius:18px;border:1px solid var(--line);display:block}
+  .founder-bio h3{font-family:'Playfair Display',serif;font-size:32px;font-weight:600}
+  .founder-bio .role{color:var(--gold-bright);font-size:15px;letter-spacing:.4px;margin:5px 0 16px}
+  .founder-bio p{color:var(--muted);font-size:16.5px;line-height:1.7}
+  .verified{display:inline-flex;align-items:center;gap:8px;margin-top:20px;font-size:14px;color:var(--gold-bright);border:1px solid var(--line);border-radius:30px;padding:9px 16px;text-decoration:none;transition:.2s}
+  .verified:hover{background:rgba(201,162,75,.1)}
+  .cred-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-bottom:48px}
+  .cred-stats > div{text-align:center;background:var(--card);border:1px solid var(--line-soft);border-radius:16px;padding:28px 16px}
+  .cred-stats .n{font-family:'Playfair Display',serif;font-size:clamp(28px,3.4vw,40px);font-weight:700;color:var(--gold-bright);line-height:1;letter-spacing:-1px}
+  .cred-stats .t{color:var(--muted);font-size:14px;margin-top:9px;line-height:1.4}
+  .timeline{position:relative;margin:0 auto 54px;max-width:760px;padding-left:8px;border-left:1px solid var(--line)}
+  .tl-item{position:relative;padding:0 0 26px 24px}
+  .tl-item:last-child{padding-bottom:0}
+  .tl-item::before{content:"";position:absolute;left:-6px;top:4px;width:11px;height:11px;border-radius:50%;background:var(--gold);box-shadow:0 0 0 4px var(--navy)}
+  .tl-item .yr{font-size:13.5px;letter-spacing:1.5px;color:var(--gold);font-weight:700;text-transform:uppercase}
+  .tl-item h4{font-family:'Playfair Display',serif;font-size:19px;font-weight:600;margin:3px 0 5px}
+  .tl-item p{color:var(--muted);font-size:15px}
+  .proof-h{text-align:center;font-family:'Playfair Display',serif;font-size:25px;font-weight:600;margin-bottom:28px}
+  .cred-gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .cred-gallery figure{margin:0;background:var(--card);border:1px solid var(--line-soft);border-radius:14px;overflow:hidden;transition:.3s}
+  .cred-gallery figure:hover{border-color:var(--line);transform:translateY(-3px)}
+  .cred-gallery img{width:100%;display:block;background:#fff}
+  .cred-gallery figcaption{font-size:13.5px;color:var(--muted);padding:12px 14px;line-height:1.45}
+  @media(max-width:860px){
+    .founder{grid-template-columns:1fr;gap:22px}
+    .founder-photo{max-width:260px}
+    .cred-stats{grid-template-columns:1fr 1fr}
+    .cred-gallery{grid-template-columns:1fr}
+  }
+  @keyframes rise{to{opacity:1;transform:none}}
+  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(127,200,160,.6)}70%{box-shadow:0 0 0 9px rgba(127,200,160,0)}100%{box-shadow:0 0 0 0 rgba(127,200,160,0)}}
+  @media(max-width:860px){
+    .plans{grid-template-columns:1fr;gap:18px}
+    .modes{grid-template-columns:1fr}
+    .unic{flex-direction:column;align-items:flex-start}
+    .unic .r{width:100%;justify-content:space-between}
+  }
+</style>
+<style>.flag{display:inline-block;width:19px;height:13px;border-radius:2px;box-shadow:0 0 0 1px rgba(0,0,0,.25) inset;vertical-align:middle;flex:0 0 auto;overflow:hidden}</style>
+</head>
+<body>
+<nav>
+  <div class="nav-left">
+    <a href="/app-es" class="nav-login">Iniciar sesión</a>
+    <div class="lang-dd" id="langDd">
+      <button class="lang-trigger" onclick="toggleLang(event)" aria-label="Elige el idioma">
+        <svg class="flag" viewBox="0 0 3 2" preserveAspectRatio="none"><rect width="3" height="2" fill="#AA151B"/><rect y="0.5" width="3" height="1" fill="#F1BF00"/></svg>Idioma
+        <svg class="lang-caret" viewBox="0 0 12 8" aria-hidden="true"><path d="M1 1.5 L6 6.5 L11 1.5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <div class="lang-menu">
+        <button class="lang-opt" onclick="setLang('ro')"><svg class="flag" viewBox="0 0 3 2" preserveAspectRatio="none"><rect width="3" height="2" fill="#CE1126"/><rect width="2" height="2" fill="#FCD116"/><rect width="1" height="2" fill="#002B7F"/></svg>RO</button>
+        <button class="lang-opt" onclick="setLang('it')"><svg class="flag" viewBox="0 0 3 2" preserveAspectRatio="none"><rect width="3" height="2" fill="#CD212A"/><rect width="2" height="2" fill="#fff"/><rect width="1" height="2" fill="#008C45"/></svg>IT</button>
+        <button class="lang-opt active" onclick="setLang('es')"><svg class="flag" viewBox="0 0 3 2" preserveAspectRatio="none"><rect width="3" height="2" fill="#AA151B"/><rect y="0.5" width="3" height="1" fill="#F1BF00"/></svg>ES</button>
+        <button class="lang-opt" onclick="setLang('en')"><svg class="flag" viewBox="0 0 60 30" preserveAspectRatio="none"><rect width="60" height="30" fill="#012169"/><path d="M0,0 60,30 M60,0 0,30" stroke="#fff" stroke-width="6"/><path d="M0,0 60,30 M60,0 0,30" stroke="#C8102E" stroke-width="4"/><path d="M30,0 V30 M0,15 H60" stroke="#fff" stroke-width="10"/><path d="M30,0 V30 M0,15 H60" stroke="#C8102E" stroke-width="6"/></svg>EN</button>
+      </div>
+    </div>
+  </div>
+  <div class="brand">Harvard of <span>Sales</span></div>
+</nav>
+<div class="wrap">
+  <header>
+    <div class="eyebrow">Generador de guiones MLM</div>
+    <h1>Las personas no le dicen NO al producto.<br>Le dicen NO <em>a cómo llamas.</em></h1>
+    <p class="hero-claim">El único generador de guiones MLM construido sobre la psicología del comportamiento.</p>
+    <p class="sub">Guiones de invitación personalizados, construidos sobre la psicología que lleva a la persona a aceptar la reunión. Listos en 120 segundos.</p>
+    <div class="hero-cta"><a href="#planuri" class="btn-primary">Elige tu plan</a></div>
+    <p class="proof-line"><span class="pulse"></span><b id="liveCount">0</b> agentes MLM ya escriben aquí sus guiones</p>
+    <p class="proof-line" style="margin-top:10px"><b id="bigCount">0</b> guiones generados hasta ahora</p>
+  </header>
+  <!-- PAIN -->
+  <section class="sec" style="padding-top:66px">
+    <div class="sec-head">
+      <div class="eyebrow" style="opacity:1;animation:none">La verdad incómoda</div>
+      <h2>No es el producto lo que los detiene. Es la invitación.</h2>
+      <p>Las personas no abandonan el MLM porque no crean en lo que venden.</p>
+      <p class="pain-quote">Abandonan porque no saben qué decir cuando tienen que llamar.</p>
+    </div>
+    <div class="stat-strip">
+      <div class="stat" data-reveal><div class="n">50%</div><div class="t">abandona en el primer año</div></div>
+      <div class="stat hl" data-reveal><div class="n">39%</div><div class="t">se detiene porque le resulta incómodo y difícil invitar a las personas</div></div>
+      <div class="stat" data-reveal><div class="n">2&nbsp;de&nbsp;3</div><div class="t">dice que no volvería a empezar una segunda vez</div></div>
+    </div>
+    <p class="stat-src">Estudios internacionales de AARP &amp; FTC sobre los distribuidores de las redes de venta.</p>
+  </section>
+  <!-- REFRAME / ANTI-CURS -->
+  <section class="sec" style="padding-top:84px">
+    <div class="sec-head">
+      <div class="eyebrow" style="opacity:1;animation:none">Por qué otro curso no te ayuda</div>
+      <h2>Ya has aprendido suficiente. Y aun así te bloqueas en la primera llamada.</h2>
+      <p>El problema no es que no sepas. Frente al teléfono, «saber» no sirve de nada. Falta exactamente la frase que hay que decir ahora.</p>
+    </div>
+    <div class="reframe">
+      <div class="rf-card old" data-reveal>
+        <h3>Lo que has comprado hasta ahora</h3>
+        <ul class="lst">
+          <li>Cursos y módulos que no terminas</li>
+          <li>Webinars de los que sales inspirado pero siempre bloqueado</li>
+          <li>Suscripciones mensuales al enésimo «programa»</li>
+        </ul>
+        <div class="rf-res">Resultado:<b>100 horas de teoría. Cero invitaciones hechas.</b></div>
+      </div>
+      <div class="rf-arrow">→</div>
+      <div class="rf-card new" data-reveal>
+        <h3>Lo que de verdad necesitabas</h3>
+        <ul class="lst">
+          <li>Dices a quién llamas y qué producto tienes</li>
+          <li>Recibes el guion escrito palabra por palabra</li>
+          <li>Lo lees por teléfono — listo</li>
+        </ul>
+        <div class="rf-res">Resultado:<b>120 segundos. Un guion para leer.</b></div>
+      </div>
+    </div>
+    <p class="rf-note pullquote">«Los demás te dan una biblioteca.<br><em>Nosotros te damos exactamente la frase que hay que decir ahora.</em>»</p>
+    <p class="rf-sub">Es lo que se llama <em>knowing-doing gap</em> — la distancia entre saber y hacer. Nosotros la eliminamos.</p>
+  </section>
+  <!-- PROOF RING (antidotul) -->
+  <section class="proof-ring" id="ringSec">
+    <p class="turn-lead">Y esto es lo que cambia cuando tienes las palabras correctas en la mano:</p>
+    <div class="eyebrow" style="opacity:1;animation:none">El resultado que cuenta</div>
+    <div class="ring-wrap">
+      <svg viewBox="0 0 200 200">
+        <circle class="ring-track" cx="100" cy="100" r="85"></circle>
+        <circle class="ring-fill" id="ringFill" cx="100" cy="100" r="85"></circle>
+      </svg>
+      <div class="ring-inner">
+        <div class="num"><span id="ringNum">0</span><small>%</small></div>
+        <div class="lab">tasa de asistencia</div>
+      </div>
+    </div>
+    <h2>Hasta el <em>78% de las personas a las que llamas</em> se presenta a la reunión.</h2>
+    <p class="contrast">Es decir, casi <b>7 de cada 10</b> — frente al <b>12–20%</b> que suele conseguirse con los guiones estándar.</p>
+  </section>
+  <!-- MECHANISM -->
+  <section class="sec" style="padding-top:88px">
+    <div class="sec-head">
+      <div class="eyebrow" style="opacity:1;animation:none">Cómo funciona</div>
+      <h2>Cuatro pasos.<br>No doce módulos.</h2>
+      <p>En el tiempo que a otro le lleva terminar la lección 1 de un curso, tú ya has llamado.</p>
+    </div>
+    <div class="steps">
+      <div class="stepc" data-reveal><div class="k">1</div><h3>Dices a quién llamas</h3><p>La situación, el producto, el tipo de presentación que vendrá después. Unos pocos campos, nada más.</p></div>
+      <div class="stepc" data-reveal><div class="k">2</div><h3>Recibes el guion</h3><p>El diálogo completo, personalizado, escrito palabra por palabra — sobre la psicología que convence.</p></div>
+      <div class="stepc" data-reveal><div class="k">3</div><h3>Llamas</h3><p>Abres, lees, invitas. Nada de improvisación, nada de bloqueo al primer «¿aló?».</p></div>
+      <div class="stepc" data-reveal><div class="k">4</div><h3>Respondes a cualquier objeción</h3><p>«No tengo tiempo», «¿Es MLM?», «Lo pienso» — tienes al instante la frase que da vuelta la conversación. Cada guion te da también la respuesta a 2 objeciones — sin consumir tu límite.</p></div>
+    </div>
+  </section>
+  <!-- TEASER -->
+  <section class="sec" style="padding-top:88px">
+    <div class="sec-head">
+      <div class="eyebrow" style="opacity:1;animation:none">No te lo prometemos. Te lo mostramos.</div>
+      <h2>Configura un guion.<br>Mira cómo queda.</h2>
+      <p>Ves exactamente qué tiene en cuenta la app para escribirte un guion solo tuyo — no una plantilla.</p>
+    </div>
+    <div class="teaser-wrap">
+      <div class="teaser-controls">
+        <p class="tintro">Los hemos rellenado con un ejemplo. Cambia lo que quieras y pulsa «Generar» — mira cómo se calibra el guion según tu persona.</p>
+        <div class="tlabel">¿A quién estás llamando?</div>
+        <div class="chips" id="relChips">
+          <button class="chip active" data-rel="prieten">Amigo cercano</button>
+          <button class="chip" data-rel="cunoscut">Conocido</button>
+          <button class="chip" data-rel="rece">Contacto frío</button>
+        </div>
+        <div class="tlabel">Describe a la persona que llamas</div>
+        <input class="tinput" id="tDesc" value="Andrés, amigo de la época del colegio, gerente en una multinacional, escéptico ante los «esquemas», padre de dos hijos" maxlength="110" />
+        <div class="tlabel">El producto que vendes en el MLM</div>
+        <div class="chips" id="prodChips">
+          <button class="chip active" data-prod="unos productos para la salud" data-adv="más energía en 2-3 semanas, sueño más reparador, –20% como miembro e ingresos recurrentes del equipo">Productos para la salud</button>
+          <button class="chip" data-prod="unos productos de belleza y cuidado corporal" data-adv="ingredientes limpios, piel visiblemente mejor en 28 días, –25% de precio como miembro, bono por las primeras 3 recomendaciones">Belleza y cuidado corporal</button>
+          <button class="chip" data-prod="unos productos de limpieza" data-adv="ecológicos, sin olores químicos agresivos, un frasco concentrado dura meses, –25% como miembro y comisión recurrente por las recompras">Productos de limpieza</button>
+          <button class="chip" data-prod="unas ofertas de viaje" data-adv="30–50% de descuento en hoteles en más de 100 países, sin costes ocultos, comisión por cada reserva de los invitados">Viajes</button>
+          <button class="chip" data-prod="__custom__" data-adv="">Otro producto</button>
+        </div>
+        <input class="tinput" id="tProdCustom" placeholder="escribe tu producto — ej: café funcional, seguros, suplementos…" maxlength="45" style="display:none;margin-top:10px" />
+        <div class="tlabel">Describe claramente las ventajas de tu producto</div>
+        <input class="tinput" id="tAdv" value="más energía en 2-3 semanas, sueño más reparador, –20% como miembro e ingresos recurrentes del equipo" maxlength="130" />
+        <div class="tlabel">¿A qué lo invitas?</div>
+        <div class="chips" id="inviteChips">
+          <button class="chip active" data-inv="cafea">Un café, 1-a-1</button>
+          <button class="chip" data-inv="online">Una presentación online</button>
+          <button class="chip" data-inv="eveniment">Un evento</button>
+        </div>
+        <div class="tlabel">Las objeciones que prevés</div>
+        <input class="tinput" id="tObj" value="«no tengo tiempo», «no tengo dinero», «¿no será un esquema piramidal?»" maxlength="120" />
+        <div class="tlabel">El tono</div>
+        <div class="chips" id="toneChips">
+          <button class="chip active" data-tone="cald">Cálido</button>
+          <button class="chip" data-tone="direct">Directo</button>
+          <button class="chip" data-tone="energic">Enérgico</button>
+        </div>
+        <button class="tgen" onclick="generateTeaser()">Generar el guion ✨</button>
+      </div>
+      <div class="phone">
+        <div class="notch"></div>
+        <div class="screen" id="screen" oncontextmenu="return false">
+          <div class="ph-placeholder" id="phPlaceholder">Rellena a la izquierda<br>y pulsa «Generar»</div>
+          <div id="phContent" style="display:none">
+            <div class="callbar"><span class="dot"></span> Tu guion · personalizado</div>
+            <div class="typed"><div id="typedText"></div><span class="cursor" id="typedCursor"></span></div>
+            <div class="calib" id="calib" style="display:none"></div>
+            <div class="structure" id="structure">
+              <div class="st-item done"><div class="st-num">1</div><div class="st-label">La apertura — has visto el inicio</div></div>
+              <div class="st-item"><div class="st-num">2</div><div class="st-label">El gancho que enciende el interés</div><div class="fog"></div></div>
+              <div class="st-item"><div class="st-num">3</div><div class="st-label">La pregunta que desarma</div><div class="fog"></div></div>
+              <div class="st-item"><div class="st-num">4</div><div class="st-label">La invitación difícil de rechazar</div><div class="fog"></div></div>
+              <div class="st-item"><div class="st-num">5</div><div class="st-label">Cómo manejas el «lo pienso»</div><div class="fog"></div></div>
+              <div class="lockrow">
+                <div class="lk">🔒</div>
+                <p>El guion completo: 6 fases · ~14 frases escritas palabra por palabra · señales de pausa y tono · + manejo de 2 objeciones.</p>
+                <a href="#planuri" class="tcta">Desbloquea el guion completo</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- PLANS -->
+  <section id="planuri">
+    <div class="sec-head" style="margin-bottom:46px">
+      <div class="eyebrow" style="opacity:1;animation:none">Planes</div>
+      <h2>Elige el escalón al que subes.</h2>
+      <p>Desde el primer guion de prueba hasta liderar un equipo — pagas por lo lejos que quieras llegar.</p>
+    </div>
+    <div class="plans">
+      <!-- LEADER (featured · recomandat) -->
+      <div class="card featured" data-reveal>
+        <div class="ribbon">Recomendado</div>
+        <div class="step">Lideras</div>
+        <div class="pname">Leader</div>
+        <div class="ptag">Para quien construye equipos, no solo contactos.</div>
+        <div class="price"><span class="amt">29€</span><span class="per">/ mes</span></div>
+        <div class="perscript">1,93€ por guion</div>
+        <div class="commit">Suscripción mensual · cancela cuando quieras</div>
+        <div class="qty"><b>15</b> guiones / mes</div>
+        <div class="bonus"><span class="b1">+5 guiones de entrenamiento</span><span class="b2">una sola vez, al registrarte — practicas sin miedo a «malgastar»</span></div>
+        <ul class="feats">
+          <li><span class="ic check">✓</span><span class="ft">Modo <b>Clean</b></span></li>
+          <li><span class="ic check">✓</span><span class="ft">Modo <b>Coach</b></span></li>
+          <li><span class="ic check">✓</span><span class="ft">Modo <b>Ambos</b><span class="desc">ejecución + explicaciones, flexibilidad total</span></span></li>
+          <li><span class="ic check">✓</span><span class="ft">Respuesta a 2 objeciones por cada guion <small>no se descuentan del límite</small></span></li>
+          <li><span class="ic check">✓</span><span class="ft"><b>Invitación-relámpago</b><span class="desc">4 invitaciones de 30 segundos, con la psicología detrás</span></span></li>
+          <li><span class="ic check">✓</span><span class="ft"><b>Modo Conexión</b><span class="desc">el mapa del cliente + el guion de conexión, frase por frase</span></span></li>
+          <li><span class="ic check">✓</span><span class="ft"><b>Modo Presentación 1 a 1</b><span class="desc">banco de preguntas + cadencia + tonalidad</span></span><span class="tier gold">Leader</span></li>
+          <li><span class="ic check">✓</span><span class="ft"><b>Modo Cierre</b><span class="desc">preguntas psicológicas de cierre</span></span><span class="tier gold">Leader</span></li>
+        </ul>
+        <button class="btn-card" onclick="selectPlan('leader')">Me hago Leader</button>
+      </div>
+      <!-- BUILDER -->
+      <div class="card" data-reveal>
+        <div class="step">Construyes</div>
+        <div class="pname">Builder</div>
+        <div class="ptag">El volumen + la comprensión. Aquí empieza la verdadera diferencia.</div>
+        <div class="price"><span class="amt">19€</span><span class="per">/ mes</span></div>
+        <div class="perscript">2,38€ por guion</div>
+        <div class="commit">Suscripción mensual · cancela cuando quieras</div>
+        <div class="qty"><b>8</b> guiones / mes</div>
+        <div class="bonus"><span class="b1">+3 guiones de entrenamiento</span><span class="b2">una sola vez, al registrarte — practicas sin miedo a «malgastar»</span></div>
+        <ul class="feats">
+          <li><span class="ic check">✓</span><span class="ft">Modo <b>Clean</b><span class="desc">pura ejecución</span></span></li>
+          <li><span class="ic check">✓</span><span class="ft">Modo <b>Coach</b><span class="desc">te explica <em>por qué</em> funciona cada frase</span></span></li>
+          <li><span class="ic check">✓</span><span class="ft">Respuesta a 2 objeciones por cada guion <small>no se descuentan del límite</small></span></li>
+          <li><span class="ic check">✓</span><span class="ft"><b>Invitación-relámpago</b><span class="desc">4 invitaciones de 30 segundos, con la psicología detrás</span></span></li>
+          <li><span class="ic check">✓</span><span class="ft"><b>Modo Conexión</b><span class="desc">el mapa del cliente + el guion de conexión, frase por frase</span></span></li>
+          <li class="locked" onclick="lockToast('Ambos')"><span class="ic lock">🔒</span><span class="ft">Modo Ambos</span><span class="tier">Leader</span></li>
+          <li class="locked" onclick="lockToast('Presentación')"><span class="ic lock">🔒</span><span class="ft">Modo Presentación 1 a 1</span><span class="tier">Leader</span></li>
+          <li class="locked" onclick="lockToast('Cierre')"><span class="ic lock">🔒</span><span class="ft">Modo Cierre</span><span class="tier">Leader</span></li>
+        </ul>
+        <button class="btn-card" onclick="selectPlan('builder')">Elijo Builder</button>
+        <button class="upsell" onclick="selectPlan('leader')">Me hago Leader por solo <b>10€</b> más →</button>
+      </div>
+      <!-- RECRUIT -->
+      <div class="card" data-reveal>
+        <div class="step">Empiezas</div>
+        <div class="pname">Recruit</div>
+        <div class="ptag">El primer paso más allá de la improvisación.</div>
+        <div class="price"><span class="amt">9€</span><span class="per">/ mes</span></div>
+        <div class="perscript">3€ por guion</div>
+        <div class="commit">Suscripción mensual · cancela cuando quieras</div>
+        <div class="qty"><b>3</b> guiones / mes</div>
+        <div class="bonus"><span class="b1">+1 guion de entrenamiento</span><span class="b2">una sola vez, al registrarte — practicas sin miedo a «malgastar»</span></div>
+        <ul class="feats">
+          <li><span class="ic check">✓</span><span class="ft">Modo <b>Clean</b><span class="desc">el diálogo listo para leer por teléfono</span></span></li>
+          <li><span class="ic check">✓</span><span class="ft">Respuesta a 2 objeciones por cada guion <small>no se descuentan del límite</small></span></li>
+          <li class="locked" onclick="lockToast('Coach')"><span class="ic lock">🔒</span><span class="ft">Modo Coach</span><span class="tier">Builder</span></li>
+          <li class="locked" onclick="lockToast('Ambos')"><span class="ic lock">🔒</span><span class="ft">Modo Ambos</span><span class="tier">Leader</span></li>
+          <li class="locked" onclick="lockToast('Invitación-relámpago')"><span class="ic lock">🔒</span><span class="ft">Invitación-relámpago</span><span class="tier">Builder</span></li>
+          <li class="locked" onclick="lockToast('Conexión')"><span class="ic lock">🔒</span><span class="ft">Modo Conexión</span><span class="tier">Builder</span></li>
+          <li class="locked" onclick="lockToast('Presentación')"><span class="ic lock">🔒</span><span class="ft">Modo Presentación 1 a 1</span><span class="tier">Leader</span></li>
+          <li class="locked" onclick="lockToast('Cierre')"><span class="ic lock">🔒</span><span class="ft">Modo Cierre</span><span class="tier">Leader</span></li>
+        </ul>
+        <button class="btn-card" onclick="selectPlan('recruit')">Empiezo con Recruit</button>
+      </div>
+    </div>
+    <!-- SCRIPT UNIC -->
+    <div class="unic" data-reveal>
+      <div class="l">
+        <h3>¿Solo quieres probar un guion suelto?</h3>
+        <ul class="unic-feats">
+          <li><span class="uc">✓</span> Un guion completo, listo para leer por teléfono</li>
+          <li><span class="uc">✓</span> Respuesta lista para 2 objeciones</li>
+        </ul>
+        <p class="unic-note">Un pago único, sin suscripción. <strong>9€ por 1 guion</strong> — el mismo precio con el que en Recruit tienes 3.</p>
+      </div>
+      <div class="r">
+        <div class="uprice">9€<small>pago único</small></div>
+        <button class="btn-ghost" onclick="selectPlan('unic')">Compro un guion</button>
+      </div>
+    </div>
+  </section>
+  <!-- MODES -->
+  <section class="sec">
+    <div class="sec-head">
+      <div class="eyebrow">Lo que de verdad obtienes</div>
+      <h2>Tres modos.<br>De la ejecución a la maestría.</h2>
+      <p>No pagas solo por más guiones — pagas por cuánto entiendes de lo que dices.</p>
+    </div>
+    <div class="modes">
+      <div class="mode" data-reveal>
+        <div class="mi">Clean</div>
+        <h3>Ejecutas</h3>
+        <p>Solo el guion, listo para leer por teléfono. Abres, lees, llamas. Cero teoría, cero distracciones.</p>
+        <span class="badge">Incluido en todos los planes</span>
+      </div>
+      <div class="mode" data-reveal>
+        <div class="mi">Coach</div>
+        <h3>Entiendes</h3>
+        <p>Cada frase llega con la explicación de <em>por qué</em> funciona, en palabras sencillas. Aprendes la psicología, no solo la ejecutas — y la próxima vez improvisas bien.</p>
+        <span class="badge">Builder & Leader</span>
+      </div>
+      <div class="mode" data-reveal>
+        <div class="mi">Ambos</div>
+        <h3>Dominas</h3>
+        <p>Tanto la versión para leer como las explicaciones, una junto a la otra. Para quien entrena a otras personas y necesita todo.</p>
+        <span class="badge">Leader</span>
+      </div>
+    </div>
+  </section>
+  <!-- CREDIBILITY -->
+  <section class="sec" id="fondator" style="padding-top:92px">
+    <div class="sec-head">
+      <div class="eyebrow" style="opacity:1;animation:none">Quién está detrás del método</div>
+      <h2>No es teoría sacada de internet. Más de una década en la cima de la venta directa.</h2>
+      <p>La psicología detrás de cada guion nace de experiencia real en el MLM, a los niveles más altos del mundo.</p>
+    </div>
+    <div class="founder">
+      <div class="founder-photo"><img loading="lazy" decoding="async" src="/foto-1.jpg" alt="Octavian Alupoaie" /></div>
+      <div class="founder-bio">
+        <h3>Octavian Alupoaie</h3>
+        <p class="role">Fundador · Harvard of Sales — Academia de Venta Psicológica</p>
+        <p>Construyó una red de 71.000 distribuidores, generó 500 millones de dólares en facturación y llegó al Top 10 de Income Earners a nivel mundial. Alcanzó los rangos más altos del MLM — International &amp; National Marketing Director en WorldVentures, Diamond en Seacret Direct — y formó a personas en escenarios internacionales, ante miles de asistentes. Hoy transforma toda esa experiencia en Harvard of Sales: la venta construida sobre la psicología, no sobre la suerte.</p>
+        <a class="verified" href="https://www.businessforhome.org/2021/03/octavian-alupoaie-from-romania-achieves-diamond-rank-at-seacret-direct/" target="_blank" rel="noopener">✔ Diamond en Seacret Direct — verificado por Business For Home</a>
+      </div>
+    </div>
+    <div class="cred-stats">
+      <div><div class="n">71.000</div><div class="t">distribuidores en red, a nivel mundial</div></div>
+      <div><div class="n">$500M</div><div class="t">de facturación generada</div></div>
+      <div><div class="n">Top 10</div><div class="t">Income Earner mundial, 2020</div></div>
+      <div><div class="n">4.000</div><div class="t">personas en sala en una sola charla</div></div>
+    </div>
+    <div class="timeline">
+      <div class="tl-item"><div class="yr">2011 – 2014</div><h4>OrgaLeader · LR Health &amp; Beauty (Alemania)</h4><p>LR Health &amp; Beauty — empresa alemana de MLM (salud &amp; belleza). Los primeros años a nivel de líder.</p></div>
+      <div class="tl-item"><div class="yr">2014 – 2020</div><h4>Doble reconocimiento mundial · WorldVentures (EE. UU.)</h4><p>WorldVentures — empresa de MLM estadounidense (viajes). International &amp; National Marketing Director (los dos niveles más altos) y Trainer International. 71.000 distribuidores, 500M$ de facturación, Top 10 Income Earner en 2020.</p></div>
+      <div class="tl-item"><div class="yr">2020 – 2023</div><h4>Diamond · Seacret Direct (EE. UU.)</h4><p>Seacret Direct — empresa de MLM estadounidense (cuidado de la piel con minerales del Mar Muerto). Rango Diamond, reconocido públicamente por Business For Home.</p></div>
+      <div class="tl-item"><div class="yr">2023 – 2026</div><h4>Fundador · Harvard of Sales</h4><p>Academia de Venta Psicológica — la experiencia en el campo, convertida en método.</p></div>
+    </div>
+    <h3 class="proof-h">Pruebas, no solo palabras</h3>
+    <div class="cred-gallery">
+      <figure><img loading="lazy" decoding="async" src="/foto-2.jpg" alt="Business For Home feature Diamond rank" /><figcaption>Aparición en Business For Home por el rango Diamond, compartida por líderes del sector — 156 reacciones, 41 comentarios (2021).</figcaption></figure>
+      <figure><img loading="lazy" decoding="async" src="/foto-3.jpg" alt="Top 10 Income Earners pe scenă" /><figcaption>Top 10 Income Earners — en el escenario, 2020.</figcaption></figure>
+      <figure><img loading="lazy" decoding="async" src="/foto-4.jpg" alt="Discurs The View Nisa" /><figcaption>Discurso en el escenario «The View», Niza — ante 4.000 personas (2019).</figcaption></figure>
+      <figure><img loading="lazy" decoding="async" src="/foto-5.jpg" alt="Testimonial Ioana Wasile" /><figcaption>NMD + 72 ciclos en 7 días, más de 10.000$/mes de un solo bono — Ioana Wasile, 2020.</figcaption></figure>
+      <figure><img loading="lazy" decoding="async" src="/foto-6.jpg" alt="Testimonial Razvan Dinca 2020" /><figcaption>National Marketing Director en la segunda cuenta, 72 ciclos — Răzvan Dincă, 2020.</figcaption></figure>
+      <figure><img loading="lazy" decoding="async" src="/foto-7.jpg" alt="Testimonial Razvan Dinca 2018" /><figcaption>RMD en el segundo puesto — «a true master of this business», Răzvan Dincă, 2018.</figcaption></figure>
+    </div>
+  </section>
+</div>
+<div class="wrap">
+  <!-- FAQ -->
+  <section class="sec">
+    <div class="sec-head">
+      <div class="eyebrow">Antes de elegir</div>
+      <h2>Preguntas naturales</h2>
+    </div>
+    <div class="faq" id="faq">
+      <div class="q"><button>¿Qué significa, exactamente, «un guion»?</button>
+        <div class="a"><p>Un diálogo de invitación completo, personalizado según tu situación — a quién llamas, qué producto tienes, qué tipo de presentación vendrá después. Lo recibes escrito palabra por palabra, listo para usar por teléfono.</p></div></div>
+      <div class="q"><button>¿Las objeciones consumen mis guiones mensuales?</button>
+        <div class="a"><p>No. Cada guion generado incluye la respuesta a 2 objeciones a elegir, sin reducir tu límite mensual. El límite se aplica solo a los guiones de invitación generados desde cero.</p></div></div>
+      <div class="q"><button>¿Qué son los «guiones de entrenamiento»?</button>
+        <div class="a"><p>Un extra que recibes una sola vez, al registrarte, además de los guiones mensuales. Sirven para practicar mientras aprendes a rellenar los campos — puedes probar, corregir, equivocarte, sin miedo a «consumir» los guiones pagados. Una vez que le tomas el ritmo, te quedas con la asignación mensual del plan.</p></div></div>
+      <div class="q"><button>¿Cuál es la diferencia entre Clean, Coach y Ambos?</button>
+        <div class="a"><p>Clean te da solo el texto para leer. Coach añade, junto a cada frase, la explicación de por qué funciona — para que aprendas, no solo ejecutes. Ambos los combina juntos.</p></div></div>
+      <div class="q"><button>¿Puedo hacer el upgrade más adelante?</button>
+        <div class="a"><p>Sí, cuando quieras. Pasas de Recruit a Builder o Leader con un clic, y los nuevos modos se desbloquean al instante.</p></div></div>
+      <div class="q"><button>Guion Suelto y Recruit cuestan ambos 9€. ¿Cuál es la diferencia?</button>
+        <div class="a"><p>Guion Suelto es un pago único por un solo guion — perfecto para probar. Recruit es una suscripción mensual y te da 3 guiones cada mes, más la respuesta a 2 objeciones por cada guion. Para quien de verdad llama, Recruit es tres veces más por el mismo precio.</p></div></div>
+    </div>
+  </section>
+  <!-- CLOSING -->
+  <section class="closing">
+    <h2>Tu próxima llamada puede sonar <em>completamente diferente.</em></h2>
+    <p>Elige tu plan ahora y genera el primer guion en 120 segundos.</p>
+    <a href="#planuri" class="btn-primary">Elige tu plan</a>
+    <div class="secure">🔒 Pago seguro, directamente en el sitio · Acceso inmediato tras el pago</div>
+  </section>
+</div>
+<footer>
+  <div class="wrap">
+    Harvard of Sales · <a href="mailto:contact@octavianalupoaie.biz">contact@octavianalupoaie.biz</a> · 0733.614.511
+    <div style="margin-top:12px">
+      <a href="/termeni-es.html">Términos y Condiciones</a> ·
+      <a href="/confidentialitate-es.html">Política de Privacidad</a> ·
+      <a href="/cookies-es.html">Política de Cookies</a>
+    </div>
+  </div>
+</footer>
+<!-- AUTH STATUS PILL -->
+<div class="apill" id="apill">
+  <span class="em" id="apillEmail"></span>
+  <button onclick="signOut()">Salir</button>
+</div>
+<!-- AUTH MODAL -->
+<div class="overlay" id="authOverlay" onclick="if(event.target===this)closeAuth()">
+  <div class="modal auth">
+    <button class="close" onclick="closeAuth()">×</button>
+    <h3 id="authTitle">Activa tu acceso</h3>
+    <div class="sub" id="authSub">Solo email y contraseña.<br>20 segundos y generas el primer guion.</div>
+    <div class="atabs">
+      <button class="atab active" id="tabRegister" onclick="setAuthMode('register')">Soy nuevo aquí</button>
+      <button class="atab" id="tabLogin" onclick="setAuthMode('login')">Ya tengo una cuenta</button>
+    </div>
+    <div class="afield">
+      <label for="authEmail">Email</label>
+      <input class="tinput" id="authEmail" type="email" autocomplete="email" placeholder="nombre@email.com" />
+    </div>
+    <div class="afield">
+      <label for="authPass">Contraseña</label>
+      <input class="tinput" id="authPass" type="password" autocomplete="current-password" placeholder="mínimo 8 caracteres" />
+    </div>
+    <div class="aerr" id="authErr"></div>
+    <button class="btn-primary" id="authSubmit" onclick="submitAuth()">Continuar</button>
+    <div class="anote">Usamos tu email solo para la cuenta, la factura y la activación del plan.</div>
+  </div>
+</div>
+<!-- CHECKOUT MODAL -->
+<div class="overlay" id="overlay" onclick="if(event.target===this)closeModal()">
+  <div class="modal" id="checkoutModal">
+    <button class="close" onclick="closeModal()">×</button>
+    <div id="checkoutSummary">
+      <div class="step" id="mStep"></div>
+      <h3 id="mName"></h3>
+      <div class="mprice" id="mPrice"></div>
+      <p id="mDesc"></p>
+      <button class="btn-primary" onclick="goCheckout()">Ir al pago</button>
+      <div class="note">El pago se realiza en el sitio, sin redirecciones. Tras la confirmación, el plan se activa automáticamente y puedes generar de inmediato el primer guion.<br><br>Al pulsar «Ir al pago» aceptas los <a href="/termeni-es.html" target="_blank" style="color:var(--gold-bright)">Términos y Condiciones</a> y la <a href="/confidentialitate-es.html" target="_blank" style="color:var(--gold-bright)">Política de Privacidad</a>. Al tratarse de un producto digital de acceso inmediato, solicitas el inicio inmediato del servicio y confirmas que pierdes el derecho de desistimiento de 14 días una vez activado el acceso.</div>
+    </div>
+    <div id="checkoutBox" style="display:none"></div>
+  </div>
+</div>
+<div class="toast" id="toast"></div>
+<script>
+  /* ===================== CONFIG SUPABASE =====================
+     Completează cu valorile din Supabase → Project Settings → API.
+     Cheia ANON este publică (safe în frontend). NU pune service_role aici. */
+  var SUPABASE_URL      = 'https://dbympznifmxalnxlemyk.supabase.co';
+  var SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRieW1wem5pZm14YWxueGxlbXlrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODAzNjYxMjgsImV4cCI6MjA5NTk0MjEyOH0.EtUssJSyjVuttc89d6kuYuf49CNcSr-kqWlUXySbvCc';
+  var DOMAIN            = window.location.origin; // pentru return_url la checkout (pas următor)
+  /* ===================== CONFIG STRIPE ===================== */
+  var STRIPE_PUBLISHABLE_KEY = 'pk_live_51RNRrB2K2gEr8ziYZqT21LqCqZdOqHwUrVjm0RVapomxD97AeLpIn3BYMLTKU1bXP6CFQX3cR85SKSpukPKKwPa500373ntLK6';
+  var stripeJs = window.Stripe ? window.Stripe(STRIPE_PUBLISHABLE_KEY) : null;
+  var embeddedCheckout = null;
+  var supa = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+  /* ---- stare auth ---- */
+  var currentUser = null;
+  var pendingPlan = null;
+  var authMode    = 'register';
+  /* la încărcare: verifică sesiunea + ascultă schimbările */
+  (async function initAuth(){
+    var { data } = await supa.auth.getSession();
+    setUser(data && data.session ? data.session.user : null);
+    supa.auth.onAuthStateChange(function(_e, session){
+      setUser(session ? session.user : null);
+    });
+  })();
+  /* Enter în câmpurile de auth → submit */
+  ['authEmail','authPass'].forEach(function(id){
+    document.getElementById(id).addEventListener('keydown', function(e){
+      if (e.key === 'Enter'){ e.preventDefault(); submitAuth(); }
+    });
+  });
+  /* revenire după plata Stripe (return_url cu ?paid=1) */
+  (function checkPaid(){
+    var params = new URLSearchParams(window.location.search);
+    if (params.get('paid') === '1'){
+      setTimeout(function(){
+        showToast('✓ Pago registrado. El plan se activa de inmediato.');
+      }, 600);
+      // curăță parametrii din URL ca să nu reapară la refresh
+      history.replaceState({}, '', window.location.pathname);
+    }
+  })();
+  function setUser(user){
+    currentUser = user;
+    var pill = document.getElementById('apill');
+    if (user){
+      document.getElementById('apillEmail').textContent = user.email || 'cuenta activa';
+      pill.classList.add('show');
+    } else {
+      pill.classList.remove('show');
+    }
+  }
+  /* deschide modalul de auth, ținând minte planul ales */
+  function openAuth(plan){
+    pendingPlan = plan || null;
+    document.getElementById('authEmail').value = '';
+    document.getElementById('authPass').value  = '';
+    document.getElementById('authErr').textContent = '';
+    setAuthMode('register');
+    document.getElementById('authOverlay').classList.add('show');
+    setTimeout(function(){ document.getElementById('authEmail').focus(); }, 60);
+  }
+  function closeAuth(){ document.getElementById('authOverlay').classList.remove('show'); }
+  function setAuthMode(mode){
+    authMode = mode;
+    var reg = mode === 'register';
+    document.getElementById('tabRegister').classList.toggle('active', reg);
+    document.getElementById('tabLogin').classList.toggle('active', !reg);
+    document.getElementById('authTitle').textContent = reg ? 'Activa tu acceso' : 'Bienvenido de nuevo';
+    document.getElementById('authSub').innerHTML   = reg
+      ? 'Solo email y contraseña.<br>20 segundos y generas el primer guion.'
+      : 'Inicia sesión para continuar al pago.';
+    document.getElementById('authSubmit').textContent = reg ? 'Activo mi acceso' : 'Iniciar sesión';
+    document.getElementById('authPass').setAttribute('autocomplete', reg ? 'new-password' : 'current-password');
+    document.getElementById('authErr').textContent = '';
+  }
+  async function submitAuth(){
+    var email = document.getElementById('authEmail').value.trim();
+    var pass  = document.getElementById('authPass').value;
+    var err   = document.getElementById('authErr');
+    var btn   = document.getElementById('authSubmit');
+    err.className = 'aerr'; err.textContent = '';
+    if (!email || email.indexOf('@') < 1){ err.textContent = 'Introduce un email válido.'; return; }
+    if (!pass || pass.length < 8){ err.textContent = 'La contraseña debe tener al menos 8 caracteres.'; return; }
+    var label = btn.textContent; btn.disabled = true; btn.textContent = 'Un momento…';
+    try {
+      var res;
+      if (authMode === 'register'){
+        res = await supa.auth.signUp({ email: email, password: pass });
+      } else {
+        res = await supa.auth.signInWithPassword({ email: email, password: pass });
+      }
+      if (res.error){ console.error('Auth error:', res.error); err.textContent = translateAuthError(res.error.message); return; }
+      /* dacă avem sesiune → logat instant; continuăm spre checkout */
+      if (res.data && res.data.session){
+        setUser(res.data.session.user);
+        closeAuth();
+        if (pendingPlan){ var pl = pendingPlan; pendingPlan = null; selectPlan(pl); }
+        return;
+      }
+      /* fără sesiune = confirmarea pe email e PORNITĂ în Supabase.
+         Pentru flux instant, oprește „Confirm email" (vezi SETUP_auth.md). */
+      err.className = 'aok';
+      err.textContent = 'Cuenta creada. Confirma el email, luego vuelve y pulsa «Ya tengo una cuenta».';
+    } catch(e){
+      err.textContent = 'Se ha producido un error. Inténtalo de nuevo.';
+    } finally {
+      btn.disabled = false; btn.textContent = label;
+    }
+  }
+  function translateAuthError(m){
+    var raw = m || '';
+    m = raw.toLowerCase();
+    if (m.indexOf('already registered') > -1 || m.indexOf('already exists') > -1)
+      return 'Ya existe una cuenta con este email. Elige «Ya tengo una cuenta».';
+    if (m.indexOf('invalid login') > -1)        return 'Email o contraseña incorrectos.';
+    if (m.indexOf('email not confirmed') > -1)  return 'Confirma primero el email y luego inicia sesión.';
+    if (m.indexOf('database error') > -1)       return 'Error al guardar la cuenta (trigger DB). Mensaje: ' + raw;
+    if (m.indexOf('password') > -1)             return 'La contraseña es demasiado débil (mínimo 8 caracteres).';
+    return 'No se puede continuar. Mensaje del servidor: ' + raw;
+  }
+  async function signOut(){ await supa.auth.signOut(); setUser(null); }
+  /* ---- date plan ---- */
+  var PLANS = {
+    unic:   {step:'Pruebas',     name:'Guion Suelto', price:'9€', per:'pago único', desc:'Un solo guion + respuesta a 2 objeciones, modo Clean. Sin suscripción.'},
+    recruit:{step:'Empiezas',    name:'Recruit',     price:'9€', per:'/ mes', desc:'3 guiones/mes + 1 de entrenamiento al inicio. Modo Clean, con respuesta a 2 objeciones/guion.'},
+    builder:{step:'Construyes',  name:'Builder',     price:'19€',per:'/ mes', desc:'8 guiones/mes + 3 de entrenamiento al inicio. Además el modo Coach, que te explica por qué funciona.'},
+    leader: {step:'Lideras',     name:'Leader',      price:'29€',per:'/ mes', desc:'15 guiones/mes + 5 de entrenamiento al inicio. Todos los modos, incluido Ambos.'}
+  };
+  var current = null;
+  function selectPlan(key){
+    current = key;
+    if (!currentUser){ openAuth(key); return; }   // fără cont → întâi auth, apoi revine aici
+    var p = PLANS[key];
+    document.getElementById('checkoutSummary').style.display = 'block';
+    var box = document.getElementById('checkoutBox');
+    box.style.display = 'none'; box.innerHTML = '';
+    if (embeddedCheckout){ try{ embeddedCheckout.destroy(); }catch(e){} embeddedCheckout = null; }
+    document.getElementById('mStep').textContent = p.step;
+    document.getElementById('mName').textContent = p.name;
+    document.getElementById('mPrice').innerHTML = p.price + ' <small>' + p.per + '</small>';
+    document.getElementById('mDesc').textContent = p.desc;
+    document.getElementById('overlay').classList.add('show');
+  }
+  function closeModal(){
+    document.getElementById('overlay').classList.remove('show');
+    if (embeddedCheckout){ try{ embeddedCheckout.destroy(); }catch(e){} embeddedCheckout = null; }
+    var box = document.getElementById('checkoutBox');
+    box.style.display = 'none'; box.innerHTML = '';
+    document.getElementById('checkoutSummary').style.display = 'block';
+  }
+  async function goCheckout(){
+    if (!currentUser){ closeModal(); openAuth(current); return; }
+    var summary = document.getElementById('checkoutSummary');
+    var box     = document.getElementById('checkoutBox');
+    // token-ul sesiunii pentru a autentifica apelul la backend
+    var sess = (await supa.auth.getSession()).data.session;
+    if (!sess){ closeModal(); openAuth(current); return; }
+    summary.style.display = 'none';
+    box.style.display = 'block';
+    box.innerHTML = '<div class="cloading">Cargando el pago seguro<br><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>';
+    try {
+      var r = await fetch('/api/create-checkout-session', {
+        method: 'POST',
+        headers: { 'Content-Type':'application/json', 'Authorization':'Bearer ' + sess.access_token },
+        body: JSON.stringify({ plan: current, lang: 'es' })
+      });
+      var d = await r.json();
+      if (!r.ok || !d.clientSecret){ throw new Error(d.error || 'Respuesta no válida del servidor'); }
+      if (!stripeJs){ throw new Error('Stripe.js no se ha cargado'); }
+      box.innerHTML = '<div id="stripe-checkout"></div>';
+      if (embeddedCheckout){ try{ embeddedCheckout.destroy(); }catch(e){} }
+      embeddedCheckout = await stripeJs.initEmbeddedCheckout({ clientSecret: d.clientSecret });
+      embeddedCheckout.mount('#stripe-checkout');
+    } catch(e){
+      box.innerHTML = '<div class="cerr">No se puede iniciar el pago: ' + (e.message || e) +
+        '</div><div style="text-align:center"><button class="cback" onclick="selectPlan(current)">Atrás</button></div>';
+    }
+  }
+  function lockToast(mod){ showToast('El modo <b>'+mod+'</b> se desbloquea con un plan superior.'); }
+  var toastTimer;
+  function showToast(html){
+    var t = document.getElementById('toast');
+    t.innerHTML = html; t.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function(){ t.classList.remove('show'); }, 3200);
+  }
+  function toggleLang(e){ e.stopPropagation(); var d=document.getElementById('langDd'); if(d) d.classList.toggle('open'); }
+  document.addEventListener('click', function(){ var d=document.getElementById('langDd'); if(d) d.classList.remove('open'); });
+  function setLang(l){ var d=document.getElementById('langDd'); if(d) d.classList.remove('open'); if(l==='es'){ return; } var u={ro:'/',it:'/it',es:'/es',en:'/en'}[l]; if(u){ window.location.href=u; } }
+  /* ---- TEASER ---- */
+  var teaserRel='prieten', teaserInv='cafea', teaserTone='cald', teaserProd='unos productos para la salud';
+  function wireChips(id, cb){
+    var el = document.getElementById(id); if(!el) return;
+    el.addEventListener('click', function(e){
+      var b = e.target.closest('.chip'); if(!b) return;
+      this.querySelectorAll('.chip').forEach(function(c){c.classList.remove('active');});
+      b.classList.add('active'); cb(b);
+    });
+  }
+  wireChips('relChips',    function(b){ teaserRel  = b.getAttribute('data-rel');  });
+  wireChips('inviteChips', function(b){ teaserInv  = b.getAttribute('data-inv');  });
+  wireChips('toneChips',   function(b){ teaserTone = b.getAttribute('data-tone'); });
+  wireChips('prodChips',   function(b){
+    var prod = b.getAttribute('data-prod');
+    var custom = document.getElementById('tProdCustom');
+    var adv = document.getElementById('tAdv');
+    if(prod === '__custom__'){
+      custom.style.display = 'block';
+      custom.focus();
+      teaserProd = (custom.value || 'tu producto').trim();
+      adv.value = '';
+      adv.placeholder = 'escribe 2-3 beneficios de tu producto';
+    } else {
+      custom.style.display = 'none';
+      teaserProd = prod;
+      var a = b.getAttribute('data-adv'); if(a) adv.value = a;
+    }
+  });
+  var prodCustom = document.getElementById('tProdCustom');
+  if(prodCustom) prodCustom.addEventListener('input', function(){ teaserProd = (this.value || 'tu producto').trim(); });
+  /* TEASER: dialog pe 3 ture (Agent → Client → Agent, tăiat la lacăt).
+     Salut după relație: „Te salut" la prieten/cunoscut, „Bună ziua" la contact rece. */
+  var GREET = { prieten:'Hola, ', cunoscut:'Hola, ', rece:'Buenos días, ' };
+  /* Două intro-uri. Fiecare = replica Agentului (tur 1) + reacția clientului (tur 2). */
+  var INTROS = [
+    {
+      id:'sincer',
+      agent: function(n){ return GREET[teaserRel] + n + '! Seré sincero: no te llamo por casualidad, y solo te pido 60 segundos. ¿Tendrías paciencia conmigo o no?'; },
+      client: 'Si son solo 60 segundos... te escucho :)',
+      conts: ['surpriza','confesiune','negare','relatie','intrebare']
+    },
+    {
+      id:'iubire',
+      agent: function(n){ return GREET[teaserRel] + n + '! Solo te digo esto: al final de esta llamada, o me vas a amar, o me vas a odiar :))))'; },
+      client: 'Venga, me has dejado con curiosidad...',
+      conts: ['motiv','negare']
+    }
+  ];
+  /* Continuări (tur 3 al Agentului) — se taie la lacăt. */
+  var CONTS = {
+    surpriza:   function(n){ return n + '... lo que estoy por decirte, quizás te—'; },
+    confesiune: function(n){ return n + ', me he pasado días enteros pensando cómo empezar esta llamada sin que parezca—'; },
+    negare:     function(n){ return n + ', seguro que nunca pensaste que te llamaría justamente para—'; },
+    relatie:    function(n){ return n + ', justamente porque te conozco desde hace tantos años no puedo decirlo como a cualquiera—'; },
+    intrebare:  function(n){ return n + ', ¿puedo hacerte una pregunta que probablemente nadie te ha hecho nunca—'; },
+    motiv:      function(n){ return n + '... y el motivo por el que lo digo es—'; }
+  };
+  var teaserSpin = 0; // rotație deterministică între generări
+  function pickDialog(n){
+    var intro = INTROS[teaserSpin % INTROS.length];
+    var pool = intro.conts.filter(function(c){ return c !== 'relatie' || teaserRel === 'prieten'; });
+    var contId = pool[Math.floor(teaserSpin / INTROS.length) % pool.length];
+    teaserSpin++;
+    return [
+      { who:'Agent',  text: intro.agent(n),   cut:false },
+      { who:'Client', text: intro.client,     cut:false },
+      { who:'Agent',  text: CONTS[contId](n), cut:true  }
+    ];
+  }
+  function traitLabel(){
+    var d = (document.getElementById('tDesc').value || '').toLowerCase();
+    if(/ocupad|tiempo|prisa|corriendo|apurad|afán|afan/.test(d))       return 'persona ocupada — mensaje breve, al grano';
+    if(/hij|familia|padre|papá|papa|madre|mamá|mama|progenitor/.test(d)) return 'tiene familia — enfócate en el tiempo y la tranquilidad';
+    if(/manager|empresari|negocio|business|director|gerente|empresa|jefe/.test(d)) return 'persona práctica — directo al grano';
+    return 'los detalles de tu descripción';
+  }
+  var RELLABEL = { prieten:'amigo cercano', cunoscut:'conocido', rece:'contacto frío' };
+  var TONELABEL = { cald:'cálido', direct:'directo', energic:'enérgico' };
+  function firstObjection(){
+    var raw = (document.getElementById('tObj')||{}).value || '';
+    var m = raw.match(/[„"]([^”"]+)[”"]/);
+    return m ? m[1] : 'tus objeciones';
+  }
+  function escHtml(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+  function buildCalib(name){
+    var rows = [
+      ['A quién llamas',            escHtml(name)+' · '+RELLABEL[teaserRel], false],
+      ['Lo que capté de la descripción', escHtml(traitLabel()), false],
+      ['Producto',                  escHtml(teaserProd), false],
+      ['Qué lo lleva a decir «sí»', 'lo que está en juego a nivel personal, no el producto', true],
+      ['Cómo desactivas «'+escHtml(firstObjection())+'»', 'sin contradecirla de frente', true],
+      ['El tono exacto de la apertura','cálido, sereno, sin tono de vendedor ('+TONELABEL[teaserTone]+')', true]
+    ];
+    var html = '<div class="ch">🧠 Cómo la app calibró tu llamada</div>';
+    rows.forEach(function(r){
+      html += '<div class="crow"><span class="cf">'+r[0]+'</span><span class="cv'+(r[2]?' lock':'')+'">'+r[1]+'</span></div>';
+    });
+    html += '<div class="cnote">La app sopesa todo esto antes de escribir una palabra — por eso el guion es solo tuyo, no una plantilla.</div>';
+    return html;
+  }
+  var typeTimer;
+  function generateTeaser(){
+    var desc = (document.getElementById('tDesc').value || 'Andrés').trim();
+    var n = (desc.split(/[\s,]+/)[0] || 'Andrés'); // numele = primul cuvânt din descriere
+    var turns = pickDialog(n);
+    document.getElementById('phPlaceholder').style.display = 'none';
+    document.getElementById('phContent').style.display = 'block';
+    var txt = document.getElementById('typedText');
+    var cur = document.getElementById('typedCursor');
+    var calib = document.getElementById('calib');
+    var struct = document.getElementById('structure');
+    struct.classList.remove('show');
+    calib.style.display = 'none';
+    calib.innerHTML = buildCalib(n);
+    clearTimeout(typeTimer);
+    // construiește liniile de dialog goale (nume escapat prin textContent la tastare)
+    txt.innerHTML = '';
+    var lines = turns.map(function(t){
+      var line = document.createElement('div');
+      line.className = 'dline ' + (t.who === 'Agent' ? 'agent' : 'client');
+      line.style.display = 'none';
+      var who = document.createElement('span'); who.className = 'dwho';
+      who.textContent = (t.who === 'Agent' ? 'Tú' : 'Él/Ella');
+      var body = document.createElement('span'); body.className = 'dtext';
+      line.appendChild(who); line.appendChild(body);
+      txt.appendChild(line);
+      return { body: body, line: line, text: t.text, cut: t.cut };
+    });
+    cur.style.display = 'inline-block';
+    var li = 0;
+    (function typeLine(){
+      if(li >= lines.length){
+        cur.style.display = 'none';
+        calib.style.display = 'block';
+        struct.classList.add('show');
+        return;
+      }
+      var L = lines[li];
+      L.line.style.display = 'block';
+      var i = 0;
+      (function typeChar(){
+        if(i <= L.text.length){
+          L.body.textContent = L.text.slice(0, i);
+          L.body.appendChild(cur);
+          if(L.cut && i === L.text.length){
+            var lk = document.createElement('span'); lk.className = 'dlock'; lk.textContent = ' 🔒';
+            L.body.appendChild(lk);
+          }
+          i++; typeTimer = setTimeout(typeChar, 22);
+        } else {
+          li++; typeTimer = setTimeout(typeLine, 360); // pauză între ture
+        }
+      })();
+    })();
+  }
+  /* ---- FAQ accordion ---- */
+  document.querySelectorAll('#faq .q button').forEach(function(b){
+    b.addEventListener('click', function(){
+      var q = b.parentElement;
+      var a = q.querySelector('.a');
+      var open = q.classList.contains('open');
+      document.querySelectorAll('#faq .q').forEach(function(x){x.classList.remove('open');x.querySelector('.a').style.maxHeight=null;});
+      if(!open){ q.classList.add('open'); a.style.maxHeight = a.scrollHeight + 'px'; }
+    });
+  });
+  /* ---- count-up ---- */
+  function countUp(el, target, dur){
+    var start=0, t0=null;
+    function step(ts){ if(!t0)t0=ts; var p=Math.min((ts-t0)/dur,1);
+      var ease=1-Math.pow(1-p,3);
+      el.textContent = Math.floor(ease*target).toLocaleString('es-ES');
+      if(p<1) requestAnimationFrame(step); }
+    requestAnimationFrame(step);
+  }
+  /* Contoare reale, sincronizate cu pagina de logare prin /api/stats.
+     distribuitori -> #liveCount · scripturi -> #bigCount · fallback 112 / 1122 */
+  window.__hosScripts = 1122;
+  (function loadStats(){
+    fetch('/api/stats').then(function(r){ return r.json(); }).then(function(d){
+      var dist = (typeof d.distribuitori === 'number') ? d.distribuitori
+               : (typeof d.agents === 'number') ? d.agents : 112;
+      var scr  = (typeof d.scripturi === 'number') ? d.scripturi : 1122;
+      window.__hosScripts = scr;
+      countUp(document.getElementById('liveCount'), dist, 1600);
+      var bc = document.getElementById('bigCount');
+      if(bc && bc.dataset.counted === '1'){ countUp(bc, scr, 1200); } // re-animeaza daca s-a afisat deja fallback-ul
+    }).catch(function(){
+      countUp(document.getElementById('liveCount'), 112, 1600);
+    });
+  })();
+  /* ---- scroll reveal + band counter + ring ---- */
+  var ringDone = false;
+  function fillRing(){
+    if(ringDone) return; ringDone = true;
+    document.getElementById('ringFill').style.strokeDashoffset = 534 * (1 - 0.78); // 78%
+    countUp(document.getElementById('ringNum'), 78, 2300);
+  }
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){
+        if(e.target.dataset.reveal!==undefined){ e.target.classList.add('in'); }
+        if(e.target.id==='bigCount'){ countUp(e.target, (window.__hosScripts||1122), 1800); e.target.dataset.counted='1'; }
+        io.unobserve(e.target);
+      }
+    });
+  },{threshold:.2});
+  document.querySelectorAll('[data-reveal]').forEach(function(el,i){ el.style.transitionDelay=(i%3*0.08)+'s'; io.observe(el); });
+  io.observe(document.getElementById('bigCount'));
+  /* cadranul 78% se umple EXACT când agentul ajunge la el (nu la încărcarea paginii) */
+  (function(){
+    var ringWrap = document.querySelector('.ring-wrap');
+    if(!ringWrap){ return; }
+    if(!('IntersectionObserver' in window)){ fillRing(); return; }   // fallback browsere fără IO
+    var ringIO = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){ fillRing(); ringIO.unobserve(e.target); }
+      });
+    },{threshold:.6});
+    ringIO.observe(ringWrap);
+  })();
+  /* aprindere secvențială a pașilor „Cum funcționează" — one-shot, respectă reduced-motion */
+  (function stepGlow(){
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if(reduce) return;
+    var cards = document.querySelectorAll('.steps .stepc');
+    if(!cards.length || !('IntersectionObserver' in window)) return;
+    var ob = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(!e.isIntersecting) return;
+        var idx = Array.prototype.indexOf.call(cards, e.target);
+        setTimeout(function(){
+          e.target.classList.add('lit');
+          setTimeout(function(){ e.target.classList.remove('lit'); }, 2000);
+        }, Math.max(0, idx) * 120);
+        ob.unobserve(e.target);
+      });
+    }, { threshold: .45 });
+    cards.forEach(function(c){ ob.observe(c); });
+  })();
+</script>
+</body>
+</html>

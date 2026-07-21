@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Política de Privacidad — Harvard of Sales</title>
+<meta name="robots" content="index, follow" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#0A1322; --navy-2:#0E1B2E; --card:#11203580; --gold:#C9A24B;
+    --gold-bright:#E4C36A; --ink:#EAEFF6; --muted:#AEBBCD; --muted-2:#7A8AA0;
+    --line:rgba(201,162,75,.22); --line-soft:rgba(255,255,255,.09);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--navy);color:var(--ink);font-family:'Hanken Grotesk',sans-serif;
+    line-height:1.72;-webkit-font-smoothing:antialiased}
+  body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
+    background:radial-gradient(900px 600px at 75% -5%,rgba(201,162,75,.08),transparent 60%),
+      linear-gradient(180deg,#0A1322 0%,#0B1525 55%,#0A1322 100%)}
+  .wrap{position:relative;z-index:1;max-width:820px;margin:0 auto;padding:0 22px}
+  nav{display:flex;align-items:center;justify-content:space-between;max-width:820px;margin:0 auto;padding:24px 22px}
+  .brand{font-family:'Playfair Display',serif;font-weight:700;font-size:18px;letter-spacing:.4px}
+  .brand span{color:var(--gold)}
+  .back{font-size:13.5px;color:var(--muted);text-decoration:none;border:1px solid var(--line);
+    padding:8px 16px;border-radius:40px;transition:.2s;white-space:nowrap}
+  .back:hover{color:var(--ink);border-color:var(--gold)}
+  header.doc{padding:34px 0 10px}
+  .eyebrow{font-size:12px;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);font-weight:700}
+  h1{font-family:'Playfair Display',serif;font-weight:700;font-size:clamp(28px,5vw,40px);margin:10px 0 8px;line-height:1.12}
+  .updated{color:var(--muted-2);font-size:13.5px}
+  .intro{margin:26px 0 8px;color:var(--muted);font-size:15.5px}
+  .toc{background:var(--card);border:1px solid var(--line-soft);border-radius:14px;padding:20px 24px;margin:26px 0 8px}
+  .toc h2{font-family:'Hanken Grotesk',sans-serif;font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:12px}
+  .toc ol{margin:0;padding-left:20px;columns:2;column-gap:28px}
+  .toc li{margin:5px 0;font-size:14px}
+  .toc a{color:var(--muted);text-decoration:none}
+  .toc a:hover{color:var(--gold-bright)}
+  section.blk{padding:30px 0 4px;border-top:1px solid var(--line-soft);margin-top:26px}
+  section.blk:first-of-type{border-top:none}
+  h2.sec{font-family:'Playfair Display',serif;font-weight:600;font-size:22px;color:var(--ink);margin-bottom:14px}
+  h2.sec .no{color:var(--gold);font-size:16px;margin-right:8px;font-family:'Hanken Grotesk',sans-serif;font-weight:700}
+  h3{font-size:16px;font-weight:700;color:var(--ink);margin:18px 0 6px}
+  p{margin:10px 0;color:var(--muted);font-size:15.5px}
+  ul,ol.body{margin:10px 0 10px 22px;color:var(--muted);font-size:15.5px}
+  li{margin:6px 0}
+  strong{color:var(--ink);font-weight:700}
+  a{color:var(--gold-bright)}
+  .idbox{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px 24px;margin:6px 0}
+  .idbox .row{display:flex;gap:12px;padding:6px 0;font-size:15px;flex-wrap:wrap}
+  .idbox .k{color:var(--muted-2);min-width:190px;flex:0 0 auto}
+  .idbox .v{color:var(--ink)}
+  .callout{background:rgba(201,162,75,.07);border:1px solid var(--line);border-left:3px solid var(--gold);
+    border-radius:10px;padding:14px 18px;margin:16px 0;font-size:15px;color:var(--ink)}
+  table.proc{width:100%;border-collapse:collapse;margin:14px 0;font-size:14.5px}
+  table.proc th,table.proc td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line-soft);vertical-align:top}
+  table.proc th{color:var(--gold);font-weight:700;font-size:12.5px;text-transform:uppercase;letter-spacing:.4px}
+  table.proc td{color:var(--muted)}
+  table.proc td strong{color:var(--ink)}
+  footer{border-top:1px solid var(--line-soft);margin-top:44px;padding:30px 0 44px;text-align:center;color:var(--muted-2);font-size:13.5px}
+  footer a{color:var(--muted);text-decoration:none;margin:0 8px}
+  footer a:hover{color:var(--gold-bright)}
+  @media(max-width:640px){.toc ol{columns:1}.idbox .k{min-width:140px}
+    table.proc,table.proc tbody,table.proc tr,table.proc td{display:block;width:100%}
+    table.proc thead{display:none}
+    table.proc tr{border:1px solid var(--line-soft);border-radius:10px;margin-bottom:10px;padding:6px 4px}
+    table.proc td{border:none}}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="brand">Harvard of <span>Sales</span></div>
+  <a href="/es" class="back">← Volver al sitio</a>
+</nav>
+
+<div class="wrap">
+  <header class="doc">
+    <div class="eyebrow">Documento legal</div>
+    <h1>Política de Privacidad</h1>
+    <div class="updated">Última actualización: 21 de julio de 2026 · En vigor desde: 21 de julio de 2026</div>
+    <p class="intro">La presente política explica qué datos personales recopilamos a través de la plataforma <strong>mlmpsychology.com</strong>, por qué los recopilamos, cómo los utilizamos y qué derechos tienes. Cumplimos el Reglamento General de Protección de Datos (RGPD – Reglamento UE 2016/679) para los usuarios de la Unión Europea.</p>
+  </header>
+
+  <div class="toc">
+    <h2>Índice</h2>
+    <ol>
+      <li><a href="#s1">Quién es el responsable</a></li>
+      <li><a href="#s2">Qué datos recopilamos</a></li>
+      <li><a href="#s3">Finalidades y bases jurídicas</a></li>
+      <li><a href="#s4">Datos de la persona invitada</a></li>
+      <li><a href="#s5">Con quién los compartimos</a></li>
+      <li><a href="#s6">Transferencias internacionales</a></li>
+      <li><a href="#s7">Durante cuánto tiempo los conservamos</a></li>
+      <li><a href="#s8">Cómo los protegemos</a></li>
+      <li><a href="#s9">Tus derechos</a></li>
+      <li><a href="#s10">Cookies y almacenamiento local</a></li>
+      <li><a href="#s11">Menores</a></li>
+      <li><a href="#s12">Inteligencia artificial</a></li>
+      <li><a href="#s13">Modificaciones</a></li>
+      <li><a href="#s14">Contacto y reclamaciones</a></li>
+    </ol>
+  </div>
+
+  <section class="blk" id="s1">
+    <h2 class="sec"><span class="no">1.</span>Quién es el responsable del tratamiento</h2>
+    <p>El responsable que decide por qué y cómo se tratan tus datos es:</p>
+    <div class="idbox">
+      <div class="row"><span class="k">Denominación</span><span class="v">VITANIC SALES LLC</span></div>
+      <div class="row"><span class="k">Forma / registro</span><span class="v">LLC, Estado de Wyoming, Estados Unidos de América</span></div>
+      <div class="row"><span class="k">Domicilio</span><span class="v">2232 Dell Range Blvd, Cheyenne, WY 82009, USA</span></div>
+      <div class="row"><span class="k">Email para datos</span><span class="v">contact@octavianalupoaie.biz</span></div>
+    </div>
+    <p>Para cualquier pregunta sobre tus datos o para ejercer tus derechos, puedes escribirnos a la dirección indicada arriba.</p>
+    <div class="callout">
+      <strong>Representante en la UE:</strong> dado que el responsable está establecido fuera de la Unión Europea pero ofrece servicios a personas en la UE, podría ser necesaria la designación de un representante en la UE conforme al art. 27 del RGPD. Los datos de contacto del representante se indicarán aquí una vez designado. Hasta entonces, puedes contactarnos directamente en el email indicado arriba.
+    </div>
+  </section>
+
+  <section class="blk" id="s2">
+    <h2 class="sec"><span class="no">2.</span>Qué datos recopilamos</h2>
+    <h3>a) Datos de la cuenta</h3>
+    <p>La dirección de email y la contraseña (conservada de forma cifrada, no en texto claro). No tenemos acceso a tu contraseña.</p>
+    <h3>b) Datos de pago</h3>
+    <p>Los pagos son procesados por <strong>Stripe</strong>. Nosotros <strong>no conservamos los datos de tu tarjeta</strong>. Solo mantenemos los identificadores técnicos necesarios para la gestión de la suscripción (por ejemplo, el identificador de cliente y de suscripción de Stripe) y, en su caso, los datos de facturación gestionados por Stripe.</p>
+    <h3>c) Datos sobre el uso del servicio</h3>
+    <p>Tu plan, el número de guiones restantes, la fecha de la última asignación, un registro de las generaciones (momento y modo de generación) y los guiones generados para ti.</p>
+    <h3>d) Contenido introducido en el generador</h3>
+    <p>La información que completas en el formulario: sobre ti (género, edad aproximada, estilo de enfoque, experiencia), sobre el producto y sobre la persona a la que deseas contactar (véase la sección 4).</p>
+    <h3>e) Mensajes de asistencia</h3>
+    <p>Si nos escribes a través del formulario de ayuda, conservamos el mensaje, tu dirección de email y el plan, para poder responderte.</p>
+    <h3>f) Datos técnicos</h3>
+    <p>Como en la mayoría de los sitios, nuestros servidores y proveedores pueden tratar datos técnicos como la dirección IP, el tipo de navegador y de dispositivo, necesarios para el funcionamiento y la seguridad (incluida la carga de las fuentes web).</p>
+  </section>
+
+  <section class="blk" id="s3">
+    <h2 class="sec"><span class="no">3.</span>Finalidades y bases jurídicas</h2>
+    <p>Tratamos tus datos para las siguientes finalidades, sobre las siguientes bases jurídicas (art. 6 del RGPD):</p>
+    <table class="proc">
+      <thead><tr><th>Finalidad</th><th>Base jurídica</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Creación y gestión de la cuenta</strong>, autenticación</td><td>Ejecución del contrato (art. 6(1)(b))</td></tr>
+        <tr><td><strong>Prestación del servicio</strong> — generación de los guiones a partir de los datos introducidos</td><td>Ejecución del contrato (art. 6(1)(b))</td></tr>
+        <tr><td><strong>Procesamiento de los pagos</strong> y emisión de los documentos</td><td>Ejecución del contrato + obligación legal (art. 6(1)(b) y (c))</td></tr>
+        <tr><td><strong>Asistencia</strong> y respuesta a las solicitudes</td><td>Ejecución del contrato / interés legítimo (art. 6(1)(b)/(f))</td></tr>
+        <tr><td><strong>Seguridad</strong>, prevención de fraudes y abusos</td><td>Interés legítimo (art. 6(1)(f))</td></tr>
+        <tr><td><strong>Cumplimiento de obligaciones legales</strong> (contables, fiscales)</td><td>Obligación legal (art. 6(1)(c))</td></tr>
+      </tbody>
+    </table>
+    <p>No utilizamos tus datos para marketing por email sin tu consentimiento. Tu email lo usamos para la cuenta, la activación del plan y los documentos de pago.</p>
+  </section>
+
+  <section class="blk" id="s4">
+    <h2 class="sec"><span class="no">4.</span>Datos de la persona invitada</h2>
+    <div class="callout">
+      Por decisión de diseño, recopilamos <strong>la menor cantidad posible de datos</strong> sobre la persona a la que deseas contactar. <strong>No solicitamos ni recopilamos apellido, número de teléfono, dirección de email, dirección postal ni otros datos de contacto o de identificación directa</strong> de esa persona.
+    </div>
+    <p>Los campos disponibles se limitan a elementos generales de contexto (por ejemplo, un nombre opcional, una edad aproximada, el tipo de relación, un contexto profesional o familiar general) — utilizados <strong>exclusivamente</strong> para generar tu guion. No intentamos, ni podemos, identificar a esa persona a partir de esta información.</p>
+    <p><strong>Tu responsabilidad como usuario.</strong> Eres tú quien introduce esta información, sobre la base de tu relación directa con la persona. Te comprometes:</p>
+    <ul>
+      <li>a no introducir datos que identifiquen directamente a la persona (nombre completo, datos de contacto, dirección, etc.);</li>
+      <li>a no introducir en los campos libres <strong>datos sensibles</strong> — por ejemplo, relativos a la salud, a la vida privada íntima, a las convicciones o a la orientación — que no son necesarios y no deberían proporcionarse;</li>
+      <li>a utilizar los guiones generados de manera legal y ética en tu comunicación.</li>
+    </ul>
+    <p>Más detalles sobre tu responsabilidad se encuentran en los <a href="/termeni-es.html">Términos y Condiciones</a>.</p>
+  </section>
+
+  <section class="blk" id="s5">
+    <h2 class="sec"><span class="no">5.</span>Con quién compartimos los datos (encargados del tratamiento)</h2>
+    <p>No vendemos tus datos. Solo los compartimos con proveedores de servicios («encargados del tratamiento») que nos ayudan a gestionar la plataforma, exclusivamente para las finalidades antes indicadas:</p>
+    <table class="proc">
+      <thead><tr><th>Proveedor</th><th>Función</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Supabase</strong></td><td>Autenticación y alojamiento de la base de datos</td></tr>
+        <tr><td><strong>Railway</strong></td><td>Alojamiento de la aplicación (servidor)</td></tr>
+        <tr><td><strong>Stripe</strong></td><td>Procesamiento de los pagos y facturación</td></tr>
+        <tr><td><strong>MindStudio</strong></td><td>Generación de los guiones mediante inteligencia artificial</td></tr>
+        <tr><td><strong>Anthropic</strong></td><td>Modelo de inteligencia artificial usado para la generación</td></tr>
+        <tr><td><strong>Resend</strong></td><td>Envío de los emails de asistencia (si está activo)</td></tr>
+        <tr><td><strong>Google Fonts</strong></td><td>Visualización de las fuentes web (puede tratar la dirección IP)</td></tr>
+      </tbody>
+    </table>
+    <p>Para generar un guion, el contenido que introduces en el formulario se transmite al proveedor de inteligencia artificial (MindStudio y/o Anthropic) exclusivamente para producir la respuesta solicitada. También podemos comunicar los datos si la ley nos lo exige o para proteger nuestros derechos.</p>
+  </section>
+
+  <section class="blk" id="s6">
+    <h2 class="sec"><span class="no">6.</span>Transferencias internacionales</h2>
+    <p>El responsable y algunos de nuestros proveedores están establecidos en los <strong>Estados Unidos de América</strong> o tratan datos fuera del Espacio Económico Europeo. Esto significa que tus datos pueden transferirse y tratarse fuera de la UE/EEE.</p>
+    <p>Para dichas transferencias nos basamos, según el caso, en los mecanismos reconocidos por el RGPD — por ejemplo, las <strong>Cláusulas Contractuales Tipo</strong> de la Comisión Europea y/o el marco <strong>EU–U.S. Data Privacy Framework</strong>, cuando el proveedor esté certificado. Puedes solicitarnos más información sobre las garantías aplicables.</p>
+  </section>
+
+  <section class="blk" id="s7">
+    <h2 class="sec"><span class="no">7.</span>Durante cuánto tiempo conservamos los datos</h2>
+    <ul>
+      <li><strong>Datos de la cuenta</strong> — mientras tu cuenta esté activa. Al eliminar la cuenta, los borramos o anonimizamos en un tiempo razonable.</li>
+      <li><strong>Contenido generado y datos introducidos</strong> — durante el uso del servicio, para ofrecerte el historial y las funcionalidades; se eliminan al eliminar la cuenta o tras un periodo razonable de inactividad.</li>
+      <li><strong>Datos de pago y documentos contables</strong> — durante el periodo impuesto por las obligaciones legales y fiscales aplicables.</li>
+      <li><strong>Mensajes de asistencia</strong> — durante el tiempo necesario para su gestión, más un periodo razonable posterior.</li>
+    </ul>
+  </section>
+
+  <section class="blk" id="s8">
+    <h2 class="sec"><span class="no">8.</span>Cómo protegemos los datos</h2>
+    <p>Adoptamos medidas técnicas y organizativas razonables: conexiones cifradas (HTTPS), contraseñas conservadas de forma cifrada, controles de acceso a la base de datos (incluidas reglas de seguridad a nivel de fila) y limitación del acceso a los encargados del tratamiento. Ningún sistema es 100 % seguro, pero nos esforzamos de forma constante en proteger tus datos.</p>
+  </section>
+
+  <section class="blk" id="s9">
+    <h2 class="sec"><span class="no">9.</span>Tus derechos</h2>
+    <p>En calidad de interesado, tienes los siguientes derechos conforme al RGPD:</p>
+    <ul>
+      <li><strong>Acceso</strong> — saber qué datos tenemos sobre ti;</li>
+      <li><strong>Rectificación</strong> — corrección de los datos inexactos;</li>
+      <li><strong>Supresión</strong> («derecho al olvido»);</li>
+      <li><strong>Limitación</strong> del tratamiento;</li>
+      <li><strong>Portabilidad</strong> — recibir los datos en un formato estructurado;</li>
+      <li><strong>Oposición</strong> a los tratamientos basados en el interés legítimo;</li>
+      <li><strong>Retirada del consentimiento</strong>, cuando el tratamiento se base en el consentimiento.</li>
+    </ul>
+    <p>Puedes ejercer tus derechos escribiéndonos a <a href="mailto:contact@octavianalupoaie.biz">contact@octavianalupoaie.biz</a>. Respondemos dentro de los plazos previstos por la ley. Puedes eliminar tu cuenta contactándonos.</p>
+  </section>
+
+  <section class="blk" id="s10">
+    <h2 class="sec"><span class="no">10.</span>Cookies y almacenamiento local</h2>
+    <p>No utilizamos cookies publicitarias ni de seguimiento con fines de marketing. Utilizamos el <strong>almacenamiento local en tu navegador</strong> (localStorage / sessionStorage) exclusivamente para el funcionamiento de la aplicación — por ejemplo, para mantener la sesión tras el acceso y para recordar los campos que has completado, de modo que no tengas que reescribirlos cada vez.</p>
+    <p>Estos datos permanecen en tu navegador y puedes eliminarlos en cualquier momento desde la configuración del navegador. Más detalles en la <a href="/cookies-es.html">Política de Cookies</a>.</p>
+  </section>
+
+  <section class="blk" id="s11">
+    <h2 class="sec"><span class="no">11.</span>Menores</h2>
+    <p>El Servicio está destinado exclusivamente a personas <strong>mayores de 18 años</strong>. No recopilamos conscientemente datos de menores. Si tienes conocimiento de que un menor nos ha proporcionado datos, contáctanos para su eliminación.</p>
+  </section>
+
+  <section class="blk" id="s12">
+    <h2 class="sec"><span class="no">12.</span>Inteligencia artificial</h2>
+    <p>Los guiones se generan automáticamente, con la ayuda de modelos de inteligencia artificial, a partir de la información que introduces. Este proceso produce un texto orientativo y <strong>no adopta decisiones con efectos jurídicos</strong> sobre ninguna persona. No utilizamos tus datos para entrenar modelos propios.</p>
+  </section>
+
+  <section class="blk" id="s13">
+    <h2 class="sec"><span class="no">13.</span>Modificaciones de la política</h2>
+    <p>Podemos actualizar la presente política. Indicaremos en la parte superior la fecha de la última actualización y, para cambios importantes, realizaremos esfuerzos razonables para informarte. Al seguir utilizando el servicio tras la actualización, tomas conocimiento de la nueva versión.</p>
+  </section>
+
+  <section class="blk" id="s14">
+    <h2 class="sec"><span class="no">14.</span>Contacto y reclamaciones</h2>
+    <p>Para cualquier pregunta relativa a tus datos: <a href="mailto:contact@octavianalupoaie.biz">contact@octavianalupoaie.biz</a>.</p>
+    <p>Si te encuentras en la Unión Europea y consideras que tus derechos han sido vulnerados, tienes derecho a presentar una reclamación ante la autoridad de protección de datos competente de tu país.</p>
+  </section>
+
+  <footer>
+    <div>© 2026 VITANIC SALES LLC · Harvard of Sales</div>
+    <div style="margin-top:10px">
+      <a href="/termeni-es.html">Términos y Condiciones</a> ·
+      <a href="/confidentialitate-es.html">Política de Privacidad</a> ·
+      <a href="/cookies-es.html">Política de Cookies</a>
+    </div>
+  </footer>
+</div>
+
+</body>
+</html>
