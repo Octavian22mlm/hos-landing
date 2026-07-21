@@ -1,0 +1,3092 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Harvard of Sales — Generator scripturi</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,500&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#080b12;--bg2:#0d1322;--panel:#121a2b;--panel2:#161f33;
+  --ink:#eef1f7;--muted:#9aa3b8;--muted2:#5a6378;
+  --gold:#d8a94a;--goldl:#ecca7e;--goldd:#c2933a;
+  --line:rgba(216,169,74,.18);--lsoft:rgba(255,255,255,.07);
+  --green:#3ecf8e;--red:#e05252;
+  --face:#16203a;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:"Hanken Grotesk",sans-serif;background:var(--bg);color:var(--ink);min-height:100vh;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:radial-gradient(60% 45% at 50% -5%,rgba(216,169,74,.09),transparent 55%),linear-gradient(180deg,#0a0f1b,var(--bg) 50%)}
+.z{position:relative;z-index:1}
+input,textarea,select{width:100%;padding:12px 14px;background:var(--panel2);border:1px solid var(--lsoft);border-radius:8px;
+  color:var(--ink);font-family:"Hanken Grotesk",sans-serif;font-size:16px;outline:none;resize:vertical;transition:border-color .2s}
+input:focus,textarea:focus,select:focus{border-color:var(--gold)}
+select option{background:var(--panel2)}
+label{display:block;font-size:13.5px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:7px}
+.btn{width:100%;padding:14px;background:linear-gradient(180deg,var(--goldl),var(--goldd));color:#1a1206;
+  font-family:"Hanken Grotesk",sans-serif;font-size:16px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;
+  border:none;border-radius:9px;cursor:pointer;transition:filter .2s,transform .15s}
+.btn:hover{filter:brightness(1.07);transform:translateY(-1px)}
+.btn:disabled{opacity:.45;cursor:not-allowed;transform:none;filter:none}
+.btn-ghost{background:transparent;color:var(--gold);border:1px solid var(--line);
+  font-family:"Hanken Grotesk",sans-serif;font-size:15px;font-weight:600;padding:11px 20px;
+  border-radius:8px;cursor:pointer;transition:border-color .2s;width:auto}
+.btn-ghost:hover{border-color:var(--gold)}
+.err{background:rgba(224,82,82,.12);border:1px solid rgba(224,82,82,.3);border-radius:8px;
+  padding:11px 14px;font-size:15px;color:#f08080;display:none;margin-bottom:14px}
+.suc{background:rgba(62,207,142,.1);border:1px solid rgba(62,207,142,.3);border-radius:8px;
+  padding:11px 14px;font-size:15px;color:var(--green);display:none;margin-bottom:14px}
+
+/* ── TOAST ── */
+#toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(100px);
+  background:var(--panel2);border:1px solid var(--line);border-radius:10px;
+  padding:13px 22px;font-size:15px;color:var(--ink);z-index:999;transition:transform .3s;white-space:nowrap}
+#toast.show{transform:translateX(-50%) translateY(0)}
+
+/* ── VIEWS ── */
+.view{display:none;min-height:100vh}
+.view.active{display:block}
+
+/* ── AUTH CARDS ── */
+.auth-wrap{display:flex;align-items:center;justify-content:center;min-height:100vh;padding:20px}
+.auth-card{background:rgba(18,26,43,.7);border:1px solid var(--line);border-radius:18px;
+  padding:44px 48px;width:100%;max-width:460px;backdrop-filter:blur(8px);margin-left:auto;margin-right:auto}
+.auth-brand{text-align:center;margin-bottom:30px}
+.auth-brand .name{font-family:"Playfair Display",serif;font-weight:700;font-size:23px;color:var(--gold);letter-spacing:.06em}
+.auth-brand .sub{font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:var(--muted2);margin-top:5px}
+.auth-card h2{font-family:"Playfair Display",serif;font-size:28px;color:var(--ink);margin-bottom:8px}
+.auth-card p{font-size:15px;color:var(--muted);margin-bottom:26px}
+.auth-card .field{margin-bottom:18px}
+.auth-switch{text-align:center;margin-top:18px;font-size:14.5px;color:var(--muted)}
+.auth-switch a{color:var(--gold);cursor:pointer;text-decoration:underline}
+
+/* ── GENERATOR ── */
+#view-generator{padding-bottom:60px}
+.gen-header{background:rgba(8,11,18,.8);border-bottom:1px solid var(--lsoft);
+  backdrop-filter:blur(10px);padding:14px 28px;display:flex;align-items:center;
+  justify-content:space-between;gap:16px;flex-wrap:wrap;position:sticky;top:0;z-index:10}
+.gen-header .brand{display:flex;align-items:center;gap:12px}
+.gen-header .name{font-family:"Playfair Display",serif;font-weight:700;color:var(--gold);font-size:18px}
+.counter-box{display:flex;align-items:center;gap:14px}
+.counter{background:var(--panel);border:1px solid var(--line);border-radius:30px;
+  padding:8px 18px;font-size:14.5px;font-weight:600}
+.counter .num{color:var(--gold);font-size:18px;font-weight:700}
+.counter .tier-badge{font-size:12px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--muted);margin-left:6px}
+.gen-wrap{max-width:800px;margin:0 auto;padding:46px 24px 0}
+.section-card{background:var(--panel);border:1px solid var(--lsoft);border-radius:13px;
+  padding:26px 28px;margin-bottom:22px}
+.section-card h3{font-family:"Playfair Display",serif;font-size:20px;color:var(--gold);margin-bottom:20px;
+  padding-bottom:12px;border-bottom:1px solid var(--lsoft);
+  display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 14px}
+.section-card h3 .h3-link{font-family:"Hanken Grotesk",sans-serif;font-size:13px;font-weight:600;
+  color:var(--muted);cursor:pointer;text-transform:none;letter-spacing:0;margin-left:auto}
+.section-card h3 .h3-link:hover{color:var(--gold)}
+.field{margin-bottom:18px}
+.field:last-child{margin-bottom:0}
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:18px}
+.field-row:last-child{margin-bottom:0}
+.field-note{font-size:13px;color:var(--muted2);margin-top:6px;font-style:italic}
+.stil-chips{display:flex;flex-wrap:wrap;gap:9px}
+.stil-chip{background:var(--panel2);border:1.5px solid var(--lsoft);color:var(--muted);
+  font-family:"Hanken Grotesk",sans-serif;font-size:15px;font-weight:600;
+  padding:10px 16px;border-radius:9px;cursor:pointer;transition:border-color .2s,color .2s,background .2s}
+.stil-chip:hover{border-color:rgba(216,169,74,.4);color:var(--ink)}
+.stil-chip.selected{border-color:var(--gold);background:rgba(216,169,74,.08);color:var(--goldl)}
+.stil-help{font-size:14.5px;color:var(--goldl);margin:0 0 11px;line-height:1.45;font-weight:500}
+
+/* ── UPGRADE NUDGE ── */
+.upgrade-nudge{display:none;margin-bottom:22px}
+.upgrade-nudge-inner{background:linear-gradient(180deg,rgba(216,169,74,.12),rgba(216,169,74,.04));
+  border:1px solid var(--line);border-radius:12px;padding:14px 20px;
+  display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.upgrade-nudge .un-text{flex:1;min-width:200px;font-size:15px;color:var(--ink);line-height:1.45}
+.upgrade-nudge .un-text b{color:var(--goldl)}
+.upgrade-nudge .un-cta{flex-shrink:0}
+
+/* ── MODE SELECTOR ── */
+.mode-options{display:flex;flex-direction:column;gap:11px}
+.mode-option{display:flex;align-items:center;gap:14px;padding:14px 18px;
+  background:var(--panel2);border:1.5px solid var(--lsoft);border-radius:10px;cursor:pointer;transition:border-color .2s}
+.mode-option:hover:not(.locked){border-color:rgba(216,169,74,.4)}
+.mode-option.selected{border-color:var(--gold);background:rgba(216,169,74,.07)}
+.mode-option.locked{opacity:.45;cursor:not-allowed}
+.mode-radio{width:18px;height:18px;border-radius:50%;border:2px solid var(--muted);flex:0 0 auto;transition:all .2s}
+.mode-option.selected .mode-radio{border-color:var(--gold);background:var(--gold)}
+.mode-option.locked .mode-radio{border-color:var(--muted2)}
+.mode-text .mode-title{font-size:16px;font-weight:600;color:var(--ink)}
+.mode-text .mode-desc{font-size:14px;color:var(--muted);margin-top:2px}
+.lock-badge{margin-left:auto;background:rgba(216,169,74,.12);border:1px solid var(--line);
+  border-radius:20px;padding:4px 12px;font-size:12.5px;font-weight:600;
+  letter-spacing:.05em;color:var(--gold);white-space:nowrap;flex-shrink:0}
+
+/* ── OUTPUT ── */
+.output-wrap{max-width:800px;margin:0 auto;padding:32px 24px}
+.output-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:22px;flex-wrap:wrap;gap:12px}
+.output-header h2{font-family:"Playfair Display",serif;font-size:28px;color:var(--ink)}
+.script-box{background:#faf7f0;border:1px solid rgba(0,0,0,.08);border-radius:13px;padding:32px 34px;
+  white-space:pre-wrap;line-height:1.8;font-size:16.5px;color:#23262e;max-height:68vh;overflow-y:auto;
+  box-shadow:0 14px 36px rgba(0,0,0,.34)}
+.script-box strong{color:#7a5f10;font-weight:700}
+.script-actions{display:flex;gap:12px;margin-top:18px;flex-wrap:wrap}
+.script-box .script-rule{display:block;margin:16px 0 10px;padding-top:12px;border-top:1px solid rgba(0,0,0,.16);font-size:13px;letter-spacing:.05em;color:#7a5f10;font-weight:700;line-height:1.45}
+.script-box .script-rule.bare{padding-top:0;height:0;margin:14px 0;border-top:1px solid rgba(0,0,0,.12)}
+.script-box .script-zone{display:block;margin:22px 0 18px;background:rgba(122,95,16,.10);border-left:3px solid #b8903a;padding:11px 14px;font-size:14.5px;letter-spacing:.02em;color:#5a4a14;font-weight:700;line-height:1.4}
+.script-box .script-pause{display:inline-block;background:rgba(0,0,0,.05);border-radius:6px;padding:3px 10px;font-size:13.5px;color:#555;font-weight:600}
+.prog-sub{text-align:center;color:var(--goldl);font-size:14px;letter-spacing:.04em;margin:-14px 0 22px}
+.prog-warn{text-align:center;color:var(--muted);font-size:13.5px;margin-top:14px;line-height:1.4}
+.prog-warn b{color:var(--goldl);font-weight:600}
+
+/* ── OBJECTION SECTION ── */
+.obj-card{background:var(--panel);border:1px solid var(--line);border-radius:13px;padding:26px 28px;margin-top:20px}
+.obj-q{font-family:"Playfair Display",serif;font-size:20px;color:var(--ink);margin-bottom:18px}
+.obj-btns{display:flex;gap:12px;flex-wrap:wrap}
+.obj-label{font-size:13.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin:24px 0 12px}
+.spinner{display:inline-block;width:20px;height:20px;border:2px solid rgba(216,169,74,.3);
+  border-top-color:var(--gold);border-radius:50%;animation:spin .7s linear infinite;vertical-align:middle;margin-right:9px}
+@keyframes spin{to{transform:rotate(360deg)}}
+.generating{text-align:center;padding:24px 20px;color:var(--muted)}
+.generating p{margin-top:16px;font-size:16px}
+
+/* ── PROGRESS (checklist 12 etape) ── */
+.prog-card{width:100%;max-width:440px;margin:0 auto;text-align:left}
+.prog-title{font-family:"Playfair Display",serif;font-size:22px;color:var(--ink);text-align:center;margin-bottom:22px}
+.prog-head{display:flex;align-items:center;gap:14px;margin-bottom:12px}
+.progress-track{flex:1;height:9px;background:rgba(216,169,74,.12);border-radius:20px;overflow:hidden}
+.progress-fill{height:100%;width:0%;background:linear-gradient(90deg,var(--goldd),var(--goldl));
+  border-radius:20px;box-shadow:0 0 10px rgba(216,169,74,.5)}
+.prog-pctnum{font-family:"Playfair Display",serif;font-weight:700;color:var(--gold);font-size:19px;min-width:44px;text-align:right}
+.prog-list{display:flex;flex-direction:column;gap:10px}
+.pstep{display:flex;align-items:center;gap:12px;font-size:14.5px;transition:color .3s,opacity .3s}
+.pstep-ico{width:18px;height:18px;border-radius:50%;flex:0 0 auto;position:relative;
+  border:2px solid var(--muted2);box-sizing:border-box;transition:border-color .3s,background .3s}
+.pstep-txt{line-height:1.35}
+.pstep.pending{color:var(--muted2);opacity:.55}
+.pstep.active{color:var(--ink)}
+.pstep.active .pstep-ico{border-color:var(--gold);border-top-color:transparent;animation:spin .7s linear infinite}
+.pstep.done{color:var(--muted)}
+.pstep.done .pstep-ico{border-color:var(--gold);background:var(--gold);animation:none}
+.pstep.done .pstep-ico::after{content:"";position:absolute;left:5px;top:1px;width:4px;height:9px;
+  border:solid #1a1206;border-width:0 2px 2px 0;transform:rotate(45deg)}
+.prog-cap{text-align:center;margin-top:22px;font-size:15.5px;color:var(--gold);min-height:20px;font-weight:600}
+.obj-prog-ctx{font-size:15px;color:var(--muted);margin-bottom:20px;padding-bottom:14px;border-bottom:1px solid var(--lsoft)}
+.obj-prog-ctx i{color:var(--goldl);font-style:italic}
+
+/* ===== OMULET LOADER (stari de incarcare) ===== */
+.omu{position:relative;width:188px;height:194px;margin:0 auto 4px}
+#omu-main{background:radial-gradient(circle at 50% 46%,rgba(216,169,74,.13),rgba(216,169,74,0) 60%)}
+.omu svg{width:100%;height:100%;display:block;overflow:visible}
+.omu .guy{transform-box:fill-box;transform-origin:50% 100%;animation:omBob 3.6s cubic-bezier(.45,0,.55,1) infinite}
+@keyframes omBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+.omu .head{transform-box:fill-box;transform-origin:50% 96%;animation:omTilt 6.5s ease-in-out infinite}
+@keyframes omTilt{0%,100%{transform:rotate(-2.2deg)}50%{transform:rotate(2.2deg)}}
+.omu .torso{transform-box:fill-box;transform-origin:50% 100%;animation:omBr 3.6s ease-in-out infinite}
+@keyframes omBr{0%,100%{transform:scaleY(1)}50%{transform:scaleY(1.04)}}
+.omu .eyes{transform-box:fill-box;transform-origin:50% 50%;animation:omBlink 4.6s infinite}
+@keyframes omBlink{0%,92%,100%{transform:scaleY(1)}95%{transform:scaleY(.08)}}
+.omu .l-arm{transform-box:fill-box;transform-origin:86% 10%}
+.omu .pen-hand{transform-box:fill-box;transform-origin:18% 12%}
+.omu .spine{transform-box:fill-box;transform-origin:50% 100%}
+.omu .guywrap{transform-box:fill-box;transform-origin:50% 100%}
+.omu .guywrap.pop{animation:omPop .45s cubic-bezier(.34,1.56,.64,1)}
+@keyframes omPop{0%{transform:translateY(0) scale(1,1)}25%{transform:translateY(3px) scale(1.08,.92)}55%{transform:translateY(-8px) scale(.96,1.05)}100%{transform:translateY(0) scale(1,1)}}
+.omu [data-p]{opacity:0;transition:opacity .4s}
+.omu .bulb,.omu .bubble{opacity:0}
+.omu .talk,.omu .happy{opacity:0;transition:opacity .3s;transform-box:fill-box;transform-origin:50% 50%}
+.omu .mouth-n,.omu .eyes-n{transition:opacity .3s}
+.omu.s-teach .bulb{opacity:1;animation:omBulb 1.8s ease-in-out infinite}
+@keyframes omBulb{0%,100%{opacity:.5}50%{opacity:1}}
+.omu.s-read [data-p=read]{opacity:1}
+.omu.s-read .head{animation:omNod 1.1s ease-in-out infinite}
+@keyframes omNod{0%,100%{transform:rotate(-1deg)}50%{transform:rotate(3deg)}}
+.omu.s-read .talk{opacity:1;animation:omTalk .42s ease-in-out infinite}
+@keyframes omTalk{0%,100%{transform:scaleY(.45)}50%{transform:scaleY(1.15)}}
+.omu.s-jump .guy{animation:omJump .85s cubic-bezier(.3,0,.35,1) infinite}
+@keyframes omJump{0%,100%{transform:translateY(0) scaleY(1)}18%{transform:translateY(3px) scaleY(.9)}50%{transform:translateY(-22px) scaleY(1.06)}82%{transform:translateY(0) scaleY(.95)}}
+.omu.s-jump [data-p=jump]{opacity:1}
+.omu.s-jump .l-arm{animation:omJL .85s ease-in-out infinite}
+@keyframes omJL{0%,100%{transform:rotate(-34deg)}50%{transform:rotate(-54deg)}}
+.omu.s-jump .pen-hand{animation:omJR .85s ease-in-out infinite}
+@keyframes omJR{0%,100%{transform:rotate(34deg)}50%{transform:rotate(54deg)}}
+.omu.s-jump .energy path{animation:omEn .85s ease-out infinite}
+@keyframes omEn{0%{opacity:0;transform:translateY(6px)}40%{opacity:1}100%{opacity:0;transform:translateY(-8px)}}
+.omu.s-breathe [data-p=breathe]{opacity:1}
+.omu.s-breathe .torso{animation:omBrB 3.4s ease-in-out infinite}
+@keyframes omBrB{0%,100%{transform:scaleY(1)}50%{transform:scaleY(1.09)}}
+.omu.s-breathe .rings circle{animation:omRing 3.4s ease-out infinite}
+.omu .rings circle:nth-child(2){animation-delay:.6s}
+@keyframes omRing{0%{r:16px;opacity:.55}100%{r:52px;opacity:0}}
+.omu.s-notes [data-p=notes]{opacity:1}
+.omu.s-notes .pen-hand{animation:omWrite .8s ease-in-out infinite}
+@keyframes omWrite{0%,100%{transform:rotate(0) translate(0,0)}50%{transform:rotate(7deg) translate(3px,2px)}}
+.omu.s-smile [data-p=smile]{opacity:1}
+.omu.s-smile .l-arm{animation:omWave .75s ease-in-out infinite}
+@keyframes omWave{0%,100%{transform:rotate(2deg)}50%{transform:rotate(-26deg)}}
+.omu.s-smile .spark path{animation:omSpk 1.2s ease-in-out infinite}
+.omu .spark path:nth-child(2){animation-delay:.4s}
+@keyframes omSpk{0%,100%{opacity:0;transform:scale(.5)}50%{opacity:1;transform:scale(1)}}
+.omu.s-silent [data-p=silent]{opacity:1}
+.omu.s-silent .phone{animation:omBuzz 1s ease-in-out infinite}
+@keyframes omBuzz{0%,100%{transform:rotate(-5deg)}50%{transform:rotate(5deg)}}
+.omu.s-think .guy{animation:omJoy 1s ease-in-out infinite}
+@keyframes omJoy{0%,100%{transform:translateY(0)}30%{transform:translateY(-8px)}62%{transform:translateY(-2px)}}
+.omu .bubble{transform-box:fill-box;transform-origin:30% 100%}
+.omu.s-think .bubble{animation:omBub .55s cubic-bezier(.34,1.56,.64,1) forwards}
+@keyframes omBub{0%{opacity:0;transform:scale(.2)}60%{opacity:1}100%{opacity:1;transform:scale(1)}}
+.omu.s-smile .happy,.omu.s-think .happy,.omu.s-breathe .happy{opacity:1}
+.omu.s-smile .eyes-n,.omu.s-think .eyes-n,.omu.s-breathe .eyes-n{opacity:0}
+.omu.s-read .mouth-n,.omu.s-smile .mouth-n,.omu.s-think .mouth-n,.omu.s-breathe .mouth-n{opacity:0}
+.om-row{display:flex;align-items:center;gap:11px;justify-content:center;text-align:left;min-height:62px;margin:2px 6px 18px}
+.om-stepno{width:26px;height:26px;border-radius:50%;background:var(--gold);color:#1a1206;font-weight:700;font-size:15px;display:flex;align-items:center;justify-content:center;flex:0 0 auto}
+.om-stepno.hide{display:none}
+.om-tip{font-size:16px;line-height:1.5;color:var(--ink);max-width:300px;transition:opacity .3s}
+.om-tip b{color:var(--goldl);font-weight:600}
+.om-dots{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;max-width:200px;margin:0 auto 18px}
+.om-dots i{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.16);transition:.3s}
+.om-dots i.on{background:var(--gold);width:18px;border-radius:6px}
+.gen-phase{text-align:center;margin:2px 0 16px;transition:opacity .3s}
+.gen-phase.lesson{font-size:12.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.gen-phase.step{font-size:17px;font-weight:600;color:var(--goldl);line-height:1.4;max-width:330px;margin-left:auto;margin-right:auto}
+.gen-phase.trans{font-family:"Playfair Display",serif;font-size:23px;font-weight:700;color:var(--goldl);line-height:1.35;max-width:330px;margin:0 auto;text-transform:none;letter-spacing:0;animation:signalIn .55s cubic-bezier(.22,1,.36,1) both}
+@keyframes signalIn{from{opacity:0;transform:translateY(12px) scale(.95)}to{opacity:1;transform:none}}
+.lesson-box{max-width:330px;margin:0 auto 4px;transition:opacity .3s}
+#gen-loader{display:flex;flex-direction:column;min-height:74vh}
+.gen-top{flex:0 0 auto}
+.gen-mid{flex:1 1 auto;display:flex;flex-direction:column;justify-content:center;align-items:center;width:100%}
+.gen-bot{flex:0 0 auto}
+#lesson-box{max-width:344px;padding:24px 24px 26px;border-radius:20px;background:linear-gradient(180deg,rgba(216,169,74,.08),rgba(216,169,74,.02));border:1px solid rgba(216,169,74,.24);box-shadow:0 10px 34px rgba(0,0,0,.28),inset 0 1px 0 rgba(216,169,74,.10)}
+#obj1-lbox,#obj2-lbox{max-width:none;padding:22px 24px 24px;border-radius:16px;background:linear-gradient(180deg,rgba(216,169,74,.07),rgba(216,169,74,.02));border:1px solid rgba(216,169,74,.22);box-shadow:0 6px 22px rgba(0,0,0,.22),inset 0 1px 0 rgba(216,169,74,.08);margin:18px auto 22px}
+.tw-caret{display:inline-block;color:var(--goldl);animation:twBlink .7s steps(1) infinite;margin-left:1px;font-weight:400}
+@keyframes twBlink{50%{opacity:0}}
+.lesson-box.reveal{animation:pageOpen .55s cubic-bezier(.22,1,.36,1) both}
+@keyframes pageOpen{from{opacity:0;transform:translateY(14px) scale(.985)}to{opacity:1;transform:none}}
+.lesson-title{text-align:center;color:var(--gold);font-weight:700;font-size:18px;line-height:1.3;margin-bottom:10px}
+.lesson-body{text-align:center;font-size:16px;line-height:1.55;color:var(--ink)}
+
+/* ===== OMULET FINAL (stare gata) ===== */
+.gen-ready{text-align:center;display:none}
+.omuf{position:relative;width:188px;height:172px;margin:6px auto 12px}
+.omuf svg{width:100%;height:100%;display:block;overflow:visible}
+.omuf .guy{transform-box:fill-box;transform-origin:50% 100%;animation:ofJoy 1.6s ease-in-out infinite}
+@keyframes ofJoy{0%,100%{transform:translateY(0)}45%{transform:translateY(-5px)}}
+.omuf .head{transform-box:fill-box;transform-origin:50% 96%;animation:ofLean 3s ease-in-out infinite}
+@keyframes ofLean{0%,100%{transform:rotate(3deg)}50%{transform:rotate(6deg)}}
+.omuf .eye{transform-box:fill-box;transform-origin:50% 50%;animation:ofBlink 4s infinite}
+@keyframes ofBlink{0%,93%,100%{transform:scaleY(1)}96%{transform:scaleY(.1)}}
+.omuf .ring path{animation:ofRng 1.4s ease-out infinite}
+.omuf .ring path:nth-child(2){animation-delay:.45s}
+@keyframes ofRng{0%{opacity:0;transform:scale(.7)}40%{opacity:1}100%{opacity:0;transform:scale(1.15)}}
+.gr-check{width:44px;height:44px;border-radius:50%;background:rgba(62,207,142,.15);border:1.5px solid var(--green);display:flex;align-items:center;justify-content:center;margin:0 auto 12px}
+.gr-check svg{width:22px;height:22px}
+.gr-check path{stroke:var(--green);stroke-width:3;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.gr-msg{font-size:17px;line-height:1.55;color:var(--ink);font-weight:600;margin:0 6px 2px}
+.gr-cta{font-family:"Playfair Display",serif;font-size:24px;font-weight:700;color:var(--goldl);margin:10px 0 22px}
+
+@media(max-width:600px){
+  .auth-card{padding:28px 22px}
+  .gen-wrap,.output-wrap{padding:34px 14px 0}
+  .section-card{padding:20px 16px}
+  .field-row{grid-template-columns:1fr}
+}
+
+/* ── PROOF / COUNTER SECTION ── */
+.proof-section{text-align:center;padding:56px 20px 36px;max-width:580px;margin:0 auto}
+.proof-eyebrow{text-transform:uppercase;letter-spacing:.3em;font-size:12px;font-weight:700;color:var(--gold);margin-bottom:24px}
+.stat-ring-wrap{position:relative;width:190px;height:190px;margin:0 auto 20px}
+.stat-ring-wrap svg{position:absolute;inset:0;transform:rotate(-90deg)}
+.ring-track{fill:none;stroke:rgba(216,169,74,.12);stroke-width:11}
+.ring-fill{fill:none;stroke:var(--gold);stroke-width:11;stroke-linecap:round;
+  stroke-dasharray:534;stroke-dashoffset:534;transition:stroke-dashoffset 2.4s cubic-bezier(.15,.85,.2,1);
+  filter:drop-shadow(0 0 8px rgba(216,169,74,.45))}
+.ring-inner{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px}
+.big-num{font-family:"Playfair Display",serif;font-size:62px;font-weight:900;color:var(--gold);line-height:1;letter-spacing:-.02em}
+.big-pct{font-size:30px;font-weight:700;vertical-align:super;color:var(--goldl)}
+.ring-sub{font-size:12.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted2)}
+.stat-headline{font-family:"Playfair Display",serif;font-size:23px;color:var(--ink);margin-bottom:10px}
+.stat-headline em{font-style:italic;color:var(--gold)}
+.stat-compare{font-size:15px;color:var(--muted);line-height:1.6}
+.stat-compare strong{color:var(--goldl);font-weight:700}
+.stat-divider{width:56px;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);margin:20px auto}
+.stat-proof{font-size:14.5px;color:var(--muted2);font-style:italic;margin-bottom:32px}
+.live-badge{display:inline-flex;align-items:center;gap:10px;
+  background:rgba(62,207,142,.07);border:1px solid rgba(62,207,142,.2);
+  border-radius:30px;padding:10px 20px;margin-bottom:22px;font-size:16px;color:var(--ink)}
+.live-badge strong{font-size:21px;font-weight:700;color:var(--green);font-family:"Playfair Display",serif}
+.live-dot{width:9px;height:9px;background:var(--green);border-radius:50%;flex-shrink:0;
+  animation:pulse-dot 1.8s ease-in-out infinite}
+@keyframes pulse-dot{
+  0%,100%{box-shadow:0 0 0 0 rgba(62,207,142,.5)}
+  50%{box-shadow:0 0 0 7px rgba(62,207,142,0)}}
+
+/* ===== HEADER v2: brand + tagline + nav tabs + lang ===== */
+.gen-header{display:block;padding:0}
+.topbar{display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap;padding:18px 24px}
+.brandwrap{display:flex;flex-direction:column;gap:4px}
+.brandwrap .name{font-family:"Playfair Display",serif;font-weight:700;color:var(--gold);font-size:19px;letter-spacing:.04em}
+.brandwrap .tagline{font-size:12px;letter-spacing:.26em;text-transform:uppercase;color:var(--muted2)}
+.topright{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.langtog{display:flex;border:1px solid var(--line);border-radius:7px;overflow:hidden}
+.langtog .lang{display:inline-flex;align-items:center;gap:5px;background:transparent;color:var(--muted);border:none;padding:6px 10px;font-size:13px;font-weight:600;cursor:pointer;letter-spacing:.04em}
+.langtog .lang+.lang{border-left:1px solid var(--line)}
+.langtog .lang .flag{font-size:14px;line-height:1}
+.langtog .lang.active{background:var(--gold);color:#1a1206}
+.iesire{padding:7px 14px;font-size:13px;letter-spacing:.12em;text-transform:uppercase}
+.navtabs{display:flex;gap:2px;padding:0 16px;border-top:1px solid var(--lsoft);overflow-x:auto}
+.navtab{position:relative;background:transparent;border:none;color:var(--muted);font-family:"Hanken Grotesk",sans-serif;
+  font-size:14px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:13px 16px;cursor:pointer;white-space:nowrap;
+  border-bottom:2px solid transparent;transition:color .2s}
+.navtab:hover{color:var(--ink)}
+.navtab.active{color:var(--gold);border-bottom-color:var(--gold)}
+.navtab.soon{color:var(--muted2);cursor:default}
+.navtab.soon:hover{color:var(--muted)}
+.soon-badge{font-size:11.5px;letter-spacing:.08em;background:rgba(216,169,74,.13);color:var(--gold);
+  border:0.5px solid var(--line);border-radius:20px;padding:2px 6px;margin-left:7px;vertical-align:middle;text-transform:none}
+
+/* ===== GUIDE BUTTONS (deasupra formularului / scriptului) ===== */
+.guide-bar{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:40px}
+.guide-btn{background:var(--panel);border:1px solid var(--line);color:var(--goldl);
+  font-family:"Hanken Grotesk",sans-serif;font-size:14.5px;font-weight:600;padding:10px 16px;border-radius:9px;cursor:pointer;
+  transition:border-color .2s,background .2s}
+.guide-btn:hover{border-color:var(--gold);background:var(--panel2)}
+/* ── PAȘI NUMEROTAȚI (gate prima utilizare) ── */
+.step-btn{display:flex;align-items:center;gap:9px}
+.step-btn .step-no{display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;
+  background:rgba(216,169,74,.15);border:1px solid var(--line);color:var(--gold);font-size:13px;font-weight:700;flex:0 0 auto}
+.step-btn .step-check{color:var(--green);font-weight:700;opacity:0;transition:opacity .2s}
+.step-btn.step-ok{border-color:rgba(62,207,142,.4)}
+.step-btn.step-ok .step-no{background:var(--green);border-color:var(--green);color:#06231a}
+.step-btn.step-ok .step-check{opacity:1}
+.gate-hint{display:none;text-align:center;font-size:14px;color:var(--gold);margin-bottom:10px}
+
+/* ===== MODAL ===== */
+.modal-overlay{position:fixed;inset:0;z-index:200;background:rgba(4,6,11,.78);backdrop-filter:blur(4px);
+  display:none;align-items:center;justify-content:center;padding:20px}
+.modal-overlay.show{display:flex}
+.modal-box{background:var(--bg2);border:1px solid var(--line);border-radius:16px;width:100%;max-width:640px;
+  max-height:88vh;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 24px 70px rgba(0,0,0,.55)}
+.modal-head{padding:22px 26px 16px;border-bottom:1px solid var(--lsoft)}
+.modal-title{font-family:"Playfair Display",serif;font-size:23px;color:var(--gold);font-weight:700}
+.modal-subtitle{font-size:14px;color:var(--muted);margin-top:5px}
+.modal-body{padding:20px 26px;overflow-y:auto}
+.modal-foot{padding:16px 26px;border-top:1px solid var(--lsoft);display:flex;justify-content:flex-end}
+.modal-gate{max-width:320px}
+.modal-gate.locked{position:relative}
+.modal-gate:disabled::after{content:" — derulează până jos";font-weight:500;text-transform:none;letter-spacing:0;font-size:13px}
+
+/* Cont / abonament / retentie */
+.acc-loading{padding:26px;text-align:center;color:var(--muted);font-size:14px}
+.acc-grid{display:flex;flex-direction:column;gap:9px;margin-bottom:24px}
+.acc-row{display:flex;justify-content:space-between;align-items:center;gap:14px;padding:11px 14px;background:var(--bg);border:1px solid var(--lsoft);border-radius:10px}
+.acc-k{font-size:11.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}
+.acc-v{font-size:14px;color:var(--ink);font-weight:600;text-align:right;word-break:break-word}
+.acc-status{padding:13px 15px;border-radius:10px;background:var(--bg);border:1px solid var(--lsoft);font-size:14px;color:var(--ink);margin-bottom:16px;line-height:1.55}
+.acc-status.warn{border-color:var(--line);background:rgba(216,169,74,.06)}
+.acc-status b{color:var(--goldl)}
+.acc-note{font-size:13px;color:var(--muted);line-height:1.5}
+.acc-actions{display:flex;gap:10px;flex-wrap:wrap}
+.retain-lead{font-size:14px;color:var(--muted);line-height:1.55;margin-bottom:16px}
+.reason-chips{display:flex;flex-direction:column;gap:9px;margin-bottom:4px}
+.reason-chip{text-align:left;padding:13px 16px;border-radius:10px;background:var(--bg);border:1px solid var(--line);color:var(--ink);font-size:14px;cursor:pointer;transition:.15s;font-family:inherit}
+.reason-chip:hover{border-color:var(--gold);color:var(--goldl)}
+.retain-msg{padding:16px 18px;border-radius:12px;background:var(--bg);border:1px solid var(--lsoft);font-size:14px;line-height:1.62;color:var(--ink);margin-bottom:16px}
+.retain-msg.ok{border-color:var(--line);background:rgba(216,169,74,.06)}
+.retain-msg b{color:var(--goldl)}
+.help-area{width:100%;min-height:120px;resize:vertical;padding:12px 14px;border-radius:10px;background:var(--bg);border:1px solid var(--line);color:var(--ink);font-family:inherit;font-size:14px;margin-bottom:14px}
+.help-area:focus{outline:none;border-color:var(--gold)}
+.btn-row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.btn-stay{background:var(--gold);color:#1a1206;border:none;padding:11px 20px;border-radius:9px;font-weight:700;cursor:pointer;font-size:14px;font-family:inherit}
+.btn-stay:hover{background:var(--goldl)}
+.btn-cancel{background:transparent;color:#d98a8a;border:1px solid rgba(217,138,138,.4);padding:11px 20px;border-radius:9px;cursor:pointer;font-size:14px;font-weight:600;font-family:inherit}
+.btn-cancel:hover{border-color:#d98a8a}
+.btn-cancel-soft{background:transparent;color:var(--muted);border:1px solid var(--line);padding:11px 20px;border-radius:9px;cursor:pointer;font-size:14px;font-family:inherit}
+.btn-cancel-soft:hover{color:#d98a8a;border-color:rgba(217,138,138,.4)}
+.plan-card{background:var(--bg);border:1px solid var(--line);border-radius:11px;padding:13px 15px;margin-bottom:10px}
+.plan-card.current{border-color:var(--gold);background:rgba(216,169,74,.06)}
+.plan-top{display:flex;justify-content:space-between;align-items:baseline}
+.plan-name{font-size:15px;font-weight:700;color:var(--ink)}
+.plan-price{font-size:14px;color:var(--goldl);font-weight:600}
+.plan-feat{font-size:12.5px;color:var(--muted);margin:4px 0 10px}
+.plan-scripts{font-size:13px;color:var(--goldl);font-weight:600;margin:0 0 2px}
+.plan-per{font-size:12px;color:var(--muted);margin:0 0 12px}
+.plan-cur{font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--gold);font-weight:600}
+.plan-pick{width:100%;background:transparent;color:var(--gold);border:1px solid var(--line);padding:9px;border-radius:8px;cursor:pointer;font-size:13.5px;font-family:inherit}
+.plan-pick:hover{border-color:var(--gold);background:rgba(216,169,74,.06)}
+.plan-topup{width:100%;margin-top:9px;background:var(--gold);color:#1a1206;border:none;padding:9px;border-radius:8px;cursor:pointer;font-size:13px;font-weight:700;font-family:inherit}
+.plan-topup:hover{background:var(--goldl)}
+
+/* Reguli cards */
+.rule-card{display:flex;gap:14px;padding:14px 0;border-bottom:1px solid var(--lsoft)}
+.rule-card:last-child{border-bottom:none}
+.rule-num{flex:0 0 30px;height:30px;border-radius:50%;background:rgba(216,169,74,.13);border:1px solid var(--line);
+  color:var(--gold);font-weight:700;display:flex;align-items:center;justify-content:center;font-size:15px}
+.rule-txt .rt{font-weight:700;color:var(--ink);font-size:16px;margin-bottom:4px}
+.rule-txt .rd{font-size:14.5px;color:var(--muted);line-height:1.55}
+
+/* ASA DA / NU comparison */
+.cmp-intro{font-size:14.5px;color:var(--muted);margin-bottom:18px;line-height:1.5}
+.cmp-blk{margin-bottom:18px}
+.cmp-fname{font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--goldl);margin-bottom:8px}
+.cmp{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.cmp .box{border-radius:10px;padding:12px 14px;border-left:3px solid}
+.cmp .nu{background:rgba(226,75,74,.08);border-left-color:#e24b4a}
+.cmp .da{background:rgba(29,158,117,.09);border-left-color:#1d9e75}
+.cmp .tag{font-size:12px;font-weight:700;letter-spacing:.05em;margin-bottom:6px}
+.cmp .tag-nu{color:#f09595}
+.cmp .tag-da{color:#5dcaa5}
+.cmp .ex{font-size:14px;color:#dfe5ee;line-height:1.45}
+.cmp-why{font-size:13px;color:var(--muted2);font-style:italic;margin-top:8px}
+.cmp-rule{margin-top:8px;background:rgba(216,169,74,.08);border:0.5px solid var(--line);border-radius:10px;
+  padding:13px 15px;font-size:14.5px;color:#e9d9b4;line-height:1.5}
+@media(max-width:560px){.cmp{grid-template-columns:1fr}}
+
+/* ===== INVITAȚIA-FULGER ===== */
+.fsub-nav{display:flex;gap:2px;margin-bottom:34px;border-bottom:1px solid var(--lsoft)}
+.fsub-btn{background:transparent;border:none;color:var(--muted);font-family:"Hanken Grotesk",sans-serif;
+  font-size:15px;font-weight:600;padding:11px 2px;margin-right:24px;cursor:pointer;border-bottom:2px solid transparent;transition:color .2s}
+.fsub-btn:hover{color:var(--ink)}
+.fsub-btn.active{color:var(--gold);border-bottom-color:var(--gold)}
+.ful-intro{background:var(--panel);border:1px solid var(--lsoft);border-radius:13px;padding:24px 26px;margin-bottom:22px}
+.ful-intro h3{font-family:"Playfair Display",serif;font-size:20px;color:var(--gold);margin-bottom:18px}
+.ful-warn{display:flex;gap:11px;align-items:flex-start;background:rgba(216,169,74,.09);
+  border:1px solid var(--line);border-radius:10px;padding:14px 16px;margin-bottom:22px}
+.ful-warn .wi{font-size:17px;line-height:1.4;flex:0 0 auto}
+.ful-warn .wt{font-size:14.5px;color:var(--ink);line-height:1.6}
+.ful-points{display:grid;gap:15px}
+.ful-pt .pq{font-size:14px;font-weight:700;color:var(--goldl);margin-bottom:4px}
+.ful-pt .pa{font-size:14.5px;color:var(--muted);line-height:1.62}
+.ful-card{background:var(--panel);border:1px solid var(--lsoft);border-radius:13px;padding:24px 26px;margin-bottom:18px}
+.ful-card .fc-name{font-family:"Playfair Display",serif;font-size:19px;color:var(--ink);margin-bottom:10px}
+.ful-card .fc-meta{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}
+.fc-tag{font-size:12px;padding:3px 11px;border-radius:7px;border:1px solid var(--lsoft);color:var(--muted)}
+.fc-tag.t-tier{background:rgba(216,169,74,.13);border-color:var(--line);color:var(--gold)}
+.fc-turn{display:flex;gap:13px;padding:7px 0}
+.fc-who{flex:0 0 56px;font-size:11.5px;font-weight:700;letter-spacing:.05em;color:var(--muted2);padding-top:4px;text-transform:uppercase}
+.fc-line{flex:1;font-size:15.5px;line-height:1.6;color:var(--ink)}
+.fc-turn.agent .fc-line{border-left:2px solid var(--gold);padding-left:13px}
+.fc-turn.client .fc-line{padding-left:15px}
+.fc-regie{margin:1px 0 1px 69px;font-size:13px;font-style:italic;color:var(--muted2)}
+.fc-regie::before{content:"▸ ";color:var(--goldd);font-style:normal}
+.fc-obj{margin:18px 0 4px;padding-top:15px;border-top:1px solid var(--lsoft);
+  font-size:12.5px;font-weight:700;letter-spacing:.03em;color:var(--muted)}
+.fc-psy{margin-top:20px;background:var(--bg2);border:1px solid var(--lsoft);border-radius:10px;padding:16px 18px}
+.fc-psy .pt{font-size:13.5px;font-weight:700;color:var(--gold);margin-bottom:12px}
+.fc-psy ul{list-style:none}
+.fc-psy li{font-size:14px;line-height:1.6;color:var(--muted);margin-bottom:9px;padding-left:16px;position:relative}
+.fc-psy li:last-child{margin-bottom:0}
+.fc-psy li::before{content:"›";position:absolute;left:0;color:var(--gold);font-weight:700}
+.fc-locked{display:flex;flex-direction:column;align-items:center;text-align:center;gap:13px;padding:10px 0 4px}
+.fc-locked .lk-ic{font-size:22px}
+.fc-locked .lk-tx{font-size:14px;color:var(--muted);line-height:1.55;max-width:360px}
+/* fundal crem DOAR pe zona de scripturi (dialogul), ca la scriptul generat — restul structurii ramane */
+.fc-script{background:#faf7f0;border:1px solid rgba(0,0,0,.08);border-radius:12px;padding:18px 22px;box-shadow:0 10px 28px rgba(0,0,0,.28);margin-bottom:6px}
+.fc-script .fc-who{color:#9a7d1e}
+.fc-script .fc-line{color:#23262e}
+.fc-script .fc-turn.agent .fc-line{border-left-color:#b8903a}
+.fc-script .fc-regie{color:#9a7d1e}
+.fc-script .fc-regie::before{color:#b8903a}
+.fc-script .fc-obj{border-top-color:rgba(0,0,0,.14);color:#7a5f10}
+/* ===== FULGER — BANNER 9/10 (execuție corectă) ===== */
+.ful9{position:relative;overflow:hidden;border:1.5px solid var(--gold);border-radius:14px;
+  background:linear-gradient(180deg,rgba(216,169,74,.14),rgba(18,26,43,.6));
+  box-shadow:0 20px 54px -28px rgba(216,169,74,.5);padding:26px 26px 22px;margin-bottom:22px}
+.ful9::before{content:"";position:absolute;top:-45%;right:-8%;width:300px;height:300px;
+  background:radial-gradient(circle,rgba(216,169,74,.16),transparent 65%);pointer-events:none}
+.ful9-top{display:flex;align-items:center;gap:22px;flex-wrap:wrap;position:relative}
+.ful9-badge{flex:0 0 auto;width:108px;height:108px;border-radius:50%;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;border:2px solid var(--gold);background:rgba(8,11,18,.5);
+  box-shadow:0 0 0 6px rgba(216,169,74,.09),inset 0 0 24px rgba(216,169,74,.14)}
+.ful9-badge .n{font-family:"Playfair Display",serif;font-size:40px;font-weight:900;color:var(--goldl);line-height:.9}
+.ful9-badge .n small{font-size:18px;font-weight:700;color:var(--muted)}
+.ful9-badge .lab{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted2);margin-top:5px}
+.ful9-txt{flex:1;min-width:250px}
+.ful9-kicker{display:inline-flex;align-items:center;gap:7px;font-size:11.5px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:9px}
+.ful9-txt h3{font-family:"Playfair Display",serif;font-size:22px;font-weight:700;line-height:1.2;color:var(--ink);margin:0}
+.ful9-txt h3 em{font-style:italic;color:var(--goldl)}
+.ful9-lead{color:var(--muted);font-size:14.5px;line-height:1.6;margin-top:9px;max-width:520px}
+.ful9-rules{margin-top:22px;border-top:1px solid var(--lsoft);padding-top:18px}
+.ful9-rh{display:flex;align-items:center;gap:9px;font-size:12px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--gold);font-weight:700;margin-bottom:13px}
+.ful9-rule{display:flex;gap:13px;padding:11px 0;border-bottom:1px solid rgba(255,255,255,.05)}
+.ful9-rule:last-child{border-bottom:none}
+.ful9-rn{flex:0 0 28px;height:28px;border-radius:50%;background:rgba(216,169,74,.14);border:1px solid var(--line);
+  color:var(--goldl);font-weight:700;display:flex;align-items:center;justify-content:center;font-size:14px}
+.ful9-rt{font-weight:700;color:var(--ink);font-size:15.5px;margin-bottom:3px}
+.ful9-rd{font-size:14px;color:var(--muted);line-height:1.55}
+.ful9-rule.forbid .ful9-rn{background:rgba(224,82,82,.13);border-color:rgba(224,82,82,.4);color:#ef9a9a}
+.ful9-rule.forbid .ful9-rt{color:#f2b3b3}
+.ful9-foot{margin-top:18px;font-size:13px;color:var(--muted);line-height:1.55;
+  background:rgba(0,0,0,.2);border:1px solid var(--lsoft);border-radius:10px;padding:12px 15px}
+.ful9-foot b{color:var(--goldl)}
+
+/* ===== MODUL CONECTARE (clase cn-, izolate de restul UI) ===== */
+.cn-title-block{text-align:center;margin-bottom:28px}
+.cn-h1{font-family:"Playfair Display",serif;font-size:30px;color:var(--ink);line-height:1.2;font-weight:700}
+.cn-subtitle{font-family:"Playfair Display",serif;font-style:italic;font-size:18px;color:var(--goldl);margin-top:9px}
+.cn-lead{font-size:16px;color:var(--muted);line-height:1.85;margin-bottom:10px}
+.cn-lead b{color:var(--goldl);font-weight:600}
+.cn-sec{font-family:"Playfair Display",serif;font-size:21px;color:var(--gold);margin:44px 0 8px;padding-bottom:13px;border-bottom:1px solid var(--line)}
+.cn-rule{display:flex;gap:18px;padding:26px 0;border-bottom:1px solid var(--lsoft)}
+.cn-rule:last-child{border-bottom:none}
+.cn-rule-num{flex:0 0 34px;height:34px;border-radius:50%;background:rgba(216,169,74,.13);border:1px solid var(--line);color:var(--gold);font-weight:700;display:flex;align-items:center;justify-content:center;font-size:15px;margin-top:2px}
+.cn-rule-txt{flex:1}
+.cn-rt{font-weight:700;color:var(--ink);font-size:16.5px;margin-bottom:14px;line-height:1.4}
+.cn-rd{font-size:15px;color:var(--muted);line-height:1.8}
+.cn-rd p{margin-bottom:13px}
+.cn-rd p:last-child{margin-bottom:0}
+.cn-rd b{color:var(--goldl);font-weight:600}
+.cn-rd em{color:var(--goldl);font-style:italic}
+.cn-note{font-size:13.5px;color:var(--muted2)}
+.cn-note em{color:var(--muted2);font-style:italic}
+.cn-big{color:var(--ink);font-weight:600}
+.cn-golden{margin-top:30px;background:rgba(216,169,74,.07);border:1px solid var(--line);border-radius:14px;padding:24px 26px}
+.cn-gt{color:var(--gold);font-size:12px;letter-spacing:.09em;text-transform:uppercase;font-weight:700;margin-bottom:20px}
+.cn-gitem{padding:16px 0;border-top:1px solid var(--lsoft)}
+.cn-gitem:first-of-type{padding-top:0;border-top:none}
+.cn-ghead{color:var(--goldl);font-weight:700;font-size:15px;margin-bottom:7px}
+.cn-gbody{font-size:14.5px;color:#d8ddea;line-height:1.75}
+.cn-gbody b{color:var(--goldl);font-weight:700}
+.cn-ban{margin-top:15px;background:rgba(224,82,82,.07);border:1px solid rgba(224,82,82,.22);border-radius:10px;padding:14px 16px}
+.cn-ban-label{color:#f0a0a0;font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;font-weight:700;margin-bottom:11px}
+.cn-ban ul{list-style:none;display:flex;flex-direction:column;gap:9px;margin:0;padding:0}
+.cn-ban li{font-size:14px;color:#ecbcbc;line-height:1.5;padding-left:22px;position:relative}
+.cn-ban li::before{content:"✕";position:absolute;left:0;top:0;color:#e05252;font-weight:700}
+.cn-precond{background:rgba(216,169,74,.09);border:1px solid var(--line);border-left:3px solid var(--gold);border-radius:0 10px 10px 0;padding:16px 20px;margin:6px 0 4px;font-size:15px;color:#e9dcc0;line-height:1.75}
+.cn-precond b{color:var(--goldl);font-weight:700}
+.cn-legend{display:flex;gap:18px;flex-wrap:wrap;margin:16px 0 6px;font-size:12.5px;color:var(--muted)}
+.cn-legend span{display:inline-flex;align-items:center;gap:7px}
+.cn-lgchip{background:rgba(216,169,74,.13);border:1px solid var(--line);border-radius:12px;padding:2px 9px;font-size:11px;color:var(--goldl);font-weight:700}
+.cn-box{background:#faf7f0;border:1px solid rgba(0,0,0,.08);border-radius:14px;padding:34px 34px;line-height:2;font-size:16px;color:#23262e;box-shadow:0 14px 36px rgba(0,0,0,.34);margin-top:8px}
+.cn-line{margin:0 0 20px}
+.cn-line:last-child{margin-bottom:0}
+.cn-role{color:#7a5f10;font-weight:700}
+.cn-box strong{color:#7a5f10;font-weight:700}
+.cn-cue{color:#9a7d1e;font-style:italic;font-size:14.5px}
+.cn-pause{display:inline-block;background:rgba(122,95,16,.12);border:1px solid rgba(122,95,16,.25);border-radius:20px;padding:3px 12px;font-size:12.5px;color:#7a5f10;font-weight:700;letter-spacing:.02em;margin:3px 0;white-space:nowrap}
+.cn-fill{color:#8a5a12;font-weight:600;background:rgba(138,90,18,.08);border-bottom:1.5px dashed rgba(138,90,18,.5);padding:1px 5px;border-radius:4px 4px 0 0}
+.cn-zone{display:block;margin:30px 0 4px;background:rgba(122,95,16,.10);border-left:3px solid #b8903a;padding:15px 18px;font-size:14.5px;letter-spacing:.02em;color:#5a4a14;font-weight:700;line-height:1.5;border-radius:0 8px 8px 0}
+.cn-client{color:#4a4f5a}
+.cn-gap{margin-bottom:24px}
+.cn-foot{text-align:center;color:var(--muted2);font-size:12px;margin-top:40px;line-height:1.6}
+.cn-lock{display:flex;flex-direction:column;align-items:center;text-align:center;gap:14px;padding:50px 20px}
+.cn-lock-ic{font-size:30px}
+.cn-lock-tx{font-size:15px;color:var(--muted);line-height:1.6;max-width:420px}
+.cn-lock-tx b{color:var(--goldl)}
+.cn-load{text-align:center;color:var(--muted);padding:50px 20px;font-size:15px}
+/* ===== MODUL ÎNCHIDERE — formula "Oferta Irezistibilă" (nativ, vertical, nu se sparge) ===== */
+.if-wrap{max-width:540px;margin:16px auto 6px}
+.if-gl{font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;margin:0 0 11px;text-align:center}
+.if-max{color:var(--goldl)}
+.if-min{color:var(--muted)}
+.if-row{display:flex;align-items:stretch;gap:10px;justify-content:center}
+.if-card{flex:1 1 0;min-width:0;background:linear-gradient(180deg,var(--panel),var(--panel2));
+  border:1px solid var(--line);border-radius:12px;padding:13px 15px;text-align:center}
+.if-card .lab{font-size:10px;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);line-height:1.32;margin-bottom:7px}
+.if-card .val{font-family:"Playfair Display",serif;font-size:16px;font-weight:700;color:var(--goldl);line-height:1.12}
+.if-x{display:flex;align-items:center;justify-content:center;color:var(--muted2);font-size:15px;font-weight:700;flex:0 0 auto}
+.if-bar{height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent);margin:15px 0;border-radius:2px}
+.if-op{text-align:center;color:var(--gold);font-size:22px;font-weight:800;font-family:"Playfair Display",serif;margin:13px 0}
+.if-risk-wrap{text-align:center}
+.if-risk{display:inline-block;background:linear-gradient(180deg,#e5484d,#c0303a);color:#fff;
+  font-family:"Playfair Display",serif;font-weight:800;font-size:19px;line-height:1.05;text-align:center;
+  padding:15px 30px;border-radius:14px;box-shadow:0 0 26px rgba(224,82,82,.45);text-transform:uppercase;letter-spacing:.04em}
+.if-result{max-width:300px;margin:0 auto;border:2px solid var(--gold);border-radius:14px;background:rgba(216,169,74,.06);
+  padding:15px 26px;text-align:center;box-shadow:0 0 0 5px rgba(216,169,74,.05)}
+.if-result .rl{font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:6px}
+.if-result .rv{font-family:"Playfair Display",serif;font-weight:800;font-size:23px;color:var(--ink);line-height:1.05;text-transform:uppercase}
+@media(max-width:500px){.if-row{flex-direction:column}}
+/* blocaje (rosu) — de ce nu poti inchide */
+.cn-block{margin:14px 0 4px;background:rgba(224,82,82,.06);border:1px solid rgba(224,82,82,.22);border-radius:12px;padding:16px 18px}
+.cn-block-h{color:#f0a0a0;font-size:12px;letter-spacing:.05em;text-transform:uppercase;font-weight:700;margin-bottom:12px}
+.cn-block ul{list-style:none;display:flex;flex-direction:column;gap:9px;margin:0;padding:0}
+.cn-block li{font-size:14.5px;color:#ecc4c4;line-height:1.5;padding-left:24px;position:relative}
+.cn-block li::before{content:"✕";position:absolute;left:0;top:0;color:#e05252;font-weight:700}
+
+</style>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+
+<!-- ── VIEW: LOGIN ── -->
+<div id="view-login" class="view active z">
+
+  <!-- PROOF / COUNTER -->
+  <div class="proof-section">
+    <div class="proof-eyebrow">Testato sul campo · risultati reali</div>
+
+    <div class="stat-ring-wrap" id="stat-ring-wrap">
+      <svg viewBox="0 0 190 190" width="190" height="190" aria-hidden="true">
+        <circle class="ring-track" cx="95" cy="95" r="85"/>
+        <circle class="ring-fill" id="ring-fill" cx="95" cy="95" r="85"/>
+      </svg>
+      <div class="ring-inner">
+        <div class="big-num"><span id="counter-num">0</span><span class="big-pct">%</span></div>
+        <div class="ring-sub">tasso di presenza</div>
+      </div>
+    </div>
+
+    <h2 class="stat-headline"><em>7 su 10</em> persone invitate si presentano all’incontro</h2>
+    <div class="stat-compare">
+      contro il <strong>12–20%</strong> con gli script MLM standard
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat-proof">Basato su script psicologici testati · neuroscienza applicata</div>
+
+    <div class="live-badge">
+      <span class="live-dot"></span>
+      <span><strong id="counter-agents">0</strong> agenti MLM generano script ogni giorno</span>
+    </div>
+    <br>
+    <div class="live-badge">
+      <span class="live-dot"></span>
+      <span><strong id="counter-scripts">0</strong> script generati finora</span>
+    </div>
+    <div class="auth-card">
+      <div class="auth-brand">
+        <div class="name">HARVARD OF SALES</div>
+        <div class="sub">The Psychology of MLM Excellence</div>
+      </div>
+      <h2>Entra nella piattaforma</h2>
+      <p>Il tuo script psicologico, a 2 minuti di distanza</p>
+      <div class="err" id="login-err"></div>
+      <div class="field"><label>Email</label><input type="email" id="login-email" placeholder="email@exemplu.com"></div>
+      <div class="field"><label>Password</label><input type="password" id="login-pass" placeholder="••••••••"></div>
+      <button class="btn" onclick="doLogin()">Entra nella piattaforma</button>
+      <div class="auth-switch" style="margin-top:14px"><a onclick="showView('forgot')">Password dimenticata?</a></div>
+      <div class="auth-switch">Non hai un account? <a href="/it">Crea un account</a></div>
+    </div>
+    <div style="text-align:center;margin-top:22px;font-size:12.5px;line-height:1.9">
+      <a href="/termeni-it.html" style="color:var(--muted)">Termini e Condizioni</a> ·
+      <a href="/confidentialitate-it.html" style="color:var(--muted)">Privacy</a> ·
+      <a href="/cookies-it.html" style="color:var(--muted)">Cookie</a>
+    </div>
+  </div>
+</div>
+
+<!-- ── VIEW: REGISTER ── -->
+<div id="view-register" class="view z">
+  <div class="auth-wrap">
+    <div class="auth-card">
+      <div class="auth-brand">
+        <div class="name">HARVARD OF SALES</div>
+        <div class="sub">The Psychology of MLM Excellence</div>
+      </div>
+      <h2>Crea account</h2>
+      <p>Crea il tuo account per entrare nella piattaforma.</p>
+      <div class="err" id="reg-err"></div>
+      <div class="suc" id="reg-suc"></div>
+      <div class="field"><label>Email</label><input type="email" id="reg-email" placeholder="email@exemplu.com"></div>
+      <div class="field"><label>Password</label><input type="password" id="reg-pass" placeholder="Minimo 6 caratteri"></div>
+      <button class="btn" onclick="doRegister()">Crea account</button>
+      <div class="auth-switch">Hai già un account? <a onclick="showView('login')">Accedi</a></div>
+    </div>
+  </div>
+</div>
+
+<!-- ── VIEW: REDEEM ── -->
+<div id="view-redeem" class="view z">
+  <div class="auth-wrap">
+    <div class="auth-card">
+      <div class="auth-brand">
+        <div class="name">HARVARD OF SALES</div>
+        <div class="sub">The Psychology of MLM Excellence</div>
+      </div>
+      <h2>Attiva il piano</h2>
+      <p>Inserisci il codice ricevuto nell’email di conferma dopo il pagamento</p>
+      <div class="err" id="redeem-err"></div>
+      <div class="suc" id="redeem-suc"></div>
+      <div class="field"><label>Codice di attivazione</label><input type="text" id="redeem-code" placeholder="XXXX-XXXX-XXXX" style="letter-spacing:.1em;text-transform:uppercase"></div>
+      <button class="btn" onclick="doRedeem()">Attiva il piano</button>
+      <div class="auth-switch" style="margin-top:14px"><a onclick="doLogout()" style="color:var(--muted)">Esci dall’account</a></div>
+    </div>
+  </div>
+</div>
+
+<!-- ── VIEW: FORGOT PASSWORD ── -->
+<div id="view-forgot" class="view z">
+  <div class="auth-wrap">
+    <div class="auth-card">
+      <div class="auth-brand">
+        <div class="name">HARVARD OF SALES</div>
+        <div class="sub">The Psychology of MLM Excellence</div>
+      </div>
+      <h2>Password dimenticata?</h2>
+      <p>Scrivi l’indirizzo email dell’account. Ti inviamo un link di reimpostazione.</p>
+      <div class="err" id="forgot-err"></div>
+      <div class="suc" id="forgot-suc"></div>
+      <div class="field"><label>Email</label><input type="email" id="forgot-email" placeholder="email@exemplu.com"></div>
+      <button class="btn" onclick="doForgotPassword()">Invia link di reimpostazione</button>
+      <div class="auth-switch" style="margin-top:16px"><a onclick="showView('login')">← Torna al login</a></div>
+    </div>
+  </div>
+</div>
+
+<!-- ── VIEW: RESET PASSWORD (după clic pe linkul din email) ── -->
+<div id="view-reset" class="view z">
+  <div class="auth-wrap">
+    <div class="auth-card">
+      <div class="auth-brand">
+        <div class="name">HARVARD OF SALES</div>
+        <div class="sub">The Psychology of MLM Excellence</div>
+      </div>
+      <h2>Imposta una nuova password</h2>
+      <p>Inserisci la nuova password per il tuo account.</p>
+      <div class="err" id="reset-err"></div>
+      <div class="suc" id="reset-suc"></div>
+      <div class="field"><label>Nuova password</label><input type="password" id="reset-pass" placeholder="Minimo 6 caratteri"></div>
+      <div class="field"><label>Conferma la password</label><input type="password" id="reset-pass2" placeholder="Ripeti la password"></div>
+      <button class="btn" onclick="doResetPassword()">Salva la nuova password</button>
+    </div>
+  </div>
+</div>
+
+<!-- ── VIEW: GENERATOR ── -->
+<div id="view-generator" class="view z">
+  <header class="gen-header">
+    <div class="topbar">
+      <div class="brandwrap">
+        <div class="name">HARVARD OF SALES</div>
+        <div class="tagline">The Psychology of MLM Excellence</div>
+      </div>
+      <div class="topright">
+        <div class="counter">
+          <span class="num" id="scripts-remaining">—</span>
+          <span style="color:var(--muted);font-size:14px"> script</span>
+          <span class="tier-badge" id="tier-badge"></span>
+        </div>
+        <div class="langtog">
+          <button class="lang" onclick="setLang('ro')"><span class="flag">🇷🇴</span>RO</button>
+          <button class="lang" onclick="setLang('en')"><span class="flag">🇬🇧</span>EN</button>
+          <button class="lang active" onclick="setLang('it')"><span class="flag">🇮🇹</span>IT</button>
+          <button class="lang" onclick="setLang('es')"><span class="flag">🇪🇸</span>ES</button>
+        </div>
+        <button class="btn-ghost" onclick="openAccount()">Account</button>
+        <button class="btn-ghost iesire" onclick="doLogout()">Esci</button>
+      </div>
+    </div>
+    <nav class="navtabs">
+      <button class="navtab active" id="tab-invitatie" onclick="navTab('invitatie')">Invito</button>
+      <button class="navtab" id="tab-conectare" onclick="navTab('conectare')">Connessione</button>
+      <button class="navtab" id="tab-prezentare" onclick="navTab('prezentare')">Presentazione</button>
+      <button class="navtab" id="tab-inchidere" onclick="navTab('inchidere')">Chiusura</button>
+      <button class="navtab soon" onclick="navTab('obiectii')">Obiezioni<span class="soon-badge">presto</span></button>
+      <button class="navtab soon" onclick="navTab('recomandari')">Richiesta di referenze<span class="soon-badge">presto</span></button>
+    </nav>
+  </header>
+
+  <div class="gen-wrap" id="wrap-invitatie">
+
+    <!-- SUB-NAV: Generator vs Invitația-fulger -->
+    <div class="fsub-nav" id="fsub-nav">
+      <button class="fsub-btn active" id="fsub-gen" onclick="fulgerTab('gen')">Genera script</button>
+      <button class="fsub-btn" id="fsub-ful" onclick="fulgerTab('ful')">Invito-lampo</button>
+    </div>
+
+    <div id="sub-generator">
+
+    <div class="guide-bar" id="step-bar">
+      <button class="guide-btn step-btn" id="step-1" onclick="openModal('m-ghid')"><span class="step-no">1</span><span>Come compilare bene</span><span class="step-check">✓</span></button>
+      <button class="guide-btn step-btn" id="step-2" onclick="openModal('m-reguli')"><span class="step-no">2</span><span>Regole di successo</span><span class="step-check">✓</span></button>
+    </div>
+
+    <!-- UPGRADE NUDGE (generator) -->
+    <div class="upgrade-nudge" id="nudge-gen">
+      <div class="upgrade-nudge-inner">
+        <div class="un-text"></div>
+        <div class="un-cta"><button class="btn-ghost" onclick="goUpgrade()">Fai l’upgrade</button></div>
+      </div>
+    </div>
+
+    <!-- SECTIUNEA 1: Agent -->
+    <div class="section-card">
+      <h3>I tuoi dati da agente</h3>
+      <div class="field-row">
+        <div class="field">
+          <label>Il tuo genere</label>
+          <select id="f_01">
+            <option value="">— Scegli —</option>
+            <option>Maschile</option>
+            <option>Femminile</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>La tua età (circa)</label>
+          <input type="text" id="f_29" placeholder="Ex: 42">
+        </div>
+      </div>
+      <div class="field">
+        <label>Stile di approccio</label>
+        <div class="stil-help">Il tuo modo naturale di parlare — lo script si adatta a esso.</div>
+        <div class="stil-chips" id="stil-chips">
+          <button type="button" class="stil-chip" data-stil="Rilassato e con umorismo" onclick="selectStil(this)">Rilassato e con umorismo</button>
+          <button type="button" class="stil-chip" data-stil="Caloroso e rispettoso" onclick="selectStil(this)">Caloroso e rispettoso</button>
+          <button type="button" class="stil-chip" data-stil="Diretto" onclick="selectStil(this)">Diretto</button>
+          <button type="button" class="stil-chip" data-stil="__altul__" onclick="selectStil(this)">Altro</button>
+        </div>
+        <input type="text" id="f_26_alt" oninput="onStilAltInput()" placeholder="Scrivi tu lo stile — es: caloroso ma diretto / ci diamo del «fratello»" style="display:none;margin-top:10px">
+        <input type="hidden" id="f_26">
+        <div class="field-note" id="stil-note" style="display:none">Con «Altro» descrivi tu il tono — il modello lo interpreta (puoi scrivere anche appellativi come «fratello»).</div>
+      </div>
+      <div class="field">
+        <label>La tua esperienza nelle vendite / MLM</label>
+        <input type="text" id="f_27" placeholder="Es: 2 anni di MLM con ATOMY / principiante / 10 anni di vendite...">
+      </div>
+      <div class="field">
+        <label>Il cliente potrebbe sapere che sviluppi un MLM?</label>
+        <select id="f_28">
+          <option value="">— Scegli —</option>
+          <option>Sì</option>
+          <option>No</option>
+          <option>Non sono sicuro</option>
+        </select>
+      </div>
+      <div class="field-note">💾 Salvato automaticamente — la prossima volta trovi i campi compilati</div>
+    </div>
+
+    <!-- SECTIUNEA 2: Client -->
+    <div class="section-card">
+      <h3>Sulla persona invitata<a class="h3-link" onclick="clearClientData()">Svuota per un’altra persona</a></h3>
+      <div class="field-row">
+        <div class="field">
+          <label>Nome del cliente</label>
+          <input type="text" id="f_22" placeholder="Es: Cristina">
+        </div>
+        <div class="field">
+          <label>Età (circa)</label>
+          <input type="text" id="f_23" placeholder="Es: 34">
+        </div>
+      </div>
+      <div class="field-row">
+        <div class="field">
+          <label>Genere del cliente</label>
+          <select id="f_02">
+            <option value="">— Scegli —</option>
+            <option>Maschile</option>
+            <option>Femminile</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Tipo di relazione</label>
+          <select id="f_03">
+            <option value="">— Scegli —</option>
+            <option>Amico stretto</option>
+            <option>Parente</option>
+            <option>Conoscente</option>
+            <option>Collega di lavoro</option>
+            <option>Persona conosciuta di recente</option>
+          </select>
+        </div>
+      </div>
+      <div class="field-row">
+        <div class="field">
+          <label>Status professionale (lavoro / ruolo)</label>
+          <input type="text" id="f_24" placeholder="Es: infermiera, imprenditore, contabile...">
+        </div>
+        <div class="field">
+          <label>Status familiare (facoltativo)</label>
+          <input type="text" id="f_25" placeholder="Es: sposata, 2 figli...">
+        </div>
+      </div>
+      <div class="field">
+        <label>Quando avete parlato l’ultima volta?</label>
+        <select id="f_20">
+          <option value="">— Scegli —</option>
+          <option>Di recente — negli ultimi 3 mesi</option>
+          <option>È passato un po’ — tra 3 e 12 mesi</option>
+          <option>Non parliamo da tanto — oltre 1 anno</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>Raccontaci del tuo cliente</label>
+        <textarea id="f_04" rows="3" placeholder="La sua situazione ora, cosa la preoccupa, chi è. Es: mamma indaffarata, lavora nelle vendite, attiva su Instagram..."></textarea>
+      </div>
+      <div class="field">
+        <label>Qualità che apprezzi in questa persona</label>
+        <input type="text" id="f_17" placeholder="Es: serietà, empatia, energia positiva...">
+      </div>
+      <div class="field">
+        <label>Cos’altro sai della persona?</label>
+        <div class="stil-help">Qualcosa di positivo, negativo o un suo desiderio — puoi sceglierne più di uno.</div>
+        <div class="stil-chips" id="semnal-chips" style="margin-bottom:10px">
+          <button type="button" class="stil-chip" data-semnal="Pozitiv" onclick="toggleSemnal(this)">Qualcosa di positivo</button>
+          <button type="button" class="stil-chip" data-semnal="Negativ" onclick="toggleSemnal(this)">Qualcosa di negativo</button>
+          <button type="button" class="stil-chip" data-semnal="Dorinta" onclick="toggleSemnal(this)">Un desiderio noto</button>
+        </div>
+        <input type="hidden" id="f_32">
+        <div id="semnal-detail-wrap" style="display:none">
+          <input type="text" id="f_05" placeholder="Dettaglio — cosa è positivo o negativo. Es: aperta alle novità / è stata scottata da un MLM">
+        </div>
+        <div id="dorinta-wrap" style="display:none;margin-top:9px">
+          <input type="text" id="f_33" placeholder="Cosa desidera? Es: dimagrire / un reddito extra / tempo con i figli">
+          <div class="stil-help" style="margin-top:5px">La teniamo per la prima obiezione — non appare nel primo script.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTIUNEA 3: Produs -->
+    <div class="section-card">
+      <h3>Il prodotto</h3>
+      <div class="field">
+        <label>Categoria del prodotto</label>
+        <select id="f_30">
+          <option value="">— Scegli —</option>
+          <option>Prodotti per la salute</option>
+          <option>Bellezza e cura del corpo</option>
+          <option>Prodotti per la pulizia</option>
+          <option>Vacanze</option>
+          <option>Altro prodotto</option>
+        </select>
+      </div>
+      <div class="field-row">
+        <div class="field">
+          <label>Il prodotto che presenti</label>
+          <input type="text" id="f_07" placeholder="Es: Integratore energizzante ATOMY Hemohim">
+        </div>
+        <div class="field">
+          <label>Hai usato il prodotto?</label>
+          <select id="f_08" onchange="toggleExperienta()">
+            <option value="">— Scegli —</option>
+            <option value="Da">Sì</option>
+            <option value="Nu">No</option>
+          </select>
+        </div>
+      </div>
+      <div class="field" id="field-experienta" style="display:none">
+        <label>La tua esperienza con il prodotto</label>
+        <textarea id="f_09" rows="3" placeholder="Es: L’ho usato 3 mesi, la mia energia è aumentata visibilmente, sono riuscita a perdere 5kg, il sonno è migliorato..."></textarea>
+      </div>
+      <div class="field">
+        <label>I vantaggi concreti del prodotto</label>
+        <textarea id="f_19" rows="2" placeholder="Es: naturale · senza effetti collaterali · risultati visibili in 30 giorni · certificato..."></textarea>
+        <div class="field-note">Elenca almeno 3 vantaggi concreti. Più sei specifico, più forte è lo script — vago → sembra una pubblicità.</div>
+      </div>
+      <div class="field">
+        <label>Testimonianze note</label>
+        <textarea id="f_18" rows="2" placeholder="Es: La mia collega Maria si è liberata del mal di schiena dopo 6 settimane, un amico ha ridotto la pressione..."></textarea>
+      </div>
+    </div>
+
+    <!-- SECTIUNEA 4: Context apel -->
+    <div class="section-card">
+      <h3>Il contesto della chiamata</h3>
+      <div class="field-row">
+        <div class="field">
+          <label>Tipo di presentazione</label>
+          <select id="f_11">
+            <option value="">— Scegli —</option>
+            <option>Online — uno a uno</option>
+            <option>Online — presentazione di gruppo (presento io)</option>
+            <option>Online — presentazione di gruppo (presenta un leader)</option>
+            <option>Offline (faccia a faccia)</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Tecnica di apertura</label>
+          <select id="f_kb">
+            <option value="">Scelta automatica (consigliato)</option>
+            <option value="1 — Pattern interrupt cu umor (oxitocina)">1 — Pattern interrupt con umorismo</option>
+            <option value="2 — Mirroring (neuroni-oglinda)">2 — Mirroring (specchio)</option>
+            <option value="3 — Compliment argumentat cu intrebare deschisa (serotonina)">3 — Complimento argomentato</option>
+            <option value="4 — Bad news + good news (bucla deschisa, dopamina)">4 — Bad news + good news</option>
+          </select>
+        </div>
+      </div>
+      <div class="field">
+        <label>Durata della presentazione / incontro</label>
+        <select id="f_durata">
+          <option value="10 minute">10 minuti</option>
+          <option value="15 minute">15 minuti</option>
+          <option value="20 minute">20 minuti</option>
+          <option value="30 minute" selected>30 minuti</option>
+          <option value="45 minute">45 minuti</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>Cosa sa lei del motivo della tua chiamata, prima di rispondere?</label>
+        <input type="text" id="f_12" placeholder="Es: Non sa nulla, ci siamo sentiti l’ultima volta al telefono...">
+      </div>
+    </div>
+
+    <!-- SECTIUNEA 5: Mod output (tier-controlled) -->
+    <div class="section-card">
+      <h3>Modalità di output</h3>
+      <div class="mode-options" id="mode-options">
+        <!-- Populated by JS based on tier -->
+      </div>
+    </div>
+
+    <div class="err" id="gen-err" style="margin-bottom:16px"></div>
+    <div class="gate-hint" id="gate-hint">🔒 Completa il Passo 1 e il Passo 2 in alto per sbloccare la generazione</div>
+    <button class="btn" id="gen-btn" onclick="doGenerate()" style="max-width:400px;margin:0 auto;display:block">
+      Passo 3 · Genera lo script →
+    </button>
+    <p style="text-align:center;font-size:14px;color:var(--muted2);margin-top:12px">
+      Il tuo script psicologico, pronto in pochi istanti
+    </p>
+
+    </div><!-- /sub-generator -->
+
+    <div id="sub-fulger" style="display:none"></div>
+
+  </div>
+
+  <!-- ── MODUL CONECTARE (gated Builder/Leader) ── -->
+  <div class="gen-wrap" id="wrap-conectare" style="display:none">
+    <div id="conectare-content"></div>
+  </div>
+
+  <!-- ── MODUL PREZENTARE (gated Leader) ── -->
+  <div class="gen-wrap" id="wrap-prezentare" style="display:none">
+    <div id="prezentare-content"></div>
+  </div>
+
+  <!-- ── MODUL ÎNCHIDERE (gated Leader) ── -->
+  <div class="gen-wrap" id="wrap-inchidere" style="display:none">
+    <div id="inchidere-content"></div>
+  </div>
+</div>
+
+<!-- ── VIEW: GENERATING ── -->
+<div id="view-generating" class="view z">
+  <div class="auth-wrap">
+    <div class="generating">
+      <div class="prog-card">
+
+        <!-- STARE: SE GENEREAZA -->
+        <div id="gen-loader">
+          <div class="gen-top">
+          <h3 class="prog-title">Costruiamo il tuo script psicologico</h3>
+          <p class="prog-sub">ci vogliono meno di 2 minuti</p>
+          </div>
+          <div class="gen-mid">
+          <div class="gen-phase lesson" id="gen-phase"></div>
+          <div class="omu" id="omu-main" style="display:none">
+            <svg viewBox="0 0 200 206" aria-hidden="true">
+              <g class="rings" data-p="breathe">
+                <circle cx="100" cy="120" r="16" fill="none" stroke="var(--goldl)" stroke-width="2"/>
+                <circle cx="100" cy="120" r="16" fill="none" stroke="var(--goldl)" stroke-width="2"/>
+              </g>
+              <g class="energy" data-p="jump" stroke="var(--goldl)" stroke-width="3" stroke-linecap="round">
+                <path d="M40 96 l-8 0"/><path d="M168 96 l8 0"/>
+              </g>
+              <g class="bulb">
+                <circle cx="100" cy="13" r="9" fill="rgba(236,202,126,.22)" stroke="var(--goldl)" stroke-width="2"/>
+                <rect x="96" y="21" width="8" height="4" rx="1.5" fill="var(--goldl)"/>
+                <line x1="100" y1="3" x2="100" y2="0" stroke="var(--goldl)" stroke-width="1.6" stroke-linecap="round"/>
+              </g>
+              <g class="bubble">
+                <circle cx="118" cy="40" r="3" fill="#1c2742" stroke="var(--goldl)" stroke-width="1.5"/>
+                <circle cx="128" cy="32" r="4.5" fill="#1c2742" stroke="var(--goldl)" stroke-width="1.5"/>
+                <ellipse cx="152" cy="20" rx="28" ry="19" fill="#1c2742" stroke="var(--goldl)" stroke-width="2"/>
+                <circle cx="148" cy="15" r="5.5" fill="var(--goldl)"/>
+                <rect x="142" y="21" width="12" height="13" rx="6" fill="var(--goldl)"/>
+                <path d="M163 16 a3.5 3.5 0 0 1 6.5 1.8 c0 3 -3.5 5.2 -6.5 7 c-3 -1.8 -6.5 -4 -6.5 -7 a3.5 3.5 0 0 1 6.5 -1.8 z" fill="#e2604a"/>
+              </g>
+              <g class="guywrap" id="omu-main-gw"><g class="guy">
+                <ellipse cx="86" cy="192" rx="10" ry="5" fill="var(--gold)"/>
+                <ellipse cx="114" cy="192" rx="10" ry="5" fill="var(--gold)"/>
+                <g class="spine">
+                  <g class="l-arm">
+                    <path d="M74 124 q-18 4 -20 26" fill="none" stroke="var(--gold)" stroke-width="7" stroke-linecap="round"/>
+                    <circle cx="54" cy="150" r="5.5" fill="var(--gold)"/>
+                  </g>
+                  <g class="torso">
+                    <rect x="66" y="104" width="68" height="62" rx="28" fill="var(--face)" stroke="var(--gold)" stroke-width="2.5"/>
+                  </g>
+                  <g class="pen-hand">
+                    <path d="M134 124 q18 4 20 24" fill="none" stroke="var(--gold)" stroke-width="7" stroke-linecap="round"/>
+                    <circle cx="154" cy="148" r="5.5" fill="var(--gold)"/>
+                    <g data-p="notes"><rect x="152" y="138" width="5" height="22" rx="2.5" fill="var(--goldl)" transform="rotate(35 154 149)"/></g>
+                  </g>
+                  <g class="head">
+                    <circle cx="100" cy="62" r="34" fill="var(--face)" stroke="var(--gold)" stroke-width="2.5"/>
+                    <path d="M70 60 a30 30 0 0 1 60 0" fill="none" stroke="var(--goldl)" stroke-width="4.5" stroke-linecap="round"/>
+                    <rect x="64" y="56" width="9" height="16" rx="4.5" fill="var(--goldl)"/>
+                    <rect x="127" y="56" width="9" height="16" rx="4.5" fill="var(--goldl)"/>
+                    <path d="M131 68 q9 5 9 18" fill="none" stroke="var(--goldl)" stroke-width="3" stroke-linecap="round"/>
+                    <circle cx="140" cy="88" r="3.6" fill="var(--goldl)"/>
+                    <path d="M84 50 q5 -3 11 -1" fill="none" stroke="var(--goldl)" stroke-width="2.4" stroke-linecap="round"/>
+                    <path d="M105 49 q6 -2 11 1" fill="none" stroke="var(--goldl)" stroke-width="2.4" stroke-linecap="round"/>
+                    <g class="eyes eyes-n">
+                      <ellipse cx="89" cy="62" rx="5" ry="6.4" fill="var(--ink)"/>
+                      <ellipse cx="111" cy="62" rx="5" ry="6.4" fill="var(--ink)"/>
+                      <circle cx="90.8" cy="59.6" r="1.7" fill="#fff"/>
+                      <circle cx="112.8" cy="59.6" r="1.7" fill="#fff"/>
+                    </g>
+                    <g class="happy" stroke="var(--ink)" stroke-width="3" fill="none" stroke-linecap="round">
+                      <path d="M83 63 q6 -7 12 0"/><path d="M105 63 q6 -7 12 0"/>
+                    </g>
+                    <path class="mouth-n" d="M89 76 q11 8 22 0" fill="none" stroke="var(--ink)" stroke-width="3" stroke-linecap="round"/>
+                    <path class="happy" d="M85 74 q15 16 30 0 q-15 6 -30 0 z" fill="var(--ink)"/>
+                    <ellipse class="talk" cx="100" cy="78" rx="7" ry="6" fill="var(--ink)"/>
+                    <g class="happy">
+                      <circle cx="79" cy="72" r="4.5" fill="rgba(216,169,74,.45)"/>
+                      <circle cx="121" cy="72" r="4.5" fill="rgba(216,169,74,.45)"/>
+                    </g>
+                  </g>
+                </g>
+              </g></g>
+              <g data-p="read">
+                <rect x="112" y="64" width="44" height="54" rx="5" fill="#f3efe6" transform="rotate(6 134 91)"/>
+                <line x1="120" y1="76" x2="148" y2="78" stroke="#9a8e74" stroke-width="2" transform="rotate(6 134 91)"/>
+                <line x1="120" y1="86" x2="148" y2="88" stroke="#9a8e74" stroke-width="2" transform="rotate(6 134 91)"/>
+                <line x1="120" y1="96" x2="142" y2="98" stroke="#9a8e74" stroke-width="2" transform="rotate(6 134 91)"/>
+              </g>
+              <g data-p="notes">
+                <rect x="58" y="152" width="42" height="32" rx="5" fill="#f3efe6" transform="rotate(-8 79 168)"/>
+                <line x1="64" y1="162" x2="92" y2="160" stroke="#9a8e74" stroke-width="2" transform="rotate(-8 79 168)"/>
+                <line x1="64" y1="170" x2="88" y2="168" stroke="#9a8e74" stroke-width="2" transform="rotate(-8 79 168)"/>
+              </g>
+              <g class="spark" data-p="smile" fill="var(--goldl)">
+                <path d="M158 46 l2.6 6.5 l6.5 2.6 l-6.5 2.6 l-2.6 6.5 l-2.6 -6.5 l-6.5 -2.6 l6.5 -2.6 z"/>
+                <path d="M44 56 l2 5 l5 2 l-5 2 l-2 5 l-2 -5 l-5 -2 l5 -2 z"/>
+              </g>
+              <g class="phone" data-p="silent" style="transform-box:fill-box;transform-origin:50% 50%">
+                <rect x="140" y="120" width="36" height="54" rx="8" fill="var(--face)" stroke="var(--goldl)" stroke-width="2.5"/>
+                <path d="M153 135 a5 5 0 0 1 10 0 v6 q0 4 3 6 h-16 q3 -2 3 -6 z" fill="var(--goldl)"/>
+                <line x1="144" y1="122" x2="172" y2="172" stroke="#e2604a" stroke-width="3" stroke-linecap="round"/>
+              </g>
+            </svg>
+          </div>
+          <div class="lesson-box" id="lesson-box">
+            <div class="lesson-title" id="lesson-title"></div>
+            <div class="lesson-body" id="lesson-body"></div>
+          </div>
+          <div class="om-row" id="om-row"><span class="om-stepno hide" id="om-stepno">1</span><div class="om-tip" id="om-tip"></div></div>
+          </div>
+          <div class="gen-bot">
+          <div class="prog-head">
+            <div class="progress-track"><div class="progress-fill" id="prog-fill"></div></div>
+            <div class="prog-pctnum"><span id="prog-num">0</span>%</div>
+          </div>
+          <p class="prog-warn">Non chiudere la finestra — <b>lo script si sta generando</b>.</p>
+          </div>
+        </div>
+
+        <!-- STARE: GATA -->
+        <div id="gen-ready" class="gen-ready">
+          <div class="gr-check"><svg viewBox="0 0 24 24"><path d="M5 13 l4 4 l10 -11"/></svg></div>
+          <div class="prog-sub" style="margin:0 0 8px">Il tuo script è pronto</div>
+          <div class="omuf" id="omuf-main">
+            <svg viewBox="0 0 200 178" aria-hidden="true">
+              <g class="guy">
+                <ellipse cx="86" cy="166" rx="10" ry="5" fill="var(--gold)"/>
+                <ellipse cx="114" cy="166" rx="10" ry="5" fill="var(--gold)"/>
+                <g class="l-arm"><path d="M72 102 q-16 6 -14 26" fill="none" stroke="var(--gold)" stroke-width="7" stroke-linecap="round"/><circle cx="58" cy="128" r="5.5" fill="var(--gold)"/></g>
+                <rect x="66" y="80" width="68" height="60" rx="28" fill="var(--face)" stroke="var(--gold)" stroke-width="2.5"/>
+                <path d="M130 100 q16 -6 12 -30" fill="none" stroke="var(--gold)" stroke-width="7" stroke-linecap="round"/>
+                <g class="head">
+                  <circle cx="100" cy="44" r="32" fill="var(--face)" stroke="var(--gold)" stroke-width="2.5"/>
+                  <path d="M70 40 a30 30 0 0 1 60 0" fill="none" stroke="rgba(216,169,74,.35)" stroke-width="3" stroke-linecap="round"/>
+                  <path d="M82 33 q5 -3 11 -1" fill="none" stroke="var(--goldl)" stroke-width="2.4" stroke-linecap="round"/>
+                  <path d="M107 32 q6 -2 11 1" fill="none" stroke="var(--goldl)" stroke-width="2.4" stroke-linecap="round"/>
+                  <path d="M83 46 q6 -8 12 0" fill="none" stroke="var(--ink)" stroke-width="3" stroke-linecap="round"/>
+                  <path d="M105 46 q6 -8 12 0" fill="none" stroke="var(--ink)" stroke-width="3" stroke-linecap="round"/>
+                  <path d="M82 55 q18 22 36 0 q-18 9 -36 0 z" fill="var(--ink)"/>
+                  <path d="M97 67 q3 5 8 3 q1 -4 -2 -6 z" fill="#e2604a"/>
+                  <circle cx="77" cy="54" r="5" fill="rgba(216,169,74,.5)"/>
+                  <circle cx="123" cy="54" r="5" fill="rgba(216,169,74,.5)"/>
+                </g>
+                <g transform="rotate(15 138 46)">
+                  <rect x="129" y="28" width="18" height="38" rx="5" fill="#0e1524" stroke="var(--goldl)" stroke-width="2"/>
+                  <rect x="132" y="34" width="12" height="24" rx="2" fill="rgba(236,202,126,.18)"/>
+                  <rect x="135" y="30.5" width="6" height="1.8" rx="0.9" fill="var(--goldl)"/>
+                  <circle cx="138" cy="62" r="1.7" fill="var(--goldl)"/>
+                </g>
+                <circle cx="140" cy="64" r="6" fill="var(--gold)"/>
+                <g class="ring" stroke="var(--goldl)" fill="none" stroke-width="2" stroke-linecap="round" style="transform-box:fill-box;transform-origin:50% 50%">
+                  <path d="M150 30 q7 -2 9 -10"/>
+                  <path d="M154 38 q11 -3 14 -15"/>
+                </g>
+              </g>
+            </svg>
+          </div>
+          <div class="gr-msg">Oggi non vendi.</div>
+          <div class="gr-msg">Oggi aiuti una persona a vedere un’occasione.</div>
+          <div class="gr-cta">Chiama con fiducia!</div>
+          <button class="btn" id="gen-ready-btn" style="max-width:240px;margin:0 auto">Vedi lo script</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── VIEW: OUTPUT ── -->
+<div id="view-output" class="view z">
+  <div class="gen-header">
+    <div class="brand"><div class="name">HARVARD OF SALES</div></div>
+    <div class="counter-box">
+      <div class="counter">
+        <span class="num" id="out-remaining">—</span>
+        <span style="color:var(--muted);font-size:14px"> script rimasti</span>
+      </div>
+    </div>
+  </div>
+  <div class="output-wrap">
+
+    <!-- UPGRADE NUDGE (output) -->
+    <div class="upgrade-nudge" id="nudge-out">
+      <div class="upgrade-nudge-inner">
+        <div class="un-text"></div>
+        <div class="un-cta"><button class="btn-ghost" onclick="goUpgrade()">Fai l’upgrade</button></div>
+      </div>
+    </div>
+
+    <div class="output-header">
+      <h2>Il tuo script</h2>
+      <div style="display:flex;gap:10px;flex-wrap:wrap">
+        <button class="btn-ghost" onclick="openModal('m-reguli','normal')">📋 Regole di Successo</button>
+        <button class="btn-ghost" onclick="showView('generator')">← Genera un altro script</button>
+      </div>
+    </div>
+    <div class="script-box" id="script-output"></div>
+    <div class="script-actions">
+      <button class="btn" onclick="copyScript()" style="max-width:200px">Copia lo script</button>
+      <button class="btn-ghost" onclick="downloadScript()">Scarica</button>
+      <button class="btn-ghost" onclick="showView('generator')">Genera un altro script</button>
+    </div>
+
+    <!-- OBIECȚII -->
+    <div id="obj-section" style="margin-top:72px">
+
+      <!-- Întrebare obiecție 1 -->
+      <div id="obj1-question" class="obj-card">
+        <p class="obj-q">Vuoi gestire un’obiezione del cliente?</p>
+        <div class="obj-btns">
+          <button class="btn" onclick="showObj(1)" style="max-width:160px">Sì</button>
+          <button class="btn-ghost" onclick="hideObjSection()">No, grazie</button>
+        </div>
+      </div>
+
+      <!-- Formular obiecție 1 -->
+      <div id="obj1-form" style="display:none" class="obj-card">
+        <label style="display:block;font-size:13.5px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:8px">Qual è l’obiezione del cliente?</label>
+        <textarea id="obj1-text" rows="3" placeholder="Es: Non ho tempo, Non ho soldi, Devo pensarci, Non conosco il prodotto..."></textarea>
+        <div id="obj1-err" class="err" style="margin-top:10px"></div>
+        <button class="btn" onclick="generateObjScript(1)" style="max-width:260px;margin-top:14px">Genera script obiezione →</button>
+      </div>
+
+      <!-- Progres obiecție 1 -->
+      <div id="obj1-progress" class="obj-card" style="display:none">
+        <div id="obj1-loader">
+          <div class="obj-prog-ctx" id="obj1-prog-ctx"></div>
+          <div class="lesson-box" id="obj1-lbox">
+            <div class="lesson-title" id="obj1-ltitle"></div>
+            <div class="lesson-body" id="obj1-lbody"></div>
+          </div>
+          <div class="om-dots" id="obj1-dots"></div>
+          <div class="prog-head">
+            <div class="progress-track"><div class="progress-fill" id="obj1-prog-fill"></div></div>
+            <div class="prog-pctnum"><span id="obj1-prog-num">0</span>%</div>
+          </div>
+        </div>
+        <div id="obj1-ready" class="gen-ready">
+          <div class="gr-check"><svg viewBox="0 0 24 24"><path d="M5 13 l4 4 l10 -11"/></svg></div>
+          <div class="omuf" id="obj1-omuf"></div>
+          <div class="gr-msg" style="margin-bottom:20px">La tua risposta è pronta.</div>
+          <button class="btn" id="obj1-ready-btn" style="max-width:240px;margin:0 auto">Vedi la risposta</button>
+        </div>
+      </div>
+
+      <!-- Scriptul obiecție 1 -->
+      <div id="obj1-result" style="display:none">
+        <div class="obj-label">Script gestione obiezione 1</div>
+        <div class="script-box" id="obj1-output"></div>
+        <div class="script-actions" style="margin-top:12px">
+          <button class="btn" onclick="copyObjScript(1)" style="max-width:200px">Copia lo script</button>
+          <button class="btn-ghost" onclick="downloadObjScript(1)">Scarica</button>
+        </div>
+
+        <!-- Întrebare obiecție 2 -->
+        <div id="obj2-question" class="obj-card" style="margin-top:28px">
+          <p class="obj-q">Vuoi gestire un’altra obiezione?</p>
+          <div class="obj-btns">
+            <button class="btn" onclick="showObj(2)" style="max-width:160px">Sì</button>
+            <button class="btn-ghost" onclick="hideObjSection()">No, grazie</button>
+          </div>
+        </div>
+
+        <!-- Formular obiecție 2 -->
+        <div id="obj2-form" style="display:none" class="obj-card">
+          <label style="display:block;font-size:13.5px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:8px">Qual è la seconda obiezione?</label>
+          <textarea id="obj2-text" rows="3" placeholder="Es: Devo parlarne con mio marito/mia moglie, Ho già provato e non ha funzionato..."></textarea>
+          <div id="obj2-err" class="err" style="margin-top:10px"></div>
+          <button class="btn" onclick="generateObjScript(2)" style="max-width:260px;margin-top:14px">Genera script obiezione →</button>
+        </div>
+
+        <!-- Progres obiecție 2 -->
+        <div id="obj2-progress" class="obj-card" style="display:none">
+          <div id="obj2-loader">
+            <div class="obj-prog-ctx" id="obj2-prog-ctx"></div>
+            <div class="lesson-box" id="obj2-lbox">
+              <div class="lesson-title" id="obj2-ltitle"></div>
+              <div class="lesson-body" id="obj2-lbody"></div>
+            </div>
+            <div class="om-dots" id="obj2-dots"></div>
+            <div class="prog-head">
+              <div class="progress-track"><div class="progress-fill" id="obj2-prog-fill"></div></div>
+              <div class="prog-pctnum"><span id="obj2-prog-num">0</span>%</div>
+            </div>
+          </div>
+          <div id="obj2-ready" class="gen-ready">
+            <div class="gr-check"><svg viewBox="0 0 24 24"><path d="M5 13 l4 4 l10 -11"/></svg></div>
+            <div class="omuf" id="obj2-omuf"></div>
+            <div class="gr-msg" style="margin-bottom:20px">La tua risposta è pronta.</div>
+            <button class="btn" id="obj2-ready-btn" style="max-width:240px;margin:0 auto">Vedi la risposta</button>
+          </div>
+        </div>
+
+        <!-- Scriptul obiecție 2 -->
+        <div id="obj2-result" style="display:none">
+          <div class="obj-label">Script gestione obiezione 2</div>
+          <div class="script-box" id="obj2-output"></div>
+          <div class="script-actions" style="margin-top:12px">
+            <button class="btn" onclick="copyObjScript(2)" style="max-width:200px">Copia lo script</button>
+            <button class="btn-ghost" onclick="downloadObjScript(2)">Scarica</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div id="toast"></div>
+
+<script>
+// ============================================
+// STATE
+// ============================================
+let TOKEN = sessionStorage.getItem('hos_token') || null;
+let USER_PROFILE = null;
+let SELECTED_MODE = 'clean';
+let _formLoaded = false;
+
+// Supabase client — pentru a recunoaște sesiunea venită din pagina de plată (preturi.html)
+const SUPABASE_URL = 'https://dbympznifmxalnxlemyk.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRieW1wem5pZm14YWxueGxlbXlrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODAzNjYxMjgsImV4cCI6MjA5NTk0MjEyOH0.EtUssJSyjVuttc89d6kuYuf49CNcSr-kqWlUXySbvCc';
+const supaApp = (window.supabase) ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY) : null;
+
+// RESET PAROLA: detectam intrarea prin linkul de resetare din email (hash contine type=recovery)
+const IS_RECOVERY = (typeof location !== 'undefined' && location.hash && location.hash.indexOf('type=recovery') !== -1);
+if (supaApp) {
+  supaApp.auth.onAuthStateChange(function(event){
+    if (event === 'PASSWORD_RECOVERY') { showView('reset'); }
+  });
+}
+
+// Link-ul tau de upgrade (Payhip). Lasa gol pentru mesaj de contact.
+const UPGRADE_URL = '';
+
+// Campuri memorate: produs + client. (Agentul = AGENT_FIELDS, salvat separat fill-once.)
+const AGENT_FIELDS = ['f_01','f_26','f_27','f_28','f_29'];
+const SAVE_FIELDS = ['f_22','f_23','f_02','f_03','f_24','f_25','f_20','f_04','f_17','f_05','f_32','f_33','f_30','f_07','f_08','f_09','f_19','f_18'];
+const CLIENT_FIELDS = ['f_22','f_23','f_02','f_03','f_24','f_25','f_20','f_04','f_17','f_05','f_32','f_33'];
+
+// ============================================
+// INIT
+// ============================================
+async function init() {
+  // RESET PAROLA: daca am intrat prin linkul de resetare, mergem direct la ecranul de parola noua
+  if (IS_RECOVERY) { showView('reset'); return; }
+  // dacă nu avem token local, dar există sesiune Supabase (venită din pagina de plată) → o folosim
+  if (!TOKEN && supaApp) {
+    try {
+      const { data } = await supaApp.auth.getSession();
+      if (data && data.session) {
+        TOKEN = data.session.access_token;
+        sessionStorage.setItem('hos_token', TOKEN);
+      }
+    } catch(e) {}
+  }
+  if (!TOKEN) { showView('login'); return; }
+  try {
+    let profile = await api('/api/user');
+    // dacă tocmai am plătit, planul s-ar putea activa cu 1-2s întârziere (webhook) → așteptăm puțin
+    const justPaid = new URLSearchParams(location.search).get('paid') === '1';
+    if (justPaid && (!profile.tier || profile.tier === 'none')) {
+      for (let i = 0; i < 6 && (!profile.tier || profile.tier === 'none'); i++) {
+        await new Promise(r => setTimeout(r, 1500));
+        profile = await api('/api/user');
+      }
+      history.replaceState({}, '', location.pathname);
+    }
+    USER_PROFILE = profile;
+    if (!profile.tier || profile.tier === 'none') {
+      showView('redeem');
+    } else {
+      renderGenerator();
+      showView('generator');
+    }
+  } catch(e) {
+    sessionStorage.removeItem('hos_token');
+    TOKEN = null;
+    showView('login');
+  }
+}
+
+// ============================================
+// VIEW MANAGEMENT
+// ============================================
+function showView(name) {
+  document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+  document.getElementById('view-' + name).classList.add('active');
+  window.scrollTo(0, 0);
+  if (name === 'generator') {
+    if (typeof navTab === 'function') navTab('invitatie');
+    if (typeof fulgerTab === 'function') fulgerTab('gen');
+  }
+}
+
+// ============================================
+// API HELPER
+// ============================================
+async function api(endpoint, options = {}) {
+  // Auto-refresh: ia token-ul proaspat din clientul Supabase (se reinnoieste singur, fara delogare la ~1h)
+  if (supaApp) {
+    try {
+      const { data: _sess } = await supaApp.auth.getSession();
+      if (_sess && _sess.session && _sess.session.access_token) {
+        TOKEN = _sess.session.access_token;
+        sessionStorage.setItem('hos_token', TOKEN);
+      }
+    } catch (e) {}
+  }
+  const headers = { 'Content-Type': 'application/json' };
+  if (TOKEN) headers['Authorization'] = 'Bearer ' + TOKEN;
+  const res = await fetch(endpoint, { ...options, headers: { ...headers, ...options.headers } });
+  const data = await res.json();
+  if (!res.ok) throw new Error(data.error || 'Errore sconosciuto');
+  return data;
+}
+
+// ============================================
+// AUTH
+// ============================================
+
+// RESET PAROLA — pas 1: trimite email cu link de resetare
+async function doForgotPassword() {
+  const email = document.getElementById('forgot-email').value.trim();
+  const errEl = document.getElementById('forgot-err');
+  const sucEl = document.getElementById('forgot-suc');
+  errEl.style.display = 'none'; sucEl.style.display = 'none';
+  if (!email) { errEl.textContent = 'Inserisci l’indirizzo email.'; errEl.style.display = 'block'; return; }
+  if (!supaApp) { errEl.textContent = 'Il servizio di reimpostazione non è disponibile al momento.'; errEl.style.display = 'block'; return; }
+  try {
+    const redirectTo = window.location.origin + '/app-it';
+    const { error } = await supaApp.auth.resetPasswordForEmail(email, { redirectTo: redirectTo });
+    if (error) throw new Error(error.message);
+    sucEl.textContent = 'Se esiste un account con questa email, riceverai un link di reimpostazione. Controlla la posta in arrivo (e la cartella Spam).';
+    sucEl.style.display = 'block';
+  } catch(e) {
+    errEl.textContent = 'Impossibile inviare l’email. Riprova tra qualche istante.';
+    errEl.style.display = 'block';
+  }
+}
+
+// RESET PAROLA — pas 2: seteaza parola noua (dupa clic pe linkul din email)
+async function doResetPassword() {
+  const p1 = document.getElementById('reset-pass').value;
+  const p2 = document.getElementById('reset-pass2').value;
+  const errEl = document.getElementById('reset-err');
+  const sucEl = document.getElementById('reset-suc');
+  errEl.style.display = 'none'; sucEl.style.display = 'none';
+  if (!p1 || p1.length < 6) { errEl.textContent = 'La password deve avere almeno 6 caratteri.'; errEl.style.display = 'block'; return; }
+  if (p1 !== p2) { errEl.textContent = 'Le password non coincidono.'; errEl.style.display = 'block'; return; }
+  if (!supaApp) { errEl.textContent = 'Il servizio di reimpostazione non è disponibile al momento.'; errEl.style.display = 'block'; return; }
+  try {
+    const { error } = await supaApp.auth.updateUser({ password: p1 });
+    if (error) throw new Error(error.message);
+    sucEl.textContent = 'Password cambiata con successo. Ti portiamo nella piattaforma...';
+    sucEl.style.display = 'block';
+    setTimeout(function(){
+      try { history.replaceState({}, '', location.pathname); } catch(e){}
+      window.location.href = window.location.origin + '/app-it';
+    }, 1600);
+  } catch(e) {
+    errEl.textContent = 'Il link di reimpostazione è scaduto o non è più valido. Richiedi un nuovo link.';
+    errEl.style.display = 'block';
+  }
+}
+
+async function doLogin() {
+  const email = document.getElementById('login-email').value.trim();
+  const pass = document.getElementById('login-pass').value;
+  const errEl = document.getElementById('login-err');
+  errEl.style.display = 'none';
+  try {
+    if (supaApp) {
+      // Login prin clientul Supabase -> sesiunea e reinnoita automat (fara delogare la ~1h)
+      const { data: sd, error: se } = await supaApp.auth.signInWithPassword({ email, password: pass });
+      if (se) throw new Error(se.message === 'Invalid login credentials' ? 'Email o password errate' : se.message);
+      TOKEN = sd.session.access_token;
+    } else {
+      const data = await api('/api/auth/login', { method: 'POST', body: JSON.stringify({ email, password: pass }) });
+      TOKEN = data.token;
+    }
+    sessionStorage.setItem('hos_token', TOKEN);
+    await init();
+  } catch(e) {
+    errEl.textContent = e.message;
+    errEl.style.display = 'block';
+  }
+}
+
+async function doRegister() {
+  const email = document.getElementById('reg-email').value.trim();
+  const pass = document.getElementById('reg-pass').value;
+  const errEl = document.getElementById('reg-err');
+  const sucEl = document.getElementById('reg-suc');
+  errEl.style.display = 'none'; sucEl.style.display = 'none';
+  try {
+    await api('/api/auth/register', {
+      method: 'POST',
+      body: JSON.stringify({ email, password: pass })
+    });
+    sucEl.textContent = 'Account creato! Controlla l’email e conferma, poi accedi.';
+    sucEl.style.display = 'block';
+  } catch(e) {
+    errEl.textContent = e.message;
+    errEl.style.display = 'block';
+  }
+}
+
+async function doRedeem() {
+  const code = document.getElementById('redeem-code').value.trim().toUpperCase();
+  const errEl = document.getElementById('redeem-err');
+  const sucEl = document.getElementById('redeem-suc');
+  errEl.style.display = 'none'; sucEl.style.display = 'none';
+  try {
+    const data = await api('/api/redeem', {
+      method: 'POST',
+      body: JSON.stringify({ code })
+    });
+    sucEl.textContent = data.message;
+    sucEl.style.display = 'block';
+    setTimeout(async () => {
+      const profile = await api('/api/user');
+      USER_PROFILE = profile;
+      renderGenerator();
+      showView('generator');
+    }, 1500);
+  } catch(e) {
+    errEl.textContent = e.message;
+    errEl.style.display = 'block';
+  }
+}
+
+
+// ===== GHIDURI / ONBOARDING / NAV =====
+function _isOnboarded(){ try{ return !!localStorage.getItem('hos_onboarded'); }catch(e){ return true; } }
+function closeModal(id){ var ov=document.getElementById(id); if(!ov) return; ov.classList.remove('show'); document.body.style.overflow=''; }
+
+// ── GATE PAȘI: Pasul 1 (Cum completezi) + Pasul 2 (Reguli) -> deblocheaza generarea ──
+var _stepDone = { ghid:false, reguli:false };   // ghid = Pasul 1, reguli = Pasul 2
+function refreshStepUI(){
+  var onboarded = _isOnboarded();
+  var map = { ghid:'step-1', reguli:'step-2' };
+  ['ghid','reguli'].forEach(function(k){
+    var b=document.getElementById(map[k]); if(!b) return;
+    b.classList.toggle('step-ok', onboarded || _stepDone[k]);
+  });
+  var gb=document.getElementById('gen-btn');
+  if(gb) gb.disabled = !onboarded;
+  var hint=document.getElementById('gate-hint');
+  if(hint) hint.style.display = onboarded ? 'none' : 'block';
+}
+function markStep(k){
+  _stepDone[k]=true;
+  if(_stepDone.ghid && _stepDone.reguli){
+    try{ localStorage.setItem('hos_onboarded','1'); }catch(e){}
+    if(typeof toast==='function') toast('Fatto! Ora puoi generare lo script 💪', 3500);
+  }
+  refreshStepUI();
+}
+
+function openModal(id, mode){
+  var ov=document.getElementById(id); if(!ov) return;
+  var body=ov.querySelector('.modal-body');
+  var btn=ov.querySelector('.modal-gate');
+  var gate = (mode!=='normal') && !_isOnboarded();    // gate activ doar la prima utilizare
+  ov.classList.add('show'); document.body.style.overflow='hidden';
+  if(body) body.scrollTop=0;
+  if(btn){
+    if(gate){
+      var stepKey = (id==='m-ghid') ? 'ghid' : 'reguli';
+      btn.textContent='Ho capito ✓';
+      btn.onclick=function(){
+        markStep(stepKey);
+        closeModal(id);
+        // dupa Pasul 1 -> deschide automat Pasul 2 (doar daca nu e gata)
+        if(stepKey==='ghid' && !_stepDone.reguli && !_isOnboarded()){ setTimeout(function(){ openModal('m-reguli'); }, 250); }
+      };
+      btn.disabled=true; btn.classList.add('locked');
+      if(body){
+        var check=function(){ if(body.scrollTop+body.clientHeight >= body.scrollHeight-12){ btn.disabled=false; btn.classList.remove('locked'); body.removeEventListener('scroll',check); } };
+        body.addEventListener('scroll',check);
+        setTimeout(function(){ if(body.scrollHeight <= body.clientHeight+12){ btn.disabled=false; btn.classList.remove('locked'); } },150);
+      }
+    } else {
+      btn.textContent='Chiudi'; btn.disabled=false; btn.classList.remove('locked');
+      btn.onclick=function(){ closeModal(id); };
+    }
+  }
+}
+function finishOnboard(){ try{ localStorage.setItem('hos_onboarded','1'); }catch(e){} closeModal('m-ghid'); refreshStepUI(); if(typeof toast==='function') toast('Fatto! Compila con dettagli reali e specifici 💪', 4000); }
+function maybeOnboard(){ if(_isOnboarded()){ refreshStepUI(); return; } openModal('m-ghid'); }   // Pasul 1 primul
+function navTab(w){
+  var real=['invitatie','conectare','prezentare','inchidere'];
+  if(real.indexOf(w)<0){
+    var n={obiectii:'Obiezioni',recomandari:'Richiesta di referenze'};
+    if(typeof toast==='function') toast((n[w]||'La sezione')+' — presto 🔒', 3000);
+    return;
+  }
+  var tabs={invitatie:'tab-invitatie',conectare:'tab-conectare',prezentare:'tab-prezentare',inchidere:'tab-inchidere'};
+  var wraps={invitatie:'wrap-invitatie',conectare:'wrap-conectare',prezentare:'wrap-prezentare',inchidere:'wrap-inchidere'};
+  real.forEach(function(k){
+    var t=document.getElementById(tabs[k]); var wr=document.getElementById(wraps[k]);
+    if(t) t.classList.toggle('active', k===w);
+    if(wr) wr.style.display=(k===w)?'block':'none';
+  });
+  if(w==='conectare' && typeof renderConectare==='function') renderConectare();
+  if(w==='prezentare' && typeof renderPrezentare==='function') renderPrezentare();
+  if(w==='inchidere' && typeof renderInchidere==='function') renderInchidere();
+}
+
+// ===== MODUL CONECTARE — incarcare gated de pe server (Builder/Leader) =====
+var _conectareLoaded=false;
+function _cnLockHtml(){
+  return '<div class="cn-lock"><div class="cn-lock-ic">🔒</div>'+
+    '<div class="cn-lock-tx">Il modulo <b>Connessione</b> — le regole complete più lo script di connessione battuta per battuta — si sblocca dal piano <b>Builder</b>.</div>'+
+    '<button class="btn-ghost" style="max-width:240px" onclick="goUpgrade()">Sblocca con Builder</button></div>';
+}
+async function renderConectare(){
+  var host=document.getElementById('conectare-content');
+  if(!host) return;
+  var tier=(typeof USER_PROFILE!=='undefined' && USER_PROFILE && USER_PROFILE.tier) ? USER_PROFILE.tier : 'none';
+  var order=['none','unic','recruit','builder','leader'];
+  var unlocked=(order.indexOf(tier) >= order.indexOf('builder'));
+  if(!unlocked){ host.innerHTML=_cnLockHtml(); _conectareLoaded=false; return; }
+  if(_conectareLoaded) return;
+  host.innerHTML='<div class="cn-load">Caricamento del modulo…</div>';
+  try{
+    var data=await api('/api/module/conectare?lang=it');
+    host.innerHTML=data.content;
+    _conectareLoaded=true;
+  }catch(e){
+    if(/locked/i.test(e.message||'')){ host.innerHTML=_cnLockHtml(); }
+    else { host.innerHTML='<div class="cn-load">Impossibile caricare il modulo. Riprova.</div>'; }
+  }
+}
+// ===== MODUL PREZENTARE — incarcare gated de pe server (doar Leader) =====
+var _prezentareLoaded=false;
+function _pzLockHtml(){
+  return '<div class="cn-lock"><div class="cn-lock-ic">🔒</div>'+
+    '<div class="cn-lock-tx">Il modulo <b>Presentazione 1 a 1</b> — la banca di domande, la cadenza e la tonalità che tengono l’attenzione del cliente al 100% — si sblocca dal piano <b>Leader</b>.</div>'+
+    '<button class="btn-ghost" style="max-width:240px" onclick="goUpgrade()">Sblocca con Leader</button></div>';
+}
+async function renderPrezentare(){
+  var host=document.getElementById('prezentare-content');
+  if(!host) return;
+  var tier=(typeof USER_PROFILE!=='undefined' && USER_PROFILE && USER_PROFILE.tier) ? USER_PROFILE.tier : 'none';
+  var order=['none','unic','recruit','builder','leader'];
+  var unlocked=(order.indexOf(tier) >= order.indexOf('leader'));
+  if(!unlocked){ host.innerHTML=_pzLockHtml(); _prezentareLoaded=false; return; }
+  if(_prezentareLoaded) return;
+  host.innerHTML='<div class="cn-load">Caricamento del modulo…</div>';
+  try{
+    var data=await api('/api/module/prezentare?lang=it');
+    host.innerHTML=data.content;
+    _prezentareLoaded=true;
+  }catch(e){
+    if(/locked/i.test(e.message||'')){ host.innerHTML=_pzLockHtml(); }
+    else { host.innerHTML='<div class="cn-load">Impossibile caricare il modulo. Riprova.</div>'; }
+  }
+}
+// ===== MODUL ÎNCHIDERE — incarcare gated de pe server (doar Leader) =====
+var _inchidereLoaded=false;
+function _inLockHtml(){
+  return '<div class="cn-lock"><div class="cn-lock-ic">🔒</div>'+
+    '<div class="cn-lock-tx">Il modulo <b>Chiusura</b> — la formula, le 3 fasi e le regole d’oro di esecuzione — si sblocca dal piano <b>Leader</b>.</div>'+
+    '<button class="btn-ghost" style="max-width:240px" onclick="goUpgrade()">Sblocca con Leader</button></div>';
+}
+async function renderInchidere(){
+  var host=document.getElementById('inchidere-content');
+  if(!host) return;
+  var tier=(typeof USER_PROFILE!=='undefined' && USER_PROFILE && USER_PROFILE.tier) ? USER_PROFILE.tier : 'none';
+  var order=['none','unic','recruit','builder','leader'];
+  var unlocked=(order.indexOf(tier) >= order.indexOf('leader'));
+  if(!unlocked){ host.innerHTML=_inLockHtml(); _inchidereLoaded=false; return; }
+  if(_inchidereLoaded) return;
+  host.innerHTML='<div class="cn-load">Caricamento del modulo…</div>';
+  try{
+    var data=await api('/api/module/inchidere?lang=it');
+    host.innerHTML=data.content;
+    _inchidereLoaded=true;
+  }catch(e){
+    if(/locked/i.test(e.message||'')){ host.innerHTML=_inLockHtml(); }
+    else { host.innerHTML='<div class="cn-load">Impossibile caricare il modulo. Riprova.</div>'; }
+  }
+}
+function setLang(l){ if(l==='ro'){ window.location.href='/app'; return; } if(l==='it'){ return; } if(typeof toast==='function'){ var m={en:'EN',es:'ES'}; toast('Versione '+(m[l]||l.toUpperCase())+' — presto', 3000); } }
+
+// ============================================
+// CONT / ABONAMENT + RETENTIE
+// ============================================
+const ACC_TIER_LABELS = { unic:'Script Singolo', recruit:'Recruit', builder:'Builder', leader:'Leader', none:'Nessun piano' };
+const ACC_SUB_TIERS = ['recruit','builder','leader'];
+const ACC_RANK = { recruit:1, builder:2, leader:3 };
+const ACC_PLANS = [
+  { id:'recruit', name:'Recruit', price:'9€/mese',  feat:'Modalità Clean',                scripts:3,  one:'9€',  per:'3€'    },
+  { id:'builder', name:'Builder', price:'19€/mese', feat:'Clean + Coach',            scripts:8,  one:'19€', per:'2,38€' },
+  { id:'leader',  name:'Leader',  price:'29€/mese', feat:'Clean + Coach + Entrambe',   scripts:15, one:'29€', per:'1,93€' }
+];
+var ACC_SUB = null;
+const RETAIN = {
+  timp: {
+    label:'Non ho tempo per chiamare',
+    msg:'Normale, la vita interviene. Ma l’abbonamento non «brucia» se non chiami per una settimana — gli script ti aspettano quando torni. Se disdici ora, la prossima volta riparti da zero. Preferisci una pausa, invece di chiudere tutto?',
+    primary:'stay'
+  },
+  rezultate: {
+    label:'Non ho ottenuto risultati',
+    msg:'Questo è ciò che voglio risolvere, non perderti come abbonato. Il più delle volte non è lo script il problema, ma chi chiami e in quale momento. Scrivici con 2-3 esempi di chiamate e guardiamo insieme dove si rompe — è incluso, senza costi.',
+    primary:'help'
+  },
+  gata_mlm: {
+    label:'Non faccio più MLM',
+    msg:'Allora hai ragione, un generatore di script davvero non ti serve più. Non ti tratteniamo con la forza. Confermiamo la disdetta ora. Grazie di essere stato con noi.',
+    primary:'cancel'
+  },
+  alt: {
+    label:'Altro motivo',
+    msg:'Capiamo. Se vuoi, lasciaci due righe — ci aiuta a migliorare. Non è obbligatorio.',
+    primary:'stay', note:true
+  }
+};
+
+function _accBody(){ return document.getElementById('acc-body'); }
+function _accSub(t){ var e=document.getElementById('acc-sub'); if(e) e.textContent=t; }
+function _esc(s){ return String(s==null?'':s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];}); }
+function _fmtDate(ms){ if(!ms) return '—'; try{ return new Date(ms).toLocaleDateString('ro-RO',{day:'numeric',month:'long',year:'numeric'}); }catch(e){ return '—'; } }
+
+async function openAccount(){
+  const ov=document.getElementById('m-account'); if(!ov) return;
+  ov.classList.add('show'); document.body.style.overflow='hidden';
+  _accSub('I dati del tuo account');
+  _accBody().innerHTML = '<div class="acc-loading">Caricamento…</div>';
+  try{
+    const sub = await api('/api/subscription');
+    accRenderHome(sub);
+  }catch(e){
+    _accBody().innerHTML = '<div class="retain-msg">Impossibile caricare l’abbonamento. Riprova.</div><div class="btn-row"><button class="btn-ghost" onclick="openAccount()">Riprova</button></div>';
+  }
+}
+
+function accRenderHome(sub){
+  ACC_SUB = sub;
+  const p = (typeof USER_PROFILE!=='undefined' && USER_PROFILE) ? USER_PROFILE : {};
+  const tier = p.tier || 'none';
+  const tierLabel = ACC_TIER_LABELS[tier] || tier;
+  let statusHtml='', actionHtml='';
+  if(tier === 'unic'){
+    statusHtml = '<div class="acc-status">Pagamento unico — accesso permanente, senza abbonamento ricorrente.</div>';
+    actionHtml = '<div class="acc-note">Non hai un abbonamento da gestire.</div>';
+  } else if(!sub.has_subscription || !ACC_SUB_TIERS.includes(tier)){
+    statusHtml = '<div class="acc-status">Non hai un abbonamento attivo ora.</div>';
+  } else if(sub.cancel_at_period_end){
+    statusHtml = '<div class="acc-status warn">Disdetto — resta attivo fino al <b>'+_fmtDate(sub.current_period_end)+'</b>. Non verrai più addebitato.</div>';
+    actionHtml = '<button class="btn-stay" onclick="doResume()">Riattiva l’abbonamento</button>';
+  } else {
+    actionHtml = '<button class="btn-stay" onclick="accManage()">Gestisci il piano e l’abbonamento</button>';
+  }
+  _accBody().innerHTML =
+    '<div class="acc-grid">'+
+      '<div class="acc-row"><span class="acc-k">Email</span><span class="acc-v">'+_esc(p.email||'')+'</span></div>'+
+      '<div class="acc-row"><span class="acc-k">Piano</span><span class="acc-v">'+_esc(tierLabel)+'</span></div>'+
+    '</div>'+ statusHtml +
+    '<div class="acc-actions">'+actionHtml+'</div>';
+}
+
+function accManage(){
+  _accSub('Il tuo piano e l’abbonamento');
+  const p = (typeof USER_PROFILE!=='undefined' && USER_PROFILE) ? USER_PROFILE : {};
+  const cur = p.tier || 'none';
+  var cards = ACC_PLANS.map(function(pl){
+    var isCur = pl.id===cur;
+    var scriptsLine = isCur
+      ? '<div class="plan-scripts">'+pl.scripts+' script / mese</div>'
+      : '<div class="plan-scripts">Accesso istantaneo a +'+pl.scripts+' script</div>';
+    var perLine = '<div class="plan-per">'+pl.per+' per script</div>';
+    return '<div class="plan-card'+(isCur?' current':'')+'">'+
+      '<div class="plan-top"><span class="plan-name">'+pl.name+'</span><span class="plan-price">'+pl.price+'</span></div>'+
+      '<div class="plan-feat">'+pl.feat+'</div>'+
+      scriptsLine + perLine +
+      (isCur ? '<div class="plan-cur">Il tuo piano</div>'
+              +'<button class="plan-topup" onclick="doTopup()">Acquista altri +'+pl.scripts+' script · '+pl.one+'</button>'
+             : '<button class="plan-pick" onclick="doChange(\''+pl.id+'\')">Passa a questo piano</button>')+
+    '</div>';
+  }).join('');
+  _accBody().innerHTML = cards +
+    '<div class="brow" style="margin-top:4px"><button class="btn-cancel" onclick="accShowReasons()">Disdici l’abbonamento</button>'+
+    '<button class="btn-ghost" onclick="openAccount()">‹ Indietro</button></div>';
+}
+
+function doChange(target){
+  const p = (typeof USER_PROFILE!=='undefined' && USER_PROFILE) ? USER_PROFILE : {};
+  const cur = p.tier || 'none';
+  if(target===cur) return;
+  var up = ACC_RANK[target] > ACC_RANK[cur];
+  var name = (ACC_PLANS.filter(function(x){return x.id===target;})[0]||{}).name || target;
+  var msg = up
+    ? 'Passi a <b>'+name+'</b>. Ora viene addebitato l’intero prezzo del nuovo piano, il ciclo di fatturazione riparte oggi e i nuovi script si aggiungono a quelli che hai. Continui?'
+    : 'Passi a <b>'+name+'</b> ora. Non viene addebitato nulla adesso — paghi il nuovo prezzo dal prossimo rinnovo. Mantieni gli script attuali, ma perdi i vantaggi del piano superiore. Continui?';
+  _accBody().innerHTML = '<div class="retain-msg">'+msg+'</div>'+
+    '<div class="brow"><button class="btn-stay" onclick="confirmChange(\''+target+'\')">Conferma</button>'+
+    '<button class="btn-ghost" onclick="accManage()">‹ Indietro</button></div>';
+}
+
+async function confirmChange(target){
+  _accBody().innerHTML = '<div class="acc-loading">Elaborazione…</div>';
+  try{
+    var res = await api('/api/subscription/change', { method:'POST', body: JSON.stringify({ tier: target }) });
+    try{ USER_PROFILE = await api('/api/user'); if(typeof renderGenerator==='function') renderGenerator(); }catch(e){}
+    _accSub('Piano cambiato');
+    _accBody().innerHTML =
+      '<div class="retain-msg ok">Fatto. Ora sei sul piano <b>'+(ACC_TIER_LABELS[target]||target)+'</b>.'+(res.upgrade?' I nuovi script sono stati aggiunti a quelli esistenti.':'')+'</div>'+
+      '<div class="brow"><button class="btn-ghost" onclick="openAccount()">Torna all’account</button></div>';
+  }catch(e){
+    _accBody().innerHTML = '<div class="retain-msg">'+_esc(e.message||'Impossibile cambiare piano.')+'</div>'+
+      '<div class="brow"><button class="btn-ghost" onclick="accManage()">‹ Indietro</button></div>';
+  }
+}
+
+async function doTopup(){
+  _accBody().innerHTML = '<div class="acc-loading">Elaborazione del pagamento…</div>';
+  try{
+    var res = await api('/api/subscription/repurchase', { method:'POST', body: JSON.stringify({}) });
+    if(!res || !res.ok) throw new Error((res && res.error) || 'Impossibile elaborare il pagamento.');
+    // reincarca profilul ca sa se vada scripturile noi
+    try{ var u = await api('/api/user'); if(u){ USER_PROFILE = u; if(typeof renderGenerator==='function') renderGenerator(); } }catch(_){}
+    var when = res.current_period_end ? new Date(res.current_period_end*1000).toLocaleDateString('ro-RO',{day:'numeric',month:'long',year:'numeric'}) : null;
+    _accBody().innerHTML =
+      '<div class="retain-msg">Fatto! Sono stati aggiunti <b>+'+(res.scripts_added||0)+' script</b> (ora hai <b>'+(res.scripts_total||0)+'</b>).'+
+      (when ? ' Prossima fattura: <b>'+when+'</b>, sullo stesso piano.' : '')+'</div>'+
+      '<div class="brow"><button class="btn-stay" onclick="accManage()">‹ Torna all’account</button></div>';
+  }catch(e){
+    _accBody().innerHTML = '<div class="retain-msg">'+_esc(e.message||'Impossibile elaborare il pagamento.')+'</div>'+
+      '<div class="brow"><button class="btn-ghost" onclick="accManage()">‹ Indietro</button></div>';
+  }
+}
+
+function accShowReasons(){
+  _accSub('Prima di andare…');
+  const chips = Object.keys(RETAIN).map(function(k){
+    return '<button class="reason-chip" onclick="accPickReason(\''+k+'\')">'+RETAIN[k].label+'</button>';
+  }).join('');
+  _accBody().innerHTML =
+    '<p class="retain-lead">Dicci in breve cosa ti ha fatto cambiare idea — magari troviamo una soluzione migliore.</p>'+
+    '<div class="reason-chips">'+chips+'</div>'+
+    '<div class="acc-actions" style="margin-top:14px"><button class="btn-ghost" onclick="openAccount()">← Indietro</button></div>';
+}
+
+function accPickReason(k){
+  const r = RETAIN[k]; if(!r) return;
+  let buttons='';
+  if(r.primary==='cancel'){
+    buttons = '<button class="btn-cancel" onclick="doCancel(\''+k+'\')">Continua la disdetta</button>'+
+              '<button class="btn-ghost" onclick="openAccount()">Ho cambiato idea</button>';
+  } else if(r.primary==='help'){
+    buttons = '<button class="btn-stay" onclick="accHelp(\''+k+'\')">Voglio aiuto</button>'+
+              '<button class="btn-cancel-soft" onclick="doCancel(\''+k+'\')">Continua la disdetta</button>';
+  } else {
+    buttons = '<button class="btn-stay" onclick="openAccount()">Resto abbonato</button>'+
+              '<button class="btn-cancel-soft" onclick="doCancel(\''+k+'\')">Continua la disdetta</button>';
+  }
+  const noteField = r.note ? '<textarea id="acc-note-in" class="help-area" style="min-height:70px" placeholder="Il tuo motivo (facoltativo)…" maxlength="500"></textarea>' : '';
+  _accBody().innerHTML = '<div class="retain-msg">'+r.msg+'</div>'+ noteField +'<div class="btn-row">'+buttons+'</div>';
+}
+
+async function doCancel(k){
+  const r = RETAIN[k] || {};
+  let reason = r.label || k;
+  const noteEl = document.getElementById('acc-note-in');
+  if(noteEl && noteEl.value.trim()) reason = 'Altro motivo: '+noteEl.value.trim().slice(0,100);
+  _accBody().innerHTML = '<div class="acc-loading">Se procesează…</div>';
+  try{
+    const res = await api('/api/subscription/cancel', { method:'POST', body: JSON.stringify({ reason }) });
+    _accSub('Abbonamento disdetto');
+    _accBody().innerHTML =
+      '<div class="retain-msg ok">Fatto. L’abbonamento resta attivo fino al <b>'+_fmtDate(res.current_period_end)+'</b> — fino ad allora hai accesso completo e non vieni più addebitato. Cambiato idea? Puoi riattivarlo quando vuoi entro quella data.</div>'+
+      '<div class="btn-row"><button class="btn-stay" onclick="doResume()">Riattiva l’abbonamento</button><button class="btn-ghost" onclick="closeModal(\'m-account\')">Chiudi</button></div>';
+  }catch(e){
+    _accBody().innerHTML = '<div class="retain-msg">'+_esc(e.message||'Impossibile disdire. Riprova.')+'</div><div class="btn-row"><button class="btn-ghost" onclick="openAccount()">← Indietro</button></div>';
+  }
+}
+
+async function doResume(){
+  _accBody().innerHTML = '<div class="acc-loading">Riattivazione…</div>';
+  try{
+    await api('/api/subscription/resume', { method:'POST' });
+    if(typeof toast==='function') toast('Abbonamento riattivato ✓', 3000);
+    openAccount();
+  }catch(e){
+    _accBody().innerHTML = '<div class="retain-msg">'+_esc(e.message||'Impossibile riattivare.')+'</div><div class="btn-row"><button class="btn-ghost" onclick="openAccount()">← Indietro</button></div>';
+  }
+}
+
+function accHelp(k){
+  _accSub('Scrivici cosa è successo');
+  _accBody().innerHTML =
+    '<p class="retain-lead">Dacci qualche dettaglio (chi hai chiamato, cosa hai detto, che risposta hai avuto) e guardiamo insieme dove si rompe.</p>'+
+    '<textarea id="help-msg" class="help-area" placeholder="Scrivi qui…" maxlength="4000"></textarea>'+
+    '<div class="btn-row">'+
+      '<button class="btn-stay" onclick="submitSupport(\''+k+'\')">Invia</button>'+
+      '<button class="btn-ghost" onclick="accShowReasons()">← Indietro</button>'+
+    '</div>';
+  setTimeout(function(){ var t=document.getElementById('help-msg'); if(t) t.focus(); }, 80);
+}
+
+async function submitSupport(k){
+  const msgEl = document.getElementById('help-msg');
+  const message = msgEl ? msgEl.value.trim() : '';
+  if(!message){ if(typeof toast==='function') toast('Scrivi un messaggio prima di inviare.', 3000); return; }
+  const reason = (RETAIN[k] && RETAIN[k].label) || 'Aiuto';
+  _accBody().innerHTML = '<div class="acc-loading">Invio…</div>';
+  try{
+    await api('/api/support', { method:'POST', body: JSON.stringify({ reason, message }) });
+    _accSub('Messaggio inviato');
+    _accBody().innerHTML =
+      '<div class="retain-msg ok">Abbiamo ricevuto il tuo messaggio. Ti rispondiamo il prima possibile. Nel frattempo, l’abbonamento resta attivo.</div>'+
+      '<div class="btn-row"><button class="btn-ghost" onclick="closeModal(\'m-account\')">Chiudi</button></div>';
+  }catch(e){
+    _accBody().innerHTML = '<div class="retain-msg">'+_esc(e.message||'Impossibile inviare. Riprova.')+'</div><div class="btn-row"><button class="btn-stay" onclick="accHelp(\''+k+'\')">← Riprova</button></div>';
+  }
+}
+
+function doLogout() {
+  sessionStorage.removeItem('hos_token');
+  TOKEN = null;
+  USER_PROFILE = null;
+  // sterge datele locale cu caracter personal (formular agent + prospect) la delogare
+  try {
+    localStorage.removeItem('hos_form');
+    localStorage.removeItem('hos_agent_data');
+  } catch(e) {}
+  if (supaApp) { try { supaApp.auth.signOut(); } catch(e){} }
+  showView('login');
+}
+
+// ============================================
+// FORM MEMORY (produs + client)
+// ============================================
+function saveAgentData() {
+  const data = {};
+  AGENT_FIELDS.forEach(id => { const el = document.getElementById(id); if (el) data[id] = el.value; });
+  try { localStorage.setItem('hos_agent_data', JSON.stringify(data)); } catch(e) {}
+}
+function saveFormData() {
+  const data = {};
+  SAVE_FIELDS.forEach(id => { const el = document.getElementById(id); if (el) data[id] = el.value; });
+  try { localStorage.setItem('hos_form', JSON.stringify(data)); } catch(e) {}
+}
+function loadFormData() {
+  try {
+    const raw = localStorage.getItem('hos_form');
+    if (!raw) return;
+    const data = JSON.parse(raw);
+    SAVE_FIELDS.forEach(id => {
+      const el = document.getElementById(id);
+      if (el && data[id] != null) el.value = data[id];
+    });
+    toggleExperienta();
+  } catch(e) {}
+}
+function clearClientData() {
+  CLIENT_FIELDS.forEach(id => { const el = document.getElementById(id); if (el) el.value = ''; });
+  saveFormData();
+  toast('Dati cliente svuotati — compila per la nuova persona');
+}
+
+// ============================================
+// UPGRADE NUDGE
+// ============================================
+const NEXT_TIER = {
+  unic:    { name: 'Recruit', perk: '3 script/mese' },
+  recruit: { name: 'Builder', perk: '8 script/mese + Coach Mode' },
+  builder: { name: 'Leader',  perk: '15 script/mese + tutte le modalità' },
+  leader:  null
+};
+function goUpgrade() {
+  if (UPGRADE_URL) { window.open(UPGRADE_URL, '_blank'); }
+  else { toast('Per l’upgrade scrivici a contact@octavianalupoaie.biz', 5000); }
+}
+function renderNudge() {
+  if (!USER_PROFILE) return;
+  const remaining = USER_PROFILE.scripts_remaining;
+  const next = NEXT_TIER[USER_PROFILE.tier];
+  const show = next && remaining <= 3;
+  ['nudge-gen','nudge-out'].forEach(id => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    const txtEl = el.querySelector('.un-text');
+    if (show && txtEl) {
+      if (remaining <= 0) {
+        txtEl.innerHTML = 'Hai finito gli script per questo mese. Passa a <b>' + next.name + '</b> — ' + next.perk + '.';
+      } else {
+        const word = 'script';
+        const verb = remaining === 1 ? 'è rimasto' : 'sono rimasti';
+        txtEl.innerHTML = 'Ti ' + verb + ' <b>' + remaining + ' ' + word + '</b>. Passa a <b>' + next.name + '</b> — ' + next.perk + '.';
+      }
+      el.style.display = 'block';
+    } else {
+      el.style.display = 'none';
+    }
+  });
+}
+
+// ============================================
+// GENERATOR
+// ============================================
+function renderGenerator() {
+  if (!USER_PROFILE) return;
+  const tier = USER_PROFILE.tier;
+  const remaining = USER_PROFILE.scripts_remaining;
+
+  // Counter
+  const badges = { recruit:'Recruit', builder:'Builder', leader:'Leader', unic:'Script Singolo' };
+  document.getElementById('scripts-remaining').textContent = remaining;
+  document.getElementById('tier-badge').textContent = '· ' + (badges[tier] || tier);
+
+  // Mode options
+  const modes = [
+    { id:'clean', title:'Clean Mode', desc:'Script pronto da eseguire al telefono, senza annotazioni', tier:null },
+    { id:'coach', title:'Coach Mode', desc:'Script + spiegazioni psicologiche per ogni riga', tier:'builder' },
+    { id:'both',  title:'Entrambe le modalità', desc:'Coach Mode + Clean Mode, uno sotto l’altro', tier:'leader' }
+  ];
+
+  const tierOrder = ['unic','recruit','builder','leader'];
+  const tierIdx = tierOrder.indexOf(tier);
+  const tierNames = { builder:'Builder', leader:'Leader' };
+
+  const modeContainer = document.getElementById('mode-options');
+  modeContainer.innerHTML = '';
+
+  modes.forEach(m => {
+    const requiredIdx = m.tier ? tierOrder.indexOf(m.tier) : 0;
+    const isLocked = tierIdx < requiredIdx;
+    const isSelected = SELECTED_MODE === m.id && !isLocked;
+
+    const div = document.createElement('div');
+    div.className = 'mode-option' + (isSelected ? ' selected' : '') + (isLocked ? ' locked' : '');
+    div.innerHTML = `
+      <div class="mode-radio"></div>
+      <div class="mode-text">
+        <div class="mode-title">${m.title}</div>
+        <div class="mode-desc">${m.desc}</div>
+      </div>
+      ${isLocked ? `<div class="lock-badge">🔒 dal piano ${tierNames[m.tier]}</div>` : ''}
+    `;
+
+    if (!isLocked) {
+      div.addEventListener('click', () => {
+        SELECTED_MODE = m.id;
+        renderGenerator();
+      });
+    } else {
+      div.addEventListener('click', () => {
+        toast(`Coach Mode ed Entrambe sono disponibili dal piano ${tierNames[m.tier]}. Fai l’upgrade per l’accesso.`);
+      });
+    }
+
+    modeContainer.appendChild(div);
+  });
+
+  // ONE-TIME: incarca date salvate + ataseaza autosave (nu la fiecare re-render)
+  if (!_formLoaded) {
+    _formLoaded = true;
+    setTimeout(maybeOnboard, 500);
+
+    try {
+      const savedAgent = localStorage.getItem('hos_agent_data');
+      if (savedAgent) {
+        const a = JSON.parse(savedAgent);
+        AGENT_FIELDS.forEach(id => { const el = document.getElementById(id); if (el && a[id] != null) el.value = a[id]; });
+      }
+    } catch(e) {}
+    loadFormData();
+    reflectStilFromValue();
+    reflectSemnalFromValue();
+
+    AGENT_FIELDS.forEach(id => {
+      const el = document.getElementById(id);
+      if (el) { el.addEventListener('blur', saveAgentData); el.addEventListener('change', saveAgentData); }
+    });
+    SAVE_FIELDS.forEach(id => {
+      const el = document.getElementById(id);
+      if (el) {
+        el.addEventListener('blur', saveFormData);
+        el.addEventListener('change', saveFormData);
+      }
+    });
+  }
+
+  renderNudge();
+  refreshStepUI();
+}
+
+function updateSemnalState() {
+  const sel = Array.from(document.querySelectorAll('#semnal-chips .stil-chip.selected')).map(c => c.getAttribute('data-semnal'));
+  document.getElementById('f_32').value = sel.join(', ');
+  const dw = document.getElementById('semnal-detail-wrap');
+  const ow = document.getElementById('dorinta-wrap');
+  if (dw) dw.style.display = (sel.indexOf('Pozitiv') !== -1 || sel.indexOf('Negativ') !== -1) ? 'block' : 'none';
+  if (ow) ow.style.display = (sel.indexOf('Dorinta') !== -1) ? 'block' : 'none';
+}
+function toggleSemnal(btn) {
+  btn.classList.toggle('selected');
+  updateSemnalState();
+  saveAgentData();
+}
+function reflectSemnalFromValue() {
+  const val = (document.getElementById('f_32').value || '').trim();
+  const set = val ? val.split(',').map(s => s.trim()) : [];
+  document.querySelectorAll('#semnal-chips .stil-chip').forEach(c => {
+    c.classList.toggle('selected', set.indexOf(c.getAttribute('data-semnal')) !== -1);
+  });
+  updateSemnalState();
+}
+function selectStil(btn) {
+  document.querySelectorAll('#stil-chips .stil-chip').forEach(c => c.classList.remove('selected'));
+  btn.classList.add('selected');
+  const val = btn.getAttribute('data-stil');
+  const alt = document.getElementById('f_26_alt');
+  const note = document.getElementById('stil-note');
+  if (val === '__altul__') {
+    alt.style.display = 'block';
+    if (note) note.style.display = 'block';
+    document.getElementById('f_26').value = alt.value.trim();
+    alt.focus();
+  } else {
+    alt.style.display = 'none';
+    if (note) note.style.display = 'none';
+    document.getElementById('f_26').value = val;
+  }
+  saveAgentData();
+}
+function onStilAltInput() {
+  document.getElementById('f_26').value = document.getElementById('f_26_alt').value;
+  saveAgentData();
+}
+function reflectStilFromValue() {
+  const val = (document.getElementById('f_26').value || '').trim();
+  const alt = document.getElementById('f_26_alt');
+  const note = document.getElementById('stil-note');
+  let matched = false;
+  document.querySelectorAll('#stil-chips .stil-chip').forEach(c => {
+    const isMatch = c.getAttribute('data-stil') === val && val !== '';
+    c.classList.toggle('selected', isMatch);
+    if (isMatch) matched = true;
+  });
+  if (val && !matched) {
+    const altChip = document.querySelector('#stil-chips .stil-chip[data-stil="__altul__"]');
+    if (altChip) altChip.classList.add('selected');
+    if (alt) { alt.style.display = 'block'; alt.value = val; }
+    if (note) note.style.display = 'block';
+  } else {
+    if (alt) alt.style.display = 'none';
+    if (note) note.style.display = 'none';
+  }
+}
+function toggleExperienta() {
+  const val = document.getElementById('f_08').value;
+  document.getElementById('field-experienta').style.display = val === 'Da' ? 'block' : 'none';
+}
+
+// Randare sigura: escape HTML, apoi **text** -> ingrosat (pentru AGENT etc.)
+function renderScript(text) {
+  var esc = String(text == null ? '' : text)
+    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  var lines = esc.split('\n');
+  // ascunde linia tehnica de ancorare a modului ([DEBUG] ...) injectata in prompt
+  lines = lines.filter(function(l){ return l.indexOf('[DEBUG]') === -1; });
+  for (var i = 0; i < lines.length; i++) {
+    var t = lines[i].trim();
+    // bare grele de zona (blocuri pline █ sau linie dubla ═) -> scoase (le inlocuieste bannerul)
+    if (/^[█═]{3,}$/.test(t)) { lines[i] = ''; continue; }
+    // separatoare usoare (— – - ─) -> linie fina
+    if (/^[—–\-─]{3,}$/.test(t)) { lines[i] = '<span class="script-rule bare"></span>'; continue; }
+    // pauza [ PAUZA ... ] -> chip discret
+    if (/^\[\s*PAUZ/i.test(t) && /\]$/.test(t)) {
+      var pcore = t.replace(/^\[\s*/, '').replace(/\s*\]$/, '');
+      lines[i] = '<span class="script-pause">' + pcore + '</span>'; continue;
+    }
+    // curata separatoarele din capete (inclusiv ─ si █) ca sa detectam continutul
+    var core = t.replace(/^[—–\-═─█\s]+/, '').replace(/[—–\-═─█\s]+$/, '');
+    if (/^ETAPA\b/i.test(core)) { lines[i] = '<span class="script-rule">' + core + '</span>'; continue; }
+    // antet de zona (incepe cu emoji-ul zonei) -> banda
+    if (/^(📋|🎬|✅)/.test(core)) { lines[i] = '<span class="script-zone">' + core + '</span>'; continue; }
+  }
+  esc = lines.join('\n');
+  return esc.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+}
+
+// Async: trimite jobul, apoi intreaba din 3 in 3 secunde pana e gata (fara timeout pe cerere lunga)
+async function generateAndWait(body) {
+  const { jobId } = await api('/api/generate', { method: 'POST', body: JSON.stringify(body) });
+  const start = Date.now();
+  while (Date.now() - start < 5 * 60 * 1000) {           // siguranta: max 5 min
+    await new Promise(r => setTimeout(r, 3000));
+    const s = await api('/api/generate-status/' + jobId);
+    if (s.status === 'done')  return s;                   // { script, scripts_remaining, training_left }
+    if (s.status === 'error') throw new Error(s.error || 'Errore nella generazione');
+  }
+  throw new Error('La generazione dura più del solito. Riprova.');
+}
+
+async function doGenerate() {
+  const errEl = document.getElementById('gen-err');
+  errEl.style.display = 'none';
+
+  // GATE: prima utilizare trebuie sa parcurga Pasul 1 + Pasul 2 (toate tier-urile)
+  if (!_isOnboarded()) {
+    refreshStepUI();
+    if (typeof toast === 'function') toast('Completa prima il Passo 1 e il Passo 2 👆', 3500);
+    maybeOnboard();
+    return;
+  }
+
+  // Validate required fields
+  const required = [
+    ['f_01','Il tuo genere'],
+    ['f_29','La tua età'],
+    ['f_26','Stile di approccio'],
+    ['f_22','Nome del cliente'],
+    ['f_23','Età del cliente'],
+    ['f_02','Genere del cliente'],
+    ['f_03','Tipo di relazione'],
+    ['f_20','Quando avete parlato l’ultima volta'],
+    ['f_17','Qualità che apprezzi in questa persona'],
+    ['f_30','Categoria del prodotto'],
+    ['f_07','Il prodotto'],
+    ['f_08','Hai usato il prodotto?'],
+    ['f_19','I vantaggi del prodotto'],
+    ['f_11','Tipo di presentazione']
+  ];
+  for (const [id, name] of required) {
+    if (!document.getElementById(id).value.trim()) {
+      errEl.textContent = `Il campo "${name}" è obbligatorio.`;
+      errEl.style.display = 'block';
+      document.getElementById(id).focus();
+      return;
+    }
+  }
+
+  // Save agent data + restul formularului (produs + client)
+  saveAgentData();
+  saveFormData();
+
+  const variables = {
+    '01_agent_gen':         document.getElementById('f_01').value,
+    '22_nume_client':        document.getElementById('f_22').value,
+    '23_varsta_client':      document.getElementById('f_23').value,
+    '24_statut_profesional': document.getElementById('f_24').value,
+    '25_statut_familial':    document.getElementById('f_25').value,
+    '26_stil_abordare':      document.getElementById('f_26').value,
+    '27_experienta_agent':   document.getElementById('f_27').value,
+    '28_stie_de_mlm':        document.getElementById('f_28').value,
+    '29_varsta_agent':       document.getElementById('f_29').value,
+    '30_categorie_produs':   document.getElementById('f_30').value,
+    '02_client_gen':        document.getElementById('f_02').value,
+    '03_tip_relatie':       document.getElementById('f_03').value,
+    '04_detalii_client':    document.getElementById('f_04').value,
+    '05_interactiune_client': document.getElementById('f_05').value,
+    '32_semnal_tip':        document.getElementById('f_32').value,
+    '33_dorinta':           document.getElementById('f_33').value,
+    '07_produs':            document.getElementById('f_07').value,
+    '08_folosit_produs':    document.getElementById('f_08').value,
+    '09_experienta_produs': document.getElementById('f_09').value,
+    '10_intentie':          'Invitatie la produs',
+    '11_tip_prezentare':    document.getElementById('f_11').value,
+    '21_durata_prezentare': document.getElementById('f_durata').value,
+    '12_context_intalnire': document.getElementById('f_12').value,
+    '17_calitati_apreciate': document.getElementById('f_17').value,
+    '18_testimoniale':      document.getElementById('f_18').value,
+    '19_avantaje_produs':   document.getElementById('f_19').value,
+    '20_vechime_contact':   document.getElementById('f_20').value,
+    'kb_opening':           document.getElementById('f_kb').value
+  };
+
+  // Save for objection flow
+  lastVariables = variables;
+  lastMode = SELECTED_MODE;
+
+  // #5 — anti-repetitie pe scripturi: la INPUT IDENTIC trimitem scripturile deja generate
+  // ca {{31_scripturi_anterioare}}, ca modelul sa varieze. Input nou (alt client) -> start curat.
+  const inputSig = JSON.stringify(variables);
+  if (inputSig !== lastInputSig) scriptVariantHistory = [];
+  const priorScripts = scriptVariantHistory.join('\n\n═══ VARIANTA ANTERIOARA (NU O REPETA) ═══\n\n');
+  lastInputSig = inputSig;
+
+  // Reset objection section
+  document.getElementById('obj-section').style.display = 'block';
+  document.getElementById('obj1-question').style.display = 'block';
+  document.getElementById('obj1-form').style.display = 'none';
+  document.getElementById('obj1-progress').style.display = 'none';
+  document.getElementById('obj1-result').style.display = 'none';
+  document.getElementById('obj2-question').style.display = 'block';
+  document.getElementById('obj2-form').style.display = 'none';
+  document.getElementById('obj2-progress').style.display = 'none';
+  document.getElementById('obj2-result').style.display = 'none';
+
+  showView('generating');
+  startProgress();
+
+  try {
+    const data = await generateAndWait({
+      mode: SELECTED_MODE,
+      variables: { ...variables, '31_scripturi_anterioare': priorScripts }
+    });
+
+    finishProgress(() => {
+      // Show output
+      document.getElementById('script-output').innerHTML = renderScript(data.script);
+      lastScriptText = data.script;     // pentru anti-repetitie la obiectii
+      scriptVariantHistory.push(data.script);                          // #5 — retine pt varianta urmatoare
+      if (scriptVariantHistory.length > 2) scriptVariantHistory.shift(); // pastreaza ultimele 2
+      lastObj1Response = '';            // lant de obiectii proaspat
+      document.getElementById('out-remaining').textContent = data.scripts_remaining;
+      if (USER_PROFILE) USER_PROFILE.scripts_remaining = data.scripts_remaining;
+      renderNudge();
+      showView('output');
+    });
+  } catch(e) {
+    stopProgress();
+    showView('generator');
+    errEl.textContent = e.message;
+    errEl.style.display = 'block';
+    window.scrollTo(0, document.body.scrollHeight - 200);
+  }
+}
+
+function copyScript() {
+  const text = document.getElementById('script-output').textContent;
+  navigator.clipboard.writeText(text).then(() => {
+    toast('Script copiato negli appunti! ✓');
+  }).catch(() => {
+    toast('Seleziona il testo manualmente e copia con Ctrl+C');
+  });
+}
+
+// ============================================
+// PROGRESS — checklist 12 etape, viteza constanta
+// ============================================
+const LESSONS_HEAD = 'Segreti di psicologia che vendono';
+const STEPS_HEAD = 'È ora di metterti in stato ottimale di performance!';
+const MAIN_ITEMS = [
+  { type:'lesson', dur:6000, title:'Inviti, non vendi', body:'Non convinci nessuno al telefono — lo rendi solo abbastanza curioso da voler vedere con i suoi occhi. Il telefono apre la porta, l’incontro vende.' },
+  { type:'lesson', dur:6000, title:'Il nome', body:'Il nome di una persona è il suono più dolce per lei. Usalo nei momenti chiave — abbassa subito la guardia.' },
+  { type:'lesson', dur:6000, title:'La sincerità disarma', body:'Un pizzico di sincerità inaspettata abbassa la guardia più di qualsiasi argomento levigato.' },
+  { type:'lesson', dur:6000, title:'La riprova sociale', body:'«Anche altri che non credevano in queste cose sono venuti e si sono ricreduti» convince più di qualsiasi lode. Le persone seguono le persone.' },
+  { type:'lesson', dur:6000, title:'Il piccolo passo', body:'Un piccolo «sì» apre la strada a uno grande. Chiedi prima 2-3 minuti di ascolto, non subito l’incontro.' },
+  { type:'lesson', dur:6000, title:'La pausa', body:'Il silenzio dopo una domanda è lo strumento più sottovalutato — non riempirlo tu, lascia rispondere lui.' },
+  { type:'transition', dur:2800, text:STEPS_HEAD },
+  { type:'step', s:'read',    dur:6000, n:1, html:'<b>Leggi lo script ad alta voce</b>, in piedi, 3 volte — tienilo davanti.' },
+  { type:'step', s:'jump',    dur:6000, n:2, html:'<b>Mettiti in stato ottimale</b>: salta, balla, muoviti.' },
+  { type:'step', s:'breathe', dur:6000, n:3, html:'<b>Sorridi ampiamente e respira profondamente</b> 3 volte. Inspira ed espira felicità!' },
+  { type:'step', s:'notes',   dur:6000, n:4, html:'Tieni <b>penna e foglio</b> a portata di mano per ciò che annoti nella chiamata.' },
+  { type:'step', s:'smile',   dur:6000, n:5, html:'<b>Sorridi</b> quando chiami — si sente nella voce.' },
+  { type:'step', s:'silent',  dur:6000, n:6, html:'Metti le notifiche in <b>silenzioso</b> — senza interruzioni.' },
+  { type:'step', s:'think',   dur:6000, n:7, html:'<b>Pensa alla persona</b>, non alla vendita. La relazione vende, non lo script.' }
+];
+
+// ===== MOTOR OMULET (reutilizabil: principal + obiectii) =====
+let _omCtx = null;
+let _twTimer = null;
+function _clearTw(){ if(_twTimer){ clearInterval(_twTimer); _twTimer=null; } }
+function _typewriter(titleEl, bodyEl, title, body){
+  _clearTw();
+  const CARET = '<span class="tw-caret">▌</span>';
+  titleEl.innerHTML=''; bodyEl.innerHTML='';
+  let ti=0, bi=0;
+  _twTimer = setInterval(function(){
+    ti++;
+    if(ti <= title.length){ titleEl.innerHTML = title.slice(0,ti)+CARET; }
+    else{
+      titleEl.textContent = title; _clearTw();
+      _twTimer = setInterval(function(){
+        bi++;
+        if(bi <= body.length){ bodyEl.innerHTML = body.slice(0,bi)+CARET; }
+        else{ bodyEl.textContent = body; _clearTw(); }
+      }, 40);
+    }
+  }, 55);
+}
+function _omShow(c, i) {
+  _clearTw();
+  const it = c.items[i];
+  const isStep = it.type === 'step';
+  const isTrans = it.type === 'transition';
+  if (c.phase) {
+    if (isTrans) {
+      c.phase.className = 'gen-phase trans';
+      c.phase.style.display = '';
+      c.phase.style.opacity = '';
+      c.phase.textContent = it.text;
+    } else if (isStep) {
+      c.phase.className = 'gen-phase step';
+      c.phase.style.display = 'none';
+      c.phase.textContent = '';
+    } else {
+      c.phase.className = 'gen-phase lesson';
+      c.phase.style.display = '';
+      c.phase.style.opacity = '';
+      c.phase.textContent = c.headLesson;
+    }
+  }
+  if (c.omu) c.omu.style.display = isStep ? '' : 'none';
+  if (isTrans) {
+    if (c.lessonBox) c.lessonBox.style.display = 'none';
+    if (c.omRow) c.omRow.style.display = 'none';
+  } else if (isStep) {
+    if (c.omu) {
+      c.omu.className = 'omu s-' + it.s;
+      const gw = c.omu.querySelector('.guywrap');
+      if (gw) { gw.classList.remove('pop'); void gw.offsetWidth; gw.classList.add('pop'); }
+    }
+    if (c.lessonBox) c.lessonBox.style.display = 'none';
+    if (c.omRow) c.omRow.style.display = '';
+    if (c.stepno) { if (it.n) { c.stepno.textContent = it.n; c.stepno.classList.remove('hide'); } else c.stepno.classList.add('hide'); }
+    if (c.tip) { c.tip.style.opacity = 0; setTimeout(function () { c.tip.innerHTML = it.html; c.tip.style.opacity = 1; }, 200); }
+  } else {
+    if (c.omRow) c.omRow.style.display = 'none';
+    if (c.lessonBox) {
+      c.lessonBox.style.display = '';
+      c.lessonBox.style.opacity = '';
+      c.lessonTitle.textContent = it.title;
+      c.lessonBody.textContent = it.body;
+      c.lessonBox.classList.remove('reveal');
+      void c.lessonBox.offsetWidth;
+      c.lessonBox.classList.add('reveal');
+    }
+  }
+  if (c.dots) c.dots.forEach((d, k) => d.classList.toggle('on', k === i));
+  c.timer = setTimeout(function () { c.i = (c.i + 1) % c.items.length; _omShow(c, c.i); }, it.dur);
+}
+function omStart(o) {
+  omStop();
+  const g = function (id) { return id ? document.getElementById(id) : null; };
+  const c = {
+    phase: g(o.phaseId), omu: g(o.omuId),
+    lessonBox: g(o.lessonBoxId), lessonTitle: g(o.lessonTitleId), lessonBody: g(o.lessonBodyId),
+    omRow: g(o.omRowId), stepno: g(o.stepnoId), tip: g(o.tipId),
+    headLesson: o.headLesson || '', headStep: o.headStep || '',
+    items: o.items, i: 0, timer: null, dots: null
+  };
+  if (o.dotsId) { const dw = g(o.dotsId); if (dw) { dw.innerHTML = ''; o.items.forEach(function () { dw.appendChild(document.createElement('i')); }); c.dots = Array.from(dw.children); } }
+  _omCtx = c;
+  _omShow(c, 0);
+}
+function omStop() { _clearTw(); if (_omCtx && _omCtx.timer) clearTimeout(_omCtx.timer); _omCtx = null; }
+
+// ===== BARA (plafon 95% pana vine rezultatul real) =====
+const PROG_CEIL = 95;
+const PROG_TOTAL_MS = 105000;
+let _progRAF = null, _progStart = 0, _progDone = false;
+function setBar(pct) {
+  const f = document.getElementById('prog-fill'), n = document.getElementById('prog-num');
+  if (f) f.style.width = pct + '%';
+  if (n) n.textContent = Math.round(pct);
+}
+function progTick() {
+  if (_progDone) return;
+  const e = performance.now() - _progStart;
+  setBar(Math.min(PROG_CEIL, (e / PROG_TOTAL_MS) * PROG_CEIL));
+  _progRAF = requestAnimationFrame(progTick);
+}
+function startProgress() {
+  cancelAnimationFrame(_progRAF); _progDone = false; _progStart = performance.now();
+  const L = document.getElementById('gen-loader'), R = document.getElementById('gen-ready');
+  if (L) L.style.display = 'flex'; if (R) R.style.display = 'none';
+  setBar(0);
+  omStart({ omuId:'omu-main', phaseId:'gen-phase', lessonBoxId:'lesson-box', lessonTitleId:'lesson-title', lessonBodyId:'lesson-body', omRowId:'om-row', stepnoId:'om-stepno', tipId:'om-tip', items:MAIN_ITEMS, headLesson:LESSONS_HEAD, headStep:STEPS_HEAD });
+  _progRAF = requestAnimationFrame(progTick);
+}
+function finishProgress(cb) {
+  _progDone = true; cancelAnimationFrame(_progRAF); omStop(); setBar(100);
+  const L = document.getElementById('gen-loader'), R = document.getElementById('gen-ready'), B = document.getElementById('gen-ready-btn');
+  if (L) L.style.display = 'none'; if (R) R.style.display = 'block';
+  if (B) B.onclick = function () { cb(); };
+}
+function stopProgress() { _progDone = true; cancelAnimationFrame(_progRAF); omStop(); }
+
+// ============================================
+// DOWNLOAD SCRIPT
+// ============================================
+function downloadText(text, filename) {
+  const blob = new Blob([text], { type: 'text/plain;charset=utf-8' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+function downloadScript() {
+  const text = document.getElementById('script-output').textContent;
+  if (!text.trim()) { toast('Non c’è ancora uno script da scaricare.'); return; }
+  downloadText(text, 'script-harvard-of-sales.txt');
+  toast('Script scaricato ✓');
+}
+function downloadObjScript(num) {
+  const text = document.getElementById('obj' + num + '-output').textContent;
+  if (!text.trim()) { toast('Non c’è ancora uno script da scaricare.'); return; }
+  downloadText(text, 'script-obiectie-' + num + '.txt');
+  toast('Script scaricato ✓');
+}
+
+// ============================================
+// TOAST
+// ============================================
+function toast(msg, duration = 3500) {
+  const el = document.getElementById('toast');
+  el.textContent = msg;
+  el.classList.add('show');
+  setTimeout(() => el.classList.remove('show'), duration);
+}
+
+// ============================================
+// ENTER KEY ON AUTH FORMS
+// ============================================
+document.addEventListener('keydown', e => {
+  if (e.key !== 'Enter') return;
+  const active = document.querySelector('.view.active');
+  if (!active) return;
+  if (active.id === 'view-login') doLogin();
+  else if (active.id === 'view-register') doRegister();
+  else if (active.id === 'view-redeem') doRedeem();
+  else if (active.id === 'view-forgot') doForgotPassword();
+  else if (active.id === 'view-reset') doResetPassword();
+});
+
+let lastVariables = null;
+let lastMode = 'clean';
+let lastObj1Text = '';
+let lastScriptText = '';      // textul scriptului principal generat
+let lastObj1Response = '';    // textul raspunsului generat la obiectia 1
+let scriptVariantHistory = [];// #5 — scripturi generate pt ACELASI input (anti-repetitie)
+let lastInputSig = null;      // #5 — semnatura inputului (detecteaza regenerare pe acelasi client)
+
+function showObj(num) {
+  if (num === 1) {
+    document.getElementById('obj1-question').style.display = 'none';
+    document.getElementById('obj1-form').style.display = 'block';
+  } else {
+    document.getElementById('obj2-question').style.display = 'none';
+    document.getElementById('obj2-form').style.display = 'block';
+  }
+}
+
+function hideObjSection() {
+  document.getElementById('obj-section').style.display = 'none';
+}
+
+async function generateObjScript(num) {
+  const prefix = 'obj' + num;
+  const textEl = document.getElementById(prefix + '-text');
+  const errEl = document.getElementById(prefix + '-err');
+  errEl.style.display = 'none';
+
+  const objText = textEl.value.trim();
+  if (!objText) {
+    errEl.textContent = 'Inserisci l’obiezione del cliente.';
+    errEl.style.display = 'block';
+    return;
+  }
+
+  if (num === 1) lastObj1Text = objText;
+
+  // Anti-repetitie: ce s-a generat deja in acest apel
+  const prior = num === 1
+    ? lastScriptText
+    : (lastScriptText + (lastObj1Response
+        ? '\n\n═══ RASPUNS OBIECTIE 1 ═══\n' + lastObj1Response
+        : ''));
+
+  const objVariables = {
+    ...lastVariables,
+    '14_obiectie_1': num === 1 ? objText : lastObj1Text,
+    '15_doreste_a_doua_obiectie': num === 2 ? 'Da' : 'Nu',
+    '16_obiectie_2': num === 2 ? objText : '',
+    '22_continut_anterior': prior || ''
+  };
+
+  // ascunde formularul, arata checklist-ul inline
+  document.getElementById(prefix + '-form').style.display = 'none';
+  document.getElementById(prefix + '-progress').style.display = 'block';
+  startObjProgress(prefix, objText);
+
+  try {
+    const data = await generateAndWait({
+      mode: lastMode,
+      variables: objVariables,
+      isObjection: true,
+      objNum: num
+    });
+
+    finishObjProgress(prefix, () => {
+      document.getElementById(prefix + '-output').innerHTML = renderScript(data.script);
+      if (num === 1) {
+        lastObj1Response = data.script;  // pentru anti-repetitie la obiectia 2
+        document.getElementById('obj2-question').style.display = 'block';
+        document.getElementById('obj2-form').style.display = 'none';
+        document.getElementById('obj2-progress').style.display = 'none';
+        document.getElementById('obj2-result').style.display = 'none';
+      }
+      document.getElementById(prefix + '-progress').style.display = 'none';
+      document.getElementById(prefix + '-result').style.display = 'block';
+    });
+
+  } catch(e) {
+    stopObjProgress(prefix);
+    document.getElementById(prefix + '-progress').style.display = 'none';
+    document.getElementById(prefix + '-form').style.display = 'block';
+    errEl.textContent = e.message;
+    errEl.style.display = 'block';
+  }
+}
+
+// ============================================
+// PROGRES OBIECTII — checklist inline (6-7 etape, ~3s)
+// ============================================
+const OBJ1_ITEMS = [
+  { dur:6000, title:'L’obiezione non è un «no»', body:'È una domanda che non ha ancora ricevuto risposta.' },
+  { dur:6000, title:'Valida, poi rispondi', body:'«Ti capisco» disarma più di qualsiasi argomento.' },
+  { dur:6000, title:'Dopo aver fatto una domanda, taci', body:'Lascia che il silenzio lavori per te.' },
+  { dur:6000, title:'Sei dalla sua parte', body:'Non è lui contro di te, è un dubbio da chiarire.' },
+  { dur:6000, title:'„Nu" înseamnă „nu încă"', body:'La maggior parte dei «no» sono in realtà «non ancora» o «non ho capito».' }
+];
+const OBJ2_ITEMS = [
+  { dur:6000, title:'La seconda obiezione è un buon segnale', body:'Se ancora parla, non se ne va — la seconda obiezione significa che è interessato, non che ti rifiuta.' },
+  { dur:6000, title:'L’emozione dietro l’obiezione', body:'Un’obiezione sembra logica, ma sotto c’è sempre un’emozione — di solito la paura di sbagliare. Parla con la paura, non con l’argomento.' },
+  { dur:6000, title:'Non difenderti', body:'Nel momento in cui ti giustifichi, hai perso. La calma e la curiosità disarmano più di qualsiasi contro-argomento.' },
+  { dur:6000, title:'Lasciagli il controllo', body:'La persona si oppone quando sente che le si toglie la libertà. Più sente di decidere lei, meno resiste.' },
+  { dur:6000, title:'La tua calma dà il tono', body:'Se ti affretti, lui sente pressione. Parla lentamente — il tuo stato calmo passa attraverso il telefono e diventa il suo.' }
+];
+const OBJ_PROG_CEIL = 95;
+const OBJ_TOTAL_MS = 30000;
+const _objProg = { obj1:{raf:null,start:0,done:false}, obj2:{raf:null,start:0,done:false} };
+
+function _ensureClone(srcId, destId) {
+  const dest = document.getElementById(destId);
+  if (dest && !dest.children.length) { const src = document.getElementById(srcId); if (src) dest.innerHTML = src.innerHTML; }
+}
+function setObjBar(prefix, pct) {
+  const f = document.getElementById(prefix + '-prog-fill'), n = document.getElementById(prefix + '-prog-num');
+  if (f) f.style.width = pct + '%';
+  if (n) n.textContent = Math.round(pct);
+}
+function objTick(prefix) {
+  const st = _objProg[prefix]; if (st.done) return;
+  const e = performance.now() - st.start;
+  setObjBar(prefix, Math.min(OBJ_PROG_CEIL, (e / OBJ_TOTAL_MS) * OBJ_PROG_CEIL));
+  st.raf = requestAnimationFrame(() => objTick(prefix));
+}
+function startObjProgress(prefix, objText) {
+  const st = _objProg[prefix]; cancelAnimationFrame(st.raf); st.done = false; st.start = performance.now();
+  const ctx = document.getElementById(prefix + '-prog-ctx');
+  if (ctx) { let t = objText.length > 80 ? objText.slice(0, 80) + '…' : objText; t = t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); ctx.innerHTML = 'Gestiamo l’obiezione: <i>«' + t + '»</i>'; }
+  document.getElementById(prefix + '-loader').style.display = 'block';
+  document.getElementById(prefix + '-ready').style.display = 'none';
+  setObjBar(prefix, 0);
+  omStart({ lessonBoxId: prefix + '-lbox', lessonTitleId: prefix + '-ltitle', lessonBodyId: prefix + '-lbody', dotsId: prefix + '-dots', items: (prefix === 'obj2' ? OBJ2_ITEMS : OBJ1_ITEMS) });
+  st.raf = requestAnimationFrame(() => objTick(prefix));
+}
+function finishObjProgress(prefix, cb) {
+  const st = _objProg[prefix]; st.done = true; cancelAnimationFrame(st.raf); omStop(); setObjBar(prefix, 100);
+  _ensureClone('omuf-main', prefix + '-omuf');
+  document.getElementById(prefix + '-loader').style.display = 'none';
+  document.getElementById(prefix + '-ready').style.display = 'block';
+  const B = document.getElementById(prefix + '-ready-btn'); if (B) B.onclick = function () { cb(); };
+}
+function stopObjProgress(prefix) {
+  const st = _objProg[prefix]; st.done = true; cancelAnimationFrame(st.raf); omStop();
+}
+
+function copyObjScript(num) {
+  const text = document.getElementById('obj' + num + '-output').textContent;
+  navigator.clipboard.writeText(text).then(() => toast('Script copiato! ✓'));
+}
+// ============================================
+function animateCounter() {
+  const el = document.getElementById('counter-num');
+  const ring = document.getElementById('ring-fill');
+  const agentsEl = document.getElementById('counter-agents');
+  const scriptsEl = document.getElementById('counter-scripts');
+  if (!el) return;
+
+  // Animam 78% ring
+  const target = 78;
+  const circumference = 534;
+  const duration = 2400;
+  const startTime = performance.now();
+  function ease(t){ return 1 - Math.pow(1 - t, 3); }
+  function frame(now){
+    const progress = Math.min((now - startTime) / duration, 1);
+    const eased = ease(progress);
+    el.textContent = Math.round(target * eased);
+    if (ring) ring.style.strokeDashoffset = circumference - circumference * (target / 100) * eased;
+    if (progress < 1) requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+
+  // Animam contoarele reale (agenti + scripturi): preia numerele din backend
+  if (agentsEl || scriptsEl) {
+    const fmtRo = (n) => Number(n).toLocaleString('ro-RO');
+    // count-up de la 0 la target peste `dur` ms (ca pe preturi.html), indiferent de marimea numarului
+    const countFromZero = (elx, target, dur) => {
+      if (!elx) return;
+      let t0 = null;
+      const stepFrame = (ts) => {
+        if (!t0) t0 = ts;
+        const p = Math.min((ts - t0) / dur, 1);
+        const eased = 1 - Math.pow(1 - p, 3);
+        elx.textContent = fmtRo(Math.floor(eased * target));
+        if (p < 1) requestAnimationFrame(stepFrame);
+        else elx.textContent = fmtRo(target);
+      };
+      requestAnimationFrame(stepFrame);
+    };
+    // polling (60s): bump silentios doar daca a crescut (delta mica)
+    const bumpTo = (elx, target) => {
+      if (!elx) return;
+      const prev = parseInt(String(elx.textContent).replace(/\D/g, '')) || 0;
+      if (target > prev) {
+        let current = prev;
+        const bump = () => {
+          if (current < target) { current++; elx.textContent = fmtRo(current); setTimeout(bump, 80); }
+        };
+        bump();
+      }
+    };
+    const updateStats = async (animate = false) => {
+      try {
+        const res = await fetch('/api/stats');
+        const data = await res.json();
+        const realAgents = (typeof data.distribuitori === 'number') ? data.distribuitori
+                         : (typeof data.agents === 'number') ? data.agents : 112;
+        const realScripts = (typeof data.scripturi === 'number') ? data.scripturi : 1122;
+        if (animate) {
+          countFromZero(agentsEl,  realAgents,  1600);
+          countFromZero(scriptsEl, realScripts, 1800);
+        } else {
+          bumpTo(agentsEl,  realAgents);
+          bumpTo(scriptsEl, realScripts);
+        }
+      } catch(e) {
+        // Fallback la valori statice daca API-ul nu raspunde
+        if (animate) {
+          if (agentsEl)  agentsEl.textContent  = '112';
+          if (scriptsEl) scriptsEl.textContent = '1.122';
+        }
+      }
+    };
+
+    // Prima incarcare cu animatie
+    updateStats(true);
+
+    // Polling la fiecare 60 secunde pentru update in timp real
+    setInterval(() => updateStats(false), 60000);
+  }
+}
+const _counterObs = new IntersectionObserver((entries, obs) => {
+  if (entries[0].isIntersecting){ animateCounter(); obs.disconnect(); }
+}, { threshold: 0.4 });
+window.addEventListener('DOMContentLoaded', () => {
+  const t = document.getElementById('counter-num');
+  if (t) _counterObs.observe(t);
+});
+
+// ============================================
+// INVITAȚIA-FULGER (conținut static + render gated)
+// ============================================
+const FULGER_EXEC = {
+  cifra: "9", din: "/10", eticheta: "tasso di riuscita",
+  kicker: "Leggi prima di chiamare",
+  titlu_a: "Eseguito correttamente, questo invito riesce in ",
+  titlu_em: "9 chiamate su 10.",
+  lead: "Non è magia — è una battuta calibrata al millimetro. La sua forza sta nell’esecuzione, non nelle parole. Rispetta le 4 regole qui sotto e il risultato arriva quasi da sé.",
+  reguli: [
+    { t: "Entra in stato ottimale di performance",
+      d: "Prima di comporre il numero: respira profondamente, rallenta il ritmo, metti il sorriso sul volto. Una voce calma e presente fa metà del lavoro. Di fretta o teso, rovini tutto." },
+    { t: "Non cambiare l’invito",
+      d: "Ogni parola, ogni pausa e ogni silenzio hanno un ruolo testato. I «miglioramenti» improvvisati la squilibrano. Fidati della struttura — è pensata per funzionare esattamente così." },
+    { t: "Di’ esattamente ciò che c’è scritto",
+      d: "Leggi la battuta alla lettera — non improvvisare, non aggiungere argomenti, non spiegare oltre. Pronunciala in modo naturale, come se ti venisse spontanea, ma senza discostarti dal testo." },
+    { t: "Fermati quando finisce lo script", forbid: true,
+      d: "Dopo l’ultima battuta — taci. È vietato continuare la conversazione. Hai ottenuto il «sì» per il caffè; ogni parola in più apre una porta che non vuoi aprire e può farti perdere l’incontro." }
+  ],
+  foot: "Ricorda: l’invito-lampo ti porta solo il sì all’incontro. Non presentare il prodotto e non spiegare il business al telefono. Il resto avviene faccia a faccia."
+};
+const FULGER_INTRO = {
+  titlu: "L’invito-lampo — leggi prima questo",
+  avertisment:
+    "Solo per amici stretti. Con un conoscente, un collega o un contatto freddo, " +
+    "la vulnerabilità suona falsa e attiva proprio quel rilevatore di manipolazione che vuoi " +
+    "evitare. Per loro, usa il generatore.",
+  puncte: [
+    { q: "A chi si rivolge — e SOLO a chi",
+      a: "Solo agli amici stretti. Punto. Per chiunque altro hai gli script normali del generatore. Questi quattro sono per le persone che ti vogliono già bene." },
+    { q: "Quali paure toglie a TE dalla testa",
+      a: "Non è l’altro il problema — sei tu. La paura del rifiuto, del «cosa penserà», del momento imbarazzante. Le varianti confessano la paura invece di nasconderla — ed è proprio questo che la disarma. Non hai nulla da nascondere, quindi non hai motivo di bloccarti." },
+    { q: "Perché funziona sull’altro",
+      a: "Non vendi nulla, non chiedi nulla, non spieghi nulla. Crei un ciclo di curiosità e lo metti nel ruolo di alleato, non di bersaglio. Dice «sì» al caffè prima ancora di alzare lo scudo." },
+    { q: "La trappola che le rovina tutte",
+      a: "Il momento «ok, ma di cosa si tratta?». Tutti e quattro sono costruiti per chiudere la chiamata PRIMA di questa domanda. Se ti metti a spiegare al telefono, hai perso l’incontro. Rispondi con la sorpresa, sorridi, chiudi. Nessuna parola in più." },
+    { q: "Conta il ritmo, non le parole",
+      a: "Le stesse battute dette in modo robotico e veloce suonano come uno script e muoiono. Dette lentamente, con pause reali (3-5 secondi) e col sorriso nella voce, suonano come presenza. La pausa drammatica non è decorazione — è lo strumento principale. Leggile ad alta voce qualche volta prima di chiamare." },
+    { q: "Dove si fermano — e dove inizi tu",
+      a: "Il lampo ti porta il «sì» al caffè, tutto qui. Non la presentazione, non l’iscrizione. Non caricare l’invito con argomenti sul prodotto o sul business — rovini tutto. Ciò che fai all’incontro è un’altra fase." }
+  ]
+};
+
+const FULGER_INVITATII = [
+  { id: 1, nume: "La paura confessata",        durata: "≈ 30 secondi", context: "solo amici stretti" },
+  { id: 2, nume: "La confessione concentrata", durata: "≈ 25 secondi", context: "solo amici stretti" },
+  { id: 3, nume: "Il ribaltamento dell’aspettativa",   durata: "≈ 30 secondi", context: "solo amici stretti" },
+  { id: 4, nume: "La decisione importante",       durata: "≈ 35 secondi", context: "solo amici stretti" }
+];
+var _fulgerPremium = null;
+
+function _fEsc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+function fulgerTab(which){
+  var gen=document.getElementById('sub-generator');
+  var ful=document.getElementById('sub-fulger');
+  var bg=document.getElementById('fsub-gen');
+  var bf=document.getElementById('fsub-ful');
+  if(!gen||!ful||!bg||!bf) return;
+  if(which==='ful'){
+    gen.style.display='none'; ful.style.display='block';
+    bg.classList.remove('active'); bf.classList.add('active');
+    renderFulger();
+  } else {
+    ful.style.display='none'; gen.style.display='block';
+    bf.classList.remove('active'); bg.classList.add('active');
+  }
+}
+
+function _fulgerDialog(dialog){
+  var h='';
+  dialog.forEach(function(t){
+    if(t.regie){
+      var _rg=_fEsc(t.regie);
+      if(/z[âa]mbet/i.test(t.regie)) _rg+=' 😊';   // emoji cand regia cere zambetul in glas
+      h+='<div class="fc-regie">'+_rg+'</div>';
+    }
+    else {
+      var who=(t.vorbitor==='agent')?'Agente':'Cliente';
+      h+='<div class="fc-turn '+t.vorbitor+'"><div class="fc-who">'+who+'</div><div class="fc-line">'+_fEsc(t.text)+'</div></div>';
+    }
+  });
+  return h;
+}
+
+function renderFulger(){ _renderFulgerAsync(); }
+async function _renderFulgerAsync(){
+  var host=document.getElementById('sub-fulger');
+  if(!host) return;
+  var tier=(typeof USER_PROFILE!=='undefined' && USER_PROFILE && USER_PROFILE.tier) ? USER_PROFILE.tier : 'none';
+  var order=['none','unic','recruit','builder','leader'];
+  var unlocked=(order.indexOf(tier) >= order.indexOf('builder'));
+
+  if(unlocked && !_fulgerPremium){
+    try{ var d=await api('/api/module/fulger?lang=it'); _fulgerPremium = d.content || []; }
+    catch(e){ if(/locked/i.test(e.message||'')) unlocked=false; _fulgerPremium=null; }
+  }
+  var prem=_fulgerPremium||[];
+
+  var html='';
+  var _e=FULGER_EXEC;
+  html+='<div class="ful9"><div class="ful9-top">';
+  html+='<div class="ful9-badge"><div class="n">'+_fEsc(_e.cifra)+'<small>'+_fEsc(_e.din)+'</small></div><div class="lab">'+_fEsc(_e.eticheta)+'</div></div>';
+  html+='<div class="ful9-txt"><div class="ful9-kicker">◆ '+_fEsc(_e.kicker)+'</div><h3>'+_fEsc(_e.titlu_a)+'<em>'+_fEsc(_e.titlu_em)+'</em></h3><div class="ful9-lead">'+_fEsc(_e.lead)+'</div></div>';
+  html+='</div>';
+  html+='<div class="ful9-rules"><div class="ful9-rh">✓ Cosa significa «eseguito correttamente»</div>';
+  _e.reguli.forEach(function(r,ix){
+    var cls='ful9-rule'+(r.forbid?' forbid':'');
+    var num=r.forbid?'✕':(ix+1);
+    html+='<div class="'+cls+'"><div class="ful9-rn">'+num+'</div><div><div class="ful9-rt">'+_fEsc(r.t)+'</div><div class="ful9-rd">'+_fEsc(r.d)+'</div></div></div>';
+  });
+  html+='</div>';
+  html+='<div class="ful9-foot">'+_fEsc(_e.foot)+'</div>';
+  html+='</div>';
+
+  html+='<div class="ful-intro">';
+  html+='<div class="ful-warn"><span class="wi">⚠️</span><span class="wt">'+_fEsc(FULGER_INTRO.avertisment)+'</span></div>';
+  html+='<h3>'+_fEsc(FULGER_INTRO.titlu)+'</h3><div class="ful-points">';
+  FULGER_INTRO.puncte.forEach(function(pt){
+    html+='<div class="ful-pt"><div class="pq">'+_fEsc(pt.q)+'</div><div class="pa">'+_fEsc(pt.a)+'</div></div>';
+  });
+  html+='</div></div>';
+
+  FULGER_INVITATII.forEach(function(v,ix){
+    html+='<div class="ful-card">';
+    html+='<div class="fc-name">'+_fEsc(v.nume)+'</div>';
+    html+='<div class="fc-meta"><span class="fc-tag">'+_fEsc(v.durata)+'</span><span class="fc-tag">'+_fEsc(v.context)+'</span><span class="fc-tag t-tier">Builder &amp; Leader</span></div>';
+    var pd=prem[ix];
+    if(unlocked && pd){
+      html+='<div class="fc-script">';   // fundal crem DOAR pe zona de scripturi
+      html+=_fulgerDialog(pd.dialog);
+      if(pd.obiectie){
+        html+='<div class="fc-obj">'+_fEsc(pd.obiectie.titlu)+'</div>'+_fulgerDialog(pd.obiectie.dialog);
+      }
+      html+='</div>';   // /fc-script
+      html+='<div class="fc-psy"><div class="pt">🔒 La psicologia dietro</div><ul>';
+      pd.psihologie.forEach(function(ps){ html+='<li>'+_fEsc(ps)+'</li>'; });
+      html+='</ul></div>';
+    } else {
+      html+='<div class="fc-locked"><div class="lk-ic">🔒</div><div class="lk-tx">La ricetta completa — il dialogo battuta per battuta più la psicologia dietro — si sblocca dal piano Builder.</div>'+
+            '<button class="btn-ghost" style="max-width:240px" onclick="goUpgrade()">Sblocca con Builder</button></div>';
+    }
+    html+='</div>';
+  });
+
+  host.innerHTML=html;
+}
+
+// ============================================
+// START
+// ============================================
+init();
+</script>
+
+<!-- ===== MODAL: REGULI DE SUCCES ===== -->
+<div class="modal-overlay" id="m-reguli" onclick="if(event.target===this && _isOnboarded()) closeModal('m-reguli')">
+  <div class="modal-box">
+    <div class="modal-head">
+      <div class="modal-title">Regole di Successo</div>
+      <div class="modal-subtitle">L’80% della chiamata è il tuo stato. Leggi una volta — poi le hai.</div>
+    </div>
+    <div class="modal-body">
+      <div class="rule-card"><div class="rule-num">1</div><div class="rule-txt"><div class="rt">Il tuo stato fa l’80% della chiamata</div><div class="rd">Da 30 a 60 secondi di movimento reale prima della chiamata — balla, salta, sorridi ampiamente allo specchio. Entri dall’abbondanza, non dal bisogno di convincere. La voce calda nasce dallo stato, non si può fingere.</div></div></div>
+      <div class="rule-card"><div class="rule-num">2</div><div class="rule-txt"><div class="rt">Leggi lo script ad alta voce, almeno 3 volte</div><div class="rd">La prima volta lo leggi, la seconda ti abitui, la terza spariscono le esitazioni. Le corde vocali memorizzano lo schema, non solo la mente. Script letto a mente = tono da venditore percepibile nella chiamata.</div></div></div>
+      <div class="rule-card"><div class="rule-num">3</div><div class="rule-txt"><div class="rt">Di’ le parole ESATTAMENTE come sono scritte</div><div class="rd">«Ti tormenta», non «ti preoccupa». Ogni parola è scelta per aggirare una resistenza. Naturalizza COME lo dici (ritmo, «guarda», il nome), ma mantieni COSA dici (le domande, i rispecchiamenti, le frasi di chiusura).</div></div></div>
+      <div class="rule-card"><div class="rule-num">4</div><div class="rule-txt"><div class="rt">Cosa fai quando il cliente ti fa domande scomode durante lo script</div><div class="rd"><div style="margin-bottom:4px">Ci sono 2 situazioni diverse:</div>
+
+        <div style="margin:14px 0">
+          <div style="color:var(--gold);font-size:12.5px;letter-spacing:.03em;text-transform:uppercase;font-weight:700;margin-bottom:6px">Situazione 1 — domanda prematura</div>
+          <div style="color:var(--muted2);font-size:13px;margin-bottom:8px">(all’inizio della conversazione, PRIMA di presentare il prodotto)</div>
+          <div style="margin-bottom:5px">Se il cliente ti chiede:</div>
+          <div style="padding-left:6px;line-height:1.9;margin-bottom:10px">• «È per caso MLM?»<br>• «Di cosa si tratta?»<br>• «Cosa vuoi vendermi?»<br>• «Dove hai saputo di questo?»</div>
+          <div style="margin-bottom:5px">La tua replica (sorridi sempre 😊) — validi la domanda + prometti risposta garantita + rimandi QUANDO rispondi tu:</div>
+          <div style="border-left:2px solid var(--line);padding-left:11px;color:var(--ink);margin-bottom:10px">«Mi piacciono le tue domande e nessuna resterà senza risposta 😊 — ci arriviamo.»</div>
+          <div style="margin-bottom:8px">→ Poi TORNA alla domanda successiva dello script.</div>
+          <div>⚠️ Principio: lo script funziona SOLO se segui la struttura. Fidati del sistema 😊</div>
+        </div>
+
+        <div style="height:1px;background:var(--lsoft);margin:14px 0"></div>
+
+        <div style="margin:14px 0">
+          <div style="color:var(--gold);font-size:12.5px;letter-spacing:.03em;text-transform:uppercase;font-weight:700;margin-bottom:6px">Situazione 2 — domanda dopo la breve presentazione</div>
+          <div style="color:var(--muted2);font-size:13px;margin-bottom:8px">(dopo aver accennato al prodotto)</div>
+          <div style="margin-bottom:5px">Se il cliente chiede:</div>
+          <div style="padding-left:6px;line-height:1.9;margin-bottom:10px">• «Come funziona esattamente?»<br>• «Che ingredienti contiene?»<br>• «Quanto costa?»<br>• «Come viene consegnato?»<br>• «Qual è la differenza rispetto a [concorrente]?»</div>
+          <div style="color:#f0a0a0;margin-bottom:10px">⚠️ Il pericolo: se rispondi ora, fai la presentazione al telefono → perdi la motivazione dell’incontro → il cliente non viene più.</div>
+          <div style="margin-bottom:5px">La tua replica (sorridi sempre 😊) — validi + rimandi con piacere all’incontro + reindirizzi verso la data:</div>
+          <div style="border-left:2px solid var(--line);padding-left:11px;color:var(--ink);margin-bottom:10px">«Mi piace che tu abbia buone domande che aumentano il valore della conversazione. Con grande piacere ti rispondo quando ci vediamo — è anche lo scopo [dell’incontro]. Non vorrei che restasse nessuna domanda senza risposta.»</div>
+          <div>→ Poi REINDIRIZZA verso la fissazione della data.</div>
+        </div>
+
+        <div style="background:rgba(216,169,74,.07);border-radius:10px;padding:12px 14px;margin-top:14px">
+          <div style="color:var(--gold);font-size:12.5px;letter-spacing:.03em;text-transform:uppercase;font-weight:700;margin-bottom:8px">La regola meta per entrambe le situazioni</div>
+          <div style="line-height:1.95">• Mai un «NO» diretto<br>• Mai un rifiuto brusco<br>• Sempre col sorriso 😊<br>• Validi PRIMA la domanda («Mi piace/piacciono...»)<br>• Prometti risposta garantita<br>• Sei tu a decidere QUANDO rispondi</div>
+        </div></div></div></div>
+      <div class="rule-card"><div class="rule-num">5</div><div class="rule-txt"><div class="rt">Il silenzio dopo la domanda = la tua forza</div><div class="rd">Se diventa scomodo, resisti. Sarà lui a parlare per primo. Non riempire il silenzio.</div></div></div>
+      <div class="rule-card"><div class="rule-num">6</div><div class="rule-txt"><div class="rt">Se ti blocchi, hai una rete di sicurezza</div><div class="rd">«Fammi formulare meglio quello che volevo chiedere...» — e torni allo script. Niente è perduto.</div></div></div>
+      <div class="rule-card"><div class="rule-num">7</div><div class="rule-txt"><div class="rt">La durata della presentazione: dilla esatta, con calma</div><div class="rd">Senza minimizzarla, senza gonfiarla. Esattamente il valore che hai scelto nel modulo.</div></div></div>
+    </div>
+    <div class="modal-foot"><button class="btn modal-gate">Chiudi</button></div>
+  </div>
+</div>
+
+<!-- ===== MODAL: CONT / ABONAMENT ===== -->
+<div class="modal-overlay" id="m-account" onclick="if(event.target===this) closeModal('m-account')">
+  <div class="modal-box" style="max-width:520px">
+    <div class="modal-head">
+      <div class="modal-title">Il tuo account</div>
+      <div class="modal-subtitle" id="acc-sub">I dati del tuo account</div>
+    </div>
+    <div class="modal-body" id="acc-body"></div>
+  </div>
+</div>
+
+<!-- ===== MODAL: GHID ASA DA / ASA NU ===== -->
+<div class="modal-overlay" id="m-ghid" onclick="if(event.target===this && _isOnboarded()) closeModal('m-ghid')">
+  <div class="modal-box">
+    <div class="modal-head">
+      <div class="modal-title">Come compilare per un buon risultato</div>
+      <div class="modal-subtitle">La qualità delle tue risposte = la qualità dello script.</div>
+    </div>
+    <div class="modal-body">
+      <div class="cmp-intro">Ecco i campi che fanno la differenza. Confronta sbagliato (sinistra) con corretto (destra):</div>
+
+      <div class="cmp-blk">
+        <div class="cmp-fname">Raccontaci del tuo cliente</div>
+        <div class="cmp">
+          <div class="box nu"><div class="tag tag-nu">✕ COSÌ NO</div><div class="ex">«la conosco da tempo, è ok»</div></div>
+          <div class="box da"><div class="tag tag-da">✓ COSÌ SÌ</div><div class="ex">«È sempre esausta dopo i turni, dorme male, non ha energia per niente»</div></div>
+        </div>
+        <div class="cmp-why">Perché: la situazione concreta è l’ancora su cui si costruisce il ponte verso il prodotto. Vago → script generico.</div>
+      </div>
+
+      <div class="cmp-blk">
+        <div class="cmp-fname">Qualità che apprezzi in questa persona</div>
+        <div class="cmp">
+          <div class="box nu"><div class="tag tag-nu">✕ COSÌ NO</div><div class="ex">«brava, a posto»</div></div>
+          <div class="box da"><div class="tag tag-da">✓ COSÌ SÌ</div><div class="ex">«Empatica, organizzata, affidabile»</div></div>
+        </div>
+        <div class="cmp-why">Perché: specifiche → complimento argomentato, non lode vuota che suona falsa.</div>
+      </div>
+
+      <div class="cmp-blk">
+        <div class="cmp-fname">L’ultima interazione con lei / lui</div>
+        <div class="cmp">
+          <div class="box nu"><div class="tag tag-nu">✕ COSÌ NO</div><div class="ex">vuoto / «non ricordo»</div></div>
+          <div class="box da"><div class="tag tag-da">✓ COSÌ SÌ</div><div class="ex">«la settimana scorsa, a un caffè — mi ha detto che è distrutta dalla stanchezza»</div></div>
+        </div>
+        <div class="cmp-why">Perché: un aggancio reale per l’apertura + rispecchiamento sulle sue parole esatte.</div>
+      </div>
+
+      <div class="cmp-blk">
+        <div class="cmp-fname">Status professionale</div>
+        <div class="cmp">
+          <div class="box nu"><div class="tag tag-nu">✕ COSÌ NO</div><div class="ex">«lavora» / «ha un impiego»</div></div>
+          <div class="box da"><div class="tag tag-da">✓ COSÌ SÌ</div><div class="ex">«Infermiera, lunghi turni di notte»</div></div>
+        </div>
+        <div class="cmp-why">Perché: calibra il profilo (analitico? esperto?) e dà un argomento concreto per il complimento.</div>
+      </div>
+
+      <div class="cmp-blk">
+        <div class="cmp-fname">La tua esperienza concreta con il prodotto</div>
+        <div class="cmp">
+          <div class="box nu"><div class="tag tag-nu">✕ COSÌ NO</div><div class="ex">«è ottimo, mi è piaciuto molto»</div></div>
+          <div class="box da"><div class="tag tag-da">✓ COSÌ SÌ</div><div class="ex">«Ero esausta dopo il lavoro; dopo ~3 settimane dormo meglio e ho energia tutto il giorno»</div></div>
+        </div>
+        <div class="cmp-why">Perché: l’esperienza reale = il ponte autentico. Vago → suona proprio come una pubblicità.</div>
+      </div>
+
+      <div class="cmp-rule"><b style="font-weight:700">La regola d’oro:</b> specifico + reale batte generico + vago. E se non sai qualcosa — lascia vuoto. Vuoto-onesto batte inventato.</div>
+    </div>
+    <div class="modal-foot"><button class="btn modal-gate">Chiudi</button></div>
+  </div>
+</div>
+
+</body>
+</html>
