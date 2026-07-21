@@ -54,6 +54,11 @@ app.get('/app', (req, res) => {
 });
 // pagina de vanzare in italiana (IT)
 app.get('/it', (req, res) => res.sendFile(path.join(__dirname, 'preturi-it.html')));
+// aplicatia in italiana (IT)
+app.get('/app-it', (req, res) => {
+  res.setHeader('X-Robots-Tag', 'noindex, nofollow');
+  res.sendFile(path.join(__dirname, 'index-it.html'));
+});
 
 // ---- SEO: robots.txt real (fisier text valid, nu pagina HTML) ----
 app.get('/robots.txt', (req, res) => {
@@ -718,9 +723,10 @@ app.post('/api/admin/set-tier', admin, async (req, res) => {
 // Protejat cu auth: userId vine din token, nu din body (nu poți plăti în numele altcuiva)
 // ============================================
 app.post('/api/create-checkout-session', auth, async (req, res) => {
-  const { plan } = req.body;
+  const { plan, lang } = req.body;
   const p = STRIPE_PLANS[plan];
   if (!p) return res.status(400).json({ error: 'Plan invalid' });
+  const appPath = (lang === 'it') ? '/app-it' : '/app'; // utilizatorii IT revin in aplicatia italiana
 
   try {
     const base = `https://${req.get('host')}`;
@@ -734,7 +740,7 @@ app.post('/api/create-checkout-session', auth, async (req, res) => {
       subscription_data: p.mode === 'subscription'
         ? { metadata: { user_id: req.user.id, tier: p.tier } } : undefined,
       invoice_creation: p.mode === 'payment' ? { enabled: true } : undefined,
-      return_url: `${base}/app?paid=1&session_id={CHECKOUT_SESSION_ID}`,
+      return_url: `${base}${appPath}?paid=1&session_id={CHECKOUT_SESSION_ID}`,
     });
     res.json({ clientSecret: session.client_secret });
   } catch (err) {
@@ -1131,7 +1137,8 @@ const MODULE_MIN_TIER = { conectare: 'builder', fulger: 'builder', prezentare: '
 const TIER_ORDER_MOD = ['none', 'unic', 'recruit', 'builder', 'leader'];
 app.get('/api/module/:name', auth, async (req, res) => {
   const name = req.params.name;
-  if (!Object.prototype.hasOwnProperty.call(PREMIUM, name)) {
+  const VALID = ['conectare', 'fulger', 'prezentare', 'inchidere'];
+  if (VALID.indexOf(name) === -1) {
     return res.status(404).json({ error: 'Modul inexistent' });
   }
   const { data: profile } = await db.from('profiles').select('tier').eq('id', req.user.id).single();
@@ -1140,7 +1147,9 @@ app.get('/api/module/:name', auth, async (req, res) => {
   if (TIER_ORDER_MOD.indexOf(tier) < TIER_ORDER_MOD.indexOf(min)) {
     return res.status(403).json({ error: 'locked', min_tier: min });
   }
-  return res.json({ name, content: PREMIUM[name] });
+  const lang = req.query.lang;
+  const source = (lang === 'it' && PREMIUM.it && PREMIUM.it[name]) ? PREMIUM.it[name] : PREMIUM[name];
+  return res.json({ name, content: source });
 });
 
 // ============================================
