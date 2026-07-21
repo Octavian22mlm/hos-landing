@@ -763,6 +763,7 @@ label{display:block;font-size:13.5px;font-weight:600;letter-spacing:.08em;text-t
           <button class="lang" onclick="setLang('it')"><svg class="flag" viewBox="0 0 3 2" preserveAspectRatio="none"><rect width="3" height="2" fill="#CD212A"/><rect width="2" height="2" fill="#fff"/><rect width="1" height="2" fill="#008C45"/></svg>IT</button>
           <button class="lang" onclick="setLang('es')"><svg class="flag" viewBox="0 0 3 2" preserveAspectRatio="none"><rect width="3" height="2" fill="#AA151B"/><rect y="0.5" width="3" height="1" fill="#F1BF00"/></svg>ES</button>
           <button class="lang" onclick="setLang('en')"><svg class="flag" viewBox="0 0 60 30" preserveAspectRatio="none"><rect width="60" height="30" fill="#012169"/><path d="M0,0 60,30 M60,0 0,30" stroke="#fff" stroke-width="6"/><path d="M0,0 60,30 M60,0 0,30" stroke="#C8102E" stroke-width="4"/><path d="M30,0 V30 M0,15 H60" stroke="#fff" stroke-width="10"/><path d="M30,0 V30 M0,15 H60" stroke="#C8102E" stroke-width="6"/></svg>EN</button>
+          <button class="lang" onclick="setLang('fr')"><svg class="flag" viewBox="0 0 3 2" preserveAspectRatio="none"><rect width="3" height="2" fill="#ED2939"/><rect width="2" height="2" fill="#fff"/><rect width="1" height="2" fill="#002395"/></svg>FR</button>
         </div>
         <button class="btn-ghost" onclick="openAccount()">Cont</button>
         <button class="btn-ghost iesire" onclick="doLogout()">Ieșire</button>
@@ -1733,7 +1734,7 @@ async function renderInchidere(){
     else { host.innerHTML='<div class="cn-load">Nu am putut încărca modulul. Reîncearcă.</div>'; }
   }
 }
-function setLang(l){ if(l==='ro'){ return; } var u={ro:'/app',it:'/app-it',es:'/app-es',en:'/app-en'}[l]; if(u){ window.location.href=u; } }
+function setLang(l){ if(l==='ro'){ return; } var u={ro:'/app',it:'/app-it',es:'/app-es',en:'/app-en',fr:'/app-fr'}[l]; if(u){ window.location.href=u; } }
 
 // ============================================
 // CONT / ABONAMENT + RETENTIE
