@@ -1972,6 +1972,11 @@ function doLogout() {
   sessionStorage.removeItem('hos_token');
   TOKEN = null;
   USER_PROFILE = null;
+  // sterge datele locale cu caracter personal (formular agent + prospect) la delogare
+  try {
+    localStorage.removeItem('hos_form');
+    localStorage.removeItem('hos_agent_data');
+  } catch(e) {}
   if (supaApp) { try { supaApp.auth.signOut(); } catch(e){} }
   showView('login');
 }
