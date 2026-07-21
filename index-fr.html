@@ -773,7 +773,7 @@ label{display:block;font-size:13.5px;font-weight:600;letter-spacing:.08em;text-t
       <button class="navtab active" id="tab-invitatie" onclick="navTab('invitatie')">Invitation</button>
       <button class="navtab" id="tab-conectare" onclick="navTab('conectare')">Connexion</button>
       <button class="navtab" id="tab-prezentare" onclick="navTab('prezentare')">Présentation</button>
-      <button class="navtab" id="tab-inchidere" onclick="navTab('inchidere')">Conclusion</button>
+      <button class="navtab" id="tab-inchidere" onclick="navTab('inchidere')">Clôture</button>
       <button class="navtab soon" onclick="navTab('obiectii')">Objections<span class="soon-badge">bientôt</span></button>
       <button class="navtab soon" onclick="navTab('recomandari')">Demande de recommandations<span class="soon-badge">bientôt</span></button>
     </nav>
@@ -1713,7 +1713,7 @@ async function renderPrezentare(){
 var _inchidereLoaded=false;
 function _inLockHtml(){
   return '<div class="cn-lock"><div class="cn-lock-ic">🔒</div>'+
-    '<div class="cn-lock-tx">Le module <b>Conclusion</b> — la formule, les 3 phases et les règles d’or d’exécution — se débloque à partir du forfait <b>Leader</b>.</div>'+
+    '<div class="cn-lock-tx">Le module <b>Clôture</b> — la formule, les 3 phases et les règles d’or d’exécution — se débloque à partir du forfait <b>Leader</b>.</div>'+
     '<button class="btn-ghost" style="max-width:240px" onclick="goUpgrade()">Débloquer avec Leader</button></div>';
 }
 async function renderInchidere(){
