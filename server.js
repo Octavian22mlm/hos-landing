@@ -52,6 +52,8 @@ app.get('/app', (req, res) => {
   res.setHeader('X-Robots-Tag', 'noindex, nofollow'); // zona logata nu se indexeaza in Google
   res.sendFile(path.join(__dirname, 'index.html'));
 });
+// pagina de vanzare in italiana (IT)
+app.get('/it', (req, res) => res.sendFile(path.join(__dirname, 'preturi-it.html')));
 
 // ---- SEO: robots.txt real (fisier text valid, nu pagina HTML) ----
 app.get('/robots.txt', (req, res) => {
