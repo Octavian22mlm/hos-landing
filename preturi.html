@@ -148,12 +148,19 @@
   .bonus .b1{font-weight:600}
   .bonus .b2{display:block;color:var(--muted-2);font-size:12.5px;font-weight:400;margin-top:2px}
   .feats{list-style:none;flex:1;margin-bottom:26px}
-  .feats li{display:flex;align-items:flex-start;gap:11px;font-size:15.5px;padding:7px 0;color:var(--ink)}
-  .feats li .ic{flex:0 0 18px;margin-top:3px}
+  .feats li{display:flex;align-items:flex-start;gap:11px;font-size:15px;padding:10px 0;color:var(--ink);
+    line-height:1.45;border-bottom:1px solid rgba(255,255,255,.045)}
+  .feats li:last-child{border-bottom:none}
+  .feats li .ic{flex:0 0 18px;margin-top:1px;text-align:center}
+  .feats li .ft{flex:1;min-width:0}
+  .feats li .ft small{display:block;color:var(--muted-2);font-size:12.5px;font-weight:400;font-style:italic;margin-top:3px}
   .feats li.locked{color:var(--muted-2);cursor:pointer}
   .feats li .check{color:var(--ok)}
   .feats li .lock{filter:grayscale(.3);opacity:.7}
-  .feats li small{display:block;color:var(--muted-2);font-size:13.5px;font-weight:400}
+  .feats li .tier{flex:0 0 auto;align-self:center;font-size:10.5px;font-weight:700;letter-spacing:.5px;
+    text-transform:uppercase;color:var(--muted-2);background:rgba(255,255,255,.05);
+    border:1px solid var(--line-soft);border-radius:30px;padding:3px 10px;white-space:nowrap}
+  .feats li .tier.gold{color:var(--gold-bright);background:rgba(201,162,75,.12);border-color:var(--line)}
   .btn-card{width:100%;padding:14px;border-radius:44px;font-weight:700;font-size:16px;cursor:pointer;
     border:1px solid var(--gold);background:transparent;color:var(--gold-bright);transition:.25s;font-family:inherit}
   .btn-card:hover{background:rgba(201,162,75,.12)}
@@ -626,6 +633,51 @@
       <p>De la primul script de test până la conducerea unei echipe — plătești pentru cât de departe vrei să mergi.</p>
     </div>
     <div class="plans">
+      <!-- LEADER (featured · recomandat) -->
+      <div class="card featured" data-reveal>
+        <div class="ribbon">Recomandat</div>
+        <div class="step">Conduci</div>
+        <div class="pname">Leader</div>
+        <div class="ptag">Pentru cei care construiesc echipe, nu doar contacte.</div>
+        <div class="price"><span class="amt">29€</span><span class="per">/ lună</span></div>
+        <div class="perscript">1,93€ per script</div>
+        <div class="commit">Abonament lunar · anulezi oricând</div>
+        <div class="qty"><b>15</b> scripturi / lună</div>
+        <div class="bonus"><span class="b1">+5 scripturi de antrenament</span><span class="b2">o singură dată, la înscriere — exersezi fără grija că „irosești"</span></div>
+        <ul class="feats">
+          <li><span class="ic check">✓</span><span class="ft">Mod <b>Clean</b></span></li>
+          <li><span class="ic check">✓</span><span class="ft">Mod <b>Coach</b></span></li>
+          <li><span class="ic check">✓</span><span class="ft">Mod <b>Ambele</b> — execuție + explicații, flexibilitate totală</span></li>
+          <li><span class="ic check">✓</span><span class="ft">Răspuns pentru 2 obiecții la fiecare script <small>nu se scad din limită</small></span></li>
+          <li><span class="ic check">✓</span><span class="ft"><b>Invitația-fulger</b> — 4 invitații gata de citit, cu psihologia din spate</span></li>
+          <li><span class="ic check">✓</span><span class="ft"><b>Modul Conectare</b> — harta clientului + scriptul de conectare, replică cu replică</span></li>
+          <li><span class="ic check">✓</span><span class="ft"><b>Modul Prezentare 1 la 1</b> — banca de întrebări + cadență + tonalitate</span><span class="tier gold">Leader</span></li>
+          <li><span class="ic check">✓</span><span class="ft"><b>Modul Închidere</b> — întrebări psihologice de închidere</span><span class="tier gold">Leader</span></li>
+        </ul>
+        <button class="btn-card" onclick="selectPlan('leader')">Devin Leader</button>
+      </div>
+      <!-- BUILDER -->
+      <div class="card" data-reveal>
+        <div class="step">Construiești</div>
+        <div class="pname">Builder</div>
+        <div class="ptag">Volumul + înțelegerea. De aici începe diferența reală.</div>
+        <div class="price"><span class="amt">19€</span><span class="per">/ lună</span></div>
+        <div class="perscript">2,38€ per script</div>
+        <div class="commit">Abonament lunar · anulezi oricând</div>
+        <div class="qty"><b>8</b> scripturi / lună</div>
+        <div class="bonus"><span class="b1">+3 scripturi de antrenament</span><span class="b2">o singură dată, la înscriere — exersezi fără grija că „irosești"</span></div>
+        <ul class="feats">
+          <li><span class="ic check">✓</span><span class="ft">Mod <b>Clean</b> — execuție pură</span></li>
+          <li><span class="ic check">✓</span><span class="ft">Mod <b>Coach</b> — îți explică <em>de ce</em> funcționează fiecare replică</span></li>
+          <li><span class="ic check">✓</span><span class="ft">Răspuns pentru 2 obiecții la fiecare script <small>nu se scad din limită</small></span></li>
+          <li><span class="ic check">✓</span><span class="ft"><b>Invitația-fulger</b> — 4 invitații gata de citit, cu psihologia din spate</span></li>
+          <li><span class="ic check">✓</span><span class="ft"><b>Modul Conectare</b> — harta clientului + scriptul de conectare, replică cu replică</span></li>
+          <li class="locked" onclick="lockToast('Ambele')"><span class="ic lock">🔒</span><span class="ft">Mod Ambele</span><span class="tier">Leader</span></li>
+          <li class="locked" onclick="lockToast('Prezentare')"><span class="ic lock">🔒</span><span class="ft">Modul Prezentare 1 la 1</span><span class="tier">Leader</span></li>
+          <li class="locked" onclick="lockToast('Închidere')"><span class="ic lock">🔒</span><span class="ft">Modul Închidere</span><span class="tier">Leader</span></li>
+        </ul>
+        <button class="btn-card" onclick="selectPlan('builder')">Aleg Builder</button>
+      </div>
       <!-- RECRUIT -->
       <div class="card" data-reveal>
         <div class="step">Începi</div>
@@ -637,61 +689,16 @@
         <div class="qty"><b>3</b> scripturi / lună</div>
         <div class="bonus"><span class="b1">+1 script de antrenament</span><span class="b2">o singură dată, la înscriere — exersezi fără grija că „irosești"</span></div>
         <ul class="feats">
-          <li><span class="ic check">✓</span> Mod <b>Clean</b> — dialogul gata de citit la telefon</li>
-          <li><span class="ic check">✓</span> Răspuns pentru 2 obiecții la fiecare script <small>(nu se scad din limită)</small></li>
-          <li class="locked" onclick="lockToast('Coach')"><span class="ic lock">🔒</span> Mod Coach <small>din planul Builder</small></li>
-          <li class="locked" onclick="lockToast('Ambele')"><span class="ic lock">🔒</span> Mod Ambele <small>din planul Leader</small></li>
-          <li class="locked" onclick="lockToast('Invitația-fulger')"><span class="ic lock">🔒</span> Invitația-fulger <small>din planul Builder</small></li>
-          <li class="locked" onclick="lockToast('Conectare')"><span class="ic lock">🔒</span> Modul Conectare <small>din planul Builder</small></li>
-          <li class="locked" onclick="lockToast('Prezentare')"><span class="ic lock">🔒</span> Modul Prezentare 1 la 1 <small>din planul Leader</small></li>
-          <li class="locked" onclick="lockToast('Închidere')"><span class="ic lock">🔒</span> Modul Închidere <small>din planul Leader</small></li>
+          <li><span class="ic check">✓</span><span class="ft">Mod <b>Clean</b> — dialogul gata de citit la telefon</span></li>
+          <li><span class="ic check">✓</span><span class="ft">Răspuns pentru 2 obiecții la fiecare script <small>nu se scad din limită</small></span></li>
+          <li class="locked" onclick="lockToast('Coach')"><span class="ic lock">🔒</span><span class="ft">Mod Coach</span><span class="tier">Builder</span></li>
+          <li class="locked" onclick="lockToast('Ambele')"><span class="ic lock">🔒</span><span class="ft">Mod Ambele</span><span class="tier">Leader</span></li>
+          <li class="locked" onclick="lockToast('Invitația-fulger')"><span class="ic lock">🔒</span><span class="ft">Invitația-fulger</span><span class="tier">Builder</span></li>
+          <li class="locked" onclick="lockToast('Conectare')"><span class="ic lock">🔒</span><span class="ft">Modul Conectare</span><span class="tier">Builder</span></li>
+          <li class="locked" onclick="lockToast('Prezentare')"><span class="ic lock">🔒</span><span class="ft">Modul Prezentare 1 la 1</span><span class="tier">Leader</span></li>
+          <li class="locked" onclick="lockToast('Închidere')"><span class="ic lock">🔒</span><span class="ft">Modul Închidere</span><span class="tier">Leader</span></li>
         </ul>
         <button class="btn-card" onclick="selectPlan('recruit')">Încep cu Recruit</button>
-      </div>
-      <!-- BUILDER (featured) -->
-      <div class="card featured" data-reveal>
-        <div class="ribbon">Cel mai ales</div>
-        <div class="step">Construiești</div>
-        <div class="pname">Builder</div>
-        <div class="ptag">Volumul + înțelegerea. De aici începe diferența reală.</div>
-        <div class="price"><span class="amt">19€</span><span class="per">/ lună</span></div>
-        <div class="perscript">2,38€ per script</div>
-        <div class="commit">Abonament lunar · anulezi oricând</div>
-        <div class="qty"><b>8</b> scripturi / lună</div>
-        <div class="bonus"><span class="b1">+3 scripturi de antrenament</span><span class="b2">o singură dată, la înscriere — exersezi fără grija că „irosești"</span></div>
-        <ul class="feats">
-          <li><span class="ic check">✓</span> Mod <b>Clean</b> — execuție pură</li>
-          <li><span class="ic check">✓</span> Mod <b>Coach</b> — îți explică <em>de ce</em> funcționează fiecare replică</li>
-          <li><span class="ic check">✓</span> Răspuns pentru 2 obiecții la fiecare script <small>(nu se scad din limită)</small></li>
-          <li><span class="ic check">✓</span> <b>Invitația-fulger</b> — 4 invitații gata de citit, cu psihologia din spate</li>
-          <li><span class="ic check">✓</span> <b>Modul Conectare</b> — harta clientului + scriptul de conectare, replică cu replică</li>
-          <li class="locked" onclick="lockToast('Ambele')"><span class="ic lock">🔒</span> Mod Ambele <small>din planul Leader</small></li>
-          <li class="locked" onclick="lockToast('Prezentare')"><span class="ic lock">🔒</span> Modul Prezentare 1 la 1 <small>din planul Leader</small></li>
-          <li class="locked" onclick="lockToast('Închidere')"><span class="ic lock">🔒</span> Modul Închidere <small>din planul Leader</small></li>
-        </ul>
-        <button class="btn-card" onclick="selectPlan('builder')">Aleg Builder</button>
-      </div>
-      <!-- LEADER -->
-      <div class="card" data-reveal>
-        <div class="step">Conduci</div>
-        <div class="pname">Leader</div>
-        <div class="ptag">Pentru cei care construiesc echipe, nu doar contacte.</div>
-        <div class="price"><span class="amt">29€</span><span class="per">/ lună</span></div>
-        <div class="perscript">1,93€ per script</div>
-        <div class="commit">Abonament lunar · anulezi oricând</div>
-        <div class="qty"><b>15</b> scripturi / lună</div>
-        <div class="bonus"><span class="b1">+5 scripturi de antrenament</span><span class="b2">o singură dată, la înscriere — exersezi fără grija că „irosești"</span></div>
-        <ul class="feats">
-          <li><span class="ic check">✓</span> Mod <b>Clean</b></li>
-          <li><span class="ic check">✓</span> Mod <b>Coach</b></li>
-          <li><span class="ic check">✓</span> Mod <b>Ambele</b> — execuție + explicații, flexibilitate totală</li>
-          <li><span class="ic check">✓</span> Răspuns pentru 2 obiecții la fiecare script <small>(nu se scad din limită)</small></li>
-          <li><span class="ic check">✓</span> <b>Invitația-fulger</b> — 4 invitații gata de citit, cu psihologia din spate</li>
-          <li><span class="ic check">✓</span> <b>Modul Conectare</b> — harta clientului + scriptul de conectare, replică cu replică</li>
-          <li><span class="ic check">✓</span> <b>Modul Prezentare 1 la 1</b> — banca de întrebări + cadență + tonalitate <small>exclusiv Leader</small></li>
-          <li><span class="ic check">✓</span> <b>Modul Închidere</b> — formula, cele 3 etape și regulile de aur de execuție <small>exclusiv Leader</small></li>
-        </ul>
-        <button class="btn-card" onclick="selectPlan('leader')">Trec la Leader</button>
       </div>
     </div>
     <!-- SCRIPT UNIC -->
