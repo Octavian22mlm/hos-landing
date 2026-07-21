@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Politique de confidentialité — Harvard of Sales</title>
+<meta name="robots" content="index, follow" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#0A1322; --navy-2:#0E1B2E; --card:#11203580; --gold:#C9A24B;
+    --gold-bright:#E4C36A; --ink:#EAEFF6; --muted:#AEBBCD; --muted-2:#7A8AA0;
+    --line:rgba(201,162,75,.22); --line-soft:rgba(255,255,255,.09);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--navy);color:var(--ink);font-family:'Hanken Grotesk',sans-serif;
+    line-height:1.72;-webkit-font-smoothing:antialiased}
+  body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
+    background:radial-gradient(900px 600px at 75% -5%,rgba(201,162,75,.08),transparent 60%),
+      linear-gradient(180deg,#0A1322 0%,#0B1525 55%,#0A1322 100%)}
+  .wrap{position:relative;z-index:1;max-width:820px;margin:0 auto;padding:0 22px}
+  nav{display:flex;align-items:center;justify-content:space-between;max-width:820px;margin:0 auto;padding:24px 22px}
+  .brand{font-family:'Playfair Display',serif;font-weight:700;font-size:18px;letter-spacing:.4px}
+  .brand span{color:var(--gold)}
+  .back{font-size:13.5px;color:var(--muted);text-decoration:none;border:1px solid var(--line);
+    padding:8px 16px;border-radius:40px;transition:.2s;white-space:nowrap}
+  .back:hover{color:var(--ink);border-color:var(--gold)}
+  header.doc{padding:34px 0 10px}
+  .eyebrow{font-size:12px;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);font-weight:700}
+  h1{font-family:'Playfair Display',serif;font-weight:700;font-size:clamp(28px,5vw,40px);margin:10px 0 8px;line-height:1.12}
+  .updated{color:var(--muted-2);font-size:13.5px}
+  .intro{margin:26px 0 8px;color:var(--muted);font-size:15.5px}
+  .toc{background:var(--card);border:1px solid var(--line-soft);border-radius:14px;padding:20px 24px;margin:26px 0 8px}
+  .toc h2{font-family:'Hanken Grotesk',sans-serif;font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:12px}
+  .toc ol{margin:0;padding-left:20px;columns:2;column-gap:28px}
+  .toc li{margin:5px 0;font-size:14px}
+  .toc a{color:var(--muted);text-decoration:none}
+  .toc a:hover{color:var(--gold-bright)}
+  section.blk{padding:30px 0 4px;border-top:1px solid var(--line-soft);margin-top:26px}
+  section.blk:first-of-type{border-top:none}
+  h2.sec{font-family:'Playfair Display',serif;font-weight:600;font-size:22px;color:var(--ink);margin-bottom:14px}
+  h2.sec .no{color:var(--gold);font-size:16px;margin-right:8px;font-family:'Hanken Grotesk',sans-serif;font-weight:700}
+  h3{font-size:16px;font-weight:700;color:var(--ink);margin:18px 0 6px}
+  p{margin:10px 0;color:var(--muted);font-size:15.5px}
+  ul,ol.body{margin:10px 0 10px 22px;color:var(--muted);font-size:15.5px}
+  li{margin:6px 0}
+  strong{color:var(--ink);font-weight:700}
+  a{color:var(--gold-bright)}
+  .idbox{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px 24px;margin:6px 0}
+  .idbox .row{display:flex;gap:12px;padding:6px 0;font-size:15px;flex-wrap:wrap}
+  .idbox .k{color:var(--muted-2);min-width:190px;flex:0 0 auto}
+  .idbox .v{color:var(--ink)}
+  .callout{background:rgba(201,162,75,.07);border:1px solid var(--line);border-left:3px solid var(--gold);
+    border-radius:10px;padding:14px 18px;margin:16px 0;font-size:15px;color:var(--ink)}
+  table.proc{width:100%;border-collapse:collapse;margin:14px 0;font-size:14.5px}
+  table.proc th,table.proc td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line-soft);vertical-align:top}
+  table.proc th{color:var(--gold);font-weight:700;font-size:12.5px;text-transform:uppercase;letter-spacing:.4px}
+  table.proc td{color:var(--muted)}
+  table.proc td strong{color:var(--ink)}
+  footer{border-top:1px solid var(--line-soft);margin-top:44px;padding:30px 0 44px;text-align:center;color:var(--muted-2);font-size:13.5px}
+  footer a{color:var(--muted);text-decoration:none;margin:0 8px}
+  footer a:hover{color:var(--gold-bright)}
+  @media(max-width:640px){.toc ol{columns:1}.idbox .k{min-width:140px}
+    table.proc,table.proc tbody,table.proc tr,table.proc td{display:block;width:100%}
+    table.proc thead{display:none}
+    table.proc tr{border:1px solid var(--line-soft);border-radius:10px;margin-bottom:10px;padding:6px 4px}
+    table.proc td{border:none}}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="brand">Harvard of <span>Sales</span></div>
+  <a href="/fr" class="back">← Retour au site</a>
+</nav>
+
+<div class="wrap">
+  <header class="doc">
+    <div class="eyebrow">Document juridique</div>
+    <h1>Politique de confidentialité</h1>
+    <div class="updated">Dernière mise à jour : 21 juillet 2026 · En vigueur à compter du : 21 juillet 2026</div>
+    <p class="intro">Cette politique explique quelles données à caractère personnel nous collectons via la plateforme <strong>mlmpsychology.com</strong>, pourquoi nous les collectons, comment nous les utilisons et quels sont vos droits. Nous respectons le Règlement général sur la protection des données (RGPD – Règlement UE 2016/679) pour les utilisateurs de l'Union européenne.</p>
+  </header>
+
+  <div class="toc">
+    <h2>Sommaire</h2>
+    <ol>
+      <li><a href="#s1">Qui est le responsable du traitement</a></li>
+      <li><a href="#s2">Quelles données nous collectons</a></li>
+      <li><a href="#s3">Finalités et bases légales</a></li>
+      <li><a href="#s4">Données de la personne invitée</a></li>
+      <li><a href="#s5">À qui nous les communiquons</a></li>
+      <li><a href="#s6">Transferts internationaux</a></li>
+      <li><a href="#s7">Durée de conservation</a></li>
+      <li><a href="#s8">Comment nous les protégeons</a></li>
+      <li><a href="#s9">Vos droits</a></li>
+      <li><a href="#s10">Cookies et stockage local</a></li>
+      <li><a href="#s11">Mineurs</a></li>
+      <li><a href="#s12">Intelligence artificielle</a></li>
+      <li><a href="#s13">Modifications</a></li>
+      <li><a href="#s14">Contact et réclamations</a></li>
+    </ol>
+  </div>
+
+  <section class="blk" id="s1">
+    <h2 class="sec"><span class="no">1.</span>Qui est le responsable du traitement</h2>
+    <p>Le responsable du traitement qui décide pourquoi et comment vos données sont traitées est :</p>
+    <div class="idbox">
+      <div class="row"><span class="k">Dénomination</span><span class="v">VITANIC SALES LLC</span></div>
+      <div class="row"><span class="k">Forme / immatriculation</span><span class="v">LLC, État du Wyoming, États-Unis d'Amérique</span></div>
+      <div class="row"><span class="k">Siège</span><span class="v">2232 Dell Range Blvd, Cheyenne, WY 82009, États-Unis</span></div>
+      <div class="row"><span class="k">E-mail pour les données</span><span class="v">contact@octavianalupoaie.biz</span></div>
+    </div>
+    <p>Pour toute question relative à vos données ou pour exercer vos droits, vous pouvez nous écrire à l'adresse ci-dessus.</p>
+    <div class="callout">
+      <strong>Représentant dans l'UE :</strong> le responsable du traitement étant établi en dehors de l'Union européenne mais proposant des services à des personnes situées dans l'UE, la désignation d'un représentant dans l'UE au titre de l'article 27 du RGPD peut être nécessaire. Les coordonnées du représentant seront affichées ici une fois celui-ci désigné. En attendant, vous pouvez nous contacter directement à l'adresse e-mail ci-dessus.
+    </div>
+  </section>
+
+  <section class="blk" id="s2">
+    <h2 class="sec"><span class="no">2.</span>Quelles données nous collectons</h2>
+    <h3>a) Données de compte</h3>
+    <p>L'adresse e-mail et le mot de passe (stocké chiffré, non en clair). Nous n'avons pas accès à votre mot de passe.</p>
+    <h3>b) Données de paiement</h3>
+    <p>Les paiements sont traités par <strong>Stripe</strong>. Nous <strong>ne stockons pas les données de votre carte</strong>. Nous ne conservons que les identifiants techniques nécessaires à la gestion de l'abonnement (par exemple l'identifiant client et l'identifiant d'abonnement fournis par Stripe) et, le cas échéant, les données de facturation gérées par Stripe.</p>
+    <h3>c) Données relatives à l'utilisation du service</h3>
+    <p>Votre formule, le nombre de scripts restants, la date de la dernière allocation, un journal des générations (le moment et le mode de génération) et les scripts générés pour vous.</p>
+    <h3>d) Contenu saisi dans le générateur</h3>
+    <p>Les informations que vous renseignez dans le formulaire : sur vous-même (genre, âge approximatif, style d'approche, expérience), sur le produit et sur la personne que vous avez l'intention de contacter (voir la section 4).</p>
+    <h3>e) Messages d'assistance</h3>
+    <p>Si vous nous écrivez via le formulaire d'aide, nous conservons le message, votre adresse e-mail et votre formule, afin de vous répondre.</p>
+    <h3>f) Données techniques</h3>
+    <p>Comme sur la plupart des sites, nos serveurs et nos prestataires peuvent traiter des données techniques telles que l'adresse IP, le type de navigateur et d'appareil, nécessaires au fonctionnement et à la sécurité (y compris lors du chargement des polices web).</p>
+  </section>
+
+  <section class="blk" id="s3">
+    <h2 class="sec"><span class="no">3.</span>Finalités et bases légales</h2>
+    <p>Nous traitons vos données pour les finalités suivantes, sur les bases légales suivantes (article 6 du RGPD) :</p>
+    <table class="proc">
+      <thead><tr><th>Finalité</th><th>Base légale</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Création et gestion du compte</strong>, authentification</td><td>Exécution du contrat (art. 6(1)(b))</td></tr>
+        <tr><td><strong>Fourniture du service</strong> — génération des scripts à partir des données saisies</td><td>Exécution du contrat (art. 6(1)(b))</td></tr>
+        <tr><td><strong>Traitement des paiements</strong> et émission des documents</td><td>Exécution du contrat + obligation légale (art. 6(1)(b) et (c))</td></tr>
+        <tr><td><strong>Assistance</strong> et réponse aux demandes</td><td>Exécution du contrat / intérêt légitime (art. 6(1)(b)/(f))</td></tr>
+        <tr><td><strong>Sécurité</strong>, prévention de la fraude et des abus</td><td>Intérêt légitime (art. 6(1)(f))</td></tr>
+        <tr><td><strong>Respect des obligations légales</strong> (comptables, fiscales)</td><td>Obligation légale (art. 6(1)(c))</td></tr>
+      </tbody>
+    </table>
+    <p>Nous n'utilisons pas vos données à des fins de marketing par e-mail sans votre consentement. Nous utilisons votre e-mail pour le compte, l'activation de la formule et les documents de paiement.</p>
+  </section>
+
+  <section class="blk" id="s4">
+    <h2 class="sec"><span class="no">4.</span>Données de la personne invitée</h2>
+    <div class="callout">
+      Par conception, nous collectons <strong>le moins de données possible</strong> sur la personne que vous souhaitez contacter. <strong>Nous ne demandons ni ne collectons de nom de famille, numéro de téléphone, adresse e-mail, adresse postale ou autres données de contact ou d'identification directe</strong> de cette personne.
+    </div>
+    <p>Les champs disponibles se limitent à des éléments généraux de contexte (par exemple un prénom facultatif, un âge approximatif, le type de relation, un contexte professionnel ou familial général) — utilisés <strong>exclusivement</strong> pour générer votre script. Nous ne cherchons pas et ne sommes pas en mesure d'identifier cette personne à partir de ces informations.</p>
+    <p><strong>Votre responsabilité en tant qu'utilisateur.</strong> C'est vous qui saisissez ces informations, sur la base de votre relation directe avec la personne concernée. Vous vous engagez à :</p>
+    <ul>
+      <li>ne pas saisir de données identifiant directement la personne (nom complet, coordonnées, adresse, etc.) ;</li>
+      <li>ne pas saisir dans les champs libres de <strong>données sensibles</strong> — par exemple relatives à l'état de santé, à la vie privée intime, aux convictions ou à l'orientation — qui ne sont pas nécessaires et ne devraient pas être fournies ;</li>
+      <li>utiliser les scripts générés de manière légale et éthique dans votre communication.</li>
+    </ul>
+    <p>Des précisions supplémentaires sur votre responsabilité figurent dans les <a href="/termeni-fr.html">Conditions générales</a>.</p>
+  </section>
+
+  <section class="blk" id="s5">
+    <h2 class="sec"><span class="no">5.</span>À qui nous communiquons les données (sous-traitants)</h2>
+    <p>Nous ne vendons pas vos données. Nous ne les partageons qu'avec des prestataires de services (« sous-traitants ») qui nous aident à exploiter la plateforme, strictement pour les finalités ci-dessus :</p>
+    <table class="proc">
+      <thead><tr><th>Prestataire</th><th>Rôle</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Supabase</strong></td><td>Authentification et hébergement de la base de données</td></tr>
+        <tr><td><strong>Railway</strong></td><td>Hébergement de l'application (serveur)</td></tr>
+        <tr><td><strong>Stripe</strong></td><td>Traitement des paiements et facturation</td></tr>
+        <tr><td><strong>MindStudio</strong></td><td>Génération des scripts par intelligence artificielle</td></tr>
+        <tr><td><strong>Anthropic</strong></td><td>Modèle d'intelligence artificielle utilisé pour la génération</td></tr>
+        <tr><td><strong>Resend</strong></td><td>Envoi des e-mails d'assistance (s'il est activé)</td></tr>
+        <tr><td><strong>Google Fonts</strong></td><td>Affichage des polices web (peut traiter l'adresse IP)</td></tr>
+      </tbody>
+    </table>
+    <p>Pour générer un script, le contenu que vous saisissez dans le formulaire est transmis au fournisseur d'intelligence artificielle (MindStudio et/ou Anthropic) exclusivement pour produire la réponse demandée. Nous pouvons également communiquer des données si la loi nous y oblige ou pour défendre nos droits.</p>
+  </section>
+
+  <section class="blk" id="s6">
+    <h2 class="sec"><span class="no">6.</span>Transferts internationaux</h2>
+    <p>Le responsable du traitement et une partie de nos prestataires sont établis aux <strong>États-Unis d'Amérique</strong> ou traitent des données en dehors de l'Espace économique européen. Cela signifie que vos données peuvent être transférées et traitées en dehors de l'UE/EEE.</p>
+    <p>Pour de tels transferts, nous nous appuyons, selon le cas, sur les mécanismes reconnus par le RGPD — par exemple les <strong>Clauses contractuelles types</strong> de la Commission européenne et/ou le cadre <strong>EU–U.S. Data Privacy Framework</strong>, lorsque le prestataire est certifié. Vous pouvez nous demander des informations complémentaires sur les garanties applicables.</p>
+  </section>
+
+  <section class="blk" id="s7">
+    <h2 class="sec"><span class="no">7.</span>Durée de conservation des données</h2>
+    <ul>
+      <li><strong>Données de compte</strong> — tant que votre compte est actif. À la suppression du compte, nous les supprimons ou les anonymisons dans un délai raisonnable.</li>
+      <li><strong>Contenu généré et données saisies</strong> — pendant la durée d'utilisation du service, afin de vous offrir l'historique et les fonctionnalités ; elles sont supprimées à la suppression du compte ou après une période raisonnable d'inactivité.</li>
+      <li><strong>Données de paiement et documents comptables</strong> — pendant la durée imposée par les obligations légales et fiscales applicables.</li>
+      <li><strong>Messages d'assistance</strong> — le temps nécessaire à leur traitement, plus une période raisonnable ultérieure.</li>
+    </ul>
+  </section>
+
+  <section class="blk" id="s8">
+    <h2 class="sec"><span class="no">8.</span>Comment nous protégeons les données</h2>
+    <p>Nous appliquons des mesures techniques et organisationnelles raisonnables : connexions chiffrées (HTTPS), mots de passe stockés chiffrés, contrôles d'accès à la base de données (y compris des règles de sécurité au niveau des lignes) et limitation de l'accès aux sous-traitants. Aucun système n'est sûr à 100 %, mais nous déployons des efforts constants pour protéger vos données.</p>
+  </section>
+
+  <section class="blk" id="s9">
+    <h2 class="sec"><span class="no">9.</span>Vos droits</h2>
+    <p>En tant que personne concernée, vous disposez des droits suivants au titre du RGPD :</p>
+    <ul>
+      <li><strong>Accès</strong> — connaître les données que nous détenons à votre sujet ;</li>
+      <li><strong>Rectification</strong> — correction des données inexactes ;</li>
+      <li><strong>Effacement</strong> (« droit à l'oubli ») ;</li>
+      <li><strong>Limitation</strong> du traitement ;</li>
+      <li><strong>Portabilité</strong> — recevoir les données dans un format structuré ;</li>
+      <li><strong>Opposition</strong> aux traitements fondés sur l'intérêt légitime ;</li>
+      <li><strong>Retrait du consentement</strong>, lorsque le traitement est fondé sur le consentement.</li>
+    </ul>
+    <p>Vous pouvez exercer vos droits en nous écrivant à <a href="mailto:contact@octavianalupoaie.biz">contact@octavianalupoaie.biz</a>. Nous répondons dans les délais prévus par la loi. Vous pouvez supprimer votre compte en nous contactant.</p>
+  </section>
+
+  <section class="blk" id="s10">
+    <h2 class="sec"><span class="no">10.</span>Cookies et stockage local</h2>
+    <p>Nous n'utilisons pas de cookies publicitaires ou de suivi à des fins de marketing. Nous utilisons le <strong>stockage local de votre navigateur</strong> (localStorage / sessionStorage) strictement pour le fonctionnement de l'application — par exemple pour maintenir la session après l'authentification et pour mémoriser les champs que vous avez renseignés, afin que vous n'ayez pas à les ressaisir à chaque fois.</p>
+    <p>Ces données restent dans votre navigateur et vous pouvez les supprimer à tout moment depuis les paramètres de votre navigateur. Détails dans la <a href="/cookies-fr.html">Politique de cookies</a>.</p>
+  </section>
+
+  <section class="blk" id="s11">
+    <h2 class="sec"><span class="no">11.</span>Mineurs</h2>
+    <p>Le Service est destiné exclusivement aux personnes de <strong>plus de 18 ans</strong>. Nous ne collectons pas sciemment de données de mineurs. Si vous constatez qu'un mineur nous a fourni des données, contactez-nous pour leur suppression.</p>
+  </section>
+
+  <section class="blk" id="s12">
+    <h2 class="sec"><span class="no">12.</span>Intelligence artificielle</h2>
+    <p>Les scripts sont générés automatiquement, à l'aide de modèles d'intelligence artificielle, à partir des informations que vous saisissez. Ce processus produit un texte indicatif et <strong>ne prend pas de décisions produisant des effets juridiques</strong> à l'égard de quiconque. Nous n'utilisons pas vos données pour entraîner nos propres modèles.</p>
+  </section>
+
+  <section class="blk" id="s13">
+    <h2 class="sec"><span class="no">13.</span>Modifications de la politique</h2>
+    <p>Nous pouvons mettre à jour cette politique. Nous afficherons la date de la dernière mise à jour en haut de la page et, pour les changements importants, nous déploierons des efforts raisonnables pour vous en informer. La poursuite de l'utilisation du service après une mise à jour signifie que vous avez pris connaissance de la nouvelle version.</p>
+  </section>
+
+  <section class="blk" id="s14">
+    <h2 class="sec"><span class="no">14.</span>Contact et réclamations</h2>
+    <p>Pour toute question relative à vos données : <a href="mailto:contact@octavianalupoaie.biz">contact@octavianalupoaie.biz</a>.</p>
+    <p>Si vous êtes dans l'Union européenne et que vous estimez que vos droits ont été violés, vous avez le droit d'introduire une réclamation auprès de <strong>l'autorité de protection des données compétente de votre pays</strong>.</p>
+  </section>
+
+  <footer>
+    <div>© 2026 VITANIC SALES LLC · Harvard of Sales</div>
+    <div style="margin-top:10px">
+      <a href="/termeni-fr.html">Conditions générales</a> ·
+      <a href="/confidentialitate-fr.html">Politique de confidentialité</a> ·
+      <a href="/cookies-fr.html">Politique de cookies</a>
+    </div>
+  </footer>
+</div>
+
+</body>
+</html>
