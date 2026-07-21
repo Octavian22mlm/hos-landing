@@ -73,6 +73,13 @@ app.get('/app-es', (req, res) => {
   res.setHeader('X-Robots-Tag', 'noindex, nofollow');
   res.sendFile(path.join(__dirname, 'index-es.html'));
 });
+// pagina de vanzare in franceza (FR)
+app.get('/fr', (req, res) => res.sendFile(path.join(__dirname, 'preturi-fr.html')));
+// aplicatia in franceza (FR)
+app.get('/app-fr', (req, res) => {
+  res.setHeader('X-Robots-Tag', 'noindex, nofollow');
+  res.sendFile(path.join(__dirname, 'index-fr.html'));
+});
 
 // ---- SEO: robots.txt real (fisier text valid, nu pagina HTML) ----
 app.get('/robots.txt', (req, res) => {
@@ -295,7 +302,18 @@ const ES_DIRECTIVE = '\n\n═══════════ IDIOMA DE SALIDA —
   'Relee el resultado antes de entregarlo: si encuentras una sola palabra en rumano, corrígela. ' +
   'En el resultado final no debe aparecer NINGUNA palabra en rumano.';
 
-const OUT_DIRECTIVES = { it: IT_DIRECTIVE, en: EN_DIRECTIVE, es: ES_DIRECTIVE };
+const FR_DIRECTIVE = '\n\n═══════════ LANGUE DE SORTIE — PRIORITÉ ABSOLUE ═══════════\n' +
+  'Rédige TOUT le résultat exclusivement en FRANÇAIS natif, fluide et naturel. ' +
+  'NE traduis PAS mot à mot : adapte les expressions, le ton et le rythme comme un vrai commercial francophone. ' +
+  'Garde la structure et la méthodologie identiques. Pour les étiquettes de section utilise « PHASE » au lieu de « ETAPA » ' +
+  'et « [PAUSE ...] » au lieu de « [PAUZĂ ...] » ; conserve les emojis 📋 🎬 ✅. ' +
+  'Les noms propres et le nom du produit restent inchangés. ' +
+  'Les étiquettes des interlocuteurs doivent toujours être « AGENT » et « CLIENT ». ' +
+  'Traduis aussi toutes les didascalies entre parenthèses : aucun mot en roumain (ex. « zâmbet » → « sourire », « voce » → « voix », « pauză » → « pause »). ' +
+  'Relis le résultat avant de le livrer : si tu trouves un seul mot en roumain, corrige-le. ' +
+  'Aucun mot roumain ne doit apparaître dans le résultat final.';
+
+const OUT_DIRECTIVES = { it: IT_DIRECTIVE, en: EN_DIRECTIVE, es: ES_DIRECTIVE, fr: FR_DIRECTIVE };
 
 async function runObjectionDirect(jobId, objNum, allVariables, lang) {
   const fs = require('fs');
@@ -782,7 +800,7 @@ app.post('/api/create-checkout-session', auth, async (req, res) => {
   const { plan, lang } = req.body;
   const p = STRIPE_PLANS[plan];
   if (!p) return res.status(400).json({ error: 'Plan invalid' });
-  const appPath = { it: '/app-it', en: '/app-en', es: '/app-es' }[lang] || '/app'; // userii revin in aplicatia limbii lor
+  const appPath = { it: '/app-it', en: '/app-en', es: '/app-es', fr: '/app-fr' }[lang] || '/app'; // userii revin in aplicatia limbii lor
 
   try {
     const base = `https://${req.get('host')}`;
