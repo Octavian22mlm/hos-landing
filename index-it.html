@@ -2222,13 +2222,13 @@ function renderScript(text) {
     // separatoare usoare (— – - ─) -> linie fina
     if (/^[—–\-─]{3,}$/.test(t)) { lines[i] = '<span class="script-rule bare"></span>'; continue; }
     // pauza [ PAUZA ... ] -> chip discret
-    if (/^\[\s*PAUZ/i.test(t) && /\]$/.test(t)) {
+    if (/^\[\s*(PAUZ|PAUS)/i.test(t) && /\]$/.test(t)) {
       var pcore = t.replace(/^\[\s*/, '').replace(/\s*\]$/, '');
       lines[i] = '<span class="script-pause">' + pcore + '</span>'; continue;
     }
     // curata separatoarele din capete (inclusiv ─ si █) ca sa detectam continutul
     var core = t.replace(/^[—–\-═─█\s]+/, '').replace(/[—–\-═─█\s]+$/, '');
-    if (/^ETAPA\b/i.test(core)) { lines[i] = '<span class="script-rule">' + core + '</span>'; continue; }
+    if (/^(ETAPA|FASE)\b/i.test(core)) { lines[i] = '<span class="script-rule">' + core + '</span>'; continue; }
     // antet de zona (incepe cu emoji-ul zonei) -> banda
     if (/^(📋|🎬|✅)/.test(core)) { lines[i] = '<span class="script-zone">' + core + '</span>'; continue; }
   }
@@ -2350,7 +2350,8 @@ async function doGenerate() {
   try {
     const data = await generateAndWait({
       mode: SELECTED_MODE,
-      variables: { ...variables, '31_scripturi_anterioare': priorScripts }
+      variables: { ...variables, '31_scripturi_anterioare': priorScripts },
+      lang: 'it'
     });
 
     finishProgress(() => {
@@ -2638,7 +2639,8 @@ async function generateObjScript(num) {
       mode: lastMode,
       variables: objVariables,
       isObjection: true,
-      objNum: num
+      objNum: num,
+      lang: 'it'
     });
 
     finishObjProgress(prefix, () => {
