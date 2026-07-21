@@ -117,21 +117,10 @@ app.get('/api/user', auth, async (req, res) => {
 
   if (error) return res.status(500).json({ error: 'Eroare la citirea profilului' });
 
-  // Reset lunar automat (Script Unic = o singură dată, nu se resetează)
-  if (profile.tier !== 'none' && profile.tier !== 'unic' && profile.tiers) {
-    const resetAt = new Date(profile.scripts_reset_at);
-    const now = new Date();
-    const newMonth = now.getMonth() !== resetAt.getMonth() || now.getFullYear() !== resetAt.getFullYear();
-
-    if (newMonth) {
-      const newRemaining = profile.tiers.scripts_per_month;
-      await db.from('profiles').update({
-        scripts_remaining: newRemaining,
-        scripts_reset_at: now.toISOString()
-      }).eq('id', req.user.id);
-      profile.scripts_remaining = newRemaining;
-    }
-  }
+  // REPORT SCRIPTURI: alocarea lunara NU se mai reseteaza pe calendar aici.
+  // Sursa unica de alocare = reinnoirea Stripe (webhook invoice.paid), care ADUNA
+  // scripturile noi peste cele ramase (report), plafonat la 2x alocarea lunara.
+  // Astfel scripturile neutilizate se pastreaza dintr-o luna in alta.
 
   res.json(profile);
 });
@@ -409,17 +398,8 @@ app.post('/api/generate', auth, async (req, res) => {
     return res.status(403).json({ error: 'Nu ai un plan activ.' });
   }
 
-  // 2. Reset lunar (Script Unic exclus — e o singură dată)
-  const resetAt = new Date(profile.scripts_reset_at);
-  const now = new Date();
-  if (profile.tier !== 'unic' &&
-      (now.getMonth() !== resetAt.getMonth() || now.getFullYear() !== resetAt.getFullYear())) {
-    profile.scripts_remaining = profile.tiers.scripts_per_month;
-    await db.from('profiles').update({
-      scripts_remaining: profile.scripts_remaining,
-      scripts_reset_at: now.toISOString()
-    }).eq('id', req.user.id);
-  }
+  // 2. REPORT SCRIPTURI: fara reset pe calendar. Alocarea lunara vine din reinnoirea
+  // Stripe (webhook invoice.paid), aditiv + plafonat la 2x. Aici folosim soldul din DB ca atare.
 
   // 3. Verificam scripturi disponibile (sau bonus de antrenament)
   const trainingLeft = profile.training_left || 0;
@@ -987,7 +967,7 @@ app.post('/api/webhook', express.raw({ type: 'application/json' }), async (req, 
       }
     }
 
-    // 2) REÎNNOIRE LUNARĂ abonament (nu prima plată) — resetează scripturile, bonus 0
+    // 2) REÎNNOIRE LUNARĂ abonament (nu prima plată) — REPORT scripturi (aditiv, plafon 2x), bonus 0
     if (event.type === 'invoice.paid') {
       const inv = event.data.object;
       if (inv.billing_reason === 'subscription_cycle') {
@@ -998,12 +978,18 @@ app.post('/api/webhook', express.raw({ type: 'application/json' }), async (req, 
           const tier   = sub.metadata && sub.metadata.tier;
           if (userId && tier) {
             const { data: t } = await db.from('tiers').select('scripts_per_month').eq('id', tier).single();
+            const monthly = t ? t.scripts_per_month : 0;
+            // REPORT: adunam alocarea lunii peste soldul ramas, plafonat la 2x alocarea lunara.
+            // max(current, ...) => nu confiscam niciodata scripturi cumparate suplimentar (upgrade/repurchase pot depasi plafonul).
+            const { data: prof } = await db.from('profiles').select('scripts_remaining').eq('id', userId).single();
+            const current = (prof && typeof prof.scripts_remaining === 'number') ? prof.scripts_remaining : 0;
+            const capped = Math.max(current, Math.min(current + monthly, monthly * 2));
             await db.from('profiles').update({
-              scripts_remaining: t ? t.scripts_per_month : 0,
+              scripts_remaining: capped,
               training_left: 0,
               scripts_reset_at: new Date().toISOString()
             }).eq('id', userId);
-            console.log(`[webhook] reînnoit ${tier} pentru ${userId}`);
+            console.log(`[webhook] reînnoit ${tier} pentru ${userId} (report: ${current}+${monthly} -> ${capped}, cap ${monthly * 2})`);
           }
         }
       }
