@@ -169,6 +169,10 @@
   .card.featured .btn-card{background:linear-gradient(135deg,var(--gold-bright),var(--gold));color:#1a1205;border:none;
     box-shadow:0 10px 26px -8px rgba(201,162,75,.5)}
   .card.featured .btn-card:hover{transform:translateY(-1px)}
+  .upsell{display:block;width:100%;margin-top:11px;background:none;border:none;font-family:inherit;
+    font-size:13.5px;color:var(--muted);cursor:pointer;transition:.2s;text-align:center;line-height:1.4}
+  .upsell b{color:var(--gold-bright);font-weight:700}
+  .upsell:hover{color:var(--ink)}
   /* ---------- SCRIPT UNIC (distinct) ---------- */
   .unic{margin-top:26px;border:1px dashed var(--line);border-radius:18px;
     padding:24px 28px;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;
@@ -679,6 +683,7 @@
           <li class="locked" onclick="lockToast('Închidere')"><span class="ic lock">🔒</span><span class="ft">Modul Închidere</span><span class="tier">Leader</span></li>
         </ul>
         <button class="btn-card" onclick="selectPlan('builder')">Aleg Builder</button>
+        <button class="upsell" onclick="selectPlan('leader')">Devin Leader cu doar <b>10€</b> în plus →</button>
       </div>
       <!-- RECRUIT -->
       <div class="card" data-reveal>
