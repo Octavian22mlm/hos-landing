@@ -9,6 +9,33 @@ const crypto = require('crypto');
 const PREMIUM = require('./private/modules');
 
 const app = express();
+
+// ============================================
+// SECURITY HEADERS (fara dependinte externe — nu necesita npm install)
+// CSP permite sursele reale: Stripe, jsDelivr (supabase-js), Google Fonts, API-ul Supabase.
+// 'unsafe-inline' e necesar pentru handler-ele inline existente; se poate strange ulterior cu nonce.
+// ============================================
+app.use((req, res, next) => {
+  res.setHeader('X-Content-Type-Options', 'nosniff');
+  res.setHeader('X-Frame-Options', 'SAMEORIGIN');
+  res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
+  res.setHeader('Strict-Transport-Security', 'max-age=15552000; includeSubDomains');
+  res.setHeader('Permissions-Policy', 'geolocation=(), microphone=(), camera=()');
+  res.setHeader('Content-Security-Policy', [
+    "default-src 'self'",
+    "base-uri 'self'",
+    "object-src 'none'",
+    "frame-ancestors 'self'",
+    "script-src 'self' 'unsafe-inline' https://js.stripe.com https://cdn.jsdelivr.net",
+    "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
+    "font-src 'self' data: https://fonts.gstatic.com",
+    "img-src 'self' data: https:",
+    "connect-src 'self' https://*.supabase.co wss://*.supabase.co https://*.stripe.com",
+    "frame-src https://*.stripe.com"
+  ].join('; '));
+  next();
+});
+
 // express.json() parsează tot, DAR webhook-ul Stripe are nevoie de body RAW pentru semnătură:
 app.use((req, res, next) => {
   if (req.originalUrl === '/api/webhook') return next();
@@ -21,7 +48,34 @@ app.use(express.static(path.join(__dirname), { index: false }));
 
 // "/" = pagina de vanzare (preturi.html) · aplicatia traieste la "/app"
 app.get('/', (req, res) => res.sendFile(path.join(__dirname, 'preturi.html')));
-app.get('/app', (req, res) => res.sendFile(path.join(__dirname, 'index.html')));
+app.get('/app', (req, res) => {
+  res.setHeader('X-Robots-Tag', 'noindex, nofollow'); // zona logata nu se indexeaza in Google
+  res.sendFile(path.join(__dirname, 'index.html'));
+});
+
+// ---- SEO: robots.txt real (fisier text valid, nu pagina HTML) ----
+app.get('/robots.txt', (req, res) => {
+  res.type('text/plain').send(
+    'User-agent: *\n' +
+    'Allow: /\n' +
+    'Disallow: /app\n' +
+    'Disallow: /api/\n' +
+    'Sitemap: https://www.mlmpsychology.com/sitemap.xml\n'
+  );
+});
+
+// ---- SEO: sitemap.xml valid ----
+app.get('/sitemap.xml', (req, res) => {
+  res.type('application/xml').send(
+    '<?xml version="1.0" encoding="UTF-8"?>\n' +
+    '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' +
+    '  <url><loc>https://www.mlmpsychology.com/</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>\n' +
+    '  <url><loc>https://www.mlmpsychology.com/termeni.html</loc><priority>0.3</priority></url>\n' +
+    '  <url><loc>https://www.mlmpsychology.com/confidentialitate.html</loc><priority>0.3</priority></url>\n' +
+    '  <url><loc>https://www.mlmpsychology.com/cookies.html</loc><priority>0.3</priority></url>\n' +
+    '</urlset>\n'
+  );
+});
 
 // ---- SUPABASE (service role = acces total, server-side only) ----
 const db = createClient(
@@ -1091,6 +1145,7 @@ app.get('/api/module/:name', auth, async (req, res) => {
 // FRONTEND — serveste index.html
 // ============================================
 app.get('*', (req, res) => {
+  res.setHeader('X-Robots-Tag', 'noindex, nofollow'); // rutele necunoscute servesc aplicatia -> nu se indexeaza
   res.sendFile(path.join(__dirname, 'index.html'));
 });
 
