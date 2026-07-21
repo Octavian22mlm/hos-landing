@@ -454,6 +454,7 @@
     .unic .r{width:100%;justify-content:space-between}
   }
 </style>
+<style>.flag{display:inline-block;width:19px;height:13px;border-radius:2px;box-shadow:0 0 0 1px rgba(0,0,0,.25) inset;vertical-align:middle;flex:0 0 auto;overflow:hidden}</style>
 </head>
 <body>
 <nav>
@@ -461,14 +462,14 @@
     <a href="/app" class="nav-login">Conectează-te</a>
     <div class="lang-dd" id="langDd">
       <button class="lang-trigger" onclick="toggleLang(event)" aria-label="Alege limba">
-        <span class="flag">🇷🇴</span>Limbă
+        <svg class="flag" viewBox="0 0 3 2" preserveAspectRatio="none"><rect width="3" height="2" fill="#CE1126"/><rect width="2" height="2" fill="#FCD116"/><rect width="1" height="2" fill="#002B7F"/></svg>Limbă
         <svg class="lang-caret" viewBox="0 0 12 8" aria-hidden="true"><path d="M1 1.5 L6 6.5 L11 1.5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </button>
       <div class="lang-menu">
-        <button class="lang-opt active" onclick="setLang('ro')"><span class="flag">🇷🇴</span>RO</button>
-        <button class="lang-opt" onclick="setLang('en')"><span class="flag">🇬🇧</span>EN</button>
-        <button class="lang-opt" onclick="setLang('it')"><span class="flag">🇮🇹</span>IT</button>
-        <button class="lang-opt" onclick="setLang('es')"><span class="flag">🇪🇸</span>ES</button>
+        <button class="lang-opt active" onclick="setLang('ro')"><svg class="flag" viewBox="0 0 3 2" preserveAspectRatio="none"><rect width="3" height="2" fill="#CE1126"/><rect width="2" height="2" fill="#FCD116"/><rect width="1" height="2" fill="#002B7F"/></svg>RO</button>
+        <button class="lang-opt" onclick="setLang('it')"><svg class="flag" viewBox="0 0 3 2" preserveAspectRatio="none"><rect width="3" height="2" fill="#CD212A"/><rect width="2" height="2" fill="#fff"/><rect width="1" height="2" fill="#008C45"/></svg>IT</button>
+        <button class="lang-opt" onclick="setLang('es')"><svg class="flag" viewBox="0 0 3 2" preserveAspectRatio="none"><rect width="3" height="2" fill="#AA151B"/><rect y="0.5" width="3" height="1" fill="#F1BF00"/></svg>ES</button>
+        <button class="lang-opt" onclick="setLang('en')"><svg class="flag" viewBox="0 0 60 30" preserveAspectRatio="none"><rect width="60" height="30" fill="#012169"/><path d="M0,0 60,30 M60,0 0,30" stroke="#fff" stroke-width="6"/><path d="M0,0 60,30 M60,0 0,30" stroke="#C8102E" stroke-width="4"/><path d="M30,0 V30 M0,15 H60" stroke="#fff" stroke-width="10"/><path d="M30,0 V30 M0,15 H60" stroke="#C8102E" stroke-width="6"/></svg>EN</button>
       </div>
     </div>
   </div>
