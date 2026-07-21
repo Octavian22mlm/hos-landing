@@ -1064,7 +1064,7 @@
   }
   function toggleLang(e){ e.stopPropagation(); var d=document.getElementById('langDd'); if(d) d.classList.toggle('open'); }
   document.addEventListener('click', function(){ var d=document.getElementById('langDd'); if(d) d.classList.remove('open'); });
-  function setLang(l){ var d=document.getElementById('langDd'); if(d) d.classList.remove('open'); if(l==='ro'){ window.location.href='/'; return; } if(l==='it'){ return; } var m={en:'EN',es:'ES'}; showToast('Versione '+(m[l]||l.toUpperCase())+' — presto'); }
+  function setLang(l){ var d=document.getElementById('langDd'); if(d) d.classList.remove('open'); if(l==='it'){ return; } var u={ro:'/',it:'/it',es:'/es',en:'/en'}[l]; if(u){ window.location.href=u; } }
   /* ---- TEASER ---- */
   var teaserRel='prieten', teaserInv='cafea', teaserTone='cald', teaserProd='dei prodotti per la salute';
   function wireChips(id, cb){
