@@ -1732,7 +1732,7 @@ async function renderInchidere(){
     else { host.innerHTML='<div class="cn-load">Nu am putut încărca modulul. Reîncearcă.</div>'; }
   }
 }
-function setLang(l){ if(l!=='ro' && typeof toast==='function'){ var m={en:'EN',it:'IT',es:'ES'}; toast('Versiunea '+(m[l]||l.toUpperCase())+' — în curând', 3000); } }
+function setLang(l){ if(l==='it'){ window.location.href='/app-it'; return; } if(l!=='ro' && typeof toast==='function'){ var m={en:'EN',es:'ES'}; toast('Versiunea '+(m[l]||l.toUpperCase())+' — în curând', 3000); } }
 
 // ============================================
 // CONT / ABONAMENT + RETENTIE
