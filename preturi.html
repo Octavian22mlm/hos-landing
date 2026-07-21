@@ -154,6 +154,8 @@
   .feats li .ic{flex:0 0 18px;margin-top:1px;text-align:center}
   .feats li .ft{flex:1;min-width:0}
   .feats li .ft small{display:block;color:var(--muted-2);font-size:12.5px;font-weight:400;font-style:italic;margin-top:3px}
+  .feats li .ft .desc{display:block;color:var(--muted-2);font-size:13.5px;font-weight:400;margin-top:3px;line-height:1.42}
+  .feats li .ft b{font-weight:700}
   .feats li.locked{color:var(--muted-2);cursor:pointer}
   .feats li .check{color:var(--ok)}
   .feats li .lock{filter:grayscale(.3);opacity:.7}
@@ -647,12 +649,12 @@
         <ul class="feats">
           <li><span class="ic check">✓</span><span class="ft">Mod <b>Clean</b></span></li>
           <li><span class="ic check">✓</span><span class="ft">Mod <b>Coach</b></span></li>
-          <li><span class="ic check">✓</span><span class="ft">Mod <b>Ambele</b> — execuție + explicații, flexibilitate totală</span></li>
+          <li><span class="ic check">✓</span><span class="ft">Mod <b>Ambele</b><span class="desc">execuție + explicații, flexibilitate totală</span></span></li>
           <li><span class="ic check">✓</span><span class="ft">Răspuns pentru 2 obiecții la fiecare script <small>nu se scad din limită</small></span></li>
-          <li><span class="ic check">✓</span><span class="ft"><b>Invitația-fulger</b> — 4 invitații gata de citit, cu psihologia din spate</span></li>
-          <li><span class="ic check">✓</span><span class="ft"><b>Modul Conectare</b> — harta clientului + scriptul de conectare, replică cu replică</span></li>
-          <li><span class="ic check">✓</span><span class="ft"><b>Modul Prezentare 1 la 1</b> — banca de întrebări + cadență + tonalitate</span><span class="tier gold">Leader</span></li>
-          <li><span class="ic check">✓</span><span class="ft"><b>Modul Închidere</b> — întrebări psihologice de închidere</span><span class="tier gold">Leader</span></li>
+          <li><span class="ic check">✓</span><span class="ft"><b>Invitația-fulger</b><span class="desc">4 invitații gata de citit, cu psihologia din spate</span></span></li>
+          <li><span class="ic check">✓</span><span class="ft"><b>Modul Conectare</b><span class="desc">harta clientului + scriptul de conectare, replică cu replică</span></span></li>
+          <li><span class="ic check">✓</span><span class="ft"><b>Modul Prezentare 1 la 1</b><span class="desc">banca de întrebări + cadență + tonalitate</span></span><span class="tier gold">Leader</span></li>
+          <li><span class="ic check">✓</span><span class="ft"><b>Modul Închidere</b><span class="desc">întrebări psihologice de închidere</span></span><span class="tier gold">Leader</span></li>
         </ul>
         <button class="btn-card" onclick="selectPlan('leader')">Devin Leader</button>
       </div>
@@ -667,11 +669,11 @@
         <div class="qty"><b>8</b> scripturi / lună</div>
         <div class="bonus"><span class="b1">+3 scripturi de antrenament</span><span class="b2">o singură dată, la înscriere — exersezi fără grija că „irosești"</span></div>
         <ul class="feats">
-          <li><span class="ic check">✓</span><span class="ft">Mod <b>Clean</b> — execuție pură</span></li>
-          <li><span class="ic check">✓</span><span class="ft">Mod <b>Coach</b> — îți explică <em>de ce</em> funcționează fiecare replică</span></li>
+          <li><span class="ic check">✓</span><span class="ft">Mod <b>Clean</b><span class="desc">execuție pură</span></span></li>
+          <li><span class="ic check">✓</span><span class="ft">Mod <b>Coach</b><span class="desc">îți explică <em>de ce</em> funcționează fiecare replică</span></span></li>
           <li><span class="ic check">✓</span><span class="ft">Răspuns pentru 2 obiecții la fiecare script <small>nu se scad din limită</small></span></li>
-          <li><span class="ic check">✓</span><span class="ft"><b>Invitația-fulger</b> — 4 invitații gata de citit, cu psihologia din spate</span></li>
-          <li><span class="ic check">✓</span><span class="ft"><b>Modul Conectare</b> — harta clientului + scriptul de conectare, replică cu replică</span></li>
+          <li><span class="ic check">✓</span><span class="ft"><b>Invitația-fulger</b><span class="desc">4 invitații gata de citit, cu psihologia din spate</span></span></li>
+          <li><span class="ic check">✓</span><span class="ft"><b>Modul Conectare</b><span class="desc">harta clientului + scriptul de conectare, replică cu replică</span></span></li>
           <li class="locked" onclick="lockToast('Ambele')"><span class="ic lock">🔒</span><span class="ft">Mod Ambele</span><span class="tier">Leader</span></li>
           <li class="locked" onclick="lockToast('Prezentare')"><span class="ic lock">🔒</span><span class="ft">Modul Prezentare 1 la 1</span><span class="tier">Leader</span></li>
           <li class="locked" onclick="lockToast('Închidere')"><span class="ic lock">🔒</span><span class="ft">Modul Închidere</span><span class="tier">Leader</span></li>
@@ -689,7 +691,7 @@
         <div class="qty"><b>3</b> scripturi / lună</div>
         <div class="bonus"><span class="b1">+1 script de antrenament</span><span class="b2">o singură dată, la înscriere — exersezi fără grija că „irosești"</span></div>
         <ul class="feats">
-          <li><span class="ic check">✓</span><span class="ft">Mod <b>Clean</b> — dialogul gata de citit la telefon</span></li>
+          <li><span class="ic check">✓</span><span class="ft">Mod <b>Clean</b><span class="desc">dialogul gata de citit la telefon</span></span></li>
           <li><span class="ic check">✓</span><span class="ft">Răspuns pentru 2 obiecții la fiecare script <small>nu se scad din limită</small></span></li>
           <li class="locked" onclick="lockToast('Coach')"><span class="ic lock">🔒</span><span class="ft">Mod Coach</span><span class="tier">Builder</span></li>
           <li class="locked" onclick="lockToast('Ambele')"><span class="ic lock">🔒</span><span class="ft">Mod Ambele</span><span class="tier">Leader</span></li>
