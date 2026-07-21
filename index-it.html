@@ -1733,7 +1733,7 @@ async function renderInchidere(){
     else { host.innerHTML='<div class="cn-load">Impossibile caricare il modulo. Riprova.</div>'; }
   }
 }
-function setLang(l){ if(l==='ro'){ window.location.href='/app'; return; } if(l==='it'){ return; } if(typeof toast==='function'){ var m={en:'EN',es:'ES'}; toast('Versione '+(m[l]||l.toUpperCase())+' — presto', 3000); } }
+function setLang(l){ if(l==='it'){ return; } var u={ro:'/app',it:'/app-it',es:'/app-es',en:'/app-en'}[l]; if(u){ window.location.href=u; } }
 
 // ============================================
 // CONT / ABONAMENT + RETENTIE
