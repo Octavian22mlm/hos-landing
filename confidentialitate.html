@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Politica de Confidențialitate — Harvard of Sales</title>
+<meta name="robots" content="index, follow" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#0A1322; --navy-2:#0E1B2E; --card:#11203580; --gold:#C9A24B;
+    --gold-bright:#E4C36A; --ink:#EAEFF6; --muted:#AEBBCD; --muted-2:#7A8AA0;
+    --line:rgba(201,162,75,.22); --line-soft:rgba(255,255,255,.09);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--navy);color:var(--ink);font-family:'Hanken Grotesk',sans-serif;
+    line-height:1.72;-webkit-font-smoothing:antialiased}
+  body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
+    background:radial-gradient(900px 600px at 75% -5%,rgba(201,162,75,.08),transparent 60%),
+      linear-gradient(180deg,#0A1322 0%,#0B1525 55%,#0A1322 100%)}
+  .wrap{position:relative;z-index:1;max-width:820px;margin:0 auto;padding:0 22px}
+  nav{display:flex;align-items:center;justify-content:space-between;max-width:820px;margin:0 auto;padding:24px 22px}
+  .brand{font-family:'Playfair Display',serif;font-weight:700;font-size:18px;letter-spacing:.4px}
+  .brand span{color:var(--gold)}
+  .back{font-size:13.5px;color:var(--muted);text-decoration:none;border:1px solid var(--line);
+    padding:8px 16px;border-radius:40px;transition:.2s;white-space:nowrap}
+  .back:hover{color:var(--ink);border-color:var(--gold)}
+  header.doc{padding:34px 0 10px}
+  .eyebrow{font-size:12px;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);font-weight:700}
+  h1{font-family:'Playfair Display',serif;font-weight:700;font-size:clamp(28px,5vw,40px);margin:10px 0 8px;line-height:1.12}
+  .updated{color:var(--muted-2);font-size:13.5px}
+  .intro{margin:26px 0 8px;color:var(--muted);font-size:15.5px}
+  .toc{background:var(--card);border:1px solid var(--line-soft);border-radius:14px;padding:20px 24px;margin:26px 0 8px}
+  .toc h2{font-family:'Hanken Grotesk',sans-serif;font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:12px}
+  .toc ol{margin:0;padding-left:20px;columns:2;column-gap:28px}
+  .toc li{margin:5px 0;font-size:14px}
+  .toc a{color:var(--muted);text-decoration:none}
+  .toc a:hover{color:var(--gold-bright)}
+  section.blk{padding:30px 0 4px;border-top:1px solid var(--line-soft);margin-top:26px}
+  section.blk:first-of-type{border-top:none}
+  h2.sec{font-family:'Playfair Display',serif;font-weight:600;font-size:22px;color:var(--ink);margin-bottom:14px}
+  h2.sec .no{color:var(--gold);font-size:16px;margin-right:8px;font-family:'Hanken Grotesk',sans-serif;font-weight:700}
+  h3{font-size:16px;font-weight:700;color:var(--ink);margin:18px 0 6px}
+  p{margin:10px 0;color:var(--muted);font-size:15.5px}
+  ul,ol.body{margin:10px 0 10px 22px;color:var(--muted);font-size:15.5px}
+  li{margin:6px 0}
+  strong{color:var(--ink);font-weight:700}
+  a{color:var(--gold-bright)}
+  .idbox{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px 24px;margin:6px 0}
+  .idbox .row{display:flex;gap:12px;padding:6px 0;font-size:15px;flex-wrap:wrap}
+  .idbox .k{color:var(--muted-2);min-width:190px;flex:0 0 auto}
+  .idbox .v{color:var(--ink)}
+  .callout{background:rgba(201,162,75,.07);border:1px solid var(--line);border-left:3px solid var(--gold);
+    border-radius:10px;padding:14px 18px;margin:16px 0;font-size:15px;color:var(--ink)}
+  table.proc{width:100%;border-collapse:collapse;margin:14px 0;font-size:14.5px}
+  table.proc th,table.proc td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line-soft);vertical-align:top}
+  table.proc th{color:var(--gold);font-weight:700;font-size:12.5px;text-transform:uppercase;letter-spacing:.4px}
+  table.proc td{color:var(--muted)}
+  table.proc td strong{color:var(--ink)}
+  footer{border-top:1px solid var(--line-soft);margin-top:44px;padding:30px 0 44px;text-align:center;color:var(--muted-2);font-size:13.5px}
+  footer a{color:var(--muted);text-decoration:none;margin:0 8px}
+  footer a:hover{color:var(--gold-bright)}
+  @media(max-width:640px){.toc ol{columns:1}.idbox .k{min-width:140px}
+    table.proc,table.proc tbody,table.proc tr,table.proc td{display:block;width:100%}
+    table.proc thead{display:none}
+    table.proc tr{border:1px solid var(--line-soft);border-radius:10px;margin-bottom:10px;padding:6px 4px}
+    table.proc td{border:none}}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="brand">Harvard of <span>Sales</span></div>
+  <a href="/" class="back">← Înapoi la site</a>
+</nav>
+
+<div class="wrap">
+  <header class="doc">
+    <div class="eyebrow">Document legal</div>
+    <h1>Politica de Confidențialitate</h1>
+    <div class="updated">Ultima actualizare: 21 iulie 2026 · În vigoare de la: 21 iulie 2026</div>
+    <p class="intro">Această politică explică ce date cu caracter personal colectăm prin platforma <strong>mlmpsychology.com</strong>, de ce le colectăm, cum le folosim și ce drepturi ai. Respectăm Regulamentul General privind Protecția Datelor (GDPR – Regulamentul UE 2016/679) pentru utilizatorii din Uniunea Europeană.</p>
+  </header>
+
+  <div class="toc">
+    <h2>Cuprins</h2>
+    <ol>
+      <li><a href="#s1">Cine este operatorul</a></li>
+      <li><a href="#s2">Ce date colectăm</a></li>
+      <li><a href="#s3">Scopuri și temeiuri legale</a></li>
+      <li><a href="#s4">Datele persoanei invitate</a></li>
+      <li><a href="#s5">Cui le divulgăm</a></li>
+      <li><a href="#s6">Transferuri internaționale</a></li>
+      <li><a href="#s7">Cât timp le păstrăm</a></li>
+      <li><a href="#s8">Cum le protejăm</a></li>
+      <li><a href="#s9">Drepturile tale</a></li>
+      <li><a href="#s10">Cookies și stocare locală</a></li>
+      <li><a href="#s11">Minori</a></li>
+      <li><a href="#s12">Inteligență artificială</a></li>
+      <li><a href="#s13">Modificări</a></li>
+      <li><a href="#s14">Contact și reclamații</a></li>
+    </ol>
+  </div>
+
+  <section class="blk" id="s1">
+    <h2 class="sec"><span class="no">1.</span>Cine este operatorul de date</h2>
+    <p>Operatorul care decide de ce și cum se prelucrează datele tale este:</p>
+    <div class="idbox">
+      <div class="row"><span class="k">Denumire</span><span class="v">VITANIC SALES LLC</span></div>
+      <div class="row"><span class="k">Formă / înregistrare</span><span class="v">LLC, statul Wyoming, Statele Unite ale Americii</span></div>
+      <div class="row"><span class="k">Sediu</span><span class="v">2232 Dell Range Blvd, Cheyenne, WY 82009, SUA</span></div>
+      <div class="row"><span class="k">Email pentru date</span><span class="v">contact@octavianalupoaie.biz</span></div>
+    </div>
+    <p>Pentru orice întrebare privind datele tale sau pentru a-ți exercita drepturile, ne poți scrie la adresa de mai sus.</p>
+    <div class="callout">
+      <strong>Reprezentant în UE:</strong> întrucât operatorul este stabilit în afara Uniunii Europene, dar oferă servicii unor persoane din UE, poate fi necesară desemnarea unui reprezentant în UE conform art. 27 GDPR. Datele de contact ale reprezentantului vor fi afișate aici odată desemnat. Până atunci, ne poți contacta direct la adresa de email de mai sus.
+    </div>
+  </section>
+
+  <section class="blk" id="s2">
+    <h2 class="sec"><span class="no">2.</span>Ce date colectăm</h2>
+    <h3>a) Date de cont</h3>
+    <p>Adresa de email și parola (stocată criptat, nu în clar). Nu avem acces la parola ta.</p>
+    <h3>b) Date de plată</h3>
+    <p>Plățile sunt procesate de <strong>Stripe</strong>. Noi <strong>nu stocăm datele cardului tău</strong>. Reținem doar identificatori tehnici necesari administrării abonamentului (de exemplu identificatorul de client și de abonament de la Stripe) și eventual datele de facturare gestionate de Stripe.</p>
+    <h3>c) Date privind utilizarea serviciului</h3>
+    <p>Planul tău, numărul de scripturi rămase, data ultimei alocări, un jurnal al generărilor (momentul și modul de generare) și scripturile generate pentru tine.</p>
+    <h3>d) Conținutul introdus în generator</h3>
+    <p>Informațiile pe care le completezi în formular: despre tine (gen, vârstă aproximativă, stil de abordare, experiență), despre produs și despre persoana pe care intenționezi să o contactezi (vezi secțiunea 4).</p>
+    <h3>e) Mesaje de suport</h3>
+    <p>Dacă ne scrii prin formularul de ajutor, păstrăm mesajul, adresa ta de email și planul, pentru a-ți răspunde.</p>
+    <h3>f) Date tehnice</h3>
+    <p>Ca la majoritatea site-urilor, serverele și furnizorii noștri pot prelucra date tehnice precum adresa IP, tipul de browser și dispozitiv, necesare funcționării și securității (inclusiv la încărcarea fonturilor web).</p>
+  </section>
+
+  <section class="blk" id="s3">
+    <h2 class="sec"><span class="no">3.</span>Scopuri și temeiuri legale</h2>
+    <p>Prelucrăm datele tale pentru următoarele scopuri, pe următoarele temeiuri legale (art. 6 GDPR):</p>
+    <table class="proc">
+      <thead><tr><th>Scop</th><th>Temei legal</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Crearea și administrarea contului</strong>, autentificare</td><td>Executarea contractului (art. 6(1)(b))</td></tr>
+        <tr><td><strong>Furnizarea serviciului</strong> — generarea scripturilor pe baza datelor introduse</td><td>Executarea contractului (art. 6(1)(b))</td></tr>
+        <tr><td><strong>Procesarea plăților</strong> și emiterea documentelor</td><td>Executarea contractului + obligație legală (art. 6(1)(b) și (c))</td></tr>
+        <tr><td><strong>Suport</strong> și răspuns la solicitări</td><td>Executarea contractului / interes legitim (art. 6(1)(b)/(f))</td></tr>
+        <tr><td><strong>Securitate</strong>, prevenirea fraudei și abuzului</td><td>Interes legitim (art. 6(1)(f))</td></tr>
+        <tr><td><strong>Respectarea obligațiilor legale</strong> (contabile, fiscale)</td><td>Obligație legală (art. 6(1)(c))</td></tr>
+      </tbody>
+    </table>
+    <p>Nu îți folosim datele pentru marketing prin email fără consimțământul tău. Emailul tău îl folosim pentru cont, activarea planului și documentele de plată.</p>
+  </section>
+
+  <section class="blk" id="s4">
+    <h2 class="sec"><span class="no">4.</span>Datele persoanei invitate</h2>
+    <div class="callout">
+      Prin design, colectăm <strong>cât mai puține date</strong> despre persoana pe care vrei să o contactezi. <strong>Nu cerem și nu colectăm nume de familie, număr de telefon, adresă de email, adresă poștală sau alte date de contact ori de identificare directă</strong> ale acelei persoane.
+    </div>
+    <p>Câmpurile disponibile se rezumă la elemente generale de context (de exemplu un prenume opțional, o vârstă aproximativă, tipul relației, un context profesional sau familial general) — folosite <strong>exclusiv</strong> pentru a genera scriptul tău. Nu încercăm și nu suntem în măsură să identificăm acea persoană pe baza acestor informații.</p>
+    <p><strong>Responsabilitatea ta ca utilizator.</strong> Tu ești cel care introduce aceste informații, pe baza relației tale directe cu persoana respectivă. Te obligi:</p>
+    <ul>
+      <li>să nu introduci date care identifică direct persoana (nume complet, date de contact, adresă etc.);</li>
+      <li>să nu introduci în câmpurile libere <strong>date sensibile</strong> — de exemplu privind starea de sănătate, viața personală intimă, convingerile ori orientarea — care nu sunt necesare și nu ar trebui furnizate;</li>
+      <li>să folosești scripturile generate în mod legal și etic în comunicarea ta.</li>
+    </ul>
+    <p>Detalii suplimentare privind răspunderea ta se află în <a href="/termeni.html">Termeni și Condiții</a>.</p>
+  </section>
+
+  <section class="blk" id="s5">
+    <h2 class="sec"><span class="no">5.</span>Cui divulgăm datele (împuterniciți)</h2>
+    <p>Nu vindem datele tale. Le partajăm doar cu furnizori de servicii („persoane împuternicite") care ne ajută să operăm platforma, strict pentru scopurile de mai sus:</p>
+    <table class="proc">
+      <thead><tr><th>Furnizor</th><th>Rol</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Supabase</strong></td><td>Autentificare și găzduirea bazei de date</td></tr>
+        <tr><td><strong>Railway</strong></td><td>Găzduirea aplicației (server)</td></tr>
+        <tr><td><strong>Stripe</strong></td><td>Procesarea plăților și facturare</td></tr>
+        <tr><td><strong>MindStudio</strong></td><td>Generarea scripturilor prin inteligență artificială</td></tr>
+        <tr><td><strong>Anthropic</strong></td><td>Model de inteligență artificială folosit la generare</td></tr>
+        <tr><td><strong>Resend</strong></td><td>Trimiterea emailurilor de suport (dacă este activat)</td></tr>
+        <tr><td><strong>Google Fonts</strong></td><td>Afișarea fonturilor web (poate prelucra adresa IP)</td></tr>
+      </tbody>
+    </table>
+    <p>Pentru a genera un script, conținutul pe care îl introduci în formular este transmis furnizorului de inteligență artificială (MindStudio și/sau Anthropic) exclusiv pentru a produce răspunsul cerut. Putem, de asemenea, divulga date dacă legea ne obligă sau pentru a ne apăra drepturile.</p>
+  </section>
+
+  <section class="blk" id="s6">
+    <h2 class="sec"><span class="no">6.</span>Transferuri internaționale</h2>
+    <p>Operatorul și o parte dintre furnizorii noștri sunt stabiliți în <strong>Statele Unite ale Americii</strong> sau prelucrează date în afara Spațiului Economic European. Aceasta înseamnă că datele tale pot fi transferate și prelucrate în afara UE/SEE.</p>
+    <p>Pentru astfel de transferuri ne bazăm, după caz, pe mecanismele recunoscute de GDPR — de exemplu <strong>Clauzele Contractuale Standard</strong> ale Comisiei Europene și/sau cadrul <strong>EU–U.S. Data Privacy Framework</strong>, acolo unde furnizorul este certificat. Ne poți solicita informații suplimentare despre garanțiile aplicabile.</p>
+  </section>
+
+  <section class="blk" id="s7">
+    <h2 class="sec"><span class="no">7.</span>Cât timp păstrăm datele</h2>
+    <ul>
+      <li><strong>Date de cont</strong> — cât timp contul tău este activ. La ștergerea contului, le eliminăm sau anonimizăm într-un termen rezonabil.</li>
+      <li><strong>Conținutul generat și datele introduse</strong> — pe durata utilizării serviciului, pentru a-ți oferi istoricul și funcționalitatea; se șterg la ștergerea contului sau după o perioadă rezonabilă de inactivitate.</li>
+      <li><strong>Date de plată și documente contabile</strong> — pe perioada impusă de obligațiile legale și fiscale aplicabile.</li>
+      <li><strong>Mesaje de suport</strong> — cât este necesar pentru soluționare, plus o perioadă rezonabilă ulterioară.</li>
+    </ul>
+  </section>
+
+  <section class="blk" id="s8">
+    <h2 class="sec"><span class="no">8.</span>Cum protejăm datele</h2>
+    <p>Aplicăm măsuri tehnice și organizatorice rezonabile: conexiuni criptate (HTTPS), parole stocate criptat, controale de acces la baza de date (inclusiv reguli de securitate la nivel de rând) și limitarea accesului la persoanele împuternicite. Niciun sistem nu este 100% sigur, dar depunem eforturi constante pentru a-ți proteja datele.</p>
+  </section>
+
+  <section class="blk" id="s9">
+    <h2 class="sec"><span class="no">9.</span>Drepturile tale</h2>
+    <p>În calitate de persoană vizată, ai următoarele drepturi conform GDPR:</p>
+    <ul>
+      <li><strong>Acces</strong> — să afli ce date deținem despre tine;</li>
+      <li><strong>Rectificare</strong> — corectarea datelor inexacte;</li>
+      <li><strong>Ștergere</strong> („dreptul de a fi uitat");</li>
+      <li><strong>Restricționare</strong> a prelucrării;</li>
+      <li><strong>Portabilitate</strong> — primirea datelor într-un format structurat;</li>
+      <li><strong>Opoziție</strong> la prelucrările bazate pe interes legitim;</li>
+      <li><strong>Retragerea consimțământului</strong>, când prelucrarea se bazează pe consimțământ.</li>
+    </ul>
+    <p>Îți poți exercita drepturile scriindu-ne la <a href="mailto:contact@octavianalupoaie.biz">contact@octavianalupoaie.biz</a>. Răspundem în termenele prevăzute de lege. Îți poți șterge contul contactându-ne.</p>
+  </section>
+
+  <section class="blk" id="s10">
+    <h2 class="sec"><span class="no">10.</span>Cookies și stocare locală</h2>
+    <p>Nu folosim cookie-uri de publicitate sau de urmărire în scop de marketing. Folosim <strong>stocare locală în browserul tău</strong> (localStorage / sessionStorage) strict pentru funcționarea aplicației — de exemplu pentru a menține sesiunea după autentificare și pentru a-ți reține câmpurile completate, ca să nu le rescrii de fiecare dată.</p>
+    <p>Aceste date rămân în browserul tău și le poți șterge oricând din setările browserului. Detalii în <a href="/cookies.html">Politica de Cookies</a>.</p>
+  </section>
+
+  <section class="blk" id="s11">
+    <h2 class="sec"><span class="no">11.</span>Minori</h2>
+    <p>Serviciul este destinat exclusiv persoanelor de <strong>peste 18 ani</strong>. Nu colectăm cu bună știință date ale minorilor. Dacă afli că un minor ne-a furnizat date, contactează-ne pentru ștergere.</p>
+  </section>
+
+  <section class="blk" id="s12">
+    <h2 class="sec"><span class="no">12.</span>Inteligență artificială</h2>
+    <p>Scripturile sunt generate automat, cu ajutorul unor modele de inteligență artificială, pe baza informațiilor pe care le introduci. Acest proces produce un text orientativ și <strong>nu ia decizii cu efecte juridice</strong> asupra vreunei persoane. Nu folosim datele tale pentru a antrena modele proprii.</p>
+  </section>
+
+  <section class="blk" id="s13">
+    <h2 class="sec"><span class="no">13.</span>Modificări ale politicii</h2>
+    <p>Putem actualiza această politică. Vom afișa data ultimei actualizări în partea de sus, iar pentru schimbări importante vom depune eforturi rezonabile să te informăm. Continuarea utilizării serviciului după actualizare înseamnă că ai luat la cunoștință noua versiune.</p>
+  </section>
+
+  <section class="blk" id="s14">
+    <h2 class="sec"><span class="no">14.</span>Contact și reclamații</h2>
+    <p>Pentru orice întrebare legată de datele tale: <a href="mailto:contact@octavianalupoaie.biz">contact@octavianalupoaie.biz</a>.</p>
+    <p>Dacă ești în Uniunea Europeană și consideri că ți-au fost încălcate drepturile, ai dreptul să depui o plângere la autoritatea de supraveghere din țara ta. În România, aceasta este <strong>Autoritatea Națională de Supraveghere a Prelucrării Datelor cu Caracter Personal (ANSPDCP)</strong> – <a href="https://www.dataprotection.ro" target="_blank" rel="noopener">dataprotection.ro</a>.</p>
+  </section>
+
+  <footer>
+    <div>© 2026 VITANIC SALES LLC · Harvard of Sales</div>
+    <div style="margin-top:10px">
+      <a href="/termeni.html">Termeni și Condiții</a> ·
+      <a href="/confidentialitate.html">Confidențialitate</a> ·
+      <a href="/cookies.html">Cookies</a>
+    </div>
+  </footer>
+</div>
+
+</body>
+</html>
