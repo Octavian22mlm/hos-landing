@@ -59,6 +59,20 @@ app.get('/app-it', (req, res) => {
   res.setHeader('X-Robots-Tag', 'noindex, nofollow');
   res.sendFile(path.join(__dirname, 'index-it.html'));
 });
+// pagina de vanzare in engleza (EN)
+app.get('/en', (req, res) => res.sendFile(path.join(__dirname, 'preturi-en.html')));
+// aplicatia in engleza (EN)
+app.get('/app-en', (req, res) => {
+  res.setHeader('X-Robots-Tag', 'noindex, nofollow');
+  res.sendFile(path.join(__dirname, 'index-en.html'));
+});
+// pagina de vanzare in spaniola (ES)
+app.get('/es', (req, res) => res.sendFile(path.join(__dirname, 'preturi-es.html')));
+// aplicatia in spaniola (ES)
+app.get('/app-es', (req, res) => {
+  res.setHeader('X-Robots-Tag', 'noindex, nofollow');
+  res.sendFile(path.join(__dirname, 'index-es.html'));
+});
 
 // ---- SEO: robots.txt real (fisier text valid, nu pagina HTML) ----
 app.get('/robots.txt', (req, res) => {
@@ -259,6 +273,30 @@ const IT_DIRECTIVE = '\n\n═══════════ LINGUA OUTPUT — PR
   'Rileggi l\'output prima di consegnarlo: se trovi anche una sola parola in rumeno, correggila. ' +
   'Nell\'output finale non deve comparire NESSUNA parola in rumeno.';
 
+const EN_DIRECTIVE = '\n\n═══════════ OUTPUT LANGUAGE — ABSOLUTE PRIORITY ═══════════\n' +
+  'Write the ENTIRE output exclusively in natural, native ENGLISH. ' +
+  'Do NOT translate word-for-word: adapt idioms, tone and rhythm like a real English-speaking salesperson. ' +
+  'Keep the structure and methodology identical. For section labels use "PHASE" instead of "ETAPA" ' +
+  'and "[PAUSE ...]" instead of "[PAUZĂ ...]"; keep the emojis 📋 🎬 ✅. ' +
+  'Proper names and the product name stay unchanged. ' +
+  'Speaker labels must always be "AGENT" and "CLIENT". ' +
+  'Also translate every stage direction in parentheses: no Romanian words (e.g. "zâmbet" → "smile", "voce" → "voice", "pauză" → "pause"). ' +
+  'Re-read the output before delivering: if you find a single Romanian word, fix it. ' +
+  'No Romanian word may appear in the final output.';
+
+const ES_DIRECTIVE = '\n\n═══════════ IDIOMA DE SALIDA — PRIORIDAD ABSOLUTA ═══════════\n' +
+  'Escribe TODO el resultado exclusivamente en ESPAÑOL neutro, fluido y natural (válido para España y Latinoamérica; evita regionalismos marcados). ' +
+  'NO traduzcas palabra por palabra: adapta modismos, tono y ritmo como un verdadero vendedor hispanohablante. ' +
+  'Mantén idéntica la estructura y la metodología. Para las etiquetas de sección usa "FASE" en lugar de "ETAPA" ' +
+  'y "[PAUSA ...]" en lugar de "[PAUZĂ ...]"; conserva los emojis 📋 🎬 ✅. ' +
+  'Los nombres propios y el nombre del producto quedan sin cambios. ' +
+  'Las etiquetas de los interlocutores deben ser siempre "AGENTE" y "CLIENTE". ' +
+  'Traduce también todas las acotaciones entre paréntesis: ninguna palabra en rumano (p. ej. "zâmbet" → "sonrisa", "voce" → "voz", "pauză" → "pausa"). ' +
+  'Relee el resultado antes de entregarlo: si encuentras una sola palabra en rumano, corrígela. ' +
+  'En el resultado final no debe aparecer NINGUNA palabra en rumano.';
+
+const OUT_DIRECTIVES = { it: IT_DIRECTIVE, en: EN_DIRECTIVE, es: ES_DIRECTIVE };
+
 async function runObjectionDirect(jobId, objNum, allVariables, lang) {
   const fs = require('fs');
   try {
@@ -308,7 +346,7 @@ async function runObjectionDirect(jobId, objNum, allVariables, lang) {
     const waTech = waPool[Math.floor(Math.random() * waPool.length)];
     prompt += '\n\n>>> ROTATIE WHATSAPP: foloseste ' + waTech + ' (se aplica DOAR daca obiectia e de tip "trimite pe WhatsApp / mail" si conditia CADRU FIX e indeplinita; pentru orice alta obiectie, ignora complet aceasta linie).';
 
-    if (lang === 'it') prompt += IT_DIRECTIVE;
+    if (OUT_DIRECTIVES[lang]) prompt += OUT_DIRECTIVES[lang];
 
     const r = await fetch('https://api.anthropic.com/v1/messages', {
       method: 'POST',
@@ -399,7 +437,7 @@ async function runInvitationDirect(jobId, jobMode, userId, allVariables, lang) {
       prompt += '\n\n═══════════ SCRIPTURI GENERATE ANTERIOR (doar pentru variatie — NU repeta openingurile/structurile) ═══════════\n' + priorScripts;
     }
 
-    if (lang === 'it') prompt += IT_DIRECTIVE;
+    if (OUT_DIRECTIVES[lang]) prompt += OUT_DIRECTIVES[lang];
 
     const r = await fetch('https://api.anthropic.com/v1/messages', {
       method: 'POST',
@@ -744,7 +782,7 @@ app.post('/api/create-checkout-session', auth, async (req, res) => {
   const { plan, lang } = req.body;
   const p = STRIPE_PLANS[plan];
   if (!p) return res.status(400).json({ error: 'Plan invalid' });
-  const appPath = (lang === 'it') ? '/app-it' : '/app'; // utilizatorii IT revin in aplicatia italiana
+  const appPath = { it: '/app-it', en: '/app-en', es: '/app-es' }[lang] || '/app'; // userii revin in aplicatia limbii lor
 
   try {
     const base = `https://${req.get('host')}`;
@@ -1166,7 +1204,7 @@ app.get('/api/module/:name', auth, async (req, res) => {
     return res.status(403).json({ error: 'locked', min_tier: min });
   }
   const lang = req.query.lang;
-  const source = (lang === 'it' && PREMIUM.it && PREMIUM.it[name]) ? PREMIUM.it[name] : PREMIUM[name];
+  const source = (lang && PREMIUM[lang] && PREMIUM[lang][name]) ? PREMIUM[lang][name] : PREMIUM[name];
   return res.json({ name, content: source });
 });
 
