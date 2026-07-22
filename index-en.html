@@ -139,6 +139,26 @@ label{display:block;font-size:13.5px;font-weight:600;letter-spacing:.08em;text-t
 /* Protectie continut: fara selectare pe scripturi + module premium */
 .script-box, #conectare-content, #prezentare-content, #inchidere-content, #sub-fulger{-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;-webkit-touch-callout:none}
 .script-box .script-wm{display:block;margin-top:26px;padding-top:14px;border-top:1px dashed rgba(122,95,16,.35);font-size:12px;color:#9a7d1e;line-height:1.5;text-align:center;font-weight:600}
+/* 1-on-1 offer + consulting form */
+.offer{margin-top:44px;background:linear-gradient(160deg,rgba(216,169,74,.17),rgba(216,169,74,.03));border:1px solid var(--gold);border-radius:18px;padding:38px 30px;text-align:center;box-shadow:0 22px 54px rgba(0,0,0,.45)}
+.offer-eyebrow{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:16px}
+.offer-h{font-family:"Playfair Display",serif;font-size:26px;color:var(--goldl);line-height:1.25;font-weight:700;margin-bottom:9px}
+.offer-h span{color:#fff;font-style:italic}
+.offer-by{font-size:14.5px;color:var(--muted);margin-bottom:26px}.offer-by b{color:var(--ink)}
+.offer-gets{text-align:left;max-width:470px;margin:0 auto 20px;display:grid;gap:12px}
+.offer-get{display:flex;gap:12px;font-size:14.5px;color:#e9dcc0;line-height:1.5}
+.offer-get .ck{color:var(--gold);flex-shrink:0;font-weight:800}
+.offer-wa{max-width:470px;margin:0 auto 26px;background:rgba(37,211,102,.08);border:1px solid rgba(37,211,102,.3);border-radius:11px;padding:13px 16px;font-size:13.5px;color:#dff3e6;line-height:1.55;text-align:left;display:flex;gap:10px}
+.offer-wa .wic{flex-shrink:0}.offer-wa b{color:#7ee7a8}
+.offer-price{font-family:"Playfair Display",serif;font-size:40px;font-weight:900;color:var(--goldl);line-height:1}
+.offer-price small{font-size:15px;color:var(--muted);font-weight:400;font-family:-apple-system,Arial,sans-serif;font-style:italic}
+.offer-btn{margin-top:8px;background:var(--gold);color:#1a1206;font-weight:700;font-size:16px;padding:16px 44px;border-radius:11px;border:none;cursor:pointer;letter-spacing:.02em;box-shadow:0 8px 24px rgba(216,169,74,.28)}
+.offer-scarce{margin-top:15px;font-size:12.5px;color:var(--muted2)}
+.cload{text-align:center;color:var(--muted);padding:34px 10px}
+.cerr{color:var(--red);text-align:center;padding:20px}
+.cf-l{display:block;font-size:13px;color:var(--muted);margin:14px 0 6px;font-weight:600}
+.cf-in{width:100%;background:var(--panel2,#161f33);border:1px solid var(--line);border-radius:9px;padding:11px 13px;color:var(--ink);font-family:inherit;font-size:14.5px}
+.cf-in:focus{outline:none;border-color:var(--gold)}
 .prog-sub{text-align:center;color:var(--goldl);font-size:14px;letter-spacing:.04em;margin:-14px 0 22px}
 .prog-warn{text-align:center;color:var(--muted);font-size:13.5px;margin-top:14px;line-height:1.4}
 .prog-warn b{color:var(--goldl);font-weight:600}
@@ -610,6 +630,7 @@ label{display:block;font-size:13.5px;font-weight:600;letter-spacing:.08em;text-t
 
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://js.stripe.com/v3/"></script>
 <style>.flag{display:inline-block;width:19px;height:13px;border-radius:2px;box-shadow:0 0 0 1px rgba(0,0,0,.25) inset;vertical-align:middle;flex:0 0 auto;overflow:hidden}</style>
 </head>
 <body>
@@ -1367,6 +1388,11 @@ label{display:block;font-size:13.5px;font-weight:600;letter-spacing:.08em;text-t
 // STATE
 // ============================================
 let TOKEN = sessionStorage.getItem('hos_token') || null;
+var STRIPE_PK_APP='pk_live_51RNRrB2K2gEr8ziYZqT21LqCqZdOqHwUrVjm0RVapomxD97AeLpIn3BYMLTKU1bXP6CFQX3cR85SKSpukPKKwPa500373ntLK6';
+var stripeApp = (typeof window!=='undefined' && window.Stripe) ? window.Stripe(STRIPE_PK_APP) : null;
+var consultEmbedded = null;
+var APP_LANG = 'en';
+var WA_NUMBER = '40733614511';
 let USER_PROFILE = null;
 let SELECTED_MODE = 'clean';
 let _formLoaded = false;
@@ -1421,6 +1447,7 @@ async function init() {
       history.replaceState({}, '', location.pathname);
     }
     USER_PROFILE = profile;
+    if (new URLSearchParams(location.search).get('consult') === '1') { history.replaceState({}, '', location.pathname); setTimeout(function(){ if(typeof openModal==='function') openModal('m-consult-form'); }, 500); }
     if (!profile.tier || profile.tier === 'none') {
       showView('redeem');
     } else {
@@ -1680,7 +1707,7 @@ async function renderConectare(){
   host.innerHTML='<div class="cn-load">Loading the module…</div>';
   try{
     var data=await api('/api/module/conectare?lang=en');
-    host.innerHTML=data.content;
+    host.innerHTML=data.content + offerCardHtml('conectare');
     _conectareLoaded=true;
   }catch(e){
     if(/locked/i.test(e.message||'')){ host.innerHTML=_cnLockHtml(); }
@@ -1705,7 +1732,7 @@ async function renderPrezentare(){
   host.innerHTML='<div class="cn-load">Loading the module…</div>';
   try{
     var data=await api('/api/module/prezentare?lang=en');
-    host.innerHTML=data.content;
+    host.innerHTML=data.content + offerCardHtml('prezentare');
     _prezentareLoaded=true;
   }catch(e){
     if(/locked/i.test(e.message||'')){ host.innerHTML=_pzLockHtml(); }
@@ -1730,7 +1757,7 @@ async function renderInchidere(){
   host.innerHTML='<div class="cn-load">Loading the module…</div>';
   try{
     var data=await api('/api/module/inchidere?lang=en');
-    host.innerHTML=data.content;
+    host.innerHTML=data.content + offerCardHtml('inchidere');
     _inchidereLoaded=true;
   }catch(e){
     if(/locked/i.test(e.message||'')){ host.innerHTML=_inLockHtml(); }
@@ -2026,6 +2053,58 @@ const NEXT_TIER = {
   builder: { name: 'Leader',  perk: '15 scripts/month + all modes' },
   leader:  null
 };
+// ===== 1-on-1 OFFER (2,000€ consulting) =====
+function offerCardHtml(kind){
+  var H={conectare:'Want a personalized CONNECTION for YOUR product?',prezentare:'Want a personalized PRESENTATION for YOUR product?',inchidere:'Want a personalized CLOSING for YOUR product?',psihologie:'Want a custom script for YOUR product?'};
+  var h=(H[kind]||'Want a custom script for YOUR product?').replace('YOUR','<span>YOUR</span>');
+  return '<div class="offer">'
+    +'<div class="offer-eyebrow">Work directly with the founder</div>'
+    +'<div class="offer-h">'+h+'</div>'
+    +'<div class="offer-by">Built 1-on-1 with <b>Octavian Alupoaie</b> — the mind behind the method.</div>'
+    +'<div class="offer-gets">'
+    +'<div class="offer-get"><span class="ck">✓</span><span>Product analysis session — what you sell, to whom, where it stalls.</span></div>'
+    +'<div class="offer-get"><span class="ck">✓</span><span>A custom script, built on your product and audience.</span></div>'
+    +'<div class="offer-get"><span class="ck">✓</span><span>Live handover + walkthrough — you execute it right, not just own it.</span></div>'
+    +'</div>'
+    +'<div class="offer-wa"><span class="wic">📱</span><span>After payment you fill a short form that goes <b>straight to Octavian Alupoaie'+AP+'s personal WhatsApp</b> — he contacts you himself.</span></div>'
+    +'<div class="offer-price">€2,000 <small>one-time</small></div>'
+    +'<button class="offer-btn" onclick="openConsultCheckout()">Book your spot →</button>'
+    +'<div class="offer-scarce">Only 2 spots per month — Octavian'+AP+'s time is limited.</div>'
+    +'</div>';
+}
+async function openConsultCheckout(){
+  if(typeof openModal==='function') openModal('m-consult');
+  var box=document.getElementById('consult-box'); if(!box) return;
+  box.innerHTML='<div class="cload">Loading secure payment…</div>';
+  try{
+    var r=await fetch('/api/create-checkout-session',{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+TOKEN},body:JSON.stringify({plan:'consult',lang:APP_LANG})});
+    var d=await r.json();
+    if(!r.ok||!d.clientSecret) throw new Error(d.error||'Server error');
+    if(!stripeApp) throw new Error('Stripe.js did not load');
+    box.innerHTML='<div id="consult-checkout"></div>';
+    if(consultEmbedded){try{consultEmbedded.destroy();}catch(e){}}
+    consultEmbedded=await stripeApp.initEmbeddedCheckout({clientSecret:d.clientSecret});
+    consultEmbedded.mount('#consult-checkout');
+  }catch(e){ box.innerHTML='<div class="cerr">Could not start payment: '+(e.message||e)+'</div>'; }
+}
+function closeConsult(){ if(consultEmbedded){try{consultEmbedded.destroy();}catch(e){}consultEmbedded=null;} if(typeof closeModal==='function') closeModal('m-consult'); }
+function submitConsultForm(){
+  var produs=(document.getElementById('cf-produs').value||'').trim();
+  var disponibil=(document.getElementById('cf-disp').value||'').trim();
+  var telefon=(document.getElementById('cf-tel').value||'').trim();
+  var mesaj=(document.getElementById('cf-msg').value||'').trim();
+  if(!produs){ toast('Tell us what product you sell.'); return; }
+  var em=(USER_PROFILE && USER_PROFILE.email)?USER_PROFILE.email:'';
+  var msg='Hi Octavian! I paid for the 1-on-1 consulting. \ud83d\ude4c\n\n'
+    +'Account email: '+em+'\n'
+    +'Phone: '+(telefon||'-')+'\n\n'
+    +'The product I sell: '+produs+'\n\n'
+    +'Availability for the 2 sessions: '+(disponibil||'-')+'\n\n'
+    +'Other: '+(mesaj||'-');
+  window.open('https://wa.me/'+WA_NUMBER+'?text='+encodeURIComponent(msg),'_blank');
+  if(typeof closeModal==='function') closeModal('m-consult-form');
+  toast('WhatsApp is opening — tap Send so it reaches Octavian. ✓',6000);
+}
 function goUpgrade() {
   if (UPGRADE_URL) { window.open(UPGRADE_URL, '_blank'); }
   else { toast('To upgrade, write to us at contact@octavianalupoaie.biz', 5000); }
@@ -3041,6 +3120,35 @@ init();
 </div>
 
 <!-- ===== MODAL: CONT / ABONAMENT ===== -->
+<div class="modal-overlay" id="m-consult" onclick="if(event.target===this) closeConsult()">
+  <div class="modal-box" style="max-width:560px">
+    <div class="modal-head">
+      <div class="modal-title">1-on-1 Consulting with Octavian</div>
+      <div class="modal-subtitle">Secure payment via Stripe · €2,000</div>
+    </div>
+    <div class="modal-body"><div id="consult-box"></div></div>
+    <div class="modal-foot"><button class="btn modal-gate" onclick="closeConsult()">Close</button></div>
+  </div>
+</div>
+<div class="modal-overlay" id="m-consult-form" onclick="if(event.target===this) closeModal('m-consult-form')">
+  <div class="modal-box" style="max-width:520px">
+    <div class="modal-head">
+      <div class="modal-title">Payment confirmed ✓ Last step</div>
+      <div class="modal-subtitle">Takes 30 seconds — the message goes straight to Octavian’s WhatsApp.</div>
+    </div>
+    <div class="modal-body">
+      <label class="cf-l">What product do you sell? *</label>
+      <textarea id="cf-produs" class="cf-in" rows="2" placeholder="e.g. energy supplements, perfumes, cosmetics…"></textarea>
+      <label class="cf-l">When are you available for the 2 sessions?</label>
+      <input id="cf-disp" class="cf-in" placeholder="e.g. evenings after 6pm, weekends…">
+      <label class="cf-l">Phone (optional)</label>
+      <input id="cf-tel" class="cf-in" placeholder="+40…">
+      <label class="cf-l">Anything else we should know? (optional)</label>
+      <textarea id="cf-msg" class="cf-in" rows="2"></textarea>
+    </div>
+    <div class="modal-foot"><button class="btn modal-gate" onclick="submitConsultForm()">Send on WhatsApp →</button></div>
+  </div>
+</div>
 <div class="modal-overlay" id="m-account" onclick="if(event.target===this) closeModal('m-account')">
   <div class="modal-box" style="max-width:520px">
     <div class="modal-head">
