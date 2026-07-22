@@ -2741,10 +2741,558 @@ const inchidere_fr = `
   <div class="cn-foot">Harvard of Sales · Module Clôture</div>
 `;
 
+// ============================================
+// DEUTSCHE VERSIONEN (ausgeliefert für DE-Nutzer über ?lang=de)
+// ============================================
+
+const conectare_de = `
+  <div class="cn-title-block">
+    <h1 class="cn-h1">Die Verbindung</h1>
+    <div class="cn-subtitle">vor der Eins-zu-eins-Präsentation</div>
+  </div>
+  <p class="cn-lead">Vor jeder Präsentation braucht es die <b>Verbindung</b>.</p>
+  <p class="cn-lead">Die Verbindung erstellt Ihnen die „Landkarte" des Kunden: <b>was ihm wehtut</b> und <b>was ihn freut</b>. Ohne Landkarte präsentieren Sie ins Leere.</p>
+
+  <div class="cn-sec">Leistungsregeln vor der Verbindung</div>
+
+  <div class="cn-rule">
+    <div class="cn-rule-num">1</div>
+    <div class="cn-rule-txt">
+      <div class="cn-rt">Versetzen Sie sich in einen optimalen Leistungszustand</div>
+      <div class="cn-rd">
+        <p>Ein Gehirn in einem positiven Zustand arbeitet bis zu <b>31 % besser</b> als ein neutrales oder gestresstes <em>(Shawn Achor, The Happiness Advantage)</em>.</p>
+        <p>Bevor Sie in die Verbindung eintreten, machen Sie <b>60 Sekunden</b> energische Bewegung — lachen, tanzen, springen.</p>
+        <p>Das ist keine Marotte: Ihr Zustand überträgt sich in den ersten Sekunden auf den Kunden, noch vor jedem Wort. Sie treten aus der Fülle heraus auf, nicht aus dem Bedürfnis zu überzeugen.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="cn-rule">
+    <div class="cn-rule-num">2</div>
+    <div class="cn-rule-txt">
+      <div class="cn-rt">Bei der Gruppenpräsentation — verbinden Sie sich 10–15 Minuten vorher</div>
+      <div class="cn-rd">
+        <p>Werfen Sie ihn nicht direkt in das Gruppentreffen — Sie riskieren, ihn zu „verbrühen" 😊.</p>
+        <p>Der Mensch braucht eine warme Brücke, eins zu eins, bevor er unter Fremde tritt.</p>
+        <p class="cn-note"><em>(Diese Regel bereitet die Gruppenvariante des Skripts vor — ein eigenes Modul.)</em></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="cn-rule">
+    <div class="cn-rule-num">3</div>
+    <div class="cn-rule-txt">
+      <div class="cn-rt">Erstellen Sie die Landkarte des Kunden</div>
+      <div class="cn-rd">
+        <p>Bevor Sie präsentieren, brauchen Sie eine „Landkarte" des Menschen vor Ihnen.</p>
+        <p>Auf der Landkarte stehen zwei Dinge: <b>was ihm wehtut</b> und <b>was ihn freut</b>.</p>
+        <p>Darauf bauen Sie die gesamte Präsentation auf. Ohne sie präsentieren Sie im Dunkeln.</p>
+        <p>Von Angesicht zu Angesicht behalten Sie sie im Kopf. Online — <b>schreiben Sie sie auf ein Blatt</b>.</p>
+        <p class="cn-note">Doch die Landkarte erscheint nicht aus dem Nichts: Sie zeichnen sie, indem Sie <b>Fragen stellen</b>. Wie? 👉 Punkt 4.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="cn-rule">
+    <div class="cn-rule-num">4</div>
+    <div class="cn-rule-txt">
+      <div class="cn-rt">Die Fragen, die Ihnen die Landkarte bauen</div>
+      <div class="cn-rd">
+        <p>Die Landkarte aus Punkt 3 zeichnen Sie durch <b>Fragen</b>.</p>
+        <p>Das Wichtigste, das Sie herausfinden müssen, ist <span class="cn-big">was ihm wehtut</span> — jetzt, in seinem Leben.</p>
+        <p>Der Schmerz ist der Motivator Nummer eins: In ~75 % der Fälle handeln wir, um einem Schmerz zu <em>entkommen</em> — und nur in ~25 %, um ein Vergnügen zu <em>gewinnen</em>.</p>
+        <p>Menschen suchen zuerst Lösungen für Probleme, dann Vergnügen.</p>
+        <p>Fragen Sie also zuerst, was ihn bedrückt. Was ihn freuen würde, kommt an zweiter Stelle.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="cn-rule">
+    <div class="cn-rule-num">5</div>
+    <div class="cn-rule-txt">
+      <div class="cn-rt">Die Eins-zu-eins-Präsentation ist NICHT für alle gleich</div>
+      <div class="cn-rd">
+        <p>Sie präsentieren das Produkt / das Geschäft als eine <b>mögliche Lösung</b> für SEINEN Schmerz, in seinen eigenen Worten.</p>
+        <p>Dasselbe Produkt, ein anderes Eingangstor für jeden Menschen.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="cn-golden">
+    <div class="cn-gt">Goldene Regeln des Skripts</div>
+
+    <div class="cn-gitem">
+      <div class="cn-ghead">1 · Die Tonalität macht den Unterschied</div>
+      <div class="cn-gbody">Es zählt nicht nur, WAS Sie sagen, sondern <b>wie</b> Sie es sagen. Ein Lächeln in der Stimme, echte Pausen (nicht gehetzt), ein ruhiger Ton bei der schweren Frage, ein spielerischer Ton beim Scherz. Dieselben Worte mechanisch gesagt lassen das Radar anspringen; warm gesagt entwaffnen sie. Der Kunde hört am Ton, ob es Ihnen wirklich wichtig ist oder ob Sie nur eine Rolle spielen.</div>
+    </div>
+
+    <div class="cn-gitem">
+      <div class="cn-ghead">2 · Tun Sie nicht so, als wären Sie wie er</div>
+      <div class="cn-gbody">Sie können nicht in der Haut eines anderen stecken. Sagen Sie nur, was <b>Ihnen</b> widerfahren ist. Er merkt selbst, ob es ihm ähnelt.
+        <div class="cn-ban">
+          <div class="cn-ban-label">Klassische MLM-Sätze — sagen Sie sie niemals</div>
+          <ul>
+            <li>„ich war in genau derselben Situation"</li>
+            <li>„ich weiß genau, wie das ist"</li>
+            <li>„das müssen Sie sich unbedingt ansehen"</li>
+            <li>„ich habe an Sie gedacht, als ich das Projekt sah"</li>
+            <li>„das werden Sie absolut lieben"</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="cn-gitem">
+      <div class="cn-ghead">3 · Die Stille</div>
+      <div class="cn-gbody">Nachdem Sie etwas gefragt haben, schweigen Sie. Auch wenn Stille herrscht und sie Ihnen lang vorkommt. Warten Sie — <b>er spricht zuerst</b>. Wer zuerst spricht, nur um die Stille nicht auszuhalten, verliert.</div>
+    </div>
+
+    <div class="cn-gitem">
+      <div class="cn-ghead">4 · Folgen Sie dem Skript Schritt für Schritt</div>
+      <div class="cn-gbody">Sagen Sie die Worte genau so, wie sie geschrieben stehen. <b>Ändern Sie sie nicht.</b> Und <b>ändern Sie nicht die Reihenfolge der Fragen.</b> Jedes Wort und jede Frage steht aus einem Grund in einer bestimmten Reihenfolge — verschieben Sie sie, ist die ganze Wirkung dahin.</div>
+    </div>
+
+  </div>
+
+  <div class="cn-sec">Das Verbindungsskript (eins zu eins)</div>
+
+  <div class="cn-precond"><b>⚠️ Dieses Skript beginnt ERST, nachdem Sie die Probleme des Kunden bereits erkannt haben.</b><br>Zuerst verbinden Sie sich und finden heraus, was ihm wehtut (die Regeln oben). Erst wenn Sie seinen Schmerz kennen, treten Sie in den Dialog unten ein.</div>
+
+  <div class="cn-legend">
+    <span><span class="cn-lgchip">Aa</span> was Sie sagen</span>
+    <span><span class="cn-cue">(kursiv)</span> = Ton / was Sie tun</span>
+    <span><span class="cn-pause">⏸ Pause</span> = schweigen</span>
+    <span><span class="cn-fill">[…]</span> = Sie füllen aus · A / B = Sie wählen</span>
+  </div>
+
+  <div class="cn-box">
+
+    <p class="cn-line"><span class="cn-role">Agent:</span> Ich habe Sie sagen hören, dass… <span class="cn-fill">[beschreiben Sie das Problem, das Sie als sein größtes empfinden]</span></p>
+    <p class="cn-line cn-client cn-gap"><span class="cn-role">Kunde:</span> Ja…</p>
+
+    <p class="cn-line"><span class="cn-role">Agent:</span> Ist es ein Problem, das Sie <strong>quält</strong> und für das Sie wirklich eine Lösung finden wollen — oder können Sie damit leben? <span class="cn-pause">⏸ schweigen — lassen Sie ihn antworten</span></p>
+    <p class="cn-line cn-client cn-gap"><span class="cn-role">Kunde:</span> Es quält mich und ich will eine Lösung finden…</p>
+
+    <p class="cn-line"><span class="cn-role">Agent:</span> <span class="cn-fill">[Name]</span>… aus Neugier frage ich Sie: Wenn es eine mögliche Lösung für <span class="cn-fill">[beschreiben Sie das Problem]</span> gäbe… wären Sie offen, sie sich anzusehen — oder würden Sie sie völlig ablehnen… weil sie von mir kommt? 😊</p>
+    <p class="cn-line cn-client cn-gap"><span class="cn-role">Kunde:</span> Kommt darauf an, worum es geht…</p>
+
+    <p class="cn-line"><span class="cn-role">Agent:</span> <span class="cn-fill">[Name]</span>… wir wissen beide, dass Menschen zurückhaltend und misstrauisch sind, wenn ein Freund ihnen etwas präsentiert. Und das müssen wir zugeben. <span class="cn-pause">⏸ schweigen Sie 2 Sekunden</span></p>
+    <p class="cn-line cn-client cn-gap"><span class="cn-role">Kunde:</span> So ist es…</p>
+
+    <p class="cn-line"><span class="cn-role">Agent:</span> Heute sage ich Ihnen nicht das klassische „das müssen Sie sich unbedingt ansehen! Es ist das Weltwunder, so etwas haben Sie noch nie gesehen…" <span class="cn-cue">(leicht lachend)</span> <span class="cn-pause">⏸ kurze Pause</span> Das wäre mir zu klassisch… und ich riskiere unsere Freundschaft nicht… für ein Produkt.</p>
+    <p class="cn-line cn-client cn-gap"><span class="cn-role">Kunde:</span> <span class="cn-cue">(lacht)</span></p>
+
+    <p class="cn-line"><span class="cn-role">Agent:</span> Ich spreche offen, wie ein echter Präsentator <span class="cn-cue">(mit einem Lächeln 😊)</span>… Sie analysieren skeptisch, stellen Fragen, wir haben Spaß… und am Ende bleibt das Wichtigste doch <strong>unsere Freundschaft</strong>. Ist das in Ordnung so?</p>
+    <p class="cn-line cn-client cn-gap"><span class="cn-role">Kunde:</span> JA…</p>
+
+    <p class="cn-line"><span class="cn-role">Agent:</span> Das Produkt / das Geschäft <span class="cn-cue">(wählen Sie eines, nachdem Sie präsentiert haben)</span>, das Sie gleich sehen, ist etwas, das ich <strong>getestet und überprüft</strong> habe in <span class="cn-fill">[beschreiben Sie Ihre Bedingungen — vermitteln Sie Vertrauen und Glaubwürdigkeit]</span>.</p>
+
+    <p class="cn-line">Und der Hauptgrund, der mich dazu bewegt, vor Ihnen darüber zu sprechen, ist das <strong>Vertrauen, das ich</strong> darin habe.</p>
+
+    <p class="cn-line"><span class="cn-role">Agent:</span> So wie es mir bei <span class="cn-fill">[X — Ihre Situation]</span> geholfen hat… <span class="cn-pause">⏸ kurze Pause</span> ist es möglich… dass es auch für Sie eine Lösung ist bei <span class="cn-fill">[Y — die Situation / der Wunsch, den er Ihnen gerade genannt hat]</span>.</p>
+
+    <p class="cn-line" style="text-align:center"><span class="cn-pause">⏸ kurze Pause</span></p>
+
+    <p class="cn-line"><span class="cn-role">Agent:</span> Wie jedes Produkt hat es einen Preis. <span class="cn-cue">(jetzt ohne Zahl — die Summe kommt in der Präsentation)</span> Wenn Sie einen Wert darin sehen, bleiben wir Freunde. Wenn Sie keinen Wert darin sehen, bleiben wir genauso Freunde. 😊</p>
+
+    <span class="cn-zone">✅ Hier endet die Verbindung. Von hier beginnt die Eins-zu-eins-Präsentation.</span>
+
+  </div>
+
+  <div class="cn-foot">Harvard of Sales · Modul Verbindung (eins zu eins)</div>
+`;
+
+const fulger_de = [
+  {
+    dialog: [
+      { vorbitor: "agent",  text: "Ich grüße Sie, George… Ich hatte richtig Angst, Sie anzurufen." },
+      { regie: "dramatische Pause" },
+      { vorbitor: "client", text: "Warum… was ist passiert?" },
+      { vorbitor: "agent",  text: "Ich wollte Sie auf einen Kaffee einladen und hatte Angst, dass Sie mir absagen." },
+      { regie: "mit einem Lächeln in der Stimme" },
+      { vorbitor: "client", text: "Wie könnte ich Ihnen absagen… Wo treffen wir uns?" },
+      { vorbitor: "agent",  text: "Dienstag um ___ oder Mittwoch um ___ — welche Variante passt Ihnen besser? Kommen Sie, ich vermisse unsere Gespräche…" },
+      { regie: "Sie geben ihm zwei konkrete Tag/Uhrzeit-Optionen" }
+    ],
+    obiectie: {
+      titlu: "Wenn er Sie fragt „worüber möchten Sie sprechen?”",
+      dialog: [
+        { vorbitor: "client", text: "Worüber möchten Sie sprechen?" },
+        { vorbitor: "agent",  text: "Wenn ich Ihnen sagen würde, dass es eine Überraschung ist, würden Sie mit Fragen nachbohren oder mir diese Freude lassen?" },
+        { vorbitor: "client", text: "Nein… ich will Ihnen die Überraschung nicht verderben. Perfekt, wir sehen uns Dienstag um ___." }
+      ]
+    },
+    psihologie: [
+      "Die eingestandene Verletzlichkeit holt ihn aus der Rolle der Zielscheibe und versetzt ihn in die Rolle des Beschützers — er hat nichts mehr, wogegen er sich wehren müsste.",
+      "Die dramatische Pause verlagert die Kontrolle durch das Schweigen: Er fragt „was ist passiert?”, also führt er zum Treffen hin, nicht Sie.",
+      "Die „Überraschung” schließt die Schleife, ohne je das Wort MLM auszusprechen — die Neugier tritt an die Stelle des Arguments."
+    ]
+  },
+  {
+    dialog: [
+      { vorbitor: "agent",  text: "Ich grüße Sie, George… Seit 3 Stunden überlege ich, Sie auf einen Kaffee einzuladen, und ich hatte richtig Angst, dass Sie mir absagen." },
+      { regie: "dramatische Pause" },
+      { vorbitor: "client", text: "Wie könnte ich Ihnen absagen…?" },
+      { vorbitor: "agent",  text: "Dienstag um ___ oder Mittwoch um ___ — welche Variante passt Ihnen besser? Kommen Sie, ich vermisse unsere Gespräche…" },
+      { regie: "Sie geben ihm zwei konkrete Tag/Uhrzeit-Optionen" }
+    ],
+    obiectie: {
+      titlu: "Wenn er Sie fragt „worüber möchten Sie sprechen?”",
+      dialog: [
+        { vorbitor: "client", text: "Worüber möchten Sie sprechen?" },
+        { vorbitor: "agent",  text: "Wenn ich Ihnen sagen würde, dass es eine Überraschung ist, würden Sie mit Fragen nachbohren oder mir diese Freude lassen?" },
+        { vorbitor: "client", text: "Nein… ich will Ihnen die Überraschung nicht verderben. Perfekt, wir sehen uns Dienstag um ___." }
+      ]
+    },
+    psihologie: [
+      "„Seit 3 Stunden überlege ich, Sie anzurufen” = ein Signal emotionaler Investition: Sie sagen ihm, ohne es zu verlangen, dass der Anruf zählt, dass er nicht zufällig ist. Das steigert den Wert der Einladung.",
+      "Sie streichen den Zwischenschritt aus Variante 1 — dieselbe entwaffnende Wirkung, aber schneller, mit weniger Raum für Widerstand.",
+      "Der Abschluss „Dienstag oder Mittwoch?” verschiebt die Entscheidung von OB zu WANN. Er wählt nicht mehr zwischen „ja” und „nein”, sondern zwischen zwei Tagen."
+    ]
+  },
+  {
+    dialog: [
+      { vorbitor: "agent",  text: "Ich grüße Sie, [Name]… Ich glaube, das Letzte, was Sie heute hören wollten, ist eine Einladung auf einen Kaffee…" },
+      { regie: "mit einem Lächeln in der Stimme" },
+      { vorbitor: "client", text: "Genau das habe ich gebraucht… Wann sehen wir uns?" },
+      { vorbitor: "agent",  text: "Dienstag um ___ oder Mittwoch um ___ — kommen Sie, ich vermisse unsere Gespräche…" },
+      { vorbitor: "client", text: "Perfekt, wir sehen uns um ___." },
+      { vorbitor: "agent",  text: "Wie schnell wir waren… ich mag uns. Wir sehen uns [Tag]." },
+      { regie: "Sie beenden das Gespräch hier — damit er keine Gelegenheit bekommt zu fragen, worum es geht" }
+    ],
+    obiectie: null,
+    psihologie: [
+      "Sie benennen selbst seinen Widerstand, bevor er ihn spürt („das Letzte, was Sie heute hören wollten”) — Sie entschärfen den Einwand, bevor er entsteht.",
+      "Die leichte Selbstironie senkt den Einsatz: Wenn Sie die Dinge nicht ernst nehmen, spürt auch er keinen Druck, also hat er nichts abzulehnen.",
+      "„Wie schnell wir waren… ich mag uns” verankert positiv auf dem „wir” und gibt Ihnen die natürliche Ausrede, aufzulegen, bevor das „worum geht es?” kommt. Die Regieanweisung „ich muss auflegen” ist Disziplin, nicht Eile."
+    ]
+  },
+  {
+    dialog: [
+      { vorbitor: "agent",  text: "Ich habe Sie angerufen, um Ihnen zu sagen, dass ich eine sehr wichtige Entscheidung getroffen habe." },
+      { vorbitor: "client", text: "Im Ernst… was denn?" },
+      { vorbitor: "agent",  text: "Ich weiß, es klingt seltsam… aber die wichtige Entscheidung ist, Sie auf einen Kaffee einzuladen." },
+      { regie: "mit einem Lächeln in der Stimme" },
+      { vorbitor: "client", text: "Das ist mal eine Neuigkeit… wollen Sie mir etwas sagen?" },
+      { vorbitor: "agent",  text: "Glauben Sie, das wäre eine völlig falsche Idee?" },
+      { vorbitor: "client", text: "Nein…" },
+      { vorbitor: "agent",  text: "Welcher der Tage würde Ihnen passen? Oder das Wochenende, da Sie freier sind?" },
+      { vorbitor: "client", text: "Wochenende…" },
+      { vorbitor: "agent",  text: "Die wichtige Entscheidung ist angenommen. Samstag oder Sonntag?" },
+      { regie: "mit einem Lächeln in der Stimme" },
+      { vorbitor: "client", text: "Samstag, um 12:00 Uhr." },
+      { vorbitor: "agent",  text: "Notiert… wir sehen uns Samstag mit einem Lächeln im Gesicht. Jetzt muss ich auflegen." }
+    ],
+    obiectie: null,
+    psihologie: [
+      "Spannung + Antiklimax: „ich habe eine wichtige Entscheidung getroffen” öffnet die Schleife, „die Entscheidung ist, Sie auf einen Kaffee einzuladen” schließt sie mit Humor. Angenehme Spannung, null Druck.",
+      "„Glauben Sie, das wäre eine völlig falsche Idee?” ist eine Negativfrage: Es ist viel schwerer, „ja, sie ist falsch” zu sagen als „nein”. Sie lenken sein Gehirn zur Zustimmung, ohne direkt zu fragen.",
+      "Sie lassen ihn selbst den Tag wählen („das Wochenende, da Sie freier sind”) — aktiver Entscheider — dann schließen Sie fest ab, mit einem Lächeln und „ich muss auflegen”. Die Neugier bleibt für das Treffen unberührt."
+    ]
+  }
+];
+
+const prezentare_de = `
+  <div class="cn-title-block">
+    <h1 class="cn-h1">Die Eins-zu-eins-Präsentation</h1>
+    <div class="cn-subtitle">Dialog, kein Monolog</div>
+  </div>
+  <p class="cn-lead">Die Eins-zu-eins-Präsentation muss ein <b>Dialog</b> sein, kein Monolog. Nur so haben Sie die Aufmerksamkeit des Kunden zu 100 %.</p>
+  <p class="cn-lead">Der Fehler, den viele machen: Sie präsentieren, ohne hochwertige Fragen zu stellen — Fragen, die dem Kunden helfen, sich des Werts des Produkts <b>bewusst zu werden</b>.</p>
+
+  <div class="cn-precond"><b>⚠️ Warum das zählt:</b> Der Kunde kauft nur die Vorteile, an die er sich erinnert. Wenn Sie präsentieren und er passiv zuhört, behält sein Verstand nichts — am Ende <b>kann er nicht</b> den Kauf rechtfertigen und Sie erhalten „ich überlege es mir", „ich habe keine Zeit", „ich muss mit meinem Partner sprechen". Ein erzwungenes JA ist ein falsches JA.</div>
+
+  <div class="cn-sec">Wie Sie die Vorteile in seinem Kopf verankern</div>
+
+  <div class="cn-rule">
+    <div class="cn-rule-num">1</div>
+    <div class="cn-rule-txt">
+      <div class="cn-rt">Durch offene Fragen, nicht nur durch die Präsentation</div>
+      <div class="cn-rd">
+        <p>Sie verankern die Vorteile nicht, indem Sie Informationen ausschütten, sondern indem Sie Fragen stellen, deren Antwort <b>er</b> selbst denken muss. Der Verstand behält, was er selbst hervorbringt, nicht was er hört.</p>
+        <p>Außerdem zeigen Ihnen offene Fragen, <b>wie der Kunde denkt</b> — so wissen Sie, worauf Sie den Abschluss aufbauen.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="cn-rule">
+    <div class="cn-rule-num">2</div>
+    <div class="cn-rule-txt">
+      <div class="cn-rt">Nutzen Sie offene Fragen: Wie / Was / Welche / Wer</div>
+      <div class="cn-rd">
+        <p>Offene Fragen erzeugen eine ausführliche Antwort, die Ihnen zeigt, wie der Kunde denkt.</p>
+        <p><b>Vermeiden Sie „Warum…?"</b> — es klingt nach einem Verhör und bringt ihn in die Defensive.</p>
+        <p><b>Vermeiden Sie „Ob wohl…?"</b> — es klingt rhetorisch und vage.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="cn-rule">
+    <div class="cn-rule-num">3</div>
+    <div class="cn-rule-txt">
+      <div class="cn-rt">Verboten: geschlossene und Fangfragen</div>
+      <div class="cn-rd">
+        <p><b>Geschlossen</b> = Ja/Nein-Antwort (z. B.: „Würden Sie gern bei den Urlauben sparen?"). Sie sagt Ihnen nichts darüber, wie er denkt.</p>
+        <p><b>Fangfrage (suggestiv)</b> = geschlossen + Sie legen ihm die Antwort in den Mund (z. B.: „Nicht wahr, Ihre Freunde würden das wollen?"). Er fühlt sich manipuliert und verschließt sich.</p>
+        <div class="cn-ban">
+          <div class="cn-ban-label">Warum sie gefährlich sind</div>
+          <ul>
+            <li>Menschen hassen es, ein erzwungenes JA zu sagen</li>
+            <li>Der Kunde fühlt sich manipuliert und verschließt sich</li>
+            <li>Sie glauben, ein JA bekommen zu haben — aber es ist falsch, Sie haben ihn gezwungen</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cn-rule">
+    <div class="cn-rule-num">4</div>
+    <div class="cn-rule-txt">
+      <div class="cn-rt">Die Tonalität macht den Unterschied</div>
+      <div class="cn-rd">
+        <p>Dieselbe Frage klingt allein durch den Ton nach einem Verhör oder nach warmer Neugier.</p>
+        <p><b>Absteigender</b> Ton am Ende (ein Verhör steigt an), langsames Tempo, ein Lächeln in der Stimme 😊 — dann <b>schweigen</b>. Er spricht zuerst.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="cn-rule">
+    <div class="cn-rule-num">5</div>
+    <div class="cn-rule-txt">
+      <div class="cn-rt">Kadenz: kein Verhör</div>
+      <div class="cn-rd">
+        <p>Wählen Sie <b>3–4 Fragen für den Produktteil</b> und <b>3–4 für den Geschäftsteil</b>.</p>
+        <p>Verteilen Sie sie über den Verlauf — eine nach jedem Vorteil, mit Stille danach — <b>niemals in Salven</b>. Sonst fühlt sich der Kunde wie im Verhör.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="cn-rule">
+    <div class="cn-rule-num">6</div>
+    <div class="cn-rule-txt">
+      <div class="cn-rt">Notieren Sie seine Antworten</div>
+      <div class="cn-rd">
+        <p>Im Kopf oder schriftlich. Die Worte, die er Ihnen jetzt gibt, sind Ihre Munition — Sie nutzen sie beim <b>Abschluss</b> (eigenes Modul).</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="cn-sec">Die Fragenbank</div>
+  <p class="cn-lead">Wählen Sie 3–4 aus jedem Bereich. Es ist ein Menü, keine Abhakliste.</p>
+
+  <div class="cn-box">
+
+    <span class="cn-zone">🛍️ Produktteil</span>
+
+    <p class="cn-line"><span class="cn-role">Für ihn:</span></p>
+    <p class="cn-line cn-gap">„Welche Vorteile hätten gerade Sie persönlich, wenn Sie X nutzen?"</p>
+    <p class="cn-line cn-gap">„Wie könnte Ihnen dieses Produkt in Ihrem Leben helfen?"</p>
+    <p class="cn-line cn-gap">„Was genau würde Sie sagen lassen, dass ein Produkt sein Geld wirklich wert war?"</p>
+    <p class="cn-line cn-gap">„Wie würde ein Tag von Ihnen aussehen, an dem <span class="cn-fill">[das Problem, das das Produkt löst]</span> keine Sorge mehr wäre?"</p>
+    <p class="cn-line cn-gap">„Was wäre das Erste, das sich für Sie anders anfühlt, nach ein paar Wochen, in denen Sie es nutzen?"</p>
+    <p class="cn-line cn-gap">„Was würde es für Sie bedeuten, das zu lösen und nicht mehr daran zu denken?"</p>
+
+    <p class="cn-line"><span class="cn-role">Über ihn hinaus:</span></p>
+    <p class="cn-line cn-gap">„Wer außer Ihnen würde sich noch über die Qualität dieses Produkts / dieser Dienstleistung freuen?"</p>
+    <p class="cn-line cn-gap">„Wer außer Ihnen könnte sich noch über die Vorteile X, Y, Z freuen?"</p>
+    <p class="cn-line cn-gap">„Wer in Ihrem Umfeld würde die Veränderung an Ihnen zuerst bemerken?"</p>
+    <p class="cn-line cn-gap">„Wie fänden Sie es, etwas weiterzugeben, das Ihnen selbst geholfen hat?"</p>
+
+    <span class="cn-zone">💼 Geschäftsteil</span>
+
+    <p class="cn-line"><span class="cn-role">Für ihn:</span></p>
+    <p class="cn-line cn-gap">„Wie könnte Ihnen ein Zusatzeinkommen von 500–1.000 EUR im Monat helfen, wenn Sie dieses Projekt in Teilzeit aufbauen?"</p>
+    <p class="cn-line cn-gap">„Was sind die Dinge, die Sie mit einem Zusatzeinkommen von 500–1.000 EUR im Monat tun würden?"</p>
+    <p class="cn-line cn-gap">„Was würde ein Zusatzeinkommen von 500–1.000 EUR im Monat, in Teilzeit, konkret in Ihrem Leben verändern?"</p>
+    <p class="cn-line cn-gap">„Was würden Sie gern mehr tun, wenn Zeit und Geld nicht mehr das Problem wären?"</p>
+
+    <p class="cn-line"><span class="cn-role">Über ihn hinaus:</span></p>
+    <p class="cn-line cn-gap">„Wer würde sich noch über ein monatliches Zusatzeinkommen von 500–1.000 EUR freuen, das Sie in Ihrer Familie erwirtschaften würden?"</p>
+    <p class="cn-line cn-gap">„Wer in Ihrer Familie würde den Unterschied dieses Einkommens am meisten spüren?"</p>
+    <p class="cn-line cn-gap">„Wer außer Ihnen hätte noch etwas davon, wenn Sie dieses Projekt aufbauen würden?"</p>
+    <p class="cn-line cn-gap">„Wie wäre es, etwas Eigenes aufzubauen, in Ihrem Tempo, ohne aufzugeben, was Sie jetzt haben?"</p>
+
+  </div>
+
+  <div class="cn-precond" style="margin-top:18px"><b>📍 Nur für die Eins-zu-eins-Präsentation.</b> Die Gruppenpräsentation funktioniert anders und wird gesondert behandelt.</div>
+
+  <div class="cn-foot">Harvard of Sales · Modul Präsentation (eins zu eins)</div>
+`;
+
+const inchidere_de = `
+  <div class="cn-title-block">
+    <h1 class="cn-h1">Der Abschluss</h1>
+    <div class="cn-subtitle">er beginnt mit der Verbindung</div>
+  </div>
+  <p class="cn-lead">Alles, was Sie <b>vor</b> dem Abschluss tun, zählt — es sind 90 % des Abschlusses. Wenn Sie bis hierher gute Arbeit geleistet haben, ist der Abschluss leicht. Wenn nicht, quälen Sie sich.</p>
+
+  <div class="cn-sec">Wann der Abschluss leicht wird</div>
+  <p class="cn-lead">Der Abschluss ist nur dann leicht, wenn es Ihnen in den vorherigen Phasen gelungen ist:</p>
+  <div class="cn-rule">
+    <div class="cn-rule-num">✓</div>
+    <div class="cn-rule-txt">
+      <div class="cn-rd">
+        <p>sich mit dem Kunden zu verbinden und ihn entspannt fühlen zu lassen — nur so nimmt er Ihre Informationen an;</p>
+        <p>herauszufinden, <b>was ihm wehtut</b> und <b>was ihm gefällt</b>;</p>
+        <p>ihm das Produkt genau auf SEINEN Bedarf zu präsentieren, nicht auf Ihren;</p>
+        <p>eine Präsentation als <b>Dialog, kein Monolog</b> zu halten, durch die er sich der Vorteile selbst bewusst wird.</p>
+        <p class="cn-note">Sie können die besten Abschlussfragen nutzen — wenn das Obige nicht stimmt, erhalten Sie höchstens ein momentanes JA, das er sofort wieder aufgibt.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="cn-block">
+    <div class="cn-block-h">Der beste Closer KANN nicht abschließen, solange der Kunde:</div>
+    <ul>
+      <li>kein Vertrauen in den Präsentator hat;</li>
+      <li>sich der Vorteile nicht bewusst ist;</li>
+      <li>nicht spürt, dass das Produkt / die Geschäftsidee sein Problem JETZT oder so bald wie möglich löst;</li>
+      <li>nicht glaubt, dass er es aufbauen kann;</li>
+      <li>nicht sieht, dass sein Risiko <b>null</b> ist;</li>
+      <li>nicht erkennt, dass er NICHTS zu verlieren hat.</li>
+    </ul>
+  </div>
+
+  <div class="cn-sec">Die Formel eines erfolgreichen Verkaufs</div>
+  <p class="cn-lead">Alles, was Sie im Abschluss tun, zielt darauf ab, zu maximieren, was der Kunde als Gewinn sieht, und zu minimieren, was er als Kosten empfindet — bis das Risiko null wird.</p>
+  <div class="if-wrap">
+    <div class="if-gl if-max">▲ Sie maximieren</div>
+    <div class="if-row">
+      <div class="if-card"><div class="lab">Dream Outcome des Kunden</div><div class="val">Wichtig</div></div>
+      <div class="if-x">×</div>
+      <div class="if-card"><div class="lab">Wahrgenommene Wahrscheinlichkeit des Erreichens</div><div class="val">Sehr hoch</div></div>
+    </div>
+    <div class="if-bar"></div>
+    <div class="if-gl if-min">▼ Sie minimieren</div>
+    <div class="if-row">
+      <div class="if-card"><div class="lab">Zeit bis zum Ergebnis</div><div class="val">Geschieht schnell</div></div>
+      <div class="if-x">×</div>
+      <div class="if-card"><div class="lab">Aufwand &amp; Opfer</div><div class="val">Gering</div></div>
+      <div class="if-x">×</div>
+      <div class="if-card"><div class="lab">Angst / Furcht</div><div class="val">Gering</div></div>
+    </div>
+    <div class="if-op">×</div>
+    <div class="if-risk-wrap"><div class="if-risk">Null Risiko</div></div>
+    <div class="if-op">=</div>
+    <div class="if-result"><div class="rl">Ergebnis</div><div class="rv">Kunde gewonnen</div></div>
+  </div>
+
+  <div class="cn-sec">Goldene Regeln des Abschlusses</div>
+  <p class="cn-lead">Die Worte haben Sie unten. Was beim Abschluss den Unterschied macht, ist <b>wie</b> Sie sie liefern.</p>
+  <div class="cn-golden">
+    <div class="cn-gt">Wie Sie liefern — 6 Regeln</div>
+    <div class="cn-gitem"><div class="cn-ghead">1 · Die Stille ist Werkzeug #1 &nbsp;⏸</div><div class="cn-gbody">Nach jeder Frage — vor allem der Entscheidungsfrage — schweigen Sie 5–6 Sekunden. Wer zuerst spricht, nur um die Stille zu brechen, verliert.</div></div>
+    <div class="cn-gitem"><div class="cn-ghead">2 · Absteigender Ton, nicht ansteigend &nbsp;🔽</div><div class="cn-gbody">Senken Sie den Ton am Satzende — ruhig, fast gelassen. Eine gehetzte oder ansteigende Stimme schreit „ich brauche diesen Verkauf", und der Kunde wehrt sich instinktiv.</div></div>
+    <div class="cn-gitem"><div class="cn-ghead">3 · Langsamer &nbsp;🐢</div><div class="cn-gbody">Nervosität = schnelles Sprechen. Bewusst langsam, mit Pausen auch <em>zwischen</em> den Sätzen, nicht nur nach den Fragen. Das langsame Tempo vermittelt Kontrolle und Sicherheit.</div></div>
+    <div class="cn-gitem"><div class="cn-ghead">4 · Zustand der Fülle / Gelassenheit</div><div class="cn-gbody">Seien Sie ehrlich einverstanden mit einem „nein". „Wenn Sie einen Wert sehen, bleiben wir Freunde; wenn nicht, ebenso" — sagen Sie es und <b>meinen Sie es</b>. Wenn Sie am „ja" hängen, wittert der Kunde das Klammern.</div></div>
+    <div class="cn-gitem"><div class="cn-ghead">5 · Nicht retten, nicht nachlegen</div><div class="cn-gbody">Nach „ich überlasse Ihnen die Entscheidung" — kein einziges Wort mehr. Der Drang, noch einen Vorteil „zum Helfen" hinterherzuwerfen, tötet den Moment. Das Schwerste beim Abschluss ist, nichts mehr zu sagen.</div></div>
+    <div class="cn-gitem"><div class="cn-ghead">6 · Kalibriertes Lächeln &nbsp;😊</div><div class="cn-gbody">Warm bei den Rapport-Zeilen und beim Scherz; aber bei der Entscheidungsfrage — ein neutraler, ruhiger Ton. Ein breites Lächeln bei „würden Sie ihm eine Chance geben?" klingt nach Verkauf, nicht nach aufrichtiger Neugier.</div></div>
+  </div>
+  <div class="cn-legend">
+    <span><span class="cn-pause">⏸</span> schweigen</span>
+    <span><span class="cn-cue">😊</span> Lächeln in der Stimme</span>
+    <span><span class="cn-cue">🔽</span> Ton senken</span>
+    <span><span class="cn-cue">🐢</span> langsam, ohne Eile</span>
+  </div>
+
+  <div class="cn-sec">Die Phasen des Abschlusses</div>
+  <p class="cn-lead">Drei Phasen, mit den psychologischen Fragen, die Sie in jeder stellen.</p>
+
+  <!-- ETAPA 1 -->
+  <div class="cn-rule">
+    <div class="cn-rule-num">1</div>
+    <div class="cn-rule-txt">
+      <div class="cn-rt">Die Zusammenfassung der Vorteile</div>
+      <div class="cn-rd">
+        <p>Hier verwenden Sie <b>ein Blatt und einen Stift</b>. Warum? Um Ihrem Kunden zu helfen, die Vorteile zu <b>sehen</b>, nicht nur zu hören — er nimmt sie über zwei Sinne auf, sehen und hören.</p>
+        <p>Am Ende fällt es ihm viel leichter zu sehen als aus dem Gedächtnis abzurufen. Sie erleichtern sich die Arbeit und ihm die Mühe.</p>
+        <p class="cn-note">Sie zählen die Vorteile auf, die <b>ER</b> Ihnen während der Dialog-Präsentation genannt hat — nicht Ihre.</p>
+      </div>
+    </div>
+  </div>
+  <div class="cn-box">
+    <p class="cn-line"><span class="cn-cue">🐢 langsam, warm</span> <span class="cn-role">Agent:</span> Jetzt, da Sie das ganze „Bild" haben, ist es auch für Sie in Ordnung, eine kleine Zusammenfassung der Vorteile zu machen — und ob diese Vorteile Ihr Problem lösen würden? Sonst hätte es keinen Sinn…</p>
+    <p class="cn-line cn-client cn-gap"><span class="cn-role">Kunde:</span> Ja…</p>
+
+    <p class="cn-line"><span class="cn-role">Agent:</span> Halten Sie es für die beste Methode, um zu entscheiden, ob das Produkt zu Ihnen passt oder nicht?</p>
+    <p class="cn-line cn-client cn-gap"><span class="cn-role">Kunde:</span> Ja… ich bin einverstanden.</p>
+
+    <p class="cn-line"><span class="cn-role">Agent:</span> Hätten Sie einen anderen Vorschlag, oder treffen auch Sie so Ihre Ja-oder-Nein-Entscheidungen?</p>
+    <p class="cn-line cn-client cn-gap"><span class="cn-role">Kunde:</span> Ich mache es genauso…</p>
+
+    <span class="cn-zone">Und Sie beginnen, die Vorteile aufzuzählen, die er Ihnen in der Präsentation genannt hat</span>
+
+    <p class="cn-line"><span class="cn-role">Agent:</span> Sie haben mir gesagt, dass <span class="cn-fill">[X — der Vorteil, den er genannt hat]</span>… eine Lösung für Sie sein könnte. <span class="cn-pause">⏸ SCHWEIGEN</span></p>
+    <p class="cn-line cn-client cn-gap"><span class="cn-role">Kunde:</span> Ja… so ist es…</p>
+
+    <p class="cn-line"><span class="cn-role">Agent:</span> Sie haben mir gesagt, dass <span class="cn-fill">[Y — ein weiterer seiner Vorteile]</span>… eine Lösung für Sie sein könnte. <span class="cn-pause">⏸ SCHWEIGEN</span></p>
+    <p class="cn-line cn-client cn-gap"><span class="cn-role">Kunde:</span> Ja… so ist es…</p>
+  </div>
+
+  <!-- ETAPA 2 -->
+  <div class="cn-rule">
+    <div class="cn-rule-num">2</div>
+    <div class="cn-rule-txt">
+      <div class="cn-rt">Die Bewertung der Risiken</div>
+      <div class="cn-rd">
+        <p>MLM-Agenten fürchten diese Phase. Doch gerade sie <b>entspannt</b> den Kunden und beseitigt die letzten Einwände: „ich überlege es mir", „ich muss mit meinem Partner sprechen".</p>
+        <p>Der Kunde versteht, dass Sie verletzlich sind und nicht nur von Vorteilen sprechen, wie es 99 % der MLM-Klassiker tun.</p>
+      </div>
+    </div>
+  </div>
+  <div class="cn-box">
+    <p class="cn-line"><span class="cn-role">Agent:</span> Jetzt, da wir die Vorteile kennen, halte ich es für wichtig, auch über die Risiken zu sprechen. Ich persönlich treffe Entscheidungen, wenn ich Gewinne gegen Risiken abwäge. <span class="cn-cue">(Lächeln 😊)</span> Würde es auch Ihnen helfen, am Ende ein klareres Bild zu haben?</p>
+    <p class="cn-line cn-client cn-gap"><span class="cn-role">Kunde:</span> Ja… das ist in Ordnung… ich mache es genauso.</p>
+  </div>
+  <div class="cn-golden">
+    <div class="cn-gt">Die 4 zu entschärfenden Risiken</div>
+    <div class="cn-gitem"><div class="cn-ghead">1 · Finanzielles Risiko</div><div class="cn-gbody">Er verliert kein Geld durch den Kauf des Produkts — oder die investierte Summe ist sehr klein im Vergleich zu dem, was er gewinnen kann.</div></div>
+    <div class="cn-gitem"><div class="cn-ghead">2 · Aufwandsrisiko</div><div class="cn-gbody">Der Aufwand, das Geschäft aufzubauen, ist gering.</div></div>
+    <div class="cn-gitem"><div class="cn-ghead">3 · Zeitrisiko</div><div class="cn-gbody">Er verliert keine Zeit, um am Ende ohne jedes Ergebnis dazustehen.</div></div>
+    <div class="cn-gitem"><div class="cn-ghead">4 · Imagerisiko</div><div class="cn-gbody">Er vertritt ein seriöses Unternehmen und ein gutes Produkt — sein Image leidet vor seinen Freunden nicht.</div></div>
+  </div>
+  <p class="cn-note" style="margin-top:12px"><em>Hier gibt es kein festes Agent-Kunde-Skript: Es gibt Tausende Produkte auf dem MLM-Markt. Sie passen die 4 Risiken an Ihr konkretes Produkt / Ihre Dienstleistung an.</em></p>
+
+  <!-- ETAPA 3 -->
+  <div class="cn-rule">
+    <div class="cn-rule-num">3</div>
+    <div class="cn-rule-txt">
+      <div class="cn-rt">Die Entscheidung ohne Druck einholen</div>
+      <div class="cn-rd">
+        <p>Sie bringen ihn in die Lage, in der er selbst entscheidet — wie am Regal — ohne sich gedrängt zu fühlen.</p>
+      </div>
+    </div>
+  </div>
+  <div class="cn-box">
+    <p class="cn-line"><span class="cn-role">Agent:</span> Sowohl Sie als auch ich kaufen regelmäßig Produkte <span class="cn-cue">(Gesundheit, Reinigung, Pflege, Urlaub — Sie nennen Ihr Produkt)</span>. <span class="cn-pause">⏸ Schweigen</span></p>
+    <p class="cn-line cn-client cn-gap"><span class="cn-role">Kunde:</span> So ist es…</p>
+
+    <p class="cn-line"><span class="cn-role">Agent:</span> Wir gehen zum Regal oder gehen online und wählen unser Produkt. Wir erkundigen uns selbst, ob es gut ist, und wir mögen es nicht, zum Kauf gedrängt zu werden. <span class="cn-pause">⏸ SCHWEIGEN</span></p>
+    <p class="cn-line cn-client cn-gap"><span class="cn-role">Kunde:</span> So ist es…</p>
+
+    <p class="cn-line"><span class="cn-role">Agent:</span> Und jetzt die aufrichtige Frage: Wenn Sie dieses Produkt gesehen hätten, das <span class="cn-fill">[X — was er angegeben hat]</span> lösen kann, würden Sie ihm eine Chance geben oder es völlig ignorieren? <span class="cn-cue">🔽 neutraler, tiefer Ton</span></p>
+    <p class="cn-line cn-client cn-gap"><span class="cn-role">Kunde:</span> Ich glaube, ich würde ihm eine Chance geben…</p>
+
+    <p class="cn-line"><span class="cn-cue">🐢🔽</span> <span class="cn-role">Agent:</span> Ich kann Sie nicht fragen, ob Sie kaufen — der natürliche Instinkt des Menschen bei einer solchen Frage ist, abzulehnen. Auch meiner… <span class="cn-pause">⏸ Schweigen</span> Ich überlasse es Ihnen, als wären Sie allein am Regal, zu entscheiden, ohne noch etwas hinzuzufügen.</p>
+
+    <p class="cn-line" style="text-align:center"><span class="cn-pause">⏸ SCHWEIGEN · SCHWEIGEN · SCHWEIGEN — das ist der Moment, in dem Sie schweigen</span></p>
+    <p class="cn-line" style="text-align:center;color:#6b6f79;font-size:14px"><em>Das Gehirn braucht 5–6 Sekunden, um eine Frage zu beantworten, die Nachdenken erfordert. Füllen Sie die Pause NICHT.</em></p>
+  </div>
+
+  <div class="cn-golden" style="margin-top:26px">
+    <div class="cn-gt">Das Ergebnis, wenn Sie alle Schritte getan haben</div>
+    <div class="cn-gbody" style="line-height:1.85">Wenn Sie, gemäß MLM Psychology, die <b>Verbindung</b>, die <b>Präsentation</b> und den <b>Abschluss</b> korrekt durchlaufen haben, steigen die Chancen abzuschließen auf <b>80 %</b>. 8 von 10 Eingeladenen können entweder Konsumenten oder Botschafter Ihres Geschäfts werden.<br><br>Sehr selten treten Einwände auf — und wenn sie auftreten, behandeln Sie sie gesondert.</div>
+  </div>
+
+  <div class="cn-foot">Harvard of Sales · Modul Abschluss</div>
+`;
+
 module.exports = {
   conectare, fulger, prezentare, inchidere,
   it: { conectare: conectare_it, fulger: fulger_it, prezentare: prezentare_it, inchidere: inchidere_it },
   en: { conectare: conectare_en, fulger: fulger_en, prezentare: prezentare_en, inchidere: inchidere_en },
   es: { conectare: conectare_es, fulger: fulger_es, prezentare: prezentare_es, inchidere: inchidere_es },
-  fr: { conectare: conectare_fr, fulger: fulger_fr, prezentare: prezentare_fr, inchidere: inchidere_fr }
+  fr: { conectare: conectare_fr, fulger: fulger_fr, prezentare: prezentare_fr, inchidere: inchidere_fr },
+  de: { conectare: conectare_de, fulger: fulger_de, prezentare: prezentare_de, inchidere: inchidere_de }
 };
