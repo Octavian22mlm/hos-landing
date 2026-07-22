@@ -136,6 +136,9 @@ label{display:block;font-size:13.5px;font-weight:600;letter-spacing:.08em;text-t
 .script-box .script-rule.bare{padding-top:0;height:0;margin:14px 0;border-top:1px solid rgba(0,0,0,.12)}
 .script-box .script-zone{display:block;margin:22px 0 18px;background:rgba(122,95,16,.10);border-left:3px solid #b8903a;padding:11px 14px;font-size:14.5px;letter-spacing:.02em;color:#5a4a14;font-weight:700;line-height:1.4}
 .script-box .script-pause{display:inline-block;background:rgba(0,0,0,.05);border-radius:6px;padding:3px 10px;font-size:13.5px;color:#555;font-weight:600}
+/* Protectie continut: fara selectare pe scripturi + module premium */
+.script-box, #conectare-content, #prezentare-content, #inchidere-content, #sub-fulger{-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;-webkit-touch-callout:none}
+.script-box .script-wm{display:block;margin-top:26px;padding-top:14px;border-top:1px dashed rgba(122,95,16,.35);font-size:12px;color:#9a7d1e;line-height:1.5;text-align:center;font-weight:600}
 .prog-sub{text-align:center;color:var(--goldl);font-size:14px;letter-spacing:.04em;margin:-14px 0 22px}
 .prog-warn{text-align:center;color:var(--muted);font-size:13.5px;margin-top:14px;line-height:1.4}
 .prog-warn b{color:var(--goldl);font-weight:600}
@@ -1248,8 +1251,7 @@ label{display:block;font-size:13.5px;font-weight:600;letter-spacing:.08em;text-t
     </div>
     <div class="script-box" id="script-output"></div>
     <div class="script-actions">
-      <button class="btn" onclick="copyScript()" style="max-width:200px">Copiar el guion</button>
-      <button class="btn-ghost" onclick="downloadScript()">Descargar</button>
+      <button class="btn" onclick="downloadScript()" style="max-width:200px">Descargar</button>
       <button class="btn-ghost" onclick="showView('generator')">Genera otro guion</button>
     </div>
 
@@ -2235,8 +2237,25 @@ function renderScript(text) {
     if (/^(📋|🎬|✅)/.test(core)) { lines[i] = '<span class="script-zone">' + core + '</span>'; continue; }
   }
   esc = lines.join('\n');
-  return esc.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+  esc = esc.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+  return esc + _scriptWatermark();
 }
+function _scriptWatermark(){
+  try{
+    var em=(typeof USER_PROFILE!=='undefined' && USER_PROFILE && USER_PROFILE.email)?USER_PROFILE.email:'';
+    if(!em) return '';
+    var d=new Date().toLocaleDateString('es-ES');
+    return '\n\n<span class="script-wm">Generado para '+em+' · '+d+' · Harvard of Sales — documento personal, compartirlo lo hace rastreable.</span>';
+  }catch(e){ return ''; }
+}
+(function(){
+  var PROT='.script-box, #conectare-content, #prezentare-content, #inchidere-content, #sub-fulger';
+  function inProt(el){ return el && el.closest && el.closest(PROT); }
+  document.addEventListener('contextmenu', function(e){ if(inProt(e.target)) e.preventDefault(); }, true);
+  document.addEventListener('copy', function(e){ var s=document.getSelection(); if(inProt(e.target) || (s && s.anchorNode && inProt(s.anchorNode.parentElement || s.anchorNode))) e.preventDefault(); }, true);
+  document.addEventListener('cut', function(e){ if(inProt(e.target)) e.preventDefault(); }, true);
+  document.addEventListener('dragstart', function(e){ if(inProt(e.target)) e.preventDefault(); }, true);
+})();
 
 // Async: trimite jobul, apoi intreaba din 3 in 3 secunde pana e gata (fara timeout pe cerere lunga)
 async function generateAndWait(body) {
