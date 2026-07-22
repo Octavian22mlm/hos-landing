@@ -134,6 +134,8 @@ const STRIPE_PLANS = {
   recruit: { priceId: 'price_1Teb0g2K2gEr8ziYzAWAiU3G', mode: 'subscription', tier: 'recruit' },
   builder: { priceId: 'price_1Teb182K2gEr8ziYLioqV1kN', mode: 'subscription', tier: 'builder' },
   leader:  { priceId: 'price_1Teb1l2K2gEr8ziYfofZ640S', mode: 'subscription', tier: 'leader'  },
+  // Consultanta 1-la-1 (2.000 EUR plata unica) — NU acorda tier, e serviciu separat
+  consult: { priceId: 'price_1Tw0Lj2K2gEr8ziYINpEVU6K', mode: 'payment', tier: null },
 };
 
 // bonus de antrenament (o singură dată, la prima plată a abonamentului)
@@ -828,11 +830,11 @@ app.post('/api/create-checkout-session', auth, async (req, res) => {
       line_items: [{ price: p.priceId, quantity: 1 }],
       customer_email: req.user.email,
       client_reference_id: req.user.id,
-      metadata: { user_id: req.user.id, tier: p.tier },
+      metadata: { user_id: req.user.id, tier: p.tier, type: (plan === 'consult' ? 'consult' : 'plan') },
       subscription_data: p.mode === 'subscription'
         ? { metadata: { user_id: req.user.id, tier: p.tier } } : undefined,
       invoice_creation: p.mode === 'payment' ? { enabled: true } : undefined,
-      return_url: `${base}${appPath}?paid=1&session_id={CHECKOUT_SESSION_ID}`,
+      return_url: `${base}${appPath}?${plan === 'consult' ? 'consult' : 'paid'}=1&session_id={CHECKOUT_SESSION_ID}`,
     });
     res.json({ clientSecret: session.client_secret });
   } catch (err) {
@@ -1084,6 +1086,49 @@ app.post('/api/support', auth, async (req, res) => {
 });
 
 // ============================================
+// CONSULTANTA — formular dupa plata (produs + disponibilitate). Stocare + email catre Octavian.
+// ============================================
+app.post('/api/consult', auth, async (req, res) => {
+  try {
+    const produs        = ((req.body && req.body.produs)        || '').toString().slice(0, 500);
+    const disponibil    = ((req.body && req.body.disponibil)    || '').toString().slice(0, 500);
+    const telefon       = ((req.body && req.body.telefon)       || '').toString().slice(0, 60);
+    const mesaj         = ((req.body && req.body.mesaj)         || '').toString().slice(0, 3000);
+    if (!produs.trim()) return res.status(400).json({ error: 'Spune-ne ce produs vinzi.' });
+
+    // 1) stocare best-effort in Supabase (tabela consult_requests, daca exista)
+    try {
+      await db.from('consult_requests').insert({
+        user_id: req.user.id, email: req.user.email, produs, disponibil, telefon, mesaj
+      });
+    } catch (e) { console.error('consult store error:', e.message); }
+
+    // 2) email catre Octavian (best-effort, prin Resend)
+    if (process.env.RESEND_API_KEY) {
+      try {
+        await fetch('https://api.resend.com/emails', {
+          method: 'POST',
+          headers: { 'Authorization': `Bearer ${process.env.RESEND_API_KEY}`, 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            from: process.env.SUPPORT_FROM || 'Harvard of Sales <onboarding@resend.dev>',
+            to: ['contact@octavianalupoaie.biz'],
+            reply_to: req.user.email,
+            subject: `[CONSULTANȚĂ] Detalii client — ${req.user.email}`,
+            text: `Client: ${req.user.email}\nTelefon: ${telefon || '-'}\n\nProdus: ${produs}\n\nDisponibilitate: ${disponibil || '-'}\n\nMesaj: ${mesaj || '-'}`
+          })
+        });
+      } catch (e) { console.error('[consult email] ', e.message); }
+    }
+
+    console.log(`[consult] formular de la ${req.user.id}`);
+    res.json({ ok: true });
+  } catch (err) {
+    console.error('consult error:', err);
+    res.status(500).json({ error: 'Nu am putut trimite. Încearcă din nou.' });
+  }
+});
+
+// ============================================
 // STRIPE WEBHOOK — activează planul automat după plată
 // (folosește body RAW — vezi skip-ul express.json de la început)
 // ============================================
@@ -1118,6 +1163,24 @@ app.post('/api/webhook', express.raw({ type: 'application/json' }), async (req, 
           stripe_subscription_id: s.subscription || null
         }).eq('id', userId);
         console.log(`[webhook] activat ${tier} pentru ${userId} (${s.mode}) cust=${s.customer || '-'} sub=${s.subscription || '-'}`);
+      }
+      // 1b) CONSULTANTA 1-la-1 — plata de 2.000€. NU schimba planul; doar anunta.
+      if (s.metadata && s.metadata.type === 'consult') {
+        console.log(`[webhook] CONSULT platit (2000€) de ${s.customer_details && s.customer_details.email || s.customer_email || userId}`);
+        if (process.env.RESEND_API_KEY) {
+          try {
+            await fetch('https://api.resend.com/emails', {
+              method: 'POST',
+              headers: { 'Authorization': `Bearer ${process.env.RESEND_API_KEY}`, 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                from: process.env.SUPPORT_FROM || 'Harvard of Sales <onboarding@resend.dev>',
+                to: ['contact@octavianalupoaie.biz'],
+                subject: `[CONSULTANȚĂ 2000€] Plată nouă — ${s.customer_details && s.customer_details.email || userId}`,
+                text: `A fost plătită consultanța 1-la-1 (2.000€).\nUser: ${userId}\nEmail: ${s.customer_details && s.customer_details.email || s.customer_email || '-'}\n\nUrmează formularul cu produsul și disponibilitatea.`
+              })
+            });
+          } catch (e) { console.error('[consult email] ', e.message); }
+        }
       }
     }
 
