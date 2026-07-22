@@ -3288,11 +3288,1577 @@ const inchidere_de = `
   <div class="cn-foot">Harvard of Sales · Modul Abschluss</div>
 `;
 
+const psihologie = `
+<div class="cn-title-block">
+    <h1 class="cn-h1">Cum cumpără femeia &amp; bărbatul</h1>
+    <div class="cn-subtitle">psihologia de cumpărare în MLM</div>
+  </div>
+
+  <p class="cn-lead">Înainte de orice script, întâi înțelegi <b>cine</b> e în fața ta. Apoi îi vorbești pe limba lui.</p>
+
+  <div class="cn-sec">📊 Cifre oficiale</div>
+  <div class="stats">
+    <div class="stile"><div class="n">85%</div><div class="l">din deciziile de cumpărare sunt influențate de femei</div><div class="s">Forbes, 2024</div></div>
+    <div class="stile"><div class="n">73%</div><div class="l">dintre distribuitorii din vânzări directe / MLM sunt femei</div><div class="s">DSA, 2024</div></div>
+    <div class="stile"><div class="n">+30%</div><div class="l">mai atente la recenzii și păreri înainte să cumpere</div><div class="s">Capital One · BLS/Pew</div></div>
+    <div class="stile"><div class="n">58<span style="font-size:16px">/44</span></div><div class="l">minute per sesiune de cumpărături — femei vs bărbați</div><div class="s">BLS · Statista</div></div>
+  </div>
+  <div class="statsnote">Cifrele arată cât de mult <b>influențează</b> femeile cumpărăturile. „Decide emoțional vs. rațional" e o tendință de vânzări, nu o statistică oficială — de aceea rămâne sub avertismentul de sus.</div>
+  <div class="hero-line">Cine înțelege psihologia de cumpărare a unei femei —<br><b>vinde mai repede, mai bine, mai mult.</b></div>
+
+  <div class="cn-ban">
+    <div class="ic">⚠️</div>
+    <div class="t"><b>Astea sunt doar TENDINȚE, nu reguli.</b> Nu contează dacă e bărbat sau femeie — contează <b>ENERGIA</b>. Există femei cu energie masculină și bărbați cu energie feminină. <b>Energia cumpără, nu sexul.</b> Uită-te la OM, nu la etichetă.</div>
+  </div>
+
+  <div class="cn-precond">
+    <div class="h">🧒 Pe înțelesul oricui</div>
+    Unii oameni cumpără cu <b>INIMA</b> — vor să se simtă bine, în siguranță, înțeleși. Alții cumpără cu <b>MINTEA</b> — vor să câștige, să aibă dreptate, să fie cei mai buni. De obicei femeile merg pe inimă, bărbații pe minte — <b>dar nu întotdeauna.</b> Tu ghicești: omul din față cumpără cu inima sau cu mintea? Și îi vorbești pe limba lui.
+  </div>
+
+
+  <div class="cn-sec">Cum cumpără fiecare</div>
+  <div class="ps-cmp">
+    <div class="row head">
+      <div class="cell lbl"></div>
+      <div class="cell f"><span class="ttl">🌸 FEMEIA</span><span class="en">energie feminină · „inima"</span><span class="say">„Vreau să mă simt în siguranță și înțeleasă."</span></div>
+      <div class="cell m"><span class="ttl">⚡ BĂRBATUL</span><span class="en">energie masculină · „mintea"</span><span class="say">„Vreau să câștig și să fiu cel mai bun."</span></div>
+    </div>
+    <div class="row">
+      <div class="cell lbl">Cum decide</div>
+      <div class="cell f"><div class="g"><ul><li>Simte întâi, gândește după</li><li>Inima conduce — mintea caută scuze frumoase</li></ul></div></div>
+      <div class="cell m"><div class="g"><ul><li>Gândește întâi, simte după</li><li>Mintea conduce: vrea cifre, dovezi, logică</li></ul></div></div>
+    </div>
+    <div class="row">
+      <div class="cell lbl">De ce se teme (în general)</div>
+      <div class="cell f"><div class="g"><ul><li>Să greșească</li><li>Să fie judecată</li><li>Să se facă de râs</li><li>Să dezamăgească pe cei dragi</li></ul></div></div>
+      <div class="cell m"><div class="g"><ul><li>Să pară slab</li><li>Să fie păcălit</li><li>Să piardă timp și bani</li><li>Să nu mai aibă controlul</li></ul></div></div>
+    </div>
+    <div class="row">
+      <div class="cell lbl">Frica față de MLM</div>
+      <div class="cell f"><div class="g"><ul><li>„O să vând agresiv la prieteni"</li><li>„O să par penibilă / disperată"</li><li>„O să-mi pierd prietenii"</li><li>„Nu-s eu genul care vinde"</li></ul></div></div>
+      <div class="cell m"><div class="g"><ul><li>„E o schemă piramidală?"</li><li>„O să râdă lumea de mine"</li><li>„Îmi pierd timpul degeaba"</li><li>„Nu vreau să cerșesc la oameni"</li></ul></div></div>
+    </div>
+    <div class="row">
+      <div class="cell lbl">Ce își dorește</div>
+      <div class="cell f"><div class="g"><ul><li>Siguranță</li><li>O comunitate caldă</li><li>Ceva al ei, fără să-și neglijeze familia</li><li>Să ajute și pe alții</li></ul></div></div>
+      <div class="cell m"><div class="g"><ul><li>Să câștige</li><li>Libertate financiară</li><li>Control pe timpul lui</li><li>Statut și respect</li></ul></div></div>
+    </div>
+    <div class="row">
+      <div class="cell lbl">Ce vrea să simtă printr-o activitate nouă</div>
+      <div class="cell f"><div class="g"><ul><li>În siguranță, înțeleasă, susținută</li><li>Că aparține unui grup frumos</li><li>Liniște că nu greșește</li></ul></div></div>
+      <div class="cell m"><div class="g"><ul><li>Puternic, câștigător, în control</li><li>Că a luat o decizie inteligentă — că investește, nu că e păcălit</li></ul></div></div>
+    </div>
+    <div class="row">
+      <div class="cell lbl">Cuvinte care îi conving</div>
+      <div class="cell f"><div class="g"><span class="tag">siguranță</span><span class="tag">împreună</span><span class="tag">în ritmul tău</span><span class="tag">fără presiune</span><span class="tag">familie</span><span class="tag">grijă</span></div></div>
+      <div class="cell m"><div class="g"><span class="tag">rezultat</span><span class="tag">câștig</span><span class="tag">control</span><span class="tag">cel mai bun</span><span class="tag">libertate</span><span class="tag">cifre</span></div></div>
+    </div>
+  </div>
+
+  <div class="detect-h">💡 Cum recunoști energia — pe loc</div>
+  <div class="detect">
+    <div class="det f">
+      <div class="det-h">🌸 Energie feminină</div>
+      <div class="det-row"><span class="det-l">Vorbește despre</span><span class="det-v">oameni, sentimente, familie · îți cere părerea</span></div>
+      <div class="det-row"><span class="det-l">Tu răspunzi</span><span class="det-v">cald · despre <b>siguranță</b> și <b>„împreună"</b></span></div>
+    </div>
+    <div class="det m">
+      <div class="det-h">⚡ Energie masculină</div>
+      <div class="det-row"><span class="det-l">Vorbește despre</span><span class="det-v">cifre, rezultate, timp · vrea să conducă discuția</span></div>
+      <div class="det-row"><span class="det-l">Tu răspunzi</span><span class="det-v">scurt · despre <b>câștig</b> și <b>control</b></span></div>
+    </div>
+  </div>
+
+  <!-- ===== SCRIPT ===== -->
+  <div class="cn-sec">Scriptul</div>
+
+  <div class="spine">
+    <div class="ic">🗝️</div>
+    <div>
+      <div class="t">Principiul care ține tot scriptul</div>
+      <div class="d">Nu o convingi niciodată — o faci să simtă că <b>EA alege</b>. Fiecare replică îi dă ei controlul și siguranța, nu ție dreptatea. Un agent care înțelege asta închide de două ori mai des decât unul care doar citește replicile.</div>
+    </div>
+  </div>
+
+  <div class="tabguide">Alege scriptul după <b>energia clientului</b> din fața ta:</div>
+  <div class="navtabs">
+    <button class="navtab active" onclick="psTab('women',this)">Client · energie feminină</button>
+    <button class="navtab soon" onclick="psTab('men',this)">Client · energie masculină <span class="soon-badge">în pregătire</span></button>
+  </div>
+
+  <div class="womenScript">
+    <div class="ctx-slim">
+      <div class="ic">🗣️</div>
+      <div>
+        <div class="ch"><b>De la femeie la femeie</b> — agentă femeie → clientă femeie.</div>
+        <div class="cd">Forța scriptului vine din complicitatea „de femeie la femeie". Dacă agentul e bărbat, framing-ul se schimbă — îl construim separat.</div>
+      </div>
+    </div>
+
+    <div class="modebar">
+      <div class="lbl">Cum vrei să vezi materialul?</div>
+      <div class="seg">
+        <button id="b-full" class="on" onclick="psMode('full')">Script + psihologie</button>
+        <button id="b-clean" onclick="psMode('clean')">Doar scriptul</button>
+      </div>
+    </div>
+
+    <div class="exch">
+      <div class="preopen">
+        <div class="preopen-h">🎯 Chiar înainte să începi (înainte de Deschidere)</div>
+        <div class="preopen-b">Nu deschide gura până nu ești în starea potrivită. 30 de secunde: respiră adânc, coboară ritmul, pune-ți zâmbetul pe față. Intri <b>caldă și calmă</b> — nu grăbită, nu din nevoia de a convinge. Primul lucru pe care i-l transmiți nu e o vorbă, e o stare.</div>
+      </div>
+      <div class="fc-psy"><div class="pt">🔒 De ce — psihologic</div><div class="strat">Starea ta vorbește prima</div><ul><li>O femeie îți simte energia înainte să-ți audă cuvintele.</li><li>În primele secunde, creierul ei limbic decide un singur lucru: „e sigur aici sau nu?".</li><li>Intri din presiune → îți simte nevoia și ridică scutul. Intri din calm → te percepe ca aliat, nu ca vânzător.</li></ul><div class="impact"><b>Regula de aur:</b> scriptul de mai jos își face efectul doar dacă starea ta îl susține.</div></div>
+    </div>
+
+    <div class="phase-band">▸ Pașii 1–4 · ÎNAINTE de prezentare — conectare + cadru de siguranță</div>
+
+    <div class="exch">
+      <div class="cn-box">
+        <span class="cn-zone">1 · Deschidere</span>
+        <div class="cn-line"><div class="cn-role">Tu</div><div class="cn-say">„Draga mea… știu exact cum te simți… și știu că noi, ca femei, vrem înainte de orice să știm că suntem în siguranță cu deciziile noastre. Vrem să știm că nu vom eșua, că nu ne vom face de râs, că nu vom fi penibile.”</div></div>
+        <span class="cn-pause">⏸ TACI — ai nevoie de confirmare</span>
+      </div>
+      <div class="fc-psy"><div class="pt">🔒 Psihologia din spate</div><div class="strat">Validare emoțională + nevoia de siguranță</div><ul><li>Îi validezi emoțiile înainte să-i prezinți oportunitatea.</li><li>Îi spui ce simte deja, dar nu verbalizează → se simte înțeleasă, nu vândută.</li><li>Dezarmezi frica de eșec și de rușine.</li><li>Pauza o lasă să proceseze; când confirmă, devine implicată emoțional.</li></ul><div class="impact"><b>Impact:</b> o femeie se deschide doar când se simte înțeleasă.</div></div>
+    </div>
+
+    <div class="exch">
+      <div class="cn-box">
+        <span class="cn-zone">2 · Cererea permisiunii</span>
+        <div class="cn-line client"><div class="cn-role client">Ea</div><div class="cn-say client">„Așa este…”</div></div>
+        <div class="cn-line"><div class="cn-role">Tu</div><div class="cn-say">„Pot să-ți pun o întrebare?”</div></div>
+        <div class="cn-line client"><div class="cn-role client">Ea</div><div class="cn-say client">„Da…”</div></div>
+      </div>
+      <div class="fc-psy"><div class="pt">🔒 Psihologia din spate</div><div class="strat">Cererea permisiunii</div><ul><li>Femeia reacționează excelent la întrebări cu permisiune.</li><li>Creezi respect, siguranță și zero presiune.</li><li>O pui în poziția de control.</li></ul><div class="impact"><b>Impact:</b> devine mult mai receptivă.</div></div>
+    </div>
+
+    <div class="exch">
+      <div class="cn-box">
+        <span class="cn-zone">3 · Identitate feminină<span class="nu-badge">🔁 NU strategic</span></span>
+        <div class="cn-line"><div class="cn-role">Tu</div><div class="cn-say">„Crezi că eu, ca femeie, știind ce valorează cel mai mult o femeie pe lumea asta, m-aș fi aruncat într-un proiect unde să mă fac de râs, unde o să eșuez, unde aș fi părut penibilă?”</div></div>
+        <div class="cn-line client"><div class="cn-role client">Ea</div><div class="cn-say client">„Nu… nu cred…”</div></div>
+      </div>
+      <div class="fc-psy"><div class="pt">🔒 Psihologia din spate</div><div class="strat">Identitate feminină + postura similară</div><ul><li>Te pui în aceeași categorie: „de femeie la femeie”.</li><li>Mesajul subtil: „dacă eu nu m-aș expune, nu te-aș expune nici pe tine”.</li></ul><div class="impact"><b>Impact:</b> se simte protejată, nu manipulată.</div></div>
+    </div>
+
+    <div class="exch">
+      <div class="cn-box">
+        <span class="cn-zone">4 · Întrebarea cu „nu”<span class="nu-badge">🔁 NU strategic</span></span>
+        <div class="cn-line"><div class="cn-role">Tu</div><div class="cn-say">„Crezi cu toată ființa ta că ți-aș prezenta ție, ca femeie, un proiect unde te-aș împinge către eșec, către penibil… sau simți că înțeleg care sunt nevoile unei femei când trebuie să aleagă?”</div></div>
+        <div class="cn-line client"><div class="cn-role client">Ea</div><div class="cn-say client">„Simți care sunt nevoile…”</div></div>
+      </div>
+      <div class="fc-psy"><div class="pt">🔒 Psihologia din spate</div><div class="strat">Întrebare cu „nu” + accesarea nevoilor</div><ul><li>O întrebare făcută să obțină un „NU” care în realitate e un „DA”.</li><li>Îi confirmi subtil că înțelegi psihologia feminină.</li></ul><div class="impact"><b>Impact:</b> când o femeie spune „simt că mă înțelegi”, ai deja 70% din decizie.</div></div>
+    </div>
+
+    <div class="present-card">
+      <div class="ic">🎤</div>
+      <div class="t">PREZENTAREA 1 LA 1</div>
+      <div class="d">Aici prezinți produsul / oportunitatea, față în față. Pașii 1–4 au pregătit terenul; abia acum, când ea are toate detaliile, continui cu întrebările de închidere.</div>
+      <div class="lk">→ vezi modulul „Prezentare"</div>
+    </div>
+
+    <div class="phase-band">▸ Pașii 5–11 · DUPĂ prezentare — dezamorsezi frica → închizi vânzarea</div>
+
+    <div class="exch">
+      <div class="cn-box">
+        <span class="cn-zone">5 · Dezamorsarea fricii</span>
+        <div class="cn-line"><div class="cn-role">Tu</div><div class="cn-say">„Acum că ai toate detaliile, crezi că o decizie de <span class="fill">X bani</span> <span class="cue">(spui suma pachetului de start)</span>, unde primești <span class="fill">X, Y, Z</span> <span class="cue">(enumeri ce primește — produse / beneficii)</span> — este riscantă pentru tine, te va face de râs sau te va expune eșecului?”</div></div>
+        <div class="cn-line client"><div class="cn-role client">Ea</div><div class="cn-say client">„eee… nuuu…”</div></div>
+      </div>
+      <div class="fc-psy"><div class="pt">🔒 Psihologia din spate</div><div class="strat">Dezamorsarea fricii + reducerea riscului</div><ul><li>Readuci fricile la dimensiunea reală: „chiar e risc aici?”.</li><li>Micro-întrebări care fac temerea să pară exagerată.</li><li>Activezi logica blând.</li></ul><div class="impact"><b>Impact:</b> minimizezi riscul → decizia devine ușoară.</div></div>
+    </div>
+
+    <div class="exch">
+      <div class="cn-box">
+        <span class="cn-zone">6 · Ironie blândă<span class="nu-badge">🔁 NU strategic</span></span>
+        <div class="cn-line"><div class="cn-role">Tu</div><div class="cn-say">„Crezi că ar fi o decizie greșită să testezi calitatea produselor… și vei fi dată afară din casă dacă încerci? 😄”</div></div>
+        <div class="cn-line client"><div class="cn-role client">Ea</div><div class="cn-say client">„nuuu…”</div></div>
+      </div>
+      <div class="fc-psy"><div class="pt">🔒 Psihologia din spate</div><div class="strat">Ironie blândă + reducerea presiunii</div><ul><li>Exagerezi intenționat frica → devine absurdă și o face să râdă.</li><li>Umor empatic, nu sarcastic — femeia reacționează excelent.</li></ul><div class="impact"><b>Impact:</b> frica dispare, apare relaxarea.</div></div>
+    </div>
+
+    <div class="exch">
+      <div class="cn-box">
+        <span class="cn-zone">7 · Complicitate feminină</span>
+        <div class="cn-line"><div class="cn-role">Tu</div><div class="cn-say">„Atâta le trebuie… să ne mai și reproșeze că îi lăsăm numai cu mâncare rece… 😄”</div></div>
+        <div class="cn-line client"><div class="cn-role client">Ea</div><div class="cn-say client">„…Daaa 😄”</div></div>
+      </div>
+      <div class="fc-psy"><div class="pt">🔒 Psihologia din spate</div><div class="strat">Complicitate feminină + umor conectiv</div><ul><li>Creezi un „inside joke” feminin.</li><li>Ea simte că vorbește cu o prietenă, nu cu o recrutare MLM.</li><li>Creezi apartenență: „suntem din aceeași lume”.</li></ul><div class="impact"><b>Impact:</b> crește enorm conexiunea și încrederea.</div></div>
+    </div>
+
+    <div class="exch">
+      <div class="cn-box">
+        <span class="cn-zone">8 · Întrebare de control</span>
+        <div class="cn-line"><div class="cn-role">Tu</div><div class="cn-say">„Cum te-ai simți confortabilă? Să alegi tu produsele, sau ești deschisă să-ți sugerez ce folosesc eu și nu există în comerț la o astfel de calitate?”</div></div>
+        <div class="cn-line client"><div class="cn-role client">Ea</div><div class="cn-say client">„Sugerează-mi tu…”</div></div>
+      </div>
+      <div class="fc-psy"><div class="pt">🔒 Psihologia din spate</div><div class="strat">Întrebare de control + validarea expertizei</div><ul><li>Îi oferi control total → femeile decid ușor când simt libertate.</li><li>Îi insufli indirect că ai experiență și expertiză.</li></ul><div class="impact"><b>Impact:</b> siguranță + deschidere → îți dă voie să o ghidezi.</div></div>
+    </div>
+
+    <div class="exch">
+      <div class="cn-box">
+        <span class="cn-zone">9 · Două alegeri</span>
+        <div class="cn-line"><div class="cn-role">Tu</div><div class="cn-say">„Din ce zonă dorești? Parfumuri care îți scot și mai mult în evidență feminitatea și senzualitatea… sau zona de curățenie, unde nu mai înjuri că aragazul a rămas pătat după ce ai frecat la el 30 de minute? 😄”</div></div>
+        <div class="cn-line client"><div class="cn-role client">Ea</div><div class="cn-say client">„Ambele…”</div></div>
+      </div>
+      <div class="fc-psy"><div class="pt">🔒 Psihologia din spate</div><div class="strat">Întrebare cu două alegeri + identitate feminină</div><ul><li>Metoda „either/or” → ambele opțiuni duc tot la „DA”.</li><li>Activezi două identități: femeia senzuală (parfumuri) și gospodina eficientă (curățenie).</li></ul><div class="impact"><b>Impact:</b> alegerea devine ușoară și plăcută.</div></div>
+    </div>
+
+    <div class="exch">
+      <div class="cn-box">
+        <span class="cn-zone">10 · Activarea simțurilor</span>
+        <div class="cn-line"><div class="cn-role">Tu</div><div class="cn-say">„Perfect… Avem parfumul X, care… (descrii doar 2 parfumuri, senzorial)”</div></div>
+        <div class="cn-line client"><div class="cn-role client">Ea</div><div class="cn-say client">„Excelent… sună bine…”</div></div>
+      </div>
+      <div class="fc-psy"><div class="pt">🔒 Psihologia din spate</div><div class="strat">Activarea simțurilor + feminitate simbolică</div><ul><li>Limbaj senzorial → imaginație → emoție.</li><li>O femeie cumpără parfumuri emoțional: o legi de „cum se simte”, nu de „cât costă”.</li></ul><div class="impact"><b>Impact:</b> decizie emoțională.</div></div>
+    </div>
+
+    <div class="exch">
+      <div class="cn-box">
+        <span class="cn-zone">11 · Închidere soft</span>
+        <div class="cn-line"><div class="cn-role">Tu</div><div class="cn-say">„Câte ai fi bucuroasă să-ți trec pe comandă…?”</div></div>
+        <div class="cn-line client"><div class="cn-role client">Ea</div><div class="cn-say client">„…X…”</div></div>
+      </div>
+      <div class="fc-psy"><div class="pt">🔒 Psihologia din spate</div><div class="strat">Întrebarea de decizie soft</div><ul><li>Nu întrebi „vrei să comanzi?”, ci „câte îți trec?” → presupui decizia luată.</li><li>„Bucuroasă” lovește zona emoțională, nu logică → crește conversia.</li></ul><div class="impact"><b>Impact:</b> finalizezi elegant, fără presiune.</div></div>
+    </div>
+
+    <div class="cn-sec">Reguli importante</div>
+    <div class="cn-rule"><div class="cn-rule-num">1</div><div><div class="cn-rt">Citește scriptul cu VOCE TARE înainte.</div><div class="cn-rd">De minim 11 ori — ca mintea să se acomodeze cu el.</div></div></div>
+    <div class="cn-rule"><div class="cn-rule-num">2</div><div><div class="cn-rt">În Zoom, scriptul e lângă tine, scris clar.</div><div class="cn-rd">Să nu te chinui să-l citești.</div></div></div>
+    <div class="cn-rule"><div class="cn-rule-num">3</div><div><div class="cn-rt">Nu schimba cuvintele.</div><div class="cn-rd">Cuvintele schimbate schimbă sensul propoziției.</div></div></div>
+    <div class="cn-rule"><div class="cn-rule-num">4</div><div><div class="cn-rt">Urmărește ca EA să răspundă FIX la întrebarea ta.</div><div class="cn-rd">Exact la întrebarea adresată, nu la altceva.</div></div></div>
+    <div class="cn-rule"><div class="cn-rule-num">5</div><div><div class="cn-rt">Dacă răspunde cu altceva, readresezi aceeași întrebare.</div></div></div>
+    <div class="cn-rule"><div class="cn-rule-num">6</div><div><div class="cn-rt">Doar în Zoom / 1-la-1, niciodată prin mesaje text.</div></div></div>
+    <div class="cn-rule"><div class="cn-rule-num">7</div><div><div class="cn-rt">Înainte de apel, intră în stare optimă de performanță.</div></div></div>
+
+    <div class="cn-sec">Greșeli care omoară scriptul</div>
+    <div class="mistakes">
+      <div class="mistake"><div class="x">✕</div><div>Te grăbești și sari peste <b>TACI</b> / pauze. Tăcerea e unealta, nu golul — dacă o umpli, pierzi confirmarea.</div></div>
+      <div class="mistake"><div class="x">✕</div><div>Explici produsul la telefon, înainte de întâlnire. Prezentarea se face față în față — la telefon doar obții „da"-ul la cafea.</div></div>
+      <div class="mistake"><div class="x">✕</div><div>Schimbi cuvintele „ca să sune mai bine". Cuvintele schimbate schimbă sensul — structura e testată exact așa.</div></div>
+      <div class="mistake"><div class="x">✕</div><div>Împingi. O femeie ridică scutul instant la presiune — dacă simte agenda înaintea grijii, se închide.</div></div>
+    </div>
+    <div class="note">Acesta e scriptul complet, integrat — de la femeie la femeie (11 schimburi + reguli + greșeli).</div>
+  </div>
+
+  <div class="men">
+    <h3>Energie masculină · în pregătire</h3>
+    <p>Tabelul de sus arată deja tiparul. Scriptul pentru energie masculină îl construim pe aceeași structură — direct, cu cifre, câștig și control.</p>
+    <p style="margin-top:14px;font-size:13px;color:var(--muted2)">Urcă-mi un material, sau spune-mi să-l schițez eu pe tiparul din tabel.</p>
+  </div>
+`;
+
+const psihologie_it = `
+<div class="cn-title-block">
+    <h1 class="cn-h1">Come compra la donna &amp; l'uomo</h1>
+    <div class="cn-subtitle">la psicologia d'acquisto nel MLM</div>
+  </div>
+
+  <p class="cn-lead">Prima di qualsiasi script, prima capisci <b>chi</b> hai davanti. Poi gli parli nella sua lingua.</p>
+
+  <div class="cn-sec">📊 Dati ufficiali</div>
+  <div class="stats">
+    <div class="stile"><div class="n">85%</div><div class="l">delle decisioni d'acquisto sono influenzate dalle donne</div><div class="s">Forbes, 2024</div></div>
+    <div class="stile"><div class="n">73%</div><div class="l">dei distributori nella vendita diretta / MLM sono donne</div><div class="s">DSA, 2024</div></div>
+    <div class="stile"><div class="n">+30%</div><div class="l">più attente a recensioni e opinioni prima di comprare</div><div class="s">Capital One · BLS/Pew</div></div>
+    <div class="stile"><div class="n">58<span style="font-size:16px">/44</span></div><div class="l">minuti per sessione di shopping — donne vs uomini</div><div class="s">BLS · Statista</div></div>
+  </div>
+  <div class="statsnote">I dati mostrano quanto le donne <b>influenzino</b> gli acquisti. «Decide con l'emozione vs. con la ragione» è una tendenza di vendita, non una statistica ufficiale — per questo resta sotto l'avvertenza in alto.</div>
+  <div class="hero-line">Chi capisce la psicologia d'acquisto di una donna —<br><b>vende più in fretta, meglio, di più.</b></div>
+
+  <div class="cn-ban">
+    <div class="ic">⚠️</div>
+    <div class="t"><b>Queste sono solo TENDENZE, non regole.</b> Non conta se è uomo o donna — conta l'<b>ENERGIA</b>. Esistono donne con energia maschile e uomini con energia femminile. <b>È l'energia che compra, non il sesso.</b> Guarda la PERSONA, non l'etichetta.</div>
+  </div>
+
+  <div class="cn-precond">
+    <div class="h">🧒 Spiegato in parole semplici</div>
+    Alcune persone comprano con il <b>CUORE</b> — vogliono sentirsi bene, al sicuro, capite. Altre comprano con la <b>TESTA</b> — vogliono vincere, avere ragione, essere le migliori. Di solito le donne vanno di cuore, gli uomini di testa — <b>ma non sempre.</b> Il tuo compito è intuire: la persona che hai davanti compra con il cuore o con la testa? E le parli nella sua lingua.
+  </div>
+
+
+  <div class="cn-sec">Come compra ciascuno</div>
+  <div class="ps-cmp">
+    <div class="row head">
+      <div class="cell lbl"></div>
+      <div class="cell f"><span class="ttl">🌸 LA DONNA</span><span class="en">energia femminile · «il cuore»</span><span class="say">«Voglio sentirmi al sicuro e capita.»</span></div>
+      <div class="cell m"><span class="ttl">⚡ L'UOMO</span><span class="en">energia maschile · «la testa»</span><span class="say">«Voglio vincere ed essere il migliore.»</span></div>
+    </div>
+    <div class="row">
+      <div class="cell lbl">Come decide</div>
+      <div class="cell f"><div class="g"><ul><li>Prima sente, poi pensa</li><li>Guida il cuore — la testa cerca belle scuse</li></ul></div></div>
+      <div class="cell m"><div class="g"><ul><li>Prima pensa, poi sente</li><li>Guida la testa: vuole numeri, prove, logica</li></ul></div></div>
+    </div>
+    <div class="row">
+      <div class="cell lbl">Di cosa ha paura (in generale)</div>
+      <div class="cell f"><div class="g"><ul><li>Di sbagliare</li><li>Di essere giudicata</li><li>Di fare una brutta figura</li><li>Di deludere le persone care</li></ul></div></div>
+      <div class="cell m"><div class="g"><ul><li>Di sembrare debole</li><li>Di essere fregato</li><li>Di perdere tempo e soldi</li><li>Di non avere più il controllo</li></ul></div></div>
+    </div>
+    <div class="row">
+      <div class="cell lbl">La paura verso l'MLM</div>
+      <div class="cell f"><div class="g"><ul><li>«Venderò in modo aggressivo agli amici»</li><li>«Sembrerò patetica / disperata»</li><li>«Perderò le amicizie»</li><li>«Non sono il tipo che vende»</li></ul></div></div>
+      <div class="cell m"><div class="g"><ul><li>«È uno schema piramidale?»</li><li>«La gente riderà di me»</li><li>«Perdo tempo per niente»</li><li>«Non voglio elemosinare dalle persone»</li></ul></div></div>
+    </div>
+    <div class="row">
+      <div class="cell lbl">Cosa desidera</div>
+      <div class="cell f"><div class="g"><ul><li>Sicurezza</li><li>Una comunità calorosa</li><li>Qualcosa di suo, senza trascurare la famiglia</li><li>Aiutare anche gli altri</li></ul></div></div>
+      <div class="cell m"><div class="g"><ul><li>Vincere</li><li>Libertà finanziaria</li><li>Controllo sul proprio tempo</li><li>Status e rispetto</li></ul></div></div>
+    </div>
+    <div class="row">
+      <div class="cell lbl">Cosa vuole provare con un'attività nuova</div>
+      <div class="cell f"><div class="g"><ul><li>Al sicuro, capita, sostenuta</li><li>Di appartenere a un bel gruppo</li><li>La serenità di non sbagliare</li></ul></div></div>
+      <div class="cell m"><div class="g"><ul><li>Forte, vincente, in controllo</li><li>Di aver preso una decisione intelligente — di investire, non di essere fregato</li></ul></div></div>
+    </div>
+    <div class="row">
+      <div class="cell lbl">Parole che la convincono</div>
+      <div class="cell f"><div class="g"><span class="tag">sicurezza</span><span class="tag">insieme</span><span class="tag">al tuo ritmo</span><span class="tag">senza pressione</span><span class="tag">famiglia</span><span class="tag">cura</span></div></div>
+      <div class="cell m"><div class="g"><span class="tag">risultato</span><span class="tag">guadagno</span><span class="tag">controllo</span><span class="tag">il migliore</span><span class="tag">libertà</span><span class="tag">numeri</span></div></div>
+    </div>
+  </div>
+
+  <div class="detect-h">💡 Come riconosci l'energia — sul momento</div>
+  <div class="detect">
+    <div class="det f">
+      <div class="det-h">🌸 Energia femminile</div>
+      <div class="det-row"><span class="det-l">Parla di</span><span class="det-v">persone, sentimenti, famiglia · ti chiede il parere</span></div>
+      <div class="det-row"><span class="det-l">Tu rispondi</span><span class="det-v">con calore · di <b>sicurezza</b> e <b>«insieme»</b></span></div>
+    </div>
+    <div class="det m">
+      <div class="det-h">⚡ Energia maschile</div>
+      <div class="det-row"><span class="det-l">Parla di</span><span class="det-v">numeri, risultati, tempo · vuole guidare la conversazione</span></div>
+      <div class="det-row"><span class="det-l">Tu rispondi</span><span class="det-v">breve · di <b>guadagno</b> e <b>controllo</b></span></div>
+    </div>
+  </div>
+
+  <!-- ===== SCRIPT ===== -->
+  <div class="cn-sec">Lo script</div>
+
+  <div class="spine">
+    <div class="ic">🗝️</div>
+    <div>
+      <div class="t">Il principio che regge tutto lo script</div>
+      <div class="d">Non la convinci mai — le fai sentire che è <b>LEI a scegliere</b>. Ogni battuta dà a lei il controllo e la sicurezza, non a te la ragione. Un agente che capisce questo chiude il doppio delle volte rispetto a uno che si limita a leggere le battute.</div>
+    </div>
+  </div>
+
+  <div class="tabguide">Scegli lo script in base all'<b>energia del cliente</b> che hai davanti:</div>
+  <div class="navtabs">
+    <button class="navtab active" onclick="psTab('women',this)">Cliente · energia femminile</button>
+    <button class="navtab soon" onclick="psTab('men',this)">Cliente · energia maschile <span class="soon-badge">in preparazione</span></button>
+  </div>
+
+  <div class="womenScript">
+    <div class="ctx-slim">
+      <div class="ic">🗣️</div>
+      <div>
+        <div class="ch"><b>Da donna a donna</b> — agente donna → cliente donna.</div>
+        <div class="cd">La forza dello script nasce dalla complicità «da donna a donna». Se l'agente è un uomo, il framing cambia — lo costruiamo a parte.</div>
+      </div>
+    </div>
+
+    <div class="modebar">
+      <div class="lbl">Come vuoi vedere il materiale?</div>
+      <div class="seg">
+        <button id="b-full" class="on" onclick="psMode('full')">Script + psicologia</button>
+        <button id="b-clean" onclick="psMode('clean')">Solo lo script</button>
+      </div>
+    </div>
+
+    <div class="exch">
+      <div class="preopen">
+        <div class="preopen-h">🎯 Proprio prima di iniziare (prima dell'Apertura)</div>
+        <div class="preopen-b">Non aprire bocca finché non sei nello stato giusto. 30 secondi: respira a fondo, abbassa il ritmo, mettiti il sorriso sul viso. Entri <b>calorosa e calma</b> — non di fretta, non dal bisogno di convincere. La prima cosa che le trasmetti non è una parola, è uno stato d'animo.</div>
+      </div>
+      <div class="fc-psy"><div class="pt">🔒 Perché — a livello psicologico</div><div class="strat">Il tuo stato d'animo parla per primo</div><ul><li>Una donna sente la tua energia prima ancora di ascoltare le tue parole.</li><li>Nei primi secondi il suo cervello limbico decide una cosa sola: «qui sono al sicuro o no?».</li><li>Entri dalla pressione → sente il tuo bisogno e alza lo scudo. Entri dalla calma → ti percepisce come alleata, non come venditrice.</li></ul><div class="impact"><b>Regola d'oro:</b> lo script qui sotto fa effetto solo se il tuo stato d'animo lo sostiene.</div></div>
+    </div>
+
+    <div class="phase-band">▸ Passi 1–4 · PRIMA della presentazione — connessione + cornice di sicurezza</div>
+
+    <div class="exch">
+      <div class="cn-box">
+        <span class="cn-zone">1 · Apertura</span>
+        <div class="cn-line"><div class="cn-role">Tu</div><div class="cn-say">«Cara mia… so esattamente come ti senti… e so che noi, come donne, prima di ogni cosa vogliamo sapere di essere al sicuro con le nostre decisioni. Vogliamo sapere che non falliremo, che non faremo brutta figura, che non risulteremo patetiche.»</div></div>
+        <span class="cn-pause">⏸ TACI — hai bisogno di una conferma</span>
+      </div>
+      <div class="fc-psy"><div class="pt">🔒 La psicologia dietro</div><div class="strat">Validazione emotiva + bisogno di sicurezza</div><ul><li>Le validi le emozioni prima di presentarle l'opportunità.</li><li>Le dici ciò che già prova ma non mette in parole → si sente capita, non venduta.</li><li>Disinneschi la paura di fallire e di vergognarsi.</li><li>La pausa la lascia elaborare; quando conferma, si coinvolge emotivamente.</li></ul><div class="impact"><b>Impatto:</b> una donna si apre solo quando si sente capita.</div></div>
+    </div>
+
+    <div class="exch">
+      <div class="cn-box">
+        <span class="cn-zone">2 · Chiedere il permesso</span>
+        <div class="cn-line client"><div class="cn-role client">Lei</div><div class="cn-say client">«È proprio così…»</div></div>
+        <div class="cn-line"><div class="cn-role">Tu</div><div class="cn-say">«Posso farti una domanda?»</div></div>
+        <div class="cn-line client"><div class="cn-role client">Lei</div><div class="cn-say client">«Sì…»</div></div>
+      </div>
+      <div class="fc-psy"><div class="pt">🔒 La psicologia dietro</div><div class="strat">Chiedere il permesso</div><ul><li>La donna reagisce benissimo alle domande con permesso.</li><li>Crei rispetto, sicurezza e zero pressione.</li><li>La metti in posizione di controllo.</li></ul><div class="impact"><b>Impatto:</b> diventa molto più ricettiva.</div></div>
+    </div>
+
+    <div class="exch">
+      <div class="cn-box">
+        <span class="cn-zone">3 · Identità femminile<span class="nu-badge">🔁 NO strategico</span></span>
+        <div class="cn-line"><div class="cn-role">Tu</div><div class="cn-say">«Credi che io, come donna, sapendo qual è la cosa più preziosa al mondo per una donna, mi sarei buttata in un progetto in cui fare brutta figura, in cui fallire, in cui sembrare patetica?»</div></div>
+        <div class="cn-line client"><div class="cn-role client">Lei</div><div class="cn-say client">«No… non credo…»</div></div>
+      </div>
+      <div class="fc-psy"><div class="pt">🔒 La psicologia dietro</div><div class="strat">Identità femminile + posizione condivisa</div><ul><li>Ti metti nella stessa categoria: «da donna a donna».</li><li>Il messaggio implicito: «se io non mi esporrei, non esporrei nemmeno te».</li></ul><div class="impact"><b>Impatto:</b> si sente protetta, non manipolata.</div></div>
+    </div>
+
+    <div class="exch">
+      <div class="cn-box">
+        <span class="cn-zone">4 · La domanda col «no»<span class="nu-badge">🔁 NO strategico</span></span>
+        <div class="cn-line"><div class="cn-role">Tu</div><div class="cn-say">«Credi con tutta te stessa che io presenterei a te, come donna, un progetto in cui ti spingerei verso il fallimento, verso la figuraccia… oppure senti che capisco quali sono i bisogni di una donna quando deve scegliere?»</div></div>
+        <div class="cn-line client"><div class="cn-role client">Lei</div><div class="cn-say client">«Senti quali sono i bisogni…»</div></div>
+      </div>
+      <div class="fc-psy"><div class="pt">🔒 La psicologia dietro</div><div class="strat">Domanda col «no» + accesso ai bisogni</div><ul><li>Una domanda costruita per ottenere un «NO» che in realtà è un «SÌ».</li><li>Le confermi sottilmente che capisci la psicologia femminile.</li></ul><div class="impact"><b>Impatto:</b> quando una donna dice «sento che mi capisci», hai già il 70% della decisione.</div></div>
+    </div>
+
+    <div class="present-card">
+      <div class="ic">🎤</div>
+      <div class="t">LA PRESENTAZIONE 1 A 1</div>
+      <div class="d">Qui presenti il prodotto / l'opportunità, faccia a faccia. I passi 1–4 hanno preparato il terreno; solo adesso, quando lei ha tutti i dettagli, prosegui con le domande di chiusura.</div>
+      <div class="lk">→ vedi il modulo «Presentazione»</div>
+    </div>
+
+    <div class="phase-band">▸ Passi 5–11 · DOPO la presentazione — disinneschi la paura → chiudi la vendita</div>
+
+    <div class="exch">
+      <div class="cn-box">
+        <span class="cn-zone">5 · Disinnescare la paura</span>
+        <div class="cn-line"><div class="cn-role">Tu</div><div class="cn-say">«Adesso che hai tutti i dettagli, credi che una decisione da <span class="fill">X euro</span> <span class="cue">(dici la cifra del pacchetto iniziale)</span>, in cui ricevi <span class="fill">X, Y, Z</span> <span class="cue">(elenchi ciò che riceve — prodotti / vantaggi)</span> — sia rischiosa per te, ti farà fare brutta figura o ti esporrà al fallimento?»</div></div>
+        <div class="cn-line client"><div class="cn-role client">Lei</div><div class="cn-say client">«eee… nooo…»</div></div>
+      </div>
+      <div class="fc-psy"><div class="pt">🔒 La psicologia dietro</div><div class="strat">Disinnescare la paura + ridurre il rischio</div><ul><li>Riporti le paure alla loro dimensione reale: «c'è davvero un rischio qui?».</li><li>Micro-domande che fanno sembrare esagerato il timore.</li><li>Attivi la logica con dolcezza.</li></ul><div class="impact"><b>Impatto:</b> minimizzi il rischio → la decisione diventa facile.</div></div>
+    </div>
+
+    <div class="exch">
+      <div class="cn-box">
+        <span class="cn-zone">6 · Ironia leggera<span class="nu-badge">🔁 NO strategico</span></span>
+        <div class="cn-line"><div class="cn-role">Tu</div><div class="cn-say">«Credi che sarebbe una decisione sbagliata provare la qualità dei prodotti… e ti sbatteranno fuori di casa se ci provi? 😄»</div></div>
+        <div class="cn-line client"><div class="cn-role client">Lei</div><div class="cn-say client">«nooo…»</div></div>
+      </div>
+      <div class="fc-psy"><div class="pt">🔒 La psicologia dietro</div><div class="strat">Ironia leggera + riduzione della pressione</div><ul><li>Esageri di proposito la paura → diventa assurda e la fa ridere.</li><li>Umorismo empatico, non sarcastico — la donna reagisce benissimo.</li></ul><div class="impact"><b>Impatto:</b> la paura sparisce, arriva il rilassamento.</div></div>
+    </div>
+
+    <div class="exch">
+      <div class="cn-box">
+        <span class="cn-zone">7 · Complicità femminile</span>
+        <div class="cn-line"><div class="cn-role">Tu</div><div class="cn-say">«Non chiedono altro… così poi ci rimproverano pure di lasciarli solo con la cena fredda… 😄»</div></div>
+        <div class="cn-line client"><div class="cn-role client">Lei</div><div class="cn-say client">«…Sìì 😄»</div></div>
+      </div>
+      <div class="fc-psy"><div class="pt">🔒 La psicologia dietro</div><div class="strat">Complicità femminile + umorismo che connette</div><ul><li>Crei una battuta «tra di noi» al femminile.</li><li>Lei sente di parlare con un'amica, non con un reclutamento MLM.</li><li>Crei appartenenza: «siamo dello stesso mondo».</li></ul><div class="impact"><b>Impatto:</b> cresce enormemente la connessione e la fiducia.</div></div>
+    </div>
+
+    <div class="exch">
+      <div class="cn-box">
+        <span class="cn-zone">8 · Domanda di controllo</span>
+        <div class="cn-line"><div class="cn-role">Tu</div><div class="cn-say">«Come ti sentiresti più a tuo agio? Scegliere tu i prodotti, oppure sei aperta a farti suggerire ciò che uso io e che non trovi in commercio a una qualità del genere?»</div></div>
+        <div class="cn-line client"><div class="cn-role client">Lei</div><div class="cn-say client">«Suggeriscimeli tu…»</div></div>
+      </div>
+      <div class="fc-psy"><div class="pt">🔒 La psicologia dietro</div><div class="strat">Domanda di controllo + validazione della competenza</div><ul><li>Le dai il controllo totale → le donne decidono facilmente quando sentono libertà.</li><li>Le trasmetti indirettamente che hai esperienza e competenza.</li></ul><div class="impact"><b>Impatto:</b> sicurezza + apertura → ti dà il permesso di guidarla.</div></div>
+    </div>
+
+    <div class="exch">
+      <div class="cn-box">
+        <span class="cn-zone">9 · Due scelte</span>
+        <div class="cn-line"><div class="cn-role">Tu</div><div class="cn-say">«Da quale area preferisci partire? Profumi che mettono ancora più in risalto la tua femminilità e sensualità… oppure l'area pulizia, dove non impreghi più perché il piano cottura è rimasto macchiato dopo che ci hai strofinato su per 30 minuti? 😄»</div></div>
+        <div class="cn-line client"><div class="cn-role client">Lei</div><div class="cn-say client">«Tutte e due…»</div></div>
+      </div>
+      <div class="fc-psy"><div class="pt">🔒 La psicologia dietro</div><div class="strat">Domanda a due scelte + identità femminile</div><ul><li>Il metodo «either/or» → entrambe le opzioni portano comunque al «SÌ».</li><li>Attivi due identità: la donna sensuale (profumi) e la padrona di casa efficiente (pulizia).</li></ul><div class="impact"><b>Impatto:</b> la scelta diventa facile e piacevole.</div></div>
+    </div>
+
+    <div class="exch">
+      <div class="cn-box">
+        <span class="cn-zone">10 · Attivazione dei sensi</span>
+        <div class="cn-line"><div class="cn-role">Tu</div><div class="cn-say">«Perfetto… Abbiamo il profumo X, che… (descrivi solo 2 profumi, in modo sensoriale)»</div></div>
+        <div class="cn-line client"><div class="cn-role client">Lei</div><div class="cn-say client">«Ottimo… suona bene…»</div></div>
+      </div>
+      <div class="fc-psy"><div class="pt">🔒 La psicologia dietro</div><div class="strat">Attivazione dei sensi + femminilità simbolica</div><ul><li>Linguaggio sensoriale → immaginazione → emozione.</li><li>Una donna compra i profumi con l'emozione: la leghi a «come ti fa sentire», non a «quanto costa».</li></ul><div class="impact"><b>Impatto:</b> decisione emotiva.</div></div>
+    </div>
+
+    <div class="exch">
+      <div class="cn-box">
+        <span class="cn-zone">11 · Chiusura soft</span>
+        <div class="cn-line"><div class="cn-role">Tu</div><div class="cn-say">«Quante saresti felice di segnarti sull'ordine…?»</div></div>
+        <div class="cn-line client"><div class="cn-role client">Lei</div><div class="cn-say client">«…X…»</div></div>
+      </div>
+      <div class="fc-psy"><div class="pt">🔒 La psicologia dietro</div><div class="strat">La domanda di decisione soft</div><ul><li>Non chiedi «vuoi ordinare?», ma «quante te ne segno?» → dai per fatta la decisione presa.</li><li>«Felice» colpisce la zona emotiva, non quella logica → aumenta la conversione.</li></ul><div class="impact"><b>Impatto:</b> concludi con eleganza, senza pressione.</div></div>
+    </div>
+
+    <div class="cn-sec">Regole importanti</div>
+    <div class="cn-rule"><div class="cn-rule-num">1</div><div><div class="cn-rt">Leggi lo script ad ALTA VOCE prima.</div><div class="cn-rd">Almeno 11 volte — così la mente ci prende confidenza.</div></div></div>
+    <div class="cn-rule"><div class="cn-rule-num">2</div><div><div class="cn-rt">Su Zoom, lo script è accanto a te, scritto chiaro.</div><div class="cn-rd">Così non fai fatica a leggerlo.</div></div></div>
+    <div class="cn-rule"><div class="cn-rule-num">3</div><div><div class="cn-rt">Non cambiare le parole.</div><div class="cn-rd">Le parole cambiate cambiano il senso della frase.</div></div></div>
+    <div class="cn-rule"><div class="cn-rule-num">4</div><div><div class="cn-rt">Fai in modo che sia LEI a rispondere ESATTAMENTE alla tua domanda.</div><div class="cn-rd">Proprio alla domanda posta, non ad altro.</div></div></div>
+    <div class="cn-rule"><div class="cn-rule-num">5</div><div><div class="cn-rt">Se risponde con altro, riproponi la stessa domanda.</div></div></div>
+    <div class="cn-rule"><div class="cn-rule-num">6</div><div><div class="cn-rt">Solo su Zoom / 1-a-1, mai via messaggi di testo.</div></div></div>
+    <div class="cn-rule"><div class="cn-rule-num">7</div><div><div class="cn-rt">Prima della chiamata, entra nello stato ottimale di performance.</div></div></div>
+
+    <div class="cn-sec">Errori che uccidono lo script</div>
+    <div class="mistakes">
+      <div class="mistake"><div class="x">✕</div><div>Vai di fretta e salti i <b>TACI</b> / le pause. Il silenzio è lo strumento, non il vuoto — se lo riempi, perdi la conferma.</div></div>
+      <div class="mistake"><div class="x">✕</div><div>Spieghi il prodotto al telefono, prima dell'incontro. La presentazione si fa faccia a faccia — al telefono ottieni solo il «sì» al caffè.</div></div>
+      <div class="mistake"><div class="x">✕</div><div>Cambi le parole «per farle suonare meglio». Le parole cambiate cambiano il senso — la struttura è testata esattamente così.</div></div>
+      <div class="mistake"><div class="x">✕</div><div>Spingi. Una donna alza lo scudo all'istante di fronte alla pressione — se sente l'agenda prima della cura, si chiude.</div></div>
+    </div>
+    <div class="note">Questo è lo script completo, integrato — da donna a donna (11 scambi + regole + errori).</div>
+  </div>
+
+  <div class="men">
+    <h3>Energia maschile · in preparazione</h3>
+    <p>La tabella qui sopra mostra già lo schema. Lo script per l'energia maschile lo costruiamo sulla stessa struttura — diretto, con numeri, guadagno e controllo.</p>
+    <p style="margin-top:14px;font-size:13px;color:var(--muted2)">Caricami un materiale, oppure dimmi di abbozzarlo io sullo schema della tabella.</p>
+  </div>
+`;
+
+const psihologie_en = `
+<div class="cn-title-block">
+    <h1 class="cn-h1">How Women &amp; Men Buy</h1>
+    <div class="cn-subtitle">the buying psychology behind MLM</div>
+  </div>
+
+  <p class="cn-lead">Before any script, first you understand <b>who</b> is in front of you. Then you speak their language.</p>
+
+  <div class="cn-sec">📊 Official numbers</div>
+  <div class="stats">
+    <div class="stile"><div class="n">85%</div><div class="l">of buying decisions are influenced by women</div><div class="s">Forbes, 2024</div></div>
+    <div class="stile"><div class="n">73%</div><div class="l">of direct-sales / MLM distributors are women</div><div class="s">DSA, 2024</div></div>
+    <div class="stile"><div class="n">+30%</div><div class="l">more likely to check reviews and opinions before buying</div><div class="s">Capital One · BLS/Pew</div></div>
+    <div class="stile"><div class="n">58<span style="font-size:16px">/44</span></div><div class="l">minutes per shopping session — women vs men</div><div class="s">BLS · Statista</div></div>
+  </div>
+  <div class="statsnote">The numbers show just how much women <b>influence</b> buying. "Decides emotionally vs. rationally" is a sales tendency, not an official statistic — which is why it stays under the disclaimer above.</div>
+  <div class="hero-line">Whoever understands a woman's buying psychology —<br><b>sells faster, better, and more.</b></div>
+
+  <div class="cn-ban">
+    <div class="ic">⚠️</div>
+    <div class="t"><b>These are only TENDENCIES, not rules.</b> It doesn't matter whether it's a man or a woman — what matters is the <b>ENERGY</b>. There are women with masculine energy and men with feminine energy. <b>Energy buys, not gender.</b> Look at the person, not the label.</div>
+  </div>
+
+  <div class="cn-precond">
+    <div class="h">🧒 In plain terms</div>
+    Some people buy with the <b>HEART</b> — they want to feel good, safe, understood. Others buy with the <b>HEAD</b> — they want to win, to be right, to be the best. Women usually go with the heart, men with the head — <b>but not always.</b> Your job is to read it: does the person in front of you buy with the heart or the head? And then you speak their language.
+  </div>
+
+
+  <div class="cn-sec">How each one buys</div>
+  <div class="ps-cmp">
+    <div class="row head">
+      <div class="cell lbl"></div>
+      <div class="cell f"><span class="ttl">🌸 THE WOMAN</span><span class="en">feminine energy · "the heart"</span><span class="say">"I want to feel safe and understood."</span></div>
+      <div class="cell m"><span class="ttl">⚡ THE MAN</span><span class="en">masculine energy · "the head"</span><span class="say">"I want to win and be the best."</span></div>
+    </div>
+    <div class="row">
+      <div class="cell lbl">How they decide</div>
+      <div class="cell f"><div class="g"><ul><li>Feels first, thinks after</li><li>The heart leads — the head looks for nice excuses</li></ul></div></div>
+      <div class="cell m"><div class="g"><ul><li>Thinks first, feels after</li><li>The head leads: wants numbers, proof, logic</li></ul></div></div>
+    </div>
+    <div class="row">
+      <div class="cell lbl">What they fear (in general)</div>
+      <div class="cell f"><div class="g"><ul><li>Getting it wrong</li><li>Being judged</li><li>Embarrassing themselves</li><li>Letting down the people they love</li></ul></div></div>
+      <div class="cell m"><div class="g"><ul><li>Looking weak</li><li>Being fooled</li><li>Wasting time and money</li><li>Losing control</li></ul></div></div>
+    </div>
+    <div class="row">
+      <div class="cell lbl">Their fear about MLM</div>
+      <div class="cell f"><div class="g"><ul><li>"I'll have to hard-sell to my friends"</li><li>"I'll look cringey / desperate"</li><li>"I'll lose my friends"</li><li>"I'm just not the selling type"</li></ul></div></div>
+      <div class="cell m"><div class="g"><ul><li>"Is this a pyramid scheme?"</li><li>"People will laugh at me"</li><li>"I'm wasting my time for nothing"</li><li>"I don't want to beg people"</li></ul></div></div>
+    </div>
+    <div class="row">
+      <div class="cell lbl">What they want</div>
+      <div class="cell f"><div class="g"><ul><li>Security</li><li>A warm community</li><li>Something of their own, without neglecting their family</li><li>To help others too</li></ul></div></div>
+      <div class="cell m"><div class="g"><ul><li>To win</li><li>Financial freedom</li><li>Control over their own time</li><li>Status and respect</li></ul></div></div>
+    </div>
+    <div class="row">
+      <div class="cell lbl">What they want to feel from a new venture</div>
+      <div class="cell f"><div class="g"><ul><li>Safe, understood, supported</li><li>That they belong to a beautiful group</li><li>The peace of mind that they're not making a mistake</li></ul></div></div>
+      <div class="cell m"><div class="g"><ul><li>Strong, winning, in control</li><li>That they made a smart decision — that they're investing, not getting fooled</li></ul></div></div>
+    </div>
+    <div class="row">
+      <div class="cell lbl">Words that win them over</div>
+      <div class="cell f"><div class="g"><span class="tag">safe</span><span class="tag">together</span><span class="tag">at your own pace</span><span class="tag">no pressure</span><span class="tag">family</span><span class="tag">care</span></div></div>
+      <div class="cell m"><div class="g"><span class="tag">results</span><span class="tag">win</span><span class="tag">control</span><span class="tag">the best</span><span class="tag">freedom</span><span class="tag">numbers</span></div></div>
+    </div>
+  </div>
+
+  <div class="detect-h">💡 How to read the energy — on the spot</div>
+  <div class="detect">
+    <div class="det f">
+      <div class="det-h">🌸 Feminine energy</div>
+      <div class="det-row"><span class="det-l">Talks about</span><span class="det-v">people, feelings, family · asks for your opinion</span></div>
+      <div class="det-row"><span class="det-l">You respond</span><span class="det-v">warm · about <b>safety</b> and <b>"together"</b></span></div>
+    </div>
+    <div class="det m">
+      <div class="det-h">⚡ Masculine energy</div>
+      <div class="det-row"><span class="det-l">Talks about</span><span class="det-v">numbers, results, time · wants to lead the conversation</span></div>
+      <div class="det-row"><span class="det-l">You respond</span><span class="det-v">short · about <b>winning</b> and <b>control</b></span></div>
+    </div>
+  </div>
+
+  <!-- ===== SCRIPT ===== -->
+  <div class="cn-sec">The Script</div>
+
+  <div class="spine">
+    <div class="ic">🗝️</div>
+    <div>
+      <div class="t">The principle that holds the whole script together</div>
+      <div class="d">You never convince her — you make her feel that <b>SHE chooses</b>. Every line hands her control and safety, not you the last word. An agent who gets this closes twice as often as one who just reads the lines.</div>
+    </div>
+  </div>
+
+  <div class="tabguide">Pick the script based on the <b>client's energy</b> in front of you:</div>
+  <div class="navtabs">
+    <button class="navtab active" onclick="psTab('women',this)">Client · feminine energy</button>
+    <button class="navtab soon" onclick="psTab('men',this)">Client · masculine energy <span class="soon-badge">coming soon</span></button>
+  </div>
+
+  <div class="womenScript">
+    <div class="ctx-slim">
+      <div class="ic">🗣️</div>
+      <div>
+        <div class="ch"><b>Woman to woman</b> — female agent → female client.</div>
+        <div class="cd">The power of this script comes from the "woman to woman" complicity. If the agent is a man, the framing changes — we build that one separately.</div>
+      </div>
+    </div>
+
+    <div class="modebar">
+      <div class="lbl">How do you want to view the material?</div>
+      <div class="seg">
+        <button id="b-full" class="on" onclick="psMode('full')">Script + psychology</button>
+        <button id="b-clean" onclick="psMode('clean')">Script only</button>
+      </div>
+    </div>
+
+    <div class="exch">
+      <div class="preopen">
+        <div class="preopen-h">🎯 Right before you start (before the Opening)</div>
+        <div class="preopen-b">Don't open your mouth until you're in the right state. 30 seconds: breathe deep, slow your rhythm, put the smile on your face. You come in <b>warm and calm</b> — not rushed, not out of a need to convince. The first thing you transmit to her isn't a word, it's a state.</div>
+      </div>
+      <div class="fc-psy"><div class="pt">🔒 Why — psychologically</div><div class="strat">Your state speaks first</div><ul><li>A woman feels your energy before she hears your words.</li><li>In the first few seconds, her limbic brain decides one thing only: "is it safe here or not?".</li><li>You come in from pressure → she feels your need and raises her guard. You come in from calm → she reads you as an ally, not a salesperson.</li></ul><div class="impact"><b>Golden rule:</b> the script below only works if your state backs it up.</div></div>
+    </div>
+
+    <div class="phase-band">▸ Steps 1–4 · BEFORE the presentation — connection + a frame of safety</div>
+
+    <div class="exch">
+      <div class="cn-box">
+        <span class="cn-zone">1 · Opening</span>
+        <div class="cn-line"><div class="cn-role">You</div><div class="cn-say">"Sweetheart… I know exactly how you feel… and I know that we, as women, want above all else to know that we're safe with our decisions. We want to know we won't fail, that we won't embarrass ourselves, that we won't look foolish."</div></div>
+        <span class="cn-pause">⏸ STAY SILENT — you need her to confirm</span>
+      </div>
+      <div class="fc-psy"><div class="pt">🔒 The psychology behind it</div><div class="strat">Emotional validation + the need for safety</div><ul><li>You validate her emotions before you present the opportunity.</li><li>You say what she already feels but doesn't put into words → she feels understood, not sold to.</li><li>You disarm the fear of failure and of shame.</li><li>The pause lets her process; when she confirms, she becomes emotionally invested.</li></ul><div class="impact"><b>Impact:</b> a woman opens up only when she feels understood.</div></div>
+    </div>
+
+    <div class="exch">
+      <div class="cn-box">
+        <span class="cn-zone">2 · Asking permission</span>
+        <div class="cn-line client"><div class="cn-role client">Her</div><div class="cn-say client">"That's true…"</div></div>
+        <div class="cn-line"><div class="cn-role">You</div><div class="cn-say">"Can I ask you a question?"</div></div>
+        <div class="cn-line client"><div class="cn-role client">Her</div><div class="cn-say client">"Sure…"</div></div>
+      </div>
+      <div class="fc-psy"><div class="pt">🔒 The psychology behind it</div><div class="strat">Asking permission</div><ul><li>A woman responds beautifully to questions asked with permission.</li><li>You create respect, safety, and zero pressure.</li><li>You put her in the position of control.</li></ul><div class="impact"><b>Impact:</b> she becomes far more receptive.</div></div>
+    </div>
+
+    <div class="exch">
+      <div class="cn-box">
+        <span class="cn-zone">3 · Feminine identity<span class="nu-badge">🔁 Strategic NO</span></span>
+        <div class="cn-line"><div class="cn-role">You</div><div class="cn-say">"Do you really think that I, as a woman — knowing what a woman values most in this world — would have thrown myself into a project where I'd embarrass myself, where I'd fail, where I'd look foolish?"</div></div>
+        <div class="cn-line client"><div class="cn-role client">Her</div><div class="cn-say client">"No… I don't think so…"</div></div>
+      </div>
+      <div class="fc-psy"><div class="pt">🔒 The psychology behind it</div><div class="strat">Feminine identity + matched stance</div><ul><li>You put yourself in the same category: "woman to woman".</li><li>The subtle message: "if I wouldn't expose myself, I wouldn't expose you either".</li></ul><div class="impact"><b>Impact:</b> she feels protected, not manipulated.</div></div>
+    </div>
+
+    <div class="exch">
+      <div class="cn-box">
+        <span class="cn-zone">4 · The "no" question<span class="nu-badge">🔁 Strategic NO</span></span>
+        <div class="cn-line"><div class="cn-role">You</div><div class="cn-say">"Do you honestly believe, with every fiber of your being, that I would show you — as a woman — a project where I'd push you toward failure, toward embarrassment… or do you feel that I understand what a woman needs when she has to make a choice?"</div></div>
+        <div class="cn-line client"><div class="cn-role client">Her</div><div class="cn-say client">"You feel what she needs…"</div></div>
+      </div>
+      <div class="fc-psy"><div class="pt">🔒 The psychology behind it</div><div class="strat">A "no" question + tapping into her needs</div><ul><li>A question built to get a "NO" that is really a "YES".</li><li>You subtly confirm that you understand female psychology.</li></ul><div class="impact"><b>Impact:</b> when a woman says "I feel that you understand me", you already have 70% of the decision.</div></div>
+    </div>
+
+    <div class="present-card">
+      <div class="ic">🎤</div>
+      <div class="t">THE 1-ON-1 PRESENTATION</div>
+      <div class="d">This is where you present the product / opportunity, face to face. Steps 1–4 set the ground; only now, when she has all the details, do you go on to the closing questions.</div>
+      <div class="lk">→ see the "Presentation" module</div>
+    </div>
+
+    <div class="phase-band">▸ Steps 5–11 · AFTER the presentation — defuse the fear → close the sale</div>
+
+    <div class="exch">
+      <div class="cn-box">
+        <span class="cn-zone">5 · Defusing the fear</span>
+        <div class="cn-line"><div class="cn-role">You</div><div class="cn-say">"Now that you have all the details, do you think a decision of <span class="fill">X dollars</span> <span class="cue">(you say the price of the starter pack)</span>, where you get <span class="fill">X, Y, Z</span> <span class="cue">(you list what she gets — products / benefits)</span> — is risky for you, will embarrass you, or set you up to fail?"</div></div>
+        <div class="cn-line client"><div class="cn-role client">Her</div><div class="cn-say client">"uhh… nooo…"</div></div>
+      </div>
+      <div class="fc-psy"><div class="pt">🔒 The psychology behind it</div><div class="strat">Defusing the fear + shrinking the risk</div><ul><li>You bring the fears back to their real size: "is there really any risk here?".</li><li>Micro-questions that make the worry look exaggerated.</li><li>You activate logic, gently.</li></ul><div class="impact"><b>Impact:</b> you minimize the risk → the decision becomes easy.</div></div>
+    </div>
+
+    <div class="exch">
+      <div class="cn-box">
+        <span class="cn-zone">6 · Gentle irony<span class="nu-badge">🔁 Strategic NO</span></span>
+        <div class="cn-line"><div class="cn-role">You</div><div class="cn-say">"Do you really think it'd be a wrong decision to test the quality of the products… and that you'll get thrown out of the house if you try them? 😄"</div></div>
+        <div class="cn-line client"><div class="cn-role client">Her</div><div class="cn-say client">"nooo…"</div></div>
+      </div>
+      <div class="fc-psy"><div class="pt">🔒 The psychology behind it</div><div class="strat">Gentle irony + lowering the pressure</div><ul><li>You deliberately exaggerate the fear → it turns absurd and makes her laugh.</li><li>Empathetic humor, not sarcastic — women respond to it beautifully.</li></ul><div class="impact"><b>Impact:</b> the fear disappears, relaxation sets in.</div></div>
+    </div>
+
+    <div class="exch">
+      <div class="cn-box">
+        <span class="cn-zone">7 · Feminine complicity</span>
+        <div class="cn-line"><div class="cn-role">You</div><div class="cn-say">"As if they need more ammo… so they can nag us for leaving them with nothing but cold dinners… 😄"</div></div>
+        <div class="cn-line client"><div class="cn-role client">Her</div><div class="cn-say client">"…Yeah 😄"</div></div>
+      </div>
+      <div class="fc-psy"><div class="pt">🔒 The psychology behind it</div><div class="strat">Feminine complicity + connective humor</div><ul><li>You create a feminine "inside joke".</li><li>She feels she's talking to a friend, not an MLM recruitment.</li><li>You create belonging: "we're from the same world".</li></ul><div class="impact"><b>Impact:</b> connection and trust go way up.</div></div>
+    </div>
+
+    <div class="exch">
+      <div class="cn-box">
+        <span class="cn-zone">8 · Control question</span>
+        <div class="cn-line"><div class="cn-role">You</div><div class="cn-say">"What would feel comfortable for you? To pick the products yourself, or are you open to me suggesting what I use — things you won't find in stores at this kind of quality?"</div></div>
+        <div class="cn-line client"><div class="cn-role client">Her</div><div class="cn-say client">"You suggest for me…"</div></div>
+      </div>
+      <div class="fc-psy"><div class="pt">🔒 The psychology behind it</div><div class="strat">Control question + validating your expertise</div><ul><li>You give her full control → women decide easily when they feel free.</li><li>You indirectly signal that you have experience and expertise.</li></ul><div class="impact"><b>Impact:</b> safety + openness → she lets you guide her.</div></div>
+    </div>
+
+    <div class="exch">
+      <div class="cn-box">
+        <span class="cn-zone">9 · Two choices</span>
+        <div class="cn-line"><div class="cn-role">You</div><div class="cn-say">"Which area would you like? Perfumes that bring out your femininity and sensuality even more… or the cleaning range, where you're not cursing anymore because the stove is still stained after you've scrubbed it for 30 minutes? 😄"</div></div>
+        <div class="cn-line client"><div class="cn-role client">Her</div><div class="cn-say client">"Both…"</div></div>
+      </div>
+      <div class="fc-psy"><div class="pt">🔒 The psychology behind it</div><div class="strat">A two-choice question + feminine identity</div><ul><li>The "either/or" method → both options still lead to a "YES".</li><li>You activate two identities: the sensual woman (perfumes) and the efficient homemaker (cleaning).</li></ul><div class="impact"><b>Impact:</b> the choice becomes easy and enjoyable.</div></div>
+    </div>
+
+    <div class="exch">
+      <div class="cn-box">
+        <span class="cn-zone">10 · Engaging the senses</span>
+        <div class="cn-line"><div class="cn-role">You</div><div class="cn-say">"Perfect… We have perfume X, which… (describe just 2 perfumes, sensory)"</div></div>
+        <div class="cn-line client"><div class="cn-role client">Her</div><div class="cn-say client">"Wonderful… that sounds good…"</div></div>
+      </div>
+      <div class="fc-psy"><div class="pt">🔒 The psychology behind it</div><div class="strat">Engaging the senses + symbolic femininity</div><ul><li>Sensory language → imagination → emotion.</li><li>A woman buys perfume emotionally: you tie it to "how it makes her feel", not to "what it costs".</li></ul><div class="impact"><b>Impact:</b> an emotional decision.</div></div>
+    </div>
+
+    <div class="exch">
+      <div class="cn-box">
+        <span class="cn-zone">11 · Soft close</span>
+        <div class="cn-line"><div class="cn-role">You</div><div class="cn-say">"How many would you be happy for me to put down on your order…?"</div></div>
+        <div class="cn-line client"><div class="cn-role client">Her</div><div class="cn-say client">"…X…"</div></div>
+      </div>
+      <div class="fc-psy"><div class="pt">🔒 The psychology behind it</div><div class="strat">The soft decision question</div><ul><li>You don't ask "do you want to order?", you ask "how many shall I put down?" → you assume the decision is made.</li><li>"Happy" hits the emotional zone, not the logical one → it lifts conversion.</li></ul><div class="impact"><b>Impact:</b> you close elegantly, with no pressure.</div></div>
+    </div>
+
+    <div class="cn-sec">Important rules</div>
+    <div class="cn-rule"><div class="cn-rule-num">1</div><div><div class="cn-rt">Read the script OUT LOUD beforehand.</div><div class="cn-rd">At least 11 times — so your mind gets comfortable with it.</div></div></div>
+    <div class="cn-rule"><div class="cn-rule-num">2</div><div><div class="cn-rt">On Zoom, keep the script next to you, written clearly.</div><div class="cn-rd">So you're not struggling to read it.</div></div></div>
+    <div class="cn-rule"><div class="cn-rule-num">3</div><div><div class="cn-rt">Don't change the words.</div><div class="cn-rd">Changed words change the meaning of the sentence.</div></div></div>
+    <div class="cn-rule"><div class="cn-rule-num">4</div><div><div class="cn-rt">Make sure SHE answers EXACTLY the question you asked.</div><div class="cn-rd">Exactly the question you put to her, not something else.</div></div></div>
+    <div class="cn-rule"><div class="cn-rule-num">5</div><div><div class="cn-rt">If she answers with something else, ask the same question again.</div></div></div>
+    <div class="cn-rule"><div class="cn-rule-num">6</div><div><div class="cn-rt">Only on Zoom / 1-on-1, never over text messages.</div></div></div>
+    <div class="cn-rule"><div class="cn-rule-num">7</div><div><div class="cn-rt">Before the call, get into your optimal performance state.</div></div></div>
+
+    <div class="cn-sec">Mistakes that kill the script</div>
+    <div class="mistakes">
+      <div class="mistake"><div class="x">✕</div><div>You rush and skip the <b>STAY SILENT</b> / pauses. Silence is the tool, not the gap — if you fill it, you lose the confirmation.</div></div>
+      <div class="mistake"><div class="x">✕</div><div>You explain the product on the phone, before the meeting. The presentation is done face to face — on the phone you only get the "yes" to coffee.</div></div>
+      <div class="mistake"><div class="x">✕</div><div>You change the words "to make them sound better". Changed words change the meaning — the structure is tested exactly as it is.</div></div>
+      <div class="mistake"><div class="x">✕</div><div>You push. A woman raises her guard instantly under pressure — if she senses the agenda ahead of the care, she shuts down.</div></div>
+    </div>
+    <div class="note">This is the complete, integrated script — woman to woman (11 exchanges + rules + mistakes).</div>
+  </div>
+
+  <div class="men">
+    <h3>Masculine energy · coming soon</h3>
+    <p>The table above already shows the pattern. We build the masculine-energy script on the same structure — direct, with numbers, winning, and control.</p>
+    <p style="margin-top:14px;font-size:13px;color:var(--muted2)">Upload me some material, or tell me to sketch it out myself from the pattern in the table.</p>
+  </div>
+`;
+
+const psihologie_es = `
+<div class="cn-title-block">
+    <h1 class="cn-h1">Cómo compra la mujer &amp; el hombre</h1>
+    <div class="cn-subtitle">la psicología de compra en el MLM</div>
+  </div>
+
+  <p class="cn-lead">Antes de cualquier guion, primero entiendes <b>quién</b> tienes delante. Después le hablas en su idioma.</p>
+
+  <div class="cn-sec">📊 Cifras oficiales</div>
+  <div class="stats">
+    <div class="stile"><div class="n">85%</div><div class="l">de las decisiones de compra están influidas por mujeres</div><div class="s">Forbes, 2024</div></div>
+    <div class="stile"><div class="n">73%</div><div class="l">de los distribuidores de venta directa / MLM son mujeres</div><div class="s">DSA, 2024</div></div>
+    <div class="stile"><div class="n">+30%</div><div class="l">más atentas a las reseñas y opiniones antes de comprar</div><div class="s">Capital One · BLS/Pew</div></div>
+    <div class="stile"><div class="n">58<span style="font-size:16px">/44</span></div><div class="l">minutos por sesión de compras — mujeres vs hombres</div><div class="s">BLS · Statista</div></div>
+  </div>
+  <div class="statsnote">Las cifras muestran cuánto <b>influyen</b> las mujeres en las compras. «Decide de forma emocional vs. racional» es una tendencia de ventas, no una estadística oficial — por eso queda bajo la advertencia de arriba.</div>
+  <div class="hero-line">Quien entiende la psicología de compra de una mujer —<br><b>vende más rápido, mejor y más.</b></div>
+
+  <div class="cn-ban">
+    <div class="ic">⚠️</div>
+    <div class="t"><b>Esto son solo TENDENCIAS, no reglas.</b> No importa si es hombre o mujer — importa la <b>ENERGÍA</b>. Hay mujeres con energía masculina y hombres con energía femenina. <b>La energía compra, no el sexo.</b> Mira a la PERSONA, no a la etiqueta.</div>
+  </div>
+
+  <div class="cn-precond">
+    <div class="h">🧒 Para que lo entienda cualquiera</div>
+    Hay personas que compran con el <b>CORAZÓN</b> — quieren sentirse bien, seguras, comprendidas. Otras compran con la <b>CABEZA</b> — quieren ganar, tener razón, ser los mejores. Por lo general las mujeres van con el corazón y los hombres con la cabeza — <b>pero no siempre.</b> Tú adivinas: la persona que tienes delante, ¿compra con el corazón o con la cabeza? Y le hablas en su idioma.
+  </div>
+
+
+  <div class="cn-sec">Cómo compra cada uno</div>
+  <div class="ps-cmp">
+    <div class="row head">
+      <div class="cell lbl"></div>
+      <div class="cell f"><span class="ttl">🌸 LA MUJER</span><span class="en">energía femenina · «el corazón»</span><span class="say">«Quiero sentirme segura y comprendida.»</span></div>
+      <div class="cell m"><span class="ttl">⚡ EL HOMBRE</span><span class="en">energía masculina · «la cabeza»</span><span class="say">«Quiero ganar y ser el mejor.»</span></div>
+    </div>
+    <div class="row">
+      <div class="cell lbl">Cómo decide</div>
+      <div class="cell f"><div class="g"><ul><li>Siente primero, piensa después</li><li>El corazón manda — la cabeza busca excusas bonitas</li></ul></div></div>
+      <div class="cell m"><div class="g"><ul><li>Piensa primero, siente después</li><li>La cabeza manda: quiere cifras, pruebas, lógica</li></ul></div></div>
+    </div>
+    <div class="row">
+      <div class="cell lbl">Qué teme (en general)</div>
+      <div class="cell f"><div class="g"><ul><li>Equivocarse</li><li>Que la juzguen</li><li>Hacer el ridículo</li><li>Decepcionar a sus seres queridos</li></ul></div></div>
+      <div class="cell m"><div class="g"><ul><li>Parecer débil</li><li>Que le engañen</li><li>Perder tiempo y dinero</li><li>Perder el control</li></ul></div></div>
+    </div>
+    <div class="row">
+      <div class="cell lbl">Su miedo hacia el MLM</div>
+      <div class="cell f"><div class="g"><ul><li>«Voy a vender de forma agresiva a mis amigas»</li><li>«Voy a parecer patética / desesperada»</li><li>«Voy a perder a mis amigas»</li><li>«No soy del tipo que vende»</li></ul></div></div>
+      <div class="cell m"><div class="g"><ul><li>«¿Es un esquema piramidal?»</li><li>«La gente se va a reír de mí»</li><li>«Pierdo el tiempo para nada»</li><li>«No quiero andar mendigando a la gente»</li></ul></div></div>
+    </div>
+    <div class="row">
+      <div class="cell lbl">Qué desea</div>
+      <div class="cell f"><div class="g"><ul><li>Seguridad</li><li>Una comunidad cálida</li><li>Algo suyo, sin descuidar a su familia</li><li>Ayudar también a los demás</li></ul></div></div>
+      <div class="cell m"><div class="g"><ul><li>Ganar</li><li>Libertad financiera</li><li>Control sobre su tiempo</li><li>Estatus y respeto</li></ul></div></div>
+    </div>
+    <div class="row">
+      <div class="cell lbl">Qué quiere sentir con una actividad nueva</div>
+      <div class="cell f"><div class="g"><ul><li>Segura, comprendida, apoyada</li><li>Que pertenece a un grupo bonito</li><li>Tranquilidad de no equivocarse</li></ul></div></div>
+      <div class="cell m"><div class="g"><ul><li>Fuerte, ganador, con el control</li><li>Que ha tomado una decisión inteligente — que invierte, no que le engañan</li></ul></div></div>
+    </div>
+    <div class="row">
+      <div class="cell lbl">Palabras que la convencen</div>
+      <div class="cell f"><div class="g"><span class="tag">seguridad</span><span class="tag">juntas</span><span class="tag">a tu ritmo</span><span class="tag">sin presión</span><span class="tag">familia</span><span class="tag">cuidado</span></div></div>
+      <div class="cell m"><div class="g"><span class="tag">resultado</span><span class="tag">ganancia</span><span class="tag">control</span><span class="tag">el mejor</span><span class="tag">libertad</span><span class="tag">cifras</span></div></div>
+    </div>
+  </div>
+
+  <div class="detect-h">💡 Cómo reconoces la energía — al instante</div>
+  <div class="detect">
+    <div class="det f">
+      <div class="det-h">🌸 Energía femenina</div>
+      <div class="det-row"><span class="det-l">Habla de</span><span class="det-v">personas, sentimientos, familia · te pide tu opinión</span></div>
+      <div class="det-row"><span class="det-l">Tú respondes</span><span class="det-v">con calidez · sobre <b>seguridad</b> y <b>«juntas»</b></span></div>
+    </div>
+    <div class="det m">
+      <div class="det-h">⚡ Energía masculina</div>
+      <div class="det-row"><span class="det-l">Habla de</span><span class="det-v">cifras, resultados, tiempo · quiere llevar la conversación</span></div>
+      <div class="det-row"><span class="det-l">Tú respondes</span><span class="det-v">breve · sobre <b>ganancia</b> y <b>control</b></span></div>
+    </div>
+  </div>
+
+  <!-- ===== SCRIPT ===== -->
+  <div class="cn-sec">El guion</div>
+
+  <div class="spine">
+    <div class="ic">🗝️</div>
+    <div>
+      <div class="t">El principio que sostiene todo el guion</div>
+      <div class="d">Nunca la convences — haces que sienta que <b>ELLA elige</b>. Cada frase le da a ella el control y la seguridad, no a ti la razón. Un agente que entiende esto cierra el doble de veces que uno que solo lee las frases.</div>
+    </div>
+  </div>
+
+  <div class="tabguide">Elige el guion según la <b>energía del cliente</b> que tienes delante:</div>
+  <div class="navtabs">
+    <button class="navtab active" onclick="psTab('women',this)">Cliente · energía femenina</button>
+    <button class="navtab soon" onclick="psTab('men',this)">Cliente · energía masculina <span class="soon-badge">en preparación</span></button>
+  </div>
+
+  <div class="womenScript">
+    <div class="ctx-slim">
+      <div class="ic">🗣️</div>
+      <div>
+        <div class="ch"><b>De mujer a mujer</b> — agenta mujer → clienta mujer.</div>
+        <div class="cd">La fuerza del guion viene de la complicidad «de mujer a mujer». Si el agente es hombre, el enfoque cambia — ese lo construimos aparte.</div>
+      </div>
+    </div>
+
+    <div class="modebar">
+      <div class="lbl">¿Cómo quieres ver el material?</div>
+      <div class="seg">
+        <button id="b-full" class="on" onclick="psMode('full')">Guion + psicología</button>
+        <button id="b-clean" onclick="psMode('clean')">Solo el guion</button>
+      </div>
+    </div>
+
+    <div class="exch">
+      <div class="preopen">
+        <div class="preopen-h">🎯 Justo antes de empezar (antes de la Apertura)</div>
+        <div class="preopen-b">No abras la boca hasta que estés en el estado adecuado. 30 segundos: respira hondo, baja el ritmo, ponte la sonrisa en la cara. Entras <b>cálida y tranquila</b> — sin prisa, sin la necesidad de convencer. Lo primero que le transmites no es una palabra, es un estado.</div>
+      </div>
+      <div class="fc-psy"><div class="pt">🔒 Por qué — a nivel psicológico</div><div class="strat">Tu estado habla primero</div><ul><li>Una mujer siente tu energía antes de oír tus palabras.</li><li>En los primeros segundos, su cerebro límbico decide una sola cosa: «¿aquí estoy segura o no?».</li><li>Entras desde la presión → siente tu necesidad y levanta el escudo. Entras desde la calma → te percibe como aliada, no como vendedora.</li></ul><div class="impact"><b>La regla de oro:</b> el guion de abajo solo hace efecto si tu estado lo sostiene.</div></div>
+    </div>
+
+    <div class="phase-band">▸ Pasos 1–4 · ANTES de la presentación — conexión + marco de seguridad</div>
+
+    <div class="exch">
+      <div class="cn-box">
+        <span class="cn-zone">1 · Apertura</span>
+        <div class="cn-line"><div class="cn-role">Tú</div><div class="cn-say">«Cariño… sé exactamente cómo te sientes… y sé que nosotras, como mujeres, antes que nada queremos saber que estamos seguras con nuestras decisiones. Queremos saber que no vamos a fracasar, que no vamos a hacer el ridículo, que no vamos a quedar en evidencia.»</div></div>
+        <span class="cn-pause">⏸ CÁLLATE — necesitas su confirmación</span>
+      </div>
+      <div class="fc-psy"><div class="pt">🔒 La psicología detrás</div><div class="strat">Validación emocional + necesidad de seguridad</div><ul><li>Le validas las emociones antes de presentarle la oportunidad.</li><li>Le dices lo que ya siente, pero no verbaliza → se siente comprendida, no vendida.</li><li>Desarmas el miedo al fracaso y a la vergüenza.</li><li>La pausa la deja procesar; cuando confirma, se implica emocionalmente.</li></ul><div class="impact"><b>Impacto:</b> una mujer solo se abre cuando se siente comprendida.</div></div>
+    </div>
+
+    <div class="exch">
+      <div class="cn-box">
+        <span class="cn-zone">2 · Pedir permiso</span>
+        <div class="cn-line client"><div class="cn-role client">Ella</div><div class="cn-say client">«Así es…»</div></div>
+        <div class="cn-line"><div class="cn-role">Tú</div><div class="cn-say">«¿Puedo hacerte una pregunta?»</div></div>
+        <div class="cn-line client"><div class="cn-role client">Ella</div><div class="cn-say client">«Sí…»</div></div>
+      </div>
+      <div class="fc-psy"><div class="pt">🔒 La psicología detrás</div><div class="strat">Pedir permiso</div><ul><li>La mujer reacciona de maravilla a las preguntas con permiso.</li><li>Creas respeto, seguridad y cero presión.</li><li>La pones en posición de control.</li></ul><div class="impact"><b>Impacto:</b> se vuelve mucho más receptiva.</div></div>
+    </div>
+
+    <div class="exch">
+      <div class="cn-box">
+        <span class="cn-zone">3 · Identidad femenina<span class="nu-badge">🔁 NO estratégico</span></span>
+        <div class="cn-line"><div class="cn-role">Tú</div><div class="cn-say">«¿Crees que yo, como mujer, sabiendo lo que más valora una mujer en este mundo, me habría lanzado a un proyecto donde fuera a hacer el ridículo, donde fuera a fracasar, donde fuera a parecer patética?»</div></div>
+        <div class="cn-line client"><div class="cn-role client">Ella</div><div class="cn-say client">«No… no creo…»</div></div>
+      </div>
+      <div class="fc-psy"><div class="pt">🔒 La psicología detrás</div><div class="strat">Identidad femenina + postura de igual a igual</div><ul><li>Te pones en la misma categoría: «de mujer a mujer».</li><li>El mensaje sutil: «si yo no me expondría, tampoco te expondría a ti».</li></ul><div class="impact"><b>Impacto:</b> se siente protegida, no manipulada.</div></div>
+    </div>
+
+    <div class="exch">
+      <div class="cn-box">
+        <span class="cn-zone">4 · La pregunta con «no»<span class="nu-badge">🔁 NO estratégico</span></span>
+        <div class="cn-line"><div class="cn-role">Tú</div><div class="cn-say">«¿Crees con toda tu alma que a ti, como mujer, te presentaría un proyecto donde te empujaría hacia el fracaso, hacia el ridículo… o sientes que entiendo cuáles son las necesidades de una mujer cuando tiene que elegir?»</div></div>
+        <div class="cn-line client"><div class="cn-role client">Ella</div><div class="cn-say client">«Sientes cuáles son las necesidades…»</div></div>
+      </div>
+      <div class="fc-psy"><div class="pt">🔒 La psicología detrás</div><div class="strat">Pregunta con «no» + acceso a las necesidades</div><ul><li>Una pregunta hecha para obtener un «NO» que en realidad es un «SÍ».</li><li>Le confirmas de forma sutil que entiendes la psicología femenina.</li></ul><div class="impact"><b>Impacto:</b> cuando una mujer dice «siento que me entiendes», ya tienes el 70% de la decisión.</div></div>
+    </div>
+
+    <div class="present-card">
+      <div class="ic">🎤</div>
+      <div class="t">LA PRESENTACIÓN 1 A 1</div>
+      <div class="d">Aquí presentas el producto / la oportunidad, cara a cara. Los pasos 1–4 han preparado el terreno; solo ahora, cuando ella tiene todos los detalles, continúas con las preguntas de cierre.</div>
+      <div class="lk">→ ver el módulo «Presentación»</div>
+    </div>
+
+    <div class="phase-band">▸ Pasos 5–11 · DESPUÉS de la presentación — desactivas el miedo → cierras la venta</div>
+
+    <div class="exch">
+      <div class="cn-box">
+        <span class="cn-zone">5 · Desactivar el miedo</span>
+        <div class="cn-line"><div class="cn-role">Tú</div><div class="cn-say">«Ahora que tienes todos los detalles, ¿crees que una decisión de <span class="fill">X dinero</span> <span class="cue">(dices el importe del pack de inicio)</span>, donde recibes <span class="fill">X, Y, Z</span> <span class="cue">(enumeras lo que recibe — productos / beneficios)</span> — es arriesgada para ti, te va a hacer el ridículo o te va a exponer al fracaso?»</div></div>
+        <div class="cn-line client"><div class="cn-role client">Ella</div><div class="cn-say client">«eeh… nooo…»</div></div>
+      </div>
+      <div class="fc-psy"><div class="pt">🔒 La psicología detrás</div><div class="strat">Desactivar el miedo + reducir el riesgo</div><ul><li>Devuelves los miedos a su dimensión real: «¿de verdad hay riesgo aquí?».</li><li>Micro-preguntas que hacen que el temor parezca exagerado.</li><li>Activas la lógica con suavidad.</li></ul><div class="impact"><b>Impacto:</b> minimizas el riesgo → la decisión se vuelve fácil.</div></div>
+    </div>
+
+    <div class="exch">
+      <div class="cn-box">
+        <span class="cn-zone">6 · Ironía suave<span class="nu-badge">🔁 NO estratégico</span></span>
+        <div class="cn-line"><div class="cn-role">Tú</div><div class="cn-say">«¿Crees que sería una decisión equivocada probar la calidad de los productos… y te van a echar de casa por intentarlo? 😄»</div></div>
+        <div class="cn-line client"><div class="cn-role client">Ella</div><div class="cn-say client">«nooo…»</div></div>
+      </div>
+      <div class="fc-psy"><div class="pt">🔒 La psicología detrás</div><div class="strat">Ironía suave + reducción de la presión</div><ul><li>Exageras el miedo a propósito → se vuelve absurdo y la hace reír.</li><li>Humor empático, no sarcástico — la mujer reacciona de maravilla.</li></ul><div class="impact"><b>Impacto:</b> el miedo desaparece, aparece la relajación.</div></div>
+    </div>
+
+    <div class="exch">
+      <div class="cn-box">
+        <span class="cn-zone">7 · Complicidad femenina</span>
+        <div class="cn-line"><div class="cn-role">Tú</div><div class="cn-say">«Lo que les faltaba… que encima nos echen en cara que solo les dejamos comida fría… 😄»</div></div>
+        <div class="cn-line client"><div class="cn-role client">Ella</div><div class="cn-say client">«…Síí 😄»</div></div>
+      </div>
+      <div class="fc-psy"><div class="pt">🔒 La psicología detrás</div><div class="strat">Complicidad femenina + humor que conecta</div><ul><li>Creas un «chiste interno» femenino.</li><li>Ella siente que habla con una amiga, no con un reclutamiento MLM.</li><li>Creas pertenencia: «somos del mismo mundo».</li></ul><div class="impact"><b>Impacto:</b> crece enormemente la conexión y la confianza.</div></div>
+    </div>
+
+    <div class="exch">
+      <div class="cn-box">
+        <span class="cn-zone">8 · Pregunta de control</span>
+        <div class="cn-line"><div class="cn-role">Tú</div><div class="cn-say">«¿Cómo te sentirías más cómoda? ¿Eligiendo tú los productos, o estás abierta a que te sugiera los que uso yo y que no encuentras en el comercio con esta calidad?»</div></div>
+        <div class="cn-line client"><div class="cn-role client">Ella</div><div class="cn-say client">«Sugiéreme tú…»</div></div>
+      </div>
+      <div class="fc-psy"><div class="pt">🔒 La psicología detrás</div><div class="strat">Pregunta de control + validación de la experiencia</div><ul><li>Le ofreces control total → las mujeres deciden fácil cuando sienten libertad.</li><li>Le transmites de forma indirecta que tienes experiencia y conocimiento.</li></ul><div class="impact"><b>Impacto:</b> seguridad + apertura → te da permiso para guiarla.</div></div>
+    </div>
+
+    <div class="exch">
+      <div class="cn-box">
+        <span class="cn-zone">9 · Dos opciones</span>
+        <div class="cn-line"><div class="cn-role">Tú</div><div class="cn-say">«¿Qué zona prefieres? ¿Perfumes que resalten aún más tu feminidad y tu sensualidad… o la zona de limpieza, donde ya no maldices porque la placa se quedó manchada después de frotar 30 minutos? 😄»</div></div>
+        <div class="cn-line client"><div class="cn-role client">Ella</div><div class="cn-say client">«Las dos…»</div></div>
+      </div>
+      <div class="fc-psy"><div class="pt">🔒 La psicología detrás</div><div class="strat">Pregunta con dos opciones + identidad femenina</div><ul><li>El método «una u otra» → ambas opciones llevan igual a un «SÍ».</li><li>Activas dos identidades: la mujer sensual (perfumes) y el ama de casa eficiente (limpieza).</li></ul><div class="impact"><b>Impacto:</b> la elección se vuelve fácil y agradable.</div></div>
+    </div>
+
+    <div class="exch">
+      <div class="cn-box">
+        <span class="cn-zone">10 · Activar los sentidos</span>
+        <div class="cn-line"><div class="cn-role">Tú</div><div class="cn-say">«Perfecto… Tenemos el perfume X, que… (describes solo 2 perfumes, de forma sensorial)»</div></div>
+        <div class="cn-line client"><div class="cn-role client">Ella</div><div class="cn-say client">«Excelente… suena bien…»</div></div>
+      </div>
+      <div class="fc-psy"><div class="pt">🔒 La psicología detrás</div><div class="strat">Activar los sentidos + feminidad simbólica</div><ul><li>Lenguaje sensorial → imaginación → emoción.</li><li>Una mujer compra perfumes de forma emocional: lo vinculas a «cómo se siente», no a «cuánto cuesta».</li></ul><div class="impact"><b>Impacto:</b> decisión emocional.</div></div>
+    </div>
+
+    <div class="exch">
+      <div class="cn-box">
+        <span class="cn-zone">11 · Cierre suave</span>
+        <div class="cn-line"><div class="cn-role">Tú</div><div class="cn-say">«¿Cuántos te haría ilusión que te anote en el pedido…?»</div></div>
+        <div class="cn-line client"><div class="cn-role client">Ella</div><div class="cn-say client">«…X…»</div></div>
+      </div>
+      <div class="fc-psy"><div class="pt">🔒 La psicología detrás</div><div class="strat">La pregunta de decisión suave</div><ul><li>No preguntas «¿quieres pedir?», sino «¿cuántos te anoto?» → das por hecho que la decisión ya está tomada.</li><li>«Te haría ilusión» toca la zona emocional, no la lógica → sube la conversión.</li></ul><div class="impact"><b>Impacto:</b> cierras con elegancia, sin presión.</div></div>
+    </div>
+
+    <div class="cn-sec">Reglas importantes</div>
+    <div class="cn-rule"><div class="cn-rule-num">1</div><div><div class="cn-rt">Lee el guion en VOZ ALTA antes.</div><div class="cn-rd">Al menos 11 veces — para que la mente se acostumbre a él.</div></div></div>
+    <div class="cn-rule"><div class="cn-rule-num">2</div><div><div class="cn-rt">En Zoom, el guion está a tu lado, escrito con claridad.</div><div class="cn-rd">Que no tengas que pelearte para leerlo.</div></div></div>
+    <div class="cn-rule"><div class="cn-rule-num">3</div><div><div class="cn-rt">No cambies las palabras.</div><div class="cn-rd">Las palabras cambiadas cambian el sentido de la frase.</div></div></div>
+    <div class="cn-rule"><div class="cn-rule-num">4</div><div><div class="cn-rt">Vigila que ELLA responda EXACTAMENTE a tu pregunta.</div><div class="cn-rd">Justo a la pregunta que le haces, no a otra cosa.</div></div></div>
+    <div class="cn-rule"><div class="cn-rule-num">5</div><div><div class="cn-rt">Si responde con otra cosa, vuelves a hacer la misma pregunta.</div></div></div>
+    <div class="cn-rule"><div class="cn-rule-num">6</div><div><div class="cn-rt">Solo en Zoom / 1 a 1, nunca por mensajes de texto.</div></div></div>
+    <div class="cn-rule"><div class="cn-rule-num">7</div><div><div class="cn-rt">Antes de la llamada, entra en tu estado óptimo de rendimiento.</div></div></div>
+
+    <div class="cn-sec">Errores que matan el guion</div>
+    <div class="mistakes">
+      <div class="mistake"><div class="x">✕</div><div>Vas con prisa y te saltas los <b>CÁLLATE</b> / las pausas. El silencio es la herramienta, no el vacío — si lo rellenas, pierdes la confirmación.</div></div>
+      <div class="mistake"><div class="x">✕</div><div>Explicas el producto por teléfono, antes del encuentro. La presentación se hace cara a cara — por teléfono solo consigues el «sí» a un café.</div></div>
+      <div class="mistake"><div class="x">✕</div><div>Cambias las palabras «para que suene mejor». Las palabras cambiadas cambian el sentido — la estructura está probada justo así.</div></div>
+      <div class="mistake"><div class="x">✕</div><div>Empujas. Una mujer levanta el escudo al instante ante la presión — si nota la agenda por delante del cuidado, se cierra.</div></div>
+    </div>
+    <div class="note">Este es el guion completo, integrado — de mujer a mujer (11 intercambios + reglas + errores).</div>
+  </div>
+
+  <div class="men">
+    <h3>Energía masculina · en preparación</h3>
+    <p>La tabla de arriba ya muestra el patrón. El guion para energía masculina lo construimos sobre la misma estructura — directo, con cifras, ganancia y control.</p>
+    <p style="margin-top:14px;font-size:13px;color:var(--muted2)">Súbeme un material, o dime que lo esboce yo sobre el patrón de la tabla.</p>
+  </div>
+`;
+
+const psihologie_fr = `
+<div class="cn-title-block">
+    <h1 class="cn-h1">Comment achètent la femme &amp; l'homme</h1>
+    <div class="cn-subtitle">la psychologie d'achat en MLM</div>
+  </div>
+
+  <p class="cn-lead">Avant tout script, tu comprends d'abord <b>qui</b> tu as en face. Ensuite tu lui parles dans sa langue.</p>
+
+  <div class="cn-sec">📊 Chiffres officiels</div>
+  <div class="stats">
+    <div class="stile"><div class="n">85%</div><div class="l">des décisions d'achat sont influencées par les femmes</div><div class="s">Forbes, 2024</div></div>
+    <div class="stile"><div class="n">73%</div><div class="l">des distributeurs en vente directe / MLM sont des femmes</div><div class="s">DSA, 2024</div></div>
+    <div class="stile"><div class="n">+30%</div><div class="l">plus attentives aux avis et aux retours avant d'acheter</div><div class="s">Capital One · BLS/Pew</div></div>
+    <div class="stile"><div class="n">58<span style="font-size:16px">/44</span></div><div class="l">minutes par session de shopping — femmes vs hommes</div><div class="s">BLS · Statista</div></div>
+  </div>
+  <div class="statsnote">Les chiffres montrent à quel point les femmes <b>influencent</b> les achats. « Décide de façon émotionnelle vs. rationnelle » est une tendance de vente, pas une statistique officielle — c'est pourquoi cela reste sous l'avertissement du haut.</div>
+  <div class="hero-line">Celle qui comprend la psychologie d'achat d'une femme —<br><b>vend plus vite, mieux, davantage.</b></div>
+
+  <div class="cn-ban">
+    <div class="ic">⚠️</div>
+    <div class="t"><b>Ce ne sont que des TENDANCES, pas des règles.</b> Peu importe si c'est un homme ou une femme — ce qui compte, c'est l'<b>ÉNERGIE</b>. Il y a des femmes à l'énergie masculine et des hommes à l'énergie féminine. <b>C'est l'énergie qui achète, pas le sexe.</b> Regarde la PERSONNE, pas l'étiquette.</div>
+  </div>
+
+  <div class="cn-precond">
+    <div class="h">🧒 À la portée de tous</div>
+    Certaines personnes achètent avec le <b>CŒUR</b> — elles veulent se sentir bien, en sécurité, comprises. D'autres achètent avec la <b>TÊTE</b> — elles veulent gagner, avoir raison, être les meilleures. En général les femmes vont vers le cœur, les hommes vers la tête — <b>mais pas toujours.</b> À toi de deviner : la personne en face achète-t-elle avec le cœur ou avec la tête ? Et tu lui parles dans sa langue.
+  </div>
+
+
+  <div class="cn-sec">Comment chacun achète</div>
+  <div class="ps-cmp">
+    <div class="row head">
+      <div class="cell lbl"></div>
+      <div class="cell f"><span class="ttl">🌸 LA FEMME</span><span class="en">énergie féminine · « le cœur »</span><span class="say">« Je veux me sentir en sécurité et comprise. »</span></div>
+      <div class="cell m"><span class="ttl">⚡ L'HOMME</span><span class="en">énergie masculine · « la tête »</span><span class="say">« Je veux gagner et être le meilleur. »</span></div>
+    </div>
+    <div class="row">
+      <div class="cell lbl">Comment elle décide</div>
+      <div class="cell f"><div class="g"><ul><li>Elle ressent d'abord, réfléchit ensuite</li><li>Le cœur mène — la tête cherche de belles excuses</li></ul></div></div>
+      <div class="cell m"><div class="g"><ul><li>Il réfléchit d'abord, ressent ensuite</li><li>La tête mène : il veut des chiffres, des preuves, de la logique</li></ul></div></div>
+    </div>
+    <div class="row">
+      <div class="cell lbl">Ce qu'il ou elle craint (en général)</div>
+      <div class="cell f"><div class="g"><ul><li>Se tromper</li><li>Être jugée</li><li>Se ridiculiser</li><li>Décevoir ses proches</li></ul></div></div>
+      <div class="cell m"><div class="g"><ul><li>Paraître faible</li><li>Se faire avoir</li><li>Perdre du temps et de l'argent</li><li>Ne plus avoir le contrôle</li></ul></div></div>
+    </div>
+    <div class="row">
+      <div class="cell lbl">La peur face au MLM</div>
+      <div class="cell f"><div class="g"><ul><li>« Je vais vendre de façon agressive à mes amies »</li><li>« Je vais avoir l'air ridicule / désespérée »</li><li>« Je vais perdre mes amies »</li><li>« Ce n'est pas mon genre de vendre »</li></ul></div></div>
+      <div class="cell m"><div class="g"><ul><li>« C'est un système pyramidal ? »</li><li>« Les gens vont se moquer de moi »</li><li>« Je perds mon temps pour rien »</li><li>« Je ne veux pas mendier auprès des gens »</li></ul></div></div>
+    </div>
+    <div class="row">
+      <div class="cell lbl">Ce qu'il ou elle désire</div>
+      <div class="cell f"><div class="g"><ul><li>La sécurité</li><li>Une communauté chaleureuse</li><li>Quelque chose à elle, sans négliger sa famille</li><li>Aider les autres aussi</li></ul></div></div>
+      <div class="cell m"><div class="g"><ul><li>Gagner</li><li>La liberté financière</li><li>Le contrôle de son temps</li><li>Le statut et le respect</li></ul></div></div>
+    </div>
+    <div class="row">
+      <div class="cell lbl">Ce qu'il ou elle veut ressentir grâce à une nouvelle activité</div>
+      <div class="cell f"><div class="g"><ul><li>En sécurité, comprise, soutenue</li><li>Qu'elle appartient à un beau groupe</li><li>Rassurée de ne pas se tromper</li></ul></div></div>
+      <div class="cell m"><div class="g"><ul><li>Fort, gagnant, aux commandes</li><li>Qu'il a pris une décision intelligente — qu'il investit, qu'il ne se fait pas avoir</li></ul></div></div>
+    </div>
+    <div class="row">
+      <div class="cell lbl">Les mots qui les convainquent</div>
+      <div class="cell f"><div class="g"><span class="tag">sécurité</span><span class="tag">ensemble</span><span class="tag">à ton rythme</span><span class="tag">sans pression</span><span class="tag">famille</span><span class="tag">attention</span></div></div>
+      <div class="cell m"><div class="g"><span class="tag">résultat</span><span class="tag">gain</span><span class="tag">contrôle</span><span class="tag">le meilleur</span><span class="tag">liberté</span><span class="tag">chiffres</span></div></div>
+    </div>
+  </div>
+
+  <div class="detect-h">💡 Comment reconnaître l'énergie — sur le vif</div>
+  <div class="detect">
+    <div class="det f">
+      <div class="det-h">🌸 Énergie féminine</div>
+      <div class="det-row"><span class="det-l">Elle parle de</span><span class="det-v">gens, sentiments, famille · elle te demande ton avis</span></div>
+      <div class="det-row"><span class="det-l">Tu réponds</span><span class="det-v">chaleureusement · de <b>sécurité</b> et d'<b>« ensemble »</b></span></div>
+    </div>
+    <div class="det m">
+      <div class="det-h">⚡ Énergie masculine</div>
+      <div class="det-row"><span class="det-l">Il parle de</span><span class="det-v">chiffres, résultats, temps · il veut mener la discussion</span></div>
+      <div class="det-row"><span class="det-l">Tu réponds</span><span class="det-v">brièvement · de <b>gain</b> et de <b>contrôle</b></span></div>
+    </div>
+  </div>
+
+  <!-- ===== SCRIPT ===== -->
+  <div class="cn-sec">Le script</div>
+
+  <div class="spine">
+    <div class="ic">🗝️</div>
+    <div>
+      <div class="t">Le principe qui tient tout le script</div>
+      <div class="d">Tu ne la convaincs jamais — tu lui fais sentir que c'est <b>ELLE qui choisit</b>. Chaque réplique lui donne à elle le contrôle et la sécurité, pas à toi la raison. Une agente qui comprend cela conclut deux fois plus souvent que celle qui se contente de lire les répliques.</div>
+    </div>
+  </div>
+
+  <div class="tabguide">Choisis le script selon l'<b>énergie du client</b> que tu as en face :</div>
+  <div class="navtabs">
+    <button class="navtab active" onclick="psTab('women',this)">Client · énergie féminine</button>
+    <button class="navtab soon" onclick="psTab('men',this)">Client · énergie masculine <span class="soon-badge">en préparation</span></button>
+  </div>
+
+  <div class="womenScript">
+    <div class="ctx-slim">
+      <div class="ic">🗣️</div>
+      <div>
+        <div class="ch"><b>De femme à femme</b> — agente femme → cliente femme.</div>
+        <div class="cd">La force du script vient de la complicité « de femme à femme ». Si l'agent est un homme, le cadrage change — on le construit à part.</div>
+      </div>
+    </div>
+
+    <div class="modebar">
+      <div class="lbl">Comment veux-tu voir le matériel ?</div>
+      <div class="seg">
+        <button id="b-full" class="on" onclick="psMode('full')">Script + psychologie</button>
+        <button id="b-clean" onclick="psMode('clean')">Le script seul</button>
+      </div>
+    </div>
+
+    <div class="exch">
+      <div class="preopen">
+        <div class="preopen-h">🎯 Juste avant de commencer (avant l'Ouverture)</div>
+        <div class="preopen-b">N'ouvre pas la bouche tant que tu n'es pas dans le bon état. 30 secondes : respire profondément, ralentis le rythme, mets le sourire sur ton visage. Tu entres <b>chaleureuse et calme</b> — pas pressée, pas depuis le besoin de convaincre. La première chose que tu lui transmets n'est pas un mot, c'est un état.</div>
+      </div>
+      <div class="fc-psy"><div class="pt">🔒 Pourquoi — psychologiquement</div><div class="strat">Ton état parle en premier</div><ul><li>Une femme sent ton énergie avant d'entendre tes mots.</li><li>Dans les premières secondes, son cerveau limbique ne décide qu'une seule chose : « est-ce sûr ici ou non ? ».</li><li>Tu entres depuis la pression → elle sent ton besoin et lève son bouclier. Tu entres depuis le calme → elle te perçoit comme une alliée, pas comme une vendeuse.</li></ul><div class="impact"><b>La règle d'or :</b> le script ci-dessous ne fait effet que si ton état le soutient.</div></div>
+    </div>
+
+    <div class="phase-band">▸ Étapes 1–4 · AVANT la présentation — connexion + cadre de sécurité</div>
+
+    <div class="exch">
+      <div class="cn-box">
+        <span class="cn-zone">1 · Ouverture</span>
+        <div class="cn-line"><div class="cn-role">Toi</div><div class="cn-say">« Ma belle… je sais exactement comment tu te sens… et je sais que nous, les femmes, on veut avant tout savoir qu'on est en sécurité avec nos décisions. On veut savoir qu'on ne va pas échouer, qu'on ne va pas se ridiculiser, qu'on ne va pas avoir l'air gênées. »</div></div>
+        <span class="cn-pause">⏸ TAIS-TOI — tu as besoin d'une confirmation</span>
+      </div>
+      <div class="fc-psy"><div class="pt">🔒 La psychologie derrière</div><div class="strat">Validation émotionnelle + besoin de sécurité</div><ul><li>Tu valides ses émotions avant de lui présenter l'opportunité.</li><li>Tu lui dis ce qu'elle ressent déjà mais ne formule pas → elle se sent comprise, pas « vendue ».</li><li>Tu désamorces la peur de l'échec et de la honte.</li><li>La pause la laisse traiter ; quand elle confirme, elle devient émotionnellement impliquée.</li></ul><div class="impact"><b>Impact :</b> une femme s'ouvre seulement quand elle se sent comprise.</div></div>
+    </div>
+
+    <div class="exch">
+      <div class="cn-box">
+        <span class="cn-zone">2 · Demander la permission</span>
+        <div class="cn-line client"><div class="cn-role client">Elle</div><div class="cn-say client">« C'est vrai… »</div></div>
+        <div class="cn-line"><div class="cn-role">Toi</div><div class="cn-say">« Je peux te poser une question ? »</div></div>
+        <div class="cn-line client"><div class="cn-role client">Elle</div><div class="cn-say client">« Oui… »</div></div>
+      </div>
+      <div class="fc-psy"><div class="pt">🔒 La psychologie derrière</div><div class="strat">Demander la permission</div><ul><li>La femme réagit à merveille aux questions avec permission.</li><li>Tu crées du respect, de la sécurité et zéro pression.</li><li>Tu la mets en position de contrôle.</li></ul><div class="impact"><b>Impact :</b> elle devient beaucoup plus réceptive.</div></div>
+    </div>
+
+    <div class="exch">
+      <div class="cn-box">
+        <span class="cn-zone">3 · Identité féminine<span class="nu-badge">🔁 NON stratégique</span></span>
+        <div class="cn-line"><div class="cn-role">Toi</div><div class="cn-say">« Tu crois que moi, en tant que femme, sachant ce qui compte le plus au monde pour une femme, je me serais lancée dans un projet où je me serais ridiculisée, où j'allais échouer, où j'aurais eu l'air gênée ? »</div></div>
+        <div class="cn-line client"><div class="cn-role client">Elle</div><div class="cn-say client">« Non… je ne crois pas… »</div></div>
+      </div>
+      <div class="fc-psy"><div class="pt">🔒 La psychologie derrière</div><div class="strat">Identité féminine + posture semblable</div><ul><li>Tu te places dans la même catégorie : « de femme à femme ».</li><li>Le message subtil : « si je ne m'exposais pas moi-même, je ne t'exposerais pas non plus ».</li></ul><div class="impact"><b>Impact :</b> elle se sent protégée, pas manipulée.</div></div>
+    </div>
+
+    <div class="exch">
+      <div class="cn-box">
+        <span class="cn-zone">4 · La question avec « non »<span class="nu-badge">🔁 NON stratégique</span></span>
+        <div class="cn-line"><div class="cn-role">Toi</div><div class="cn-say">« Tu crois de tout ton être que je te présenterais à toi, en tant que femme, un projet où je te pousserais vers l'échec, vers le ridicule… ou tu sens que je comprends quels sont les besoins d'une femme quand elle doit choisir ? »</div></div>
+        <div class="cn-line client"><div class="cn-role client">Elle</div><div class="cn-say client">« Tu sens quels sont les besoins… »</div></div>
+      </div>
+      <div class="fc-psy"><div class="pt">🔒 La psychologie derrière</div><div class="strat">Question avec « non » + accès aux besoins</div><ul><li>Une question conçue pour obtenir un « NON » qui est en réalité un « OUI ».</li><li>Tu lui confirmes subtilement que tu comprends la psychologie féminine.</li></ul><div class="impact"><b>Impact :</b> quand une femme dit « je sens que tu me comprends », tu tiens déjà 70 % de la décision.</div></div>
+    </div>
+
+    <div class="present-card">
+      <div class="ic">🎤</div>
+      <div class="t">LA PRÉSENTATION EN TÊTE-À-TÊTE</div>
+      <div class="d">C'est ici que tu présentes le produit / l'opportunité, face à face. Les étapes 1 à 4 ont préparé le terrain ; c'est maintenant seulement, quand elle a tous les détails, que tu continues avec les questions de closing.</div>
+      <div class="lk">→ voir le module « Présentation »</div>
+    </div>
+
+    <div class="phase-band">▸ Étapes 5–11 · APRÈS la présentation — tu désamorces la peur → tu conclus la vente</div>
+
+    <div class="exch">
+      <div class="cn-box">
+        <span class="cn-zone">5 · Désamorcer la peur</span>
+        <div class="cn-line"><div class="cn-role">Toi</div><div class="cn-say">« Maintenant que tu as tous les détails, crois-tu qu'une décision de <span class="fill">X euros</span> <span class="cue">(tu dis le montant du pack de démarrage)</span>, où tu reçois <span class="fill">X, Y, Z</span> <span class="cue">(tu énumères ce qu'elle reçoit — produits / bénéfices)</span> — est risquée pour toi, va te ridiculiser ou va t'exposer à l'échec ? »</div></div>
+        <div class="cn-line client"><div class="cn-role client">Elle</div><div class="cn-say client">« euh… non… »</div></div>
+      </div>
+      <div class="fc-psy"><div class="pt">🔒 La psychologie derrière</div><div class="strat">Désamorcer la peur + réduire le risque</div><ul><li>Tu ramènes les peurs à leur taille réelle : « y a-t-il vraiment un risque ici ? ».</li><li>Des micro-questions qui font paraître la crainte exagérée.</li><li>Tu actives la logique en douceur.</li></ul><div class="impact"><b>Impact :</b> tu minimises le risque → la décision devient facile.</div></div>
+    </div>
+
+    <div class="exch">
+      <div class="cn-box">
+        <span class="cn-zone">6 · Ironie douce<span class="nu-badge">🔁 NON stratégique</span></span>
+        <div class="cn-line"><div class="cn-role">Toi</div><div class="cn-say">« Tu crois que ce serait une mauvaise décision de tester la qualité des produits… et qu'on va te mettre à la porte de chez toi si tu essaies ? 😄 »</div></div>
+        <div class="cn-line client"><div class="cn-role client">Elle</div><div class="cn-say client">« non… »</div></div>
+      </div>
+      <div class="fc-psy"><div class="pt">🔒 La psychologie derrière</div><div class="strat">Ironie douce + réduction de la pression</div><ul><li>Tu exagères volontairement la peur → elle devient absurde et la fait rire.</li><li>Humour empathique, pas sarcastique — la femme y réagit à merveille.</li></ul><div class="impact"><b>Impact :</b> la peur disparaît, la détente s'installe.</div></div>
+    </div>
+
+    <div class="exch">
+      <div class="cn-box">
+        <span class="cn-zone">7 · Complicité féminine</span>
+        <div class="cn-line"><div class="cn-role">Toi</div><div class="cn-say">« Il ne manquerait plus que ça… qu'en plus ils nous reprochent de ne leur servir que des plats froids… 😄 »</div></div>
+        <div class="cn-line client"><div class="cn-role client">Elle</div><div class="cn-say client">« …Ouiii 😄 »</div></div>
+      </div>
+      <div class="fc-psy"><div class="pt">🔒 La psychologie derrière</div><div class="strat">Complicité féminine + humour connecteur</div><ul><li>Tu crées une « blague entre nous » féminine.</li><li>Elle a le sentiment de parler à une amie, pas à un recrutement MLM.</li><li>Tu crées l'appartenance : « on est du même monde ».</li></ul><div class="impact"><b>Impact :</b> la connexion et la confiance montent énormément.</div></div>
+    </div>
+
+    <div class="exch">
+      <div class="cn-box">
+        <span class="cn-zone">8 · Question de contrôle</span>
+        <div class="cn-line"><div class="cn-role">Toi</div><div class="cn-say">« Comment te sentirais-tu à l'aise ? Choisir toi-même les produits, ou es-tu ouverte à ce que je te suggère ce que j'utilise, moi, et qu'on ne trouve pas dans le commerce à une telle qualité ? »</div></div>
+        <div class="cn-line client"><div class="cn-role client">Elle</div><div class="cn-say client">« Suggère-moi, toi… »</div></div>
+      </div>
+      <div class="fc-psy"><div class="pt">🔒 La psychologie derrière</div><div class="strat">Question de contrôle + validation de l'expertise</div><ul><li>Tu lui offres le contrôle total → les femmes décident facilement quand elles sentent de la liberté.</li><li>Tu lui insuffles indirectement que tu as de l'expérience et de l'expertise.</li></ul><div class="impact"><b>Impact :</b> sécurité + ouverture → elle t'autorise à la guider.</div></div>
+    </div>
+
+    <div class="exch">
+      <div class="cn-box">
+        <span class="cn-zone">9 · Deux choix</span>
+        <div class="cn-line"><div class="cn-role">Toi</div><div class="cn-say">« Quel univers te tente ? Des parfums qui mettent encore plus en valeur ta féminité et ta sensualité… ou l'univers du ménage, où tu ne pestes plus parce que la plaque est restée tachée après avoir frotté 30 minutes dessus ? 😄 »</div></div>
+        <div class="cn-line client"><div class="cn-role client">Elle</div><div class="cn-say client">« Les deux… »</div></div>
+      </div>
+      <div class="fc-psy"><div class="pt">🔒 La psychologie derrière</div><div class="strat">Question à deux choix + identité féminine</div><ul><li>La méthode « soit/soit » → les deux options mènent quand même à « OUI ».</li><li>Tu actives deux identités : la femme sensuelle (parfums) et la maîtresse de maison efficace (ménage).</li></ul><div class="impact"><b>Impact :</b> le choix devient facile et agréable.</div></div>
+    </div>
+
+    <div class="exch">
+      <div class="cn-box">
+        <span class="cn-zone">10 · Activer les sens</span>
+        <div class="cn-line"><div class="cn-role">Toi</div><div class="cn-say">« Parfait… On a le parfum X, qui… (tu décris seulement 2 parfums, de façon sensorielle) »</div></div>
+        <div class="cn-line client"><div class="cn-role client">Elle</div><div class="cn-say client">« Excellent… ça sonne bien… »</div></div>
+      </div>
+      <div class="fc-psy"><div class="pt">🔒 La psychologie derrière</div><div class="strat">Activer les sens + féminité symbolique</div><ul><li>Un langage sensoriel → imagination → émotion.</li><li>Une femme achète les parfums émotionnellement : tu la relies à « comment ça se ressent », pas à « combien ça coûte ».</li></ul><div class="impact"><b>Impact :</b> décision émotionnelle.</div></div>
+    </div>
+
+    <div class="exch">
+      <div class="cn-box">
+        <span class="cn-zone">11 · Closing en douceur</span>
+        <div class="cn-line"><div class="cn-role">Toi</div><div class="cn-say">« Combien serais-tu heureuse que je t'en note sur la commande… ? »</div></div>
+        <div class="cn-line client"><div class="cn-role client">Elle</div><div class="cn-say client">« …X… »</div></div>
+      </div>
+      <div class="fc-psy"><div class="pt">🔒 La psychologie derrière</div><div class="strat">La question de décision en douceur</div><ul><li>Tu ne demandes pas « tu veux commander ? », mais « combien je t'en note ? » → tu présupposes la décision prise.</li><li>« Heureuse » frappe la zone émotionnelle, pas logique → la conversion monte.</li></ul><div class="impact"><b>Impact :</b> tu finalises avec élégance, sans pression.</div></div>
+    </div>
+
+    <div class="cn-sec">Règles importantes</div>
+    <div class="cn-rule"><div class="cn-rule-num">1</div><div><div class="cn-rt">Lis le script à VOIX HAUTE avant.</div><div class="cn-rd">Au moins 11 fois — pour que l'esprit s'y habitue.</div></div></div>
+    <div class="cn-rule"><div class="cn-rule-num">2</div><div><div class="cn-rt">En Zoom, le script est à côté de toi, écrit clairement.</div><div class="cn-rd">Pour que tu n'aies pas à peiner à le lire.</div></div></div>
+    <div class="cn-rule"><div class="cn-rule-num">3</div><div><div class="cn-rt">Ne change pas les mots.</div><div class="cn-rd">Les mots changés changent le sens de la phrase.</div></div></div>
+    <div class="cn-rule"><div class="cn-rule-num">4</div><div><div class="cn-rt">Veille à ce qu'ELLE réponde PILE à ta question.</div><div class="cn-rd">Exactement à la question posée, pas à autre chose.</div></div></div>
+    <div class="cn-rule"><div class="cn-rule-num">5</div><div><div class="cn-rt">Si elle répond autre chose, tu reposes la même question.</div></div></div>
+    <div class="cn-rule"><div class="cn-rule-num">6</div><div><div class="cn-rt">Seulement en Zoom / en tête-à-tête, jamais par messages écrits.</div></div></div>
+    <div class="cn-rule"><div class="cn-rule-num">7</div><div><div class="cn-rt">Avant l'appel, entre dans un état optimal de performance.</div></div></div>
+
+    <div class="cn-sec">Erreurs qui tuent le script</div>
+    <div class="mistakes">
+      <div class="mistake"><div class="x">✕</div><div>Tu te presses et tu sautes les <b>TAIS-TOI</b> / les pauses. Le silence est l'outil, pas le vide — si tu le remplis, tu perds la confirmation.</div></div>
+      <div class="mistake"><div class="x">✕</div><div>Tu expliques le produit au téléphone, avant la rencontre. La présentation se fait en face à face — au téléphone, tu obtiens seulement le « oui » pour le café.</div></div>
+      <div class="mistake"><div class="x">✕</div><div>Tu changes les mots « pour que ça sonne mieux ». Les mots changés changent le sens — la structure est testée exactement ainsi.</div></div>
+      <div class="mistake"><div class="x">✕</div><div>Tu pousses. Une femme lève son bouclier à l'instant sous la pression — si elle sent l'agenda avant l'attention, elle se ferme.</div></div>
+    </div>
+    <div class="note">Voici le script complet, intégré — de femme à femme (11 échanges + règles + erreurs).</div>
+  </div>
+
+  <div class="men">
+    <h3>Énergie masculine · en préparation</h3>
+    <p>Le tableau du haut montre déjà le schéma. Le script pour l'énergie masculine, on le construit sur la même structure — direct, avec des chiffres, du gain et du contrôle.</p>
+    <p style="margin-top:14px;font-size:13px;color:var(--muted2)">Envoie-moi un support, ou dis-moi de l'esquisser moi-même sur le schéma du tableau.</p>
+  </div>
+`;
+
+const psihologie_de = `
+<div class="cn-title-block">
+    <h1 class="cn-h1">Wie Frau &amp; Mann kaufen</h1>
+    <div class="cn-subtitle">die Kaufpsychologie im MLM</div>
+  </div>
+
+  <p class="cn-lead">Vor jedem Skript verstehst du zuerst, <b>wer</b> dir gegenübersitzt. Dann sprichst du seine Sprache.</p>
+
+  <div class="cn-sec">📊 Offizielle Zahlen</div>
+  <div class="stats">
+    <div class="stile"><div class="n">85%</div><div class="l">aller Kaufentscheidungen werden von Frauen beeinflusst</div><div class="s">Forbes, 2024</div></div>
+    <div class="stile"><div class="n">73%</div><div class="l">der Vertriebspartner im Direktvertrieb / MLM sind Frauen</div><div class="s">DSA, 2024</div></div>
+    <div class="stile"><div class="n">+30%</div><div class="l">achten stärker auf Bewertungen und Meinungen, bevor sie kaufen</div><div class="s">Capital One · BLS/Pew</div></div>
+    <div class="stile"><div class="n">58<span style="font-size:16px">/44</span></div><div class="l">Minuten pro Einkaufssitzung — Frauen vs. Männer</div><div class="s">BLS · Statista</div></div>
+  </div>
+  <div class="statsnote">Die Zahlen zeigen, wie stark Frauen den Einkauf <b>beeinflussen</b>. „Entscheidet emotional vs. rational" ist eine Verkaufstendenz, keine offizielle Statistik — deshalb bleibt sie unter dem Hinweis oben.</div>
+  <div class="hero-line">Wer die Kaufpsychologie einer Frau versteht —<br><b>verkauft schneller, besser, mehr.</b></div>
+
+  <div class="cn-ban">
+    <div class="ic">⚠️</div>
+    <div class="t"><b>Das sind nur TENDENZEN, keine Regeln.</b> Es kommt nicht darauf an, ob Mann oder Frau — es kommt auf die <b>ENERGIE</b> an. Es gibt Frauen mit männlicher Energie und Männer mit weiblicher Energie. <b>Die Energie kauft, nicht das Geschlecht.</b> Schau auf den MENSCHEN, nicht auf das Etikett.</div>
+  </div>
+
+  <div class="cn-precond">
+    <div class="h">🧒 Ganz einfach erklärt</div>
+    Manche Menschen kaufen mit dem <b>HERZEN</b> — sie wollen sich gut fühlen, sicher, verstanden. Andere kaufen mit dem <b>KOPF</b> — sie wollen gewinnen, recht haben, die Besten sein. Meist gehen Frauen übers Herz, Männer über den Kopf — <b>aber nicht immer.</b> Du erkennst: Kauft der Mensch vor dir mit dem Herzen oder mit dem Kopf? Und du sprichst seine Sprache.
+  </div>
+
+
+  <div class="cn-sec">Wie jeder kauft</div>
+  <div class="ps-cmp">
+    <div class="row head">
+      <div class="cell lbl"></div>
+      <div class="cell f"><span class="ttl">🌸 DIE FRAU</span><span class="en">weibliche Energie · „das Herz"</span><span class="say">„Ich will mich sicher und verstanden fühlen."</span></div>
+      <div class="cell m"><span class="ttl">⚡ DER MANN</span><span class="en">männliche Energie · „der Kopf"</span><span class="say">„Ich will gewinnen und der Beste sein."</span></div>
+    </div>
+    <div class="row">
+      <div class="cell lbl">Wie sie/er entscheidet</div>
+      <div class="cell f"><div class="g"><ul><li>Fühlt zuerst, denkt danach</li><li>Das Herz führt — der Kopf sucht schöne Ausreden</li></ul></div></div>
+      <div class="cell m"><div class="g"><ul><li>Denkt zuerst, fühlt danach</li><li>Der Kopf führt: will Zahlen, Beweise, Logik</li></ul></div></div>
+    </div>
+    <div class="row">
+      <div class="cell lbl">Wovor sie/er sich fürchtet (allgemein)</div>
+      <div class="cell f"><div class="g"><ul><li>Einen Fehler zu machen</li><li>Verurteilt zu werden</li><li>Sich zu blamieren</li><li>Die Liebsten zu enttäuschen</li></ul></div></div>
+      <div class="cell m"><div class="g"><ul><li>Schwach zu wirken</li><li>Übers Ohr gehauen zu werden</li><li>Zeit und Geld zu verlieren</li><li>Die Kontrolle zu verlieren</li></ul></div></div>
+    </div>
+    <div class="row">
+      <div class="cell lbl">Die Angst vor MLM</div>
+      <div class="cell f"><div class="g"><ul><li>„Ich werde meinen Freunden etwas aufdrängen"</li><li>„Ich wirke peinlich / verzweifelt"</li><li>„Ich verliere meine Freunde"</li><li>„Ich bin nicht der Typ, der verkauft"</li></ul></div></div>
+      <div class="cell m"><div class="g"><ul><li>„Ist das ein Schneeballsystem?"</li><li>„Die Leute lachen mich aus"</li><li>„Ich vergeude meine Zeit"</li><li>„Ich will bei niemandem betteln"</li></ul></div></div>
+    </div>
+    <div class="row">
+      <div class="cell lbl">Was sie/er sich wünscht</div>
+      <div class="cell f"><div class="g"><ul><li>Sicherheit</li><li>Eine warme Gemeinschaft</li><li>Etwas Eigenes, ohne die Familie zu vernachlässigen</li><li>Auch anderen helfen</li></ul></div></div>
+      <div class="cell m"><div class="g"><ul><li>Gewinnen</li><li>Finanzielle Freiheit</li><li>Kontrolle über seine Zeit</li><li>Status und Respekt</li></ul></div></div>
+    </div>
+    <div class="row">
+      <div class="cell lbl">Was sie/er durch eine neue Tätigkeit fühlen will</div>
+      <div class="cell f"><div class="g"><ul><li>Sicher, verstanden, unterstützt</li><li>Dass sie zu einer schönen Gruppe gehört</li><li>Die Gewissheit, keinen Fehler zu machen</li></ul></div></div>
+      <div class="cell m"><div class="g"><ul><li>Stark, siegreich, in Kontrolle</li><li>Dass er eine kluge Entscheidung getroffen hat — dass er investiert, nicht dass er reingelegt wird</li></ul></div></div>
+    </div>
+    <div class="row">
+      <div class="cell lbl">Worte, die überzeugen</div>
+      <div class="cell f"><div class="g"><span class="tag">Sicherheit</span><span class="tag">gemeinsam</span><span class="tag">in deinem Tempo</span><span class="tag">ohne Druck</span><span class="tag">Familie</span><span class="tag">Fürsorge</span></div></div>
+      <div class="cell m"><div class="g"><span class="tag">Ergebnis</span><span class="tag">Gewinn</span><span class="tag">Kontrolle</span><span class="tag">der Beste</span><span class="tag">Freiheit</span><span class="tag">Zahlen</span></div></div>
+    </div>
+  </div>
+
+  <div class="detect-h">💡 Wie du die Energie erkennst — sofort</div>
+  <div class="detect">
+    <div class="det f">
+      <div class="det-h">🌸 Weibliche Energie</div>
+      <div class="det-row"><span class="det-l">Spricht über</span><span class="det-v">Menschen, Gefühle, Familie · fragt nach deiner Meinung</span></div>
+      <div class="det-row"><span class="det-l">Du antwortest</span><span class="det-v">warm · über <b>Sicherheit</b> und <b>„gemeinsam"</b></span></div>
+    </div>
+    <div class="det m">
+      <div class="det-h">⚡ Männliche Energie</div>
+      <div class="det-row"><span class="det-l">Spricht über</span><span class="det-v">Zahlen, Ergebnisse, Zeit · will das Gespräch führen</span></div>
+      <div class="det-row"><span class="det-l">Du antwortest</span><span class="det-v">kurz · über <b>Gewinn</b> und <b>Kontrolle</b></span></div>
+    </div>
+  </div>
+
+  <!-- ===== SCRIPT ===== -->
+  <div class="cn-sec">Das Skript</div>
+
+  <div class="spine">
+    <div class="ic">🗝️</div>
+    <div>
+      <div class="t">Das Prinzip, das das ganze Skript trägt</div>
+      <div class="d">Du überzeugst sie nie — du lässt sie fühlen, dass <b>SIE wählt</b>. Jede Replik gibt ihr Kontrolle und Sicherheit, nicht dir das Rechthaben. Ein Berater, der das versteht, schließt doppelt so oft ab wie einer, der nur die Zeilen abliest.</div>
+    </div>
+  </div>
+
+  <div class="tabguide">Wähle das Skript nach der <b>Energie des Kunden</b>, der dir gegenübersitzt:</div>
+  <div class="navtabs">
+    <button class="navtab active" onclick="psTab('women',this)">Kunde · weibliche Energie</button>
+    <button class="navtab soon" onclick="psTab('men',this)">Kunde · männliche Energie <span class="soon-badge">in Vorbereitung</span></button>
+  </div>
+
+  <div class="womenScript">
+    <div class="ctx-slim">
+      <div class="ic">🗣️</div>
+      <div>
+        <div class="ch"><b>Von Frau zu Frau</b> — Beraterin → Kundin.</div>
+        <div class="cd">Die Kraft des Skripts kommt aus der Verbundenheit „von Frau zu Frau". Ist der Berater ein Mann, ändert sich das Framing — das bauen wir separat auf.</div>
+      </div>
+    </div>
+
+    <div class="modebar">
+      <div class="lbl">Wie willst du das Material sehen?</div>
+      <div class="seg">
+        <button id="b-full" class="on" onclick="psMode('full')">Skript + Psychologie</button>
+        <button id="b-clean" onclick="psMode('clean')">Nur das Skript</button>
+      </div>
+    </div>
+
+    <div class="exch">
+      <div class="preopen">
+        <div class="preopen-h">🎯 Kurz bevor du beginnst (vor der Eröffnung)</div>
+        <div class="preopen-b">Mach den Mund nicht auf, bevor du im richtigen Zustand bist. 30 Sekunden: tief durchatmen, das Tempo runterfahren, ein Lächeln aufsetzen. Du gehst <b>warm und ruhig</b> rein — nicht gehetzt, nicht aus dem Drang, überzeugen zu müssen. Das Erste, was du ihr vermittelst, ist kein Wort, sondern ein Zustand.</div>
+      </div>
+      <div class="fc-psy"><div class="pt">🔒 Warum — psychologisch</div><div class="strat">Dein Zustand spricht zuerst</div><ul><li>Eine Frau spürt deine Energie, bevor sie deine Worte hört.</li><li>In den ersten Sekunden entscheidet ihr limbisches Gehirn nur eines: „Ist es hier sicher oder nicht?".</li><li>Du gehst aus Druck rein → sie spürt deinen Bedarf und zieht den Schutzschild hoch. Du gehst aus Ruhe rein → sie nimmt dich als Verbündete wahr, nicht als Verkäuferin.</li></ul><div class="impact"><b>Die goldene Regel:</b> Das Skript unten wirkt nur, wenn dein Zustand es trägt.</div></div>
+    </div>
+
+    <div class="phase-band">▸ Schritte 1–4 · VOR der Präsentation — Verbindung + Sicherheitsrahmen</div>
+
+    <div class="exch">
+      <div class="cn-box">
+        <span class="cn-zone">1 · Eröffnung</span>
+        <div class="cn-line"><div class="cn-role">Du</div><div class="cn-say">„Meine Liebe … ich weiß genau, wie du dich fühlst … und ich weiß, dass wir Frauen vor allem eines wollen: die Gewissheit, dass wir mit unseren Entscheidungen sicher sind. Wir wollen wissen, dass wir nicht scheitern, dass wir uns nicht blamieren, dass wir nicht peinlich wirken.”</div></div>
+        <span class="cn-pause">⏸ SCHWEIG — du brauchst eine Bestätigung</span>
+      </div>
+      <div class="fc-psy"><div class="pt">🔒 Die Psychologie dahinter</div><div class="strat">Emotionale Bestätigung + das Bedürfnis nach Sicherheit</div><ul><li>Du bestätigst ihre Gefühle, bevor du ihr die Chance präsentierst.</li><li>Du sprichst aus, was sie längst fühlt, aber nicht in Worte fasst → sie fühlt sich verstanden, nicht bequatscht.</li><li>Du entwaffnest die Angst vor dem Scheitern und der Blamage.</li><li>Die Pause lässt sie verarbeiten; wenn sie bestätigt, wird sie emotional beteiligt.</li></ul><div class="impact"><b>Wirkung:</b> Eine Frau öffnet sich nur, wenn sie sich verstanden fühlt.</div></div>
+    </div>
+
+    <div class="exch">
+      <div class="cn-box">
+        <span class="cn-zone">2 · Um Erlaubnis bitten</span>
+        <div class="cn-line client"><div class="cn-role client">Sie</div><div class="cn-say client">„Genau so ist es …”</div></div>
+        <div class="cn-line"><div class="cn-role">Du</div><div class="cn-say">„Darf ich dir eine Frage stellen?”</div></div>
+        <div class="cn-line client"><div class="cn-role client">Sie</div><div class="cn-say client">„Ja …”</div></div>
+      </div>
+      <div class="fc-psy"><div class="pt">🔒 Die Psychologie dahinter</div><div class="strat">Um Erlaubnis bitten</div><ul><li>Eine Frau reagiert hervorragend auf Fragen mit Erlaubnis.</li><li>Du schaffst Respekt, Sicherheit und null Druck.</li><li>Du gibst ihr die Kontrolle.</li></ul><div class="impact"><b>Wirkung:</b> Sie wird viel empfänglicher.</div></div>
+    </div>
+
+    <div class="exch">
+      <div class="cn-box">
+        <span class="cn-zone">3 · Weibliche Identität<span class="nu-badge">🔁 Strategisches NEIN</span></span>
+        <div class="cn-line"><div class="cn-role">Du</div><div class="cn-say">„Glaubst du, dass ich als Frau — die weiß, was einer Frau auf dieser Welt am meisten wert ist — mich in ein Projekt gestürzt hätte, in dem ich mich blamiere, in dem ich scheitere, in dem ich peinlich wirke?”</div></div>
+        <div class="cn-line client"><div class="cn-role client">Sie</div><div class="cn-say client">„Nein … glaube ich nicht …”</div></div>
+      </div>
+      <div class="fc-psy"><div class="pt">🔒 Die Psychologie dahinter</div><div class="strat">Weibliche Identität + gleiche Haltung</div><ul><li>Du stellst dich in dieselbe Kategorie: „von Frau zu Frau”.</li><li>Die feine Botschaft: „Wenn ich mich nicht bloßstellen würde, würde ich dich auch nicht bloßstellen”.</li></ul><div class="impact"><b>Wirkung:</b> Sie fühlt sich beschützt, nicht manipuliert.</div></div>
+    </div>
+
+    <div class="exch">
+      <div class="cn-box">
+        <span class="cn-zone">4 · Die Frage mit dem „Nein"<span class="nu-badge">🔁 Strategisches NEIN</span></span>
+        <div class="cn-line"><div class="cn-role">Du</div><div class="cn-say">„Glaubst du mit deinem ganzen Herzen, dass ich dir als Frau ein Projekt vorstellen würde, das dich ins Scheitern, ins Peinliche treibt … oder spürst du, dass ich verstehe, was eine Frau braucht, wenn sie sich entscheiden muss?”</div></div>
+        <div class="cn-line client"><div class="cn-role client">Sie</div><div class="cn-say client">„Du spürst, was ich brauche …”</div></div>
+      </div>
+      <div class="fc-psy"><div class="pt">🔒 Die Psychologie dahinter</div><div class="strat">Frage mit „Nein" + Zugang zu den Bedürfnissen</div><ul><li>Eine Frage, die darauf angelegt ist, ein „NEIN" zu bekommen, das in Wahrheit ein „JA" ist.</li><li>Du bestätigst ihr fein, dass du die weibliche Psychologie verstehst.</li></ul><div class="impact"><b>Wirkung:</b> Wenn eine Frau sagt „Ich spüre, dass du mich verstehst", hast du schon 70% der Entscheidung.</div></div>
+    </div>
+
+    <div class="present-card">
+      <div class="ic">🎤</div>
+      <div class="t">DIE 1-ZU-1-PRÄSENTATION</div>
+      <div class="d">Hier präsentierst du das Produkt / die Chance, von Angesicht zu Angesicht. Die Schritte 1–4 haben den Boden bereitet; erst jetzt, wenn sie alle Details hat, gehst du mit den Abschlussfragen weiter.</div>
+      <div class="lk">→ siehe Modul „Präsentation"</div>
+    </div>
+
+    <div class="phase-band">▸ Schritte 5–11 · NACH der Präsentation — Angst entschärfen → Verkauf abschließen</div>
+
+    <div class="exch">
+      <div class="cn-box">
+        <span class="cn-zone">5 · Die Angst entschärfen</span>
+        <div class="cn-line"><div class="cn-role">Du</div><div class="cn-say">„Jetzt, wo du alle Details hast — glaubst du, dass eine Entscheidung über <span class="fill">X Euro</span> <span class="cue">(du nennst den Betrag des Startpakets)</span>, bei der du <span class="fill">X, Y, Z</span> <span class="cue">(du zählst auf, was sie bekommt — Produkte / Vorteile)</span> bekommst — riskant für dich ist, dich blamieren oder ins Scheitern führen wird?”</div></div>
+        <div class="cn-line client"><div class="cn-role client">Sie</div><div class="cn-say client">„Ähm … neein …”</div></div>
+      </div>
+      <div class="fc-psy"><div class="pt">🔒 Die Psychologie dahinter</div><div class="strat">Angst entschärfen + Risiko reduzieren</div><ul><li>Du bringst die Ängste auf ihre reale Größe zurück: „Ist da wirklich ein Risiko?".</li><li>Mikro-Fragen, die die Sorge übertrieben wirken lassen.</li><li>Du aktivierst die Logik sanft.</li></ul><div class="impact"><b>Wirkung:</b> Du minimierst das Risiko → die Entscheidung wird leicht.</div></div>
+    </div>
+
+    <div class="exch">
+      <div class="cn-box">
+        <span class="cn-zone">6 · Sanfte Ironie<span class="nu-badge">🔁 Strategisches NEIN</span></span>
+        <div class="cn-line"><div class="cn-role">Du</div><div class="cn-say">„Glaubst du, es wäre eine falsche Entscheidung, die Qualität der Produkte zu testen … und wirst du aus dem Haus geworfen, wenn du es versuchst? 😄”</div></div>
+        <div class="cn-line client"><div class="cn-role client">Sie</div><div class="cn-say client">„neein …”</div></div>
+      </div>
+      <div class="fc-psy"><div class="pt">🔒 Die Psychologie dahinter</div><div class="strat">Sanfte Ironie + Druck reduzieren</div><ul><li>Du übertreibst die Angst bewusst → sie wird absurd und bringt sie zum Lachen.</li><li>Empathischer Humor, nicht sarkastisch — eine Frau reagiert hervorragend darauf.</li></ul><div class="impact"><b>Wirkung:</b> Die Angst verschwindet, Entspannung stellt sich ein.</div></div>
+    </div>
+
+    <div class="exch">
+      <div class="cn-box">
+        <span class="cn-zone">7 · Weibliche Verbundenheit</span>
+        <div class="cn-line"><div class="cn-role">Du</div><div class="cn-say">„Das fehlte noch … dass sie uns auch noch vorwerfen, wir würden ihnen nur kaltes Essen hinstellen … 😄”</div></div>
+        <div class="cn-line client"><div class="cn-role client">Sie</div><div class="cn-say client">„… Jaa 😄”</div></div>
+      </div>
+      <div class="fc-psy"><div class="pt">🔒 Die Psychologie dahinter</div><div class="strat">Weibliche Verbundenheit + verbindender Humor</div><ul><li>Du schaffst einen weiblichen „Insider-Witz”.</li><li>Sie fühlt, dass sie mit einer Freundin spricht, nicht mit einer MLM-Rekrutierung.</li><li>Du schaffst Zugehörigkeit: „Wir sind aus derselben Welt”.</li></ul><div class="impact"><b>Wirkung:</b> Verbindung und Vertrauen wachsen enorm.</div></div>
+    </div>
+
+    <div class="exch">
+      <div class="cn-box">
+        <span class="cn-zone">8 · Die Kontrollfrage</span>
+        <div class="cn-line"><div class="cn-role">Du</div><div class="cn-say">„Womit würdest du dich wohlfühlen? Wählst du die Produkte selbst aus, oder bist du offen dafür, dass ich dir vorschlage, was ich selbst benutze — und was es in dieser Qualität im Handel nicht gibt?”</div></div>
+        <div class="cn-line client"><div class="cn-role client">Sie</div><div class="cn-say client">„Schlag du mir was vor …”</div></div>
+      </div>
+      <div class="fc-psy"><div class="pt">🔒 Die Psychologie dahinter</div><div class="strat">Kontrollfrage + Bestätigung der Expertise</div><ul><li>Du gibst ihr volle Kontrolle → Frauen entscheiden leicht, wenn sie Freiheit spüren.</li><li>Du vermittelst ihr indirekt, dass du Erfahrung und Expertise hast.</li></ul><div class="impact"><b>Wirkung:</b> Sicherheit + Offenheit → sie erlaubt dir, sie zu führen.</div></div>
+    </div>
+
+    <div class="exch">
+      <div class="cn-box">
+        <span class="cn-zone">9 · Zwei Möglichkeiten</span>
+        <div class="cn-line"><div class="cn-role">Du</div><div class="cn-say">„Aus welchem Bereich möchtest du? Düfte, die deine Weiblichkeit und Sinnlichkeit noch mehr zur Geltung bringen … oder der Bereich Reinigung, wo du nicht mehr fluchst, weil der Herd nach 30 Minuten Schrubben immer noch fleckig ist? 😄”</div></div>
+        <div class="cn-line client"><div class="cn-role client">Sie</div><div class="cn-say client">„Beides …”</div></div>
+      </div>
+      <div class="fc-psy"><div class="pt">🔒 Die Psychologie dahinter</div><div class="strat">Frage mit zwei Möglichkeiten + weibliche Identität</div><ul><li>Die „Entweder/Oder”-Methode → beide Optionen führen ohnehin zu „JA".</li><li>Du aktivierst zwei Identitäten: die sinnliche Frau (Düfte) und die effiziente Hausfrau (Reinigung).</li></ul><div class="impact"><b>Wirkung:</b> Die Wahl wird leicht und angenehm.</div></div>
+    </div>
+
+    <div class="exch">
+      <div class="cn-box">
+        <span class="cn-zone">10 · Die Sinne aktivieren</span>
+        <div class="cn-line"><div class="cn-role">Du</div><div class="cn-say">„Perfekt … Wir haben den Duft X, der … (du beschreibst nur 2 Düfte, sinnlich)”</div></div>
+        <div class="cn-line client"><div class="cn-role client">Sie</div><div class="cn-say client">„Ausgezeichnet … klingt gut …”</div></div>
+      </div>
+      <div class="fc-psy"><div class="pt">🔒 Die Psychologie dahinter</div><div class="strat">Die Sinne aktivieren + symbolische Weiblichkeit</div><ul><li>Sinnliche Sprache → Vorstellung → Emotion.</li><li>Eine Frau kauft Düfte emotional: Du verbindest es mit „wie es sich anfühlt", nicht mit „was es kostet".</li></ul><div class="impact"><b>Wirkung:</b> emotionale Entscheidung.</div></div>
+    </div>
+
+    <div class="exch">
+      <div class="cn-box">
+        <span class="cn-zone">11 · Sanfter Abschluss</span>
+        <div class="cn-line"><div class="cn-role">Du</div><div class="cn-say">„Wie viele darf ich dir mit Freude auf die Bestellung setzen …?”</div></div>
+        <div class="cn-line client"><div class="cn-role client">Sie</div><div class="cn-say client">„… X …”</div></div>
+      </div>
+      <div class="fc-psy"><div class="pt">🔒 Die Psychologie dahinter</div><div class="strat">Die sanfte Entscheidungsfrage</div><ul><li>Du fragst nicht „Willst du bestellen?", sondern „Wie viele setze ich dir auf?" → du setzt die Entscheidung voraus.</li><li>„Mit Freude" trifft die emotionale Zone, nicht die logische → die Konversion steigt.</li></ul><div class="impact"><b>Wirkung:</b> Du schließt elegant ab, ohne Druck.</div></div>
+    </div>
+
+    <div class="cn-sec">Wichtige Regeln</div>
+    <div class="cn-rule"><div class="cn-rule-num">1</div><div><div class="cn-rt">Lies das Skript vorher LAUT vor.</div><div class="cn-rd">Mindestens 11 Mal — damit sich dein Kopf daran gewöhnt.</div></div></div>
+    <div class="cn-rule"><div class="cn-rule-num">2</div><div><div class="cn-rt">Im Zoom liegt das Skript neben dir, klar geschrieben.</div><div class="cn-rd">Damit du dich nicht abmühen musst, es zu lesen.</div></div></div>
+    <div class="cn-rule"><div class="cn-rule-num">3</div><div><div class="cn-rt">Ändere die Worte nicht.</div><div class="cn-rd">Geänderte Worte ändern den Sinn des Satzes.</div></div></div>
+    <div class="cn-rule"><div class="cn-rule-num">4</div><div><div class="cn-rt">Achte darauf, dass SIE GENAU auf deine Frage antwortet.</div><div class="cn-rd">Genau auf die gestellte Frage, nicht auf etwas anderes.</div></div></div>
+    <div class="cn-rule"><div class="cn-rule-num">5</div><div><div class="cn-rt">Antwortet sie mit etwas anderem, stellst du dieselbe Frage erneut.</div></div></div>
+    <div class="cn-rule"><div class="cn-rule-num">6</div><div><div class="cn-rt">Nur im Zoom / 1-zu-1, niemals per Textnachricht.</div></div></div>
+    <div class="cn-rule"><div class="cn-rule-num">7</div><div><div class="cn-rt">Vor dem Anruf gehst du in deinen optimalen Leistungszustand.</div></div></div>
+
+    <div class="cn-sec">Fehler, die das Skript töten</div>
+    <div class="mistakes">
+      <div class="mistake"><div class="x">✕</div><div>Du bist in Eile und überspringst das <b>SCHWEIG</b> / die Pausen. Die Stille ist das Werkzeug, nicht die Leere — füllst du sie, verlierst du die Bestätigung.</div></div>
+      <div class="mistake"><div class="x">✕</div><div>Du erklärst das Produkt am Telefon, vor dem Treffen. Die Präsentation läuft von Angesicht zu Angesicht — am Telefon holst du dir nur das „Ja" zum Kaffee.</div></div>
+      <div class="mistake"><div class="x">✕</div><div>Du änderst die Worte, „damit es besser klingt". Geänderte Worte ändern den Sinn — die Struktur ist genau so getestet.</div></div>
+      <div class="mistake"><div class="x">✕</div><div>Du drängst. Eine Frau zieht bei Druck sofort den Schutzschild hoch — spürt sie die Agenda vor der Fürsorge, verschließt sie sich.</div></div>
+    </div>
+    <div class="note">Das ist das vollständige, integrierte Skript — von Frau zu Frau (11 Austausche + Regeln + Fehler).</div>
+  </div>
+
+  <div class="men">
+    <h3>Männliche Energie · in Vorbereitung</h3>
+    <p>Die Tabelle oben zeigt das Muster bereits. Das Skript für männliche Energie bauen wir auf derselben Struktur auf — direkt, mit Zahlen, Gewinn und Kontrolle.</p>
+    <p style="margin-top:14px;font-size:13px;color:var(--muted2)">Lade mir ein Material hoch, oder sag mir, dass ich es nach dem Muster aus der Tabelle skizzieren soll.</p>
+  </div>
+`;
+
 module.exports = {
-  conectare, fulger, prezentare, inchidere,
-  it: { conectare: conectare_it, fulger: fulger_it, prezentare: prezentare_it, inchidere: inchidere_it },
-  en: { conectare: conectare_en, fulger: fulger_en, prezentare: prezentare_en, inchidere: inchidere_en },
-  es: { conectare: conectare_es, fulger: fulger_es, prezentare: prezentare_es, inchidere: inchidere_es },
-  fr: { conectare: conectare_fr, fulger: fulger_fr, prezentare: prezentare_fr, inchidere: inchidere_fr },
-  de: { conectare: conectare_de, fulger: fulger_de, prezentare: prezentare_de, inchidere: inchidere_de }
+  conectare, fulger, prezentare, inchidere, psihologie,
+  it: { conectare: conectare_it, fulger: fulger_it, prezentare: prezentare_it, inchidere: inchidere_it, psihologie: psihologie_it },
+  en: { conectare: conectare_en, fulger: fulger_en, prezentare: prezentare_en, inchidere: inchidere_en, psihologie: psihologie_en },
+  es: { conectare: conectare_es, fulger: fulger_es, prezentare: prezentare_es, inchidere: inchidere_es, psihologie: psihologie_es },
+  fr: { conectare: conectare_fr, fulger: fulger_fr, prezentare: prezentare_fr, inchidere: inchidere_fr, psihologie: psihologie_fr },
+  de: { conectare: conectare_de, fulger: fulger_de, prezentare: prezentare_de, inchidere: inchidere_de, psihologie: psihologie_de }
 };
