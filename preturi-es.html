@@ -471,6 +471,7 @@
         <button class="lang-opt active" onclick="setLang('es')"><svg class="flag" viewBox="0 0 3 2" preserveAspectRatio="none"><rect width="3" height="2" fill="#AA151B"/><rect y="0.5" width="3" height="1" fill="#F1BF00"/></svg>ES</button>
         <button class="lang-opt" onclick="setLang('en')"><svg class="flag" viewBox="0 0 60 30" preserveAspectRatio="none"><rect width="60" height="30" fill="#012169"/><path d="M0,0 60,30 M60,0 0,30" stroke="#fff" stroke-width="6"/><path d="M0,0 60,30 M60,0 0,30" stroke="#C8102E" stroke-width="4"/><path d="M30,0 V30 M0,15 H60" stroke="#fff" stroke-width="10"/><path d="M30,0 V30 M0,15 H60" stroke="#C8102E" stroke-width="6"/></svg>EN</button>
         <button class="lang-opt" onclick="setLang('fr')"><svg class="flag" viewBox="0 0 3 2" preserveAspectRatio="none"><rect width="3" height="2" fill="#ED2939"/><rect width="2" height="2" fill="#fff"/><rect width="1" height="2" fill="#002395"/></svg>FR</button>
+        <button class="lang-opt" onclick="setLang('de')"><svg class="flag" viewBox="0 0 5 3" preserveAspectRatio="none"><rect width="5" height="3" fill="#FFCE00"/><rect width="5" height="2" fill="#DD0000"/><rect width="5" height="1" fill="#000000"/></svg>DE</button>
       </div>
     </div>
   </div>
@@ -1065,7 +1066,7 @@
   }
   function toggleLang(e){ e.stopPropagation(); var d=document.getElementById('langDd'); if(d) d.classList.toggle('open'); }
   document.addEventListener('click', function(){ var d=document.getElementById('langDd'); if(d) d.classList.remove('open'); });
-  function setLang(l){ var d=document.getElementById('langDd'); if(d) d.classList.remove('open'); if(l==='es'){ return; } var u={ro:'/',it:'/it',es:'/es',en:'/en',fr:'/fr'}[l]; if(u){ window.location.href=u; } }
+  function setLang(l){ var d=document.getElementById('langDd'); if(d) d.classList.remove('open'); if(l==='es'){ return; } var u={ro:'/',it:'/it',es:'/es',en:'/en',fr:'/fr',de:'/de'}[l]; if(u){ window.location.href=u; } }
   /* ---- TEASER ---- */
   var teaserRel='prieten', teaserInv='cafea', teaserTone='cald', teaserProd='unos productos para la salud';
   function wireChips(id, cb){
