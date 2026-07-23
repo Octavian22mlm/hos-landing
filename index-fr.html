@@ -1908,8 +1908,8 @@ async function renderReferralPanel(){
           : '<div class="ref-note">Active un abonnement pour gagner des mois gratuits grâce au parrainage.</div>');
     host.innerHTML =
       '<div class="ref-panel">'+
-        '<div class="ref-h">Parraine et obtiens des mois gratuits</div>'+
-        '<div class="ref-sub">Amène '+d.threshold+' personnes sur ton plan ou supérieur. Tant qu’elles restent actives, ton abonnement est gratuit chaque mois.</div>'+
+        '<div class="ref-h">Parraine et ton abonnement est gratuit</div>'+
+        '<div class="ref-sub">Invite '+d.threshold+' personnes sur ton plan ou supérieur. Tant qu’elles restent actives, tu profites d’un abonnement gratuit — chaque mois.</div>'+
         '<div class="ref-linkbox"><div class="ref-link" id="ref-link">'+_esc(d.link)+'</div><button class="ref-copy" onclick="copyRefLink()">Copier</button></div>'+
         '<div class="ref-prog"><div class="ref-dots">'+dots+'</div><span class="ref-count">'+d.qualifying+' / '+d.threshold+' actifs</span></div>'+
         freeHtml+
