@@ -662,7 +662,7 @@
           <li><span class="ic check">✓</span><span class="ft"><b>Invitación-relámpago</b><span class="desc">4 invitaciones de 30 segundos, con la psicología detrás</span></span></li>
           <li><span class="ic check">✓</span><span class="ft"><b>Modo Conexión</b><span class="desc">el mapa del cliente + el guion de conexión, frase por frase</span></span></li>
           <li><span class="ic check">✓</span><span class="ft"><b>Módulo Psicología de la decisión</b><span class="desc">cómo compran mujer y hombre + el guion completo, frase por frase</span></span></li>
-          <li><span class="ic check">✓</span><span class="ft"><b>Modo Presentación 1 a 1</b><span class="desc">banco de preguntas + cadencia + tonalidad</span></span><span class="tier gold">Leader</span></li>
+          <li><span class="ic check">✓</span><span class="ft"><b>Modo Presentación 1 a 1</b><span class="desc">banco de preguntas + cadencia + tonalidad</span></span></li>
           <li><span class="ic check">✓</span><span class="ft"><b>Modo Cierre</b><span class="desc">preguntas psicológicas de cierre</span></span><span class="tier gold">Leader</span></li>
         </ul>
         <button class="btn-card" onclick="selectPlan('leader')">Me hago Leader</button>
@@ -685,7 +685,7 @@
           <li><span class="ic check">✓</span><span class="ft"><b>Modo Conexión</b><span class="desc">el mapa del cliente + el guion de conexión, frase por frase</span></span></li>
           <li><span class="ic check">✓</span><span class="ft"><b>Módulo Psicología de la decisión</b><span class="desc">cómo compran mujer y hombre + el guion completo, frase por frase</span></span></li>
           <li class="locked" onclick="lockToast('Ambos')"><span class="ic lock">🔒</span><span class="ft">Modo Ambos</span><span class="tier">Leader</span></li>
-          <li class="locked" onclick="lockToast('Presentación')"><span class="ic lock">🔒</span><span class="ft">Modo Presentación 1 a 1</span><span class="tier">Leader</span></li>
+          <li><span class="ic check">✓</span><span class="ft"><b>Modo Presentación 1 a 1</b><span class="desc">banco de preguntas + cadencia + tonalidad</span></span></li>
           <li class="locked" onclick="lockToast('Cierre')"><span class="ic lock">🔒</span><span class="ft">Modo Cierre</span><span class="tier">Leader</span></li>
         </ul>
         <button class="btn-card" onclick="selectPlan('builder')">Elijo Builder</button>
@@ -709,10 +709,11 @@
           <li class="locked" onclick="lockToast('Invitación-relámpago')"><span class="ic lock">🔒</span><span class="ft">Invitación-relámpago</span><span class="tier">Builder</span></li>
           <li class="locked" onclick="lockToast('Conexión')"><span class="ic lock">🔒</span><span class="ft">Modo Conexión</span><span class="tier">Builder</span></li>
           <li class="locked" onclick="lockToast('Psicología de la decisión')"><span class="ic lock">🔒</span><span class="ft">Módulo Psicología de la decisión</span><span class="tier">Builder</span></li>
-          <li class="locked" onclick="lockToast('Presentación')"><span class="ic lock">🔒</span><span class="ft">Modo Presentación 1 a 1</span><span class="tier">Leader</span></li>
+          <li class="locked" onclick="lockToast('Presentación')"><span class="ic lock">🔒</span><span class="ft">Modo Presentación 1 a 1</span><span class="tier">Builder</span></li>
           <li class="locked" onclick="lockToast('Cierre')"><span class="ic lock">🔒</span><span class="ft">Modo Cierre</span><span class="tier">Leader</span></li>
         </ul>
         <button class="btn-card" onclick="selectPlan('recruit')">Empiezo con Recruit</button>
+        <button class="upsell" onclick="selectPlan('builder')">Acceso a 4 de 5 módulos, solo <b>10€</b> más →</button>
       </div>
     </div>
     <!-- SCRIPT UNIC -->
@@ -1008,7 +1009,7 @@
     unic:   {step:'Pruebas',     name:'Guion Suelto', price:'9€', per:'pago único', desc:'Un solo guion + respuesta a 2 objeciones, modo Clean. Sin suscripción.'},
     recruit:{step:'Empiezas',    name:'Recruit',     price:'9€', per:'/ mes', desc:'3 guiones/mes + 1 de entrenamiento al inicio. Modo Clean, con respuesta a 2 objeciones/guion.'},
     builder:{step:'Construyes',  name:'Builder',     price:'19€',per:'/ mes', desc:'8 guiones/mes + 3 de entrenamiento al inicio. Además el modo Coach, que te explica por qué funciona.'},
-    leader: {step:'Lideras',     name:'Leader',      price:'29€',per:'/ mes', desc:'15 guiones/mes + 5 de entrenamiento al inicio. Todos los modos, incluido Ambos.'}
+    leader: {step:'Lideras',     name:'Leader',      price:'29€',per:'/ mes', desc:'15 guiones/mes + 5 de entrenamiento al inicio. Acceso 24/7 a todos los módulos.'}
   };
   var current = null;
   function selectPlan(key){
