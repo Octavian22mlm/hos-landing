@@ -230,55 +230,149 @@ async function sendReferralWelcomeEmail(email, code, lang) {
   const link = `https://${host}/?ref=${code}`;
   const T = {
     ro: {
-      subject: 'Linkul tău de recomandare — 4 abonați și al tău e gratis',
-      title: 'Bine ai venit! Iată cum poți avea abonamentul GRATIS',
-      body: `Adu 4 oameni care se abonează la planul tău sau mai mare, iar cât timp rămân activi <b>nu mai plătești nimic</b> — abonamentul tău e gratis în fiecare lună.`,
-      cta: 'Linkul tău personal:',
-      foot: 'Distribuie-l oricui crezi că are nevoie de scripturi care chiar vând.'
+      subject: 'Ești înăuntru — Abonamentul tău poate fi gratuit!',
+      greeting: 'Salut și bine ai venit 🤝',
+      p1: `Ne bucurăm că ești aici. Înainte să te apuci de scripturi, vrem să știi un lucru care poate schimba complet cât te costă tot ce urmează:`,
+      p2: `<b>Abonamentul tău poate fi gratis. Complet. Și nu pentru o lună.</b>`,
+      p3: `Uite regula, om la om: recomanzi MlmPsychology cu linkul tău. Când <b>4 oameni</b> se abonează la planul tău sau mai mare și rămân activi, tu nu mai plătești nimic — luna aceea și fiecare lună cât ei rămân alături.`,
+      p4: `Nu e un concurs, nu e o reducere de o săptămână. E <b>permanent</b>.`,
+      hl: `4 activi = abonamentul tău e 0€`,
+      p5: `În funcție de planul tău, sunt între <b>108€ și 348€ pe an</b> pe care nu-i mai scoți din buzunar — pentru 4 oameni pe care oricum i-ai fi ajutat.`,
+      p6a: `Și aici e partea pe care mulți o ratează: nu recomanzi ca să-ți faci ție abonamentul gratis.`,
+      p6b: `Recomanzi pentru că îți poți ajuta fiecare om din echipa ta să <b>invite, să prezinte și să închidă mai bine</b>. Dacă îi ajuți pe ei să facă bani, toți veți face bani.`,
+      hl2: `MLM înseamnă împreună. O echipă care vinde împreună câștigă împreună: recunoaștere internațională și venituri pentru fiecare.`,
+      linkintro: 'Linkul tău personal:',
+      pthink: `Nu-ți lăsa echipa în urmă. Invită-i la masa câștigurilor.`,
+      signoff: `Om bun, să-ți meargă bine,`,
+      team: 'Echipa MlmPsychology',
+      waMsg: `Salut! 👋 Știu cât e de enervant să pierzi oameni fix la telefon — să nu știi cum să deschizi sau ce să răspunzi la „e MLM?”. Am dat de ceva care mi-a schimbat complet abordarea: îți scrie dialogul cuvânt cu cuvânt, personalizat pe produsul tău — invitație, prezentare și închidere. Aruncă un ochi, poate te ajută și pe tine:`,
+      waLabel: `Trimite linkul tău prin WhatsApp`
     },
     en: {
-      subject: 'Your referral link — 4 members and yours is free',
-      title: 'Welcome! Here is how to get your membership FREE',
-      body: `Bring 4 people who subscribe to your plan or higher, and as long as they stay active <b>you pay nothing</b> — your membership is free every month.`,
-      cta: 'Your personal link:',
-      foot: 'Share it with anyone who needs scripts that actually sell.'
+      subject: 'You’re in — Your membership can be free!',
+      greeting: 'Hi, and welcome 🤝',
+      p1: `We’re glad you’re here. Before you dive into the scripts, there’s one thing worth knowing — it can completely change what all of this costs you:`,
+      p2: `<b>Your membership can be free. Fully. And not just for one month.</b>`,
+      p3: `Here’s the rule, person to person: you recommend MlmPsychology with your link. When <b>4 people</b> subscribe to your plan or higher and stay active, you pay nothing — that month, and every month they stick around.`,
+      p4: `It’s not a contest, not a one-week discount. It’s <b>permanent</b>.`,
+      hl: `4 active = your membership costs €0`,
+      p5: `Depending on your plan, that’s between <b>€108 and €348 a year</b> you keep in your pocket — for 4 people you’d have helped anyway.`,
+      p6a: `And here’s the part most people miss: you don’t refer to get your own membership for free.`,
+      p6b: `You refer because you can help every person on your team <b>invite, present and close better</b>. Help them make money, and you all make money.`,
+      hl2: `MLM means together. A team that sells together wins together: international recognition and income for everyone.`,
+      linkintro: 'Your personal link:',
+      pthink: `Don’t leave your team behind. Bring them to the winners’ table.`,
+      signoff: `Go get 'em — we're rooting for you,`,
+      team: 'The MlmPsychology Team',
+      waMsg: `Hey! 👋 You know how frustrating it is to lose people right on the phone — not knowing how to open or what to say to “is this MLM?”. I found something that completely changed my approach: it writes your dialogue word for word, tailored to your product — invitation, presentation and closing. Take a look, it might help you too:`,
+      waLabel: `Send your link on WhatsApp`
     },
     it: {
-      subject: 'Il tuo link di referral — 4 iscritti e il tuo è gratis',
-      title: 'Benvenuto! Ecco come avere il tuo abbonamento GRATIS',
-      body: `Porta 4 persone che si abbonano al tuo piano o superiore e, finché restano attive, <b>non paghi nulla</b> — il tuo abbonamento è gratis ogni mese.`,
-      cta: 'Il tuo link personale:',
-      foot: 'Condividilo con chi ha bisogno di script che vendono davvero.'
+      subject: 'Sei dentro — Il tuo abbonamento può essere gratis!',
+      greeting: 'Ciao e benvenuto 🤝',
+      p1: `Siamo felici che tu sia qui. Prima di iniziare con gli script, c’è una cosa che vale la pena sapere — può cambiare completamente quanto ti costa tutto questo:`,
+      p2: `<b>Il tuo abbonamento può essere gratis. Del tutto. E non per un solo mese.</b>`,
+      p3: `Ecco la regola, da persona a persona: consigli MlmPsychology con il tuo link. Quando <b>4 persone</b> si abbonano al tuo piano o superiore e restano attive, tu non paghi nulla — quel mese e ogni mese in cui restano.`,
+      p4: `Non è un concorso, non è uno sconto di una settimana. È <b>permanente</b>.`,
+      hl: `4 attivi = il tuo abbonamento è 0€`,
+      p5: `A seconda del tuo piano, sono tra <b>108€ e 348€ all’anno</b> che ti restano in tasca — per 4 persone che avresti aiutato comunque.`,
+      p6a: `E qui c’è la parte che molti si perdono: non consigli per avere il tuo abbonamento gratis.`,
+      p6b: `Consigli perché puoi aiutare ogni persona della tua squadra a <b>invitare, presentare e chiudere meglio</b>. Aiuta loro a fare soldi, e farete tutti soldi.`,
+      hl2: `MLM significa insieme. Una squadra che vende insieme vince insieme: riconoscimento internazionale e guadagni per tutti.`,
+      linkintro: 'Il tuo link personale:',
+      pthink: `Non lasciare indietro la tua squadra. Portala al tavolo dei vincitori.`,
+      signoff: `In gamba, e in bocca al lupo,`,
+      team: 'Il team MlmPsychology',
+      waMsg: `Ciao! 👋 Sai quant’è frustrante perdere le persone proprio al telefono — non sapere come aprire o cosa rispondere a “è MLM?”. Ho trovato una cosa che ha cambiato completamente il mio approccio: ti scrive il dialogo parola per parola, su misura per il tuo prodotto — invito, presentazione e chiusura. Dai un’occhiata, potrebbe aiutare anche te:`,
+      waLabel: `Invia il tuo link su WhatsApp`
     },
     es: {
-      subject: 'Tu enlace de referidos — 4 suscriptores y el tuyo es gratis',
-      title: '¡Bienvenido! Así consigues tu membresía GRATIS',
-      body: `Trae a 4 personas que se suscriban a tu plan o superior y, mientras sigan activas, <b>no pagas nada</b> — tu membresía es gratis cada mes.`,
-      cta: 'Tu enlace personal:',
-      foot: 'Compártelo con quien necesite guiones que de verdad venden.'
+      subject: 'Estás dentro — ¡Tu membresía puede ser gratis!',
+      greeting: 'Hola y bienvenido 🤝',
+      p1: `Nos alegra que estés aquí. Antes de meterte con los guiones, hay algo que conviene saber — puede cambiar por completo lo que todo esto te cuesta:`,
+      p2: `<b>Tu membresía puede ser gratis. Del todo. Y no solo por un mes.</b>`,
+      p3: `Esta es la regla, de persona a persona: recomiendas MlmPsychology con tu enlace. Cuando <b>4 personas</b> se suscriben a tu plan o superior y siguen activas, tú no pagas nada — ese mes y cada mes que sigan contigo.`,
+      p4: `No es un concurso ni un descuento de una semana. Es <b>permanente</b>.`,
+      hl: `4 activos = tu membresía cuesta 0€`,
+      p5: `Según tu plan, son entre <b>108€ y 348€ al año</b> que te quedas en el bolsillo — por 4 personas a las que ibas a ayudar de todas formas.`,
+      p6a: `Y aquí está la parte que muchos se pierden: no recomiendas para tener tu membresía gratis.`,
+      p6b: `Recomiendas porque puedes ayudar a cada persona de tu equipo a <b>invitar, presentar y cerrar mejor</b>. Ayúdalos a ganar dinero, y el dinero llega para todos.`,
+      hl2: `MLM significa juntos. Un equipo que vende junto gana junto: reconocimiento internacional e ingresos para todos.`,
+      linkintro: 'Tu enlace personal:',
+      pthink: `No dejes atrás a tu equipo. Llévalos a la mesa de los ganadores.`,
+      signoff: `Un abrazo, y a por todas,`,
+      team: 'El equipo de MlmPsychology',
+      waMsg: `¡Hola! 👋 Sabes lo frustrante que es perder gente justo en el teléfono — no saber cómo abrir o qué responder a “¿esto es MLM?”. Encontré algo que cambió por completo mi forma de hacerlo: te escribe el diálogo palabra por palabra, adaptado a tu producto — invitación, presentación y cierre. Échale un vistazo, quizá te ayude a ti también:`,
+      waLabel: `Envía tu enlace por WhatsApp`
     },
     fr: {
-      subject: 'Ton lien de parrainage — 4 abonnés et le tien est gratuit',
-      title: 'Bienvenue ! Voici comment avoir ton abonnement GRATUIT',
-      body: `Amène 4 personnes qui s'abonnent à ton plan ou supérieur et, tant qu'elles restent actives, <b>tu ne paies plus rien</b> — ton abonnement est gratuit chaque mois.`,
-      cta: 'Ton lien personnel :',
-      foot: 'Partage-le avec toute personne qui a besoin de scripts qui vendent vraiment.'
+      subject: 'Tu es dans la place — Ton abonnement peut être gratuit !',
+      greeting: 'Salut et bienvenue 🤝',
+      p1: `On est contents que tu sois là. Avant de te lancer dans les scripts, il y a une chose à savoir — elle peut complètement changer ce que tout ça te coûte :`,
+      p2: `<b>Ton abonnement peut être gratuit. Entièrement. Et pas juste pour un mois.</b>`,
+      p3: `Voici la règle, d’humain à humain : tu recommandes MlmPsychology avec ton lien. Quand <b>4 personnes</b> s’abonnent à ton plan ou supérieur et restent actives, tu ne paies plus rien — ce mois-là et chaque mois où elles restent.`,
+      p4: `Ce n’est pas un concours, ni une promo d’une semaine. C’est <b>permanent</b>.`,
+      hl: `4 actifs = ton abonnement à 0€`,
+      p5: `Selon ton plan, ça fait entre <b>108€ et 348€ par an</b> que tu gardes dans ta poche — pour 4 personnes que tu aurais aidées de toute façon.`,
+      p6a: `Et voici ce que beaucoup ratent : tu ne recommandes pas pour avoir ton abonnement gratuit.`,
+      p6b: `Tu recommandes parce que tu peux aider chaque personne de ton équipe à <b>mieux inviter, présenter et conclure</b>. Aide-les à gagner de l’argent, et vous y gagnez tous.`,
+      hl2: `Le MLM, c’est ensemble. Une équipe qui vend ensemble gagne ensemble : reconnaissance internationale et revenus pour chacun.`,
+      linkintro: 'Ton lien personnel :',
+      pthink: `Ne laisse pas ton équipe derrière. Amène-les à la table des gagnants.`,
+      signoff: `Fonce — on est avec toi,`,
+      team: 'L’équipe MlmPsychology',
+      waMsg: `Salut ! 👋 Tu sais à quel point c’est frustrant de perdre des gens au téléphone — ne pas savoir comment ouvrir ou quoi répondre à « c’est du MLM ? ». J’ai trouvé un truc qui a complètement changé mon approche : il t’écrit le dialogue mot pour mot, adapté à ton produit — invitation, présentation et conclusion. Jette un œil, ça pourrait t’aider aussi :`,
+      waLabel: `Envoie ton lien sur WhatsApp`
     },
     de: {
-      subject: 'Dein Empfehlungslink — 4 Mitglieder und deins ist gratis',
-      title: 'Willkommen! So bekommst du deine Mitgliedschaft GRATIS',
-      body: `Bring 4 Personen, die deinen Plan oder höher abonnieren, und solange sie aktiv bleiben, <b>zahlst du nichts</b> — deine Mitgliedschaft ist jeden Monat kostenlos.`,
-      cta: 'Dein persönlicher Link:',
-      foot: 'Teile ihn mit jedem, der Skripte braucht, die wirklich verkaufen.'
+      subject: 'Du bist dabei — Deine Mitgliedschaft kann gratis sein!',
+      greeting: 'Hallo und willkommen 🤝',
+      p1: `Schön, dass du hier bist. Bevor du mit den Skripten loslegst, gibt es eine Sache, die du wissen solltest — sie kann komplett verändern, was dich das alles kostet:`,
+      p2: `<b>Deine Mitgliedschaft kann kostenlos sein. Komplett. Und nicht nur für einen Monat.</b>`,
+      p3: `Hier die Regel, von Mensch zu Mensch: Du empfiehlst MlmPsychology mit deinem Link. Wenn <b>4 Personen</b> deinen Plan oder höher abonnieren und aktiv bleiben, zahlst du nichts mehr — in diesem Monat und in jedem Monat, in dem sie dabei bleiben.`,
+      p4: `Kein Gewinnspiel, kein Rabatt für eine Woche. Es ist <b>dauerhaft</b>.`,
+      hl: `4 Aktive = deine Mitgliedschaft kostet 0€`,
+      p5: `Je nach Plan sind das zwischen <b>108€ und 348€ pro Jahr</b>, die in deiner Tasche bleiben — für 4 Menschen, denen du sowieso geholfen hättest.`,
+      p6a: `Und hier ist der Teil, den die meisten übersehen: Du empfiehlst nicht, um deine eigene Mitgliedschaft gratis zu bekommen.`,
+      p6b: `Du empfiehlst, weil du jeder Person in deinem Team helfen kannst, <b>besser einzuladen, zu präsentieren und abzuschließen</b>. Hilf ihnen, Geld zu verdienen, und ihr verdient alle.`,
+      hl2: `MLM heißt gemeinsam. Ein Team, das gemeinsam verkauft, gewinnt gemeinsam: internationale Anerkennung und Einkommen für alle.`,
+      linkintro: 'Dein persönlicher Link:',
+      pthink: `Lass dein Team nicht zurück. Hol es an den Tisch der Gewinner.`,
+      signoff: `Mach's gut — und leg los,`,
+      team: 'Das MlmPsychology-Team',
+      waMsg: `Hey! 👋 Du weißt, wie frustrierend es ist, Leute direkt am Telefon zu verlieren — nicht zu wissen, wie man eröffnet oder was man auf „ist das MLM?” antwortet. Ich habe etwas gefunden, das meinen Ansatz komplett verändert hat: Es schreibt dir den Dialog Wort für Wort, zugeschnitten auf dein Produkt — Einladung, Präsentation und Abschluss. Schau’s dir an, vielleicht hilft es dir auch:`,
+      waLabel: `Sende deinen Link per WhatsApp`
     }
   };
   const t = T[lang] || T.ro;
-  const html = `<div style="font-family:Arial,Helvetica,sans-serif;max-width:520px;margin:0 auto;color:#23262e">
-    <h2 style="color:#1a1205">${t.title}</h2>
-    <p style="font-size:15px;line-height:1.7">${t.body}</p>
-    <p style="font-size:14px;color:#555;margin-bottom:6px">${t.cta}</p>
-    <p style="font-size:16px"><a href="${link}" style="color:#b8903a;font-weight:700">${link}</a></p>
-    <p style="font-size:13px;color:#888;margin-top:22px">${t.foot}</p>
+  const waUrl = 'https://wa.me/?text=' + encodeURIComponent(t.waMsg + '\n' + link);
+  const html = `<div style="background:#f4f2ee;padding:28px 12px;font-family:Arial,Helvetica,sans-serif">
+    <div style="max-width:560px;margin:0 auto;background:#ffffff;border-radius:14px;overflow:hidden;border:1px solid #e8e4dc">
+      <div style="background:#12182a;padding:18px 28px">
+        <span style="color:#ecca7e;font-size:18px;font-weight:700;letter-spacing:.5px">MlmPsychology</span>
+      </div>
+      <div style="padding:30px 28px;color:#23262e;font-size:15px;line-height:1.7">
+        <h1 style="font-size:20px;color:#1a1205;margin:0 0 18px">${t.greeting}</h1>
+        <p style="margin:0 0 14px">${t.p1}</p>
+        <p style="margin:0 0 14px">${t.p2}</p>
+        <p style="margin:0 0 14px">${t.p3}</p>
+        <p style="margin:0 0 14px">${t.p4}</p>
+        <p style="text-align:center;font-size:18px;font-weight:700;color:#b8903a;margin:8px 0 20px">${t.hl}</p>
+        <p style="margin:0 0 22px">${t.p5}</p>
+        <p style="margin:0 0 14px">${t.p6a}</p>
+        <p style="margin:0 0 14px">${t.p6b}</p>
+        <p style="text-align:center;font-size:17px;font-weight:700;color:#b8903a;margin:14px 0 26px;line-height:1.5">${t.hl2}</p>
+        <p style="margin:0 0 8px;font-size:14px;color:#666">${t.linkintro}</p>
+        <div style="background:#faf7f0;border:1px solid #b8903a;border-radius:10px;padding:14px 16px;margin:0 0 14px;text-align:center">
+          <a href="${link}" style="color:#b8903a;font-weight:700;font-size:15px;word-break:break-all;text-decoration:none">${link}</a>
+        </div>
+        <div style="text-align:center;margin:0 0 24px">
+          <a href="${waUrl}" style="display:inline-block;background:#25D366;color:#ffffff;font-weight:700;font-size:15px;text-decoration:none;padding:13px 28px;border-radius:10px">${t.waLabel} →</a>
+        </div>
+        <p style="margin:0 0 24px">${t.pthink}</p>
+        <p style="margin:0;color:#23262e">${t.signoff}<br><b>${t.team}</b></p>
+      </div>
+    </div>
   </div>`;
   try {
     await fetch('https://api.resend.com/emails', {
