@@ -662,7 +662,7 @@
           <li><span class="ic check">✓</span><span class="ft"><b>Invitația-fulger</b><span class="desc">4 invitații de 30 de secunde, cu psihologia din spate</span></span></li>
           <li><span class="ic check">✓</span><span class="ft"><b>Modul Conectare</b><span class="desc">harta clientului + scriptul de conectare, replică cu replică</span></span></li>
           <li><span class="ic check">✓</span><span class="ft"><b>Modul Psihologia deciziei</b><span class="desc">cum cumpără femeia &amp; bărbatul + scriptul complet, replică cu replică</span></span></li>
-          <li><span class="ic check">✓</span><span class="ft"><b>Modul Prezentare 1 la 1</b><span class="desc">banca de întrebări + cadență + tonalitate</span></span><span class="tier gold">Leader</span></li>
+          <li><span class="ic check">✓</span><span class="ft"><b>Modul Prezentare 1 la 1</b><span class="desc">banca de întrebări + cadență + tonalitate</span></span></li>
           <li><span class="ic check">✓</span><span class="ft"><b>Modul Închidere</b><span class="desc">întrebări psihologice de închidere</span></span><span class="tier gold">Leader</span></li>
         </ul>
         <button class="btn-card" onclick="selectPlan('leader')">Devin Leader</button>
@@ -685,7 +685,7 @@
           <li><span class="ic check">✓</span><span class="ft"><b>Modul Conectare</b><span class="desc">harta clientului + scriptul de conectare, replică cu replică</span></span></li>
           <li><span class="ic check">✓</span><span class="ft"><b>Modul Psihologia deciziei</b><span class="desc">cum cumpără femeia &amp; bărbatul + scriptul complet, replică cu replică</span></span></li>
           <li class="locked" onclick="lockToast('Ambele')"><span class="ic lock">🔒</span><span class="ft">Mod Ambele</span><span class="tier">Leader</span></li>
-          <li class="locked" onclick="lockToast('Prezentare')"><span class="ic lock">🔒</span><span class="ft">Modul Prezentare 1 la 1</span><span class="tier">Leader</span></li>
+          <li><span class="ic check">✓</span><span class="ft"><b>Modul Prezentare 1 la 1</b><span class="desc">banca de întrebări + cadență + tonalitate</span></span></li>
           <li class="locked" onclick="lockToast('Închidere')"><span class="ic lock">🔒</span><span class="ft">Modul Închidere</span><span class="tier">Leader</span></li>
         </ul>
         <button class="btn-card" onclick="selectPlan('builder')">Aleg Builder</button>
@@ -709,10 +709,11 @@
           <li class="locked" onclick="lockToast('Invitația-fulger')"><span class="ic lock">🔒</span><span class="ft">Invitația-fulger</span><span class="tier">Builder</span></li>
           <li class="locked" onclick="lockToast('Conectare')"><span class="ic lock">🔒</span><span class="ft">Modul Conectare</span><span class="tier">Builder</span></li>
           <li class="locked" onclick="lockToast('Psihologia deciziei')"><span class="ic lock">🔒</span><span class="ft">Modul Psihologia deciziei</span><span class="tier">Builder</span></li>
-          <li class="locked" onclick="lockToast('Prezentare')"><span class="ic lock">🔒</span><span class="ft">Modul Prezentare 1 la 1</span><span class="tier">Leader</span></li>
+          <li class="locked" onclick="lockToast('Prezentare')"><span class="ic lock">🔒</span><span class="ft">Modul Prezentare 1 la 1</span><span class="tier">Builder</span></li>
           <li class="locked" onclick="lockToast('Închidere')"><span class="ic lock">🔒</span><span class="ft">Modul Închidere</span><span class="tier">Leader</span></li>
         </ul>
         <button class="btn-card" onclick="selectPlan('recruit')">Încep cu Recruit</button>
+        <button class="upsell" onclick="selectPlan('builder')">Acces la 4 din 5 module, cu doar <b>10€</b> în plus →</button>
       </div>
     </div>
     <!-- SCRIPT UNIC -->
@@ -1008,7 +1009,7 @@
     unic:   {step:'Încerci',     name:'Script Unic', price:'9€', per:'o singură dată', desc:'Un singur script + răspuns pentru 2 obiecții, mod Clean. Fără abonament.'},
     recruit:{step:'Începi',      name:'Recruit',     price:'9€', per:'/ lună', desc:'3 scripturi/lună + 1 de antrenament la start. Mod Clean, cu răspuns pentru 2 obiecții/script.'},
     builder:{step:'Construiești',name:'Builder',     price:'19€',per:'/ lună', desc:'8 scripturi/lună + 3 de antrenament la start. Plus modul Coach, care îți explică de ce funcționează.'},
-    leader: {step:'Conduci',     name:'Leader',      price:'29€',per:'/ lună', desc:'15 scripturi/lună + 5 de antrenament la start. Toate modurile, inclusiv Ambele.'}
+    leader: {step:'Conduci',     name:'Leader',      price:'29€',per:'/ lună', desc:'15 scripturi/lună + 5 de antrenament la start. Acces 24/7 la toate modulele.'}
   };
   var current = null;
   function selectPlan(key){
