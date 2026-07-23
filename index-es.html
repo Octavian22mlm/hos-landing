@@ -627,6 +627,23 @@ label{display:block;font-size:13.5px;font-weight:600;letter-spacing:.08em;text-t
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>.flag{display:inline-block;width:19px;height:13px;border-radius:2px;box-shadow:0 0 0 1px rgba(0,0,0,.25) inset;vertical-align:middle;flex:0 0 auto;overflow:hidden}</style>
+<style id="ref-css">
+.ref-panel{margin-top:18px;border-top:1px solid var(--line);padding-top:18px}
+.ref-h{font-weight:700;color:var(--goldl);font-size:15px;margin-bottom:6px}
+.ref-sub{font-size:13px;color:var(--muted);line-height:1.6;margin-bottom:12px}
+.ref-linkbox{display:flex;gap:8px;align-items:stretch;margin-bottom:12px}
+.ref-link{flex:1;background:var(--panel2);border:1px solid var(--line);border-radius:8px;padding:10px 12px;font-size:13px;color:var(--ink);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ref-copy{background:var(--gold);color:#1a1206;border:none;border-radius:8px;padding:0 16px;font-weight:700;cursor:pointer;font-size:13px}
+.ref-copy:hover{background:var(--goldl)}
+.ref-prog{display:flex;align-items:center;gap:10px;margin-bottom:8px;flex-wrap:wrap}
+.ref-dots{display:flex;gap:6px}
+.ref-dot{width:22px;height:22px;border-radius:50%;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--muted2)}
+.ref-dot.on{background:var(--green);border-color:var(--green);color:#08130d}
+.ref-count{font-size:13px;color:var(--muted)}
+.ref-free{background:rgba(62,207,142,.12);border:1px solid rgba(62,207,142,.35);color:#8ff0c2;border-radius:8px;padding:10px 12px;font-size:13px;font-weight:600;margin-top:6px}
+.ref-note{font-size:12px;color:var(--muted2);margin-top:8px;line-height:1.5}
+</style>
+<script>(function(){try{var m=new URLSearchParams(location.search).get('ref');if(m){localStorage.setItem('hos_ref',String(m).trim().toUpperCase().slice(0,16));}}catch(e){}})();</script>
 </head>
 <body>
 
@@ -1570,7 +1587,7 @@ async function doRegister() {
   try {
     await api('/api/auth/register', {
       method: 'POST',
-      body: JSON.stringify({ email, password: pass })
+      body: JSON.stringify({ email, password: pass, ref: (function(){try{return localStorage.getItem('hos_ref')||'';}catch(e){return '';}})(), lang: 'es' })
     });
     sucEl.textContent = '¡Cuenta creada! Revisa tu email y confirma, luego inicia sesión.';
     sucEl.style.display = 'block';
@@ -1873,7 +1890,37 @@ function accRenderHome(sub){
       '<div class="acc-row"><span class="acc-k">Email</span><span class="acc-v">'+_esc(p.email||'')+'</span></div>'+
       '<div class="acc-row"><span class="acc-k">Plan</span><span class="acc-v">'+_esc(tierLabel)+'</span></div>'+
     '</div>'+ statusHtml +
-    '<div class="acc-actions">'+actionHtml+'</div>';
+    '<div class="acc-actions">'+actionHtml+'</div>'+
+    '<div id="acc-ref"></div>';
+  if(typeof renderReferralPanel==='function') renderReferralPanel();
+}
+
+async function renderReferralPanel(){
+  var host=document.getElementById('acc-ref'); if(!host) return;
+  try{
+    var d=await api('/api/referrals');
+    var dots='';
+    for(var i=0;i<d.threshold;i++){ dots+='<div class="ref-dot'+(i<d.qualifying?' on':'')+'">'+(i<d.qualifying?'\u2713':(i+1))+'</div>'; }
+    var freeHtml = d.free_now
+      ? '<div class="ref-free">🎉 Tienes '+d.qualifying+' referidos activos — tu membresía es GRATIS este mes.</div>'
+      : (d.eligible_plan
+          ? '<div class="ref-note">Necesitas '+d.threshold+' suscriptores activos en tu plan o superior. Te faltan '+Math.max(0,d.threshold-d.qualifying)+'.</div>'
+          : '<div class="ref-note">Activa una suscripción para ganar meses gratis con los referidos.</div>');
+    host.innerHTML =
+      '<div class="ref-panel">'+
+        '<div class="ref-h">Recomienda y consigue meses gratis</div>'+
+        '<div class="ref-sub">Trae '+d.threshold+' personas en tu plan o superior. Mientras sigan activas, tu membresía es gratis cada mes.</div>'+
+        '<div class="ref-linkbox"><div class="ref-link" id="ref-link">'+_esc(d.link)+'</div><button class="ref-copy" onclick="copyRefLink()">Copiar</button></div>'+
+        '<div class="ref-prog"><div class="ref-dots">'+dots+'</div><span class="ref-count">'+d.qualifying+' / '+d.threshold+' activos</span></div>'+
+        freeHtml+
+      '</div>';
+    window.__refLink=d.link;
+  }catch(e){ host.innerHTML=''; }
+}
+function copyRefLink(){
+  var l=window.__refLink||''; if(!l) return;
+  try{ navigator.clipboard.writeText(l).then(function(){ if(typeof toast==='function') toast('Enlace copiado ✅',2000); }); }
+  catch(e){ if(typeof toast==='function') toast('Copia el enlace manualmente',2500); }
 }
 
 function accManage(){
