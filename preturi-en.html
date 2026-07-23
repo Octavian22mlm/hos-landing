@@ -662,7 +662,7 @@
           <li><span class="ic check">✓</span><span class="ft"><b>Flash Invite</b><span class="desc">4 thirty-second invitations, with the psychology behind them</span></span></li>
           <li><span class="ic check">✓</span><span class="ft"><b>Connection Mode</b><span class="desc">the client map + the connection script, line by line</span></span></li>
           <li><span class="ic check">✓</span><span class="ft"><b>Decision Psychology module</b><span class="desc">how women &amp; men buy + the full line-by-line script</span></span></li>
-          <li><span class="ic check">✓</span><span class="ft"><b>1-on-1 Presentation Mode</b><span class="desc">question bank + cadence + tonality</span></span><span class="tier gold">Leader</span></li>
+          <li><span class="ic check">✓</span><span class="ft"><b>1-on-1 Presentation Mode</b><span class="desc">question bank + cadence + tonality</span></span></li>
           <li><span class="ic check">✓</span><span class="ft"><b>Closing Mode</b><span class="desc">psychological closing questions</span></span><span class="tier gold">Leader</span></li>
         </ul>
         <button class="btn-card" onclick="selectPlan('leader')">Become a Leader</button>
@@ -685,7 +685,7 @@
           <li><span class="ic check">✓</span><span class="ft"><b>Connection Mode</b><span class="desc">the client map + the connection script, line by line</span></span></li>
           <li><span class="ic check">✓</span><span class="ft"><b>Decision Psychology module</b><span class="desc">how women &amp; men buy + the full line-by-line script</span></span></li>
           <li class="locked" onclick="lockToast('Both')"><span class="ic lock">🔒</span><span class="ft">Both mode</span><span class="tier">Leader</span></li>
-          <li class="locked" onclick="lockToast('1-on-1 Presentation')"><span class="ic lock">🔒</span><span class="ft">1-on-1 Presentation Mode</span><span class="tier">Leader</span></li>
+          <li><span class="ic check">✓</span><span class="ft"><b>1-on-1 Presentation Mode</b><span class="desc">question bank + cadence + tonality</span></span></li>
           <li class="locked" onclick="lockToast('Closing')"><span class="ic lock">🔒</span><span class="ft">Closing Mode</span><span class="tier">Leader</span></li>
         </ul>
         <button class="btn-card" onclick="selectPlan('builder')">Choose Builder</button>
@@ -709,10 +709,11 @@
           <li class="locked" onclick="lockToast('Flash Invite')"><span class="ic lock">🔒</span><span class="ft">Flash Invite</span><span class="tier">Builder</span></li>
           <li class="locked" onclick="lockToast('Connection')"><span class="ic lock">🔒</span><span class="ft">Connection Mode</span><span class="tier">Builder</span></li>
           <li class="locked" onclick="lockToast('Decision Psychology')"><span class="ic lock">🔒</span><span class="ft">Decision Psychology module</span><span class="tier">Builder</span></li>
-          <li class="locked" onclick="lockToast('1-on-1 Presentation')"><span class="ic lock">🔒</span><span class="ft">1-on-1 Presentation Mode</span><span class="tier">Leader</span></li>
+          <li class="locked" onclick="lockToast('1-on-1 Presentation')"><span class="ic lock">🔒</span><span class="ft">1-on-1 Presentation Mode</span><span class="tier">Builder</span></li>
           <li class="locked" onclick="lockToast('Closing')"><span class="ic lock">🔒</span><span class="ft">Closing Mode</span><span class="tier">Leader</span></li>
         </ul>
         <button class="btn-card" onclick="selectPlan('recruit')">Start with Recruit</button>
+        <button class="upsell" onclick="selectPlan('builder')">Access to 4 of 5 modules, just <b>€10</b> more →</button>
       </div>
     </div>
     <!-- SCRIPT UNIC -->
@@ -1008,7 +1009,7 @@
     unic:   {step:'You try',      name:'Single Script', price:'9€', per:'one-time', desc:'A single script + answer to 2 objections, Clean mode. No subscription.'},
     recruit:{step:'You start',    name:'Recruit',     price:'9€', per:'/ month', desc:'3 scripts/month + 1 practice at start. Clean mode, with answer to 2 objections/script.'},
     builder:{step:'You build',    name:'Builder',     price:'19€',per:'/ month', desc:'8 scripts/month + 3 practice at start. Plus Coach mode, which explains why it works.'},
-    leader: {step:'You lead',     name:'Leader',      price:'29€',per:'/ month', desc:'15 scripts/month + 5 practice at start. All modes, including Both.'}
+    leader: {step:'You lead',     name:'Leader',      price:'29€',per:'/ month', desc:'15 scripts/month + 5 practice at start. 24/7 access to all modules.'}
   };
   var current = null;
   function selectPlan(key){
