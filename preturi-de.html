@@ -662,7 +662,7 @@
           <li><span class="ic check">✓</span><span class="ft"><b>Blitz-Einladung</b><span class="desc">4 Einladungen à 30 Sekunden, mit der Psychologie dahinter</span></span></li>
           <li><span class="ic check">✓</span><span class="ft"><b>Modus Verbindung</b><span class="desc">die Kunden-Landkarte + das Verbindungsskript, Satz für Satz</span></span></li>
           <li><span class="ic check">✓</span><span class="ft"><b>Modul Entscheidungspsychologie</b><span class="desc">wie Frau &amp; Mann kaufen + das vollständige Skript, Satz für Satz</span></span></li>
-          <li><span class="ic check">✓</span><span class="ft"><b>Modus 1-zu-1-Präsentation</b><span class="desc">Fragenbank + Rhythmus + Tonalität</span></span><span class="tier gold">Leader</span></li>
+          <li><span class="ic check">✓</span><span class="ft"><b>Modus 1-zu-1-Präsentation</b><span class="desc">Fragenbank + Rhythmus + Tonalität</span></span></li>
           <li><span class="ic check">✓</span><span class="ft"><b>Modus Abschluss</b><span class="desc">psychologische Abschlussfragen</span></span><span class="tier gold">Leader</span></li>
         </ul>
         <button class="btn-card" onclick="selectPlan('leader')">Ich werde Leader</button>
@@ -685,7 +685,7 @@
           <li><span class="ic check">✓</span><span class="ft"><b>Modus Verbindung</b><span class="desc">die Kunden-Landkarte + das Verbindungsskript, Satz für Satz</span></span></li>
           <li><span class="ic check">✓</span><span class="ft"><b>Modul Entscheidungspsychologie</b><span class="desc">wie Frau &amp; Mann kaufen + das vollständige Skript, Satz für Satz</span></span></li>
           <li class="locked" onclick="lockToast('Beide')"><span class="ic lock">🔒</span><span class="ft">Modus Beide</span><span class="tier">Leader</span></li>
-          <li class="locked" onclick="lockToast('1-zu-1-Präsentation')"><span class="ic lock">🔒</span><span class="ft">Modus 1-zu-1-Präsentation</span><span class="tier">Leader</span></li>
+          <li><span class="ic check">✓</span><span class="ft"><b>Modus 1-zu-1-Präsentation</b><span class="desc">Fragenbank + Rhythmus + Tonalität</span></span></li>
           <li class="locked" onclick="lockToast('Abschluss')"><span class="ic lock">🔒</span><span class="ft">Modus Abschluss</span><span class="tier">Leader</span></li>
         </ul>
         <button class="btn-card" onclick="selectPlan('builder')">Ich wähle Builder</button>
@@ -709,10 +709,11 @@
           <li class="locked" onclick="lockToast('Blitz-Einladung')"><span class="ic lock">🔒</span><span class="ft">Blitz-Einladung</span><span class="tier">Builder</span></li>
           <li class="locked" onclick="lockToast('Verbindung')"><span class="ic lock">🔒</span><span class="ft">Modus Verbindung</span><span class="tier">Builder</span></li>
           <li class="locked" onclick="lockToast('Entscheidungspsychologie')"><span class="ic lock">🔒</span><span class="ft">Modul Entscheidungspsychologie</span><span class="tier">Builder</span></li>
-          <li class="locked" onclick="lockToast('1-zu-1-Präsentation')"><span class="ic lock">🔒</span><span class="ft">Modus 1-zu-1-Präsentation</span><span class="tier">Leader</span></li>
+          <li class="locked" onclick="lockToast('1-zu-1-Präsentation')"><span class="ic lock">🔒</span><span class="ft">Modus 1-zu-1-Präsentation</span><span class="tier">Builder</span></li>
           <li class="locked" onclick="lockToast('Abschluss')"><span class="ic lock">🔒</span><span class="ft">Modus Abschluss</span><span class="tier">Leader</span></li>
         </ul>
         <button class="btn-card" onclick="selectPlan('recruit')">Ich starte mit Recruit</button>
+        <button class="upsell" onclick="selectPlan('builder')">Zugang zu 4 von 5 Modulen, nur <b>10€</b> mehr →</button>
       </div>
     </div>
     <!-- SCRIPT UNIC -->
@@ -1008,7 +1009,7 @@
     unic:   {step:'Sie testen',   name:'Einzelskript', price:'9€', per:'einmalig', desc:'Ein einzelnes Skript + Antwort auf 2 Einwände, Modus Clean. Ohne Abo.'},
     recruit:{step:'Sie starten',  name:'Recruit',     price:'9€', per:'/ Monat', desc:'3 Skripte/Monat + 1 Übungsskript zum Start. Modus Clean, mit Antwort auf 2 Einwände/Skript.'},
     builder:{step:'Sie bauen auf',name:'Builder',     price:'19€',per:'/ Monat', desc:'8 Skripte/Monat + 3 Übungsskripte zum Start. Zusätzlich der Modus Coach, der Ihnen erklärt, warum es funktioniert.'},
-    leader: {step:'Sie führen',   name:'Leader',      price:'29€',per:'/ Monat', desc:'15 Skripte/Monat + 5 Übungsskripte zum Start. Alle Modi, inklusive Beide.'}
+    leader: {step:'Sie führen',   name:'Leader',      price:'29€',per:'/ Monat', desc:'15 Skripte/Monat + 5 Übungsskripte zum Start. 24/7-Zugang zu allen Modulen.'}
   };
   var current = null;
   function selectPlan(key){
