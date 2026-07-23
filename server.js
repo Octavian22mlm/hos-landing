@@ -168,17 +168,164 @@ const admin = (req, res, next) => {
 };
 
 // ============================================
+// PROGRAM DE RECOMANDĂRI (referral)
+// Gratis cât timp ai >= 4 abonați activi cu planul TĂU sau mai mare.
+// ============================================
+const REFERRAL_THRESHOLD = 4;
+// TIER_RANK { recruit:1, builder:2, leader:3 } e declarat mai jos (secțiunea de schimbare plan) și refolosit aici.
+
+function genRefCode() {
+  const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789'; // fără 0/O/1/I ambigue
+  let c = '';
+  for (let i = 0; i < 8; i++) c += chars[Math.floor(Math.random() * chars.length)];
+  return c;
+}
+
+// Generează + salvează un ref_code unic pentru user (retry pe coliziune). Idempotent.
+async function ensureRefCode(userId) {
+  const { data: prof } = await db.from('profiles').select('ref_code').eq('id', userId).single();
+  if (prof && prof.ref_code) return prof.ref_code;
+  for (let attempt = 0; attempt < 6; attempt++) {
+    const code = genRefCode();
+    const { error } = await db.from('profiles').update({ ref_code: code }).eq('id', userId);
+    if (!error) {
+      // verificăm că a rămas al nostru (unicitatea e garantată de indexul unic)
+      const { data: check } = await db.from('profiles').select('ref_code').eq('id', userId).single();
+      if (check && check.ref_code) return check.ref_code;
+    }
+    // coliziune improbabilă -> reîncercăm cu alt cod
+  }
+  return null;
+}
+
+// Numără recomandații ACTIVI cu planul >= planul recomandatorului.
+async function countQualifyingReferrals(referrerId, referrerTier) {
+  const minRank = TIER_RANK[referrerTier];
+  if (!minRank) return 0; // recomandatorul nu e pe plan recurent -> nu se aplică
+  const { data: me } = await db.from('profiles').select('ref_code').eq('id', referrerId).single();
+  if (!me || !me.ref_code) return 0;
+  const eligible = Object.keys(TIER_RANK).filter(t => TIER_RANK[t] >= minRank);
+  const { count } = await db
+    .from('profiles')
+    .select('id', { count: 'exact', head: true })
+    .eq('referred_by', me.ref_code)
+    .in('tier', eligible);
+  return count || 0;
+}
+
+// Rezolvă un cod de recomandare la user-ul care îl deține (sau null). Blochează auto-recomandarea.
+async function resolveReferrer(rawCode, selfId) {
+  if (!rawCode) return null;
+  const code = String(rawCode).trim().toUpperCase().slice(0, 16);
+  if (!code) return null;
+  const { data: ref } = await db.from('profiles').select('id, ref_code').eq('ref_code', code).single();
+  if (!ref || ref.id === selfId) return null;
+  return ref.ref_code;
+}
+
+// Email de bun venit + link personal, prin Resend (best-effort, multilingv).
+async function sendReferralWelcomeEmail(email, code, lang) {
+  if (!process.env.RESEND_API_KEY || !email || !code) return;
+  const host = process.env.PUBLIC_HOST || 'mlmpsychology.com';
+  const link = `https://${host}/?ref=${code}`;
+  const T = {
+    ro: {
+      subject: 'Linkul tău de recomandare — 4 abonați și al tău e gratis',
+      title: 'Bine ai venit! Iată cum poți avea abonamentul GRATIS',
+      body: `Adu 4 oameni care se abonează la planul tău sau mai mare, iar cât timp rămân activi <b>nu mai plătești nimic</b> — abonamentul tău e gratis în fiecare lună.`,
+      cta: 'Linkul tău personal:',
+      foot: 'Distribuie-l oricui crezi că are nevoie de scripturi care chiar vând.'
+    },
+    en: {
+      subject: 'Your referral link — 4 members and yours is free',
+      title: 'Welcome! Here is how to get your membership FREE',
+      body: `Bring 4 people who subscribe to your plan or higher, and as long as they stay active <b>you pay nothing</b> — your membership is free every month.`,
+      cta: 'Your personal link:',
+      foot: 'Share it with anyone who needs scripts that actually sell.'
+    },
+    it: {
+      subject: 'Il tuo link di referral — 4 iscritti e il tuo è gratis',
+      title: 'Benvenuto! Ecco come avere il tuo abbonamento GRATIS',
+      body: `Porta 4 persone che si abbonano al tuo piano o superiore e, finché restano attive, <b>non paghi nulla</b> — il tuo abbonamento è gratis ogni mese.`,
+      cta: 'Il tuo link personale:',
+      foot: 'Condividilo con chi ha bisogno di script che vendono davvero.'
+    },
+    es: {
+      subject: 'Tu enlace de referidos — 4 suscriptores y el tuyo es gratis',
+      title: '¡Bienvenido! Así consigues tu membresía GRATIS',
+      body: `Trae a 4 personas que se suscriban a tu plan o superior y, mientras sigan activas, <b>no pagas nada</b> — tu membresía es gratis cada mes.`,
+      cta: 'Tu enlace personal:',
+      foot: 'Compártelo con quien necesite guiones que de verdad venden.'
+    },
+    fr: {
+      subject: 'Ton lien de parrainage — 4 abonnés et le tien est gratuit',
+      title: 'Bienvenue ! Voici comment avoir ton abonnement GRATUIT',
+      body: `Amène 4 personnes qui s'abonnent à ton plan ou supérieur et, tant qu'elles restent actives, <b>tu ne paies plus rien</b> — ton abonnement est gratuit chaque mois.`,
+      cta: 'Ton lien personnel :',
+      foot: 'Partage-le avec toute personne qui a besoin de scripts qui vendent vraiment.'
+    },
+    de: {
+      subject: 'Dein Empfehlungslink — 4 Mitglieder und deins ist gratis',
+      title: 'Willkommen! So bekommst du deine Mitgliedschaft GRATIS',
+      body: `Bring 4 Personen, die deinen Plan oder höher abonnieren, und solange sie aktiv bleiben, <b>zahlst du nichts</b> — deine Mitgliedschaft ist jeden Monat kostenlos.`,
+      cta: 'Dein persönlicher Link:',
+      foot: 'Teile ihn mit jedem, der Skripte braucht, die wirklich verkaufen.'
+    }
+  };
+  const t = T[lang] || T.ro;
+  const html = `<div style="font-family:Arial,Helvetica,sans-serif;max-width:520px;margin:0 auto;color:#23262e">
+    <h2 style="color:#1a1205">${t.title}</h2>
+    <p style="font-size:15px;line-height:1.7">${t.body}</p>
+    <p style="font-size:14px;color:#555;margin-bottom:6px">${t.cta}</p>
+    <p style="font-size:16px"><a href="${link}" style="color:#b8903a;font-weight:700">${link}</a></p>
+    <p style="font-size:13px;color:#888;margin-top:22px">${t.foot}</p>
+  </div>`;
+  try {
+    await fetch('https://api.resend.com/emails', {
+      method: 'POST',
+      headers: { 'Authorization': `Bearer ${process.env.RESEND_API_KEY}`, 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        from: process.env.SUPPORT_FROM || 'Harvard of Sales <onboarding@resend.dev>',
+        to: [email],
+        subject: t.subject,
+        html
+      })
+    });
+  } catch (e) { console.error('[referral email]', e.message); }
+}
+
+// ============================================
 // AUTH ROUTES
 // ============================================
 
 // Înregistrare
 app.post('/api/auth/register', async (req, res) => {
-  const { email, password } = req.body;
+  const { email, password, ref, lang } = req.body;
   if (!email || !password) return res.status(400).json({ error: 'Email și parolă sunt obligatorii' });
   if (password.length < 6) return res.status(400).json({ error: 'Parola trebuie să aibă minim 6 caractere' });
 
-  const { data, error } = await db.auth.signUp({ email, password });
+  // păstrăm codul recomandatorului în metadata, ca backup dacă rândul de profil întârzie
+  const meta = ref ? { ref: String(ref).trim().toUpperCase().slice(0, 16) } : undefined;
+  const { data, error } = await db.auth.signUp({ email, password, options: meta ? { data: meta } : undefined });
   if (error) return res.status(400).json({ error: error.message });
+
+  // best-effort: cod personal + legare de recomandator + email de bun venit (nu blocăm înscrierea dacă pică)
+  const uid = data && data.user && data.user.id;
+  if (uid) {
+    (async () => {
+      try {
+        // rândul de profil e creat de un trigger; îi dăm câteva încercări
+        let code = null;
+        for (let i = 0; i < 5 && !code; i++) {
+          code = await ensureRefCode(uid);
+          if (!code) await new Promise(r => setTimeout(r, 400));
+        }
+        const referredBy = await resolveReferrer(ref, uid);
+        if (referredBy) await db.from('profiles').update({ referred_by: referredBy }).eq('id', uid);
+        if (code) await sendReferralWelcomeEmail(email, code, lang || 'ro');
+      } catch (e) { console.error('[register referral]', e.message); }
+    })();
+  }
 
   res.json({ message: 'Cont creat cu succes. Verifică emailul pentru confirmare.' });
 });
@@ -213,7 +360,56 @@ app.get('/api/user', auth, async (req, res) => {
   // scripturile noi peste cele ramase (report), plafonat la 2x alocarea lunara.
   // Astfel scripturile neutilizate se pastreaza dintr-o luna in alta.
 
+  // REFERRAL — backfill leneș: cod personal + legare de recomandator (din metadata), o singură dată.
+  try {
+    if (profile && !profile.ref_code) {
+      const code = await ensureRefCode(req.user.id);
+      if (code) profile.ref_code = code;
+    }
+    if (profile && !profile.referred_by && req.user.user_metadata && req.user.user_metadata.ref) {
+      const referredBy = await resolveReferrer(req.user.user_metadata.ref, req.user.id);
+      if (referredBy) {
+        await db.from('profiles').update({ referred_by: referredBy }).eq('id', req.user.id);
+        profile.referred_by = referredBy;
+      }
+    }
+  } catch (e) { console.error('[user referral backfill]', e.message); }
+
   res.json(profile);
+});
+
+// ---- REFERRAL: stare pentru panoul din cont ----
+app.get('/api/referrals', auth, async (req, res) => {
+  try {
+    const { data: me } = await db.from('profiles').select('ref_code, tier').eq('id', req.user.id).single();
+    let code = me && me.ref_code;
+    if (!code) code = await ensureRefCode(req.user.id);
+    const tier = (me && me.tier) || 'none';
+    const host = req.get('host');
+    const link = `https://${host}/?ref=${code || ''}`;
+
+    let total = 0, qualifying = 0;
+    if (code) {
+      const { count: totalCount } = await db
+        .from('profiles').select('id', { count: 'exact', head: true })
+        .eq('referred_by', code);
+      total = totalCount || 0;
+      qualifying = await countQualifyingReferrals(req.user.id, tier);
+    }
+    const eligiblePlan = !!TIER_RANK[tier]; // e pe plan recurent?
+    res.json({
+      code: code || null,
+      link,
+      total,
+      qualifying,
+      threshold: REFERRAL_THRESHOLD,
+      eligible_plan: eligiblePlan,
+      free_now: eligiblePlan && qualifying >= REFERRAL_THRESHOLD
+    });
+  } catch (e) {
+    console.error('[api/referrals]', e.message);
+    res.status(500).json({ error: 'Eroare la citirea recomandărilor' });
+  }
 });
 
 // Activare cod de acces
@@ -1207,6 +1403,36 @@ app.post('/api/webhook', express.raw({ type: 'application/json' }), async (req, 
               scripts_reset_at: new Date().toISOString()
             }).eq('id', userId);
             console.log(`[webhook] reînnoit ${tier} pentru ${userId} (report: ${current}+${monthly} -> ${capped}, cap ${monthly * 2})`);
+          }
+        }
+      }
+    }
+
+    // 2b) RECOMANDĂRI — factură de reînnoire creată (draft): dacă recomandatorul are
+    //     >= 4 recomandați activi cu planul lui sau mai mare, luna asta e GRATIS.
+    //     Stripe lasă ~1h până finalizează factura abonamentului -> avem timp să adăugăm creditul.
+    if (event.type === 'invoice.created') {
+      const inv = event.data.object;
+      const isRenewal = inv.billing_reason === 'subscription_cycle' || inv.billing_reason === 'subscription_create';
+      if (isRenewal && inv.amount_due > 0 && inv.status === 'draft') {
+        const subId = inv.subscription || (inv.parent && inv.parent.subscription_details && inv.parent.subscription_details.subscription);
+        if (subId) {
+          const sub = await stripe.subscriptions.retrieve(subId);
+          const userId = sub.metadata && sub.metadata.user_id;
+          const tier   = sub.metadata && sub.metadata.tier;
+          if (userId && TIER_RANK[tier]) {
+            const qualifying = await countQualifyingReferrals(userId, tier);
+            if (qualifying >= REFERRAL_THRESHOLD) {
+              // credit egal cu totalul facturii -> luna devine 0
+              await stripe.invoiceItems.create({
+                customer: inv.customer,
+                invoice: inv.id,
+                amount: -inv.amount_due,
+                currency: inv.currency,
+                description: `Recompensă recomandări — ${qualifying} abonați activi (prag ${REFERRAL_THRESHOLD}). Lună gratuită.`
+              });
+              console.log(`[referral] LUNĂ GRATIS pentru ${userId} (${tier}) — ${qualifying} recomandați activi >= plan`);
+            }
           }
         }
       }
