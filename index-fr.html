@@ -642,6 +642,7 @@ label{display:block;font-size:13.5px;font-weight:600;letter-spacing:.08em;text-t
 .ref-count{font-size:13px;color:var(--muted)}
 .ref-free{background:rgba(62,207,142,.12);border:1px solid rgba(62,207,142,.35);color:#8ff0c2;border-radius:8px;padding:10px 12px;font-size:13px;font-weight:600;margin-top:6px}
 .ref-note{font-size:12px;color:var(--muted2);margin-top:8px;line-height:1.5}
+.rfm-ov{position:fixed;inset:0;background:rgba(4,6,12,.72);display:flex;align-items:center;justify-content:center;padding:20px;z-index:99999}.rfm{background:linear-gradient(180deg,#141d31,#111829);border:1px solid var(--line);border-radius:18px;max-width:440px;width:100%;padding:30px 28px;box-shadow:0 30px 80px rgba(0,0,0,.5);position:relative}.rfm-x{position:absolute;top:12px;right:16px;color:var(--muted2);font-size:24px;text-decoration:none;cursor:pointer;line-height:1}.rfm-gift{font-size:30px;text-align:center;margin-bottom:6px}.rfm-t{font-family:"Playfair Display",Georgia,serif;font-size:22px;color:var(--goldl);text-align:center;font-weight:700;margin:0 0 8px;line-height:1.25}.rfm-d{font-size:14px;color:var(--muted);text-align:center;line-height:1.6;margin:0 0 20px}.rfm-prog{display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:18px}.rfm-wa{display:block;text-align:center;background:#25D366;color:#fff;font-weight:700;font-size:14.5px;text-decoration:none;padding:13px;border-radius:10px;margin-bottom:14px}.rfm-later{display:block;text-align:center;color:var(--muted2);font-size:13px;text-decoration:none;cursor:pointer}
 </style>
 <script>(function(){try{var m=new URLSearchParams(location.search).get('ref');if(m){localStorage.setItem('hos_ref',String(m).trim().toUpperCase().slice(0,16));}}catch(e){}})();</script>
 </head>
@@ -1572,6 +1573,7 @@ async function doLogin() {
     }
     sessionStorage.setItem('hos_token', TOKEN);
     await init();
+    if(typeof showReferralPopup==='function') showReferralPopup();
   } catch(e) {
     errEl.textContent = e.message;
     errEl.style.display = 'block';
@@ -1813,6 +1815,42 @@ function psTab(t, btn){
   tabs.forEach(function(b){b.classList.remove('active')});
   if(btn) btn.classList.add('active');
 }
+var REFP={t:"Parraine et ton abonnement est gratuit",d:"Invite {N} personnes sur ton plan ou supérieur. Tant qu’elles restent actives, tu profites d’un abonnement gratuit — chaque mois.",act:"actifs",copy:"Copier",copied:"Lien copié ✅",wa:"Envoie ton lien sur WhatsApp",later:"Plus tard",ok:"Super !",freeT:"Ton abonnement est gratuit ce mois-ci 🎉",freeD:"Tu as {N} filleuls actifs. Merci d’avoir amené ton équipe — vous grandissez ensemble.",waMsg:"Salut ! 👋 J’ai trouvé des scripts MLM qui vendent vraiment — invitation, présentation et conclusion, adaptés à ton produit. Jette un œil :"};
+
+function showReferralPopup(){
+  if(typeof api!=='function') return;
+  api('/api/referrals').then(function(d){
+    if(!d || !d.code) return;
+    var wa='https://wa.me/?text='+encodeURIComponent(REFP.waMsg+'\n'+d.link);
+    var inner;
+    if(d.free_now){
+      inner='<a class="rfm-x">×</a><div class="rfm-gift">🎉</div>'+
+        '<div class="rfm-t">'+REFP.freeT+'</div>'+
+        '<div class="rfm-d">'+REFP.freeD.replace('{N}',d.qualifying)+'</div>'+
+        '<a class="rfm-later rfm-close">'+REFP.ok+'</a>';
+    } else {
+      var dots='';
+      for(var i=0;i<d.threshold;i++){ dots+='<div class="ref-dot'+(i<d.qualifying?' on':'')+'">'+(i<d.qualifying?'✓':(i+1))+'</div>'; }
+      inner='<a class="rfm-x">×</a><div class="rfm-gift">🎁</div>'+
+        '<div class="rfm-t">'+REFP.t+'</div>'+
+        '<div class="rfm-d">'+REFP.d.replace('{N}',d.threshold)+'</div>'+
+        '<div class="rfm-prog"><div class="ref-dots">'+dots+'</div><span class="ref-count">'+d.qualifying+' / '+d.threshold+' '+REFP.act+'</span></div>'+
+        '<div class="ref-linkbox"><div class="ref-link" id="rfm-link">'+d.link+'</div><button class="ref-copy" id="rfm-copy">'+REFP.copy+'</button></div>'+
+        '<a class="rfm-wa" href="'+wa+'" target="_blank" rel="noopener">'+REFP.wa+' →</a>'+
+        '<a class="rfm-later rfm-close">'+REFP.later+'</a>';
+    }
+    var ov=document.createElement('div'); ov.className='rfm-ov';
+    var card=document.createElement('div'); card.className='rfm'; card.innerHTML=inner;
+    ov.appendChild(card); document.body.appendChild(ov);
+    function close(){ try{document.body.removeChild(ov);}catch(e){} }
+    ov.addEventListener('click',function(e){ if(e.target===ov) close(); });
+    var xb=card.querySelector('.rfm-x'); if(xb) xb.addEventListener('click',close);
+    var lb=card.querySelector('.rfm-close'); if(lb) lb.addEventListener('click',close);
+    var cp=card.querySelector('#rfm-copy');
+    if(cp) cp.addEventListener('click',function(){ try{ navigator.clipboard.writeText(d.link); if(typeof toast==='function') toast(REFP.copied,2000);}catch(e){} });
+  }).catch(function(){});
+}
+
 function setLang(l){ if(l==='fr'){ return; } var u={ro:'/app',it:'/app-it',es:'/app-es',en:'/app-en',fr:'/app-fr',de:'/app-de'}[l]; if(u){ window.location.href=u; } }
 
 // ============================================
