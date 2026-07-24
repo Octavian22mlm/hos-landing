@@ -831,6 +831,7 @@ label{display:block;font-size:13.5px;font-weight:600;letter-spacing:.08em;text-t
     </div>
     <nav class="navtabs">
       <button class="navtab active" id="tab-invitatie" onclick="navTab('invitatie')">Invitation</button>
+      <button class="navtab" id="tab-dm" onclick="navTab('dm')">DM Sociaux</button>
       <button class="navtab" id="tab-conectare" onclick="navTab('conectare')">Connexion</button>
       <button class="navtab" id="tab-prezentare" onclick="navTab('prezentare')">Présentation</button>
       <button class="navtab" id="tab-inchidere" onclick="navTab('inchidere')">Clôture</button>
@@ -1112,6 +1113,10 @@ label{display:block;font-size:13.5px;font-weight:600;letter-spacing:.08em;text-t
   </div>
   <div class="gen-wrap" id="wrap-psihologie" style="display:none">
     <div id="psihologie-content" class="psm" data-pstab="women"></div>
+  </div>
+
+  <div class="gen-wrap" id="wrap-dm" style="display:none">
+    <div id="dm-content"></div>
   </div>
 </div>
 
@@ -1705,14 +1710,14 @@ function openModal(id, mode){
 function finishOnboard(){ try{ localStorage.setItem('hos_onboarded','1'); }catch(e){} closeModal('m-ghid'); refreshStepUI(); if(typeof toast==='function') toast('C’est fait ! Remplissez avec des détails réels et précis 💪', 4000); }
 function maybeOnboard(){ if(_isOnboarded()){ refreshStepUI(); return; } openModal('m-ghid'); }   // Pasul 1 primul
 function navTab(w){
-  var real=['invitatie','conectare','prezentare','inchidere','psihologie'];
+  var real=['invitatie','conectare','prezentare','inchidere','psihologie','dm'];
   if(real.indexOf(w)<0){
     var n={obiectii:'Objections',recomandari:'Demande de recommandations'};
     if(typeof toast==='function') toast((n[w]||'La section')+' — bientôt 🔒', 3000);
     return;
   }
-  var tabs={invitatie:'tab-invitatie',conectare:'tab-conectare',prezentare:'tab-prezentare',inchidere:'tab-inchidere',psihologie:'tab-psihologie'};
-  var wraps={invitatie:'wrap-invitatie',conectare:'wrap-conectare',prezentare:'wrap-prezentare',inchidere:'wrap-inchidere',psihologie:'wrap-psihologie'};
+  var tabs={invitatie:'tab-invitatie',conectare:'tab-conectare',prezentare:'tab-prezentare',inchidere:'tab-inchidere',psihologie:'tab-psihologie',dm:'tab-dm'};
+  var wraps={invitatie:'wrap-invitatie',conectare:'wrap-conectare',prezentare:'wrap-prezentare',inchidere:'wrap-inchidere',psihologie:'wrap-psihologie',dm:'wrap-dm'};
   real.forEach(function(k){
     var t=document.getElementById(tabs[k]); var wr=document.getElementById(wraps[k]);
     if(t) t.classList.toggle('active', k===w);
@@ -1722,6 +1727,7 @@ function navTab(w){
   if(w==='prezentare' && typeof renderPrezentare==='function') renderPrezentare();
   if(w==='inchidere' && typeof renderInchidere==='function') renderInchidere();
   if(w==='psihologie' && typeof renderPsihologie==='function') renderPsihologie();
+  if(w==='dm' && typeof renderDM==='function') renderDM();
 }
 
 // ===== MODUL CONECTARE — incarcare gated de pe server (Builder/Leader) =====
@@ -1836,6 +1842,578 @@ function psTab(t, btn){
   var tabs=root.querySelectorAll('.navtab');
   tabs.forEach(function(b){b.classList.remove('active')});
   if(btn) btn.classList.add('active');
+}
+
+// ============================================
+// MESAJE PE REȚELE (DM LIVE) — multilingv (DM_T)
+// ============================================
+var DM_T = {
+"ro":{
+"lockTx":"Modulul <b>Mesaje pe rețele</b> — co-pilotul live care-ți scrie primul mesaj și fiecare replică până obții apelul — se deblochează din planul <b>Recruit</b>.",
+"lockBtn":"Deblochează la Recruit",
+"title":"Mesaje pe rețele",
+"sub":"Un co-pilot care te ține de mână, mesaj cu mesaj, până obții apelul.",
+"rulesH":"Reguli & așteptări corecte",
+"rules":["Nu e o baghetă magică. <b>Nu toți vor răspunde</b> — mai ales la rece. E normal: un joc de răbdare și număr, nu de garanții.","<b>Cu cât dai mai mult context real, cu atât mesajul e mai bun.</b> Input sărac → mesaj generic. Detaliul specific face diferența.","<b>Nu forța apelul.</b> Mesajul încălzește și câștigă dreptul la o discuție — nu cere Zoom din primul mesaj. Răbdarea aduce „da”-ul.","<b>Lipește răspunsul REAL al persoanei</b>, cuvânt cu cuvânt. Nu inventa ce crezi că ar zice — pe date reale îți dau replica potrivită.","<b>Personalizează, nu trimite la fel la 50 de oameni.</b> Copy-paste identic = detectabil = ignorat. Fiecare om, mesajul lui.","<b>Respectă omul.</b> Dacă cineva spune clar „nu”, nu insista. Un „nu” respectat azi poate fi un „da” peste un an."],
+"howH":"Cum funcționează",
+"how":["<b>Introdu contextul persoanei</b>, cât mai în detaliu.","Îți generez <b>primul mesaj</b> — îl copiezi și îl trimiți.","Când primești răspuns, îl <b>copiezi și îl lipești aici</b>.","Îți generez <b>replica următoare</b>, în urma conversației de până atunci."],
+"howFoot":"Totul fără să pară spam sau pitch instant. Scopul: să obții un <b>apel telefonic</b> sau o <b>întâlnire pe Zoom</b>.",
+"lPlatforma":"Platformă","lTip":"Tip contact",
+"tip":["Rece total","A interacționat recent","Contact vechi","Cunoștință"],
+"lGenA":"Genul tău","lGenC":"Genul persoanei",
+"gen":["Masculin","Feminin"],"genC":["Feminin","Masculin"],
+"lNume":"Numele persoanei","pNume":"Prenumele",
+"lDespre":"Despre persoană","pDespre":"Job, pasiuni, o postare recentă, un detaliu real…",
+"hDespre":"Materia primă pentru cârlig — cu cât mai specific, cu atât mesajul e mai bun.",
+"lObiectiv":"Obiectiv (spre care conduci când raportul e cald)",
+"obiectiv":["Apel telefonic","Întâlnire pe Zoom"],
+"hook":[{"l":"Cârligul — ce anume ți-a atras atenția la ea","p":"Ex: postează des de la sală și a scris „n-am avut chef azi, dar am venit oricum”","h":"La rece, ăsta e tot ce ai. Un detaliu real și specific = mesaj viu; generic = ignorat."},{"l":"Semnalul ei — la ce a reacționat și ce a scris","p":"Ex: a comentat „aveam nevoie de asta azi” la reelul meu despre…","h":"Ea a făcut primul gest — de aici pornești firesc."},{"l":"Legătura voastră + ce ai văzut recent la ea","p":"Ex: colegi de liceu, nu ne-am auzit de 2 ani; acum a postat o poză din parc cu copiii","h":"Reconectarea se sprijină pe ce vă leagă + un motiv real din prezent."},{"l":"Ce vă leagă / de unde vă știți","p":"Ex: mergem la aceeași sală; sau: prieten comun, Andrei","h":"Construiești pe ce aveți deja în comun."}],
+"startBtn":"Generează primul mesaj →",
+"threadH":"Conversația live","newBtn":"Conversație nouă",
+"savedThread":"💾 Se salvează automat — poți reveni la ea oricând din „Conversațiile mele”.",
+"aiLabel":"Mesajul de trimis","clientLabel":"Răspunsul clientului",
+"pasteLabel":"Lipește aici răspunsul primit de la ","pastePlaceholder":"Ce ți-a răspuns…",
+"sendBtn":"Continuă →","generating":"Se generează…",
+"copy":"Copiază","copied":"Copiat ✅",
+"quota":"Scripturi DM:",
+"listH":"Conversațiile mele","listSaved":"Se salvează automat — apasă pe una ca s-o continui.","noName":"(fără nume)",
+"ago":{"now":"acum","min":"acum {n} min","h":"acum {n} h","yesterday":"ieri","days":"acum {n} zile","month":"acum {n} lună","months":"acum {n} luni"},
+"wallH":"Ai atins cele {n} {de}scripturi pe luna asta",
+"wallP":"Și mă bucur că le-ai folosit — semn că lucrezi serios.",
+"wallOpts":"Ai două variante:",
+"wallWait":"Aștepți să se reseteze luna viitoare, la reînnoirea abonamentului.",
+"wallUpgrade":"Faci upgrade acum la <b>{tier}</b> (<b>{n} {de}scripturi</b>) și continui conversația exact de unde ai rămas.",
+"wallBtn1":"Fac upgrade acum →","wallBtn2":"Aștept luna viitoare",
+"wallLeader":"Se resetează luna viitoare, la reînnoirea abonamentului. Ai cel mai mare plan — mulțumim că duci conversațiile până la capăt.",
+"wallLeaderBtn":"Am înțeles",
+"tNeed":"Completează măcar numele și câteva detalii despre persoană.",
+"tPasteFirst":"Lipește întâi răspunsul primit.",
+"tErrGen":"Nu am putut genera mesajul.","tErrReply":"Nu am putut genera răspunsul.","tErrOpen":"Nu am putut deschide conversația."
+},
+"en":{
+"lockTx":"The <b>Social DMs</b> module — the live co-pilot that writes your first message and every reply until you get the call — unlocks from the <b>Recruit</b> plan.",
+"lockBtn":"Unlock with Recruit","title":"Social DMs",
+"sub":"A co-pilot that holds your hand, message by message, until you get the call.",
+"rulesH":"Rules & realistic expectations",
+"rules":["It's not a magic wand. <b>Not everyone will reply</b> — especially cold contacts. That's normal: it's a game of patience and numbers, not guarantees.","<b>The more real context you give, the better the message.</b> Thin input → generic message. The specific detail makes the difference.","<b>Don't force the call.</b> The message warms things up and earns the right to a conversation — don't ask for a Zoom in the first message. Patience brings the yes.","<b>Paste the person's REAL reply</b>, word for word. Don't make up what you think they'd say — on real data I give you the right response.","<b>Personalize; don't send the same thing to 50 people.</b> Identical copy-paste = detectable = ignored. Each person, their own message.","<b>Respect the person.</b> If someone clearly says no, don't push. A no respected today can be a yes a year from now."],
+"howH":"How it works",
+"how":["<b>Enter the person's context</b>, in as much detail as possible.","I generate the <b>first message</b> — you copy it and send it.","When you get a reply, you <b>copy it and paste it here</b>.","I generate the <b>next reply</b>, based on the conversation so far."],
+"howFoot":"All without sounding like spam or an instant pitch. The goal: to get a <b>phone call</b> or a <b>Zoom meeting</b>.",
+"lPlatforma":"Platform","lTip":"Contact type",
+"tip":["Cold (total stranger)","Recently interacted","Old contact","Acquaintance"],
+"lGenA":"Your gender","lGenC":"Their gender",
+"gen":["Male","Female"],"genC":["Female","Male"],
+"lNume":"Their name","pNume":"First name",
+"lDespre":"About the person","pDespre":"Job, interests, a recent post, a real detail…",
+"hDespre":"Raw material for the hook — the more specific, the better the message.",
+"lObiectiv":"Goal (what you steer toward once rapport is warm)",
+"obiectiv":["Phone call","Zoom meeting"],
+"hook":[{"l":"The hook — what caught your eye about them","p":"e.g. posts from the gym a lot and wrote \"didn't feel like it today, but I showed up anyway\"","h":"Cold, this is all you've got. A real, specific detail = a live message; generic = ignored."},{"l":"Their signal — what they reacted to and what they wrote","p":"e.g. commented \"needed to hear this today\" on my reel about…","h":"They made the first move — you start from there, naturally."},{"l":"Your connection + what you saw about them recently","p":"e.g. high-school classmates, haven't talked in 2 years; just posted a photo from the park with the kids","h":"Reconnecting rests on what links you + a real reason from the present."},{"l":"What connects you / how you know each other","p":"e.g. we go to the same gym; or: mutual friend, Andrei","h":"You build on what you already share."}],
+"startBtn":"Generate the first message →",
+"threadH":"Live conversation","newBtn":"New conversation",
+"savedThread":"💾 Saved automatically — you can return to it anytime from \"My conversations\".",
+"aiLabel":"Message to send","clientLabel":"Their reply",
+"pasteLabel":"Paste here the reply you got from ","pastePlaceholder":"What they replied…",
+"sendBtn":"Continue →","generating":"Generating…","copy":"Copy","copied":"Copied ✅",
+"quota":"DM scripts:",
+"listH":"My conversations","listSaved":"Saved automatically — tap one to continue it.","noName":"(no name)",
+"ago":{"now":"just now","min":"{n} min ago","h":"{n} h ago","yesterday":"yesterday","days":"{n} days ago","month":"{n} month ago","months":"{n} months ago"},
+"wallH":"You've used all {n} scripts this month",
+"wallP":"And I'm glad you used them — a sign you're working seriously.",
+"wallOpts":"You have two options:",
+"wallWait":"Wait for them to reset next month, when your subscription renews.",
+"wallUpgrade":"Upgrade now to <b>{tier}</b> (<b>{n} scripts</b>) and continue the conversation right where you left off.",
+"wallBtn1":"Upgrade now →","wallBtn2":"I'll wait until next month",
+"wallLeader":"They reset next month, when your subscription renews. You're on the top plan — thank you for taking conversations all the way.",
+"wallLeaderBtn":"Got it",
+"tNeed":"Fill in at least the name and a few details about the person.",
+"tPasteFirst":"Paste the reply you got first.",
+"tErrGen":"Couldn't generate the message.","tErrReply":"Couldn't generate the reply.","tErrOpen":"Couldn't open the conversation."
+},
+"it":{
+"lockTx":"Il modulo <b>DM Social</b> — il co-pilota dal vivo che scrive il tuo primo messaggio e ogni risposta finché non ottieni la chiamata — si sblocca dal piano <b>Recruit</b>.",
+"lockBtn":"Sblocca con Recruit","title":"DM Social",
+"sub":"Un co-pilota che ti tiene per mano, messaggio dopo messaggio, finché non ottieni la chiamata.",
+"rulesH":"Regole e aspettative realistiche",
+"rules":["Non è una bacchetta magica. <b>Non tutti risponderanno</b> — soprattutto i contatti freddi. È normale: è un gioco di pazienza e di numeri, non di garanzie.","<b>Più contesto reale mi dai, migliore sarà il messaggio.</b> Poche informazioni → messaggio generico. È il dettaglio specifico a fare la differenza.","<b>Non forzare la chiamata.</b> Il messaggio riscalda il terreno e ti guadagna il diritto a una conversazione — non chiedere uno Zoom al primo messaggio. È la pazienza a portare il sì.","<b>Incolla la risposta VERA della persona</b>, parola per parola. Non inventare ciò che pensi direbbe — sui dati reali ti do la risposta giusta.","<b>Personalizza; non mandare la stessa cosa a 50 persone.</b> Copia-incolla identico = riconoscibile = ignorato. A ogni persona il suo messaggio.","<b>Rispetta la persona.</b> Se qualcuno dice chiaramente di no, non insistere. Un no rispettato oggi può diventare un sì tra un anno."],
+"howH":"Come funziona",
+"how":["<b>Inserisci il contesto della persona</b>, nel modo più dettagliato possibile.","Genero il <b>primo messaggio</b> — tu lo copi e lo invii.","Quando ricevi una risposta, la <b>copi e la incolli qui</b>.","Genero la <b>risposta successiva</b>, basata sulla conversazione fin qui."],
+"howFoot":"Il tutto senza sembrare spam o una proposta commerciale istantanea. L'obiettivo: ottenere una <b>telefonata</b> o un <b>incontro su Zoom</b>.",
+"lPlatforma":"Piattaforma","lTip":"Tipo di contatto",
+"tip":["Freddo (perfetto sconosciuto)","Ha interagito di recente","Vecchio contatto","Conoscente"],
+"lGenA":"Il tuo genere","lGenC":"Il suo genere",
+"gen":["Uomo","Donna"],"genC":["Donna","Uomo"],
+"lNume":"Il suo nome","pNume":"Nome",
+"lDespre":"Sulla persona","pDespre":"Lavoro, interessi, un post recente, un dettaglio vero…",
+"hDespre":"Materia prima per l'aggancio — più è specifico, migliore sarà il messaggio.",
+"lObiectiv":"Obiettivo (verso cosa punti una volta creato il feeling)",
+"obiectiv":["Telefonata","Incontro su Zoom"],
+"hook":[{"l":"L'aggancio — cosa ti ha colpito di lei","p":"es. pubblica spesso dalla palestra e ha scritto «oggi non ne avevo voglia, ma mi sono presentato lo stesso»","h":"A freddo, è tutto ciò che hai. Un dettaglio vero e specifico = messaggio vivo; generico = ignorato."},{"l":"Il suo segnale — a cosa ha reagito e cosa ha scritto","p":"es. ha commentato «avevo proprio bisogno di sentirlo oggi» sotto il mio reel su…","h":"Ha fatto lei la prima mossa — tu parti da lì, in modo naturale."},{"l":"Il vostro legame + cosa hai visto di lei di recente","p":"es. compagni di liceo, non ci sentiamo da 2 anni; ha appena postato una foto al parco con i bambini","h":"Riallacciare si basa su ciò che vi lega + un motivo reale del presente."},{"l":"Cosa vi lega / come vi conoscete","p":"es. andiamo nella stessa palestra; oppure: amico in comune, Andrea","h":"Costruisci su ciò che già condividete."}],
+"startBtn":"Genera il primo messaggio →",
+"threadH":"Conversazione dal vivo","newBtn":"Nuova conversazione",
+"savedThread":"💾 Salvata automaticamente — puoi riprenderla quando vuoi da «Le mie conversazioni».",
+"aiLabel":"Messaggio da inviare","clientLabel":"La sua risposta",
+"pasteLabel":"Incolla qui la risposta che hai ricevuto da ","pastePlaceholder":"Cosa ha risposto…",
+"sendBtn":"Continua →","generating":"Sto generando…","copy":"Copia","copied":"Copiato ✅",
+"quota":"Script DM:",
+"listH":"Le mie conversazioni","listSaved":"Salvate automaticamente — toccane una per continuarla.","noName":"(senza nome)",
+"ago":{"now":"proprio ora","min":"{n} min fa","h":"{n} h fa","yesterday":"ieri","days":"{n} giorni fa","month":"{n} mese fa","months":"{n} mesi fa"},
+"wallH":"Hai usato tutti i {n} script di questo mese",
+"wallP":"E sono contento che tu li abbia usati — è segno che stai lavorando sul serio.",
+"wallOpts":"Hai due opzioni:",
+"wallWait":"Aspettare che si azzerino il mese prossimo, al rinnovo dell'abbonamento.",
+"wallUpgrade":"Passare subito a <b>{tier}</b> (<b>{n} script</b>) e continuare la conversazione esattamente da dove l'hai lasciata.",
+"wallBtn1":"Passa ora →","wallBtn2":"Aspetto il mese prossimo",
+"wallLeader":"Si azzerano il mese prossimo, al rinnovo dell'abbonamento. Sei sul piano più alto — grazie per portare le conversazioni fino in fondo.",
+"wallLeaderBtn":"Ho capito",
+"tNeed":"Inserisci almeno il nome e qualche dettaglio sulla persona.",
+"tPasteFirst":"Prima incolla la risposta che hai ricevuto.",
+"tErrGen":"Non sono riuscito a generare il messaggio.","tErrReply":"Non sono riuscito a generare la risposta.","tErrOpen":"Non sono riuscito ad aprire la conversazione."
+},
+"es":{
+"lockTx":"El módulo <b>DMs Sociales</b> — el copiloto en vivo que escribe tu primer mensaje y cada respuesta hasta que consigues la llamada — se desbloquea a partir del plan <b>Recruit</b>.",
+"lockBtn":"Desbloquear con Recruit","title":"DMs Sociales",
+"sub":"Un copiloto que te lleva de la mano, mensaje a mensaje, hasta que consigues la llamada.",
+"rulesH":"Reglas y expectativas realistas",
+"rules":["No es una varita mágica. <b>No todos van a responder</b> — sobre todo los contactos fríos. Es normal: es un juego de paciencia y de números, no de garantías.","<b>Cuanto más contexto real das, mejor sale el mensaje.</b> Información pobre → mensaje genérico. El detalle concreto es lo que marca la diferencia.","<b>No fuerces la llamada.</b> El mensaje rompe el hielo y te gana el derecho a una conversación — no pidas un Zoom en el primer mensaje. La paciencia trae el sí.","<b>Pega la respuesta REAL de la persona</b>, palabra por palabra. No inventes lo que crees que diría — con datos reales te doy la respuesta correcta.","<b>Personaliza; no le mandes lo mismo a 50 personas.</b> Copiar y pegar idéntico = se nota = te ignoran. Cada persona, su propio mensaje.","<b>Respeta a la persona.</b> Si alguien te dice que no con claridad, no insistas. Un no respetado hoy puede ser un sí dentro de un año."],
+"howH":"Cómo funciona",
+"how":["<b>Escribe el contexto de la persona</b>, con todo el detalle que puedas.","Genero el <b>primer mensaje</b> — tú lo copias y lo envías.","Cuando te respondan, <b>lo copias y lo pegas aquí</b>.","Genero la <b>siguiente respuesta</b>, según cómo va la conversación."],
+"howFoot":"Todo sin sonar a spam ni a venta instantánea. El objetivo: conseguir una <b>llamada telefónica</b> o una <b>reunión por Zoom</b>.",
+"lPlatforma":"Plataforma","lTip":"Tipo de contacto",
+"tip":["Frío (desconocido total)","Interactuó hace poco","Contacto antiguo","Conocido"],
+"lGenA":"Tu género","lGenC":"Su género",
+"gen":["Hombre","Mujer"],"genC":["Mujer","Hombre"],
+"lNume":"Su nombre","pNume":"Nombre",
+"lDespre":"Sobre la persona","pDespre":"Trabajo, intereses, una publicación reciente, un detalle real…",
+"hDespre":"Materia prima para el gancho — cuanto más concreto, mejor sale el mensaje.",
+"lObiectiv":"Objetivo (hacia dónde llevas la charla cuando ya hay confianza)",
+"obiectiv":["Llamada telefónica","Reunión por Zoom"],
+"hook":[{"l":"El gancho — qué te llamó la atención de esa persona","p":"ej. sube mucho contenido del gimnasio y escribió «hoy no tenía ganas, pero igual me presenté»","h":"En frío, esto es todo lo que tienes. Un detalle real y concreto = un mensaje vivo; genérico = te ignoran."},{"l":"Su señal — a qué reaccionó y qué escribió","p":"ej. comentó «justo necesitaba oír esto hoy» en mi reel sobre…","h":"Ella dio el primer paso — tú arrancas desde ahí, con naturalidad."},{"l":"Vuestra conexión + qué viste de esa persona hace poco","p":"ej. compañeros del instituto, no hablamos desde hace 2 años; acaba de subir una foto del parque con los niños","h":"Reconectar se apoya en lo que os une + una razón real del presente."},{"l":"Qué os conecta / de qué os conocéis","p":"ej. vamos al mismo gimnasio; o: amigo en común, Andrés","h":"Construyes sobre lo que ya compartís."}],
+"startBtn":"Generar el primer mensaje →",
+"threadH":"Conversación en vivo","newBtn":"Nueva conversación",
+"savedThread":"💾 Guardada automáticamente — puedes volver a ella cuando quieras desde «Mis conversaciones».",
+"aiLabel":"Mensaje para enviar","clientLabel":"Su respuesta",
+"pasteLabel":"Pega aquí la respuesta que recibiste de ","pastePlaceholder":"Lo que respondió…",
+"sendBtn":"Continuar →","generating":"Generando…","copy":"Copiar","copied":"Copiado ✅",
+"quota":"Guiones de DM:",
+"listH":"Mis conversaciones","listSaved":"Guardadas automáticamente — toca una para continuarla.","noName":"(sin nombre)",
+"ago":{"now":"ahora mismo","min":"hace {n} min","h":"hace {n} h","yesterday":"ayer","days":"hace {n} días","month":"hace {n} mes","months":"hace {n} meses"},
+"wallH":"Ya usaste los {n} guiones de este mes",
+"wallP":"Y me alegra que los hayas usado — señal de que estás trabajando en serio.",
+"wallOpts":"Tienes dos opciones:",
+"wallWait":"Esperar a que se renueven el mes que viene, cuando se renueve tu suscripción.",
+"wallUpgrade":"Sube ahora a <b>{tier}</b> (<b>{n} guiones</b>) y continúa la conversación justo donde la dejaste.",
+"wallBtn1":"Subir de plan ahora →","wallBtn2":"Espero hasta el mes que viene",
+"wallLeader":"Se renuevan el mes que viene, cuando se renueve tu suscripción. Estás en el plan más alto — gracias por llevar tus conversaciones hasta el final.",
+"wallLeaderBtn":"Entendido",
+"tNeed":"Rellena al menos el nombre y algunos datos sobre la persona.",
+"tPasteFirst":"Primero pega la respuesta que recibiste.",
+"tErrGen":"No se pudo generar el mensaje.","tErrReply":"No se pudo generar la respuesta.","tErrOpen":"No se pudo abrir la conversación."
+},
+"fr":{
+"lockTx":"Le module <b>DM Sociaux</b> — le copilote en direct qui rédige ton premier message et chaque réponse jusqu'à ce que tu décroches l'appel — se débloque à partir du plan <b>Recruit</b>.",
+"lockBtn":"Débloquer avec Recruit","title":"DM Sociaux",
+"sub":"Un copilote qui te tient la main, message après message, jusqu'à ce que tu décroches l'appel.",
+"rulesH":"Règles et attentes réalistes",
+"rules":["Ce n'est pas une baguette magique. <b>Tout le monde ne répondra pas</b> — surtout les contacts froids. C'est normal : un jeu de patience et de volume, pas de garanties.","<b>Plus tu donnes de contexte réel, meilleur est le message.</b> Peu d'infos → message générique. C'est le détail précis qui fait la différence.","<b>Ne force pas l'appel.</b> Le message réchauffe la relation et te donne le droit à une conversation — ne demande pas un Zoom dès le premier message. C'est la patience qui amène le oui.","<b>Colle la VRAIE réponse de la personne</b>, mot pour mot. N'invente pas ce que tu crois qu'elle dirait — sur des données réelles, je te donne la bonne réplique.","<b>Personnalise ; n'envoie pas la même chose à 50 personnes.</b> Copier-coller identique = repérable = ignoré. À chaque personne, son propre message.","<b>Respecte la personne.</b> Si quelqu'un dit clairement non, n'insiste pas. Un non respecté aujourd'hui peut devenir un oui dans un an."],
+"howH":"Comment ça marche",
+"how":["<b>Renseigne le contexte de la personne</b>, avec le plus de détails possible.","Je génère le <b>premier message</b> — tu le copies et tu l'envoies.","Quand tu reçois une réponse, tu la <b>copies et tu la colles ici</b>.","Je génère la <b>réponse suivante</b>, en me basant sur la conversation jusqu'ici."],
+"howFoot":"Le tout sans jamais sonner comme du spam ou un pitch instantané. L'objectif : décrocher un <b>appel téléphonique</b> ou une <b>réunion Zoom</b>.",
+"lPlatforma":"Plateforme","lTip":"Type de contact",
+"tip":["Froid (parfait inconnu)","Interaction récente","Ancien contact","Connaissance"],
+"lGenA":"Ton genre","lGenC":"Son genre",
+"gen":["Homme","Femme"],"genC":["Femme","Homme"],
+"lNume":"Son prénom","pNume":"Prénom",
+"lDespre":"À propos de la personne","pDespre":"Métier, centres d'intérêt, un post récent, un détail réel…",
+"hDespre":"La matière première de l'accroche — plus c'est précis, meilleur est le message.",
+"lObiectiv":"Objectif (vers quoi tu orientes une fois la relation réchauffée)",
+"obiectiv":["Appel téléphonique","Réunion Zoom"],
+"hook":[{"l":"L'accroche — ce qui t'a marqué chez cette personne","p":"ex. poste souvent depuis la salle de sport et a écrit « pas motivé aujourd'hui, mais je me suis quand même présenté »","h":"À froid, c'est tout ce que tu as. Un détail réel et précis = un message vivant ; générique = ignoré."},{"l":"Son signal — à quoi elle a réagi et ce qu'elle a écrit","p":"ex. a commenté « j'avais besoin d'entendre ça aujourd'hui » sur mon reel à propos de…","h":"Elle a fait le premier pas — tu pars de là, naturellement."},{"l":"Votre lien + ce que tu as vu chez elle récemment","p":"ex. camarades de lycée, plus parlé depuis 2 ans ; vient de poster une photo au parc avec les enfants","h":"Renouer repose sur ce qui vous lie + une vraie raison ancrée dans le présent."},{"l":"Ce qui vous relie / comment vous vous connaissez","p":"ex. on va à la même salle de sport ; ou : ami commun, Andrei","h":"Tu t'appuies sur ce que vous partagez déjà."}],
+"startBtn":"Générer le premier message →",
+"threadH":"Conversation en direct","newBtn":"Nouvelle conversation",
+"savedThread":"💾 Enregistrée automatiquement — tu peux y revenir à tout moment depuis « Mes conversations ».",
+"aiLabel":"Message à envoyer","clientLabel":"Sa réponse",
+"pasteLabel":"Colle ici la réponse que tu as reçue de ","pastePlaceholder":"Ce qu'elle a répondu…",
+"sendBtn":"Continuer →","generating":"Génération…","copy":"Copier","copied":"Copié ✅",
+"quota":"Scripts DM :",
+"listH":"Mes conversations","listSaved":"Enregistrées automatiquement — touche l'une d'elles pour la reprendre.","noName":"(sans nom)",
+"ago":{"now":"à l'instant","min":"il y a {n} min","h":"il y a {n} h","yesterday":"hier","days":"il y a {n} jours","month":"il y a {n} mois","months":"il y a {n} mois"},
+"wallH":"Tu as utilisé tes {n} scripts ce mois-ci",
+"wallP":"Et je suis content que tu les aies utilisés — le signe que tu travailles sérieusement.",
+"wallOpts":"Tu as deux options :",
+"wallWait":"Attendre leur remise à zéro le mois prochain, au renouvellement de ton abonnement.",
+"wallUpgrade":"Passer maintenant à <b>{tier}</b> (<b>{n} scripts</b>) et reprendre la conversation là où tu t'es arrêté.",
+"wallBtn1":"Passer à la vitesse supérieure →","wallBtn2":"J'attendrai le mois prochain",
+"wallLeader":"Ils se remettent à zéro le mois prochain, au renouvellement de ton abonnement. Tu es sur le plan le plus élevé — merci de mener tes conversations jusqu'au bout.",
+"wallLeaderBtn":"Compris",
+"tNeed":"Renseigne au moins le prénom et quelques détails sur la personne.",
+"tPasteFirst":"Colle d'abord la réponse que tu as reçue.",
+"tErrGen":"Impossible de générer le message.","tErrReply":"Impossible de générer la réponse.","tErrOpen":"Impossible d'ouvrir la conversation."
+},
+"de":{
+"lockTx":"Das Modul <b>Social DMs</b> — der Live-Copilot, der deine erste Nachricht und jede Antwort schreibt, bis du den Call hast — schaltet sich ab dem <b>Recruit</b>-Tarif frei.",
+"lockBtn":"Mit Recruit freischalten","title":"Social DMs",
+"sub":"Ein Copilot, der dich Nachricht für Nachricht an die Hand nimmt, bis du den Call hast.",
+"rulesH":"Regeln & realistische Erwartungen",
+"rules":["Es ist kein Zauberstab. <b>Nicht jeder wird antworten</b> — vor allem kalte Kontakte nicht. Das ist normal: ein Spiel aus Geduld und Zahlen, keine Garantie.","<b>Je mehr echten Kontext du gibst, desto besser die Nachricht.</b> Dünner Input → generische Nachricht. Das konkrete Detail macht den Unterschied.","<b>Erzwing den Call nicht.</b> Die Nachricht wärmt an und verdient sich das Recht auf ein Gespräch — frag nicht schon in der ersten Nachricht nach einem Zoom. Geduld bringt das Ja.","<b>Füg die ECHTE Antwort der Person ein</b>, Wort für Wort. Erfind nicht, was sie deiner Meinung nach sagen würde — mit echten Daten gebe ich die richtige Antwort.","<b>Personalisiere; schick nicht 50 Leuten dasselbe.</b> Identisches Copy-paste = erkennbar = ignoriert. Jede Person, ihre eigene Nachricht.","<b>Respektiere die Person.</b> Wenn jemand klar Nein sagt, dräng nicht. Ein heute respektiertes Nein kann in einem Jahr ein Ja sein."],
+"howH":"So funktioniert's",
+"how":["<b>Gib den Kontext der Person ein</b>, so ausführlich wie möglich.","Ich generiere die <b>erste Nachricht</b> — du kopierst sie und schickst sie ab.","Wenn du eine Antwort bekommst, <b>kopierst du sie und fügst sie hier ein</b>.","Ich generiere die <b>nächste Antwort</b>, basierend auf dem bisherigen Gespräch."],
+"howFoot":"Alles, ohne wie Spam oder ein Sofort-Pitch zu klingen. Das Ziel: ein <b>Telefonat</b> oder ein <b>Zoom-Meeting</b>.",
+"lPlatforma":"Plattform","lTip":"Kontakttyp",
+"tip":["Kalt (völlig fremd)","Kürzlich interagiert","Alter Kontakt","Bekannter"],
+"lGenA":"Dein Geschlecht","lGenC":"Ihr/sein Geschlecht",
+"gen":["Männlich","Weiblich"],"genC":["Weiblich","Männlich"],
+"lNume":"Name der Person","pNume":"Vorname",
+"lDespre":"Über die Person","pDespre":"Job, Interessen, ein aktueller Post, ein echtes Detail…",
+"hDespre":"Rohmaterial für den Aufhänger — je konkreter, desto besser die Nachricht.",
+"lObiectiv":"Ziel (worauf du hinsteuerst, sobald der Draht warm ist)",
+"obiectiv":["Telefonat","Zoom-Meeting"],
+"hook":[{"l":"Der Aufhänger — was dir an ihr/ihm aufgefallen ist","p":"z. B. postet oft aus dem Gym und schrieb „hatte heute null Bock, bin aber trotzdem hin\"","h":"Kalt hast du nur das. Ein echtes, konkretes Detail = eine lebendige Nachricht; generisch = ignoriert."},{"l":"Ihr/sein Signal — worauf sie/er reagiert und was sie/er geschrieben hat","p":"z. B. hat „das musste ich heute hören\" unter mein Reel über … kommentiert","h":"Sie/er hat den ersten Schritt gemacht — genau da setzt du ganz natürlich an."},{"l":"Eure Verbindung + was du kürzlich über sie/ihn gesehen hast","p":"z. B. Schulkameraden, seit 2 Jahren kein Kontakt; hat gerade ein Foto aus dem Park mit den Kindern gepostet","h":"Wiederanknüpfen beruht auf dem, was euch verbindet + einem echten Anlass aus dem Jetzt."},{"l":"Was euch verbindet / woher ihr euch kennt","p":"z. B. wir gehen ins selbe Gym; oder: gemeinsamer Freund, Andrei","h":"Du baust auf dem auf, was ihr schon teilt."}],
+"startBtn":"Erste Nachricht generieren →",
+"threadH":"Live-Gespräch","newBtn":"Neues Gespräch",
+"savedThread":"💾 Automatisch gespeichert — du kannst jederzeit über „Meine Gespräche\" zurückkehren.",
+"aiLabel":"Nachricht zum Senden","clientLabel":"Ihre/seine Antwort",
+"pasteLabel":"Füg hier die Antwort ein, die du bekommen hast von ","pastePlaceholder":"Was sie/er geantwortet hat…",
+"sendBtn":"Weiter →","generating":"Wird generiert…","copy":"Kopieren","copied":"Kopiert ✅",
+"quota":"DM-Skripte:",
+"listH":"Meine Gespräche","listSaved":"Automatisch gespeichert — tipp auf eins, um es fortzusetzen.","noName":"(kein Name)",
+"ago":{"now":"gerade eben","min":"vor {n} Min.","h":"vor {n} Std.","yesterday":"gestern","days":"vor {n} Tagen","month":"vor {n} Monat","months":"vor {n} Monaten"},
+"wallH":"Du hast diesen Monat alle {n} Skripte aufgebraucht",
+"wallP":"Und ich freu mich, dass du sie genutzt hast — ein Zeichen, dass du ernsthaft arbeitest.",
+"wallOpts":"Du hast zwei Optionen:",
+"wallWait":"Warte, bis sie sich nächsten Monat zurücksetzen, wenn dein Abo sich verlängert.",
+"wallUpgrade":"Upgrade jetzt auf <b>{tier}</b> (<b>{n} Skripte</b>) und setz das Gespräch genau da fort, wo du aufgehört hast.",
+"wallBtn1":"Jetzt upgraden →","wallBtn2":"Ich warte bis nächsten Monat",
+"wallLeader":"Sie setzen sich nächsten Monat zurück, wenn dein Abo sich verlängert. Du bist im Top-Tarif — danke, dass du Gespräche bis zum Ende führst.",
+"wallLeaderBtn":"Verstanden",
+"tNeed":"Gib mindestens den Namen und ein paar Details zur Person an.",
+"tPasteFirst":"Füg zuerst die Antwort ein, die du bekommen hast.",
+"tErrGen":"Nachricht konnte nicht generiert werden.","tErrReply":"Antwort konnte nicht generiert werden.","tErrOpen":"Gespräch konnte nicht geöffnet werden."
+}
+};
+function _dmL(){
+  var l=(typeof APP_LANG!=='undefined' && APP_LANG) ? APP_LANG : ((document.documentElement && document.documentElement.getAttribute('lang'))||'ro');
+  l=String(l).toLowerCase().slice(0,2);
+  return DM_T[l]?l:'ro';
+}
+function _dmS(){ return DM_T[_dmL()]; }
+var DM_LIMIT_FE = { recruit:15, builder:40, leader:70 };
+var _dmConv=null, _dmBusy=false;
+// mapare canonică (RO) trimisă la prompt, indiferent de limba interfeței
+var _DM_CT=['Rece total','A interacționat recent','Contact vechi','Cunoștință'];
+var _DM_CG=['Masculin','Feminin'];
+var _DM_CGC=['Feminin','Masculin'];
+var _DM_CO=['Apel telefonic','Întâlnire pe Zoom'];
+
+function _dmEsc(s){ return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+function _dmLockHtml(){ var T=_dmS(); return '<div class="cn-lock"><div class="cn-lock-ic">🔒</div><div class="cn-lock-tx">'+T.lockTx+'</div><button class="btn-ghost" style="max-width:240px" onclick="goUpgrade()">'+T.lockBtn+'</button></div>'; }
+
+function _dmInjectCss(){
+  if(document.getElementById('dm-css')) return;
+  var s=document.createElement('style'); s.id='dm-css';
+  s.textContent =
+  '#dm-content{max-width:720px;margin:0 auto}'+
+  '#dm-content .dm-card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:26px 24px;margin-bottom:18px}'+
+  '#dm-content h3{font-family:"Playfair Display",serif;font-size:20px;color:var(--gold);margin:0 0 6px}'+
+  '#dm-content .dm-sub{font-size:13.5px;color:var(--muted);margin:0 0 20px;line-height:1.5}'+
+  '#dm-content .dm-quota{float:right;font-size:13px;color:var(--muted)}#dm-content .dm-quota b{color:var(--gold);font-size:16px}'+
+  '#dm-content .dm-rules{background:rgba(216,169,74,.05);border:1px solid var(--goldd);border-radius:13px;padding:20px 20px 10px;margin-bottom:22px}'+
+  '#dm-content .dm-ht{font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);font-weight:700;margin:0 0 15px}'+
+  '#dm-content .dm-rules ul{list-style:none;padding:0;margin:0}'+
+  '#dm-content .dm-rules li{position:relative;padding-left:20px;margin-bottom:12px;font-size:13.5px;line-height:1.5;color:var(--ink)}'+
+  '#dm-content .dm-rules li:before{content:"\\2192";position:absolute;left:0;color:var(--gold);font-weight:800}'+
+  '#dm-content .dm-rules li b,#dm-content .dm-hstep .t b{color:var(--goldl)}'+
+  '#dm-content .dm-how{background:var(--bg2);border:1px solid var(--line);border-radius:13px;padding:20px 20px 6px;margin-bottom:24px}'+
+  '#dm-content .dm-hstep{display:flex;gap:13px;margin-bottom:15px}'+
+  '#dm-content .dm-hstep .n{flex-shrink:0;width:27px;height:27px;border-radius:50%;background:linear-gradient(180deg,var(--goldl),var(--goldd));color:#1a1206;font-weight:800;font-size:13.5px;display:flex;align-items:center;justify-content:center}'+
+  '#dm-content .dm-hstep .t{flex:1;font-size:14px;line-height:1.5;color:var(--ink);padding-top:3px}'+
+  '#dm-content .dm-foot{font-size:13.5px;color:var(--goldl);line-height:1.55;border-top:1px dashed var(--line);padding:14px 2px;margin-top:2px}'+
+  '#dm-content .dm-f{margin-bottom:16px}#dm-content .dm-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:16px}'+
+  '#dm-content label{display:block;font-size:12.5px;font-weight:600;color:var(--goldl);letter-spacing:.03em;margin:0 0 7px}'+
+  '#dm-content .dm-hint{font-size:11.5px;color:var(--muted);margin:5px 0 0}'+
+  '#dm-content .dm-cond{border-left:2px solid var(--goldd);padding-left:14px;margin:12px 0 4px}'+
+  '#dm-content .dm-bubble{border-radius:14px;padding:16px 18px;margin-bottom:14px;font-size:14.5px;line-height:1.55;white-space:pre-line}'+
+  '#dm-content .dm-bubble.ai{background:#faf7f0;border:1px solid rgba(0,0,0,.10);color:#1a1206}'+
+  '#dm-content .dm-bubble.client{background:var(--panel2);border:1px solid var(--line)}'+
+  '#dm-content .dm-bl{font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;margin-bottom:9px;display:flex;align-items:center;justify-content:space-between}'+
+  '#dm-content .dm-bubble.ai .dm-bl{color:#a8791f}#dm-content .dm-bubble.client .dm-bl{color:var(--muted)}'+
+  '#dm-content .dm-copy{background:transparent;border:1px solid rgba(0,0,0,.22);color:#8a6a20;font-size:11px;font-weight:600;padding:4px 11px;border-radius:8px;cursor:pointer;font-family:inherit}'+
+  '#dm-content .dm-th-head{display:flex;align-items:center;justify-content:space-between;margin:0 0 16px}'+
+  '#dm-content .dm-th-head span{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);font-weight:700}'+
+  '#dm-content .dm-paste{background:var(--bg2);border:1px dashed var(--goldd);border-radius:12px;padding:16px;margin-top:6px}'+
+  '#dm-content .dm-wall{background:linear-gradient(160deg,rgba(216,169,74,.17),rgba(216,169,74,.03));border:1px solid var(--gold);border-radius:18px;padding:32px 26px;text-align:center;margin-top:8px}'+
+  '#dm-content .dm-wall .ic{font-size:32px;margin-bottom:10px}'+
+  '#dm-content .dm-wall h4{font-family:"Playfair Display",serif;font-size:21px;color:var(--goldl);margin:0 0 10px;line-height:1.3}'+
+  '#dm-content .dm-wall p{font-size:14px;color:var(--ink);line-height:1.55;margin:0 auto 8px;max-width:430px}'+
+  '#dm-content .dm-wall .opts{font-size:13.5px;color:var(--muted);margin:12px auto 20px;max-width:420px;text-align:left;line-height:1.7}'+
+  '#dm-content .dm-wall .opts b{color:var(--goldl)}'+
+  '#dm-content .dm-wall .wbtns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}'+
+  '#dm-content .dm-wall .b2{background:transparent;color:var(--goldl);border:1px solid var(--line);font-weight:600;font-size:14.5px;padding:13px 24px;border-radius:11px;cursor:pointer;font-family:inherit}'+
+  '#dm-content .dm-mini{width:auto;padding:11px 20px;font-size:14px;margin-top:11px}'+
+  '#dm-content .dm-saved{font-size:12px;color:var(--muted);line-height:1.45}'+
+  '#dm-content .dm-li{background:var(--bg2);border:1px solid var(--line);border-radius:11px;padding:13px 15px;margin-bottom:9px;cursor:pointer}'+
+  '#dm-content .dm-li:hover{border-color:var(--gold)}'+
+  '#dm-content .dm-li-name{font-size:14px;font-weight:600;color:var(--ink)}'+
+  '#dm-content .dm-li-meta{font-size:12px;color:var(--muted);margin-top:3px}';
+  document.head.appendChild(s);
+}
+
+function _dmOpts(arr){ return (arr||[]).map(function(o){return '<option>'+_dmEsc(o)+'</option>';}).join(''); }
+
+function _dmFormHtml(){
+  var T=_dmS();
+  var rules=T.rules.map(function(r){return '<li>'+r+'</li>';}).join('');
+  var how=T.how.map(function(h,i){return '<div class="dm-hstep"><div class="n">'+(i+1)+'</div><div class="t">'+h+'</div></div>';}).join('');
+  return ''+
+  '<div class="dm-card" id="dm-list-card" style="display:none">'+
+    '<div class="dm-ht">'+_dmEsc(T.listH)+'</div>'+
+    '<div class="dm-saved" style="margin-bottom:14px">'+_dmEsc(T.listSaved)+'</div>'+
+    '<div id="dm-list"></div>'+
+  '</div>'+
+  '<div class="dm-card">'+
+    '<div class="dm-quota" id="dm-quota">'+_dmEsc(T.quota)+' <b id="dm-rem">—</b> <span id="dm-lim"></span></div>'+
+    '<h3>'+_dmEsc(T.title)+'</h3>'+
+    '<p class="dm-sub">'+_dmEsc(T.sub)+'</p>'+
+    '<div class="dm-rules"><div class="dm-ht">'+T.rulesH+'</div><ul>'+rules+'</ul></div>'+
+    '<div class="dm-how"><div class="dm-ht">'+_dmEsc(T.howH)+'</div>'+how+'<div class="dm-foot">'+T.howFoot+'</div></div>'+
+    '<div class="dm-row">'+
+      '<div><label>'+_dmEsc(T.lPlatforma)+'</label><select id="dm-platforma"><option>Instagram</option><option>Facebook</option><option>WhatsApp</option><option>TikTok</option><option>LinkedIn</option></select></div>'+
+      '<div><label>'+_dmEsc(T.lTip)+'</label><select id="dm-tip" onchange="_dmCond()">'+_dmOpts(T.tip)+'</select></div>'+
+    '</div>'+
+    '<div class="dm-row">'+
+      '<div><label>'+_dmEsc(T.lGenA)+'</label><select id="dm-gena">'+_dmOpts(T.gen)+'</select></div>'+
+      '<div><label>'+_dmEsc(T.lGenC)+'</label><select id="dm-genc">'+_dmOpts(T.genC)+'</select></div>'+
+    '</div>'+
+    '<div class="dm-f"><label>'+_dmEsc(T.lNume)+'</label><input id="dm-nume" placeholder="'+_dmEsc(T.pNume)+'"></div>'+
+    '<div class="dm-f"><label>'+_dmEsc(T.lDespre)+'</label><textarea id="dm-despre" rows="3" placeholder="'+_dmEsc(T.pDespre)+'"></textarea><p class="dm-hint">'+_dmEsc(T.hDespre)+'</p></div>'+
+    '<div class="dm-f"><label id="dm-hook-label"></label><input id="dm-hook"><p class="dm-hint" id="dm-hook-hint"></p></div>'+
+    '<div class="dm-f"><label>'+_dmEsc(T.lObiectiv)+'</label><select id="dm-obiectiv">'+_dmOpts(T.obiectiv)+'</select></div>'+
+    '<button class="btn" id="dm-start-btn" onclick="dmStart()">'+_dmEsc(T.startBtn)+'</button>'+
+  '</div>'+
+  '<div class="dm-card" id="dm-thread" style="display:none">'+
+    '<div class="dm-th-head"><span>'+_dmEsc(T.threadH)+'</span><button class="btn-ghost" style="width:auto;padding:8px 16px" onclick="dmNew()">'+_dmEsc(T.newBtn)+'</button></div>'+
+    '<div class="dm-saved" style="margin:-8px 0 14px">'+_dmEsc(T.savedThread)+'</div>'+
+    '<div id="dm-msgs"></div>'+
+    '<div class="dm-paste" id="dm-paste">'+
+      '<label>'+_dmEsc(T.pasteLabel)+'<span id="dm-paste-name"></span></label>'+
+      '<textarea id="dm-reply-input" rows="2" placeholder="'+_dmEsc(T.pastePlaceholder)+'"></textarea>'+
+      '<button class="btn dm-mini" id="dm-send-btn" onclick="dmReply()">'+_dmEsc(T.sendBtn)+'</button>'+
+    '</div>'+
+  '</div>';
+}
+
+function _dmCond(){
+  var T=_dmS();
+  var sel=document.getElementById('dm-tip'); var idx=sel?sel.selectedIndex:0;
+  var d=(T.hook&&T.hook[idx])||T.hook[0];
+  var lab=document.getElementById('dm-hook-label'), inp=document.getElementById('dm-hook'), hint=document.getElementById('dm-hook-hint');
+  if(lab) lab.textContent=d.l;
+  if(inp) inp.setAttribute('placeholder', d.p);
+  if(hint) hint.textContent=d.h;
+}
+
+async function renderDM(){
+  var host=document.getElementById('dm-content'); if(!host) return;
+  var tier=(typeof USER_PROFILE!=='undefined' && USER_PROFILE && USER_PROFILE.tier) ? USER_PROFILE.tier : 'none';
+  var order=['none','unic','recruit','builder','leader'];
+  if(order.indexOf(tier) < order.indexOf('recruit')){ host.innerHTML=_dmLockHtml(); return; }
+  _dmInjectCss(); _dmConv=null;
+  host.innerHTML=_dmFormHtml();
+  _dmCond(); _dmLoadQuota(); _dmLoadList();
+}
+
+function _dmSetPasteName(name){ var el=document.getElementById('dm-paste-name'); if(el) el.textContent=(name||''); }
+
+function _dmAgo(iso){
+  var T=_dmS().ago;
+  if(!iso) return '';
+  var t=new Date(iso).getTime(); if(isNaN(t)) return '';
+  var s=Math.floor((Date.now()-t)/1000);
+  if(s<60) return T.now;
+  var m=Math.floor(s/60); if(m<60) return T.min.replace('{n}',m);
+  var h=Math.floor(m/60); if(h<24) return T.h.replace('{n}',h);
+  var d=Math.floor(h/24); if(d===1) return T.yesterday; if(d<30) return T.days.replace('{n}',d);
+  var mo=Math.floor(d/30); return (mo===1?T.month:T.months).replace('{n}',mo);
+}
+
+async function _dmLoadList(){
+  try{
+    var d=await api('/api/dm/conversations');
+    var list=(d && d.conversations)||[];
+    var card=document.getElementById('dm-list-card'), host=document.getElementById('dm-list');
+    if(!host||!card) return;
+    if(!list.length){ card.style.display='none'; return; }
+    var T=_dmS();
+    host.innerHTML=list.map(function(c){
+      var nm=_dmEsc(c.nume||T.noName);
+      var meta=[c.platform,c.tip_contact,_dmAgo(c.updated_at)].filter(Boolean).map(_dmEsc).join(' · ');
+      return '<div class="dm-li" onclick="dmOpen(\''+c.id+'\')"><div class="dm-li-name">'+nm+'</div><div class="dm-li-meta">'+meta+'</div></div>';
+    }).join('');
+    card.style.display='block';
+  }catch(e){}
+}
+
+async function dmOpen(id){
+  if(_dmBusy) return;
+  try{
+    var d=await api('/api/dm/conversation/'+id);
+    _dmConv=id;
+    var ctx=(d.conversation && d.conversation.context)||{};
+    var msgs=document.getElementById('dm-msgs'); if(msgs) msgs.innerHTML='';
+    document.getElementById('dm-thread').style.display='block';
+    var paste=document.getElementById('dm-paste'); if(paste) paste.style.display='block';
+    _dmSetPasteName(ctx.nume_client||'');
+    (d.messages||[]).forEach(function(m){ _dmBubble(m.role==='ai'?'ai':'client', m.content); });
+    document.getElementById('dm-thread').scrollIntoView({behavior:'smooth',block:'start'});
+  }catch(e){ if(typeof toast==='function') toast(_dmS().tErrOpen,3000); }
+}
+
+async function _dmLoadQuota(){
+  try{
+    var q=await api('/api/dm/quota');
+    var rem=document.getElementById('dm-rem'), lim=document.getElementById('dm-lim');
+    if(rem) rem.textContent=(q.remaining!=null?q.remaining:'—');
+    if(lim) lim.textContent='/ '+(q.limit||0);
+  }catch(e){}
+}
+function _dmSetQuota(remaining, limit){
+  var rem=document.getElementById('dm-rem'), lim=document.getElementById('dm-lim');
+  if(rem && remaining!=null) rem.textContent=remaining;
+  if(lim && limit!=null) lim.textContent='/ '+limit;
+}
+
+function _dmBubble(role, text){
+  var msgs=document.getElementById('dm-msgs'); if(!msgs) return;
+  var T=_dmS();
+  var d=document.createElement('div');
+  d.className='dm-bubble '+(role==='ai'?'ai':'client');
+  if(role==='ai'){
+    d.innerHTML='<div class="dm-bl">'+_dmEsc(T.aiLabel)+' <button class="dm-copy" onclick="dmCopy(this)">'+_dmEsc(T.copy)+'</button></div>'+_dmEsc(text);
+  } else {
+    d.innerHTML='<div class="dm-bl">'+_dmEsc(T.clientLabel)+'</div>'+_dmEsc(text);
+  }
+  msgs.appendChild(d);
+  d.scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+
+function dmCopy(btn){
+  var box=btn.closest('.dm-bubble'); if(!box) return;
+  var T=_dmS();
+  var txt=box.textContent;
+  var pfx=T.aiLabel+' '+T.copy;
+  if(txt.indexOf(pfx)===0) txt=txt.slice(pfx.length);
+  txt=txt.trim();
+  try{ navigator.clipboard.writeText(txt); }catch(e){}
+  var old=btn.textContent; btn.textContent=T.copied;
+  setTimeout(function(){ btn.textContent=old; }, 1600);
+}
+
+function _dmContext(){
+  var val=function(id){var el=document.getElementById(id);return el?el.value.trim():'';};
+  var sidx=function(id){var el=document.getElementById(id);return el?el.selectedIndex:0;};
+  var ti=sidx('dm-tip'), hook=val('dm-hook');
+  var ctx={
+    platforma:val('dm-platforma'),
+    tip_contact:_DM_CT[ti]||_DM_CT[0],
+    gen_agent:_DM_CG[sidx('dm-gena')]||'',
+    gen_client:_DM_CGC[sidx('dm-genc')]||'',
+    nume_client:val('dm-nume'),
+    despre_client:val('dm-despre'),
+    obiectiv:_DM_CO[sidx('dm-obiectiv')]||_DM_CO[0]
+  };
+  if(ti===1) ctx.semnal_recent=hook;
+  else if(ti===2) ctx.amintire_comuna=hook;
+  else ctx.carlig=hook;
+  return ctx;
+}
+
+async function dmStart(){
+  if(_dmBusy) return;
+  var T=_dmS();
+  var ctx=_dmContext();
+  if(!ctx.nume_client || !ctx.despre_client){ if(typeof toast==='function') toast(T.tNeed, 3500); return; }
+  var btn=document.getElementById('dm-start-btn'); _dmBusy=true;
+  if(btn){ btn.disabled=true; btn.textContent=T.generating; }
+  try{
+    var r=await api('/api/dm/opener',{method:'POST',body:JSON.stringify({context:ctx, lang:_dmL()})});
+    _dmConv=r.conversationId;
+    var msgs=document.getElementById('dm-msgs'); if(msgs) msgs.innerHTML='';
+    document.getElementById('dm-thread').style.display='block';
+    var paste=document.getElementById('dm-paste'); if(paste) paste.style.display='block';
+    _dmBubble('ai', r.message);
+    _dmSetQuota(r.remaining, r.limit);
+    _dmSetPasteName(ctx.nume_client||'');
+    _dmLoadList();
+    document.getElementById('dm-thread').scrollIntoView({behavior:'smooth',block:'start'});
+  }catch(e){
+    if((e.message||'')==='limit'){ _dmShowWallStandalone(); }
+    else if((e.message||'')==='no_plan'){ var h=document.getElementById('dm-content'); if(h) h.innerHTML=_dmLockHtml(); }
+    else if(typeof toast==='function') toast(e.message||T.tErrGen, 3500);
+  }finally{
+    _dmBusy=false; if(btn){ btn.disabled=false; btn.textContent=T.startBtn; }
+  }
+}
+
+async function dmReply(){
+  if(_dmBusy || !_dmConv) return;
+  var T=_dmS();
+  var inp=document.getElementById('dm-reply-input');
+  var v=inp?inp.value.trim():'';
+  if(!v){ if(typeof toast==='function') toast(T.tPasteFirst, 3000); return; }
+  var btn=document.getElementById('dm-send-btn'); _dmBusy=true;
+  if(btn){ btn.disabled=true; btn.textContent=T.generating; }
+  _dmBubble('client', v);
+  if(inp) inp.value='';
+  try{
+    var r=await api('/api/dm/reply',{method:'POST',body:JSON.stringify({conversationId:_dmConv, clientReply:v, lang:_dmL()})});
+    _dmBubble('ai', r.message);
+    _dmSetQuota(r.remaining, r.limit);
+  }catch(e){
+    if((e.message||'')==='limit'){ _dmWallInThread(); }
+    else if(typeof toast==='function') toast(e.message||T.tErrReply, 3500);
+  }finally{
+    _dmBusy=false; if(btn){ btn.disabled=false; btn.textContent=T.sendBtn; }
+  }
+}
+
+function dmNew(){ renderDM(); }
+
+function _dmWallHtml(){
+  var T=_dmS(), L=_dmL();
+  var tier=(USER_PROFILE && USER_PROFILE.tier)?USER_PROFILE.tier:'recruit';
+  var cur=DM_LIMIT_FE[tier]||0;
+  var nt=(typeof NEXT_TIER!=='undefined' && NEXT_TIER[tier])?NEXT_TIER[tier]:null;
+  var de=function(n){ return (L==='ro'&&n>=20)?'de ':''; };
+  var head='<div class="dm-wall"><div class="ic">💪</div>'+
+    '<h4>'+T.wallH.replace('{n}',cur).replace('{de}',de(cur))+'</h4>'+
+    '<p>'+T.wallP+'</p>';
+  if(nt){
+    var ntName=nt.name; var ntLim=DM_LIMIT_FE[ntName.toLowerCase()]||0;
+    var up=T.wallUpgrade.replace('{tier}',ntName).replace('{n}',ntLim).replace('{de}',de(ntLim));
+    return head+
+      '<div class="opts">'+T.wallOpts+'<br>• '+T.wallWait+'<br>• '+up+'</div>'+
+      '<div class="wbtns"><button class="btn" style="width:auto;padding:14px 30px" onclick="goUpgrade()">'+T.wallBtn1+'</button>'+
+      '<button class="b2" onclick="_dmDismissWall()">'+T.wallBtn2+'</button></div></div>';
+  }
+  return head+
+    '<div class="opts">'+T.wallLeader+'</div>'+
+    '<div class="wbtns"><button class="b2" onclick="_dmDismissWall()">'+T.wallLeaderBtn+'</button></div></div>';
+}
+function _dmWallInThread(){
+  var paste=document.getElementById('dm-paste'); if(paste) paste.style.display='none';
+  var msgs=document.getElementById('dm-msgs'); if(!msgs) return;
+  var w=document.createElement('div'); w.id='dm-wall-el'; w.innerHTML=_dmWallHtml();
+  msgs.appendChild(w); w.scrollIntoView({behavior:'smooth',block:'center'});
+}
+function _dmShowWallStandalone(){
+  var host=document.getElementById('dm-content'); if(!host) return;
+  var c=document.createElement('div'); c.className='dm-card'; c.innerHTML=_dmWallHtml();
+  host.insertBefore(c, host.firstChild); c.scrollIntoView({behavior:'smooth',block:'center'});
+}
+function _dmDismissWall(){
+  var w=document.getElementById('dm-wall-el'); if(w) w.remove();
+  var paste=document.getElementById('dm-paste'); if(paste) paste.style.display='block';
 }
 var REFP={t:"Parraine et ton abonnement est gratuit",d:"Invite {N} personnes sur ton plan ou supérieur. Tant qu’elles restent actives, tu profites d’un abonnement gratuit — chaque mois.",act:"actifs",copy:"Copier",copied:"Lien copié ✅",wa:"Envoie ton lien sur WhatsApp",later:"Plus tard",ok:"Super !",freeT:"Ton abonnement est gratuit ce mois-ci 🎉",freeD:"Tu as {N} filleuls actifs. Merci d’avoir amené ton équipe — vous grandissez ensemble.",waMsg:"Salut ! 👋 J’ai trouvé des scripts MLM qui vendent vraiment — invitation, présentation et conclusion, adaptés à ton produit. Jette un œil :"};
 
