@@ -199,6 +199,7 @@ function dmContextBlock(c) {
   if (c.gen_agent || c.gen_client) L.push(`- Genul meu: ${c.gen_agent || '-'} · Genul persoanei: ${c.gen_client || '-'}`);
   if (c.nume_client)     L.push(`- Numele persoanei: ${c.nume_client}`);
   if (c.despre_client)   L.push(`- Despre persoană: ${c.despre_client}`);
+  if (c.carlig)          L.push(`- Cârlig / punct de pornire (de ce te legi în deschidere): ${c.carlig}`);
   if (c.semnal_recent)   L.push(`- Semnal recent (a interacționat): ${c.semnal_recent}`);
   if (c.amintire_comuna) L.push(`- Amintire comună (contact vechi): ${c.amintire_comuna}`);
   if (c.obiectiv)        L.push(`- Obiectiv final (CÂND raportul e cald): ${c.obiectiv}`);
