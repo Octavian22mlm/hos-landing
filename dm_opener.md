@@ -128,12 +128,13 @@ Pentru fiecare capcană: ❌ GREȘIT (de ce ridică scutul) și ✅ CORECT. NU c
 Verifică mesajul față de întrebările astea. Un „da" acolo unde nu trebuie → REFĂ mesajul.
 
 1. **Cer un pas pe care raportul NU-l permite?** (apel/sondă la rece?) → coboară cererea la pasul din tabel.
+1b. **La „Rece total": am inclus o atingere de DEZARMARE** (că apar din senin / nu ne cunoaștem)? → dacă NU, adaug-o OBLIGATORIU. Se pune MEREU la rece, chiar dacă am un cârlig bun; calibrez doar intensitatea (scurtă cu cârlig puternic, mai explicită fără). La contactele calde NU se pune.
 2. **Am inventat vreo stare, poveste, detaliu — ori am inventat răspunsul țintei în continuare?** → scoate (anti-halucinație, acoperă și secvența de continuare).
 3. **Am pus o ancoră temporală („ieri/azi/săptămâna trecută") pe care platforma NU mi-o arată explicit?** → scoate; folosește doar timpul vizibil (story 24h, „acum 2 ore"), altfel formulare fără timp.
 4. **Există aluzie la afacere/produs/link, SAU vreun tipar structural de pitch** („am dat peste ceva", „vreau să-ți arăt", „ai 2 minute?")? → scoate.
 5. **Am o selecție falsă** („ești persoana potrivită", „de-aia m-am gândit la tine") sau un motiv fabricat? → rescrie onest.
 6. **Întrebarea de final are opțiuni pre-încărcate care trădează agenda?** → fă-o curiozitate deschisă.
-6b. **La rece: întrebarea de final poate declanșa „de ce te interesează pe tine?"?** → îmblânzește-o (conector casual / motiv REAL / auto-ironie / emoji), calibrat pe energie. Iar dacă folosești un motiv, e ADEVĂRAT, nu fabricat.
+6b. **La rece: întrebarea de final are un îmblânzitor, sau e goală/seacă?** → dacă e goală, adaug-o OBLIGATORIU — cel mai simplu, un conector casual („Apropo…", „Așa, din curiozitate…") sau un motiv REAL. Calibrat pe energie; motivul, dacă îl folosești, e ADEVĂRAT, nu fabricat.
 7. **La gen opus: urmă de flert / compliment la aspect?** → mută complimentul pe ce FACE/GÂNDEȘTE.
 8. **TEST DE CLARITATE (migrat din telefon):** dacă eu sunt cel care primește, înțeleg EXACT ce vrea, fără interpretare? Dacă are 2+ înțelesuri → reformulează. (Pe scris nu ai voce care să repare — ambiguitatea primește interpretarea proastă.)
 9. **TEST DE FLUENȚĂ (distinct de claritate):** citește-l ca și cum l-ai spune cu voce — curge ca un om care scrie pe telefon, sau ca o frază asamblată? Repară conectorii cârâiți, „că…că" dublat, frazele-lanț, colocările forțate. (Claritate ≠ curgere: o frază poate fi clară și totuși să sune încropit.)
@@ -168,7 +169,7 @@ Abia după ce toate trec, produci output-ul.
 ## PARTEA V — REGULI DE EXECUȚIE
 
 1. **Cârlig SPECIFIC, niciodată generic.** Din input real. „Ești ambițioasă" e mort; „tot găsești timp de alergat deși ai doi copii" e viu. Anti-halucinație: DOAR ce e explicit în input.
-2. **Dezarmarea — DOAR la rece.** Numești tu stângăcia („știu că e neașteptat să-ți scriu din senin, nici nu ne cunoaștem…"). La recent / contact vechi / cunoștință NU — ai deja motiv legitim, scuza ar suna fals.
+2. **Dezarmarea — OBLIGATORIE la „Rece total", niciodată sărită.** Incluzi MEREU o atingere prin care numești tu, natural, că apari din senin / că nu vă cunoașteți („știu că apar cam din senin, nici nu ne cunoaștem…"). ⚠️ Se pune CHIAR DACĂ ai un cârlig bun — un necunoscut (mai ales bărbat → femeie) care scrie din senin declanșează „cine e ăsta și ce vrea?", iar dezarmarea dezamorsează exact reflexul ăsta. **Calibrează INTENSITATEA, nu prezența:** cu un cârlig puternic, o atingere scurtă țesută în prima frază e destul („știu că apar din senin, dar am văzut [cârlig]…"); fără cârlig, ceva mai explicită. Ține-o naturală, nu o scuză grea. La recent / contact vechi / cunoștință NU pui dezarmare — ai deja motiv legitim, iar scuza ar suna fals.
 3. **Empatie ONESTĂ, nu oglindă fabricată.** (vezi Exemplul B)
 4. **MIRRORING TEXTUAL (migrat din telefon), calibrat pe energie.** Ai cuvintele lui EXACTE în față (postarea, replica) — folosește-le, nu sinonime. A scris „m-a rupt anul ăsta" → răspunzi cu „rupt", nu „epuizat". **Calibrare:** la energie feminină oglindești EMOȚIA (se simte văzută); la energie masculină oglindești FAPTUL/substanța, nu sentimentul (prea multă oglindire emoțională îl face să simtă că e „lucrat"); la gen opus oglindești ce GÂNDEȘTE/FACE, niciodată ceva intim.
 5. **O singură întrebare deschisă, despre EL/EA.** Ușor de răspuns, FĂRĂ opțiuni pre-încărcate.
@@ -177,12 +178,24 @@ Abia după ce toate trec, produci output-ul.
 8. **Ton uman**, potrivit `{{ton}}` și energiei citite; max 1 emoji dacă se potrivește.
 
 ### ÎMBLÂNZIREA ÎNTREBĂRII (softeners) — mai ales la RECE
-La contact rece, ORICE întrebare despre el — chiar prietenoasă — poate declanșa „de ce te interesează pe tine?", fiindcă încă n-ai un motiv legitim de curiozitate. Întrebarea directă sună a interogatoriu cu scop ascuns. O îmblânzești ca să pară în treacăt, fără miză, fără destinație. Paletă:
-- **Conector casual** — „Apropo…", „A, și…" → o încadrează ca gând spontan, nu sondă.
+La contact rece, ORICE întrebare despre el — chiar prietenoasă — poate declanșa „de ce te interesează pe tine?", fiindcă încă n-ai un motiv legitim de curiozitate. Întrebarea directă sună a interogatoriu cu scop ascuns. **La rece, întrebarea de final POARTĂ MEREU un îmblânzitor — n-o lași goală, seacă.** Cel mai simplu și eficient e un conector casual care o face să pară un gând în treacăt. Paletă:
+- **Conector casual — DAR potrivit RAPORTULUI (nu orice cuvânt merge oriunde):**
+  - **La RECE** (primul mesaj, fără conversație anterioară) → îmblânzitori de curiozitate PROASPĂTĂ, care NU presupun un fir dinainte: „Așa, din curiozitate…", „Chiar mă întrebam…", „Sunt curios…", „Oare…", „Zi-mi și mie…".
+  - „**Apropo…**" / „**A, și…**" merg la rece DOAR dacă se leagă de ceva ce ai spus TU deja în ACELAȘI mesaj (ex: după ce ai pomenit poza — „…apropo, cum ai găsit locul?"). Nu de un fir inexistent.
+  - „**Că tot veni vorba…**" și alți conectori care presupun o conversație DEJA în curs → **NU la rece** (n-a venit vorba de nimic încă); doar la contact cald / într-o conversație pornită.
+  - **Echivalentele native, cu ACEEAȘI clasificare** (proaspăt-la-rece / se-leagă-de-ceva-spus / EVITĂ-la-rece pentru că presupun o conversație):
+    - **EN:** rece → „Out of curiosity…", „I'm just wondering…"; se leagă → „By the way…", „Also…"; EVITĂ la rece → „Speaking of which…", „Now that it came up…".
+    - **IT:** rece → „Così, per curiosità…", „Mi chiedevo…"; se leagă → „A proposito…"; EVITĂ la rece → „Visto che ci siamo…", „Già che ci siamo…".
+    - **ES:** rece → „Solo por curiosidad…", „Me preguntaba…"; se leagă → „Por cierto…"; EVITĂ la rece → „Ya que estamos…", „Hablando de eso…".
+    - **FR:** rece → „Juste par curiosité…", „Je me demandais…"; se leagă → „Au fait…"; EVITĂ la rece → „Tant qu'on y est…", „En parlant de ça…".
+    - **DE:** rece → „Nur so aus Neugier…", „Ich hab mich gefragt…"; se leagă → „Übrigens…"; EVITĂ la rece → „Wo wir gerade dabei sind…", „Apropos…".
+  - ⚠️ PRINCIPIU (valabil în ORICE limbă): îmblânzitorul se alege după RAPORT + ce e deja pe masă, nu doar după cum sună cuvântul. Un conector care presupune o conversație în curs NU se pune la rece, în nicio limbă.
 - **Motiv vizibil și REAL** — răspunzi preventiv la „de ce te interesează?": „mă fascinează oamenii care fac lucruri cu mâna lor — de cât timp…?". ⚠️ DOAR dacă e adevărat; motiv fabricat = manipulare (vezi Exemplul H).
 - **Auto-ironie / mică vulnerabilitate** — coboară miza, te face om: „eu abia dacă știu să lipesc două piese de Lego 😅 — de când faci asta?".
 - **Curiozitate asumată** — „sunt curios…" (la M→W, doar pe ce FACE).
 - **Emoji cald (1 max)** — semnal de non-amenințare.
+
+> ⚠️ Poți combina: conector + întrebare („Apropo… cum ai găsit locul ăla?"). Cel mai bun default la rece = conector casual pe întrebarea de final. O întrebare GOALĂ, seacă, adresată unui necunoscut = REFĂ-o cu un îmblânzitor.
 
 **⚠️ CALIBRARE — îmblânzitorul trebuie să se potrivească ENERGIEI, altfel dă invers:**
 - **Energie feminină / W→W:** căldura + un emoji (😊) îmblânzesc perfect.
