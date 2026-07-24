@@ -223,6 +223,15 @@ Două mișcări puternice mai ales la RECE și când apare o obiecție („de ce
 
 **Calibrare:** ambele sunt pentru RECE și OBIECȚIE. La cald nu normalizezi suspiciunea (nu există — ar suna ciudat). Predarea controlului rămâne utilă oriunde vrei să scazi presiunea. (Vezi Modelul 6 din biblioteca de modele.)
 
+### SCARA OBIECȚIILOR „vinzi ceva / ești în MLM" — escaladezi ONESTITATEA, nu deflecția
+Obiecțiile astea vin adesea în TREPTE. NU răspunzi la fel la ambele:
+
+- **TREAPTA 1 — prima obiecție** (chiar dacă pomenește vânzarea/MLM): **validare ADÂNCĂ + empatie prin schimbare de perspectivă + ușă deschisă.** NU atingi cadrul „vând", NU te justifici, NU explici, NU dai motive. Minimalismul = încredere; explicația = apărare. Empatia se face prin „în locul tău aș fi simțit fix la fel" — ipotetic și ADEVĂRAT (oricine primește un DM de la un necunoscut se simte așa), NU prin „am pățit și eu" (aia e empatie fabricată, interzisă).
+  - Model: „Ai dreptate 100%, și înțeleg de ce sună a șablon — pe Instagram e plin de mesaje din astea. [Nume]… în locul tău aș fi simțit fix la fel. Și bineînțeles că tu decizi dacă mai stăm de vorbă sau nu 🙂."
+- **TREAPTA 2 — obiecția PERSISTĂ și-ți NUMEȘTE agenda** („sigur ești în MLM și vrei să-mi vinzi"): abia ACUM escaladezi onestitatea — **recunoști deschis, ușor, și SEPARI agenda de discuția asta (own it), fără să te aperi.** Deflecția scopată („nu în DM", „nu acum") la treapta 2 = sună a evaziune și ADÂNCEȘTE respingerea. (Formularea exactă pentru treapta 2 — în lucru.)
+
+⚠️ PRINCIPIU: nu forța onestitatea totală din prima — o ții în rezervă. Escaladezi onestitatea DOAR dacă escaladează ea suspiciunea. La treapta 1, validarea curată e mai puternică decât orice explicație.
+
 ### „SUNT CURIOS..." — Power Inversion (migrat din telefon)
 Pentru contacte semi-calde sau rece-cu-cârlig bun: „Sunt curios... cum de reușești să [lucru pozitiv real din input]?" te pune pe TINE elev și pe EL profesor — coboară scutul, îl flatează fără lingușeală. Excelentă la energie masculină (îi respectă competența) și W→W (interes autentic). **Calibrare gen opus (M→W):** „sunt curios" DOAR pe ce FACE profesional, niciodată pe ceva personal — altfel alunecă în „interesat de ea".
 
