@@ -149,6 +149,10 @@ const TIER_MODES = {
   leader:  { clean: true,  coach: true,  both: true  }
 };
 
+// ---- COTĂ DM (mesaje pe rețele) — separată de scripturile de telefon. 1 mesaj = 1 script.
+//      Reset la reînnoirea Stripe (nu report). Disponibil doar pe abonament (Recruit+). ----
+const DM_LIMIT = { unic: 0, recruit: 15, builder: 40, leader: 70 };
+
 // ---- AUTH MIDDLEWARE ----
 const auth = async (req, res, next) => {
   const token = req.headers.authorization?.split(' ')[1];
@@ -166,6 +170,187 @@ const admin = (req, res, next) => {
   }
   next();
 };
+
+// ============================================
+// MESAJE PE REȚELE (DM LIVE) — co-pilot pe calea Anthropic (Sonnet, Clean)
+// 1 mesaj generat = 1 script din cota DM. Openerul + fiecare replică consumă câte 1.
+// ============================================
+let _dmPromptCache = null;
+function loadDmPrompt() {
+  if (_dmPromptCache) return _dmPromptCache;
+  const fs = require('fs');
+  const cands = [
+    path.join(__dirname, 'prompts', 'dm_opener.md'),
+    path.join(process.cwd(), 'prompts', 'dm_opener.md'),
+    path.join(__dirname, 'dm_opener.md')
+  ];
+  const p = cands.find(x => { try { return fs.existsSync(x); } catch (e) { return false; } });
+  _dmPromptCache = p ? fs.readFileSync(p, 'utf8') : '';
+  if (!_dmPromptCache) console.error('[DM] prompt dm_opener.md LIPSĂ din prompts/');
+  return _dmPromptCache;
+}
+
+// blocul de context = primul mesaj "user" din fir
+function dmContextBlock(c) {
+  c = c || {};
+  const L = ['CONTEXTUL CONVERSAȚIEI:'];
+  if (c.platforma)       L.push(`- Platformă: ${c.platforma}`);
+  if (c.tip_contact)     L.push(`- Tip contact: ${c.tip_contact}`);
+  if (c.gen_agent || c.gen_client) L.push(`- Genul meu: ${c.gen_agent || '-'} · Genul persoanei: ${c.gen_client || '-'}`);
+  if (c.nume_client)     L.push(`- Numele persoanei: ${c.nume_client}`);
+  if (c.despre_client)   L.push(`- Despre persoană: ${c.despre_client}`);
+  if (c.semnal_recent)   L.push(`- Semnal recent (a interacționat): ${c.semnal_recent}`);
+  if (c.amintire_comuna) L.push(`- Amintire comună (contact vechi): ${c.amintire_comuna}`);
+  if (c.obiectiv)        L.push(`- Obiectiv final (CÂND raportul e cald): ${c.obiectiv}`);
+  L.push('', 'Generează PRIMUL mesaj de deschidere. Doar textul de trimis, în linii scurte.');
+  return L.join('\n');
+}
+
+// apel Anthropic — system (V7) cu prompt caching + firul de mesaje
+async function dmGenerate(messages, lang) {
+  const system = loadDmPrompt();
+  // blocul mare = cache partajat între toate limbile; directiva de limbă = bloc mic separat
+  const sysBlocks = [{ type: 'text', text: system, cache_control: { type: 'ephemeral' } }];
+  if (lang && OUT_DIRECTIVES[lang]) sysBlocks.push({ type: 'text', text: OUT_DIRECTIVES[lang] });
+  const r = await fetch('https://api.anthropic.com/v1/messages', {
+    method: 'POST',
+    headers: {
+      'x-api-key': process.env.ANTHROPIC_API_KEY,
+      'anthropic-version': '2023-06-01',
+      'content-type': 'application/json'
+    },
+    body: JSON.stringify({
+      model: process.env.DM_MODEL || 'claude-sonnet-4-6',
+      max_tokens: 1200,
+      temperature: 0.7,
+      system: sysBlocks,
+      messages
+    })
+  });
+  const data = await r.json();
+  if (!r.ok) {
+    console.error('[DM] anthropic error:', JSON.stringify(data).slice(0, 400));
+    return { error: true };
+  }
+  try {
+    const u = data.usage || {};
+    console.log(`[DM COST] in=${u.input_tokens||0} cache_read=${u.cache_read_input_tokens||0} out=${u.output_tokens||0}`);
+  } catch (_) {}
+  const text = (data.content || []).map(b => b.text || '').join('\n').trim();
+  return { text };
+}
+
+// verifică + scade 1 din cota DM
+async function dmSpend(userId) {
+  const { data: prof } = await db.from('profiles').select('tier, dm_scripts_remaining').eq('id', userId).single();
+  const tier = (prof && prof.tier) || 'none';
+  if (!DM_LIMIT[tier]) return { blocked: true, reason: 'no_plan', tier, remaining: 0, limit: 0 };
+  const rem = (prof && prof.dm_scripts_remaining) || 0;
+  if (rem <= 0) return { blocked: true, reason: 'limit', tier, remaining: 0, limit: DM_LIMIT[tier] };
+  await db.from('profiles').update({ dm_scripts_remaining: rem - 1 }).eq('id', userId);
+  return { ok: true, tier, remaining: rem - 1, limit: DM_LIMIT[tier] };
+}
+
+// GET — cota DM curentă (pentru afișare în tab)
+app.get('/api/dm/quota', auth, async (req, res) => {
+  try {
+    const { data: prof } = await db.from('profiles').select('tier, dm_scripts_remaining').eq('id', req.user.id).single();
+    const tier = (prof && prof.tier) || 'none';
+    res.json({ tier, remaining: (prof && prof.dm_scripts_remaining) || 0, limit: DM_LIMIT[tier] || 0, enabled: !!DM_LIMIT[tier] });
+  } catch (e) { res.status(500).json({ error: 'Eroare cotă.' }); }
+});
+
+// GET — lista conversațiilor
+app.get('/api/dm/conversations', auth, async (req, res) => {
+  try {
+    const { data } = await db.from('dm_conversations')
+      .select('id, created_at, updated_at, platform, tip_contact, obiectiv, context, status')
+      .eq('user_id', req.user.id).order('updated_at', { ascending: false }).limit(100);
+    const list = (data || []).map(c => ({
+      id: c.id, created_at: c.created_at, updated_at: c.updated_at,
+      platform: c.platform, tip_contact: c.tip_contact, obiectiv: c.obiectiv,
+      nume: (c.context && c.context.nume_client) || '', status: c.status
+    }));
+    res.json({ conversations: list });
+  } catch (e) { res.status(500).json({ error: 'Eroare listă.' }); }
+});
+
+// GET — un fir complet
+app.get('/api/dm/conversation/:id', auth, async (req, res) => {
+  try {
+    const { data: conv } = await db.from('dm_conversations').select('*').eq('id', req.params.id).single();
+    if (!conv || conv.user_id !== req.user.id) return res.status(404).json({ error: 'Conversație inexistentă.' });
+    const { data: msgs } = await db.from('dm_messages')
+      .select('role, content, created_at').eq('conversation_id', conv.id).order('created_at', { ascending: true });
+    res.json({ conversation: { id: conv.id, context: conv.context, status: conv.status }, messages: msgs || [] });
+  } catch (e) { res.status(500).json({ error: 'Eroare fir.' }); }
+});
+
+// POST — primul mesaj (openerul). Body: { context: {...} }
+app.post('/api/dm/opener', auth, async (req, res) => {
+  try {
+    const context = (req.body && req.body.context) || {};
+    const lang = (req.body && req.body.lang) || 'ro';
+    const spend = await dmSpend(req.user.id);
+    if (spend.blocked) return res.status(403).json({ error: spend.reason, remaining: spend.remaining, limit: spend.limit, tier: spend.tier });
+
+    const gen = await dmGenerate([{ role: 'user', content: dmContextBlock(context) }], lang);
+    if (gen.error || !gen.text) {
+      await db.from('profiles').update({ dm_scripts_remaining: spend.remaining + 1 }).eq('id', req.user.id); // rambursare
+      return res.status(500).json({ error: 'Nu am putut genera mesajul. Încearcă din nou.' });
+    }
+
+    const convId = crypto.randomUUID();
+    await db.from('dm_conversations').insert({
+      id: convId, user_id: req.user.id,
+      platform: context.platforma || null, tip_contact: context.tip_contact || null,
+      obiectiv: context.obiectiv || null, context, status: 'activa'
+    });
+    await db.from('dm_messages').insert({ conversation_id: convId, role: 'ai', content: gen.text });
+
+    res.json({ conversationId: convId, message: gen.text, remaining: spend.remaining, limit: spend.limit });
+  } catch (e) {
+    console.error('dm/opener error:', e.message);
+    res.status(500).json({ error: 'Eroare la generare.' });
+  }
+});
+
+// POST — pasul următor. Body: { conversationId, clientReply }
+app.post('/api/dm/reply', auth, async (req, res) => {
+  try {
+    const { conversationId, clientReply } = req.body || {};
+    const lang = (req.body && req.body.lang) || 'ro';
+    if (!conversationId || !clientReply || !clientReply.trim()) return res.status(400).json({ error: 'Lipsește răspunsul clientului.' });
+
+    const { data: conv } = await db.from('dm_conversations').select('*').eq('id', conversationId).single();
+    if (!conv || conv.user_id !== req.user.id) return res.status(404).json({ error: 'Conversație inexistentă.' });
+
+    const spend = await dmSpend(req.user.id);
+    if (spend.blocked) return res.status(403).json({ error: spend.reason, remaining: spend.remaining, limit: spend.limit, tier: spend.tier });
+
+    await db.from('dm_messages').insert({ conversation_id: conv.id, role: 'client', content: clientReply.trim() });
+
+    const { data: msgs } = await db.from('dm_messages')
+      .select('role, content, created_at').eq('conversation_id', conv.id).order('created_at', { ascending: true });
+
+    const messages = [{ role: 'user', content: dmContextBlock(conv.context || {}) }];
+    for (const m of (msgs || [])) messages.push({ role: m.role === 'ai' ? 'assistant' : 'user', content: m.content });
+
+    const gen = await dmGenerate(messages, lang);
+    if (gen.error || !gen.text) {
+      await db.from('profiles').update({ dm_scripts_remaining: spend.remaining + 1 }).eq('id', req.user.id); // rambursare
+      return res.status(500).json({ error: 'Nu am putut genera răspunsul. Încearcă din nou.' });
+    }
+
+    await db.from('dm_messages').insert({ conversation_id: conv.id, role: 'ai', content: gen.text });
+    await db.from('dm_conversations').update({ updated_at: new Date().toISOString() }).eq('id', conv.id);
+
+    res.json({ message: gen.text, remaining: spend.remaining, limit: spend.limit });
+  } catch (e) {
+    console.error('dm/reply error:', e.message);
+    res.status(500).json({ error: 'Eroare la generare.' });
+  }
+});
 
 // ============================================
 // PROGRAM DE RECOMANDĂRI (referral)
@@ -1274,6 +1459,7 @@ app.post('/api/subscription/change', auth, async (req, res) => {
       const add = t ? t.scripts_per_month : 0;
       const cur = (prof && prof.scripts_remaining) || 0;
       dbUpdate.scripts_remaining = cur + add;
+      dbUpdate.dm_scripts_remaining = DM_LIMIT[target] || 0; // upgrade -> cota DM a noului tier, imediat (continuă conversația)
       dbUpdate.scripts_reset_at  = new Date().toISOString();
     }
     // downgrade: NU atingem scripts_remaining (pastreaza ce are); doar tier-ul scade -> feature-urile superioare se blocheaza
@@ -1313,6 +1499,7 @@ app.post('/api/subscription/repurchase', auth, async (req, res) => {
     const cur = (prof && prof.scripts_remaining) || 0;
     await db.from('profiles').update({
       scripts_remaining: cur + add,
+      dm_scripts_remaining: DM_LIMIT[tier] || 0, // repurchase repornește ciclul -> reset cotă DM
       scripts_reset_at: new Date().toISOString(),
       stripe_subscription_id: sub.id
     }).eq('id', req.user.id);
@@ -1447,6 +1634,7 @@ app.post('/api/webhook', express.raw({ type: 'application/json' }), async (req, 
         await db.from('profiles').update({
           tier,
           scripts_remaining: monthly,
+          dm_scripts_remaining: DM_LIMIT[tier] || 0,
           training_left: s.mode === 'subscription' ? (TRAINING_BONUS[tier] || 0) : 0,
           scripts_reset_at: new Date().toISOString(),
           stripe_customer_id: s.customer || null,
@@ -1493,6 +1681,7 @@ app.post('/api/webhook', express.raw({ type: 'application/json' }), async (req, 
             const capped = Math.max(current, Math.min(current + monthly, monthly * 2));
             await db.from('profiles').update({
               scripts_remaining: capped,
+              dm_scripts_remaining: DM_LIMIT[tier] || 0, // DM se RESETEAZĂ la reînnoire (nu report)
               training_left: 0,
               scripts_reset_at: new Date().toISOString()
             }).eq('id', userId);
@@ -1538,7 +1727,7 @@ app.post('/api/webhook', express.raw({ type: 'application/json' }), async (req, 
       const userId = sub.metadata && sub.metadata.user_id;
       if (userId) {
         await db.from('profiles').update({
-          tier: 'none', scripts_remaining: 0, training_left: 0
+          tier: 'none', scripts_remaining: 0, dm_scripts_remaining: 0, training_left: 0
         }).eq('id', userId);
         console.log(`[webhook] anulat pentru ${userId}`);
       }
