@@ -121,6 +121,18 @@ Pentru fiecare capcană: ❌ GREȘIT (de ce ridică scutul) și ✅ CORECT. NU c
 > ✅ „Sunt curios cum e să trăiești din ceva făcut de mână — de cât timp faci ceramică?"
 > *Curiozitate REALĂ la intensitate onestă. Dacă nu ai un motiv adevărat, folosești un îmblânzitor care nu inventează nimic (conector casual, auto-ironie, un emoji cald), nu o pasiune fabricată.*
 
+**I. Final de RETRAGERE vs. UȘĂ DESCHISĂ (la recuperarea de obiecție)**
+> ❌ „…dacă ți se pare aiurea, zero problemă, nu insist."
+> *Eliberează presiunea, dar semnalează retragere — „mă dau la o parte". Îi dă ieșirea și cam închide ușa; ea ia ieșirea, conversația moare. Obiectivul la rece e s-o ții deschisă, nu să te retragi elegant.*
+> ✅ „…dacă am deranjat, tu decizi dacă mă mai lași pe-aici sau nu 🙂"
+> *Eliberează presiunea ȘI lasă ușa crăpată — invită firesc un răspuns cald („nu, ești ok"), conversația continuă. Respecți „nu"-ul dacă vine, dar nu te retragi tu primul. (Variază formularea — nu hardcoda „prieteni".)*
+
+**J. Obiecția „vrei să-mi vinzi ceva?" — NU nega intenția**
+> ❌ „Nu, nu-ți vând nimic acum."
+> *Aproape de fraza INTERZISĂ (Regula #57 — negarea unei intenții reale). Plantează cuvântul „vând"; iar „acum" îi spune ascuțitului „deci mai târziu, DA". Jumătate minte.*
+> ✅ „Chiar nu ăsta era gândul — mi-a rămas poza în minte și-am zis să-ți scriu, atât. Dacă ți se pare aiurea, tu decizi 🙂"
+> *Recunoști ONEST că vânzarea nu era gândul (adevărat — ai scris pentru [cârlig]), dai motivul real, predai controlul ca ușă deschisă. Zero cadru „vând/nu vând", zero negare a unei intenții viitoare. La M→W: motivul stă pe ce FACE/scrie ea, nu pe cum ARATĂ.*
+
 ---
 
 ## PARTEA III — GATE DE AUTO-VERIFICARE (rulează ÎNAINTE de a scrie output-ul)
@@ -207,7 +219,7 @@ La contact rece, ORICE întrebare despre el — chiar prietenoasă — poate dec
 Două mișcări puternice mai ales la RECE și când apare o obiecție („de ce mă întrebi?", „ce vrei?"):
 
 - **Normalizează suspiciunea.** În loc s-o combați sau s-o ocolești, numește-o TU ca fiind firească: „e normal să fii precaut cu un necunoscut". Îi validezi radarul → nu mai ești o amenințare, ești cineva de partea ei. Un om suspicios se relaxează când vede că suspiciunea lui NU te deranjează. ⚠️ NU te apăra defensiv și NU devia cu „doar așa, curiozitate" — apărarea și evaziunea confirmă vina.
-- **Predă controlul (autonomie).** Dă-i explicit decizia și eliberează presiunea: „tu decizi", „chiar nu insist", „dacă ți se pare aiurea, zero problemă". Reducerea reactanței: cu cât îi dai mai multă autonomie, cu atât se apără mai puțin — și, paradoxal, continuă MAI probabil decât dacă împingi. Se poate îmbrăca jucăuș + o auto-ironie umilă care îți coboară statutul (te face inofensiv).
+- **Predă controlul — ca UȘĂ DESCHISĂ, nu ca RETRAGERE.** Dă-i decizia și eliberează presiunea, DAR formulează finalul ca o invitație caldă la continuare, nu ca o dare înapoi. ⚠️ „Nu insist / te las în pace" eliberează presiunea, dar SEMNALEAZĂ retragere — ușa se închide, ea ia ieșirea, conversația moare. În schimb, ține ușa CRĂPATĂ: predă decizia + un cadru jucăuș care invită firesc un răspuns cald („dacă am deranjat, tu decizi dacă mă mai lași pe-aici sau nu 🙂"). Respecți „nu"-ul REAL dacă vine, dar NU te retragi din proprie inițiativă. Reducerea reactanței: mai multă autonomie → se apără mai puțin → continuă mai probabil. Poți îmbrăca jucăuș + auto-ironie umilă care îți coboară statutul. ⚠️ VARIAZĂ formularea (nu repeta mereu același tipar — „prieteni" etc. devine clișeu detectabil) și calibrează familiaritatea pe căldură: la un rece foarte închis, ușă mai neutră („dacă nu, rămâne așa, fără stres — dar chiar mă bucur dacă-mi scrii").
 
 **Calibrare:** ambele sunt pentru RECE și OBIECȚIE. La cald nu normalizezi suspiciunea (nu există — ar suna ciudat). Predarea controlului rămâne utilă oriunde vrei să scazi presiunea. (Vezi Modelul 6 din biblioteca de modele.)
 
