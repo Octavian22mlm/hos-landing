@@ -1972,8 +1972,7 @@ function _dmFormHtml(){
     '</div>'+
     '<div class="dm-f"><label>Numele persoanei</label><input id="dm-nume" placeholder="Prenumele"></div>'+
     '<div class="dm-f"><label>Despre persoană</label><textarea id="dm-despre" rows="3" placeholder="Job, pasiuni, o postare recentă, un detaliu real…"></textarea><p class="dm-hint">Materia primă pentru cârlig — cu cât mai specific, cu atât mesajul e mai bun.</p></div>'+
-    '<div class="dm-cond" id="dm-semnal-wrap" style="display:none"><label>Semnal recent (la ce a reacționat)</label><input id="dm-semnal" placeholder="La ce a dat like/comment + ce a scris"></div>'+
-    '<div class="dm-cond" id="dm-amintire-wrap" style="display:none"><label>Amintire comună</label><input id="dm-amintire" placeholder="Liceu, job, prieten comun, o amintire"></div>'+
+    '<div class="dm-f"><label id="dm-hook-label">Cârligul — ce ți-a atras atenția</label><input id="dm-hook"><p class="dm-hint" id="dm-hook-hint"></p></div>'+
     '<div class="dm-f"><label>Obiectiv (spre care conduci când raportul e cald)</label><select id="dm-obiectiv"><option>Apel telefonic</option><option>Întâlnire pe Zoom</option></select></div>'+
     '<button class="btn" id="dm-start-btn" onclick="dmStart()">Generează primul mesaj →</button>'+
   '</div>'+
@@ -1989,11 +1988,35 @@ function _dmFormHtml(){
   '</div>';
 }
 
+var DM_HOOK = {
+  'Rece total': {
+    l:'Cârligul — ce anume ți-a atras atenția la ea',
+    p:'Ex: postează des de la sală și a scris „n-am avut chef azi, dar am venit oricum"',
+    h:'La rece, ăsta e tot ce ai. Un detaliu real și specific = mesaj viu; generic = ignorat.'
+  },
+  'A interacționat recent': {
+    l:'Semnalul ei — la ce a reacționat și ce a scris',
+    p:'Ex: a comentat „aveam nevoie de asta azi" la reelul meu despre…',
+    h:'Ea a făcut primul gest — de aici pornești firesc.'
+  },
+  'Contact vechi': {
+    l:'Legătura voastră + ce ai văzut recent la ea',
+    p:'Ex: colegi de liceu, nu ne-am auzit de 2 ani; acum a postat o poză din parc cu copiii',
+    h:'Reconectarea se sprijină pe ce vă leagă + un motiv real din prezent.'
+  },
+  'Cunoștință': {
+    l:'Ce vă leagă / de unde vă știți',
+    p:'Ex: mergem la aceeași sală; sau: prieten comun, Andrei',
+    h:'Construiești pe ce aveți deja în comun.'
+  }
+};
 function _dmCond(){
   var tip=(document.getElementById('dm-tip')||{}).value||'';
-  var sw=document.getElementById('dm-semnal-wrap'), aw=document.getElementById('dm-amintire-wrap');
-  if(sw) sw.style.display = (tip==='A interacționat recent')?'block':'none';
-  if(aw) aw.style.display = (tip==='Contact vechi')?'block':'none';
+  var d=DM_HOOK[tip]||DM_HOOK['Rece total'];
+  var lab=document.getElementById('dm-hook-label'), inp=document.getElementById('dm-hook'), hint=document.getElementById('dm-hook-hint');
+  if(lab) lab.textContent=d.l;
+  if(inp) inp.setAttribute('placeholder', d.p);
+  if(hint) hint.textContent=d.h;
 }
 
 async function renderDM(){
@@ -2090,13 +2113,18 @@ function dmCopy(btn){
 
 function _dmContext(){
   var g=function(id){ var el=document.getElementById(id); return el?el.value.trim():''; };
-  return {
-    platforma:g('dm-platforma'), tip_contact:g('dm-tip'),
+  var tip=g('dm-tip'), hook=g('dm-hook');
+  var ctx={
+    platforma:g('dm-platforma'), tip_contact:tip,
     gen_agent:g('dm-gena'), gen_client:g('dm-genc'),
     nume_client:g('dm-nume'), despre_client:g('dm-despre'),
-    semnal_recent:g('dm-semnal'), amintire_comuna:g('dm-amintire'),
     obiectiv:g('dm-obiectiv')
   };
+  // cârligul merge în variabila potrivită tipului de contact
+  if(tip==='A interacționat recent') ctx.semnal_recent=hook;
+  else if(tip==='Contact vechi') ctx.amintire_comuna=hook;
+  else ctx.carlig=hook; // Rece total / Cunoștință
+  return ctx;
 }
 
 async function dmStart(){
